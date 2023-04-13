@@ -14,12 +14,12 @@
     <div
       class={`${
         small ? "w-[48px] h-[48px]" : "w-[64px] h-[64px]"
-      } bg-center bg-cover mt-4 rounded-full border border-white`}
+      } bg-center bg-cover mt-4 rounded-full border border-white transition-size`}
       style="background-image: url('{image}');"
     />
 
     <svg
-      class="w-[65%] mt-4"
+      class="w-[65%] mt-4 transition-size"
       viewBox="0 0 248 52"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -142,11 +142,11 @@
       />
     </svg>
 
-    <div class={`${small ? "text-sm" : "text-base"} mt-4 text-center w-[80%]`}>
+    <div class={`${small ? "text-sm" : "text-base"} transition-font mt-4 text-center w-[80%]`}>
       {intro}
     </div>
     <div
-      class={`${small ? "text-base" : "text-lg"} font-bold w-[80%] text-center`}
+      class={`${small ? "text-base" : "text-lg"} transition-font font-bold w-[80%] text-center`}
     >
       {topic}
     </div>
@@ -155,10 +155,10 @@
   <button
     class={`flex flex-row items-center justify-center w-[80%] ${
       small ? "h-[30px] text-xs" : "h-[36px] text-sm"
-    } rounded-xl mb-3 bg-white text-black font-bold`}
+    } rounded-xl mb-3 bg-white text-black font-bold transition-[width,height,font]`}
   >
     <svg
-      class="h-[40%] mr-1"
+      class="h-[40%] mr-1 transition-size"
       viewBox="0 0 13 16"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

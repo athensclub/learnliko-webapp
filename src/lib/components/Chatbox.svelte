@@ -1,21 +1,30 @@
 <script lang="ts">
-	import { showChatbox } from "$lib/global/chatbox";
-	import { fly } from "svelte/transition";
+	import { startRecording, stopRecording, toggleRecording } from '$lib/global/audio/recording';
+	import { showChatbox } from '$lib/global/chatbox';
+	import { fly } from 'svelte/transition';
 
-    const hide = () => $showChatbox = false;
+	const hide = () => ($showChatbox = false);
 </script>
 
-<div transition:fly={{y:800, duration: 500}} class="w-full h-full bg-white z-[1000] font-line-seed relative flex justify-center">
+<div
+	transition:fly={{ y: 800, duration: 500 }}
+	class="w-full h-full bg-white z-[1000] font-line-seed relative flex justify-center"
+>
 	<div
 		class="flex items-center justify-center w-full h-fit py-2 font-bold text-lg border-b border-black/[0.15] relative"
 	>
 		Voice Chat
 
-        <button on:click={hide} class="absolute right-4 rounded-full border border-black/[0.15] h-[28px] aspect-square">x</button>
+		<button
+			on:click={hide}
+			class="absolute right-4 rounded-full border border-black/[0.15] h-[28px] aspect-square"
+			>x</button
+		>
 	</div>
 
 	<button
-	class="absolute mx-auto bottom-4 w-[44px] h-[44px] shadow-all rounded-xl flex items-center justify-center"
+		on:click={toggleRecording}
+		class="absolute mx-auto bottom-4 w-[44px] h-[44px] shadow-all rounded-xl flex items-center justify-center"
 	>
 		<svg class="w-[35%]" viewBox="0 0 41 56" fill="none" xmlns="http://www.w3.org/2000/svg">
 			<path
@@ -24,4 +33,4 @@
 			/>
 		</svg>
 	</button>
-</div>	
+</div>

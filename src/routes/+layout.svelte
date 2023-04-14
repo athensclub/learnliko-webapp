@@ -1,7 +1,14 @@
 <script>
+	import '../app.css';
 	import Chatbox from '$lib/components/Chatbox.svelte';
 	import { showChatbox } from '$lib/global/chatbox';
-	import '../app.css';
+	import { onMount } from 'svelte';
+	import { audioRecording, initializeAudioRecording } from '$lib/global/audio/recording';
+
+	onMount(() => {
+		initializeAudioRecording();
+	});
+	$: console.log($audioRecording);
 </script>
 
 <div class="w-[100vw] h-[1px] min-h-[100vh]">

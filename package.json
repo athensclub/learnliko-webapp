@@ -14,10 +14,13 @@
 		"format": "prettier --plugin-search-dir . --write ."
 	},
 	"devDependencies": {
+		"@fontsource/fira-mono": "^4.5.10",
+		"@neoconfetti/svelte": "^1.0.0",
 		"@playwright/test": "^1.28.1",
 		"@sveltejs/adapter-auto": "^2.0.0",
 		"@sveltejs/adapter-cloudflare": "^2.2.0",
 		"@sveltejs/kit": "^1.5.0",
+		"@types/cookie": "^0.5.1",
 		"@typescript-eslint/eslint-plugin": "^5.45.0",
 		"@typescript-eslint/parser": "^5.45.0",
 		"autoprefixer": "^10.4.14",
@@ -27,9 +30,6 @@
 		"postcss": "^8.4.21",
 		"prettier": "^2.8.0",
 		"prettier-plugin-svelte": "^2.8.1",
-		"@fontsource/fira-mono": "^4.5.10",
-		"@neoconfetti/svelte": "^1.0.0",
-		"@types/cookie": "^0.5.1",
 		"svelte": "^3.54.0",
 		"svelte-check": "^3.0.1",
 		"tailwindcss": "^3.3.1",
@@ -40,6 +40,8 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@vime/core": "^5.4.0",
+		"@vime/svelte": "^5.4.0",
 		"svelte-keen-slider": "^0.0.9",
 		"svelte-select": "^5.6.0"
 	}

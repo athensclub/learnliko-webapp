@@ -1,5 +1,15 @@
 <script>
+	import Chatbox from '$lib/components/Chatbox.svelte';
+	import { showChatbox } from '$lib/global/chatbox';
 	import '../app.css';
 </script>
 
-<slot />
+<div class="w-[100vw] h-[1px] min-h-[100vh]">
+	<slot />
+
+	{#if $showChatbox}
+		<div class="fixed right-0 bottom-0 w-[40vw] h-[65vh]">
+			<Chatbox />
+		</div>
+	{/if}
+</div>

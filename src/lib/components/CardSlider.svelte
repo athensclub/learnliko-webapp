@@ -5,6 +5,7 @@
   import KeenSlide from "svelte-keen-slider/src/KeenSlide.svelte";
   import ConversationCard from "./ConversationCard.svelte";
   import kidImage from "$lib/images/sample_kid_image.png";
+	import { showChatbox } from "$lib/global/chatbox";
 
   let cards = [
     {
@@ -43,6 +44,7 @@
 <KeenSlider
   slideChanged={onSelectedChanged}
   slidesPerView={5}
+  arrows={!$showChatbox}
   dots={false}
   centered
   loop

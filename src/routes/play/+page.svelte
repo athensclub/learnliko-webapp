@@ -1,6 +1,7 @@
 <script lang="ts">
-	import CardSlider from '$lib/components/CardSlider.svelte';
-	import Select from 'svelte-select';
+  import CardSlider from "$lib/components/CardSlider.svelte";
+  // @ts-ignore
+  import Select from "svelte-select";
 
 	let options = ['Grade 1', 'Grade 2', 'Grade 3', 'Grade 4', 'Grade 5', 'Grade 6'];
 </script>

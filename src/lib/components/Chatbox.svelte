@@ -9,11 +9,13 @@
 	let history: { role: 'user' | 'assistant'; audioURL: string }[] = [];
 
 	$: if ($audioRecording !== null) {
-		console.log(history);
-		history.push({
-			role: 'user',
-			audioURL: $audioRecording
-		});
+		history = [
+			...history,
+			{
+				role: 'user',
+				audioURL: $audioRecording
+			}
+		];
 	}
 </script>
 
@@ -33,20 +35,19 @@
 		>
 	</div>
 
-	<div class="w-full h-[calc(100%-48px)] overflow-y-auto">
-		{#each history as chat, index (index)}
-			<div class="w-[80%]">
-				<div>No. {index}</div>
-				<Player>
-					<Audio>
-						<source data-src={chat.audioURL} type="audio/ogg;" />
-					</Audio>
+	<!-- <div class="w-full h-[calc(100%-48px)] overflow-y-auto"> -->
+	{#each history as chat, index (index)}
+		<div class="w-[80%]">
+			<Player>
+				<Audio>
+					<source data-src={chat.audioURL} type="audio/ogg;" />
+				</Audio>
 
-					<DefaultUi noSettings />
-				</Player>
-			</div>
-		{/each}
-	</div>
+				<DefaultUi noSettings />
+			</Player>
+		</div>
+	{/each}
+	<!-- </div> -->
 
 	<button
 		on:click={toggleRecording}

@@ -8,7 +8,6 @@
 	onMount(() => {
 		initializeAudioRecording();
 	});
-	$: console.log($audioRecording);
 </script>
 
 <div class="w-[100vw] h-[1px] min-h-[100vh]">

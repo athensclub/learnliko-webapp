@@ -1,17 +1,28 @@
 <script lang="ts">
-	import { startRecording, stopRecording, toggleRecording } from '$lib/global/audio/recording';
+	import { audioRecording, toggleRecording } from '$lib/global/audio/recording';
 	import { showChatbox } from '$lib/global/chatbox';
 	import { fly } from 'svelte/transition';
+	import { Player, DefaultUi, Audio } from '@vime/svelte';
 
 	const hide = () => ($showChatbox = false);
+
+	let history: { role: 'user' | 'assistant'; audioURL: string }[] = [];
+
+	$: if ($audioRecording !== null) {
+		console.log(history);
+		history.push({
+			role: 'user',
+			audioURL: $audioRecording
+		});
+	}
 </script>
 
 <div
 	transition:fly={{ y: 800, duration: 500 }}
-	class="w-full h-full bg-white z-[1000] font-line-seed relative flex justify-center"
+	class="w-full h-full bg-white z-[1000] font-line-seed relative flex flex-col items-center"
 >
 	<div
-		class="flex items-center justify-center w-full h-fit py-2 font-bold text-lg border-b border-black/[0.15] relative"
+		class="flex items-center justify-center w-full h-[48px] font-bold text-lg border-b border-black/[0.15] relative"
 	>
 		Voice Chat
 
@@ -20,6 +31,21 @@
 			class="absolute right-4 rounded-full border border-black/[0.15] h-[28px] aspect-square"
 			>x</button
 		>
+	</div>
+
+	<div class="w-full h-[calc(100%-48px)] overflow-y-auto">
+		{#each history as chat, index (index)}
+			<div class="w-[80%]">
+				<div>No. {index}</div>
+				<Player>
+					<Audio>
+						<source data-src={chat.audioURL} type="audio/ogg;" />
+					</Audio>
+
+					<DefaultUi noSettings />
+				</Player>
+			</div>
+		{/each}
 	</div>
 
 	<button

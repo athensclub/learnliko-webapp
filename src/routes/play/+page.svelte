@@ -1,5 +1,6 @@
 <script lang="ts">
   import CardSlider from "$lib/components/CardSlider.svelte";
+  // @ts-ignore
   import Select from "svelte-select";
 
   let options = [

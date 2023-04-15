@@ -1,8 +1,12 @@
 <script lang="ts">
-  import CardSlider from "$lib/components/CardSlider.svelte";
-  import Select from "svelte-select";
+	import CardSlider from '$lib/components/CardSlider.svelte';
+	import Select from 'svelte-select';
+	import type { PageData } from './$types';
 
 	let options = ['Grade 1', 'Grade 2', 'Grade 3', 'Grade 4', 'Grade 5', 'Grade 6'];
+
+  export let data: PageData;
+
 </script>
 
 <header
@@ -17,4 +21,4 @@
 	</div>
 </div>
 
-<CardSlider />
+<CardSlider cards={data.conversationCorouselItems} />

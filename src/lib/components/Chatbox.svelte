@@ -40,7 +40,7 @@
 		<div class="w-[80%]">
 			<Player>
 				<Audio>
-					<source data-src={chat.audioURL} type="audio/ogg;" />
+					<source data-src={chat.audioURL} type="audio/ogg; codecs=opus" />
 				</Audio>
 
 				<DefaultUi noSettings />

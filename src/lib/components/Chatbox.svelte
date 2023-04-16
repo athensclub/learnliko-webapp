@@ -3,20 +3,33 @@
 	import { showChatbox } from '$lib/global/chatbox';
 	import { fly } from 'svelte/transition';
 	import { Player, DefaultUi, Audio } from '@vime/svelte';
+	import { transcribe } from '$lib/assemblyai/transcription';
 
 	const hide = () => ($showChatbox = false);
 
-	let history: { role: 'user' | 'assistant'; audioURL: string }[] = [];
+	let history: { role: 'user' | 'assistant'; audioURL: string; transcription: string | null }[] =
+		[];
 
-	$: if ($audioRecording !== null) {
-		history = [
-			...history,
-			{
-				role: 'user',
-				audioURL: $audioRecording
-			}
-		];
-	}
+	audioRecording.subscribe((audioRecording) => {
+		if (audioRecording !== null) {
+			history = [
+				...history,
+				{
+					role: 'user',
+					audioURL: audioRecording.url,
+					transcription: null
+				}
+			];
+
+			const targetIndex = history.length - 1;
+			transcribe(audioRecording.data).then((transcription) => {
+				history[targetIndex] = {
+					...history[targetIndex],
+					transcription: transcription
+				};
+			});
+		}
+	});
 </script>
 
 <div
@@ -35,19 +48,27 @@
 		>
 	</div>
 
-	<!-- <div class="w-full h-[calc(100%-48px)] overflow-y-auto"> -->
-	{#each history as chat, index (index)}
-		<div class="w-[80%]">
-			<Player>
-				<Audio>
-					<source data-src={chat.audioURL} type="audio/ogg; codecs=opus" />
-				</Audio>
+	<div class="w-full h-[calc(100%-48px)] overflow-y-auto">
+		{#each history as chat, index (index)}
+			<div class="w-[80%]">
+				<Player>
+					<Audio>
+						<source data-src={chat.audioURL} type="audio/ogg; codecs=opus" />
+					</Audio>
 
-				<DefaultUi noSettings />
-			</Player>
-		</div>
-	{/each}
-	<!-- </div> -->
+					<DefaultUi noSettings />
+				</Player>
+
+				<div>
+					{#if chat.transcription === null}
+						Transcribing...
+					{:else}
+						{chat.transcription}
+					{/if}
+				</div>
+			</div>
+		{/each}
+	</div>
 
 	<button
 		on:click={toggleRecording}

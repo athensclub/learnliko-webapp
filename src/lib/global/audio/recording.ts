@@ -6,10 +6,10 @@ let mediaRecorder: MediaRecorder;
 let media: Blob[] = [];
 
 /**
- * The string URL of the current audio recording. 
+ * The current audio recording. 
  * The store will change to the new value every time a recording is finished.
  */
-export const audioRecording = writable<string | null>(null);
+export const audioRecording = writable<null | { data: Blob, url: string }>(null);
 
 export const isRecording = writable(false);
 
@@ -23,7 +23,7 @@ export const initializeAudioRecording = async () => {
     mediaRecorder.onstop = function () {
         const blob = new Blob(media, { 'type': 'audio/ogg; codecs=opus' });
         media = [];
-        audioRecording.set(window.URL.createObjectURL(blob));
+        audioRecording.set({ data: blob, url: window.URL.createObjectURL(blob) });
     }
 };
 

@@ -3,7 +3,7 @@
 	import { showChatbox } from '$lib/global/chatbox';
 	import { fly } from 'svelte/transition';
 	import { Player, DefaultUi, Audio } from '@vime/svelte';
-	import { transcribe } from '$lib/assemblyai/transcription';
+	import { transcribe } from '$api/assemblyai/transcription';
 	import { showModal } from '$lib/global/modal';
 	import ConfirmModal from './modals/ConfirmModal.svelte';
 

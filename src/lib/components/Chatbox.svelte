@@ -1,12 +1,19 @@
 <script lang="ts">
-	import { audioRecording, toggleRecording } from '$lib/global/audio/recording';
+	import { audioRecording, toggleRecording } from '$lib/global/recording';
 	import { showChatbox } from '$lib/global/chatbox';
 	import { fly } from 'svelte/transition';
 	import { Player, DefaultUi, Audio } from '@vime/svelte';
 	import { transcribe } from '$lib/assemblyai/transcription';
+	import { showModal } from '$lib/global/modal';
+	import ConfirmModal from './modals/ConfirmModal.svelte';
 
-	const hide = () => ($showChatbox = false);
-
+	const hide = () =>
+		showModal(ConfirmModal, {
+			title: 'Confirm',
+			description: 'Are you sure you want to finish this conversation?',
+			onConfirm: () => ($showChatbox = false)
+		});
+		
 	let history: { role: 'user' | 'assistant'; audioURL: string; transcription: string | null }[] =
 		[];
 

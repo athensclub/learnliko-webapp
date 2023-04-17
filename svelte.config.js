@@ -1,5 +1,6 @@
 import adapter from '@sveltejs/adapter-cloudflare';
 import { vitePreprocess } from '@sveltejs/kit/vite';
+import path from 'path';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -15,7 +16,11 @@ const config = {
 				include: ['/*'],
 				exclude: ['<all>']
 			}
-		})
+		}),
+		alias: {
+			// Access learnliko's api via SDK library
+			$api: path.resolve('./src/routes/api/_lib')
+		}
 	}
 };
 

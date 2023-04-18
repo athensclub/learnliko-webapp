@@ -15,16 +15,18 @@
 			onConfirm: () => ($showChatbox = false)
 		});
 
-	synthesize('Hi, I’m Traveler. How to go to Hat Yai Public Garden?').then((val) => {
-		history = [
-			{
-				role: 'assistant',
-				audioURL: URL.createObjectURL(val),
-				transcription: null
-			},
-			...history
-		];
-	});
+	synthesize('Hi, I’m Traveler. How to go to Hat Yai Public Garden?', 'India', 'MALE').then(
+		(val) => {
+			history = [
+				{
+					role: 'assistant',
+					audioURL: URL.createObjectURL(val),
+					transcription: null
+				},
+				...history
+			];
+		}
+	);
 
 	let history: { role: 'user' | 'assistant'; audioURL: string; transcription: string | null }[] =
 		[];

@@ -6,6 +6,7 @@
 	import { transcribe } from '$api/transcription';
 	import { showModal } from '$lib/global/modal';
 	import ConfirmModal from './modals/ConfirmModal.svelte';
+	import { synthesize } from '$api/tts';
 
 	const hide = () =>
 		showModal(ConfirmModal, {
@@ -13,7 +14,18 @@
 			description: 'Are you sure you want to finish this conversation?',
 			onConfirm: () => ($showChatbox = false)
 		});
-		
+
+	synthesize('Hi, I’m Traveler. How to go to Hat Yai Public Garden?').then((val) => {
+		history = [
+			{
+				role: 'assistant',
+				audioURL: URL.createObjectURL(val),
+				transcription: null
+			},
+			...history
+		];
+	});
+
 	let history: { role: 'user' | 'assistant'; audioURL: string; transcription: string | null }[] =
 		[];
 
@@ -57,20 +69,24 @@
 
 	<div class="w-full h-[calc(100%-48px)] overflow-y-auto">
 		{#each history as chat, index (index)}
-			<div class="w-[80%]">
-				<Player>
-					<Audio>
-						<source data-src={chat.audioURL} type="audio/ogg; codecs=opus" />
-					</Audio>
+			<div class={`flex flex-row w-full ${chat.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+				<div class="w-[80%]">
+					<Player>
+						<Audio>
+							<source data-src={chat.audioURL} type="audio/ogg; codecs=opus" />
+						</Audio>
 
-					<DefaultUi noSettings />
-				</Player>
+						<DefaultUi noSettings />
+					</Player>
 
-				<div>
-					{#if chat.transcription === null}
-						Transcribing...
-					{:else}
-						{chat.transcription}
+					{#if chat.role === 'user'}
+						<div>
+							{#if chat.transcription === null}
+								Transcribing...
+							{:else}
+								{chat.transcription}
+							{/if}
+						</div>
 					{/if}
 				</div>
 			</div>

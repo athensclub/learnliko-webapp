@@ -3,7 +3,7 @@
 	import Chatbox from '$lib/components/Chatbox.svelte';
 	import { showChatbox } from '$lib/global/chatbox';
 	import { onMount } from 'svelte';
-	import { initializeAudioRecording } from '$lib/global/recording';
+	import { audioRecording, initializeAudioRecording, resetRecordingData } from '$lib/global/recording';
 	import Modal from 'svelte-simple-modal';
 	import { modal } from '$lib/global/modal';
 	import { browser } from '$app/environment';
@@ -11,6 +11,10 @@
 	onMount(() => {
 		initializeAudioRecording();
 	});
+
+	$: if(!$showChatbox){
+		resetRecordingData();
+	}
 </script>
 
 <div class="w-[100vw] h-[1px] min-h-[100vh]">

@@ -2,6 +2,7 @@
 	import {
 		audioRecording,
 		isRecording,
+		resetRecordingData,
 		stopRecording,
 		toggleRecording
 	} from '$lib/global/recording';
@@ -12,6 +13,9 @@
 	import { showModal } from '$lib/global/modal';
 	import ConfirmModal from './modals/ConfirmModal.svelte';
 	import { synthesize } from '$api/tts';
+	import aiImage from '$lib/images/sample_ai_profile.png';
+	import userImage from '$lib/images/sample_kid_image.png';
+	import { onDestroy } from 'svelte';
 
 	const hide = () =>
 		showModal(ConfirmModal, {
@@ -19,6 +23,9 @@
 			description: 'Are you sure you want to finish this conversation?',
 			onConfirm: () => ($showChatbox = false)
 		});
+
+	let history: { role: 'user' | 'assistant'; audioURL: string; transcription: string | null }[] =
+		[];
 
 	synthesize('Hi, I’m Traveler. How to go to Hat Yai Public Garden?', 'India', 'MALE').then(
 		(val) => {
@@ -33,9 +40,6 @@
 		}
 	);
 
-	let history: { role: 'user' | 'assistant'; audioURL: string; transcription: string | null }[] =
-		[];
-
 	audioRecording.subscribe((audioRecording) => {
 		if (audioRecording !== null) {
 			history = [
@@ -48,18 +52,14 @@
 			];
 
 			const targetIndex = history.length - 1;
-			transcribe(audioRecording.data).then((transcription) => {
-				history[targetIndex] = {
-					...history[targetIndex],
-					transcription: transcription
-				};
-			});
-		}
-	});
-
-	showChatbox.subscribe((showChatbox) => {
-		if (!showChatbox) {
-			stopRecording();
+			transcribe(audioRecording.data)
+				.then((transcription) => {
+					history[targetIndex] = {
+						...history[targetIndex],
+						transcription: transcription
+					};
+				})
+				.catch((e) => console.error(e));
 		}
 	});
 </script>
@@ -82,30 +82,39 @@
 
 	<div class="w-full h-[calc(100%-48px)] overflow-y-auto">
 		{#each history as chat, index (index)}
-			<div
-				class={`flex flex-row w-full mt-3 ${
-					chat.role === 'user' ? 'justify-end' : 'justify-start'
-				}`}
-			>
-				<div class="w-[80%] mx-2">
-					<Player>
-						<Audio>
-							<source data-src={chat.audioURL} type="audio/ogg; codecs=opus" />
-						</Audio>
+			<div class={`flex flex-col mt-3 ${chat.role === 'user' ? 'items-end' : 'items-start'}`}>
+				<div class={`flex flex-row items-center w-[85%]`}>
+					{#if chat.role === 'assistant'}
+						<div
+							class={`w-[48px] h-[48px] mr-2 bg-center bg-cover rounded-full border border-white`}
+							style="background-image: url('{aiImage}');"
+						/>
+					{/if}
+					<div class="w-[70%] mx-2 z-50">
+						<Player>
+							<Audio>
+								<source data-src={chat.audioURL} type="audio/ogg; codecs=opus" />
+							</Audio>
 
-						<DefaultUi noSettings />
-					</Player>
-
+							<DefaultUi noSettings />
+						</Player>
+					</div>
 					{#if chat.role === 'user'}
-						<div>
-							{#if chat.transcription === null}
-								Transcribing...
-							{:else}
-								{chat.transcription}
-							{/if}
-						</div>
+						<div
+							class={`w-[48px] h-[48px] bg-center bg-cover ml-2 rounded-full border border-white`}
+							style="background-image: url('{userImage}');"
+						/>
 					{/if}
 				</div>
+				{#if chat.role === 'user'}
+					<div class="pl-2 w-[85%]">
+						{#if chat.transcription === null}
+							Transcribing...
+						{:else}
+							{chat.transcription}
+						{/if}
+					</div>
+				{/if}
 			</div>
 		{/each}
 	</div>

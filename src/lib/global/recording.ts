@@ -6,6 +6,14 @@ let mediaRecorder: MediaRecorder;
 let media: Blob[] = [];
 
 /**
+ * when user is still recording, but closes the chatbox anyway, we will stop recording,
+ * but we has to wait for mediaRecorder onstop to stop and we would need variable
+ * to mark when user has already stopped using chatbox to ignore incoming data
+ * when value comes from mediaRecorder.
+ */
+let resetting = false;
+
+/**
  * The current audio recording. 
  * The store will change to the new value every time a recording is finished.
  */
@@ -24,20 +32,39 @@ export const initializeAudioRecording = async () => {
     mediaRecorder = new MediaRecorder(stream);
     mediaRecorder.ondataavailable = (e) => media.push(e.data);
     mediaRecorder.onstop = function () {
+        if (resetting) {
+            media = [];
+            return;
+        }
         const blob = new Blob(media, { 'type': 'audio/ogg; codecs=opus' });
         media = [];
         audioRecording.set({ data: blob, url: window.URL.createObjectURL(blob) });
     }
 };
 
+/**
+ * Reset all the current recording data to prepare for new recording.
+ */
+export const resetRecordingData = () => {
+    media = [];
+    resetting = true;
+    stopRecording();
+    audioRecording.set(null);
+}
+
 export const startRecording = () => {
+    if (get(isRecording))
+        return;
+    resetting = false;
     isRecording.set(true);
-    mediaRecorder.start()
+    mediaRecorder.start();
 }
 
 export const stopRecording = () => {
+    if (!get(isRecording))
+        return;
     isRecording.set(false);
-    mediaRecorder.stop()
+    mediaRecorder.stop();
 }
 
 /**

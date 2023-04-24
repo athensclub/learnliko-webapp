@@ -11,11 +11,11 @@
 	import { Player, DefaultUi, Audio } from '@vime/svelte';
 	import { transcribe } from '$api/transcription';
 	import { showModal } from '$lib/global/modal';
+	import Typewriter from 'svelte-typewriter';
 	import ConfirmModal from './modals/ConfirmModal.svelte';
 	import { synthesize, type SynthesizeAccent, type SynthesizeGender } from '$api/tts';
 	import aiImage from '$lib/images/sample_ai_profile.png';
 	import userImage from '$lib/images/sample_kid_image.png';
-	import { onDestroy } from 'svelte';
 	import { chat } from '$api/conversation';
 	import type { ChatMessage } from '$lib/types/requests/chatCompletion';
 
@@ -25,6 +25,9 @@
 		intro: 'Hi, I’m Traveler. How to go to Hat Yai Public Garden?',
 		bot: { accent: 'India' as SynthesizeAccent, gender: 'MALE' as SynthesizeGender }
 	};
+
+	let waitingForAIResponse = false;
+	let transcribing = false;
 
 	const hide = () =>
 		showModal(ConfirmModal, {
@@ -38,6 +41,7 @@
 	 * @param message ignore chat history if [message] is provided
 	 */
 	const botReply = async function (message?: string) {
+		waitingForAIResponse = true;
 		// if no message provide, get response from chatGPT
 		if (!message) {
 			const _history = history.map(
@@ -60,10 +64,12 @@
 				transcription: message
 			}
 		];
+		waitingForAIResponse = false;
 	};
 
 	const onUserReply = async function (audioRecording: { data: Blob; url: string } | null) {
 		if (audioRecording !== null) {
+			transcribing = true;
 			history = [
 				...history,
 				{
@@ -79,6 +85,8 @@
 				...history[targetIndex],
 				transcription: transcription
 			};
+
+			transcribing = false;
 			// TODO: implement `botReply` function with bot's typing/loadind status
 			botReply();
 		}
@@ -133,9 +141,9 @@
 					{/if}
 				</div>
 				{#if chat.role === 'user'}
-					<div class="pl-2 w-[85%]">
+					<div class="mt-1 flex flex-row pl-2 w-[85%]">
 						{#if chat.transcription === null}
-							Transcribing...
+							Transcribing<Typewriter mode="loop">...</Typewriter>
 						{:else}
 							{chat.transcription}
 						{/if}
@@ -143,9 +151,20 @@
 				{/if}
 			</div>
 		{/each}
+		{#if waitingForAIResponse}
+			<div class="flex flex-row items-center">
+				<div
+					class={`w-[48px] h-[48px] mr-2 bg-center bg-cover rounded-full border border-white`}
+					style="background-image: url('{aiImage}');"
+				/>
+				Thinking
+				<Typewriter mode="loop">...</Typewriter>
+			</div>
+		{/if}
 	</div>
 
 	<button
+		disabled={waitingForAIResponse || transcribing}
 		on:click={toggleRecording}
 		class="absolute bg-white/[0.8] mx-auto bottom-4 w-[44px] h-[44px] shadow-all rounded-xl flex items-center justify-center z-[1000]"
 	>

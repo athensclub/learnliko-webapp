@@ -3,7 +3,7 @@ import type { Handle } from '@sveltejs/kit';
 
 const _whitelist = isOnProduction()
 	? ['https://learnliko.pages.dev']
-	: ['http://localhost:5173', 'https://staging.learnliko.pages.dev'];
+	: ['http://localhost:5173', 'http://[::]:5173', 'https://staging.learnliko.pages.dev'];
 
 export const handle: Handle = async ({ resolve, event }) => {
 	const response = await resolve(event);

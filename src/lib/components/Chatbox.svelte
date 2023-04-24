@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { audioRecording, toggleRecording } from '$lib/global/recording';
+	import { audioRecording, stopRecording, toggleRecording } from '$lib/global/recording';
 	import { showChatbox } from '$lib/global/chatbox';
 	import { fly } from 'svelte/transition';
 	import { Player, DefaultUi, Audio } from '@vime/svelte';
@@ -51,6 +51,12 @@
 			});
 		}
 	});
+
+	showChatbox.subscribe((showChatbox) => {
+		if(!showChatbox){
+			stopRecording();
+		}
+	})
 </script>
 
 <div
@@ -71,8 +77,8 @@
 
 	<div class="w-full h-[calc(100%-48px)] overflow-y-auto">
 		{#each history as chat, index (index)}
-			<div class={`flex flex-row w-full ${chat.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-				<div class="w-[80%]">
+			<div class={`flex flex-row w-full mt-3 ${chat.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+				<div class="w-[80%] mx-2">
 					<Player>
 						<Audio>
 							<source data-src={chat.audioURL} type="audio/ogg; codecs=opus" />

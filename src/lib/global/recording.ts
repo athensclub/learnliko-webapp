@@ -11,6 +11,9 @@ let media: Blob[] = [];
  */
 export const audioRecording = writable<null | { data: Blob, url: string }>(null);
 
+/**
+ * Whether the browser is recording audio or not.
+ */
 export const isRecording = writable(false);
 
 /**

@@ -12,10 +12,19 @@
 	import { transcribe } from '$api/transcription';
 	import { showModal } from '$lib/global/modal';
 	import ConfirmModal from './modals/ConfirmModal.svelte';
-	import { synthesize } from '$api/tts';
+	import { synthesize, type SynthesizeAccent, type SynthesizeGender } from '$api/tts';
 	import aiImage from '$lib/images/sample_ai_profile.png';
 	import userImage from '$lib/images/sample_kid_image.png';
 	import { onDestroy } from 'svelte';
+	import { chat } from '$api/conversation';
+	import type { ChatMessage } from '$lib/types/requests/chatCompletion';
+
+	let history: { role: 'user' | 'assistant'; audioURL: string; transcription: string | null }[] =
+		[];
+	const conversationDetails = {
+		intro: 'Hi, I’m Traveler. How to go to Hat Yai Public Garden?',
+		bot: { accent: 'India' as SynthesizeAccent, gender: 'MALE' as SynthesizeGender }
+	};
 
 	const hide = () =>
 		showModal(ConfirmModal, {
@@ -24,23 +33,36 @@
 			onConfirm: () => ($showChatbox = false)
 		});
 
-	let history: { role: 'user' | 'assistant'; audioURL: string; transcription: string | null }[] =
-		[];
-
-	synthesize('Hi, I’m Traveler. How to go to Hat Yai Public Garden?', 'India', 'MALE').then(
-		(val) => {
-			history = [
-				{
-					role: 'assistant',
-					audioURL: URL.createObjectURL(val),
-					transcription: null
-				},
-				...history
-			];
+	/**
+	 * Call bot to reply base on chat history
+	 * @param message ignore chat history if [message] is provided
+	 */
+	const botReply = async function (message?: string) {
+		// if no message provide, get response from chatGPT
+		if (!message) {
+			const _history = history.map(
+				(data) => Object({ role: data.role, content: data.transcription }) as ChatMessage
+			);
+			message = await chat(_history);
 		}
-	);
 
-	audioRecording.subscribe((audioRecording) => {
+		const audio = await synthesize(
+			message,
+			conversationDetails.bot.accent,
+			conversationDetails.bot.gender
+		);
+
+		history = [
+			...history,
+			{
+				role: 'assistant',
+				audioURL: URL.createObjectURL(audio),
+				transcription: message
+			}
+		];
+	};
+
+	const onUserReply = async function (audioRecording: { data: Blob; url: string } | null) {
 		if (audioRecording !== null) {
 			history = [
 				...history,
@@ -52,16 +74,20 @@
 			];
 
 			const targetIndex = history.length - 1;
-			transcribe(audioRecording.data)
-				.then((transcription) => {
-					history[targetIndex] = {
-						...history[targetIndex],
-						transcription: transcription
-					};
-				})
-				.catch((e) => console.error(e));
+			const transcription = await transcribe(audioRecording.data);
+			history[targetIndex] = {
+				...history[targetIndex],
+				transcription: transcription
+			};
+			// TODO: implement `botReply` function with bot's typing/loadind status
+			botReply();
 		}
-	});
+	};
+
+	// initialization
+	// TODO: implement with simulate situation, give bot the information about the situation
+	botReply(conversationDetails.intro);
+	audioRecording.subscribe(onUserReply);
 </script>
 
 <div

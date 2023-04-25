@@ -6,13 +6,12 @@
 		stopRecording,
 		toggleRecording
 	} from '$lib/global/recording';
-	import { showChatbox } from '$lib/global/chatbox';
-	import { fly } from 'svelte/transition';
 	import { Player, DefaultUi, Audio } from '@vime/svelte';
 	import { transcribe } from '$api/transcription';
 	import { showModal } from '$lib/global/modal';
+	import { showChatbox } from '$lib/global/chatbox';
 	import Typewriter from 'svelte-typewriter';
-	import ConfirmModal from './modals/ConfirmModal.svelte';
+	import ConfirmModal from '$lib/components/modals/ConfirmModal.svelte';
 	import { synthesize, type SynthesizeAccent, type SynthesizeGender } from '$api/tts';
 	import aiImage from '$lib/images/sample_ai_profile.png';
 	import userImage from '$lib/images/sample_kid_image.png';
@@ -68,6 +67,8 @@ I will be your customer who is an kid and have English proficiency at level A1.
 If you understand, say “Welcome to the shop how can I help you?”`
 		}
 	};
+
+	let finished = true;
 
 	let initializedConversation = false;
 	let waitingForAIResponse = false;
@@ -167,88 +168,92 @@ If you understand, say “Welcome to the shop how can I help you?”`
 </script>
 
 <div
-	transition:fly={{ y: 800, duration: 500 }}
-	class="w-full h-full bg-white z-[1000] font-line-seed relative flex flex-col items-center"
+	class="flex items-center justify-center w-full h-[48px] font-bold text-lg border-b border-black/[0.15] relative"
 >
-	<div
-		class="flex items-center justify-center w-full h-[48px] font-bold text-lg border-b border-black/[0.15] relative"
-	>
-		Voice Chat
+	Voice Chat
 
-		<button
-			on:click={hide}
-			class="absolute right-4 rounded-full border border-black/[0.15] h-[28px] aspect-square"
-			>x</button
-		>
+	<div class="flex flex-row absolute right-4">
+		<button on:click={hide} class="rounded-full border border-black/[0.15] h-[28px] aspect-square">
+			x
+		</button>
 	</div>
+</div>
 
-	{#if initializedConversation}
-		<div class="w-full h-[calc(100%-48px)] overflow-y-auto">
-			{#each history as chat, index (index)}
-				<div class={`flex flex-col mt-3 ${chat.role === 'user' ? 'items-end' : 'items-start'}`}>
-					<div class={`flex flex-row items-center w-[85%]`}>
-						{#if chat.role === 'assistant'}
-							<div
-								class={`w-[48px] h-[48px] mr-2 bg-center bg-cover rounded-full border border-white`}
-								style="background-image: url('{aiImage}');"
-							/>
-						{/if}
-						<div class="w-[70%] mx-2 z-50">
-							<Player>
-								<Audio>
-									<source data-src={chat.audioURL} type="audio/ogg; codecs=opus" />
-								</Audio>
+{#if initializedConversation}
+	<div class="w-full h-[calc(100%-48px)] overflow-y-auto">
+		{#each history as chat, index (index)}
+			<div class={`flex flex-col mt-3 ${chat.role === 'user' ? 'items-end' : 'items-start'}`}>
+				<div class={`flex flex-row items-center w-[85%]`}>
+					{#if chat.role === 'assistant'}
+						<div
+							class={`w-[48px] h-[48px] mr-2 bg-center bg-cover rounded-full border border-white`}
+							style="background-image: url('{aiImage}');"
+						/>
+					{/if}
+					<div class="w-[70%] mx-2 z-50">
+						<Player>
+							<Audio>
+								<source data-src={chat.audioURL} type="audio/ogg; codecs=opus" />
+							</Audio>
 
-								<DefaultUi noSettings />
-							</Player>
-						</div>
-						{#if chat.role === 'user'}
-							<div
-								class={`w-[48px] h-[48px] bg-center bg-cover ml-2 rounded-full border border-white`}
-								style="background-image: url('{userImage}');"
-							/>
-						{/if}
+							<DefaultUi noSettings />
+						</Player>
 					</div>
 					{#if chat.role === 'user'}
-						<div class="mt-1 flex flex-row pl-2 w-[85%]">
-							{#if chat.transcription === null}
-								Transcribing<Typewriter mode="loop">...</Typewriter>
-							{:else}
-								{chat.transcription}
-							{/if}
-						</div>
+						<div
+							class={`w-[48px] h-[48px] bg-center bg-cover ml-2 rounded-full border border-white`}
+							style="background-image: url('{userImage}');"
+						/>
 					{/if}
 				</div>
-			{/each}
-			{#if waitingForAIResponse}
-				<div class="flex flex-row items-center">
-					<div
-						class={`w-[48px] h-[48px] mr-2 bg-center bg-cover rounded-full border border-white`}
-						style="background-image: url('{aiImage}');"
-					/>
-					Thinking
-					<Typewriter mode="loop">...</Typewriter>
-				</div>
-			{/if}
-		</div>
-	{:else}
-		<!-- TODO: waiting for conversation initialization UI -->
-		<h4>Initializing Conversation...</h4>
-	{/if}
-
-	<button
-		disabled={waitingForAIResponse || transcribing}
-		on:click={toggleRecording}
-		class="absolute bg-white/[0.8] mx-auto bottom-4 w-[44px] h-[44px] shadow-all rounded-xl flex items-center justify-center z-[1000]"
-	>
-		{#if $isRecording}
-			<div class="bg-red-600 rounded-full w-[15%] aspect-square absolute top-1 right-2" />
+				{#if chat.role === 'user'}
+					<div class="mt-1 flex flex-row pl-2 w-[85%]">
+						{#if chat.transcription === null}
+							Transcribing<Typewriter mode="loop">...</Typewriter>
+						{:else}
+							{chat.transcription}
+						{/if}
+					</div>
+				{/if}
+			</div>
+		{/each}
+		{#if waitingForAIResponse}
+			<div class="flex flex-row items-center">
+				<div
+					class={`w-[48px] h-[48px] mr-2 bg-center bg-cover rounded-full border border-white`}
+					style="background-image: url('{aiImage}');"
+				/>
+				Thinking
+				<Typewriter mode="loop">...</Typewriter>
+			</div>
 		{/if}
-		<svg class="w-[35%]" viewBox="0 0 41 56" fill="none" xmlns="http://www.w3.org/2000/svg">
-			<path
-				d="M20.5 35.25C18.1042 35.25 16.0677 34.4115 14.3906 32.7344C12.7135 31.0573 11.875 29.0208 11.875 26.625V9.375C11.875 6.97917 12.7135 4.94271 14.3906 3.26562C16.0677 1.58854 18.1042 0.75 20.5 0.75C22.8958 0.75 24.9323 1.58854 26.6094 3.26562C28.2865 4.94271 29.125 6.97917 29.125 9.375V26.625C29.125 29.0208 28.2865 31.0573 26.6094 32.7344C24.9323 34.4115 22.8958 35.25 20.5 35.25ZM17.625 55.375V46.5344C12.6417 45.8635 8.52083 43.6354 5.2625 39.85C2.00417 36.0646 0.375 31.6562 0.375 26.625H6.125C6.125 30.6021 7.52704 33.9917 10.3311 36.7939C13.1333 39.598 16.5229 41 20.5 41C24.4771 41 27.8677 39.598 30.6718 36.7939C33.4739 33.9917 34.875 30.6021 34.875 26.625H40.625C40.625 31.6562 38.9958 36.0646 35.7375 39.85C32.4792 43.6354 28.3583 45.8635 23.375 46.5344V55.375H17.625Z"
-				fill="black"
-			/>
-		</svg>
-	</button>
-</div>
+
+		{#if finished}
+			<div class="w-full text-center flex flex-col mt-4 items-center font-bold">
+				Conversation Finished
+
+				<button class="mt-3 rounded-lg w-fit border border-black/[0.15] font-normal text-base mr-4 px-3">
+					Recap
+				</button>
+			</div>
+		{/if}
+	</div>
+{:else}
+	<div class="flex flex-row">Initializing Conversation<Typewriter mode="loop">...</Typewriter></div>
+{/if}
+
+<button
+	disabled={waitingForAIResponse || transcribing || finished}
+	on:click={toggleRecording}
+	class="absolute bg-white/[0.8] mx-auto bottom-4 w-[44px] h-[44px] shadow-all rounded-xl flex items-center justify-center z-[1000]"
+>
+	{#if $isRecording}
+		<div class="bg-red-600 rounded-full w-[15%] aspect-square absolute top-1 right-2" />
+	{/if}
+	<svg class="w-[35%]" viewBox="0 0 41 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+		<path
+			d="M20.5 35.25C18.1042 35.25 16.0677 34.4115 14.3906 32.7344C12.7135 31.0573 11.875 29.0208 11.875 26.625V9.375C11.875 6.97917 12.7135 4.94271 14.3906 3.26562C16.0677 1.58854 18.1042 0.75 20.5 0.75C22.8958 0.75 24.9323 1.58854 26.6094 3.26562C28.2865 4.94271 29.125 6.97917 29.125 9.375V26.625C29.125 29.0208 28.2865 31.0573 26.6094 32.7344C24.9323 34.4115 22.8958 35.25 20.5 35.25ZM17.625 55.375V46.5344C12.6417 45.8635 8.52083 43.6354 5.2625 39.85C2.00417 36.0646 0.375 31.6562 0.375 26.625H6.125C6.125 30.6021 7.52704 33.9917 10.3311 36.7939C13.1333 39.598 16.5229 41 20.5 41C24.4771 41 27.8677 39.598 30.6718 36.7939C33.4739 33.9917 34.875 30.6021 34.875 26.625H40.625C40.625 31.6562 38.9958 36.0646 35.7375 39.85C32.4792 43.6354 28.3583 45.8635 23.375 46.5344V55.375H17.625Z"
+			fill="black"
+		/>
+	</svg>
+</button>

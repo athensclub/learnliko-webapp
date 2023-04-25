@@ -1,6 +1,6 @@
 <script>
 	import '../app.css';
-	import Chatbox from '$lib/components/Chatbox.svelte';
+	import Chatbox from '$lib/components/chatbox/Chatbox.svelte';
 	import { showChatbox } from '$lib/global/chatbox';
 	import { onMount } from 'svelte';
 	import { audioRecording, initializeAudioRecording, resetRecordingData } from '$lib/global/recording';

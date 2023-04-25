@@ -2,6 +2,7 @@
 	import { recapHistory, showChatbox } from '$lib/global/chatbox';
 	import ConfirmModal from '$lib/components/modals/ConfirmModal.svelte';
 	import { showModal } from '$lib/global/modal';
+	import DialogueCard from './DialogueCard.svelte';
 
 	const totalScore = $recapHistory.map((x) => x.score).reduce((x, y) => x + y, 0);
 
@@ -27,4 +28,12 @@
 	>
 		Finish
 	</button>
+</div>
+
+<div class="w-full h-[calc(100%-48px)] overflow-y-auto">
+	{#each $recapHistory as dialogue, index (index)}
+		{#if dialogue.user}
+			<DialogueCard dialogueNumber={index+1} {dialogue}/>
+		{/if}
+	{/each}
 </div>

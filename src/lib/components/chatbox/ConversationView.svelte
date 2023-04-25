@@ -9,7 +9,12 @@
 	import { Player, DefaultUi, Audio } from '@vime/svelte';
 	import { transcribe } from '$api/transcription';
 	import { showModal } from '$lib/global/modal';
-	import { showChatbox } from '$lib/global/chatbox';
+	import {
+		showChatbox,
+		type ChatboxView,
+		recapHistory,
+		type RecapHistory
+	} from '$lib/global/chatbox';
 	import Typewriter from 'svelte-typewriter';
 	import ConfirmModal from '$lib/components/modals/ConfirmModal.svelte';
 	import { synthesize, type SynthesizeAccent, type SynthesizeGender } from '$api/tts';
@@ -18,6 +23,17 @@
 	import { chat } from '$api/conversation';
 	import type { ChatMessage } from '$lib/types/requests/chatCompletion';
 	import type { ChatBotMessage } from '$lib/types/conversationData';
+
+	export let setView: (view: ChatboxView) => void;
+	const showRecap = () => {
+		let result: RecapHistory = [];
+		for (let chat of history) {
+			// TODO: add score and suggestion info
+			result.push({ ...chat, transcription: chat.transcription!, score: 0, suggestion: '' });
+		}
+		$recapHistory = result;
+		setView('RECAP');
+	};
 
 	// chat's history, used for display only
 	let history: {
@@ -102,6 +118,8 @@ If you understand, say “Welcome to the shop how can I help you?”`
 				case 'NORMAL':
 				case 'INAPPROPRIATE':
 				case 'END-OF-CONVERSATION':
+                    finished = true;
+                    break;
 				default:
 					break;
 			}
@@ -232,7 +250,10 @@ If you understand, say “Welcome to the shop how can I help you?”`
 			<div class="w-full text-center flex flex-col mt-4 items-center font-bold">
 				Conversation Finished
 
-				<button class="mt-3 rounded-lg w-fit border border-black/[0.15] font-normal text-base mr-4 px-3">
+				<button
+					on:click={showRecap}
+					class="mt-3 rounded-lg w-fit border border-black/[0.15] font-normal text-base mr-4 px-3"
+				>
 					Recap
 				</button>
 			</div>

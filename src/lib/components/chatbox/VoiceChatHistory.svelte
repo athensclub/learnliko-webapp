@@ -22,7 +22,7 @@
 					style="background-image: url('{assistantProfileImage}');"
 				/>
 			{/if}
-			<div class="w-[70%] mx-2 z-50">
+			<div class="w-[75%] mx-2 z-50">
 				<Player>
 					<Audio>
 						<source data-src={chat.audioURL} type="audio/ogg; codecs=opus" />

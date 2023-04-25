@@ -21,7 +21,7 @@
 	<slot />
 
 	{#if $showChatbox}
-		<div class="fixed right-0 bottom-0 w-[40vw] h-[65vh]">
+		<div class="fixed right-0 bottom-0 w-[40vw] h-[calc(100vh-48px)]">
 			<Chatbox />
 		</div>
 	{/if}

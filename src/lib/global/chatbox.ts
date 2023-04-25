@@ -29,6 +29,7 @@ export type RecapHistoryItem = {
  * A history of pair of assistant message, then user message.
  */
 export type RecapHistory = RecapHistoryItem[];
+
 /**
  * A history to be used to show in recap.
  * Fill this store's data before showing recap view.

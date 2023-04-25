@@ -6,7 +6,6 @@
 		stopRecording,
 		toggleRecording
 	} from '$lib/global/recording';
-	import { Player, DefaultUi, Audio } from '@vime/svelte';
 	import { transcribe } from '$api/transcription';
 	import { showModal } from '$lib/global/modal';
 	import {
@@ -23,6 +22,7 @@
 	import { chat } from '$api/conversation';
 	import type { ChatMessage } from '$lib/types/requests/chatCompletion';
 	import type { ChatBotMessage } from '$lib/types/conversationData';
+	import VoiceChatHistory from './VoiceChatHistory.svelte';
 
 	export let setView: (view: ChatboxView) => void;
 	const showRecap = () => {
@@ -84,7 +84,7 @@ If you understand, say “Welcome to the shop how can I help you?”`
 		}
 	};
 
-	let finished = true;
+	let finished = false;
 
 	let initializedConversation = false;
 	let waitingForAIResponse = false;
@@ -118,8 +118,8 @@ If you understand, say “Welcome to the shop how can I help you?”`
 				case 'NORMAL':
 				case 'INAPPROPRIATE':
 				case 'END-OF-CONVERSATION':
-                    finished = true;
-                    break;
+					finished = true;
+					break;
 				default:
 					break;
 			}
@@ -199,42 +199,8 @@ If you understand, say “Welcome to the shop how can I help you?”`
 
 {#if initializedConversation}
 	<div class="w-full h-[calc(100%-48px)] overflow-y-auto">
-		{#each history as chat, index (index)}
-			<div class={`flex flex-col mt-3 ${chat.role === 'user' ? 'items-end' : 'items-start'}`}>
-				<div class={`flex flex-row items-center w-[85%]`}>
-					{#if chat.role === 'assistant'}
-						<div
-							class={`w-[48px] h-[48px] mr-2 bg-center bg-cover rounded-full border border-white`}
-							style="background-image: url('{aiImage}');"
-						/>
-					{/if}
-					<div class="w-[70%] mx-2 z-50">
-						<Player>
-							<Audio>
-								<source data-src={chat.audioURL} type="audio/ogg; codecs=opus" />
-							</Audio>
+		<VoiceChatHistory showAssistantTranscription {history} assistantProfileImage={aiImage} userProfileImage={userImage} />
 
-							<DefaultUi noSettings />
-						</Player>
-					</div>
-					{#if chat.role === 'user'}
-						<div
-							class={`w-[48px] h-[48px] bg-center bg-cover ml-2 rounded-full border border-white`}
-							style="background-image: url('{userImage}');"
-						/>
-					{/if}
-				</div>
-				{#if chat.role === 'user'}
-					<div class="mt-1 flex flex-row pl-2 w-[85%]">
-						{#if chat.transcription === null}
-							Transcribing<Typewriter mode="loop">...</Typewriter>
-						{:else}
-							{chat.transcription}
-						{/if}
-					</div>
-				{/if}
-			</div>
-		{/each}
 		{#if waitingForAIResponse}
 			<div class="flex flex-row items-center">
 				<div
@@ -258,13 +224,16 @@ If you understand, say “Welcome to the shop how can I help you?”`
 				</button>
 			</div>
 		{/if}
+
+        <!-- Just a bottom space -->
+        <div class="w-full h-[80px]"></div>
 	</div>
 {:else}
 	<div class="flex flex-row">Initializing Conversation<Typewriter mode="loop">...</Typewriter></div>
 {/if}
 
 <button
-	disabled={waitingForAIResponse || transcribing || finished}
+	disabled={waitingForAIResponse || transcribing || finished || !initializedConversation}
 	on:click={toggleRecording}
 	class="absolute bg-white/[0.8] mx-auto bottom-4 w-[44px] h-[44px] shadow-all rounded-xl flex items-center justify-center z-[1000]"
 >

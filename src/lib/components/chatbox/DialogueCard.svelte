@@ -1,14 +1,36 @@
 <script lang="ts">
-	import type { RecapHistoryItem } from "$lib/global/chatbox";
+	import type { RecapHistoryItem } from '$lib/global/chatbox';
+	import ReadMore from 'svelte-read-more';
+	import VoiceChatHistory from './VoiceChatHistory.svelte';
+	import aiImage from '$lib/images/sample_ai_profile.png';
+	import userImage from '$lib/images/sample_kid_image.png';
 
 	export let dialogueNumber: number;
-    export let dialogue: RecapHistoryItem;
+	export let dialogue: RecapHistoryItem;
+
+	const mockHistory = [dialogue.assistant, dialogue.user!];
 </script>
 
-<div class="w-[95%] mx-auto mt-3 rounded-xl flex flex-col bg-[#F8F8F8]">
-	<div class="flex flex-row justify-between text-xl font-bold items-center px-3">
+<div class="w-[95%] mx-auto mt-3 rounded-xl flex flex-col bg-[#F8F8F8] pb-4">
+	<div class="flex flex-row justify-between text-xl font-bold items-center px-3 mt-3">
 		Dialogue {dialogueNumber}
 
-		<div class="rounded-lg bg-black text-base text-center text-white px-2">{dialogue.score} Point</div>
+		<div class="rounded-lg bg-black text-base text-center text-white px-2">
+			{dialogue.score} Point
+		</div>
+	</div>
+
+	<div class="w-full px-3">
+		<VoiceChatHistory
+			showAssistantTranscription
+			history={mockHistory}
+			assistantProfileImage={aiImage}
+			userProfileImage={userImage}
+		/>
+	</div>
+
+	<div class="w-full text-center font-bold text-base mt-3">Suggestion</div>
+	<div class="px-3">
+		<ReadMore textContent={dialogue.suggestion} maxChars={80} />
 	</div>
 </div>

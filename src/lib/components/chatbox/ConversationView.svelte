@@ -24,17 +24,6 @@
 	import type { ChatBotMessage } from '$lib/types/conversationData';
 	import VoiceChatHistory from './VoiceChatHistory.svelte';
 
-	export let setView: (view: ChatboxView) => void;
-	const showRecap = () => {
-		let result: RecapHistory = [];
-		for (let chat of history) {
-			// TODO: add score and suggestion info
-			result.push({ ...chat, transcription: chat.transcription!, score: 0, suggestion: '' });
-		}
-		$recapHistory = result;
-		setView('RECAP');
-	};
-
 	// chat's history, used for display only
 	let history: {
 		role: 'user' | 'assistant';
@@ -44,6 +33,30 @@
 
 	// an array of chatGPT's history in raw data, used for chat completion
 	const gptHistory: ChatMessage[] = [];
+
+	export let setView: (view: ChatboxView) => void;
+	const showRecap = () => {
+		let result: RecapHistory = [];
+		for (let i = 0; i < history.length; i += 2) {
+			result.push({
+				assistant: { ...history[i], role: 'assistant', transcription: history[i].transcription! },
+				user:
+					i + 1 < history.length
+						? { ...history[i + 1], role: 'user', transcription: history[i + 1].transcription! }
+						: null,
+				score: 0,
+				suggestion: `Lorem ipsum dolor sit amet, consectetur adippscing elit. Duis eu neque lacus. Mauris
+scelerisque sed arcu vel pharetra. Aenean nec nulla sed nulla viverra cursus at et lacus.
+Etiam accumsan turpis ac consequat sodales. In sollicitudin egestas arcu, et vulputate nunc
+semper in. Praesent interdum odio ac tempor feugiat. Integer id sapien a enim iaculis
+fringilla sed ac lacus. Vivamus odio enim, faucibus vitae nibh malesuada, semper dapibus
+massa. Fusce ligula lorem, dictum sit amet elit sit amet, tempor feugiat nulla. Vestibulum
+non luctus dolor. Vestibulum consectetur ipsum nec sem eleifend ultricies. Lorem ipsum dolor.`
+			});
+		}
+		$recapHistory = result;
+		setView('RECAP');
+	};
 
 	const conversationDetails = {
 		intro: 'Welcome to the shop how can I help you?',
@@ -116,7 +129,9 @@ If you understand, say “Welcome to the shop how can I help you?”`
 			// TODO: implement behavior regarding bot's message status
 			switch (data.status) {
 				case 'NORMAL':
+                    break;
 				case 'INAPPROPRIATE':
+                    break;
 				case 'END-OF-CONVERSATION':
 					finished = true;
 					break;
@@ -199,7 +214,11 @@ If you understand, say “Welcome to the shop how can I help you?”`
 
 {#if initializedConversation}
 	<div class="w-full h-[calc(100%-48px)] overflow-y-auto">
-		<VoiceChatHistory showAssistantTranscription {history} assistantProfileImage={aiImage} userProfileImage={userImage} />
+		<VoiceChatHistory
+			{history}
+			assistantProfileImage={aiImage}
+			userProfileImage={userImage}
+		/>
 
 		{#if waitingForAIResponse}
 			<div class="flex flex-row items-center">
@@ -225,8 +244,8 @@ If you understand, say “Welcome to the shop how can I help you?”`
 			</div>
 		{/if}
 
-        <!-- Just a bottom space -->
-        <div class="w-full h-[80px]"></div>
+		<!-- Just a bottom space -->
+		<div class="w-full h-[80px]" />
 	</div>
 {:else}
 	<div class="flex flex-row">Initializing Conversation<Typewriter mode="loop">...</Typewriter></div>

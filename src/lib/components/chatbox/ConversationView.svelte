@@ -61,8 +61,8 @@ non luctus dolor. Vestibulum consectetur ipsum nec sem eleifend ultricies. Lorem
 	const conversationDetails = {
 		intro: 'Welcome to the shop how can I help you?',
 		bot: {
-			accent: 'India' as SynthesizeAccent,
-			gender: 'MALE' as SynthesizeGender,
+			accent: 'Australia' as SynthesizeAccent,
+			gender: 'FEMALE' as SynthesizeGender,
 			prompt: `Your role:
 I want you to act as a female stationery shop keeper, you are kind, and friendly. Your name is Lucy.
 
@@ -91,9 +91,7 @@ The pen and pencil is 5฿ and 10฿ each respectively.
 Your store have only 10 pens, 10 pencils stock in your storage.
 
 My role:
-I will be your customer who is an kid and have English proficiency at level A1.
-
-If you understand, say “Welcome to the shop how can I help you?”`
+I will be your customer who is an kid and have English proficiency at level A1.`
 		}
 	};
 
@@ -129,9 +127,9 @@ If you understand, say “Welcome to the shop how can I help you?”`
 			// TODO: implement behavior regarding bot's message status
 			switch (data.status) {
 				case 'NORMAL':
-                    break;
+					break;
 				case 'INAPPROPRIATE':
-                    break;
+					break;
 				case 'END-OF-CONVERSATION':
 					finished = true;
 					break;
@@ -184,9 +182,10 @@ If you understand, say “Welcome to the shop how can I help you?”`
 
 	const initializeBot = async function () {
 		gptHistory.push({ role: 'user', content: conversationDetails.bot.prompt });
-
-		const message = await chat(gptHistory);
-		gptHistory.push({ role: 'assistant', content: message });
+		gptHistory.push({
+			role: 'assistant',
+			content: `{"message":"${conversationDetails.intro}","status":"NORMAL"}`
+		});
 
 		await botReply(conversationDetails.intro);
 
@@ -214,11 +213,7 @@ If you understand, say “Welcome to the shop how can I help you?”`
 
 {#if initializedConversation}
 	<div class="w-full h-[calc(100%-48px)] overflow-y-auto">
-		<VoiceChatHistory
-			{history}
-			assistantProfileImage={aiImage}
-			userProfileImage={userImage}
-		/>
+		<VoiceChatHistory {history} assistantProfileImage={aiImage} userProfileImage={userImage} />
 
 		{#if waitingForAIResponse}
 			<div class="flex flex-row items-center">

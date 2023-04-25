@@ -3,3 +3,8 @@ export interface ConversationCarouselItem {
 	intro: string;
 	topic: string;
 }
+
+export interface ChatBotMessage {
+	message: string;
+	status: 'NORMAL' | 'INAPPROPRIATE' | 'END-OF-CONVERSATION';
+}

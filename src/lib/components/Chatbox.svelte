@@ -18,6 +18,7 @@
 	import userImage from '$lib/images/sample_kid_image.png';
 	import { chat } from '$api/conversation';
 	import type { ChatMessage } from '$lib/types/requests/chatCompletion';
+	import type { ChatBotMessage } from '$lib/types/conversationData';
 
 	// chat's history, used for display only
 	let history: {
@@ -92,8 +93,17 @@ If you understand, say “Welcome to the shop how can I help you?”`
 
 			console.log(botResponse);
 			// gpt will response in JSON format, parse it to object
-			const data: { message: string; status: string } = JSON.parse(botResponse);
+			const data: ChatBotMessage = JSON.parse(botResponse);
 			message = data.message;
+
+			// TODO: implement behavior regarding bot's message status
+			switch (data.status) {
+				case 'NORMAL':
+				case 'INAPPROPRIATE':
+				case 'END-OF-CONVERSATION':
+				default:
+					break;
+			}
 		}
 
 		const audio = await synthesize(
@@ -134,7 +144,6 @@ If you understand, say “Welcome to the shop how can I help you?”`
 			gptHistory.push({ role: 'user', content: transcription });
 
 			transcribing = false;
-			// TODO: implement `botReply` function with bot's typing/loadind status
 			botReply();
 		}
 	};
@@ -153,7 +162,6 @@ If you understand, say “Welcome to the shop how can I help you?”`
 	};
 
 	// initialization
-	// TODO: implement with simulate situation, give bot the information about the situation
 	initializeBot();
 	audioRecording.subscribe(onUserReply);
 </script>

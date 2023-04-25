@@ -19,13 +19,56 @@
 	import { chat } from '$api/conversation';
 	import type { ChatMessage } from '$lib/types/requests/chatCompletion';
 
-	let history: { role: 'user' | 'assistant'; audioURL: string; transcription: string | null }[] =
-		[];
+	// chat's history, used for display only
+	let history: {
+		role: 'user' | 'assistant';
+		audioURL: string;
+		transcription: string | null;
+	}[] = [];
+
+	// an array of chatGPT's history in raw data, used for chat completion
+	const gptHistory: ChatMessage[] = [];
+
 	const conversationDetails = {
-		intro: 'Hi, I’m Traveler. How to go to Hat Yai Public Garden?',
-		bot: { accent: 'India' as SynthesizeAccent, gender: 'MALE' as SynthesizeGender }
+		intro: 'Welcome to the shop how can I help you?',
+		bot: {
+			accent: 'India' as SynthesizeAccent,
+			gender: 'MALE' as SynthesizeGender,
+			prompt: `Your role:
+I want you to act as a female stationery shop keeper, you are kind, and friendly. Your name is Lucy.
+
+Your Goal: 
+You have to give customer an information about the product available in you store, the sell them to the customer. 
+
+Answer Format:
+You have to answer in the JSON format by using to following JSON schema
+
+{
+//your response
+"message": string,
+// the enum value in string type
+// “NORMAL” used when the situation is normal
+// “INAPPROPRIATE” used when the situation is out of context or say something inappropriate
+// “END-OF-CONVERSATION” used when the customer have left or finish purchased your product
+"status": string
+}
+
+When the customer have left or finish purchased your product, you have to add "END-OF-CONVERSATION" in the end of the last sentence.
+If your customer talk out of context or say something inappropriate, simply answer "INAPPROPRIATE"
+
+Shop information:
+There are only pen and pencil available in your store.
+The pen and pencil is 5฿ and 10฿ each respectively.
+Your store have only 10 pens, 10 pencils stock in your storage.
+
+My role:
+I will be your customer who is an kid and have English proficiency at level A1.
+
+If you understand, say “Welcome to the shop how can I help you?”`
+		}
 	};
 
+	let initializedConversation = false;
 	let waitingForAIResponse = false;
 	let transcribing = false;
 
@@ -44,10 +87,13 @@
 		waitingForAIResponse = true;
 		// if no message provide, get response from chatGPT
 		if (!message) {
-			const _history = history.map(
-				(data) => Object({ role: data.role, content: data.transcription }) as ChatMessage
-			);
-			message = await chat(_history);
+			const botResponse = await chat(gptHistory);
+			gptHistory.push({ role: 'assistant', content: botResponse });
+
+			console.log(botResponse);
+			// gpt will response in JSON format, parse it to object
+			const data: { message: string; status: string } = JSON.parse(botResponse);
+			message = data.message;
 		}
 
 		const audio = await synthesize(
@@ -85,6 +131,7 @@
 				...history[targetIndex],
 				transcription: transcription
 			};
+			gptHistory.push({ role: 'user', content: transcription });
 
 			transcribing = false;
 			// TODO: implement `botReply` function with bot's typing/loadind status
@@ -92,9 +139,22 @@
 		}
 	};
 
+	const initializeBot = async function () {
+		gptHistory.push({ role: 'user', content: conversationDetails.bot.prompt });
+
+		const message = await chat(gptHistory);
+		gptHistory.push({ role: 'assistant', content: message });
+
+		await botReply(conversationDetails.intro);
+
+		// finish initialization
+		initializedConversation = true;
+		console.log('Finish init bot');
+	};
+
 	// initialization
 	// TODO: implement with simulate situation, give bot the information about the situation
-	botReply(conversationDetails.intro);
+	initializeBot();
 	audioRecording.subscribe(onUserReply);
 </script>
 
@@ -114,54 +174,59 @@
 		>
 	</div>
 
-	<div class="w-full h-[calc(100%-48px)] overflow-y-auto">
-		{#each history as chat, index (index)}
-			<div class={`flex flex-col mt-3 ${chat.role === 'user' ? 'items-end' : 'items-start'}`}>
-				<div class={`flex flex-row items-center w-[85%]`}>
-					{#if chat.role === 'assistant'}
-						<div
-							class={`w-[48px] h-[48px] mr-2 bg-center bg-cover rounded-full border border-white`}
-							style="background-image: url('{aiImage}');"
-						/>
-					{/if}
-					<div class="w-[70%] mx-2 z-50">
-						<Player>
-							<Audio>
-								<source data-src={chat.audioURL} type="audio/ogg; codecs=opus" />
-							</Audio>
+	{#if initializedConversation}
+		<div class="w-full h-[calc(100%-48px)] overflow-y-auto">
+			{#each history as chat, index (index)}
+				<div class={`flex flex-col mt-3 ${chat.role === 'user' ? 'items-end' : 'items-start'}`}>
+					<div class={`flex flex-row items-center w-[85%]`}>
+						{#if chat.role === 'assistant'}
+							<div
+								class={`w-[48px] h-[48px] mr-2 bg-center bg-cover rounded-full border border-white`}
+								style="background-image: url('{aiImage}');"
+							/>
+						{/if}
+						<div class="w-[70%] mx-2 z-50">
+							<Player>
+								<Audio>
+									<source data-src={chat.audioURL} type="audio/ogg; codecs=opus" />
+								</Audio>
 
-							<DefaultUi noSettings />
-						</Player>
-					</div>
-					{#if chat.role === 'user'}
-						<div
-							class={`w-[48px] h-[48px] bg-center bg-cover ml-2 rounded-full border border-white`}
-							style="background-image: url('{userImage}');"
-						/>
-					{/if}
-				</div>
-				{#if chat.role === 'user'}
-					<div class="mt-1 flex flex-row pl-2 w-[85%]">
-						{#if chat.transcription === null}
-							Transcribing<Typewriter mode="loop">...</Typewriter>
-						{:else}
-							{chat.transcription}
+								<DefaultUi noSettings />
+							</Player>
+						</div>
+						{#if chat.role === 'user'}
+							<div
+								class={`w-[48px] h-[48px] bg-center bg-cover ml-2 rounded-full border border-white`}
+								style="background-image: url('{userImage}');"
+							/>
 						{/if}
 					</div>
-				{/if}
-			</div>
-		{/each}
-		{#if waitingForAIResponse}
-			<div class="flex flex-row items-center">
-				<div
-					class={`w-[48px] h-[48px] mr-2 bg-center bg-cover rounded-full border border-white`}
-					style="background-image: url('{aiImage}');"
-				/>
-				Thinking
-				<Typewriter mode="loop">...</Typewriter>
-			</div>
-		{/if}
-	</div>
+					{#if chat.role === 'user'}
+						<div class="mt-1 flex flex-row pl-2 w-[85%]">
+							{#if chat.transcription === null}
+								Transcribing<Typewriter mode="loop">...</Typewriter>
+							{:else}
+								{chat.transcription}
+							{/if}
+						</div>
+					{/if}
+				</div>
+			{/each}
+			{#if waitingForAIResponse}
+				<div class="flex flex-row items-center">
+					<div
+						class={`w-[48px] h-[48px] mr-2 bg-center bg-cover rounded-full border border-white`}
+						style="background-image: url('{aiImage}');"
+					/>
+					Thinking
+					<Typewriter mode="loop">...</Typewriter>
+				</div>
+			{/if}
+		</div>
+	{:else}
+		<!-- TODO: waiting for conversation initialization UI -->
+		<h4>Initializing Conversation...</h4>
+	{/if}
 
 	<button
 		disabled={waitingForAIResponse || transcribing}

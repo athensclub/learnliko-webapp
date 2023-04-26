@@ -19,7 +19,7 @@
 	import { synthesize, type SynthesizeAccent, type SynthesizeGender } from '$api/tts';
 	import aiImage from '$lib/images/sample_ai_profile.png';
 	import userImage from '$lib/images/sample_kid_image.png';
-	import { chat } from '$api/conversation';
+	import { analyzeDialog, chat } from '$api/conversation';
 	import type { ChatMessage } from '$lib/types/requests/chatCompletion';
 	import type { ChatBotMessage } from '$lib/types/conversationData';
 	import VoiceChatHistory from './VoiceChatHistory.svelte';
@@ -35,25 +35,33 @@
 	const gptHistory: ChatMessage[] = [];
 
 	export let setView: (view: ChatboxView) => void;
-	const showRecap = () => {
+	const showRecap = async () => {
 		let result: RecapHistory = [];
+		const promises: Promise<any>[] = [];
+
+		let resultIndex = 0;
 		for (let i = 0; i < history.length; i += 2) {
-			result.push({
-				assistant: { ...history[i], role: 'assistant', transcription: history[i].transcription! },
-				user:
-					i + 1 < history.length
-						? { ...history[i + 1], role: 'user', transcription: history[i + 1].transcription! }
-						: null,
-				score: 0,
-				suggestion: `Lorem ipsum dolor sit amet, consectetur adippscing elit. Duis eu neque lacus. Mauris
-scelerisque sed arcu vel pharetra. Aenean nec nulla sed nulla viverra cursus at et lacus.
-Etiam accumsan turpis ac consequat sodales. In sollicitudin egestas arcu, et vulputate nunc
-semper in. Praesent interdum odio ac tempor feugiat. Integer id sapien a enim iaculis
-fringilla sed ac lacus. Vivamus odio enim, faucibus vitae nibh malesuada, semper dapibus
-massa. Fusce ligula lorem, dictum sit amet elit sit amet, tempor feugiat nulla. Vestibulum
-non luctus dolor. Vestibulum consectetur ipsum nec sem eleifend ultricies. Lorem ipsum dolor.`
-			});
+			// the last dialog will have no user's response
+			if (i + 1 >= history.length) break;
+
+			promises.push(
+				analyzeDialog(history[i].transcription!, history[i + 1].transcription!).then((recap) => {
+					result[resultIndex++] = {
+						assistant: {
+							...history[i],
+							role: 'assistant',
+							transcription: history[i].transcription!
+						},
+						user: { ...history[i + 1], role: 'user', transcription: history[i + 1].transcription! },
+
+						score: recap.overallScore,
+						suggestion: recap.suggestion
+					};
+				})
+			);
 		}
+		await Promise.all(promises);
+		
 		$recapHistory = result;
 		setView('RECAP');
 	};

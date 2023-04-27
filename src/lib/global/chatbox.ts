@@ -33,5 +33,8 @@ export type RecapHistory = RecapHistoryItem[];
 /**
  * A history to be used to show in recap.
  * Fill this store's data before showing recap view.
+ * If the history is not loaded yet, it will be null.
  */
-export const recapHistory = writable<RecapHistory>([]);
+export const recapHistory = writable<RecapHistory | null>();
+
+export const isLoadingRecapHistory = writable(false);

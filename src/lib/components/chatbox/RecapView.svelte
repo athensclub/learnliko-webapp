@@ -4,8 +4,10 @@
 	import { showModal } from '$lib/global/modal';
 	import DialogueCard from './DialogueCard.svelte';
 	import { round } from '$lib/utils/math';
+	import Typewriter from 'svelte-typewriter/Typewriter.svelte';
 
-	const totalScore = $recapHistory.map((x) => x.score).reduce((x, y) => x + y, 0);
+	// we have to wait for recapHistory to finish loading.
+	$: totalScore = $recapHistory ? $recapHistory.map((x) => x.score).reduce((x, y) => x + y, 0) : 0;
 
 	const hide = () =>
 		showModal(ConfirmModal, {
@@ -15,26 +17,32 @@
 		});
 </script>
 
-<div
-	class="flex items-center justify-between w-full h-[48px] font-bold text-lg border-b border-black/[0.15] relative"
->
-	<div class="flex flex-row ml-4">
-		You got
-		<div class="font-extrabold ml-2">{round(totalScore, 2).toLocaleString()} point</div>
+{#if $recapHistory}
+	<div
+		class="flex items-center justify-between w-full h-[48px] font-bold text-lg border-b border-black/[0.15] relative"
+	>
+		<div class="flex flex-row ml-4">
+			You got
+			<div class="font-extrabold ml-2">{round(totalScore, 2).toLocaleString()} point</div>
+		</div>
+
+		<button
+			on:click={hide}
+			class="rounded-lg mr-4 px-3 text-base text-center text-white h-[28px] bg-gradient-to-r from-[#9BA1FD] to-[#FFABAB]"
+		>
+			Finish
+		</button>
 	</div>
 
-	<button
-		on:click={hide}
-		class="rounded-lg mr-4 px-3 text-base text-center text-white h-[28px] bg-gradient-to-r from-[#9BA1FD] to-[#FFABAB]"
-	>
-		Finish
-	</button>
-</div>
-
-<div class="w-full h-[calc(100%-48px)] overflow-y-auto">
-	{#each $recapHistory as dialogue, index (index)}
-		{#if dialogue.user}
-			<DialogueCard dialogueNumber={index + 1} {dialogue} />
-		{/if}
-	{/each}
-</div>
+	<div class="w-full h-[calc(100%-48px)] overflow-y-auto">
+		{#each $recapHistory as dialogue, index (index)}
+			{#if dialogue.user}
+				<DialogueCard dialogueNumber={index + 1} {dialogue} />
+			{/if}
+		{/each}
+	</div>
+{:else}
+	<div class="w-full h-full flex flex-row items-center justify-center">
+		Loading recap. Please wait <Typewriter mode="loop">...</Typewriter>
+	</div>
+{/if}

@@ -12,7 +12,10 @@
 		showChatbox,
 		type ChatboxView,
 		recapHistory,
-		type RecapHistory
+		type RecapHistory,
+
+		isLoadingRecapHistory
+
 	} from '$lib/global/chatbox';
 	import Typewriter from 'svelte-typewriter';
 	import ConfirmModal from '$lib/components/modals/ConfirmModal.svelte';
@@ -36,17 +39,19 @@
 
 	export let setView: (view: ChatboxView) => void;
 	const showRecap = async () => {
+		$recapHistory = null;
+		setView('RECAP');
+
 		let result: RecapHistory = [];
 		const promises: Promise<any>[] = [];
 
-		let resultIndex = 0;
 		for (let i = 0; i < history.length; i += 2) {
 			// the last dialog will have no user's response
 			if (i + 1 >= history.length) break;
 
 			promises.push(
 				analyzeDialog(history[i].transcription!, history[i + 1].transcription!).then((recap) => {
-					result[resultIndex++] = {
+					result[i/2] = {
 						assistant: {
 							...history[i],
 							role: 'assistant',
@@ -63,7 +68,6 @@
 		await Promise.all(promises);
 		
 		$recapHistory = result;
-		setView('RECAP');
 	};
 
 	const conversationDetails = {
@@ -248,7 +252,7 @@ I will be your customer who is an kid and have English proficiency at level A1.`
 		<div class="w-full h-[80px]" />
 	</div>
 {:else}
-	<div class="flex flex-row">Initializing Conversation<Typewriter mode="loop">...</Typewriter></div>
+	<div class="w-full h-full flex flex-row items-center justify-center">Initializing Conversation<Typewriter mode="loop">...</Typewriter></div>
 {/if}
 
 <button

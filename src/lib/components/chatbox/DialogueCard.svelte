@@ -1,12 +1,19 @@
 <script lang="ts">
 	import type { RecapHistoryItem } from '$lib/global/chatbox';
-	import ReadMore from 'svelte-read-more';
+	import ReadMore from '$lib/components/ReadMore.svelte';
 	import VoiceChatHistory from './VoiceChatHistory.svelte';
 	import aiImage from '$lib/images/sample_ai_profile.png';
 	import userImage from '$lib/images/sample_kid_image.png';
+	import { round } from '$lib/utils/math';
 
 	export let dialogueNumber: number;
 	export let dialogue: RecapHistoryItem;
+
+	dialogue.suggestion = dialogue.suggestion
+		? dialogue.suggestion
+		: "There's no suggestion for this dialogue.";
+
+	console.log(dialogue);
 
 	const mockHistory = [dialogue.assistant, dialogue.user!];
 </script>
@@ -16,7 +23,8 @@
 		Dialogue {dialogueNumber}
 
 		<div class="rounded-lg bg-black text-base text-center text-white px-2">
-			{dialogue.score} Point
+			<!-- round to 2 decimal places https://stackoverflow.com/a/11832950 -->
+			{round(dialogue.score, 2).toLocaleString()} Point
 		</div>
 	</div>
 

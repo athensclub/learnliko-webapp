@@ -11,12 +11,6 @@ const config = {
 	kit: {
 		// See https://kit.svelte.dev/docs/adapters for more information about adapters.
 		adapter: adapter({
-			// See https://kit.svelte.dev/docs/adapter-cloudflare#options
-			routes: {
-				include: ['/*'],
-				exclude: ['<all>']
-			},
-
 			// if true, will create a Netlify Edge Function rather
 			// than using standard Node-based functions
 			edge: false,

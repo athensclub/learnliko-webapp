@@ -7,7 +7,7 @@ const _whitelist = isOnProduction()
 			'http://localhost:5173',
 			'http://[::]:5173',
 			'https://staging.learnliko.pages.dev',
-			'https://learnliko.netlify.app/play'
+			'https://learnliko.netlify.app'
 	  ];
 
 export const handle: Handle = async ({ resolve, event }) => {

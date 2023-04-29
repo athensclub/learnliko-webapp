@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Player, DefaultUi, Audio } from '@vime/svelte';
+	import AudioPlayer from '../AudioPlayer.svelte';
 	import Typewriter from 'svelte-typewriter';
 	export let history: {
 		role: 'user' | 'assistant';
@@ -23,13 +23,7 @@
 				/>
 			{/if}
 			<div class="w-[75%] mx-2 z-50">
-				<Player>
-					<Audio>
-						<source data-src={chat.audioURL} type="audio/ogg; codecs=opus" />
-					</Audio>
-
-					<DefaultUi noSettings />
-				</Player>
+				<AudioPlayer src={chat.audioURL} />
 			</div>
 			{#if chat.role === 'user'}
 				<div

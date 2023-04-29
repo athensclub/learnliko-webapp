@@ -24,7 +24,7 @@ export const synthesize = async (
 			audioConfig: { audioEncoding: 'OGG_OPUS' }
 		});
 		if (response.audioContent) {
-			return new Blob([response.audioContent]);
+			return response.audioContent;
 		} else {
 			throw new Error('Synthesize does not return any audio content (input text: ' + text + ')');
 		}

@@ -59,7 +59,7 @@ export const analyzeDialog = async function (assistant: string, user: string) {
 			break;
 		} catch (error) {
 			// max attempt at 5
-			if (attempt++ > 5) break;
+			if (attempt++ >= 5) break;
 
 			console.error('error: parsing dialog analytic, retring...');
 		}

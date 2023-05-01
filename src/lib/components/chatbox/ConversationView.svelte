@@ -137,8 +137,9 @@ I will be your customer who is an kid and have English proficiency at level A1.`
 					break;
 				} catch (error) {
 					// max attempt at 5
-					if (attempt++ > 5) break;
+					if (attempt++ >= 5) break;
 
+					gptHistory.push({ role: 'user', content: 'Reply with provided JSON scheme' });
 					console.error("error: parsing bot's message, retring...");
 				}
 			}

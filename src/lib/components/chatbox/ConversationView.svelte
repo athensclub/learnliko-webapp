@@ -13,9 +13,7 @@
 		type ChatboxView,
 		recapHistory,
 		type RecapHistory,
-
 		isLoadingRecapHistory
-
 	} from '$lib/global/chatbox';
 	import Typewriter from 'svelte-typewriter';
 	import ConfirmModal from '$lib/components/modals/ConfirmModal.svelte';
@@ -51,7 +49,7 @@
 
 			promises.push(
 				analyzeDialog(history[i].transcription!, history[i + 1].transcription!).then((recap) => {
-					result[i/2] = {
+					result[i / 2] = {
 						assistant: {
 							...history[i],
 							role: 'assistant',
@@ -66,7 +64,7 @@
 			);
 		}
 		await Promise.all(promises);
-		
+
 		$recapHistory = result;
 	};
 
@@ -125,12 +123,27 @@ I will be your customer who is an kid and have English proficiency at level A1.`
 		waitingForAIResponse = true;
 		// if no message provide, get response from chatGPT
 		if (!message) {
-			const botResponse = await chat(gptHistory);
-			gptHistory.push({ role: 'assistant', content: botResponse });
+			let data: ChatBotMessage | undefined;
+			let attempt = 0;
+			while (true) {
+				try {
+					const botResponse = await chat(gptHistory);
 
-			console.log(botResponse);
-			// gpt will response in JSON format, parse it to object
-			const data: ChatBotMessage = JSON.parse(botResponse);
+					// gpt will response in JSON format, parse it to object
+					data = JSON.parse(botResponse);
+
+					gptHistory.push({ role: 'assistant', content: botResponse });
+					console.log(botResponse);
+					break;
+				} catch (error) {
+					// max attempt at 5
+					if (attempt++ > 5) break;
+
+					console.error("error: parsing bot's message, retring...");
+				}
+			}
+
+			if (!data) throw new Error('Error: Bot failed to reply');
 			message = data.message;
 
 			// TODO: implement behavior regarding bot's message status
@@ -252,7 +265,9 @@ I will be your customer who is an kid and have English proficiency at level A1.`
 		<div class="w-full h-[80px]" />
 	</div>
 {:else}
-	<div class="w-full h-full flex flex-row items-center justify-center">Initializing Conversation<Typewriter mode="loop">...</Typewriter></div>
+	<div class="w-full h-full flex flex-row items-center justify-center">
+		Initializing Conversation<Typewriter mode="loop">...</Typewriter>
+	</div>
 {/if}
 
 <button

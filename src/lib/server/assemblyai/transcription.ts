@@ -15,7 +15,17 @@ export const transcribe = async (audio: Blob): Promise<string> => {
 
 	let result = null;
 	do {
-		const res = (await assembly.get(`/transcript/${id}`)).data;
+		let res = null;
+		try {
+			res = (await assembly.get(`/transcript/${id}`)).data;
+		} catch (e) {
+			res = null;
+		}
+
+		if(!res){
+			continue;
+		}
+
 		if (res.status === 'completed') {
 			result = res.text;
 		} else if (res.status === 'error') {
@@ -23,6 +33,7 @@ export const transcribe = async (audio: Blob): Promise<string> => {
 				'Something went wrong while trying to transcribe audio: ' + JSON.stringify(res)
 			);
 		}
+		
 		await setTimeout(300);
 	} while (result === null);
 	return result;

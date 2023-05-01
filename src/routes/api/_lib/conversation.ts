@@ -44,11 +44,28 @@ export const analyzeDialog = async function (assistant: string, user: string) {
 		content: `A: “${assistant}”
 		ME: “${user}”`
 	});
-	const response = await chat(prompt);
 
-	// gpt will response in JSON format, parse it to object
-	const data: { clarity: number; grammar: number; appropriateness: number; suggestion: string } =
-		JSON.parse(response);
+	let data:
+		| { clarity: number; grammar: number; appropriateness: number; suggestion: string }
+		| undefined;
+
+	let attempt = 0;
+	while (true) {
+		try {
+			const response = await chat(prompt);
+
+			// gpt will response in JSON format, parse it to object
+			data = JSON.parse(response);
+			break;
+		} catch (error) {
+			// max attempt at 5
+			if (attempt++ > 5) break;
+
+			console.error('error: parsing dialog analytic, retring...');
+		}
+	}
+
+	if (!data) throw new Error('Error: failed analyze dialog');
 
 	return { ...data, overallScore: (data.clarity + data.grammar + data.appropriateness) / 300 };
 };

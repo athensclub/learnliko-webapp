@@ -1,7 +1,19 @@
+import type { SynthesizeAccent, SynthesizeGender } from '$api/tts';
+
+export interface ConversationDetails {
+	intro: string;
+	bot: {
+		accent: SynthesizeAccent;
+		gender: SynthesizeGender;
+		prompt: string;
+	};
+}
+
 export interface ConversationCarouselItem {
 	image: string;
 	intro: string;
 	topic: string;
+	details: ConversationDetails;
 }
 
 export interface ChatBotMessage {

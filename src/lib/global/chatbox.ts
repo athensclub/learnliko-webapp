@@ -1,28 +1,38 @@
-import { writable } from "svelte/store";
+import type { ConversationDetails } from '$lib/types/conversationData';
+import { writable } from 'svelte/store';
 
-export type ChatboxView = "CONVERSATION" | "RECAP";
+export type ChatboxView = 'CONVERSATION' | 'RECAP';
 
 /**
  * Whether to show the chatbox or not.
  */
 export const showChatbox = writable(false);
 
+type ChatboxContext = {
+	details: ConversationDetails;
+};
+
+/**
+ * Context of the current chatbox
+ */
+export const chatContext = writable<ChatboxContext | null>();
+
 /**
  * pair of assistant message, then user message.
  */
 export type RecapHistoryItem = {
-    assistant: {
-        role: 'assistant';
-        audioURL: string;
-        transcription: string;
-    };
-    user: {
-        role: 'user';
-        audioURL: string;
-        transcription: string;
-    } | null;
-    suggestion: string;
-    score: number;
+	assistant: {
+		role: 'assistant';
+		audioURL: string;
+		transcription: string;
+	};
+	user: {
+		role: 'user';
+		audioURL: string;
+		transcription: string;
+	} | null;
+	suggestion: string;
+	score: number;
 };
 
 /**

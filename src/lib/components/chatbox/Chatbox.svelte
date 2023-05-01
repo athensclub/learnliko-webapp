@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { fly } from 'svelte/transition';
 	import ConversationView from './ConversationView.svelte';
-	import type { ChatboxView } from '$lib/global/chatbox';
+	import { chatContext, type ChatboxView } from '$lib/global/chatbox';
 	import RecapView from './RecapView.svelte';
 
 	let currentView: ChatboxView = 'CONVERSATION';
@@ -14,7 +14,11 @@
 	class="w-full h-full bg-white z-[1000] font-line-seed relative flex flex-col items-center"
 >
 	{#if currentView === 'CONVERSATION'}
-		<ConversationView {setView} />
+		{#if $chatContext}
+			<ConversationView {setView} conversationDetails={$chatContext.details} />
+		{:else}
+			<h3>No Data Available</h3>
+		{/if}
 	{:else if currentView === 'RECAP'}
 		<RecapView />
 	{/if}

@@ -1,12 +1,17 @@
 <script lang="ts">
-	import { showChatbox } from '$lib/global/chatbox';
+	import { chatContext, showChatbox } from '$lib/global/chatbox';
+	import type { ConversationDetails } from '$lib/types/conversationData';
 
 	export let small = false;
 	export let image: string;
 	export let topic: string;
 	export let intro: string;
+	export let details: ConversationDetails;
 
-	const openChatbox = () => ($showChatbox = true);
+	const openChatbox = () => {
+		$showChatbox = true;
+		$chatContext = { details };
+	};
 </script>
 
 <div

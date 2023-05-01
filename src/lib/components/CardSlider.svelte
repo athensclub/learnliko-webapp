@@ -33,6 +33,7 @@
 					image={card.image}
 					intro={card.intro}
 					topic={card.topic}
+					details={card.details}
 				/>
 			</div>
 		</KeenSlide>

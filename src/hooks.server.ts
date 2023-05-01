@@ -2,13 +2,13 @@ import { isOnProduction } from '$lib/utils/environment';
 import type { Handle } from '@sveltejs/kit';
 
 const _whitelist = isOnProduction()
-	? ['https://learnliko.pages.dev']
+	? ['https://learnliko.pages.dev', 'https://learnliko.netlify.app']
 	: [
 			'http://localhost:5173',
 			'http://localhost:4173',
 			'http://[::]:5173',
 			'https://staging.learnliko.pages.dev',
-			'https://learnliko.netlify.app'
+			'https://staging--learnliko.netlify.app'
 	  ];
 
 export const handle: Handle = async ({ resolve, event }) => {

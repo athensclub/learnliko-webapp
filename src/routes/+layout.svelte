@@ -17,11 +17,11 @@
 	}
 </script>
 
-<div class="w-[100vw] h-[1px] min-h-[100vh]">
+<div class="w-full h-full">
 	<slot />
 
 	{#if $showChatbox}
-		<div class="fixed right-0 bottom-0 w-[40vw] h-[calc(100vh-48px)]">
+		<div class="fixed right-0 bottom-0 w-[40vw] h-[calc(100vh-48px)] z-30">
 			<Chatbox />
 		</div>
 	{/if}

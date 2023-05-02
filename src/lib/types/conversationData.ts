@@ -1,12 +1,18 @@
 import type { SynthesizeAccent, SynthesizeGender } from '$api/tts';
 
+interface LearnerDetails {
+	goal: string;
+}
+interface BotDetails {
+	accent: SynthesizeAccent;
+	gender: SynthesizeGender;
+	prompt: string;
+}
+
 export interface ConversationDetails {
 	intro: string;
-	bot: {
-		accent: SynthesizeAccent;
-		gender: SynthesizeGender;
-		prompt: string;
-	};
+	bot: BotDetails;
+	learner: LearnerDetails;
 }
 
 export interface ConversationCarouselItem {

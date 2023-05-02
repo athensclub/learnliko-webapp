@@ -6,6 +6,9 @@
             "topic": "“ Welcome to the shop how can I help you? ”",
             "details": {
                 "intro": "Welcome to the shop how can I help you?",
+                "learner": {
+                    "goal": "EDIT learner's goal here"
+                },
                 "bot": {
                     "accent": "Australia",
                     "gender": "FEMALE",
@@ -19,6 +22,9 @@
             "topic": "“ Howdy! I'm Alan nice to meet you  ”",
             "details": {
                 "intro": "Howdy! I'm Alan nice to meet you",
+                "learner": {
+                    "goal": "EDIT learner's goal here"
+                },
                 "bot": {
                     "accent": "US",
                     "gender": "MALE",
@@ -32,6 +38,9 @@
             "topic": "“ Welcome to the shop how can I help you? ”",
             "details": {
                 "intro": "Welcome to the shop how can I help you?",
+                "learner": {
+                    "goal": "EDIT learner's goal here"
+                },
                 "bot": {
                     "accent": "Australia",
                     "gender": "FEMALE",
@@ -45,6 +54,9 @@
             "topic": "“ Welcome to the shop how can I help you? ”",
             "details": {
                 "intro": "Welcome to the shop how can I help you?",
+                "learner": {
+                    "goal": "EDIT learner's goal here"
+                },
                 "bot": {
                     "accent": "Australia",
                     "gender": "FEMALE",
@@ -58,6 +70,9 @@
             "topic": "“ Welcome to the shop how can I help you? ”",
             "details": {
                 "intro": "Welcome to the shop how can I help you?",
+                "learner": {
+                    "goal": "EDIT learner's goal here"
+                },
                 "bot": {
                     "accent": "Australia",
                     "gender": "FEMALE",

@@ -27,7 +27,7 @@
 >
 	{#each cards as card, index (index)}
 		<KeenSlide>
-			<div class="w-full h-[24rem]   flex items-center justify-center">
+			<div class="w-full h-[29vw] flex items-center justify-center">
 				<ConversationCard
 					small={index !== selectedSlide}
 					image={card.image}

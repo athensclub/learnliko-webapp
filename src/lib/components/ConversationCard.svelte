@@ -6,6 +6,7 @@
 	export let image: string;
 	export let topic: string;
 	export let intro: string;
+	export let background: string;
 	export let details: ConversationDetails;
 
 	const openChatbox = () => {
@@ -15,9 +16,10 @@
 </script>
 
 <div
+	style="background-image: {background};"
 	class={`${
-		small ? 'w-[15rem] h-[15rem]' : 'w-[19rem] h-[19rem]'
-	} font-line-seed text-white rounded-3xl shadow-lg transition-size bg-gradient-to-t from-[#D0B3FF] to-[#FF785B] flex flex-col items-center justify-around`}
+		small ? 'w-[80%] h-[80%]' : 'w-full h-full'
+	} font-line-seed text-white rounded-xl transition-size flex flex-col items-center justify-between`}
 >
 	<!-- <svg
 			class="w-[65%] mt-4 transition-size"

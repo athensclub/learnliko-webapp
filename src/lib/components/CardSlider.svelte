@@ -3,7 +3,7 @@
 	import type KeenSliderInternal from 'keen-slider';
 	import KeenSlider from 'svelte-keen-slider/src/KeenSlider.svelte';
 	import KeenSlide from 'svelte-keen-slider/src/KeenSlide.svelte';
-	import ConversationCard from './ConversationCard.svelte';
+	import ConversationCard from '$lib/components/ConversationCard.svelte';
 	import { showChatbox } from '$lib/global/chatbox';
 	import type { ConversationCarouselItem } from '$lib/types/conversationData';
 
@@ -33,6 +33,7 @@
 					image={card.image}
 					intro={card.intro}
 					topic={card.topic}
+					background={card.background}
 					details={card.details}
 				/>
 			</div>

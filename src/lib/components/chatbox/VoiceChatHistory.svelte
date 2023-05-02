@@ -15,7 +15,7 @@
 
 {#each history as chat, index (index)}
 	<div class={`flex flex-col w-full mt-3 ${chat.role === 'user' ? 'items-end' : 'items-start'}`}>
-		<div class={`flex flex-row items-center w-[85%] ${chat.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+		<div class={`flex pt-4 flex-row items-center w-[85%] ${chat.role === 'user' ? 'justify-end' : 'justify-start'}`}>
 			{#if chat.role === 'assistant'}
 				<div
 					class={`w-[48px] h-[48px] mr-2 bg-center bg-cover rounded-full border border-white`}

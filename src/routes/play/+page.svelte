@@ -24,7 +24,7 @@
 	</div>
 </header>
 
-<div class="w-full pt-8 text-center relative font-bold text-lg">
+<div class="w-full pt-16 text-center relative font-bold text-lg">
 	<br>
 	👋Today, You have 5 people to Talk with
 </div>

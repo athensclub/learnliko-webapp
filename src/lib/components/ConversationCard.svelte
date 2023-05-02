@@ -16,18 +16,10 @@
 
 <div
 	class={`${
-		small ? 'w-[80%] h-[80%]' : 'w-full h-full'
-	} font-line-seed text-white rounded-xl transition-size bg-gradient-to-t from-[#D0B3FF] to-[#FF785B] flex flex-col items-center justify-between`}
+		small ? 'w-[15rem] h-[15rem]' : 'w-[19rem] h-[19rem]'
+	} font-line-seed text-white rounded-3xl shadow-lg transition-size bg-gradient-to-t from-[#D0B3FF] to-[#FF785B] flex flex-col items-center justify-around`}
 >
-	<div class="flex flex-col w-full items-center justify-center">
-		<div
-			class={`${
-				small ? 'w-[48px] h-[48px]' : 'w-[64px] h-[64px]'
-			} bg-center bg-cover mt-4 rounded-full border border-white transition-size`}
-			style="background-image: url('{image}');"
-		/>
-
-		<svg
+	<!-- <svg
 			class="w-[65%] mt-4 transition-size"
 			viewBox="0 0 248 52"
 			fill="none"
@@ -149,12 +141,20 @@
 				d="M247.905 23.8334C247.905 22.6368 246.931 21.6667 245.73 21.6667C244.529 21.6667 243.556 22.6368 243.556 23.8334V34.6667C243.556 35.8634 244.529 36.8334 245.73 36.8334C246.931 36.8334 247.905 35.8634 247.905 34.6667V23.8334Z"
 				fill="white"
 			/>
-		</svg>
+		</svg> -->
 
-		<div class={`${small ? 'text-sm' : 'text-base'} transition-font mt-4 text-center w-[80%]`}>
-			{intro}
-		</div>
-		<div class={`${small ? 'text-base' : 'text-lg'} transition-font font-bold w-[80%] text-center`}>
+	<div class={`${small ? 'text-sm' : 'text-base'} transition-font mt-2 text-center w-[80%]`}>
+		{intro}
+	</div>
+
+	<div class="flex flex-col w-full items-center justify-center">
+		<div
+			class={`${
+				small ? 'w-[70px] h-[70px]' : 'w-[90px] h-[90px] '
+			} bg-center bg-cover  rounded-full mb-3 border border-white transition-size`}
+			style="background-image: url('{image}');"
+		/>
+		<div class={`${small ? 'text-sm' : 'text-lg'} transition-font font-bold w-[80%] text-center`}>
 			{topic}
 		</div>
 	</div>

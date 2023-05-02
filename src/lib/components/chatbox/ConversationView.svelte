@@ -189,13 +189,16 @@
 </script>
 
 <div
-	class="flex items-center justify-center w-full h-[48px] font-bold text-lg border-b border-black/[0.15] relative"
+	class="z-10 flex items-center justify-center w-full h-[48px] font-bold text-md border-b border-black/[0.15] relative"
 >
 	Voice Chat
 
-	<div class="flex flex-row absolute right-4">
-		<button on:click={hide} class="rounded-full border border-black/[0.15] h-[28px] aspect-square">
-			x
+	<div class="flex flex-row absolute right-0">
+		<button
+			on:click={hide}
+			class="rounded-full border border-black/[0.15] h-[28px] aspect-square text-sm"
+		>
+		✕
 		</button>
 	</div>
 </div>

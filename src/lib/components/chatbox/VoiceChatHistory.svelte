@@ -7,15 +7,22 @@
 		transcription: string | null;
 	}[];
 
-    export let showAssistantTranscription = false;
+	export let showAssistantTranscription = false;
 
-    export let assistantProfileImage: string;
-    export let userProfileImage: string;
+	export let assistantProfileImage: string;
+	export let userProfileImage: string;
 </script>
-
+<h1 class=" p-4 bg-slate-100 rounded-lg mt-3 text-gray-600">
+	🗣️Your role: I will be your customer who is an kid and have English proficiency at level A1.
+</h1>
 {#each history as chat, index (index)}
-	<div class={`flex flex-col w-full mt-3 ${chat.role === 'user' ? 'items-end' : 'items-start'}`}>
-		<div class={`flex pt-4 flex-row items-center w-[85%] ${chat.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+
+	<div class={`flex flex-col w-full ${chat.role === 'user' ? 'items-end' : 'items-start'}`}>
+		<div
+			class={`flex pt-4 flex-row items-center w-[85%] ${
+				chat.role === 'user' ? 'justify-end' : 'justify-start'
+			}`}
+		>
 			{#if chat.role === 'assistant'}
 				<div
 					class={`w-[48px] h-[48px] mr-2 bg-center bg-cover rounded-full border border-white`}
@@ -33,7 +40,11 @@
 			{/if}
 		</div>
 		{#if chat.role === 'user' || (chat.role === 'assistant' && showAssistantTranscription)}
-			<div class={`mt-1 flex flex-row w-[70%] ${chat.role === 'assistant' ? "pl-16 justify-start" : "pr-16 justify-end"}`}>
+			<div
+				class={`mt-1 flex flex-row w-[70%] ${
+					chat.role === 'assistant' ? 'pl-16 justify-start' : 'pr-16 justify-end'
+				}`}
+			>
 				{#if chat.transcription === null}
 					Transcribing<Typewriter mode="loop">...</Typewriter>
 				{:else}

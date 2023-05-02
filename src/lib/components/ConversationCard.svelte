@@ -6,6 +6,7 @@
 	export let image: string;
 	export let topic: string;
 	export let intro: string;
+	export let background: string;
 	export let details: ConversationDetails;
 
 	const openChatbox = () => {
@@ -15,9 +16,10 @@
 </script>
 
 <div
+	style="background-image: {background};"
 	class={`${
-		small ? 'w-[15rem] h-[15rem]' : 'w-[19rem] h-[19rem]'
-	} font-line-seed text-white rounded-3xl shadow-lg transition-size bg-gradient-to-t from-[#D0B3FF] to-[#FF785B] flex flex-col items-center justify-around`}
+		small ? 'w-[18vw] h-[22vw]' : 'w-[20vw] h-[24vw]'
+	} font-line-seed text-white rounded-[3vw] shadow-lg transition-size bg-gradient-to-t from-[#D0B3FF] to-[#FF785B] flex flex-col items-center justify-around`}
 >
 	<!-- <svg
 			class="w-[65%] mt-4 transition-size"
@@ -143,30 +145,30 @@
 			/>
 		</svg> -->
 
-	<div class={`${small ? 'text-sm' : 'text-base'} transition-font mt-2 text-center w-[80%]`}>
+	<div class=" text-[1.2vw] transition-font mt-[2vw] text-center ">
 		{intro}
 	</div>
 
 	<div class="flex flex-col w-full items-center justify-center">
 		<div
 			class={`${
-				small ? 'w-[70px] h-[70px]' : 'w-[90px] h-[90px] '
-			} bg-center bg-cover  rounded-full mb-3 border border-white transition-size`}
+				small ? 'w-[6vw] h-[6vw]' : 'w-[7vw] h-[7vw] '
+			} bg-center bg-cover  rounded-full mt-[0.75vw]  shadow-md transition-size`}
 			style="background-image: url('{image}');"
 		/>
-		<div class={`${small ? 'text-sm' : 'text-lg'} transition-font font-bold w-[80%] text-center`}>
+		<div class="text-[1.2vw] px-6 py-4 transition-font font-bold text-center">
 			{topic}
 		</div>
 	</div>
 
 	<button
 		on:click={openChatbox}
-		class={`flex flex-row items-center justify-center w-[80%] ${
-			small ? 'h-[30px] text-xs' : 'h-[36px] text-sm'
-		} rounded-xl mb-3 bg-white text-black font-bold transition-[width,height,font]`}
+		class:animate-bounce ={!small}
+		class="flex flex-row items-center justify-center w-[12vw] h-[3vw] text-[0.8vw] shadow-lg z-40
+		 rounded-full mb-6 bg-white text-black font-bold transition-[width,height,font]"
 	>
 		<svg
-			class="h-[40%] mr-1 transition-size"
+			class="h-[1vw] mr-1 transition-size"
 			viewBox="0 0 13 16"
 			fill="none"
 			xmlns="http://www.w3.org/2000/svg"

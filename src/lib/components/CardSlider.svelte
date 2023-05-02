@@ -3,7 +3,7 @@
 	import type KeenSliderInternal from 'keen-slider';
 	import KeenSlider from 'svelte-keen-slider/src/KeenSlider.svelte';
 	import KeenSlide from 'svelte-keen-slider/src/KeenSlide.svelte';
-	import ConversationCard from './ConversationCard.svelte';
+	import ConversationCard from '$lib/components/ConversationCard.svelte';
 	import { showChatbox } from '$lib/global/chatbox';
 	import type { ConversationCarouselItem } from '$lib/types/conversationData';
 
@@ -27,12 +27,13 @@
 >
 	{#each cards as card, index (index)}
 		<KeenSlide>
-			<div class="w-full h-[26rem] flex items-center justify-center">
+			<div class="w-full h-[29vw] flex items-center justify-center">
 				<ConversationCard
 					small={index !== selectedSlide}
 					image={card.image}
 					intro={card.intro}
 					topic={card.topic}
+					background={card.background}
 					details={card.details}
 				/>
 			</div>

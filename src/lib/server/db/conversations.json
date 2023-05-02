@@ -1,6 +1,7 @@
 {
     "results": [
         {
+            "background": "linear-gradient(to top, black, red)",
             "image": "https://us.123rf.com/450wm/jackf/jackf1706/jackf170604892/80811825-happy-european-teenager-buying-different-products-in-stationery-shop.jpg?ver=6",
             "intro": "Hi, I’m shopkeeper",
             "topic": "“ Welcome to the shop how can I help you? ”",
@@ -17,6 +18,7 @@
             }
         },
         {
+            "background": "linear-gradient(to top, #D0B3FF, #FF785B)",
             "image": "https://thumbs.dreamstime.com/b/portrait-boy-studio-years-old-emotion-doubt-portrait-boy-studio-years-old-139714090.jpg",
             "intro": "My name is Alan",
             "topic": "“ Howdy! I'm Alan nice to meet you  ”",
@@ -33,6 +35,7 @@
             }
         },
         {
+            "background": "linear-gradient(to top, #D0B3FF, #FF785B)",
             "image": "https://us.123rf.com/450wm/jackf/jackf1706/jackf170604892/80811825-happy-european-teenager-buying-different-products-in-stationery-shop.jpg?ver=6",
             "intro": "Hi, I’m shopkeeper",
             "topic": "“ Welcome to the shop how can I help you? ”",
@@ -49,6 +52,7 @@
             }
         },
         {
+            "background": "linear-gradient(to top, #D0B3FF, #FF785B)",
             "image": "https://us.123rf.com/450wm/jackf/jackf1706/jackf170604892/80811825-happy-european-teenager-buying-different-products-in-stationery-shop.jpg?ver=6",
             "intro": "Hi, I’m shopkeeper",
             "topic": "“ Welcome to the shop how can I help you? ”",
@@ -65,6 +69,7 @@
             }
         },
         {
+            "background": "linear-gradient(to top, #D0B3FF, #FF785B)",
             "image": "https://us.123rf.com/450wm/jackf/jackf1706/jackf170604892/80811825-happy-european-teenager-buying-different-products-in-stationery-shop.jpg?ver=6",
             "intro": "Hi, I’m shopkeeper",
             "topic": "“ Welcome to the shop how can I help you? ”",

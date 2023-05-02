@@ -16,7 +16,7 @@
 
 <div
 	class={`${
-		small ? 'w-[15rem] h-[15rem]' : 'w-[19rem] h-[19rem]'
+		small ? 'w-[18rem] h-[18rem]' : 'w-[20rem] h-[20rem]'
 	} font-line-seed text-white rounded-3xl shadow-lg transition-size bg-gradient-to-t from-[#D0B3FF] to-[#FF785B] flex flex-col items-center justify-around`}
 >
 	<!-- <svg
@@ -163,7 +163,7 @@
 		on:click={openChatbox}
 		class={`flex flex-row items-center justify-center w-[80%] ${
 			small ? 'h-[30px] text-xs' : 'h-[36px] text-sm'
-		} rounded-xl mb-3 bg-white text-black font-bold transition-[width,height,font]`}
+		} rounded-full mb-3 bg-white text-black font-bold transition-[width,height,font]`}
 	>
 		<svg
 			class="h-[40%] mr-1 transition-size"

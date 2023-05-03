@@ -9,7 +9,7 @@ export const POST: RequestHandler = async ({ request }) => {
 
 	try {
 		const audio = await synthesize(body.text, body.languageCode, body.voiceName, body.ssmlGender);
-		return new Response(audio, { headers: { 'Content-Type': 'audio/opus' } });
+		return new Response(audio, { headers: { 'Content-Type': 'audio/mpeg' } });
 	} catch (e) {
 		throw error(500, `Error: ${e}`);
 	}

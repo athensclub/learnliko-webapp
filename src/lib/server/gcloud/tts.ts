@@ -21,7 +21,7 @@ export const synthesize = async (
 		const [response] = await client.synthesizeSpeech({
 			input: { text: text },
 			voice: { languageCode, ssmlGender, name: voiceName },
-			audioConfig: { audioEncoding: 'OGG_OPUS' }
+			audioConfig: { audioEncoding: 'MP3' }
 		});
 		if (response.audioContent) {
 			return response.audioContent;

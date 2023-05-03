@@ -31,6 +31,35 @@ const modelsMapping = {
 			'FEMALE': 'en-US-Standard-G'
 		},
 		'languageCode': 'en-US'
+	},
+	'JP': {
+		'voiceName': {
+			'MALE': 'ja-JP-Standard-C',
+			'FEMALE': 'ja-JP-Standard-B'
+		},
+		'languageCode': 'ja-JP'
+	},
+	'TH': {
+		'voiceName': {
+			'MALE': 'th-TH-Standard-A',
+			'FEMALE': 'th-TH-Standard-A'
+		},
+		'languageCode': 'th-TH'
+	},
+	'CN': {
+		'voiceName': {
+			'MALE': 'yue-HK-Standard-C',
+			'FEMALE': 'yue-HK-Standard-D'
+		},
+		'languageCode': 'yue-HK'
+	},
+
+	'DK': {
+		'voiceName': {
+			'MALE': 'da-DK-Standard-C',
+			'FEMALE': 'da-DK-Standard-A'
+		},
+		'languageCode': 'da-DK'
 	}
 };
 

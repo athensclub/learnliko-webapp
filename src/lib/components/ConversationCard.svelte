@@ -145,7 +145,7 @@
 			/>
 		</svg> -->
 
-	<div class=" text-[1.2vw] transition-font mt-[2vw] text-center ">
+	<div class=" text-[1.2vw] w-[20vw] transition-font mt-[2vw] text-center ">
 		{intro}
 	</div>
 

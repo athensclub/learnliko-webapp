@@ -2,6 +2,7 @@ import { isOnProduction } from '$lib/utils/environment';
 import type { Handle } from '@sveltejs/kit';
 
 const _whitelist = isOnProduction()
+<<<<<<< Updated upstream
 	? ['https://learnliko.pages.dev', 'https://learnliko.netlify.app']
 	: [
 			'http://localhost:5173',
@@ -11,6 +12,18 @@ const _whitelist = isOnProduction()
 			'https://staging.learnliko.pages.dev',
 			'https://staging--learnliko.netlify.app'
 	  ];
+=======
+	? ['https://learnliko.pages.dev', 'https://learnliko.netlify.app', 'http://127.0.0.1:5173', 'http://192.168.2.25:5173']
+	: [
+		// 'http://localhost:5173',
+		// 'http://localhost:4173',
+		// 'http://[::]:5173',
+		'http://192.168.2.25:5173',
+		'http://127.0.0.1:5173',
+		'https://staging.learnliko.pages.dev',
+		'https://staging--learnliko.netlify.app'
+	];
+>>>>>>> Stashed changes
 
 export const handle: Handle = async ({ resolve, event }) => {
 	const response = await resolve(event);

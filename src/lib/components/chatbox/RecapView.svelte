@@ -5,9 +5,12 @@
 	import DialogueCard from './DialogueCard.svelte';
 	import { round } from '$lib/utils/math';
 	import Typewriter from 'svelte-typewriter/Typewriter.svelte';
+	import type { ConversationDetails } from '$lib/types/conversationData';
 
 	// we have to wait for recapHistory to finish loading.
 	$: totalScore = $recapHistory ? $recapHistory.map((x) => x.score).reduce((x, y) => x + y, 0) : 0;
+
+	export let conversationDetails: ConversationDetails;
 
 	const hide = () =>
 		showModal(ConfirmModal, {
@@ -39,7 +42,11 @@
 	<div class="w-full h-[calc(100%-48px)] overflow-y-auto">
 		{#each $recapHistory as dialogue, index (index)}
 			{#if dialogue.user}
-				<DialogueCard dialogueNumber={index + 1} {dialogue} />
+				<DialogueCard
+					dialogueNumber={index + 1}
+					{dialogue}
+					assistantProfileImage={conversationDetails.bot.avatar}
+				/>
 			{/if}
 		{/each}
 	</div>

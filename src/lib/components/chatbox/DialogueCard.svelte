@@ -2,11 +2,11 @@
 	import type { RecapHistoryItem } from '$lib/global/chatbox';
 	import ReadMore from '$lib/components/ReadMore.svelte';
 	import VoiceChatHistory from './VoiceChatHistory.svelte';
-	import aiImage from '$lib/images/sample_ai_profile.png';
 	import userImage from '$lib/images/sample_kid_image.png';
 	import { round } from '$lib/utils/math';
 
 	export let dialogueNumber: number;
+	export let assistantProfileImage: string;
 	export let dialogue: RecapHistoryItem;
 
 	dialogue.suggestion = dialogue.suggestion
@@ -32,7 +32,7 @@
 		<VoiceChatHistory
 			showAssistantTranscription
 			history={mockHistory}
-			assistantProfileImage={aiImage}
+			assistantProfileImage={assistantProfileImage}
 			userProfileImage={userImage}
 		/>
 	</div>

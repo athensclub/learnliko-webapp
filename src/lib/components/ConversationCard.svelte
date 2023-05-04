@@ -3,7 +3,6 @@
 	import type { ConversationDetails } from '$lib/types/conversationData';
 
 	export let small = false;
-	export let image: string;
 	export let topic: string;
 	export let intro: string;
 	export let background: string;
@@ -154,7 +153,7 @@
 			class={`${
 				small ? 'w-[6vw] h-[6vw]' : 'w-[7vw] h-[7vw] '
 			} bg-center bg-cover  rounded-full mt-[0.75vw]  shadow-md transition-size`}
-			style="background-image: url('{image}');"
+			style="background-image: url('{details.bot.avatar}');"
 		/>
 		<div class="text-[1.2vw] px-6 py-4 transition-font font-bold text-center" class:text-[1.1vw] ={small}>
 			{topic}

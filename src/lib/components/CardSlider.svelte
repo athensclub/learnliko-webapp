@@ -30,7 +30,6 @@
 			<div class="w-full lg:h-[28vw] flex items-center justify-center mt-[5vh] h-[80vh] ">
 				<ConversationCard
 					small={index !== selectedSlide}
-					image={card.image}
 					intro={card.intro}
 					topic={card.topic}
 					background={card.background}

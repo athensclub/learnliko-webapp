@@ -18,7 +18,6 @@
 	import Typewriter from 'svelte-typewriter';
 	import ConfirmModal from '$lib/components/modals/ConfirmModal.svelte';
 	import { synthesize, type SynthesizeAccent, type SynthesizeGender } from '$api/tts';
-	import aiImage from '$lib/images/sample_ai_profile.png';
 	import userImage from '$lib/images/sample_kid_image.png';
 	import { analyzeDialog, chat } from '$api/conversation';
 	import type { ChatMessage } from '$lib/types/requests/chatCompletion';
@@ -207,13 +206,17 @@
 		<h1 class=" p-4 bg-slate-100 rounded-lg mt-3 text-gray-600">
 			🗣️Goal: {conversationDetails.learner.goal}
 		</h1>
-		<VoiceChatHistory {history} assistantProfileImage={aiImage} userProfileImage={userImage} />
+		<VoiceChatHistory
+			{history}
+			assistantProfileImage={conversationDetails.bot.avatar}
+			userProfileImage={userImage}
+		/>
 
 		{#if waitingForAIResponse}
 			<div class="flex flex-row items-center">
 				<div
 					class={`w-[48px] h-[48px] mr-2 bg-center bg-cover rounded-full border border-white`}
-					style="background-image: url('{aiImage}');"
+					style="background-image: url('{conversationDetails.bot.avatar}');"
 				/>
 				Thinking
 				<Typewriter mode="loop">...</Typewriter>

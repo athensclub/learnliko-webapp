@@ -191,8 +191,7 @@
 <div
 	class="z-10 flex items-center justify-center w-full h-[48px] font-bold text-md border-b border-black/[0.15] relative"
 >
-	Voice Chat
-
+	<h1>Voice Chat</h1>
 	<div class="flex flex-row absolute right-0">
 		<button
 			on:click={hide}

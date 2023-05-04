@@ -18,7 +18,7 @@
 <div
 	style="background-image: {background};"
 	class={`${
-		small ? 'w-[18vw] h-[22vw]' : 'w-[20vw] h-[24vw]'
+		small ? 'w-[18vw] h-[22vw]' : 'lg:w-[20vw] lg:h-[24vw] w-[45vh] h-[45vh]'
 	} font-line-seed text-white rounded-[3vw] shadow-lg transition-size bg-gradient-to-t from-[#D0B3FF] to-[#FF785B] flex flex-col items-center justify-around`}
 >
 	<!-- <svg
@@ -156,7 +156,7 @@
 			} bg-center bg-cover  rounded-full mt-[0.75vw]  shadow-md transition-size`}
 			style="background-image: url('{image}');"
 		/>
-		<div class="text-[1.2vw] px-6 py-4 transition-font font-bold text-center">
+		<div class="text-[1.2vw] px-6 py-4 transition-font font-bold text-center" class:text-[1.1vw] ={small}>
 			{topic}
 		</div>
 	</div>

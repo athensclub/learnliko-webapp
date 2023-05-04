@@ -14,6 +14,7 @@
 
 <style>
 	audio::-webkit-media-controls-panel {
-  background-color: #56AEFF;
-}
+		background-color: #56aeff;
+	}
+
 </style>

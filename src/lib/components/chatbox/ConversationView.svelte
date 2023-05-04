@@ -204,7 +204,7 @@
 {#if initializedConversation}
 	<div class="w-full h-[calc(100%-48px)] overflow-y-auto">
 		<h1 class=" p-4 bg-slate-100 rounded-lg mt-3 text-gray-600">
-			🗣️Goal: {conversationDetails.learner.goal}
+			🎯Goal: {conversationDetails.learner.goal}
 		</h1>
 		<VoiceChatHistory
 			{history}
@@ -229,9 +229,9 @@
 
 				<button
 					on:click={showRecap}
-					class="mt-3 rounded-lg w-fit border border-black/[0.15] font-normal text-base mr-4 px-3"
+					class="mt-3 rounded-lg w-fit border border-black/[0.15] font-normal text-base mr-4 px-4 py-1"
 				>
-					Recap
+					Finish!
 				</button>
 			</div>
 		{/if}

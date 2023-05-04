@@ -14,6 +14,7 @@ export interface ConversationDetails {
 	intro: string;
 	bot: BotDetails;
 	learner: LearnerDetails;
+	image: string;
 }
 
 export interface ConversationCarouselItem {

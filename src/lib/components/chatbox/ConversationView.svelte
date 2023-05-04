@@ -197,13 +197,16 @@
 			on:click={hide}
 			class="rounded-full border border-black/[0.15] h-[28px] aspect-square text-sm"
 		>
-		✕
+			✕
 		</button>
 	</div>
 </div>
 
 {#if initializedConversation}
 	<div class="w-full h-[calc(100%-48px)] overflow-y-auto">
+		<h1 class=" p-4 bg-slate-100 rounded-lg mt-3 text-gray-600">
+			🗣️Goal: {conversationDetails.learner.goal}
+		</h1>
 		<VoiceChatHistory {history} assistantProfileImage={aiImage} userProfileImage={userImage} />
 
 		{#if waitingForAIResponse}

@@ -12,9 +12,7 @@
 	export let assistantProfileImage: string;
 	export let userProfileImage: string;
 </script>
-<h1 class=" p-4 bg-slate-100 rounded-lg mt-3 text-gray-600">
-	🗣️Your role: I will be your customer who is an kid and have English proficiency at level A1.
-</h1>
+
 {#each history as chat, index (index)}
 
 	<div class={`flex flex-col w-full ${chat.role === 'user' ? 'items-end' : 'items-start'}`}>

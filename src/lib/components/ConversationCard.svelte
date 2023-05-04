@@ -155,7 +155,7 @@
 			} bg-center bg-cover  rounded-full mt-[0.75vw]  shadow-md transition-size`}
 			style="background-image: url('{details.bot.avatar}');"
 		/>
-		<div class="text-[1.2vw] px-6 py-4 transition-font font-bold text-center" class:text-[1.1vw] ={small}>
+		<div class="text-[1.2vw] px-6 py-4 transition-font font-bold text-center" class:text-[1vw] ={small}>
 			{topic}
 		</div>
 	</div>

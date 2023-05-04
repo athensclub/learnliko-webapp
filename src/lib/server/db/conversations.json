@@ -8,7 +8,7 @@
             "details": {
                 "intro": "Welcome to the shop how can I help you?",
                 "learner": {
-                    "goal": "EDIT learner's goal here"
+                    "goal": "Learn about the products available in the shop and practice my English speaking skills by making a purchase."
                 },
                 "bot": {
                     "accent": "US",
@@ -42,7 +42,7 @@
             "details": {
                 "intro": "What would you like to learn today about animals?",
                 "learner": {
-                    "goal": "As a kid with English proficiency at level A1, I want to improve my English speaking skills and learn new vocabulary words related to animals."
+                    "goal": "Improve your English speaking skills and learn new vocabulary words related to animals."
                 },
                 "bot": {
                     "accent": "UK",

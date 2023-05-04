@@ -23,7 +23,9 @@
 	>
 		<div class="flex flex-row ml-4">
 			You got
-			<div class="font-extrabold ml-2">{round(totalScore, 2).toLocaleString()} point</div>
+			<div class="font-extrabold ml-2">
+				{round((totalScore / $recapHistory.length) * 100, 2).toLocaleString()}%
+			</div>
 		</div>
 
 		<button

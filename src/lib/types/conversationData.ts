@@ -4,6 +4,7 @@ interface LearnerDetails {
 	goal: string;
 }
 interface BotDetails {
+	avatar: string;
 	accent: SynthesizeAccent;
 	gender: SynthesizeGender;
 	prompt: string;

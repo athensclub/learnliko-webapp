@@ -1,6 +1,6 @@
 <script lang="ts">
 	export let src: string;
-	export let type = 'audio/ogg; codecs=opus';
+	export let type = 'audio/mpeg';
 </script>
 
 <audio

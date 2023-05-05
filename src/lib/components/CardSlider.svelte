@@ -8,6 +8,7 @@
 	import type { ConversationCarouselItem } from '$lib/types/conversationData';
 	import { MOBILE_BREAKPOINT_WIDTH_QUERY } from '$lib/global/breakpoints';
 
+
 	export let cards: ConversationCarouselItem[];
 
 	let selectedSlide = 0;
@@ -22,7 +23,7 @@
 	slidesPerView={5}
 	breakpoints={{
 		[MOBILE_BREAKPOINT_WIDTH_QUERY]: {
-			slidesPerView: 1
+			slidesPerView: 2
 		}
 	}}
 	arrows={!$showChatbox}
@@ -33,7 +34,7 @@
 >
 	{#each cards as card, index (index)}
 		<KeenSlide>
-			<div class="w-full lg:h-[28vw] flex items-center justify-center mt-[5vh] h-[80vh]">
+			<div class="w-full lg:h-[30vw] xl:h-[27vw] flex items-center justify-center mt-[5vh] h-[34vh]">
 				<ConversationCard
 					small={index !== selectedSlide}
 					intro={card.intro}

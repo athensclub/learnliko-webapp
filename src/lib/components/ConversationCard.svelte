@@ -17,8 +17,8 @@
 <div
 	style="background-image: {background};"
 	class={`${
-		small ? 'w-[18vw] h-[22vw]' : 'lg:w-[20vw] lg:h-[24vw] w-[45vh] h-[45vh]'
-	} font-line-seed text-white rounded-[3vw] shadow-lg transition-size bg-gradient-to-t from-[#D0B3FF] to-[#FF785B] flex flex-col items-center justify-around`}
+		small ? 'lg:w-[18vw] lg:h-[22vw] w-[20vh] h-[26vh]' : 'lg:w-[20vw] lg:h-[24vw] w-[28vh] h-[29vh]'
+	} font-line-seed text-white lg:rounded-[3vw] rounded-[6vw]  shadow-lg transition-size bg-gradient-to-t from-[#D0B3FF] to-[#FF785B] flex flex-col items-center justify-around`}
 >
 	<!-- <svg
 			class="w-[65%] mt-4 transition-size"
@@ -144,18 +144,20 @@
 			/>
 		</svg> -->
 
-	<div class=" text-[1vw] w-[20vw] transition-font mt-[2vw] text-center ">
+	<div class=" lg:text-[1vw] text-[1vh] lg:w-[20vw] w-[18vh] transition-font lg:mt-[2vw] mt-[2vh] text-center">
 		{intro}
 	</div>
 
 	<div class="flex flex-col w-full items-center justify-center">
 		<div
 			class={`${
-				small ? 'w-[6vw] h-[6vw]' : 'w-[7vw] h-[7vw] '
-			} bg-center bg-cover  rounded-full mt-[0.75vw]  shadow-md transition-size`}
+				small ? 'w-[6vw] h-[6vw]' : 'lg:w-[7vw] lg:h-[7vw] w-[7vh] h-[7vh] '
+			} bg-center bg-cover  rounded-full lg:mt-[0.5vw] mt-[1.5vh]  shadow-md transition-size`}
 			style="background-image: url('{details.bot.avatar}');"
 		/>
-		<div class="text-[1.2vw] px-6 py-4 transition-font font-bold text-center" class:text-[1vw] ={small}>
+		<div class="lg:text-[1.2vw] text-[1vh]  px-6 py-4 transition-font font-bold text-center"
+		class:xl:text-[1vw] ={small}
+		class:lg:text-[1vh] ={small}>
 			{topic}
 		</div>
 	</div>
@@ -163,11 +165,11 @@
 	<button
 		on:click={openChatbox}
 		class:animate-bounce ={!small}
-		class="flex flex-row items-center justify-center w-[12vw] h-[3vw] text-[0.8vw] shadow-lg z-40
+		class="flex flex-row items-center justify-center w-[16vh] h-[4vh] lg:w-[12vw] lg:h-[3vw] text-[0.8vw] shadow-lg z-40
 		 rounded-full mb-6 bg-white text-black font-bold transition-[width,height,font]"
 	>
 		<svg
-			class="h-[1vw] mr-1 transition-size"
+			class="lg:h-[1vw] h-[1vh] mr-1 transition-size"
 			viewBox="0 0 13 16"
 			fill="none"
 			xmlns="http://www.w3.org/2000/svg"

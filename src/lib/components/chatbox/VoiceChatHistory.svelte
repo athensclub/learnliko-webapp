@@ -17,7 +17,7 @@
 
 	<div class={`flex flex-col w-full ${chat.role === 'user' ? 'items-end' : 'items-start'}`}>
 		<div
-			class={`flex pt-6 flex-row items-center w-[85%] ${
+			class={`flex pt-6 flex-row items-center lg:w-[85%] w-[100%] ${
 				chat.role === 'user' ? 'justify-end' : 'justify-start'
 			}`}
 		>
@@ -27,7 +27,7 @@
 					style="background-image: url('{assistantProfileImage}');"
 				/>
 			{/if}
-			<div class="w-[-75%] mx-2 z-">
+			<div class="w-[-75%] mx-2 ">
 				<AudioPlayer src={chat.audioURL} />
 			</div>
 			{#if chat.role === 'user'}

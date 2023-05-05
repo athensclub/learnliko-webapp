@@ -34,9 +34,8 @@
 
 <div class=" mt-[5vw] justify-center font-bold text-[1.5vw] z-1 flex">
 	<br />
-	<h3 class=" animate-pulse text-[2.5vw] mr-2 ">🗣️</h3>
-	<h3 class=" py-[1vw] font-line-seed font-bold">	Today, You have 5 people to Talk with</h3>
-
+	<h3 class=" animate-pulse text-[2.5vw] mr-2">🗣️</h3>
+	<h3 class=" py-[1vw] font-line-seed font-bold">Today, You have 5 people to Talk with</h3>
 </div>
 
 <CardSlider cards={data.conversationCorouselItems} />

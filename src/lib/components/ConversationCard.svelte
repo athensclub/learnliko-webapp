@@ -17,7 +17,9 @@
 <div
 	style="background-image: {background};"
 	class={`${
-		small ? 'lg:w-[18vw] lg:h-[22vw] w-[20vh] h-[26vh]' : 'lg:w-[20vw] lg:h-[24vw] w-[28vh] h-[29vh]'
+		small
+			? 'lg:w-[18vw] lg:h-[22vw] w-[20vh] h-[26vh]'
+			: 'lg:w-[20vw] lg:h-[24vw] w-[28vh] h-[29vh]'
 	} font-line-seed text-white lg:rounded-[3vw] rounded-[6vw]  shadow-lg transition-size bg-gradient-to-t from-[#D0B3FF] to-[#FF785B] flex flex-col items-center justify-around`}
 >
 	<!-- <svg
@@ -144,7 +146,9 @@
 			/>
 		</svg> -->
 
-	<div class=" lg:text-[1vw] text-[1vh] lg:w-[20vw] w-[18vh] transition-font lg:mt-[2vw] mt-[2vh] text-center">
+	<div
+		class=" lg:text-[1vw] text-[1vh] lg:w-[20vw] w-[18vh] transition-font lg:mt-[2vw] mt-[2vh] text-center"
+	>
 		{intro}
 	</div>
 
@@ -155,17 +159,20 @@
 			} bg-center bg-cover  rounded-full lg:mt-[0.5vw] mt-[1.5vh]  shadow-md transition-size`}
 			style="background-image: url('{details.bot.avatar}');"
 		/>
-		<div class="lg:text-[1.2vw] text-[1vh]  px-6 py-4 transition-font font-bold text-center"
-		class:xl:text-[1vw] ={small}
-		class:lg:text-[1vh] ={small}>
+		<div
+			class="lg:text-[1.2vw] text-[1.5vh] px-6 py-4 transition-font font-bold text-center"
+			class:xl:text-[1vw]={small}
+			class:text-[0.79vh]={small}
+			class:lg:text-[1vh]={small}
+		>
 			{topic}
 		</div>
 	</div>
 
 	<button
 		on:click={openChatbox}
-		class:animate-bounce ={!small}
-		class="flex flex-row items-center justify-center w-[16vh] h-[4vh] lg:w-[12vw] lg:h-[3vw] text-[0.8vw] shadow-lg z-40
+		class:animate-bounce={!small}
+		class="flex flex-row items-center justify-center w-[16vh] h-[4vh] lg:w-[12vw] lg:h-[3vw] text-[1vh] shadow-lg z-40
 		 rounded-full mb-6 bg-white text-black font-bold transition-[width,height,font]"
 	>
 		<svg

@@ -42,7 +42,7 @@
             "intro": "Hello! I'm English teacher.",
             "topic": "What would you like to learn today?",
             "details": {
-                "intro": "What would you like to learn today about animals?",
+                "intro": "What would you like to learn today about animals? Let's start by telling me your favorite animal.",
                 "learner": {
                     "goal": "Improve your English speaking skills and learn new vocabulary words related to animals."
                 },

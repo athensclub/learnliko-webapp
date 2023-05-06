@@ -19,8 +19,8 @@
 	class={`${
 		small
 			? 'lg:w-[18vw] lg:h-[22vw] w-[20vh] h-[26vh]'
-			: 'lg:w-[20vw] lg:h-[24vw] w-[28vh] h-[29vh]'
-	} font-line-seed text-white lg:rounded-[3vw] rounded-[6vw]  shadow-lg transition-size bg-gradient-to-t from-[#D0B3FF] to-[#FF785B] flex flex-col items-center justify-around`}
+			: 'lg:w-[20vw] lg:h-[24vw] w-[28vh] h-[36vh]'
+	} w-full font-line-seed text-white lg:rounded-[3vw] rounded-[6vw]  shadow-lg transition-size bg-gradient-to-t from-[#D0B3FF] to-[#FF785B] flex flex-col items-center justify-around`}
 >
 	<!-- <svg
 			class="w-[65%] mt-4 transition-size"

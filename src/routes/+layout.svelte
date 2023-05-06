@@ -18,7 +18,7 @@
 	}
 </script>
 
-<div class="w-full h-full">
+<div class="w-full max-w-[100vw] h-full overflow-x-hidden">
 	<slot />
 
 	{#if $showChatbox}

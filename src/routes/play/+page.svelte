@@ -26,21 +26,42 @@
 			<Select items={options} placeholder="Select Level ▾" />
 		</div>
 	</div> -->
-
-	<div class="w-full flex flex-row justify-end">
-		<button class=" text-sm border border-black/10 rounded-full p-2 px-3">📖Reading</button>
-	</div>
 </header>
 
-<div class=" mt-[5vw] justify-center font-bold text-[1.5vw] z-1 flex">
+<div
+	class=" xl:mt-[5vw] justify-center font-bold xl:text-[1.5vw] lg:text-[3.5vh] text-[2.2vh] z-1 lg:flex lg:mt-[15vh] mt-[10vh]"
+>
 	<br />
-	<h3 class=" animate-pulse text-[2.5vw] mr-2 ">🗣️</h3>
-	<h3 class=" py-[1vw] font-line-seed font-bold">	Today, You have 5 people to Talk with</h3>
 
+	<h3
+		class=" md:portrait:invisible py-[1vw] animate-pulse xl:text-[1.5vw] mr-2 text-center text-[5.5vh] lg:text-[3.5vh]"
+	>
+		🗣️
+	</h3>
+
+	<h3 class=" md:portrait:invisible py-[1vw] font-line-seed font-bold text-center lg:mt-0 mt-[4vw]">
+		Today, You have 5 people to Talk with
+	</h3>
 </div>
 
-<CardSlider cards={data.conversationCorouselItems} />
 
-<footer class=" fixed bottom-0 w-full h-16 bg-slate-100 text-center py-5 text-gray-400">
-	Demo for <strong>Learnliko.ai</strong> ©Copyright www.learnliko.ai 2023
+<div class="md:portrait:invisible">
+	<CardSlider cards={data.conversationCorouselItems} />
+</div>
+
+<h3
+	class="md:landscape:invisible md:portrait:visible portrait:invisible animate-pulse xl:text-[1.5vw] mr-2 text-center text-[10.5vh] lg:text-[3.5vh] top-[30vh] left-10 absolute"
+>
+	🔄️
+</h3>
+<h3
+	class=" md:landscape:invisible md:portrait:visible portrait:invisible py-[1vw] font-line-seed font-bold text-center lg:mt-0 mt-[2vw] text-[5.2vh] top-[44vh] left-16 absolute"
+>
+	Flip your screen
+</h3>
+
+<footer
+	class=" fixed bottom-0 w-full lg:h-16 h-32 bg-slate-100 text-center lg:py-2 py-8 text-gray-400"
+>
+	Demo for <strong>Learnliko.ai</strong> <br />©Copyright www.learnliko.ai 2023
 </footer>

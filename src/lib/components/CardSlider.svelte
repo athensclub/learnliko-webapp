@@ -6,6 +6,8 @@
 	import ConversationCard from '$lib/components/ConversationCard.svelte';
 	import { showChatbox } from '$lib/global/chatbox';
 	import type { ConversationCarouselItem } from '$lib/types/conversationData';
+	import { MOBILE_BREAKPOINT_WIDTH_QUERY } from '$lib/global/breakpoints';
+
 
 	export let cards: ConversationCarouselItem[];
 
@@ -19,6 +21,11 @@
 <KeenSlider
 	slideChanged={onSelectedChanged}
 	slidesPerView={5}
+	breakpoints={{
+		[MOBILE_BREAKPOINT_WIDTH_QUERY]: {
+			slidesPerView: 2
+		}
+	}}
 	arrows={!$showChatbox}
 	dots={false}
 	centered
@@ -27,7 +34,7 @@
 >
 	{#each cards as card, index (index)}
 		<KeenSlide>
-			<div class="w-full lg:h-[28vw] flex items-center justify-center mt-[5vh] h-[80vh] ">
+			<div class="w-full lg:h-[30vw] xl:h-[27vw] flex items-center justify-center mt-[5vh] h-[34vh]">
 				<ConversationCard
 					small={index !== selectedSlide}
 					intro={card.intro}

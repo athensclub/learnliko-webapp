@@ -3,16 +3,17 @@
 	import Chatbox from '$lib/components/chatbox/Chatbox.svelte';
 	import { showChatbox } from '$lib/global/chatbox';
 	import { onMount } from 'svelte';
-	import { audioRecording, initializeAudioRecording, resetRecordingData } from '$lib/global/recording';
+	import { initializeAudioRecording, resetRecordingData } from '$lib/global/recording';
 	import Modal from 'svelte-simple-modal';
 	import { modal } from '$lib/global/modal';
 	import { browser } from '$app/environment';
+	import { isMobile } from '$lib/global/breakpoints';
 
 	onMount(() => {
 		initializeAudioRecording();
 	});
 
-	$: if(!$showChatbox){
+	$: if (!$showChatbox) {
 		resetRecordingData();
 	}
 </script>
@@ -21,7 +22,11 @@
 	<slot />
 
 	{#if $showChatbox}
-		<div class="fixed right-0 bottom-0 w-[40vw] h-[calc(100vh-48px)] z-30">
+		<div
+			class={`fixed right-0 bottom-0 ${
+				isMobile ? 'w-[100vw] h-[70vh]' : 'w-[40vw] h-[calc(100vh-48px)]'
+			} z-30`}
+		>
 			<Chatbox />
 		</div>
 	{/if}

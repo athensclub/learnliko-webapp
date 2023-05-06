@@ -52,6 +52,6 @@
 	</div>
 {:else}
 	<div class="w-full h-full flex flex-row items-center justify-center">
-		Loading recap. Please wait <Typewriter mode="loop">...</Typewriter>
+		Calculating Scores. Please wait <Typewriter mode="loop">...</Typewriter>
 	</div>
 {/if}

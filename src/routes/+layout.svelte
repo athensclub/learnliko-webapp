@@ -18,13 +18,13 @@
 	}
 </script>
 
-<div class="w-full h-full">
+<div class="w-full max-w-[100vw] h-full overflow-x-hidden">
 	<slot />
 
 	{#if $showChatbox}
 		<div
 			class={`fixed right-0 bottom-0 ${
-				isMobile ? 'w-[100vw] h-[70vh]' : 'w-[40vw] h-[calc(100vh-48px)]'
+				$isMobile ? 'w-[100vw] h-[70vh]' : 'w-[40vw] h-[calc(100vh-48px)]'
 			} z-30`}
 		>
 			<Chatbox />

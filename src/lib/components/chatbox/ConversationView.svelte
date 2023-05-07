@@ -251,7 +251,7 @@
 	class="absolute bg-white/[0.8] mx-auto bottom-8 w-[200px] h-[44px] shadow-all rounded-xl flex items-center justify-center z-[1000]"
 >
 	{#if $isRecording}
-		<div class="bg-red-600 rounded-full w-[5%] aspect-square absolute top-2 right-1" />
+		<div class="bg-red-600 rounded-full w-[5%] aspect-square absolute top-2 right-2" />
 	{/if}
 	<svg class="w-[8%] mr-2" viewBox="0 0 41 56" fill="none" xmlns="http://www.w3.org/2000/svg">
 		<path
@@ -259,5 +259,11 @@
 			fill="black"
 		/>
 	</svg>
-	Talk to Shopkeeper
+	{#if $isRecording}
+	Recording
+	{/if}
+	{#if !$isRecording}
+	Press to Talk
+	{/if}
+	
 </button>

@@ -29,18 +29,18 @@
 </header>
 
 <div
-	class=" xl:mt-[5vw] justify-center font-bold xl:text-[1.5vw] lg:text-[3.5vh] text-[2.2vh] z-1 lg:flex lg:mt-[15vh] mt-[10vh]"
+	class=" xl:mt-[5vw] justify-center font-bold xl:text-[1.5vw] lg:text-[3.5vh] text-[2.2vh] z-1 lg:flex lg:mt-[15vh] mt-[8vh]"
 >
 	<br />
 
 	<h3
 		class=" md:portrait:invisible py-[1vw] animate-pulse xl:text-[1.5vw] mr-2 text-center text-[4.5vh] lg:text-[3.5vh]"
 	>
-		🗣️
+		👋
 	</h3>
 
 	<h3 class=" md:portrait:invisible py-[1vw] font-line-seed font-bold text-center lg:mt-0 mt-[4vw]">
-		Today, You have 5 people to Talk with
+		Today, You have 5 people to Talk!
 	</h3>
 </div>
 
@@ -61,7 +61,7 @@
 </h3>
 
 <footer
-	class=" fixed bottom-0 w-full lg:h-16 h-32 bg-slate-100 text-center lg:py-2 py-8 text-gray-400"
+	class=" fixed bottom-0 w-full lg:h-16 h-24 bg-slate-100 text-center lg:py-2 py-5 text-gray-400"
 >
 	Demo for <strong>Learnliko.ai</strong> <br />©Copyright www.learnliko.ai 2023
 </footer>

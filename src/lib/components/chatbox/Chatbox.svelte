@@ -11,7 +11,7 @@
 
 <div
 	transition:fly={{ y: 800, duration: 500 }}
-	class="w-full h-full bg-white z-30 font-line-seed relative flex flex-col items-center shadow-2xl shadow-gray-700 border-[1px] border-black/10 border-b-0 lg:px-56 px-2 "
+	class="w-full h-full bg-white z-30 font-line-seed relative flex flex-col items-center shadow-2xl shadow-gray-700 border-[1px] border-black/10 border-b-0 px-2"
 >
 	{#if $chatContext}
 		{#if currentView === 'CONVERSATION'}

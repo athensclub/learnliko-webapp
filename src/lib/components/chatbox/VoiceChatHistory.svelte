@@ -23,7 +23,7 @@
 		>
 			{#if chat.role === 'assistant'}
 				<div
-					class={`w-[48px] h-[48px] mr-2 bg-center bg-cover rounded-full border border-white`}
+					class={`w-[32px] h-[32px]  bg-center bg-cover rounded-full border border-white`}
 					style="background-image: url('{assistantProfileImage}');"
 				/>
 			{/if}
@@ -32,14 +32,14 @@
 			</div>
 			{#if chat.role === 'user'}
 				<div
-					class={`w-[48px] h-[48px] bg-center bg-cover ml-2 rounded-full border border-white`}
+					class={`w-[32px] h-[32px] bg-center bg-cover  rounded-full border border-white`}
 					style="background-image: url('{userProfileImage}');"
 				/>
 			{/if}
 		</div>
 		{#if chat.role === 'user' || (chat.role === 'assistant' && showAssistantTranscription)}
 			<div
-				class={`mt-1 flex flex-row w-[70%] ${
+				class={`mt-3 flex flex-row w-[100%] ${
 					chat.role === 'assistant' ? 'pl-16 justify-start' : 'pr-16 justify-end'
 				}`}
 			>

@@ -18,8 +18,8 @@
 	style="background-image: {background};"
 	class={`${
 		small
-			? 'lg:w-[18vw] lg:h-[22vw] w-[20vh] h-[38vh]'
-			: 'lg:w-[20vw] lg:h-[24vw] w-[70vw] h-[42vh]'
+			? 'lg:w-[18vw] lg:h-[22vw] w-[20vh] h-[82vw]'
+			: 'lg:w-[20vw] lg:h-[24vw] w-[70vw] h-[92vw]'
 	} w-full font-line-seed text-white lg:rounded-[3vw] rounded-[8vw]  shadow-lg transition-size bg-gradient-to-t from-[#D0B3FF] to-[#FF785B] flex flex-col items-center justify-around`}
 >
 	<!-- <svg
@@ -173,11 +173,11 @@
 	<button
 		on:click={openChatbox}
 		class:animate-bounce={!small}
-		class="flex flex-row items-center justify-center w-[50vw] h-[5vh] lg:w-[12vw] lg:h-[3vw] text-[1.5vh] shadow-lg z-40
+		class="flex flex-row items-center justify-center w-[50vw] h-[5vh] lg:w-[12vw] lg:h-[3vw] lg:text-[0.9vw] text-[3.5vw] shadow-lg z-40
 		 rounded-full mb-6 bg-white text-black font-bold transition-[width,height,font]"
 	>
 		<svg
-			class="lg:h-[1vw] h-[2vh] mr-1 transition-size"
+			class="lg:h-[1vw] h-[4vw] mr-1 transition-size"
 			viewBox="0 0 13 16"
 			fill="none"
 			xmlns="http://www.w3.org/2000/svg"

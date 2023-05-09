@@ -51,7 +51,7 @@
 		{#each cards as card, index (index)}
 			<KeenSlide>
 				<div
-					class={`w-full lg:h-[30vw] xl:h-[27vw] flex items-center justify-center mt-[2vh] h-[50vh]`}
+					class={`w-full lg:h-[30vw] xl:h-[27vw] flex items-center justify-center mt-[2vh] h-[55vh]`}
 				>
 					<ConversationCard
 						small={index !== selectedSlide}

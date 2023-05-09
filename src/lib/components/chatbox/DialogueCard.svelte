@@ -37,8 +37,8 @@
 		/>
 	</div>
 
-	<div class="w-full text-center font-bold text-base mt-3">Suggestion</div>
-	<div class="px-3">
+	<div class="w-full font-bold text-base mt-3">Suggestion</div>
+	<div class="px-3 mt-2">
 		<ReadMore textContent={dialogue.suggestion} maxChars={80} />
 	</div>
 </div>

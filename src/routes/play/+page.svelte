@@ -17,7 +17,7 @@
 		class=" w-8 h-8 mr-2"
 	/>
 	<span class=" flex mt-1"
-		>Learnliko.ai
+		>Learnliko
 		<h1 class=" ml-2 text-xs bg-black text-white rounded-md px-2 text-center mb-1 py-1">DEMO</h1>
 	</span>
 

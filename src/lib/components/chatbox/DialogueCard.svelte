@@ -18,7 +18,7 @@
 	const mockHistory = [dialogue.assistant, dialogue.user!];
 </script>
 
-<div class="w-[95%] mx-auto mt-3 rounded-xl flex flex-col bg-[#F8F8F8] pb-4">
+<div class="w-[100%] mb-5 mt-5 mx-auto rounded-xl flex flex-col bg-[#F8F8F8] border-2 pb-4">
 	<div class="flex flex-row justify-between text-xl font-bold items-center px-3 mt-3">
 		Dialogue {dialogueNumber}
 
@@ -28,7 +28,7 @@
 		</div>
 	</div>
 
-	<div class="w-full px-3">
+	<div class="w-[100%] px-3">
 		<VoiceChatHistory
 			showAssistantTranscription
 			history={mockHistory}
@@ -37,8 +37,8 @@
 		/>
 	</div>
 
-	<div class="w-full font-bold text-base mt-3">Suggestion</div>
-	<div class="px-3 mt-2">
+	<div class="w-full font-bold text-base mt-3 px-5">Suggestion</div>
+	<div class="px-5 mt-2">
 		<ReadMore textContent={dialogue.suggestion} maxChars={80} />
 	</div>
 </div>

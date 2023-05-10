@@ -202,9 +202,9 @@
 </div>
 
 {#if initializedConversation}
-	<div class="w-full h-[calc(100%-48px)] overflow-y-auto">
-		<h1 class=" p-4 bg-slate-100 rounded-lg mt-3 text-gray-600">
-			🎯Goal: {conversationDetails.learner.goal}
+	<div class="w-full h-[calc(100%-48px)] overflow-y-auto ">
+		<h1 class=" p-4 bg-slate-100 rounded-lg mt-3 text-gray-600 ">
+			🤩<strong>Goal</strong>: {conversationDetails.learner.goal}
 		</h1>
 		<VoiceChatHistory
 			{history}
@@ -215,7 +215,7 @@
 		{#if waitingForAIResponse}
 			<div class="flex flex-row items-center">
 				<div
-					class={`w-[48px] h-[48px] mr-2 bg-center bg-cover rounded-full border border-white`}
+					class={`w-[42px] h-[42px] px-4 bg-center bg-cover rounded-full border border-white`}
 					style="background-image: url('{conversationDetails.bot.avatar}');"
 				/>
 				Thinking

@@ -18,8 +18,8 @@
 	style="background-image: {background};"
 	class={`${
 		small
-			? 'lg:w-[18vw] lg:h-[22vw] w-[20vh] h-[82vw]'
-			: 'lg:w-[20vw] lg:h-[24vw] w-[70vw] h-[92vw]'
+			? 'lg:w-[18vw] lg:h-[22vw] w-[20vh] h-[40vh]'
+			: 'lg:w-[20vw] lg:h-[24vw] w-[35vh] h-[45vh]'
 	} w-full font-line-seed text-white lg:rounded-[3vw] rounded-[8vw]  shadow-lg transition-size bg-gradient-to-t from-[#D0B3FF] to-[#FF785B] flex flex-col items-center justify-around`}
 >
 	<!-- <svg

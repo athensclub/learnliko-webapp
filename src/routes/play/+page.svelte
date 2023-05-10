@@ -60,8 +60,8 @@
 	Flip your screen
 </h3>
 
-<footer
-	class=" fixed bottom-0 w-full lg:h-16 h-24 bg-slate-100 text-center lg:py-2 py-5 text-gray-400"
+<div
+	class="bottom-0 w-full h-16 text-center text-gray-300 py-2"
 >
-	Demo for <strong>Learnliko.ai</strong> <br />©Copyright www.learnliko.ai 2023
-</footer>
+	Demo for <strong>Learnliko</strong> <br />©Copyright www.learnliko.com 2023
+</div>

@@ -1,5 +1,6 @@
 import { isOnProduction } from '$lib/utils/environment';
 import type { Handle } from '@sveltejs/kit';
+import * as Sentry from '@sentry/sveltekit';
 
 const _whitelist = isOnProduction()
 	? ['https://learnliko.pages.dev', 'https://learnliko.netlify.app', 'https://app.learnliko.com']
@@ -12,6 +13,13 @@ const _whitelist = isOnProduction()
 			'https://staging.learnliko.pages.dev',
 			'https://staging--learnliko.netlify.app'
 	  ];
+
+// Initialize Sentry SDK for error tracing on server side
+Sentry.init({
+	dsn: 'https://c4397c7891ef474b8c7608f147e22d87@o4504690575605760.ingest.sentry.io/4505165088161792',
+	// Performance Monitoring
+	tracesSampleRate: 1.0 // Capture 100% of the transactions. Adjust this value in production as necessary.
+});
 
 export const handle: Handle = async ({ resolve, event }) => {
 	const response = await resolve(event);

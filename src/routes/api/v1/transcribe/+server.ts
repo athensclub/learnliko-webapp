@@ -7,8 +7,8 @@ export const POST: RequestHandler = async ({ request }) => {
 	if (!audioBlob) throw error(400, `Error: No audio provided`);
 
 	try {
-		const text = await transcribe(audioBlob);
-		return new Response(text);
+		const id = await transcribe(audioBlob);
+		return new Response(id);
 	} catch (e) {
 		throw error(500, `Error: ${e}`);
 	}

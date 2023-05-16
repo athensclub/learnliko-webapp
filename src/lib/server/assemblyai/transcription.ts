@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { setTimeout } from 'timers/promises';
 import { SECRET_ASSEMBLY_API_KEY } from '$env/static/private';
 
 const assembly = axios.create({
@@ -9,32 +8,40 @@ const assembly = axios.create({
 	}
 });
 
+/**
+ * Upload audio file to assembly, and make transcribe request
+ * @param audio
+ * @returns id of transcription
+ */
 export const transcribe = async (audio: Blob): Promise<string> => {
 	const url = (await assembly.post('/upload', audio)).data.upload_url;
 	const id = (await assembly.post('/transcript', { audio_url: url })).data.id;
+	return id;
+};
 
-	let result = null;
-	do {
-		let res = null;
-		try {
-			res = (await assembly.get(`/transcript/${id}`)).data;
-		} catch (e) {
-			res = null;
-		}
+/**
+ * Get transcription result by id
+ * @param id
+ * @returns transcription result
+ */
+export const getTranscript = async function (id: string) {
+	let res = null,
+		text = '';
+	try {
+		res = (await assembly.get(`/transcript/${id}`)).data;
+	} catch (e) {
+		res = null;
+	}
 
-		if(!res){
-			continue;
-		}
+	if (!res) return;
 
-		if (res.status === 'completed') {
-			result = res.text;
-		} else if (res.status === 'error') {
-			throw new Error(
-				'Something went wrong while trying to transcribe audio: ' + JSON.stringify(res)
-			);
-		}
-		
-		await setTimeout(300);
-	} while (result === null);
-	return result;
+	if (res.status === 'completed') {
+		text = res.text;
+	} else if (res.status === 'error') {
+		throw new Error(
+			'Something went wrong while trying to transcribe audio: ' + JSON.stringify(res)
+		);
+	}
+
+	return text;
 };

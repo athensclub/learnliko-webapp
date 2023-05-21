@@ -38,7 +38,7 @@
 		<!-- <div class="col-span-2 bg-white p-10 rounded">1</div>
 	  <div class="bg-white p-10 rounded">2</div> -->
 		<div
-			class="row-span-2 backdrop-blur-3xl bg-white/15 rounded-2xl shadow-xl border-white/10 border-[1px]"
+			class="row-span-2 text-black backdrop-blur-3xl bg-white/15 rounded-2xl shadow-xl border-white/10 border-[1px]"
 		>
 			<h1 class=" font-bold text-[2vw] mt-2 ml-4">Welcome</h1>
 			<h2 class="text-[1.3vw] ml-4">Learn English with AI</h2>
@@ -66,14 +66,14 @@
 		</div>
 		<!-- <div class="bg-white p-10 rounded">6</div> -->
 		<div
-			class="col-span-2 backdrop-blur-3xl bg-white/15 h-[14vw] rounded-2xl shadow-xl border-white/10 border-[1px]"
+			class="col-span-2 text-black backdrop-blur-3xl bg-white/15 h-[18vw] rounded-2xl shadow-xl border-white/10 border-[1px]"
 		>
 			<div class=" flex justify-between">
 				<div>
 					<h1 class=" font-bold text-[2vw] mt-2 ml-4">Friends Circle</h1>
 					<h2 class="text-[1.3vw] ml-4">Pratice English with friends</h2>
 				</div>
-				<img src={friend} class=" w-[16vw] mr-[2vw]" alt="" />
+				<img src={friend} class=" w-[18vw] mr-[2vw] top-0" alt="" />
 			</div>
 		
 		</div>

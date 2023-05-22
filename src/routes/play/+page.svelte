@@ -2,6 +2,7 @@
 	import CardSlider from '$lib/components/CardSlider.svelte';
 	import Select from 'svelte-select';
 	import type { PageData } from './$types';
+	import bgvd from '$lib/images/play.mp4';
 
 	let options = ['Grade 1', 'Grade 2', 'Grade 3', 'Grade 4', 'Grade 5', 'Grade 6'];
 
@@ -29,7 +30,7 @@
 </header>
 
 <div
-	class=" xl:mt-[5vw] justify-center font-bold xl:text-[1.5vw] lg:text-[3.5vh] text-[2.2vh] z-1 lg:flex lg:mt-[15vh] mt-[8vh]"
+	class=" xl:mt-[5vw] backdrop-blur-xl w-[32vw] backdrop-brightness-75 mx-auto rounded-full shadow-xl justify-center font-bold xl:text-[1.5vw] lg:text-[3.5vh] text-[2.2vh] z-1 lg:flex lg:mt-[15vh] mt-[8vh]"
 >
 	<br />
 
@@ -39,11 +40,10 @@
 		👋
 	</h3>
 
-	<h3 class=" md:portrait:invisible py-[1vw] font-line-seed font-bold text-center lg:mt-0 mt-[4vw]">
+	<h3 class=" md:portrait:invisible py-[1vw] font-line-seed font-bold text-center text-white lg:mt-0 mt-[4vw]">
 		Today, You have 5 people to Talk!
 	</h3>
 </div>
-
 
 <div class="md:portrait:invisible">
 	<CardSlider cards={data.conversationCorouselItems} />
@@ -60,8 +60,26 @@
 	Flip your screen
 </h3>
 
-<div
-	class="bottom-0 w-full h-16 text-center text-gray-300 py-2"
->
+<div class="bottom-0 w-full h-16 text-center text-gray-300 py-2">
 	Demo for <strong>Learnliko</strong> <br />©Copyright www.learnliko.com 2023
 </div>
+<video
+	autoplay
+	muted
+	loop
+	id="myVideo"
+	class=" brightness-200 blur-lg rotate-0 md:rotate-0 object-cover"
+>
+	<source src={bgvd} type="video/mp4" />
+</video>
+
+<style>
+	#myVideo {
+		position: fixed;
+		right: 0;
+		bottom: 0;
+		min-width: 100%;
+		min-height: 100%;
+		z-index: -1;
+	}
+</style>

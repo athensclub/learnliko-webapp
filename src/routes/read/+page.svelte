@@ -1,6 +1,6 @@
 <script lang="ts">
 	import ReadMore from '$lib/components/ReadMore.svelte';
-	import { getReadingItem } from '$api/reading';
+	import { getReadingItems } from '$api/reading';
 	import type { ReadingItem } from '$lib/types/reading';
 	import { browser } from '$app/environment';
 
@@ -11,7 +11,7 @@
 	const onSelectedTopicChanged = async () => {
 		// avoid the first time when it is still in SSR
 		if (!browser) return;
-		items = await getReadingItem(data.topics[selectedTopic]);
+		items = await getReadingItems(data.topics[selectedTopic]);
 	};
 
 	$: selectedTopic, onSelectedTopicChanged();
@@ -38,10 +38,7 @@
 		<div class="flex flex-row flex-wrap w-full gap-2 mt-6">
 			{#each data.topics as topic, index (topic)}
 				<button
-					on:click={() => {
-						selectedTopic = index;
-						
-					}}
+					on:click={() => (selectedTopic = index)}
 					class={`rounded-3xl py-1 px-5 font-bold ${
 						selectedTopic === index ? 'bg-black text-white' : 'bg-[#EBEBEB] text-black'
 					}`}

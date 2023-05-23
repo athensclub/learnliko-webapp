@@ -16,3 +16,8 @@ export const queryReadingItems = async (topic: string) => {
     const data = await import('$lib/server/db/reading_data.json');
     return data.default.map(item => item as ReadingItem).filter(item => topic === "All" || item.topic === topic);
 };
+
+export const queryReadingItemById = async (id: string) => {
+    const data = await import('$lib/server/db/reading_data.json');
+    return data.default.map(item => item as ReadingItem).find(item => item.id === id);
+}

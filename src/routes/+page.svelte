@@ -86,7 +86,7 @@
 		muted
 		loop
 		id="myVideo"
-		class=" brightness-120 blur-sm rotate-0 md:rotate-0 object-cover"
+		class=" brightness-125 blur-sm rotate-0 md:rotate-0 object-cover bg-blend-color"
 	>
 		<source src={bgvd} type="video/mp4" />
 	</video>
@@ -107,72 +107,76 @@
 			</button>
 		</div>
 		<!-- <div class="bg-white p-10 rounded">6</div> -->
-		<div
-			class="text-black backdrop-blur-3xl bg-white/70 w-[22vw] h-[22vw] rounded-3xl shadow-xl border-white/30 border-[2px]"
-		>
-			<div class=" flex justify-between">
-				<div>
-					<h1 class="font-bold text-[2vw] mt-2 ml-5">Conversation</h1>
-					<h2 class="text-[1.1vw] ml-5">You have <strong>5</strong> people to talk</h2>
+		<a href="/play">
+			<div
+				class="text-black backdrop-blur-3xl bg-white/70 w-[22vw] h-[22vw] rounded-3xl shadow-xl border-white/30 border-[2px]"
+			>
+				<div class=" flex justify-between">
+					<div>
+						<h1 class="font-bold text-[2vw] mt-2 ml-5">Conversation</h1>
+						<h2 class="text-[1.1vw] ml-5">You have <strong>5</strong> people to talk</h2>
+					</div>
+
+					<svg
+						width="40"
+						class=" mr-4 mt-4"
+						height="40"
+						viewBox="0 0 66 66"
+						fill="none"
+						xmlns="http://www.w3.org/2000/svg"
+					>
+						<g clip-path="url(#clip0_323_97)">
+							<path
+								d="M1.46447 57.4645C-0.488156 59.4171 -0.488156 62.5829 1.46447 64.5355C3.41709 66.4882 6.58291 66.4882 8.53553 64.5355L1.46447 57.4645ZM66 5C66 2.23858 63.7614 0 61 0H16C13.2386 0 11 2.23858 11 5C11 7.76142 13.2386 10 16 10H56V50C56 52.7614 58.2386 55 61 55C63.7614 55 66 52.7614 66 50V5ZM8.53553 64.5355L64.5355 8.53553L57.4645 1.46447L1.46447 57.4645L8.53553 64.5355Z"
+								fill="#0A0A0A"
+							/>
+						</g>
+						<defs>
+							<clipPath id="clip0_323_97">
+								<rect width="66" height="66" fill="white" />
+							</clipPath>
+						</defs>
+					</svg>
 				</div>
 
-				<svg
-					width="40"
-					class=" mr-4 mt-4"
-					height="40"
-					viewBox="0 0 66 66"
-					fill="none"
-					xmlns="http://www.w3.org/2000/svg"
-				>
-					<g clip-path="url(#clip0_323_97)">
-						<path
-							d="M1.46447 57.4645C-0.488156 59.4171 -0.488156 62.5829 1.46447 64.5355C3.41709 66.4882 6.58291 66.4882 8.53553 64.5355L1.46447 57.4645ZM66 5C66 2.23858 63.7614 0 61 0H16C13.2386 0 11 2.23858 11 5C11 7.76142 13.2386 10 16 10H56V50C56 52.7614 58.2386 55 61 55C63.7614 55 66 52.7614 66 50V5ZM8.53553 64.5355L64.5355 8.53553L57.4645 1.46447L1.46447 57.4645L8.53553 64.5355Z"
-							fill="#0A0A0A"
-						/>
-					</g>
-					<defs>
-						<clipPath id="clip0_323_97">
-							<rect width="66" height="66" fill="white" />
-						</clipPath>
-					</defs>
-				</svg>
+				<img src={talk} class=" w-[10.5vw] mt-[0vw] ml-[10vw]" alt="" />
 			</div>
-
-			<img src={talk} class=" w-[10.5vw] mt-[0vw] ml-[10vw]" alt="" />
-		</div>
+		</a>
 		<!-- <div class="bg-white p-10 rounded">6</div> -->
-		<div
-			class="text-black backdrop-blur-3xl bg-white/70 w-[22vw] h-[22vw] rounded-3xl shadow-xl border-white/30 border-[2px]"
-		>
-			<div class=" flex justify-between">
-				<div>
-					<h1 class="font-bold text-[2vw] mt-2 ml-5">Reading</h1>
-					<h2 class="text-[1.1vw] ml-5">You have <strong>5</strong> people to talk</h2>
-				</div>
+		<a href="/read">
+			<div
+				class="text-black backdrop-blur-3xl bg-white/70 w-[22vw] h-[22vw] rounded-3xl shadow-xl border-white/30 border-[2px]"
+			>
+				<div class=" flex justify-between">
+					<div>
+						<h1 class="font-bold text-[2vw] mt-2 ml-5">Reading</h1>
+						<h2 class="text-[1.1vw] ml-5">You have <strong>5</strong> people to talk</h2>
+					</div>
 
-				<svg
-					width="40"
-					class=" mr-4 mt-4"
-					height="40"
-					viewBox="0 0 66 66"
-					fill="none"
-					xmlns="http://www.w3.org/2000/svg"
-				>
-					<g clip-path="url(#clip0_323_97)">
-						<path
-							d="M1.46447 57.4645C-0.488156 59.4171 -0.488156 62.5829 1.46447 64.5355C3.41709 66.4882 6.58291 66.4882 8.53553 64.5355L1.46447 57.4645ZM66 5C66 2.23858 63.7614 0 61 0H16C13.2386 0 11 2.23858 11 5C11 7.76142 13.2386 10 16 10H56V50C56 52.7614 58.2386 55 61 55C63.7614 55 66 52.7614 66 50V5ZM8.53553 64.5355L64.5355 8.53553L57.4645 1.46447L1.46447 57.4645L8.53553 64.5355Z"
-							fill="#0A0A0A"
-						/>
-					</g>
-					<defs>
-						<clipPath id="clip0_323_97">
-							<rect width="66" height="66" fill="white" />
-						</clipPath>
-					</defs>
-				</svg>
+					<svg
+						width="40"
+						class=" mr-4 mt-4"
+						height="40"
+						viewBox="0 0 66 66"
+						fill="none"
+						xmlns="http://www.w3.org/2000/svg"
+					>
+						<g clip-path="url(#clip0_323_97)">
+							<path
+								d="M1.46447 57.4645C-0.488156 59.4171 -0.488156 62.5829 1.46447 64.5355C3.41709 66.4882 6.58291 66.4882 8.53553 64.5355L1.46447 57.4645ZM66 5C66 2.23858 63.7614 0 61 0H16C13.2386 0 11 2.23858 11 5C11 7.76142 13.2386 10 16 10H56V50C56 52.7614 58.2386 55 61 55C63.7614 55 66 52.7614 66 50V5ZM8.53553 64.5355L64.5355 8.53553L57.4645 1.46447L1.46447 57.4645L8.53553 64.5355Z"
+								fill="#0A0A0A"
+							/>
+						</g>
+						<defs>
+							<clipPath id="clip0_323_97">
+								<rect width="66" height="66" fill="white" />
+							</clipPath>
+						</defs>
+					</svg>
+				</div>
+				<img src={read} class=" w-[18vw] ml-[4vw] mt-[0.5vw]" alt="" />
 			</div>
-			<img src={read} class=" w-[18vw] ml-[4vw] mt-[0.5vw]" alt="" />
-		</div>
+		</a>
 		<!-- <div class="bg-white p-10 rounded">6</div> -->
 		<div
 			class="col-span-2 text-black backdrop-blur-3xl bg-white/70 h-[16vw] rounded-3xl shadow-xl border-white/30 border-[2px]"

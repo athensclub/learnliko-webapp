@@ -30,17 +30,19 @@
 </header>
 
 <div
-	class=" xl:mt-[5vw] backdrop-blur-xl w-[32vw] backdrop-brightness-75 mx-auto rounded-full shadow-xl justify-center font-bold xl:text-[1.5vw] lg:text-[3.5vh] text-[2.2vh] z-1 lg:flex lg:mt-[15vh] mt-[8vh]"
+	class="xl:mt-[5vw] w-[42vh]  shadow-xl justify-center font-bold xl:text-[1.5vw] lg:text-[3.5vh] text-[2.2vh] z-1 lg:flex lg:mt-[15vh] mt-[8vh] lg:w-[32vw] backdrop-brightness-75 mx-auto backdrop-blur-xl rounded-full"
 >
 	<br />
 
 	<h3
-		class=" md:portrait:invisible py-[1vw] animate-pulse xl:text-[1.5vw] mr-2 text-center text-[4.5vh] lg:text-[3.5vh]"
+		class=" md:portrait:invisible py-[0.5vw] animate-pulse xl:text-[1.5vw] mr-2 text-center text-[4.5vh] lg:text-[3.5vh]"
 	>
 		👋
 	</h3>
 
-	<h3 class=" md:portrait:invisible py-[1vw] font-line-seed font-bold text-center text-white lg:mt-0 mt-[4vw]">
+	<h3
+		class=" md:portrait:invisible py-[1vw] font-line-seed font-bold text-center text-white lg:mt-0 mt-[4vw]"
+	>
 		Today, You have 5 people to Talk!
 	</h3>
 </div>
@@ -60,7 +62,7 @@
 	Flip your screen
 </h3>
 
-<div class="bottom-0 w-full h-16 text-center text-gray-300 py-2">
+<div class="bottom-0 w-full h-16 text-center text-gray-800 py-2">
 	Demo for <strong>Learnliko</strong> <br />©Copyright www.learnliko.com 2023
 </div>
 <video
@@ -68,7 +70,7 @@
 	muted
 	loop
 	id="myVideo"
-	class=" brightness-200 blur-lg rotate-0 md:rotate-0 object-cover"
+	class=" brightness-200 blur-xl rotate-0 md:rotate-0 object-cover"
 >
 	<source src={bgvd} type="video/mp4" />
 </video>

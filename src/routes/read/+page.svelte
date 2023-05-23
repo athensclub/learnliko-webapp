@@ -1,5 +1,4 @@
 <script lang="ts">
-	import jsonData from './readingdata.json';
 	import ReadMore from '$lib/components/ReadMore.svelte';
 	import { getReadingItem } from '$api/reading';
 	import type { ReadingItem } from '$lib/types/reading';
@@ -28,7 +27,7 @@
 	<source src={read} type="video/mp4" />
 </video> -->
 
-<div class="w-full h-full bg-black/5">
+<div class="w-full h-full min-h-[100vh] bg-black/5">
 	<h1 class="text-3xl font-bold pt-8 text-center">Dynamic Blog List</h1>
 
 	<div

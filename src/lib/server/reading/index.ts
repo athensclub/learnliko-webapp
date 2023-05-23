@@ -6,4 +6,13 @@ export const queryReadingTopics = async () => {
 
     // only return unique topics https://stackoverflow.com/a/14438954
     return [...new Set(topics)];
-}
+};
+
+/**
+ * Note: Use topic "All" to query all items.
+ * @param topic 
+ */
+export const queryReadingItems = async (topic: string) => {
+    const data = await import('$lib/server/db/reading_data.json');
+    return data.default.map(item => item as ReadingItem).filter(item => topic === "All" || item.topic === topic);
+};

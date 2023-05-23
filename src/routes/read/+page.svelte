@@ -51,12 +51,14 @@
 
 	<ul>
 		{#each items as blog (blog.id)}
-			<li class="mt-6 bg-white w-[28vw] mx-auto px-4 py-4 rounded-xl">
-				<h2 class="text-xl font-bold mb-2">{blog.blogName}</h2>
-				<p class="text-gray-600">Topic: {blog.topic}</p>
-				<p class="text-gray-600">Date and Time: {blog.dateTime}</p>
-				<img class="mt-2 rounded-lg mb-2" src={blog.image} alt="Blog Image" />
-				<ReadMore textContent={blog.content} maxChars={120} />
+			<li class="mt-6 bg-white w-[28vw] rounded-xl mx-auto p-4">
+				<a class="w-full " href="/read/{blog.id}">
+					<h2 class="text-xl font-bold mb-2">{blog.blogName}</h2>
+					<p class="text-gray-600">Topic: {blog.topic}</p>
+					<p class="text-gray-600">Date and Time: {blog.dateTime}</p>
+					<img class="mt-2 rounded-lg mb-2" src={blog.image} alt="Blog Image" />
+					<ReadMore textContent={blog.content} maxChars={120} />
+				</a>
 			</li>
 		{/each}
 	</ul>

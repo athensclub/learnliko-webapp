@@ -86,14 +86,14 @@
 		muted
 		loop
 		id="myVideo"
-		class=" brightness-125 blur-sm rotate-0 md:rotate-0 object-cover bg-blend-color"
+		class=" brightness-110 blur-sm rotate-0 md:rotate-0 object-cover "
 	>
 		<source src={bgvd} type="video/mp4" />
 	</video>
 	<div class="grid grid-cols-2 gap-3 pt-[16vh] pb-[5vh]">
 		<!-- <div class="col-span-2 bg-white p-10 rounded">1</div>
 	  <div class="bg-white p-10 rounded">2</div> -->
-		<div class="row-span-2 text-black backdrop-blur-xl rounded-3xl shadow-xl">
+		<div class="row-span-2 text-black backdrop-blur-xl bg-white/5 rounded-3xl shadow-xl">
 			<h1 class=" font-bold text-[2vw] mt-2 ml-5">Welcome</h1>
 			<h2 class="text-[1.3vw] ml-5">Learn English with AI</h2>
 			<img
@@ -109,7 +109,7 @@
 		<!-- <div class="bg-white p-10 rounded">6</div> -->
 		<a href="/play">
 			<div
-				class="text-black backdrop-blur-3xl bg-white/70 w-[22vw] h-[22vw] rounded-3xl shadow-xl border-white/30 border-[2px]"
+				class="text-black backdrop-blur-3xl bg-white/90 w-[22vw] h-[22vw] rounded-3xl shadow-xl border-white/30 border-[2px]"
 			>
 				<div class=" flex justify-between">
 					<div>
@@ -145,7 +145,7 @@
 		<!-- <div class="bg-white p-10 rounded">6</div> -->
 		<a href="/read">
 			<div
-				class="text-black backdrop-blur-3xl bg-white/70 w-[22vw] h-[22vw] rounded-3xl shadow-xl border-white/30 border-[2px]"
+				class="text-black backdrop-blur-3xl bg-white/90 w-[22vw] h-[22vw] rounded-3xl shadow-xl border-white/30 border-[2px]"
 			>
 				<div class=" flex justify-between">
 					<div>
@@ -179,7 +179,7 @@
 		</a>
 		<!-- <div class="bg-white p-10 rounded">6</div> -->
 		<div
-			class="col-span-2 text-black backdrop-blur-3xl bg-white/70 h-[16vw] rounded-3xl shadow-xl border-white/30 border-[2px]"
+			class="col-span-2 text-black backdrop-blur-3xl bg-white/90 h-[16vw] rounded-3xl shadow-xl border-white/30 border-[2px]"
 		>
 			<div class=" flex justify-between">
 				<div>

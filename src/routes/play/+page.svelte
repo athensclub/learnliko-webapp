@@ -1,6 +1,5 @@
 <script lang="ts">
 	import CardSlider from '$lib/components/CardSlider.svelte';
-	import Select from 'svelte-select';
 	import type { PageData } from './$types';
 	import bgvd from '$lib/images/play.mp4';
 

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import CardSlider from '$lib/components/CardSlider.svelte';
 	import type { PageData } from './$types';
-	import bgvd from '$lib/images/play.mp4';
+	import bgvd from '$lib/images/university.mp4';
 
 	let options = ['Grade 1', 'Grade 2', 'Grade 3', 'Grade 4', 'Grade 5', 'Grade 6'];
 
@@ -18,7 +18,7 @@
 	/>
 	<span class=" flex mt-1"
 		>Learnliko
-		<h1 class=" ml-2 text-xs bg-black text-white rounded-md px-2 text-center mb-1 py-1">DEMO</h1>
+		<h1 class=" ml-2 text-xs bg-black text-white rounded-md px-2 text-center mb-1 py-1">University</h1>
 	</span>
 
 	<!-- <div class="w-full flex flex-row justify-start ml-6">
@@ -42,7 +42,7 @@
 	<h3
 		class=" md:portrait:invisible py-[1vw] font-line-seed font-bold text-center text-white lg:mt-0 mt-[4vw]"
 	>
-		Today, You have 5 people to Talk!
+		Today, You have 5 workers to Talk!
 	</h3>
 </div>
 
@@ -69,7 +69,7 @@
 	muted
 	loop
 	id="myVideo"
-	class=" brightness-200 blur-xl rotate-0 md:rotate-0 object-cover"
+	class=" rotate-0 md:rotate-0 object-cover"
 >
 	<source src={bgvd} type="video/mp4" />
 </video>

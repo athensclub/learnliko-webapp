@@ -13,8 +13,6 @@
 		? dialogue.suggestion
 		: "There's no suggestion for this dialogue.";
 
-	console.log(dialogue);
-
 	const mockHistory = [dialogue.assistant, dialogue.user!];
 </script>
 

@@ -1,5 +1,7 @@
 <script lang="ts">
 	import Header from '$lib/components/Header.svelte';
+	import chatBubbleImage from '$lib/images/chat_bubble_gradient.png';
+	import blueBookImage from '$lib/images/blue_book.png';
 	import profileImage from '$lib/images/sample_kid_image.png';
 
 	let name = 'Natsataporn M.';
@@ -62,9 +64,27 @@
 							</svg>
 						</a>
 					</div>
-					<div class="mt-5">You learn about How to purchase products in shop and learn new 10 vocabularies</div>
+					<div class="mt-5">
+						You learn about How to purchase products in shop and learn new 10 vocabularies
+					</div>
 				</div>
 			</div>
+		</div>
+
+		<div class="flex flex-col h-full gap-[20px] pt-10">
+			<a
+				class="h-[calc(50%-10px)] aspect-square bg-[#F6F6F6] rounded-2xl border border-black/[0.15] font-bold flex flex-col items-center justify-center"
+			>
+				<img class="h-[70%]" src={chatBubbleImage} alt="Chat Bubble" />
+
+				Conversation History
+			</a>
+			<a
+				class="h-[calc(50%-10px)] aspect-square bg-[#F6F6F6] rounded-2xl border border-black/[0.15] font-bold flex flex-col items-center justify-center"
+			>
+				<img class="h-[70%]" src={blueBookImage} alt="Blue Book" />
+				Reading History
+			</a>
 		</div>
 	</div>
 </div>

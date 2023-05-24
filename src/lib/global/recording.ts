@@ -1,4 +1,5 @@
 // inspired from https://cptcrunchy.medium.com/how-to-build-a-voice-recorder-with-sveltekit-d331e3e94af6
+import { blobToBase64 } from "$lib/utils/io";
 import { writable, get } from "svelte/store";
 
 let mediaRecorder: MediaRecorder;
@@ -31,14 +32,16 @@ export const initializeAudioRecording = async () => {
     const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
     mediaRecorder = new MediaRecorder(stream);
     mediaRecorder.ondataavailable = (e) => media.push(e.data);
-    mediaRecorder.onstop = function () {
+    mediaRecorder.onstop = async function () {
         if (resetting) {
             media = [];
             return;
         }
         const blob = new Blob(media, { 'type': 'audio/ogg; codecs=opus' });
+        const url = await blobToBase64(blob);
+        console.log(url)
         media = [];
-        audioRecording.set({ data: blob, url: window.URL.createObjectURL(blob) });
+        audioRecording.set({ data: blob, url });
     }
 };
 

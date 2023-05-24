@@ -53,13 +53,7 @@
 				<div
 					class={`w-full lg:h-[30vw] xl:h-[27vw] flex items-center justify-center mt-[2vh] h-[55vh]`}
 				>
-					<ConversationCard
-						small={index !== selectedSlide}
-						intro={card.intro}
-						topic={card.topic}
-						background={card.background}
-						details={card.details}
-					/>
+					<ConversationCard small={index !== selectedSlide} conversation={card} />
 				</div>
 			</KeenSlide>
 		{/each}

@@ -1,21 +1,18 @@
 <script lang="ts">
 	import { chatContext, showChatbox } from '$lib/global/chatbox';
-	import type { ConversationDetails } from '$lib/types/conversationData';
+	import type { ConversationCarouselItem, ConversationDetails } from '$lib/types/conversationData';
 
 	export let small = false;
-	export let topic: string;
-	export let intro: string;
-	export let background: string;
-	export let details: ConversationDetails;
+	export let conversation: ConversationCarouselItem;
 
 	const openChatbox = () => {
 		$showChatbox = true;
-		$chatContext = { details };
+		$chatContext = { conversation };
 	};
 </script>
 
 <div
-	style="background-image: {background};"
+	style="background-image: {conversation.background};"
 	class={`${
 		small
 			? 'lg:w-[18vw] lg:h-[22vw] w-[20vh] h-[40vh]'
@@ -149,15 +146,15 @@
 	<div
 		class=" lg:text-[1vw] text-[2vh] lg:w-[20vw] w-[18vh] transition-font lg:mt-[2vw] mt-[2vh] text-center"
 	>
-		{intro}
+		{conversation.intro}
 	</div>
-	
+
 	<div class="flex flex-col w-full items-center justify-center">
 		<div
 			class={`${
 				small ? 'w-[6vw] h-[6vw]' : 'lg:w-[7vw] lg:h-[7vw] w-[10vh] h-[10vh] '
 			} bg-center bg-cover  rounded-full lg:mt-[0.5vw] shadow-md transition-size`}
-			style="background-image: url('{details.bot.avatar}');"
+			style="background-image: url('{conversation.details.bot.avatar}');"
 		/>
 
 		<div
@@ -166,7 +163,7 @@
 			class:text-[0.79vh]={small}
 			class:lg:text-[1vh]={small}
 		>
-			{topic}
+			{conversation.topic}
 		</div>
 	</div>
 

@@ -1,26 +1,26 @@
 <script lang="ts">
-	import { recapHistory, showChatbox } from '$lib/global/chatbox';
+	import { chatContext, currentChatboxView, recapHistory, showChatbox } from '$lib/global/chatbox';
 	import ConfirmModal from '$lib/components/modals/ConfirmModal.svelte';
 	import { showModal } from '$lib/global/modal';
 	import DialogueCard from './DialogueCard.svelte';
 	import { round } from '$lib/utils/math';
 	import Typewriter from 'svelte-typewriter/Typewriter.svelte';
-	import type { ConversationDetails } from '$lib/types/conversationData';
 
 	// we have to wait for recapHistory to finish loading.
 	$: totalScore = $recapHistory ? $recapHistory.map((x) => x.score).reduce((x, y) => x + y, 0) : 0;
-
-	export let conversationDetails: ConversationDetails;
 
 	const hide = () =>
 		showModal(ConfirmModal, {
 			title: 'Confirm',
 			description: 'Are you sure you want to end the recap?',
-			onConfirm: () => ($showChatbox = false)
+			onConfirm: () => {
+				$showChatbox = false;
+				$currentChatboxView = 'CONVERSATION';
+			}
 		});
 </script>
 
-{#if $recapHistory}
+{#if $recapHistory && $chatContext}
 	<div
 		class="flex items-center justify-between w-full h-[48px] font-bold text-lg border-b border-black/[0.15] relative"
 	>
@@ -45,7 +45,7 @@
 				<DialogueCard
 					dialogueNumber={index + 1}
 					{dialogue}
-					assistantProfileImage={conversationDetails.bot.avatar}
+					assistantProfileImage={$chatContext.conversation.details.bot.avatar}
 				/>
 			{/if}
 		{/each}

@@ -1,3 +1,9 @@
+<script lang="ts">
+	import { page } from "$app/stores";
+
+	
+</script>
+
 <header
 	class="z-20 flex top-0 items-center justify-left font-line-seed text-xl text-black font-bold w-full fixed bg-white py-[2vh] px-6 pt-[2vh] shadow-xl"
 >
@@ -39,8 +45,10 @@
 		<div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
 			<div class="text-sm lg:flex-grow">
 				<a
-					href="#responsive-header"
-					class="block mt-4 lg:inline-block lg:mt-0 text-black hover:text-black mr-4"
+					href="/"
+					class={`block mt-4 lg:inline-block lg:mt-0 text-black hover:text-black mr-4 ${
+						$page.url.pathname === '/' ? "text-black" : "text-black/40"
+					}`}
 				>
 					Home
 				</a>

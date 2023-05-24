@@ -1,4 +1,5 @@
 import type { SynthesizeAccent, SynthesizeGender } from '$api/tts';
+import type { RecapHistory } from '$lib/global/chatbox';
 
 interface LearnerDetails {
 	goal: string;
@@ -23,6 +24,13 @@ export interface ConversationCarouselItem {
 	topic: string;
 	background: string;
 	details: ConversationDetails;
+	id: string;
+}
+
+export interface FinishedConversation {
+	recap: RecapHistory;
+	finishedTime: Date;
+	conversationID: string;
 }
 
 export interface ChatBotMessage {

@@ -39,7 +39,6 @@ export const initializeAudioRecording = async () => {
         }
         const blob = new Blob(media, { 'type': 'audio/ogg; codecs=opus' });
         const url = await blobToBase64(blob);
-        console.log(url)
         media = [];
         audioRecording.set({ data: blob, url });
     }

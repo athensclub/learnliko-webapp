@@ -1,19 +1,13 @@
 <script lang="ts">
-	import {
-		audioRecording,
-		isRecording,
-		resetRecordingData,
-		stopRecording,
-		toggleRecording
-	} from '$lib/global/recording';
+	import { audioRecording, isRecording, toggleRecording } from '$lib/global/recording';
 	import { transcribe } from '$api/transcription';
 	import { showModal } from '$lib/global/modal';
 	import {
 		showChatbox,
-		type ChatboxView,
 		recapHistory,
 		type RecapHistory,
-		isLoadingRecapHistory
+		currentChatboxView,
+		chatContext
 	} from '$lib/global/chatbox';
 	import Typewriter from 'svelte-typewriter';
 	import ConfirmModal from '$lib/components/modals/ConfirmModal.svelte';
@@ -21,8 +15,9 @@
 	import userImage from '$lib/images/sample_kid_image.png';
 	import { analyzeDialog, chat } from '$api/conversation';
 	import type { ChatMessage } from '$lib/types/requests/chatCompletion';
-	import type { ChatBotMessage, ConversationDetails } from '$lib/types/conversationData';
+	import type { ChatBotMessage } from '$lib/types/conversationData';
 	import VoiceChatHistory from './VoiceChatHistory.svelte';
+	import { completeConversationLocal } from '$lib/localdb/profileLocal';
 
 	// chat's history, used for display only
 	let history: {
@@ -31,6 +26,7 @@
 		transcription: string | null;
 	}[] = [];
 	let finished = false;
+	let finishedTime: Date;
 	let initializedConversation = false;
 	let waitingForAIResponse = false;
 	let transcribing = false;
@@ -38,13 +34,10 @@
 	// an array of chatGPT's history in raw data, used for chat completion
 	const gptHistory: ChatMessage[] = [];
 
-	export let conversationDetails: ConversationDetails;
-	export let setView: (view: ChatboxView) => void;
+	let conversationDetails = $chatContext!.conversation.details;
 
-	const showRecap = async () => {
+	const computeRecap = async () => {
 		$recapHistory = null;
-		setView('RECAP');
-
 		let result: RecapHistory = [];
 		const promises: Promise<any>[] = [];
 
@@ -71,7 +64,16 @@
 		await Promise.all(promises);
 
 		$recapHistory = result;
+
+		// TODO: use actual db (cloud).
+		completeConversationLocal({
+			recap: result,
+			finishedTime,
+			conversationID: $chatContext!.conversation.id
+		});
 	};
+
+	const showRecap = async () => ($currentChatboxView = 'RECAP');
 
 	const hide = () =>
 		showModal(ConfirmModal, {
@@ -120,6 +122,8 @@
 					break;
 				case 'END-OF-CONVERSATION':
 					finished = true;
+					finishedTime = new Date();
+					computeRecap();
 					break;
 				default:
 					break;
@@ -202,8 +206,8 @@
 </div>
 
 {#if initializedConversation}
-	<div class="w-full h-[calc(100%-48px)] overflow-y-auto ">
-		<h1 class=" p-4 bg-slate-100 rounded-lg mt-3 text-gray-600 ">
+	<div class="w-full h-[calc(100%-48px)] overflow-y-auto">
+		<h1 class=" p-4 bg-slate-100 rounded-lg mt-3 text-gray-600">
 			🤩<strong>Goal</strong>: {conversationDetails.learner.goal}
 		</h1>
 		<VoiceChatHistory
@@ -260,10 +264,9 @@
 		/>
 	</svg>
 	{#if $isRecording}
-	Recording
+		Recording
 	{/if}
 	{#if !$isRecording}
-	Press to Talk
+		Press to Talk
 	{/if}
-	
 </button>

@@ -46,6 +46,7 @@
 	"type": "module",
 	"dependencies": {
 		"@google-cloud/text-to-speech": "^4.2.2",
+		"@macfja/svelte-persistent-store": "^2.3.0",
 		"@sentry/sveltekit": "^7.51.2",
 		"axios": "^1.3.5",
 		"openai": "^3.2.1",

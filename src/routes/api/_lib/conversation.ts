@@ -1,3 +1,4 @@
+import type { ConversationCarouselItem } from '$lib/types/conversationData';
 import type { ChatMessage } from '$lib/types/requests/chatCompletion';
 
 export const chat = async function (messages: ChatMessage[]) {
@@ -69,3 +70,9 @@ export const analyzeDialog = async function (assistant: string, user: string) {
 
 	return { ...data, overallScore: (data.clarity + data.grammar + data.appropriateness) / 300 };
 };
+
+export const getConversations = async () => {
+	const result = await fetch('/api/v1/conversation/queryAvailable', { method: 'GET' });
+	const val: ConversationCarouselItem[] = await result.json();
+	return val;
+}

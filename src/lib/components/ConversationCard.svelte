@@ -3,7 +3,9 @@
 	import type { ConversationCarouselItem, ConversationDetails } from '$lib/types/conversationData';
 
 	export let small = false;
+	export let extraSmall = false;
 	export let conversation: ConversationCarouselItem;
+	export let disabled = false;
 
 	const openChatbox = () => {
 		$showChatbox = true;
@@ -14,7 +16,9 @@
 <div
 	style="background-image: {conversation.background};"
 	class={`${
-		small
+		extraSmall
+			? 'lg:w-[12vw] lg:h-[16vw] w-[12vh] h-[34vh]'
+			: small
 			? 'lg:w-[18vw] lg:h-[22vw] w-[20vh] h-[40vh]'
 			: 'lg:w-[20vw] lg:h-[24vw] w-[35vh] h-[45vh]'
 	} w-full font-line-seed text-white lg:rounded-[3vw] rounded-[8vw]  shadow-lg transition-size bg-gradient-to-t from-[#D0B3FF] to-[#FF785B] flex flex-col items-center justify-around`}
@@ -144,7 +148,9 @@
 		</svg> -->
 
 	<div
-		class=" lg:text-[1vw] text-[2vh] lg:w-[20vw] w-[18vh] transition-font lg:mt-[2vw] mt-[2vh] text-center"
+		class={`lg:text-[1vw] ${
+			extraSmall ? 'text-[0.5vh]' : 'text-[2vh]'
+		} lg:w-[20vw] w-[18vh] transition-font lg:mt-[2vw] mt-[2vh] text-center`}
 	>
 		{conversation.intro}
 	</div>
@@ -152,26 +158,34 @@
 	<div class="flex flex-col w-full items-center justify-center">
 		<div
 			class={`${
-				small ? 'w-[6vw] h-[6vw]' : 'lg:w-[7vw] lg:h-[7vw] w-[10vh] h-[10vh] '
+				extraSmall
+					? 'w-[4vw] h-[4vw]'
+					: small
+					? 'w-[6vw] h-[6vw]'
+					: 'lg:w-[7vw] lg:h-[7vw] w-[10vh] h-[10vh] '
 			} bg-center bg-cover  rounded-full lg:mt-[0.5vw] shadow-md transition-size`}
 			style="background-image: url('{conversation.details.bot.avatar}');"
 		/>
 
 		<div
-			class="lg:text-[1.2vw] text-[5vw] px-6 py-4 transition-font font-bold text-center"
-			class:xl:text-[1vw]={small}
-			class:text-[0.79vh]={small}
-			class:lg:text-[1vh]={small}
+			class={`${
+				extraSmall
+					? 'xl:text-[0.7vw] text-[0.49vh] lg:text-[0.7vh]'
+					: small
+					? 'xl:text-[1vw] text-[0.79vh] lg:text-[1vh]'
+					: 'lg:text-[1.2vw] text-[5vw]'
+			} px-6 py-4 transition-font font-bold text-center`}
 		>
 			{conversation.topic}
 		</div>
 	</div>
 
 	<button
+		{disabled}
 		on:click={openChatbox}
-		class:animate-bounce={!small}
-		class="flex flex-row items-center justify-center w-[50vw] h-[5vh] lg:w-[12vw] lg:h-[3vw] lg:text-[0.9vw] text-[3.5vw] shadow-lg z-40
-		 rounded-full mb-6 bg-white text-black font-bold transition-[width,height,font]"
+		class:animate-bounce={!(small || extraSmall)}
+		class={`${extraSmall ? "lg:text-[0.6vw] text-[3vw] px-1" : "lg:text-[0.9vw] text-[3.5vw] lg:w-[12vw] lg:h-[3vw]"} flex flex-row w-fit items-center justify-center h-[5vh] shadow-lg z-40
+		 rounded-full mb-6 bg-white text-black font-bold transition-[width,height,font]`}
 	>
 		<svg
 			class="lg:h-[1vw] h-[4vw] mr-1 transition-size"

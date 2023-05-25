@@ -5,15 +5,30 @@
 	import profileImage from '$lib/images/sample_kid_image.png';
 	import { queryLearningDiariesLocal } from '$lib/localdb/profileLocal';
 	import { onMount } from 'svelte';
-	import type { LearningDiaryItem } from '$lib/types/learningDiary';
+	import type { LearnedItem, LearningDiaryItem } from '$lib/types/learningDiary';
+	import ConversationCard from '$lib/components/ConversationCard.svelte';
+	import { formatAMPM } from '$lib/utils/time';
+	import { currentChatboxView, recapHistory, showChatbox } from '$lib/global/chatbox';
 
 	let name = 'Natsataporn M.';
 	let learningDiaries: LearningDiaryItem[] | null = null;
 
+	let showingItem: LearningDiaryItem | null = null;
+
+	const showItemRecap = (item: LearnedItem) => {
+		$recapHistory = item.recap;
+		$currentChatboxView = 'RECAP';
+		$showChatbox = true;
+	};
+
 	onMount(async () => {
 		// TODO: implement db using actual database (cloud) and probably move this to ssr.
 		learningDiaries = await queryLearningDiariesLocal();
+		console.log(learningDiaries);
 	});
+
+	// combined vocabs from the selected diary item.
+	$: vocabs = showingItem?.learnedItems.flatMap((item) => item.vocabs);
 </script>
 
 <div class="w-full h-full">
@@ -53,13 +68,77 @@
 			<div
 				class="mt-3 w-full flex-1 flex flex-col overflow-y-auto bg-[#F6F6F6] rounded-3xl p-3 gap-4"
 			>
-				{#if learningDiaries}
+				{#if showingItem}
+					<div
+						class="w-full h-full overflow-y-auto bg-white flex flex-col rounded-2xl font-bold p-3"
+					>
+						<button
+							on:click={() => (showingItem = null)}
+							class="flex flex-row w-fit bg-black text-white items-center justify-center text-sm px-2 py-1 rounded-2xl"
+						>
+							<svg
+								class="w-3 mr-3"
+								viewBox="0 0 25 16"
+								fill="none"
+								xmlns="http://www.w3.org/2000/svg"
+							>
+								<path
+									d="M24 9C24.5523 9 25 8.55228 25 8C25 7.44772 24.5523 7 24 7L24 9ZM0.292892 7.29289C-0.0976315 7.68342 -0.0976315 8.31658 0.292892 8.70711L6.65685 15.0711C7.04738 15.4616 7.68054 15.4616 8.07107 15.0711C8.46159 14.6805 8.46159 14.0474 8.07107 13.6569L2.41421 8L8.07107 2.34315C8.46159 1.95262 8.46159 1.31946 8.07107 0.928932C7.68054 0.538408 7.04738 0.538408 6.65685 0.928932L0.292892 7.29289ZM24 7L1 7L1 9L24 9L24 7Z"
+									fill="white"
+								/>
+							</svg>
+
+							Back
+						</button>
+
+						<div class="text-sm mt-3">
+							{showingItem.date}
+						</div>
+
+						<div class="mt-5">
+							{showingItem.title}
+						</div>
+
+						<div class="mt-5">Learned Vocabularies:</div>
+
+						<!-- To make linter happy, vocabs should always exists in this scope -->
+						{#if vocabs}
+							<ul>
+								{#each vocabs as word, index (word)}
+									<li>{index + 1}. {word}</li>
+								{/each}
+							</ul>
+						{/if}
+
+						<div class="mt-5">Conversations:</div>
+
+						{#each showingItem.learnedItems as item (item.conversation.id)}
+							<div class="flex flex-row mt-3">
+								<ConversationCard extraSmall disabled conversation={item.conversation} />
+
+								<div class="flex flex-col text-sm ml-5">
+									<div>Played on {formatAMPM(item.finishedTime)}</div>
+
+									<div class="mt-3">Goal: {item.conversation.details.learner.goal}</div>
+
+									<div class="mt-3">Vocabularies: {item.vocabs.join(', ')}</div>
+
+									<button
+										on:click={() => showItemRecap(item)}
+										class="mt-3 w-fit bg-[#D9D9D9] rounded-2xl py-1 px-4">See Recap</button
+									>
+								</div>
+							</div>
+						{/each}
+					</div>
+				{:else if learningDiaries}
 					{#each learningDiaries as diary (diary.date)}
 						<div class="w-full bg-white h-fit flex flex-col rounded-2xl font-bold p-3">
 							<div class="flex flex-row items-center justify-between">
 								<div class="text-sm">{diary.date}</div>
 
-								<a
+								<button
+									on:click={() => (showingItem = diary)}
 									class="bg-black text-white text-sm flex flex-row px-2 py-1 items-center justify-center rounded-2xl"
 								>
 									Read more
@@ -75,8 +154,9 @@
 											fill="white"
 										/>
 									</svg>
-								</a>
+								</button>
 							</div>
+
 							<div class="mt-5">
 								{diary.title}
 							</div>

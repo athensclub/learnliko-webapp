@@ -37,7 +37,7 @@ export const queryLearningDiariesLocal = async (): Promise<LearningDiaryItem[]> 
     const result: LearningDiaryItem[] = [];
     for (const key of dateToConversations.keys()) {
         const convs = dateToConversations.get(key);
-        // use if check to make linter happy :(z
+        // use if check to make linter happy :(
         if (convs) {
             const items: LearnedItem[] = convs.map(conv =>
             ({

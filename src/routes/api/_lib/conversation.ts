@@ -1,3 +1,4 @@
+import type { RecapHistory } from '$lib/global/chatbox';
 import type { ConversationCarouselItem } from '$lib/types/conversationData';
 import type { ChatMessage } from '$lib/types/requests/chatCompletion';
 
@@ -70,6 +71,35 @@ export const analyzeDialog = async function (assistant: string, user: string) {
 
 	return { ...data, overallScore: (data.clarity + data.grammar + data.appropriateness) / 300 };
 };
+
+export const getVocabsFromConversation = async (history: RecapHistory) => {
+	const prompt: ChatMessage[] = [];
+	prompt.push({
+		role: 'user',
+		content: `You are English professor. I want you to analyze the provided dialog and give me all the useful vocabularies that you think the student would not have known in that said dialog. Answer the each word separated by comma and do not provide any other explanation or information. Do not use any punctuation other than comma.`
+	});
+	prompt.push({
+		role: 'user',
+		content: `A: Welcome to the shop how can I help you?
+		B: Want to buy some pens, please.
+		A: Sure, we have pens available. Our pens are 5฿ each. How many pens would you like to purchase?
+		B: One.
+		A: Great! We have one pen left in stock. Would you like to purchase it?
+		B: Yes.`
+	});
+	prompt.push({
+		role: 'assistant',
+		content: `Welcome, shop, purchase, stock`
+	});
+	prompt.push({
+		role: 'user',
+		content: history.map(
+			item => `A: ${item.assistant.transcription}\nB: ${item.user?.transcription}`
+		).join("\n")
+	})
+	const response = await chat(prompt);
+	return response.replace(".", "").split(",").map(s => s.trim().toLowerCase());
+}
 
 export const getConversations = async () => {
 	const result = await fetch('/api/v1/conversation/queryAvailable', { method: 'GET' });

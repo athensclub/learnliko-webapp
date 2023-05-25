@@ -13,7 +13,7 @@ interface UserFinishedConversationItem {
     vocabs: string[];
 }
 
-const completedConversations = browser ? persist(writable<UserFinishedConversationItem[]>([]), createIndexedDBStorage(), "completedConversations") : null;
+export const completedConversations = browser ? persist(writable<UserFinishedConversationItem[]>([]), createIndexedDBStorage(), "completedConversations") : null;
 
 export const completeConversationLocal = async (conversation: FinishedConversation) => {
     completedConversations?.set([...get(completedConversations),

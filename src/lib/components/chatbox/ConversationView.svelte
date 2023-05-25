@@ -18,6 +18,7 @@
 	import type { ChatBotMessage } from '$lib/types/conversationData';
 	import VoiceChatHistory from './VoiceChatHistory.svelte';
 	import { completeConversationLocal } from '$lib/localdb/profileLocal';
+	import { blobToBase64 } from '$lib/utils/io';
 
 	// chat's history, used for display only
 	let history: {
@@ -140,7 +141,7 @@
 			...history,
 			{
 				role: 'assistant',
-				audioURL: URL.createObjectURL(audio),
+				audioURL: await blobToBase64(audio),
 				transcription: message
 			}
 		];

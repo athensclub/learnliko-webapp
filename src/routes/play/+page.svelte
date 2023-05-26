@@ -2,10 +2,23 @@
 	import CardSlider from '$lib/components/CardSlider.svelte';
 	import type { PageData } from './$types';
 	import bgvd from '$lib/images/play.mp4';
+	import type { ConversationCarouselItem } from '$lib/types/conversationData';
+	import { onMount } from 'svelte';
+	import { queryConversationsLocal } from '$lib/localdb/conversationLocal';
 
 	let options = ['Grade 1', 'Grade 2', 'Grade 3', 'Grade 4', 'Grade 5', 'Grade 6'];
 
-	export let data: PageData;
+	// TODO: probably switch back to querying in ssr when we switch the db to cloud.
+	// export let data: PageData;
+	let data: { conversationCorouselItems: ConversationCarouselItem[] } = {
+		conversationCorouselItems: []
+	};
+	onMount(async () => {
+		const result = await queryConversationsLocal();
+		data = {
+			conversationCorouselItems: result
+		};
+	});
 </script>
 
 <header
@@ -29,7 +42,7 @@
 </header>
 
 <div
-	class="xl:mt-[5vw] w-[42vh]  shadow-xl justify-center font-bold xl:text-[1.5vw] lg:text-[3.5vh] text-[2.2vh] z-1 lg:flex lg:mt-[15vh] mt-[8vh] lg:w-[32vw] backdrop-brightness-75 mx-auto backdrop-blur-xl rounded-full"
+	class="xl:mt-[5vw] w-[42vh] shadow-xl justify-center font-bold xl:text-[1.5vw] lg:text-[3.5vh] text-[2.2vh] z-1 lg:flex lg:mt-[15vh] mt-[8vh] lg:w-[32vw] backdrop-brightness-75 mx-auto backdrop-blur-xl rounded-full"
 >
 	<br />
 

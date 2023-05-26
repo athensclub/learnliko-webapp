@@ -14,11 +14,10 @@
 </script>
 
 {#each history as chat, index (index)}
-
 	<div class={`flex flex-col px-4 w-full ${chat.role === 'user' ? 'items-end' : 'items-start'}`}>
 		<div
-			class={`flex pt-6 flex-row items-center lg:w-[85%] w-[100%] ${
-				chat.role === 'user' ? 'justify-end' : 'justify-start'
+			class={`flex pt-6 flex-row items-center  w-full ${
+				chat.role === 'user' ? 'flex-row-reverse' : ''
 			}`}
 		>
 			{#if chat.role === 'assistant'}
@@ -27,16 +26,22 @@
 					style="background-image: url('{assistantProfileImage}');"
 				/>
 			{/if}
-		
+
 			{#if chat.role === 'user'}
 				<div
 					class={`w-[42px] h-[42px] bg-center bg-cover  rounded-full border border-white`}
 					style="background-image: url('{userProfileImage}');"
 				/>
 			{/if}
-		</div>
-		<div class="w-[-75%] pt-3 ">
-			<AudioPlayer src={chat.audioURL} />
+
+			<AudioPlayer
+				class={`mx-3 w-[70%] h-[44px] rounded-3xl ${
+					chat.role === 'user' ? 'bg-[#F0F0F0]' : 'bg-gradient-to-r from-[#FFBDBD] to-[#FFF1C1]'
+				}`}
+				defaultBlockColor={chat.role === 'user' ? 'white' : 'black'}
+				playedBlockColor={chat.role === 'user' ? 'black' : 'white'}
+				src={chat.audioURL}
+			/>
 		</div>
 		{#if chat.role === 'user' || (chat.role === 'assistant' && showAssistantTranscription)}
 			<div

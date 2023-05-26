@@ -11,6 +11,8 @@
 
 	export let defaultBlockColor = 'black';
 	export let playedBlockColor = 'white';
+	export let playColor = 'black';
+	export let pauseColor = 'black';
 
 	let clazz = '';
 	export { clazz as class };
@@ -99,7 +101,7 @@
 		{#if playing}
 			<svg
 				class="h-full"
-				fill="#000000"
+				fill={pauseColor}
 				viewBox="0 0 32 32"
 				version="1.1"
 				xmlns="http://www.w3.org/2000/svg"
@@ -112,7 +114,7 @@
 		{:else}
 			<svg
 				class="h-full"
-				fill="#000000"
+				fill={playColor}
 				viewBox="0 0 32 32"
 				version="1.1"
 				xmlns="http://www.w3.org/2000/svg"

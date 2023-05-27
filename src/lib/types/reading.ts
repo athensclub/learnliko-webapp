@@ -5,4 +5,10 @@ export interface ReadingItem {
     topic: string;
     image: string;
     dateTime: string;
+    quiz: MultipleChoicesQuestion[];
 };
+
+export interface MultipleChoicesQuestion {
+    question: string;
+    choices: string[];
+}

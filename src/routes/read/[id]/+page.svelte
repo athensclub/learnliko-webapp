@@ -19,7 +19,7 @@
 		<img class="mt-2 rounded-lg mb-2" src={item.image} alt="Blog" />
 	</div>
 
-	<div class="font-bold w-[28vw] mx-auto px-4 py-4 rounded-xl font-line-seed">
+	<div class="font-bold w-[32vw] mx-auto px-4 py-4 rounded-xl whitespace-pre-wrap font-line-seed">
 		{item.content}
 	</div>
 

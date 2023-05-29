@@ -144,7 +144,7 @@
 		{/each}
 	</div>
 
-	<audio controls bind:duration bind:currentTime bind:this={player}>
+	<audio bind:duration bind:currentTime bind:this={player}>
 		<source {src} {type} />
 		Your browser does not support the audio element.
 	</audio>

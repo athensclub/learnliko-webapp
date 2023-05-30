@@ -18,7 +18,7 @@ export default {
 				}
 			  },
 			  animation: {
-				wiggle: 'wiggle 1s ease-in-out infinite',
+				wiggle: 'wiggle 1s ease-in-out forwards',
 			  }
 		}
 	},

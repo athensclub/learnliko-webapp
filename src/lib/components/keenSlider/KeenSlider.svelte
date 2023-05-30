@@ -121,7 +121,7 @@
 				}}
 			>
 				<svg
-					class="keen-slider__prev-icon"
+					class="keen-slider__prev-icon bg-black p-2 rounded-md"
 					xmlns="http://www.w3.org/2000/svg"
 					viewBox="0 0 24 24"
 					aria-hidden="true"
@@ -137,7 +137,7 @@
 				}}
 			>
 				<svg
-					class="keen-slider__next-icon"
+					class="keen-slider__next-icon bg-black p-2 rounded-md"
 					xmlns="http://www.w3.org/2000/svg"
 					viewBox="0 0 24 24"
 					aria-hidden="true"

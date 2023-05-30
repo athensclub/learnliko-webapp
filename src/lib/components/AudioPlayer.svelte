@@ -2,7 +2,7 @@
 	export let src: string;
 	export let type = 'audio/mpeg';
 
-	export let blockWidth = 3;
+	export let blockWidth = 10;
 	export let blockSpacing = 2;
 
 	export let smallBlockHeightPercentage = 30;
@@ -11,8 +11,8 @@
 
 	export let defaultBlockColor = 'black';
 	export let playedBlockColor = 'white';
-	export let playColor = 'black';
-	export let pauseColor = 'black';
+	export let playColor = 'white';
+	export let pauseColor = 'white';
 
 	let clazz = '';
 	export { clazz as class };
@@ -131,17 +131,19 @@
 		bind:this={blocksParent}
 		on:click={onClicked}
 		bind:clientWidth={width}
-		class="flex flex-row items-center flex-1 h-[70%]"
-		style="gap: {blockSpacing}px;"
+		class="flex flex-row items-center flex-1 h-[80%]"
+		style="gap: 0px;"
 	>
 		{#each blocks as block, index}
 			<div
-				class="bg-white w-2 rounded-3xl"
-				style="width: {blockWidth}px; height: {block.heightPercentage}%; background-color: {block.played
+				class="bg-white w-2 "
+				style="width: {blockWidth}%; height: 5px; background-color: {block.played
 					? playedBlockColor
 					: defaultBlockColor};"
 			/>
 		{/each}
+
+		<!-- <h1> {currentTime}/{duration} </h1> -->
 	</div>
 
 	<audio bind:duration bind:currentTime bind:this={player}>

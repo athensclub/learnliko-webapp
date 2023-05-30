@@ -3,6 +3,7 @@
 	import chatBubbleImage from '$lib/images/chat_bubble_gradient.png';
 	import blueBookImage from '$lib/images/blue_book.png';
 	import profileImage from '$lib/images/sample_kid_image.png';
+	import Typewriter from 'svelte-typewriter';
 	import { queryLearningDiariesLocal } from '$lib/localdb/profileLocal';
 	import { onMount } from 'svelte';
 	import type { LearnedItem, LearningDiaryItem } from '$lib/types/learningDiary';

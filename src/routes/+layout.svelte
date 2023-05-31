@@ -23,8 +23,8 @@
 
 	{#if $showChatbox}
 		<div
-			class={`fixed right-0 bottom-0 ${
-				$isMobile ? 'w-[100vw] h-[70vh]' : 'w-[40vw] h-[calc(100vh-48px)]'
+			class={`fixed bottom-0 ${
+				$isMobile ? 'w-[100vw] h-[90vh]' : 'w-[40vw] h-[calc(100vh-48px)] left-[30%]'
 			} z-30`}
 		>
 			<Chatbox />

@@ -17,11 +17,11 @@
 	style="background-image: {conversation.background};"
 	class={`${
 		extraSmall
-			? 'lg:w-[12vw] lg:h-[16vw] w-[12vh] h-[34vh]'
+			? 'lg:w-[12vw] lg:h-[16vw] w-[12vh] h-[34vh] rounded-3xl'
 			: small
-			? 'lg:w-[18vw] lg:h-[22vw] w-[20vh] h-[40vh]'
-			: 'lg:w-[20vw] lg:h-[24vw] w-[35vh] h-[45vh]'
-	} w-full font-line-seed text-white lg:rounded-[3vw] rounded-[8vw]  shadow-lg transition-size bg-gradient-to-t from-[#D0B3FF] to-[#FF785B] flex flex-col items-center justify-around`}
+			? 'lg:w-[18vw] lg:h-[22vw] w-[20vh] h-[40vh] lg:rounded-[3vw] rounded-[8vw]'
+			: 'lg:w-[20vw] lg:h-[24vw] w-[35vh] h-[45vh] lg:rounded-[3vw] rounded-[8vw]'
+	} w-full font-line-seed text-white shadow-lg transition-size flex flex-col items-center justify-around `}
 >
 	<!-- <svg
 			class="w-[65%] mt-4 transition-size"

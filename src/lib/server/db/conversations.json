@@ -8,7 +8,7 @@
 			"details": {
 				"intro": "Welcome to the shop how can I help you?",
 				"learner": {
-					"goal": "1.Ask for product available in the shop &nbsp2.Making a purchase."
+					"goal": "1.Ask for product available in the shop\n2.Making a purchase."
 				},
 				"bot": {
 					"avatar": "https://media.discordapp.net/attachments/1087307553471463514/1103186216712671242/vi_A_girl_shopkeeper_profile_image_3d_stylelize_fortnite_48710422-4877-4262-95a2-66ddfd36ff9d.png?width=1357&height=1357",
@@ -27,7 +27,7 @@
 			"details": {
 				"intro": "Howdy! I'm Alan nice to meet you. What's your name?",
 				"learner": {
-					"goal": "Get to know with Alan about ages, hometown, hobbies, and favorite foods"
+					"goal": "1.Introduce yourself to Alan\n2.Get to know Alan's ages\n3.Get to know Alan's hobby\n4.Get to know Alan's hometown\n5.Get to know Alan's favorite food"
 				},
 				"bot": {
 					"avatar": "https://media.discordapp.net/attachments/1087307553471463514/1103186686311145473/vi_A_new_boy_class_mate_3d_stylize_profile_image_b5ef15a9-31e1-4eb8-b30b-403e7573c03c.png?width=862&height=862",

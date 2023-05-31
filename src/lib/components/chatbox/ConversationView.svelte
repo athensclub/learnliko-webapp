@@ -208,8 +208,8 @@
 
 {#if initializedConversation}
 	<div class="w-full h-[calc(100%-48px)] overflow-y-auto">
-		<h1 class=" sticky p-4 bg-white shadow-md  rounded-lg mt-3 text-gray-600 text-[1.3vw]">
-			<strong class=" text-[2vw]">🎯Coversation Goal</strong><br><Typewriter>{conversationDetails.learner.goal}</Typewriter>
+		<h1 class=" sticky p-4 bg-black/5 rounded-lg mt-3 text-gray-600 text-[1.3vw]">
+			<strong class=" text-[2vw]">🎯Coversation Goal</strong><br><Typewriter><pre>{conversationDetails.learner.goal}</pre></Typewriter>
 		</h1>
 		<VoiceChatHistory
 			{history}

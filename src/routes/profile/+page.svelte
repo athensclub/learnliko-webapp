@@ -35,11 +35,11 @@
 <div class="w-full h-full">
 	<Header />
 
-	<div class="flex flex-row w-fit mt-24 justify-between mx-auto gap-10 font-line-seed h-[75vh]">
+	<div class="flex flex-row w-fit mt-[8vw] justify-between mx-auto gap-10 font-line-seed h-[75vh]">
 		<div class="flex h-full flex-col items-center justify-between pt-4">
 			<div class="flex flex-col items-center">
 				<div
-					class="bg-center bg-cover w-[24vh] h-[24vh] rounded-[40px]"
+					class="bg-center bg-cover w-[24vh] h-[24vh] rounded-full"
 					style="background-image: url('{profileImage}');"
 				/>
 
@@ -47,8 +47,8 @@
 					class="flex flex-col w-full bg-[#F6F6F6] mt-8 px-3 py-4 rounded-2xl font-bold text-lg border border-black/[0.15]"
 				>
 					{name}
-					<div class="mt-4 text-base bg-[#9BA1FD] text-white w-fit px-3 py-1 rounded-3xl">
-						Level A1
+					<div class="mt-4 text-base bg-gradient-to-r from-[#9BA1FD] to-[#FFABAB] text-white w-fit px-3 py-1 rounded-lg text-[1vw]">
+						CEFR Level: A1
 					</div>
 				</div>
 			</div>
@@ -62,13 +62,14 @@
 
 		<div class="flex h-full flex-col items-center w-[35vw]">
 			<div class="flex flex-row w-full justify-between items-center">
-				<div class="font-bold text-lg">👾 Learning Dairy</div>
-				<div class="font-bold text-sm">📅 30 Days of Learning</div>
+				
+				<!-- <div class="font-bold text-sm">📅 30 Days of Learning</div> -->
 			</div>
 
 			<div
 				class="mt-3 w-full flex-1 flex flex-col overflow-y-auto bg-[#F6F6F6] rounded-3xl p-3 gap-4"
 			>
+			<div class="font-bold text-lg">📝 Learning Dairy</div>
 				{#if showingItem}
 					<div
 						class="w-full h-full overflow-y-auto bg-white flex flex-col rounded-2xl font-bold p-3"
@@ -167,16 +168,16 @@
 			</div>
 		</div>
 
-		<div class="flex flex-col h-full gap-[20px] pt-10">
+		<div class="flex flex-col h-full gap-[20px] pt-3">
 			<a
-				class="h-[calc(50%-10px)] aspect-square bg-[#F6F6F6] rounded-2xl border border-black/[0.15] font-bold flex flex-col items-center justify-center"
+				class="h-[calc(50%-10px)] aspect-square bg-[#F6F6F6] rounded-3xl border border-black/[0.15] font-bold flex flex-col items-center justify-center"
 			>
 				<img class="h-[70%]" src={chatBubbleImage} alt="Chat Bubble" />
 
 				Conversation History
 			</a>
 			<a
-				class="h-[calc(50%-10px)] aspect-square bg-[#F6F6F6] rounded-2xl border border-black/[0.15] font-bold flex flex-col items-center justify-center"
+				class="h-[calc(50%-10px)] aspect-square bg-[#F6F6F6] rounded-3xl border border-black/[0.15] font-bold flex flex-col items-center justify-center"
 			>
 				<img class="h-[70%]" src={blueBookImage} alt="Blue Book" />
 				Reading History

@@ -24,7 +24,7 @@
 	</div>
 
 	<div
-		class=" w-[28vw] h-[23vw] top-[24vh] bg-[#F6F6F6] fixed right-[3vw] rounded-xl font-line-seed text-lg font-bold p-3 flex flex-col"
+		class=" w-[28vw] h-[23vw] top-[24vh]  bg-[#6C80E8] fixed right-[3vw] rounded-3xl font-line-seed text-lg font-bold p-5 flex flex-col"
 	>
 		Quiz
 
@@ -34,7 +34,7 @@
 
 				<div class="flex flex-row flex-wrap gap-5 mt-3">
 					{#each problem.choices as choice, index (index)}
-						<button class="bg-[#D9D9D9] border border-black py-1 px-3 rounded-xl">
+						<button class="bg-[#FFF1C1]  py-1 px-4 rounded-full text-[1vw] text-[#fff]">
 							{String.fromCharCode(index + 'A'.charCodeAt(0))}. {choice}
 						</button>
 					{/each}

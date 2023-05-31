@@ -33,7 +33,7 @@
 
 		<button
 			on:click={hide}
-			class="rounded-lg mr-4 px-3 text-base text-center text-white h-[28px] bg-gradient-to-r from-[#9BA1FD] to-[#FFABAB]"
+			class="rounded-lg mr-4 px-3 text-base text-center text-white h-[28px] bg-[#6C80E8]"
 		>
 			Finish
 		</button>

@@ -31,7 +31,7 @@
 	/>
 	<span class=" flex mt-1"
 		>Learnliko
-		<h1 class=" ml-2 text-xs bg-black text-white rounded-md px-2 text-center mb-1 py-1">DEMO</h1>
+		<h1 class=" ml-2 text-xs bg-black text-white rounded-md px-2 text-center mb-1 py-1">School</h1>
 	</span>
 
 	<!-- <div class="w-full flex flex-row justify-start ml-6">

@@ -142,8 +142,7 @@
 					: defaultBlockColor};"
 			/>
 		{/each}
-
-		<!-- <h1> {currentTime}/{duration} </h1> -->
+			<div class=" bg-white rounded-full px-2 text-[0.8vw] ml-2"> 02.00 </div>
 	</div>
 
 	<audio bind:duration bind:currentTime bind:this={player}>

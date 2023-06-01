@@ -5,7 +5,7 @@
 </script>
 
 <header
-	class="z-20 flex top-0 items-center justify-left font-line-seed text-xl text-black font-bold w-full fixed bg-white py-[2vh] px-6 pt-[2vh] shadow-xl"
+	class="z-20 flex top-0 items-center justify-left font-line-seed text-xl text-black font-bold w-full fixed bg-white h-[12vh] px-6  shadow-xl"
 >
 	<nav class="flex items-center justify-between flex-wrap p-3 w-full">
 		<div class="flex items-center flex-shrink-0 text-black mr-6">
@@ -68,7 +68,7 @@
 			<div>
 				<a
 					href="/profile"
-					class={`inline-block text-sm px-4 py-2 leading-none rounded-full text-black border-black hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0 ${
+					class={`inline-block text-sm px-4 py-2 leading-none rounded-full text-black border-black hover:border-2  mt-4 lg:mt-0 ${
 						$page.url.pathname === '/profile' ? "border-2" : "border"
 					}`}
 				>

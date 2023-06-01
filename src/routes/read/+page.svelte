@@ -38,8 +38,8 @@
 			{#each data.topics as topic, index (topic)}
 				<button
 					on:click={() => (selectedTopic = index)}
-					class={`rounded-3xl shadow-lg py-1 px-5 font-bold ${
-						selectedTopic === index ? 'bg-black text-white' : 'bg-white text-black'
+					class={`rounded-3xl shadow-lg py-1 px-5 font-bold border ${
+						selectedTopic === index ? 'bg-black text-white border-none' : 'bg-white text-black'
 					}`}
 				>
 					{topic}

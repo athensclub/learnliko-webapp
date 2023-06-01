@@ -47,7 +47,7 @@
 	<br />
 
 	<h3
-		class=" md:portrait:invisible py-[0.5vw] animate-pulse xl:text-[1.5vw] mr-2 text-center text-[4.5vh] lg:text-[3.5vh]"
+		class=" md:portrait:invisible py-[0.8vw] animate-pulse xl:text-[1.5vw] mr-2 text-center text-[4.5vh] lg:text-[3.5vh]"
 	>
 		👋
 	</h3>

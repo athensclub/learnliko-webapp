@@ -74,7 +74,7 @@
 		}
 	};
 
-	const onClicked = (e: PointerEvent) => {
+	const onClicked = (e: MouseEvent & { currentTarget: EventTarget & HTMLDivElement }) => {
 		// console.log('x', e.clientX - blocksParent.getBoundingClientRect().left);
 		currentTime = ((e.clientX - blocksParent.getBoundingClientRect().left) / width) * duration;
 	};
@@ -94,6 +94,12 @@
 	$: if (!Number.isFinite(duration)) {
 		fixDuration();
 	}
+
+
+	// https://stackoverflow.com/a/1322771
+	$: timeText = Number.isFinite(duration - currentTime)
+		? new Date((duration - currentTime) * 1000).toISOString().slice(14, 19)
+		: '00:00';
 </script>
 
 <div class={`flex flex-row items-center px-5 py-1 gap-3 ${clazz}`}>
@@ -127,6 +133,7 @@
 		{/if}
 	</button>
 
+	<!-- svelte-ignore a11y-click-events-have-key-events -->
 	<div
 		bind:this={blocksParent}
 		on:click={onClicked}
@@ -136,13 +143,16 @@
 	>
 		{#each blocks as block, index}
 			<div
-				class="bg-white w-2 "
+				class="bg-white w-2"
 				style="width: {blockWidth}%; height: 5px; background-color: {block.played
 					? playedBlockColor
 					: defaultBlockColor};"
 			/>
 		{/each}
-			<div class=" bg-white rounded-full px-2 text-[0.8vw] ml-2"> 02.00 </div>
+
+		<div class=" bg-white rounded-full px-2 text-[0.8vw] ml-2">
+			{timeText}
+		</div>
 	</div>
 
 	<audio bind:duration bind:currentTime bind:this={player}>

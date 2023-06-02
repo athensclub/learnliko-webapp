@@ -41,6 +41,7 @@
 				defaultBlockColor={chat.role === 'user' ? 'white' : 'black'}
 				playedBlockColor={chat.role === 'user' ? 'black' : 'white'}
 				src={chat.audioURL}
+				type={chat.role === 'user' ? 'audio/ogg; codecs=opus' : 'audio/mpeg'}
 			/>
 		</div>
 		{#if chat.role === 'user' || (chat.role === 'assistant' && showAssistantTranscription)}

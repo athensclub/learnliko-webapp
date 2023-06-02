@@ -75,7 +75,6 @@
 	};
 
 	const onClicked = (e: MouseEvent & { currentTarget: EventTarget & HTMLDivElement }) => {
-		// console.log('x', e.clientX - blocksParent.getBoundingClientRect().left);
 		currentTime = ((e.clientX - blocksParent.getBoundingClientRect().left) / width) * duration;
 	};
 
@@ -83,18 +82,32 @@
 	// so the workaround is to play then quickly pause to get duration.
 	const fixDuration = async () => {
 		if (player) {
+			// https://stackoverflow.com/a/41245574
 			player.volume = 0;
-			// wait until finished start playing, otherwise exception will be thrown
-			await player.play();
-			player.pause();
-			player.volume = 1;
-			currentTime = 0.0;
+			currentTime = 24 * 60 * 60;
+
+			// reset current time AFTER the browser set the currentTime to duration (because duration changed from infinity).
+			const timeListener: EventListenerOrEventListenerObject = (e) => {
+				player!.removeEventListener('timeupdate', timeListener);
+				currentTime = 0;
+			};
+			player!.addEventListener('timeupdate', timeListener);
+			const durationListener: EventListenerOrEventListenerObject = async (e) => {
+				if (Number.isFinite(duration)) {
+					player!.removeEventListener('durationchange', durationListener);
+					player!.pause();
+					player!.volume = 1;
+					player!.remove;
+
+					currentTime = 0;
+				}
+			};
+			player.addEventListener('durationchange', durationListener);
 		}
 	};
 	$: if (!Number.isFinite(duration)) {
 		fixDuration();
 	}
-
 
 	// https://stackoverflow.com/a/1322771
 	$: timeText = Number.isFinite(duration - currentTime)

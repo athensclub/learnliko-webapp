@@ -8,8 +8,49 @@
 		"dateTime": "2023-05-20T09:30:00Z",
 		"quiz": [
 			{
-				"question": "What is the capital of Spain?",
-				"choices": ["Barcelona", "Madrid", "Sevilla", "Buenos Aires"]
+				"question": "What did Milo and Sammy find in the enchanted forest?",
+				"choices": [
+					"A hidden treasure chest",
+					"A magical cheese",
+					"A friendly squirrel",
+					"An ancient tree"
+				],
+				"answer": 1
+			},
+			{
+				"question": "What did Ophelia, the fearsome owl, do when Milo confronted her?",
+				"choices": [
+					"She attacked Milo and Sammy.",
+					"She flew away and left them alone.",
+					"She listened to Milo and softened her gaze.",
+					"She screeched loudly to scare them away."
+				],
+				"answer": 2
+			},
+			{
+				"question": "What is the meaning of the word \"labyrinth\" as used in the story?",
+				"choices": [
+					"A small, cozy hole",
+					"A vast, dense forest",
+					"A winding and complex maze",
+					"A brightly shining object"
+				],
+				"answer": 2
+			},
+			{
+				"question": "What is the meaning of the word \"traversed\" as used in the story?",
+				"choices": [
+					"To hide or conceal",
+					"To fly or soar",
+					"To move quickly and lightly",
+					"To travel across or through"
+				],
+				"answer": 3
+			},
+			{
+				"question": "What tone of voice is used to describe Milo's encounter with the fearsome owl, Ophelia?",
+				"choices": ["Joyful", "Terrified", "Serious", "Surprised"],
+				"answer": 3
 			}
 		]
 	},
@@ -22,8 +63,39 @@
 		"dateTime": "2023-05-18T14:15:00Z",
 		"quiz": [
 			{
-				"question": "What is the capital of Spain?",
-				"choices": ["Barcelona", "Madrid", "Sevilla", "Buenos Aires"]
+				"question": "Why did the little red hen refuse to share the bread with the lazy dog, sleepy cat, and greedy pig?",
+				"choices": [
+					"She didn't like them.",
+					"She wanted to eat all the bread herself.",
+					"They had refused to help her throughout the process.",
+					"She wanted to teach them a lesson."
+				],
+				"answer": 2
+			},
+			{
+				"question": "What was the response of the lazy dog when the little red hen asked for help in planting the grains of wheat?",
+				"choices": [
+					"\"I prefer to lie in the sun and do nothing.\"",
+					"\"I am too busy eating.\"",
+					"\"I'd rather take a nap under the tree.\"",
+					"\"I will help you.\""
+				],
+				"answer": 0
+			},
+			{
+				"question": "What does the word \"diligent\" mean in the story?",
+				"choices": ["Lazy", "Hardworking", "Greedy", "Sleepy"],
+				"answer": 1
+			},
+			{
+				"question": "What does the word \"threshed\" mean in the story?",
+				"choices": ["Harvested", "Watered", "Ground", "Gathered"],
+				"answer": 2
+			},
+			{
+				"question": "What is the tone of the little red hen's response when the other animals finally offer to help her eat the bread?",
+				"choices": ["Excitement", "Gratitude", "Disappointment", "Indifference"],
+				"answer": 2
 			}
 		]
 	},
@@ -36,8 +108,54 @@
 		"dateTime": "2023-05-15T11:45:00Z",
 		"quiz": [
 			{
-				"question": "What is the capital of Spain?",
-				"choices": ["Barcelona", "Madrid", "Sevilla", "Buenos Aires"]
+				"question": "What is the moral of the story of the tortoise and the hare?",
+				"choices": [
+					"Speed is the most important factor in winning a race.",
+					"Boasting about one's abilities can lead to failure.",
+					"Consistency and determination are key to success.",
+					"Slow and steady progress is not worth celebrating."
+				],
+				"answer": 2
+			},
+			{
+				"question": "What caused the hare to lose the race against the tortoise in the story?",
+				"choices": [
+					"The tortoise took a shortcut.",
+					"The hare fell asleep during the race.",
+					"The hare got distracted by the cheering animals.",
+					"The tortoise was faster than the hare."
+				],
+				"answer": 1
+			},
+			{
+				"question": "What does the word \"perseverance\" mean in the story?",
+				"choices": [
+					"Being boastful and proud",
+					"Moving forward slowly and steadily",
+					"Consistency, patience, and never giving up",
+					"Being fast and talented"
+				],
+				"answer": 2
+			},
+			{
+				"question": "What does the word \"plod\" mean in the story?",
+				"choices": [
+					"To move quickly and swiftly",
+					"To take a nap under a shady tree",
+					"To boast and show off",
+					"To move forward slowly and heavily"
+				],
+				"answer": 3
+			},
+			{
+				"question": "How would you describe the tone of the story?",
+				"choices": [
+					"Joyful and playful",
+					"Serious and cautionary",
+					"Sad and tragic",
+					"Exciting and suspenseful"
+				],
+				"answer": 1
 			}
 		]
 	},
@@ -50,8 +168,49 @@
 		"dateTime": "2023-05-12T16:20:00Z",
 		"quiz": [
 			{
-				"question": "What is the capital of Spain?",
-				"choices": ["Barcelona", "Madrid", "Sevilla", "Buenos Aires"]
+				"question": "What is the moral of the story \"The Lion and the Mouse\"?",
+				"choices": [
+					"Small acts of kindness can have a big impact.",
+					" Bravery is the key to success.",
+					"The lion is the king of the jungle.",
+					"Size and strength determine one's worth."
+				],
+				"answer": 0
+			},
+			{
+				"question": "What did the lion do when he first caught the mouse?",
+				"choices": [
+					"He crushed the mouse with his paw.",
+					"He ignored the mouse and went back to sleep.",
+					"He decided to keep the mouse as his pet.",
+					"He granted mercy and let the mouse go."
+				],
+				"answer": 3
+			},
+			{
+				"question": "In the story, the lion was awakened by the tiny footsteps of a little mouse running across his body. What does \"gnawing\" mean when the mouse began gnawing at the ropes of the net?",
+				"choices": [
+					"Running quickly",
+					"Biting or chewing persistently",
+					"Climbing up and down",
+					"Squeaking loudly"
+				],
+				"answer": 1
+			},
+			{
+				"question": "In the story, the lion expressed his gratitude towards the little mouse. What does \"gratitude\" mean?",
+				"choices": ["Extreme fear", "Deep sadness", "Strong anger", "Thankfulness or appreciation"],
+				"answer": 3
+			},
+			{
+				"question": "Which tone of voice did the lion use when speaking to the mouse initially?",
+				"choices": [
+					"Angry and threatening",
+					"Amused and entertained",
+					"Sympathetic and understanding",
+					"Grateful and appreciative"
+				],
+				"answer": 0
 			}
 		]
 	},
@@ -64,8 +223,39 @@
 		"dateTime": "2023-05-09T13:10:00Z",
 		"quiz": [
 			{
-				"question": "What is the capital of Spain?",
-				"choices": ["Barcelona", "Madrid", "Sevilla", "Buenos Aires"]
+				"question": "What did Lily name the little kitten she found?",
+				"choices": ["Fluffy", "Snowball", "Whiskers", "Mittens"],
+				"answer": 1
+			},
+			{
+				"question": "What did Lily do when she found the lost kitten in the park?",
+				"choices": [
+					"She left it alone and continued walking.",
+					"She called animal control to pick it up.",
+					"She picked it up and cradled it in her arms.",
+					"She asked other people to take care of it."
+				],
+				"answer": 2
+			},
+			{
+				"question": "What does the word \"compassion\" mean in the story?",
+				"choices": ["Fear", "Joy", "Love", "Sympathy"],
+				"answer": 3
+			},
+			{
+				"question": "What does the word \"embrace\" mean in the story?",
+				"choices": [
+					"A type of dance",
+					"A warm hug",
+					"A way to catch something",
+					"A kind of animal"
+				],
+				"answer": 0
+			},
+			{
+				"question": "How would you describe the tone of the story?",
+				"choices": ["Suspenseful", "Heartwarming", "Mysterious", "Hilarious"],
+				"answer": 1
 			}
 		]
 	},
@@ -78,8 +268,44 @@
 		"dateTime": "2023-05-06T09:45:00Z",
 		"quiz": [
 			{
-				"question": "What is the capital of Spain?",
-				"choices": ["Barcelona", "Madrid", "Sevilla", "Buenos Aires"]
+				"question": "What did Emma and Tom do when they noticed the mischievous squirrel eyeing their food?",
+				"choices": [
+					"They ignored the squirrel and continued eating.",
+					"They shooed the squirrel away and protected their food.",
+					"They threw a small piece of bread to the squirrel.",
+					"They called for help to scare the squirrel away."
+				],
+				"answer": 2
+			},
+			{
+				"question": "What did Emma and Tom do when they reached the sparkling lake?",
+				"choices": [
+					"They jumped into the lake for a refreshing swim.",
+					"They sat by the lake and enjoyed the view.",
+					"They skipped rocks on the water and competed with each other.",
+					"They decided to have a picnic near the lake."
+				],
+				"answer": 2
+			},
+			{
+				"question": "What does the word \"mischievous\" mean in the story?",
+				"choices": ["Friendly", "Curious", "Naughty", "Playful"],
+				"answer": 2
+			},
+			{
+				"question": "What does the word \"vibrant\" mean in the story?",
+				"choices": ["Dull", "Colorful", "Quiet", "Mysterious"],
+				"answer": 1
+			},
+			{
+				"question": "What is the tone of voice used in the story?",
+				"choices": [
+					"Serious and somber",
+					"Playful and lighthearted",
+					"Mysterious and suspenseful",
+					"Sad and melancholic"
+				],
+				"answer": 1
 			}
 		]
 	},
@@ -92,8 +318,44 @@
 		"dateTime": "2023-05-03T14:30:00Z",
 		"quiz": [
 			{
-				"question": "What is the capital of Spain?",
-				"choices": ["Barcelona", "Madrid", "Sevilla", "Buenos Aires"]
+				"question": "What did Max find behind the ancient door in the enchanted forest?",
+				"choices": [
+					"A hidden garden filled with vibrant flowers and sparkling waterfalls.",
+					"A treasure chest filled with gold and jewels.",
+					"A mystical portal to another world.",
+					"A secret map leading to hidden pirate treasure."
+				],
+				"answer": 0
+			},
+			{
+				"question": "What did Max find inside his grandmother's attic?",
+				"choices": [
+					"An old, rusty key.",
+					"A dusty, forgotten book.",
+					"A magical wand.",
+					"A hidden treasure map."
+				],
+				"answer": 0
+			},
+			{
+				"question": "What does the word \"cherished\" mean in the context of the story?",
+				"choices": ["Explored", "Appreciated", "Hidden", "Discovered"],
+				"answer": 1
+			},
+			{
+				"question": "What does the word \"embark\" mean in the context of the story?",
+				"choices": ["Continue", "Finish", "Begin", "Stop"],
+				"answer": 2
+			},
+			{
+				"question": "How would you describe the tone of the story?",
+				"choices": [
+					"Fearful and suspenseful",
+					"Joyful and adventurous",
+					"Melancholic and nostalgic",
+					"Serious and thought-provoking"
+				],
+				"answer": 1
 			}
 		]
 	},
@@ -106,8 +368,44 @@
 		"dateTime": "2023-04-30T11:20:00Z",
 		"quiz": [
 			{
-				"question": "What is the capital of Spain?",
-				"choices": ["Barcelona", "Madrid", "Sevilla", "Buenos Aires"]
+				"question": "What was the purpose of the pyramids in ancient Egypt?",
+				"choices": [
+					"They were used as forts for defense against invaders.",
+					"They served as places of worship for ancient Egyptian gods.",
+					"They were built as tombs for the pharaohs.",
+					"They were used as astronomical observatories."
+				],
+				"answer": 2
+			},
+			{
+				"question": "Which pharaoh was the Great Pyramid of Giza built for?",
+				"choices": ["Tutankhamun", "Ramses II", "Akhenaten", "Khufu"],
+				"answer": 3
+			},
+			{
+				"question": "What does the word \"ingenuity\" mean in the context of the story?",
+				"choices": [
+					"The process of constructing pyramids",
+					"The belief in the afterlife",
+					"The ability to transport heavy stone blocks",
+					"Cleverness and creativity in solving problems"
+				],
+				"answer": 3
+			},
+			{
+				"question": "What is the meaning of the word \"pharaoh\" as used in the story?",
+				"choices": [
+					"Ancient Egyptian structures",
+					"Rulers of ancient Egypt",
+					"Burial chambers within the pyramids",
+					"Techniques used for pyramid construction"
+				],
+				"answer": 1
+			},
+			{
+				"question": "What is the tone of voice used in the passage about the pyramids?",
+				"choices": ["Exuberant", "Nostalgic", "Informative", "Mournful"],
+				"answer": 2
 			}
 		]
 	},
@@ -120,8 +418,44 @@
 		"dateTime": "2023-04-27T15:50:00Z",
 		"quiz": [
 			{
-				"question": "What is the capital of Spain?",
-				"choices": ["Barcelona", "Madrid", "Sevilla", "Buenos Aires"]
+				"question": "Who designed the Statue of Liberty?",
+				"choices": [
+					"Gustave Eiffel",
+					"Frédéric Auguste Bartholdi",
+					"Thomas Jefferson",
+					"Leonardo da Vinci"
+				],
+				"answer": 1
+			},
+			{
+				"question": "Which date is inscribed on the tablet held by the Statue of Liberty?",
+				"choices": ["July 4, 1776", "June 30, 1900", "October 28, 1886", "September 3, 1783"],
+				"answer": 0
+			},
+			{
+				"question": "What does the word \"colossal\" mean in the context of the story?",
+				"choices": ["Beautiful", "Small", "Enormous", "Old"],
+				"answer": 2
+			},
+			{
+				"question": "What is the meaning of the word \"pedestal\" as used in the story?",
+				"choices": [
+					"A type of building",
+					"A type of statue",
+					"A platform or base",
+					"A religious symbol"
+				],
+				"answer": 2
+			},
+			{
+				"question": "Based on the tone of the story, how would you describe the portrayal of the Statue of Liberty?",
+				"choices": [
+					"Somber and mournful",
+					"Proud and celebratory",
+					"Indifferent and apathetic",
+					"Critical and skeptical"
+				],
+				"answer": 1
 			}
 		]
 	},
@@ -134,8 +468,39 @@
 		"dateTime": "2023-04-24T10:40:00Z",
 		"quiz": [
 			{
-				"question": "What is the capital of Spain?",
-				"choices": ["Barcelona", "Madrid", "Sevilla", "Buenos Aires"]
+				"question": "When was the construction of the Colosseum completed?",
+				"choices": ["72 AD", "80 AD", "50,000 to 80,000 spectators", "1,788 feet"],
+				"answer": 1
+			},
+			{
+				"question": "Who commissioned the construction of the Colosseum?",
+				"choices": ["Emperor Titus", "Roman Emperor Vespasian", "Gladiators", "Ancient Romans"],
+				"answer": 1
+			},
+			{
+				"question": "What does the word \"amphitheater\" mean in the context of the story?",
+				"choices": [
+					"A large open-air venue for hosting events and spectacles.",
+					"An ancient Roman emperor.",
+					"A type of Roman architectural technique.",
+					"A historical symbol of Roman history and architecture."
+				],
+				"answer": 0
+			},
+			{
+				"question": "What is the meaning of the word \"grandeur\" as used in the story?",
+				"choices": [
+					"Magnificence or impressiveness, especially in scale or appearance.",
+					"A type of Roman Emperor.",
+					"The act of entertaining or providing amusement.",
+					"The process of constructing a large monument."
+				],
+				"answer": 0
+			},
+			{
+				"question": "What tone of voice does the passage about the Colosseum convey?",
+				"choices": ["Informative", "Melancholic", "Humorous", "Indifferent"],
+				"answer": 0
 			}
 		]
 	}

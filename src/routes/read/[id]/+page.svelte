@@ -24,7 +24,7 @@
 	</div>
 
 	<div
-		class=" w-[28vw] h-[23vw] top-[24vh]  bg-[#6C80E8] fixed right-[3vw] rounded-3xl font-line-seed text-lg font-bold p-5 flex flex-col"
+		class=" w-[28vw] h-[60vh] top-[24vh]  bg-[#6C80E8] fixed right-[3vw] rounded-3xl font-line-seed text-lg font-bold p-5 flex flex-col overflow-y-auto"
 	>
 		Quiz
 

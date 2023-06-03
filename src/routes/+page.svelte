@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { browser } from '$app/environment';
-	import { goto } from '$app/navigation';
 	import bgvd from '$lib/images/bgvd.mp4';
 	import welcomeImg from '$lib/images/welcomavatar.png';
 	import talk from '$lib/images/talk.png';
@@ -8,9 +6,15 @@
 	import friend from '$lib/images/friend.png';
 	import assistant from '$lib/images/assistant.png';
 	import Header from '$lib/components/Header.svelte';
+	import { currentChatboxView, showChatbox } from '$lib/global/chatbox';
 	// if (browser) {
 	// 	goto('/play');
 	// }
+
+	const openAssistantChat = () => {
+		$currentChatboxView = 'ASSISTANT';
+		$showChatbox = true;
+	};
 </script>
 
 <div class="text-white flex items-center justify-center">
@@ -130,10 +134,10 @@
 </div>
 
 <button
+	on:click={openAssistantChat}
 	class="p-1 w-16 fixed h-16 bg-white rounded-full bottom-14 right-14 hover:bg-black active:shadow-xl mouse shadow transition ease-in duration-200 focus:outline-none"
 >
-	<img src={assistant} >
-
+	<img src={assistant} alt="assistant" />
 </button>
 
 <style>

@@ -1,10 +1,31 @@
 <script lang="ts">
 	import Header from '$lib/components/Header.svelte';
 	import ReadMore from '$lib/components/ReadMore.svelte';
+	import ConfirmModal from '$lib/components/modals/ConfirmModal.svelte';
+	import { showModal } from '$lib/global/modal';
+	import { completeReading, queryAnswers } from '$lib/localdb/readingLocal';
 	import type { ReadingItem } from '$lib/types/reading';
 
 	export let data: PageData;
 	let item: ReadingItem = data.item;
+	let selected: (null | number)[] = Array(item.quiz.length).fill(null);
+
+	// if not null -> user submitted
+	let answers: null | number[] = null;
+
+	const submit = () => {
+		showModal(ConfirmModal, {
+			title: 'Confirm',
+			description: 'Are you sure you want to submit your answer?',
+			onConfirm: async () => {
+				// TODO: use data from cloud db when ready.
+				answers = (await queryAnswers(item.id)) ?? null;
+
+				// to submit all user answers must not be null already, safely cast.
+				// completeReading({ readingID: item.id, userAnswers: selected as number[] });
+			}
+		});
+	};
 </script>
 
 <div class="w-full h-full min-h-[100vh] bg-white">
@@ -24,7 +45,7 @@
 	</div>
 
 	<div
-		class=" w-[28vw] h-[60vh] top-[24vh]  bg-[#6C80E8] fixed right-[3vw] rounded-3xl font-line-seed text-lg font-bold p-5 flex flex-col overflow-y-auto"
+		class="w-[28vw] h-[60vh] top-[24vh] bg-[#6C80E8] fixed right-[3vw] rounded-3xl font-line-seed text-lg font-bold p-5 flex flex-col overflow-y-auto"
 	>
 		Quiz
 
@@ -33,13 +54,37 @@
 				{index + 1}. {problem.question}
 
 				<div class="flex flex-row flex-wrap gap-5 mt-3">
-					{#each problem.choices as choice, index (index)}
-						<button class="bg-[#FFF1C1]  py-1 px-4 rounded-full text-[1vw] text-[#fff]">
-							{String.fromCharCode(index + 'A'.charCodeAt(0))}. {choice}
+					{#each problem.choices as choice, choiceIndex (choiceIndex)}
+						<button
+							disabled={!!answers}
+							on:click={() => (selected = selected.map((v, i) => (i === index ? choiceIndex : v)))}
+							class={`${
+								answers
+									? choiceIndex === answers[index]
+										? 'bg-green-400'
+										: choiceIndex === selected[index]
+										? 'bg-red-400'
+										: 'bg-[#FFF1C1]'
+									: 'bg-[#FFF1C1]'
+							}  text-start py-1 px-4 rounded-full text-[1vw] text-[#fff] outline-black outline ${
+								selected[index] === choiceIndex ? 'outline-2' : 'outline-0'
+							}`}
+						>
+							{String.fromCharCode(choiceIndex + 'A'.charCodeAt(0))}. {choice}
 						</button>
 					{/each}
 				</div>
 			</div>
 		{/each}
+
+		{#if !answers}
+			<button
+				on:click={submit}
+				disabled={selected.some((s) => s === null)}
+				class="mt-7 bg-[#D9D9D9] border border-black w-fit mx-auto px-5 py-1 rounded-xl"
+			>
+				Submit
+			</button>
+		{/if}
 	</div>
 </div>

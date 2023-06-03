@@ -3,8 +3,13 @@
 	import ReadMore from '$lib/components/ReadMore.svelte';
 	import ConfirmModal from '$lib/components/modals/ConfirmModal.svelte';
 	import { showModal } from '$lib/global/modal';
-	import { completeReadingLocal, queryAnswersLocal } from '$lib/localdb/readingLocal';
+	import {
+		completeReadingLocal,
+		getUserSubmissionLocal,
+		queryAnswersLocal
+	} from '$lib/localdb/readingLocal';
 	import type { ReadingItem } from '$lib/types/reading';
+	import { onMount } from 'svelte';
 
 	export let data: PageData;
 	let item: ReadingItem = data.item;
@@ -12,6 +17,16 @@
 
 	// if not null -> user submitted
 	let answers: null | number[] = null;
+
+	// TODO: use cloud db when ready. also should move to ssr.
+	onMount(async () => {
+		let userSubmission = await getUserSubmissionLocal(item.id);
+
+		if (userSubmission) {
+			selected = userSubmission;
+			answers = await queryAnswersLocal(item.id);
+		}
+	});
 
 	const submit = () => {
 		showModal(ConfirmModal, {

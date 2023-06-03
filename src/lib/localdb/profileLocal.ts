@@ -16,7 +16,10 @@ interface UserFinishedConversationItem {
 export const completedConversations = browser ? persist(writable<UserFinishedConversationItem[]>([]), createIndexedDBStorage(), "completedConversations") : null;
 
 export const completeConversationLocal = async (conversation: FinishedConversation) => {
-    completedConversations?.set([...get(completedConversations),
+    if (!completedConversations)
+        throw new Error("do not query local data from ssr");
+        
+    completedConversations.set([...get(completedConversations),
     { conversation, vocabs: await getVocabsFromConversation(conversation.recap) }]);
 }
 

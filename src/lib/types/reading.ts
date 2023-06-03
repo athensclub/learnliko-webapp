@@ -10,6 +10,7 @@ export interface ReadingItem {
 
 export interface FinishedReading {
     readingID: string;
+    finishedTime: Date;
     userAnswers: number[];
 }
 

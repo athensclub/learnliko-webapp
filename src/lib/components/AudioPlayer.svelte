@@ -79,10 +79,9 @@
 	};
 
 	// somehow duration is infinity for ogg format and is set when audio is played.
-	// so the workaround is to play then quickly pause to get duration.
+	// https://stackoverflow.com/a/41245574
 	const fixDuration = async () => {
 		if (player) {
-			// https://stackoverflow.com/a/41245574
 			player.volume = 0;
 			currentTime = 24 * 60 * 60;
 
@@ -98,8 +97,6 @@
 					player!.pause();
 					player!.volume = 1;
 					player!.remove;
-
-					currentTime = 0;
 				}
 			};
 			player.addEventListener('durationchange', durationListener);

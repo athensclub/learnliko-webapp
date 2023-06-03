@@ -1,60 +1,76 @@
 /**
  * Profile APIs implemented using IndexDB (For demo/testing only).
  */
-import { getConversations, getVocabsFromConversation } from "$api/conversation";
-import { browser } from "$app/environment";
-import type { ConversationCarouselItem, FinishedConversation } from "$lib/types/conversationData";
-import type { LearnedItem, LearningDiaryItem } from "$lib/types/learningDiary";
-import { persist, createIndexedDBStorage } from "@macfja/svelte-persistent-store"
-import { writable, get } from "svelte/store"
-
-interface UserFinishedConversationItem {
-    conversation: FinishedConversation;
-    vocabs: string[];
-}
-
-export const completedConversations = browser ? persist(writable<UserFinishedConversationItem[]>([]), createIndexedDBStorage(), "completedConversations") : null;
-
-export const completeConversationLocal = async (conversation: FinishedConversation) => {
-    if (!completedConversations)
-        throw new Error("do not query local data from ssr");
-        
-    completedConversations.set([...get(completedConversations),
-    { conversation, vocabs: await getVocabsFromConversation(conversation.recap) }]);
-}
+import { getConversations } from "$api/conversation";
+import type { LearnedConversationItem, LearnedReadingItem, LearningDiaryItem } from "$lib/types/learningDiary";
+import { get } from "svelte/store"
+import { completedConversations, type UserFinishedConversationItem } from "./conversationLocal";
+import type { FinishedReading } from "$lib/types/reading";
+import { completedReadings } from "./readingLocal";
+import { getReadingItems } from "$api/reading";
 
 export const queryLearningDiariesLocal = async (): Promise<LearningDiaryItem[]> => {
-    if (!completedConversations)
+    if (!completedConversations || !completedReadings)
         throw new Error("do not query local data from ssr");
 
     const conversations = await getConversations();
-    const completed = get(completedConversations);
+    const readings = await getReadingItems("All");
+
+    const completedConv = get(completedConversations);
     const dateToConversations = new Map<string, UserFinishedConversationItem[]>;
-    for (const item of completed) {
+    for (const item of completedConv) {
         const date = `${item.conversation.finishedTime.getDate()}.${item.conversation.finishedTime.getMonth() + 1}.${item.conversation.finishedTime.getFullYear()}`;
         if (!dateToConversations.has(date))
             dateToConversations.set(date, []);
         dateToConversations.get(date)?.push(item);
     }
 
+    const completedRs = get(completedReadings);
+    const dateToReadingItems = new Map<string, FinishedReading[]>
+    for (const item of completedRs) {
+        const date = `${item.finishedTime.getDate()}.${item.finishedTime.getMonth() + 1}.${item.finishedTime.getFullYear()}`;
+        if (!dateToReadingItems.has(date))
+            dateToReadingItems.set(date, []);
+        dateToReadingItems.get(date)?.push(item);
+    }
+
+    const dates = new Set(dateToConversations.keys());
+    for (const key of dateToReadingItems.keys())
+        dates.add(key);
+
     const result: LearningDiaryItem[] = [];
-    for (const key of dateToConversations.keys()) {
-        const convs = dateToConversations.get(key);
-        // use if check to make linter happy :(
+    for (const date of dates) {
+        const convs = dateToConversations.get(date);
+        let convItems: LearnedConversationItem[] = [];
         if (convs) {
-            const items: LearnedItem[] = convs.map(conv =>
+            convItems = convs.map(conv =>
             ({
                 recap: conv.conversation.recap,
                 conversation: conversations.find(c => c.id === conv.conversation.conversationID)!,
                 vocabs: conv.vocabs,
                 finishedTime: conv.conversation.finishedTime
             }));
-            result.push({
-                date: key,
-                title: `You achieved following goal(s): ${items.map(item => item.conversation.details.learner.goal).join(", ")}`,
-                learnedItems: items
-            });
         }
+
+        const reads = dateToReadingItems.get(date);
+        let readItems: LearnedReadingItem[] = [];
+        if (reads) {
+            readItems = reads.map(read => ({
+                item: readings.find(r => r.id === read.readingID)!,
+                vocabs: [],
+                finishedTime: read.finishedTime
+            }))
+        }
+
+        let title = "You achieved following goal(s): ";
+        title += [...convItems.map(item => item.conversation.details.learner.goal), ...readItems.map(item => `Learn and understand about "${item.item.blogName}"`)].join(", ");
+
+        result.push({
+            date,
+            title,
+            learnedConversations: convItems,
+            learnedReadings: readItems
+        });
     }
     return result;
 };

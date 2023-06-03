@@ -3,7 +3,7 @@
 	import ReadMore from '$lib/components/ReadMore.svelte';
 	import ConfirmModal from '$lib/components/modals/ConfirmModal.svelte';
 	import { showModal } from '$lib/global/modal';
-	import { completeReading, queryAnswers } from '$lib/localdb/readingLocal';
+	import { completeReadingLocal, queryAnswersLocal } from '$lib/localdb/readingLocal';
 	import type { ReadingItem } from '$lib/types/reading';
 
 	export let data: PageData;
@@ -19,10 +19,15 @@
 			description: 'Are you sure you want to submit your answer?',
 			onConfirm: async () => {
 				// TODO: use data from cloud db when ready.
-				answers = (await queryAnswers(item.id)) ?? null;
+				answers = (await queryAnswersLocal(item.id)) ?? null;
 
-				// to submit all user answers must not be null already, safely cast.
-				// completeReading({ readingID: item.id, userAnswers: selected as number[] });
+				// TODO: also use cloud db here
+				// to submit all user answers must not be null already, safely cast selected.
+				await completeReadingLocal({
+					readingID: item.id,
+					userAnswers: selected as number[],
+					finishedTime: new Date()
+				});
 			}
 		});
 	};

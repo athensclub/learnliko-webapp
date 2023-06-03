@@ -6,14 +6,14 @@ import { writable, get } from "svelte/store";
 
 export const completedReadings = browser ? persist(writable<FinishedReading[]>([]), createIndexedDBStorage(), "completedReadings") : null;
 
-export const completeReading = async (item: FinishedReading) => {
+export const completeReadingLocal = async (item: FinishedReading) => {
     if (!completedReadings)
         throw new Error("do not query local data from ssr");
 
     completedReadings.set([...get(completedReadings), item]);
 };
 
-export const queryAnswers = async (readingID: string) => {
+export const queryAnswersLocal = async (readingID: string) => {
     const all = await getReadingItems('All');
     return all.find(v => v.id === readingID)?.quiz.map(q => q.answer);
 }

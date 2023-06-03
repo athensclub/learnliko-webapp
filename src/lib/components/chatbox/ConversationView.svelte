@@ -17,8 +17,8 @@
 	import type { ChatMessage } from '$lib/types/requests/chatCompletion';
 	import type { ChatBotMessage } from '$lib/types/conversationData';
 	import VoiceChatHistory from './VoiceChatHistory.svelte';
-	import { completeConversationLocal } from '$lib/localdb/profileLocal';
 	import { blobToBase64 } from '$lib/utils/io';
+	import { completeConversationLocal } from '$lib/localdb/conversationLocal';
 
 	// chat's history, used for display only
 	let history: {

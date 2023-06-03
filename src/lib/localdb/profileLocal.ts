@@ -57,7 +57,7 @@ export const queryLearningDiariesLocal = async (): Promise<LearningDiaryItem[]> 
         if (reads) {
             readItems = reads.map(read => ({
                 item: readings.find(r => r.id === read.readingID)!,
-                vocabs: [],
+                vocabs: readings.find(r => r.id === read.readingID)!.vocabs,
                 finishedTime: read.finishedTime
             }))
         }

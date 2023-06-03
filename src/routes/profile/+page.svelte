@@ -3,10 +3,9 @@
 	import chatBubbleImage from '$lib/images/chat_bubble_gradient.png';
 	import blueBookImage from '$lib/images/blue_book.png';
 	import profileImage from '$lib/images/sample_kid_image.png';
-	import Typewriter from 'svelte-typewriter';
 	import { queryLearningDiariesLocal } from '$lib/localdb/profileLocal';
 	import { onMount } from 'svelte';
-	import type { LearnedItem, LearningDiaryItem } from '$lib/types/learningDiary';
+	import type { LearnedConversationItem, LearningDiaryItem } from '$lib/types/learningDiary';
 	import ConversationCard from '$lib/components/ConversationCard.svelte';
 	import { formatAMPM } from '$lib/utils/time';
 	import { currentChatboxView, recapHistory, showChatbox } from '$lib/global/chatbox';
@@ -16,7 +15,7 @@
 
 	let showingItem: LearningDiaryItem | null = null;
 
-	const showItemRecap = (item: LearnedItem) => {
+	const showItemRecap = (item: LearnedConversationItem) => {
 		$recapHistory = item.recap;
 		$currentChatboxView = 'RECAP';
 		$showChatbox = true;
@@ -29,7 +28,10 @@
 	});
 
 	// combined vocabs from the selected diary item.
-	$: vocabs = showingItem?.learnedItems.flatMap((item) => item.vocabs);
+	$: vocabs = [
+		...(showingItem?.learnedConversations.flatMap((item) => item.vocabs) ?? []),
+		...(showingItem?.learnedReadings.flatMap((item) => item.vocabs) ?? [])
+	];
 </script>
 
 <div class="w-full h-full">
@@ -47,7 +49,9 @@
 					class="flex flex-col w-full bg-[#F6F6F6] mt-8 px-3 py-4 rounded-2xl font-bold text-lg border border-black/[0.15]"
 				>
 					{name}
-					<div class="mt-4 text-base bg-gradient-to-r from-[#9BA1FD] to-[#FFABAB] text-white w-fit px-3 py-1 rounded-lg text-[1vw]">
+					<div
+						class="mt-4 text-base bg-gradient-to-r from-[#9BA1FD] to-[#FFABAB] text-white w-fit px-3 py-1 rounded-lg text-[1vw]"
+					>
 						CEFR Level: A1
 					</div>
 				</div>
@@ -62,14 +66,13 @@
 
 		<div class="flex h-full flex-col items-center w-[35vw]">
 			<div class="flex flex-row w-full justify-between items-center">
-				
 				<!-- <div class="font-bold text-sm">📅 30 Days of Learning</div> -->
 			</div>
 
 			<div
 				class="mt-3 w-full flex-1 flex flex-col overflow-y-auto bg-[#F6F6F6] rounded-3xl p-3 gap-4"
 			>
-			<div class="font-bold text-lg">📝 Learning Dairy</div>
+				<div class="font-bold text-lg">📝 Learning Dairy</div>
 				{#if showingItem}
 					<div
 						class="w-full h-full overflow-y-auto bg-white flex flex-col rounded-2xl font-bold p-3"
@@ -112,26 +115,52 @@
 							</ul>
 						{/if}
 
-						<div class="mt-5">Conversations:</div>
+						{#if showingItem.learnedConversations.length > 0}
+							<div class="mt-5">Conversations:</div>
 
-						{#each showingItem.learnedItems as item (item.conversation.id)}
-							<div class="flex flex-row mt-3">
-								<ConversationCard extraSmall disabled conversation={item.conversation} />
+							{#each showingItem.learnedConversations as item (item.conversation.id)}
+								<div class="flex flex-row mt-3">
+									<ConversationCard extraSmall disabled conversation={item.conversation} />
 
-								<div class="flex flex-col text-sm ml-5">
-									<div>Played on {formatAMPM(item.finishedTime)}</div>
+									<div class="flex flex-col text-sm ml-5">
+										<div>Played on {formatAMPM(item.finishedTime)}</div>
 
-									<div class="mt-3">Goal: {item.conversation.details.learner.goal}</div>
+										<div class="mt-3">Goal: {item.conversation.details.learner.goal}</div>
 
-									<div class="mt-3">Vocabularies: {item.vocabs.join(', ')}</div>
+										<div class="mt-3">Vocabularies: {item.vocabs.join(', ')}</div>
 
-									<button
-										on:click={() => showItemRecap(item)}
-										class="mt-3 w-fit bg-[#D9D9D9] rounded-2xl py-1 px-4">See Recap</button
-									>
+										<button
+											on:click={() => showItemRecap(item)}
+											class="mt-3 w-fit bg-[#D9D9D9] rounded-2xl py-1 px-4">See Recap</button
+										>
+									</div>
 								</div>
-							</div>
-						{/each}
+							{/each}
+						{/if}
+
+						{#if showingItem.learnedReadings.length > 0}
+							<div class="mt-5">Reading Items:</div>
+
+							{#each showingItem.learnedReadings as item (item.item.id)}
+								<div class="flex flex-col text-sm mt-4">
+									<div class="max-w-[40%] text-center">{item.item.blogName}</div>
+
+									<div class="flex flex-row">
+										<img
+											class="rounded-xl mt-1 max-w-[40%]"
+											src={item.item.image}
+											alt={item.item.blogName}
+										/>
+
+										<div class="flex flex-col text-sm ml-5">
+											<div>Played on {formatAMPM(item.finishedTime)}</div>
+
+											<div class="mt-3">Vocabularies: {item.vocabs.join(', ')}</div>
+										</div>
+									</div>
+								</div>
+							{/each}
+						{/if}
 					</div>
 				{:else if learningDiaries}
 					{#each learningDiaries as diary (diary.date)}

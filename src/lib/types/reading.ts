@@ -8,6 +8,11 @@ export interface ReadingItem {
     quiz: MultipleChoicesQuestion[];
 };
 
+export interface FinishedReading {
+    readingID: string;
+    userAnswers: number[];
+}
+
 export interface MultipleChoicesQuestion {
     question: string;
     choices: string[];

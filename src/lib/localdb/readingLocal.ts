@@ -13,7 +13,15 @@ export const completeReadingLocal = async (item: FinishedReading) => {
     completedReadings.set([...get(completedReadings), item]);
 };
 
-export const queryAnswersLocal = async (readingID: string) => {
+export const queryAnswersLocal = async (readingID: string): Promise<number[] | null> => {
     const all = await getReadingItems('All');
-    return all.find(v => v.id === readingID)?.quiz.map(q => q.answer);
+    return all.find(v => v.id === readingID)?.quiz.map(q => q.answer) ?? null;
+}
+
+export const getUserSubmissionLocal = async (readingID: string) => {
+    if (!completedReadings)
+        throw new Error("do not query local data from ssr");
+
+    const readings = get(completedReadings);
+    return readings.find(r => r.readingID === readingID)?.userAnswers ?? null; 
 }

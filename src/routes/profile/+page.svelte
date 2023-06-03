@@ -9,6 +9,7 @@
 	import ConversationCard from '$lib/components/ConversationCard.svelte';
 	import { formatAMPM } from '$lib/utils/time';
 	import { currentChatboxView, recapHistory, showChatbox } from '$lib/global/chatbox';
+	import ReadMore from '$lib/components/ReadMore.svelte';
 
 	let name = 'Natsataporn M.';
 	let learningDiaries: LearningDiaryItem[] | null = null;
@@ -127,7 +128,12 @@
 
 										<div class="mt-3">Goal: {item.conversation.details.learner.goal}</div>
 
-										<div class="mt-3">Vocabularies: {item.vocabs.join(', ')}</div>
+										<div class="mt-3">
+											<ReadMore
+												textContent="Vocabularies: {item.vocabs.join(', ')}"
+												maxChars={100}
+											/>
+										</div>
 
 										<button
 											on:click={() => showItemRecap(item)}
@@ -149,7 +155,7 @@
 
 									<div class="flex flex-row">
 										<img
-											class="rounded-xl mt-1 max-w-[40%]"
+											class="rounded-xl mt-1 w-[13vw] h-[13vw]"
 											src={item.item.image}
 											alt={item.item.blogName}
 										/>
@@ -157,7 +163,12 @@
 										<div class="flex flex-col text-sm ml-5">
 											<div>Played on {formatAMPM(item.finishedTime)}</div>
 
-											<div class="mt-3">Vocabularies: {item.vocabs.join(', ')}</div>
+											<div class="mt-3">
+												<ReadMore
+													textContent="Vocabularies: {item.vocabs.join(', ')}"
+													maxChars={100}
+												/>
+											</div>
 
 											<a
 												href="/read/{item.item.id}"

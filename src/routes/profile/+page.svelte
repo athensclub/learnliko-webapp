@@ -131,8 +131,10 @@
 
 										<button
 											on:click={() => showItemRecap(item)}
-											class="mt-3 w-fit bg-[#D9D9D9] rounded-2xl py-1 px-4">See Recap</button
+											class="mt-3 w-fit bg-[#D9D9D9] rounded-2xl py-1 px-4"
 										>
+											See Recap
+										</button>
 									</div>
 								</div>
 							{/each}
@@ -156,6 +158,13 @@
 											<div>Played on {formatAMPM(item.finishedTime)}</div>
 
 											<div class="mt-3">Vocabularies: {item.vocabs.join(', ')}</div>
+
+											<a
+												href="/read/{item.item.id}"
+												class="mt-3 w-fit bg-[#D9D9D9] rounded-2xl py-1 px-4"
+											>
+												Read again
+											</a>
 										</div>
 									</div>
 								</div>

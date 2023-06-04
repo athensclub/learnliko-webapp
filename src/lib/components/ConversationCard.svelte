@@ -184,7 +184,11 @@
 		{disabled}
 		on:click={openChatbox}
 		class:animate-bounce={!(small || extraSmall)}
-		class={`${extraSmall ? "lg:text-[0.6vw] text-[3vw] px-1" : "lg:text-[0.9vw] text-[3.5vw] lg:w-[12vw] lg:h-[3vw]"} flex flex-row w-fit items-center justify-center h-[5vh] shadow-lg z-40
+		class={`${
+			extraSmall
+				? 'lg:text-[0.6vw] text-[3vw] px-1'
+				: 'lg:text-[0.9vw] text-[3.5vw] lg:w-[12vw] lg:h-[3vw]'
+		} flex flex-row w-fit items-center justify-center h-[5vh] shadow-lg z-40
 		 rounded-full mb-6 bg-white text-black font-bold transition-[width,height,font]`}
 	>
 		<svg
@@ -200,4 +204,14 @@
 		</svg>
 		Start Conversation
 	</button>
+</div>
+
+<div
+	class={`
+	rounded-full shadow-md bg-white border-black border-2 border-opacity-80
+	w-[4vw] h-[4vw]
+	flex flex-row items-center justify-center p-3 absolute top-8 right-16
+	`}
+>
+	<h3 class="font-bold text-black opacity-80">{conversation.CEFRlevel}</h3>
 </div>

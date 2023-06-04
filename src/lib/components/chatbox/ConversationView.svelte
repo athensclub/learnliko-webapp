@@ -19,6 +19,8 @@
 	import VoiceChatHistory from './VoiceChatHistory.svelte';
 	import { blobToBase64 } from '$lib/utils/io';
 	import { completeConversationLocal } from '$lib/localdb/conversationLocal';
+	import { round } from '$lib/utils/math';
+	import { setCurrentCEFRLevel } from '$lib/localdb/profileLocal';
 
 	// chat's history, used for display only
 	let history: {
@@ -65,6 +67,12 @@
 		await Promise.all(promises);
 
 		$recapHistory = result;
+
+		const totalScore = result ? result.map((x) => x.score).reduce((x, y) => x + y, 0) : 0;
+		round((totalScore / result.length) * 100, 2);
+
+		// TODO: find a better approach to promote/demote user's CEFR level
+		if (totalScore > 90) setCurrentCEFRLevel($chatContext!.conversation.CEFRlevel);
 
 		// TODO: use actual db (cloud).
 		completeConversationLocal({
@@ -208,8 +216,12 @@
 
 {#if initializedConversation}
 	<div class="w-full h-[calc(100%-48px)] overflow-y-auto">
-		<h1 class=" sticky p-4 shadow-sm border border-black/15 rounded-xl mt-3 text-black text-[1.3vw]">
-			<strong class=" text-[2vw]">🎯Coversation Goal</strong><br><Typewriter><pre>{conversationDetails.learner.goal}</pre></Typewriter>
+		<h1
+			class=" sticky p-4 shadow-sm border border-black/15 rounded-xl mt-3 text-black text-[1.3vw]"
+		>
+			<strong class=" text-[2vw]">🎯Coversation Goal</strong><br /><Typewriter
+				><pre>{conversationDetails.learner.goal}</pre></Typewriter
+			>
 		</h1>
 		<VoiceChatHistory
 			{history}

@@ -21,7 +21,7 @@
 			: small
 			? 'lg:w-[18vw] lg:h-[22vw] w-[20vh] h-[40vh] lg:rounded-[3vw] rounded-[8vw]'
 			: 'lg:w-[20vw] lg:h-[24vw] w-[35vh] h-[45vh] lg:rounded-[3vw] rounded-[8vw]'
-	} w-full font-line-seed text-white shadow-lg transition-size flex flex-col items-center justify-around `}
+	} w-full font-line-seed text-white shadow-lg transition-size flex flex-col items-center justify-around relative`}
 >
 	<!-- <svg
 			class="w-[65%] mt-4 transition-size"
@@ -204,14 +204,14 @@
 		</svg>
 		Start Conversation
 	</button>
-</div>
-
-<div
-	class={`
-	rounded-full shadow-md bg-white border-black border-2 border-opacity-80
-	w-[4vw] h-[4vw]
-	flex flex-row items-center justify-center p-3 absolute top-8 right-16
-	`}
->
-	<h3 class="font-bold text-black opacity-80">{conversation.CEFRlevel}</h3>
+	
+	<div
+		class={`
+		rounded-full shadow-md bg-white border-black border-2 border-opacity-80
+		w-[4vw] h-[4vw]
+		flex flex-row items-center justify-center p-3 absolute -top-2 right-0
+		`}
+	>
+		<h3 class="font-bold text-black opacity-80">{conversation.CEFRlevel}</h3>
+	</div>
 </div>

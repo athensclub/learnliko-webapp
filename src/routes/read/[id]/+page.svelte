@@ -65,7 +65,7 @@
 	</div>
 
 	<div
-		class="w-[28vw] h-[60vh] top-[24vh] bg-[#6C80E8] fixed right-[3vw] rounded-3xl font-line-seed text-lg font-bold p-5 flex flex-col overflow-y-auto"
+		class="w-[28vw] h-[60vh] top-[24vh] bg-white shadow-md fixed right-[3vw] rounded-3xl font-line-seed text-lg font-bold p-5 flex flex-col overflow-y-auto"
 	>
 		Quiz
 
@@ -84,10 +84,10 @@
 										? 'bg-green-400'
 										: choiceIndex === selected[index]
 										? 'bg-red-400'
-										: 'bg-[#FFF1C1]'
-									: 'bg-[#FFF1C1]'
+										: 'bg-[#B6BAFF]'
+									: 'bg-[#B6BAFF]'
 							}  text-start py-1 px-4 rounded-full text-[1vw] text-[#fff] outline-black outline ${
-								selected[index] === choiceIndex ? 'outline-2' : 'outline-0'
+								selected[index] === choiceIndex ? 'outline-0 bg-[#FFD281]' : 'outline-0'
 							}`}
 						>
 							{String.fromCharCode(choiceIndex + 'A'.charCodeAt(0))}. {choice}

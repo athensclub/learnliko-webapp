@@ -14,10 +14,10 @@
 <div class="w-full h-full min-h-[100vh] bg-white">
 	<Header />
 	<!-- top spacing -->
-	<div class="w-full h-[100px]" />
+	<div class="w-full h-[120px]" />
 
 	<div class="flex flex-col w-full font-line-seed">
-		<div class="mx-auto font-bold text-2xl">Friends Space</div>
+		<div class="mx-auto font-bold text-2xl">🤗Friends Space</div>
 
 		<div class="flex flex-row mt-8 mx-auto">
 			<div class="flex flex-col w-[22vw] h-[60vh] bg-[#F5F5F5] rounded-2xl p-4 overflow-y-auto">
@@ -59,7 +59,7 @@
 			<div
 				class="flex flex-col items-center ml-4 w-[35vw] h-[60vh] bg-[#F5F5F5] rounded-2xl relative p-4 overflow-y-auto"
 			>
-				<div class="absolute top-4 flex flex-col bg-white w-[95%] px-4 py-2 rounded-lg">
+				<div class="absolute top-4 flex flex-col bg-white w-[95%] px-4 py-2 rounded-lg shadow-md">
 					<div class="text-lg font-bold">Quest</div>
 					<div>Ask your friend about their Holidays</div>
 				</div>

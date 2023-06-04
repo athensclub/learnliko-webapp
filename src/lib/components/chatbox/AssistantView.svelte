@@ -9,8 +9,8 @@
 		role: 'user' | 'assistant';
 		text: string;
 	}[] = [
-		{ role: 'assistant', text: 'Hello. How can I help you?' },
-		{ role: 'user', text: 'Hello. How can I help you?' }
+		{ role: 'assistant', text: 'สวัสดี ฉันคือผู้ช่วยของเธอ ฉันสามารถให้ความช่วยเหลือในการใช้งาน Learnliko รวมถึงให้ความช่วยเหลือด้านภาษาอังกฤษ เช่น การแปลคำศัพท์, การใช้แกรมมา และ อื่นๆ' },
+		{ role: 'user', text: 'Metaverse แปลว่าอะไร' }
 	];
 
 	const hide = () =>
@@ -45,8 +45,8 @@
 			>
 				{#if chat.role === 'assistant'}
 					<div
-						class={`w-[42px] h-[42px] bg-center bg-cover rounded-full`}
-						style="background-image: url('{assistantProfileImage}'), linear-gradient(#9BA1FD, #FFA7A7);"
+						class={`w-[42px] h-[42px] bg-center bg-cover rounded-full bg-[#FFD281]`}
+						style="background-image: url('{assistantProfileImage}');"
 					/>
 				{/if}
 
@@ -57,28 +57,31 @@
 					/>
 				{/if}
 
-				<div class={`mx-3 border border-black/[0.15] py-2 px-5 rounded-xl`}>{chat.text}</div>
 			</div>
+			<div class={`mx-3 border border-black/[0.15] py-2 px-5 rounded-xl max-w-[18rem] mt-6`}>{chat.text}</div>
 		</div>
 	{/each}
 </div>
 
-<div class="absolute bottom-[86px] flex flex-row gap-6 font-line-seed w-full px-4 overflow-x-auto overflow-y-hidden">
-    <button class="text-sm border border-black/[0.15] py-2 px-5 rounded-2xl whitespace-nowrap">
-        How to start a conversation?
+<div class="absolute bottom-[86px] flex flex-row gap-6 font-line-seed w-full px-4 overflow-x-auto overflow-y-hidden pb-6">
+    <button class="text-sm border border-black/[0.15] py-2 px-5 rounded-full whitespace-nowrap">
+        สอนการแนะนำตัว
     </button>
-    <button class="text-sm border border-black/[0.15] py-2 px-5 rounded-2xl whitespace-nowrap">
-        How to start a conversation?
+    <button class="text-sm border border-black/[0.15] py-2 px-5 rounded-full whitespace-nowrap">
+        สอนการทักทายผู้อื่น
     </button>
-    <button class="text-sm border border-black/[0.15] py-2 px-5 rounded-2xl whitespace-nowrap">
-        How to start a conversation?
+    <button class="text-sm border border-black/[0.15] py-2 px-5 rounded-full whitespace-nowrap">
+        การใช้งานระบบ Reading
+    </button>
+	<button class="text-sm border border-black/[0.15] py-2 px-5 rounded-full whitespace-nowrap">
+        ช่วยฉันแปลประโยค
     </button>
 </div>
 
 <div class="w-full h-[64px] font-line-seed">
 	<div class="flex flex-row">
-		<input class="bg-[#E6E6E657] h-fit flex-1 text-lg rounded-3xl px-5 py-1" type="text" />
+		<input class="bg-[#E6E6E657] h-fit flex-1 text-lg rounded-full px-5 py-1" type="text" />
 
-		<button class="bg-[#9BA1FD] py-1 px-3 rounded-xl ml-3">Send</button>
+		<button class="bg-[#979DFF] py-1 px-3 rounded-full ml-3 text-white">Send</button>
 	</div>
 </div>

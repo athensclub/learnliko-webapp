@@ -188,7 +188,7 @@
 		class={`${
 			extraSmall
 				? 'lg:text-[0.6vw] text-[3vw] px-1'
-				: 'lg:text-[0.9vw] text-[3.5vw] lg:w-[12vw] lg:h-[3vw]'
+				: 'lg:text-[0.9vw] text-[4vw]  px-6'
 		} flex flex-row w-fit items-center justify-center h-[5vh] shadow-lg z-40 
 		 rounded-full mb-6 bg-black/10 border border-white/10 backdrop-blur-sm text-white font-bold transition-[width,height,font] `}
 	>
@@ -209,7 +209,7 @@
 	<div
 		class={`
 		rounded-full text-[0.9vw] shadow-md bg-black/5 backdrop-blur-xl border border-white/5
-		w-[6vw] h-[2.5vw]
+		lg:w-[6vw] lg:h-[2.5vw]
 		flex flex-row items-center justify-center p-2 absolute -top-2 right-0
 		`}
 	>

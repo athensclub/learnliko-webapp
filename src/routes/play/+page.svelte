@@ -53,18 +53,18 @@
 </header>
 
 <div
-	class="xl:mt-[5vw] w-[42vh] lg:shadow-xl justify-center font-bold xl:text-[1.5vw] lg:text-[3.5vh] text-[2.2vh] z-1 lg:flex lg:mt-[15vh] mt-[8vh] lg:w-[32vw] lg:backdrop-brightness-75 mx-auto lg:backdrop-blur-xl rounded-full"
+	class="xl:mt-[5vw] w-[42vh]  justify-center font-bold xl:text-[1.5vw] lg:text-[3.5vh] text-[2.2vh] z-1 lg:flex lg:mt-[15vh] mt-[8vh] lg:w-[32vw]  mx-auto  rounded-full"
 >
 	<br />
 
 	<h3
-		class=" md:portrait:invisible py-[0.5vw] animate-pulse xl:text-[1.5vw] mr-2 text-center text-[4.5vh] lg:text-[3.5vh]"
+		class=" md:portrait:invisible animate-pulse xl:text-[1.5vw] mr-2 text-center text-[4.5vh] lg:text-[3.5vh]"
 	>
 		👋
 	</h3>
 
 	<h3
-		class=" md:portrait:invisible py-[0.5vw] font-line-seed font-bold text-center text-white lg:mt-0 mt-[6vw] text-[0.3]"
+		class=" md:portrait:invisible font-line-seed font-bold text-center text-white  lg:text-[1.5vw]"
 	>
 		Today, You have 5 people to Talk!
 	</h3>
@@ -87,13 +87,13 @@
 
 <button
 	on:click={openAssistantChat}
-	class="p-1 w-16 fixed h-16 backdrop-blur-lg bg-white/20 rounded-full bottom-14 right-14 hover:bg-white active:shadow-xl mouse shadow transition ease-in duration-200 focus:outline-none"
+	class="z-30 p-1 w-16 fixed h-16 backdrop-blur-xl bg-black/10 rounded-full bottom-14 lg:right-14 right-8 hover:bg-white active:shadow-xl mouse shadow transition ease-in duration-200 focus:outline-none"
 >
 	<img src={assistant} alt="assistant" />
 </button>
 
 
-<div class="bottom-8 h-16 text-black py-2 fixed text-center w-full">
+<div class=" h-16 text-black/80 py-2 px-8 bottom-14 w-[75vw] text fixed lg:text-center lg:w-full lg:bottom-8 font-bold ">
 	<Typewriter>Tips: ฝึกฝนอ่าน Reading เพื่อเรียนรู้คำใหม่ๆเพื่อใช้พูดคุย</Typewriter>
 </div>
 <video

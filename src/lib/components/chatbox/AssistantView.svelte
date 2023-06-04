@@ -12,10 +12,15 @@
 		{
 			role: 'system',
 			content:
-				'You are a female assistant for website Learnliko. You must assist the user in using the website using given information about the website. All of your answers must be in Thai language. Do not answer in English language.'
+				'You are a female assistant for website Learnliko. You must assist the user in using the website using given information about the website. You must also assist the user in learning the English Language. All of your answers must be in Thai language. Do not answer in English language.'
 		},
-		{ role: 'assistant', content: 'สวัสดี มีอะไรให้ฉันช่วยบ้าง' }
+		{
+			role: 'assistant',
+			content:
+				'สวัสดี ฉันคือผู้ช่วยของเธอ ฉันสามารถให้ความช่วยเหลือในการใช้งาน Learnliko รวมถึงให้ความช่วยเหลือด้านภาษาอังกฤษ เช่น การแปลคำศัพท์, การใช้แกรมมา และ อื่นๆ'
+		}
 	];
+
 	let currentText = '';
 	let waitingForAIResponse = false;
 
@@ -29,9 +34,13 @@
 				{
 					role: 'system',
 					content:
-						'You are a female assistant for website Learnliko. You must assist the user in using the website using given information about the website. All of your answers must be in Thai language. Do not answer in English language.'
+						'You are a female assistant for website Learnliko. You must assist the user in using the website using given information about the website. You must also assist the user in learning the English Language. All of your answers must be in Thai language. Do not answer in English language.'
 				},
-				{ role: 'assistant', content: 'สวัสดี มีอะไรให้ฉันช่วยบ้าง' }
+				{
+					role: 'assistant',
+					content:
+						'สวัสดี ฉันคือผู้ช่วยของเธอ ฉันสามารถให้ความช่วยเหลือในการใช้งาน Learnliko รวมถึงให้ความช่วยเหลือด้านภาษาอังกฤษ เช่น การแปลคำศัพท์, การใช้แกรมมา และ อื่นๆ'
+				}
 			];
 		} else if (currentLanguage === 'EN') {
 			hintPrompts = ['What is learnliko?', 'How to start conversation?'];
@@ -39,7 +48,7 @@
 				{
 					role: 'system',
 					content:
-						'You are a female assistant for website Learnliko. You must assist the user in using the website using given information about the website. All of your answers must be in English language. Do not answer in Thai language.'
+						'You are a female assistant for website Learnliko. You must assist the user in using the website using given information about the website. You must also assist the user in learning the English Language. All of your answers must be in English language. Do not answer in Thai language.'
 				},
 				{ role: 'assistant', content: 'Hi. How can I help you?' }
 			];
@@ -125,8 +134,8 @@
 			>
 				{#if chat.role === 'assistant'}
 					<div
-						class={`w-[42px] h-[42px] bg-center bg-cover rounded-full`}
-						style="background-image: url('{assistantProfileImage}'), linear-gradient(#9BA1FD, #FFA7A7);"
+						class={`w-[42px] h-[42px] bg-center bg-cover rounded-full bg-[#FFD281]`}
+						style="background-image: url('{assistantProfileImage}');"
 					/>
 				{/if}
 
@@ -137,7 +146,7 @@
 					/>
 				{/if}
 
-				<div class={`mx-3 max-w-[75%] border border-black/[0.15] py-2 px-5 rounded-xl`}>
+				<div class={`mx-3 border border-black/[0.15] py-2 px-5 rounded-xl max-w-[18rem] mt-6`}>
 					{chat.content}
 				</div>
 			</div>

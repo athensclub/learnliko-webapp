@@ -3,7 +3,7 @@
 	import chatBubbleImage from '$lib/images/chat_bubble_gradient.png';
 	import blueBookImage from '$lib/images/blue_book.png';
 	import profileImage from '$lib/images/sample_kid_image.png';
-	import { queryLearningDiariesLocal } from '$lib/localdb/profileLocal';
+	import { getCurrentCEFRLevel, queryLearningDiariesLocal } from '$lib/localdb/profileLocal';
 	import { onMount } from 'svelte';
 	import type { LearnedConversationItem, LearningDiaryItem } from '$lib/types/learningDiary';
 	import ConversationCard from '$lib/components/ConversationCard.svelte';
@@ -21,6 +21,8 @@
 		$currentChatboxView = 'RECAP';
 		$showChatbox = true;
 	};
+
+	const CEFRLevel = getCurrentCEFRLevel();
 
 	onMount(async () => {
 		// TODO: implement db using actual database (cloud) and probably move this to ssr.
@@ -53,7 +55,7 @@
 					<div
 						class="mt-4 text-base bg-gradient-to-r from-[#9BA1FD] to-[#FFABAB] text-white w-fit px-3 py-1 rounded-lg text-[1vw]"
 					>
-						CEFR Level: A1
+						CEFR Level: {CEFRLevel}
 					</div>
 				</div>
 			</div>

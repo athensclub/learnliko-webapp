@@ -88,14 +88,14 @@ export const queryLearningDiariesLocal = async (): Promise<LearningDiaryItem[]> 
 	return result;
 };
 
-export const getCurrentCEFRLevel = async function () {
+export const getCurrentCEFRLevel = function () {
 	if (!CEFRLevelLocal) throw new Error('do not query local data from ssr');
 
 	const currentLevel = get(CEFRLevelLocal);
 	return currentLevel ?? 'A1';
 };
 
-export const setCurrentCEFRLevel = async function (level: string) {
+export const setCurrentCEFRLevel = function (level: string) {
 	if (!CEFRLevelLocal) throw new Error('do not set local data from ssr');
 	CEFRLevelLocal.set(level);
 };

@@ -44,5 +44,5 @@ export const assistantChatCompletion = async (message: ChatMessage[]) => {
         throw new Error("Call assistant chat completion with empty arguments");
 
     const res = await chain.call({ question: query.content, chat_history: message.map(chatMessageToLangchainMessage) });
-    return res;
+    return res.text;
 }

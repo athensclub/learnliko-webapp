@@ -19,7 +19,6 @@ export const assistantChat =  async function (messages: ChatMessage[]) {
 		body: JSON.stringify({ messages })
 	});
 	const val = await response.json();
-	console.log(val)
 	if (!val) throw new Error('No response from chat bot');
 
 	return String(val.message);

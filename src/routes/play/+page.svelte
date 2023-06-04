@@ -24,15 +24,19 @@
 <header
 	class="z-20 flex top-0 items-center justify-left h-[48px] font-line-seed text-xl font-bold w-full fixed bg-transparent py-8 px-6 pt-10"
 >
-	<img
-		src="https://firebasestorage.googleapis.com/v0/b/motoverse-development.appspot.com/o/Group%2051.png?alt=media&token=6f4645b6-f350-44bb-9767-e3e2739dc749"
-		alt=""
-		class=" w-8 h-8 mr-2"
-	/>
-	<span class=" flex mt-1"
-		>Learnliko
-		<h1 class=" ml-2 text-xs bg-black text-white rounded-md px-2 text-center mb-1 py-1">School</h1>
-	</span>
+	<a href="/" class="flex">
+		<img
+			src="https://firebasestorage.googleapis.com/v0/b/motoverse-development.appspot.com/o/Group%2051.png?alt=media&token=6f4645b6-f350-44bb-9767-e3e2739dc749"
+			alt=""
+			class=" w-8 h-8 mr-2"
+		/>
+		<span class=" flex mt-1"
+			>Learnliko
+			<h1 class=" ml-2 text-xs bg-black text-white rounded-md px-2 text-center mb-1 py-1">
+				School
+			</h1>
+		</span>
+	</a>
 
 	<!-- <div class="w-full flex flex-row justify-start ml-6">
 		<div class="w-[150px]">

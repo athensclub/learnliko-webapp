@@ -29,20 +29,20 @@
 	>
 		<source src={bgvd} type="video/mp4" />
 	</video>
-	<div class="grid grid-cols-2 gap-3 pt-[16vh] pb-[5vh]">
+	<div class="grid lg:grid-cols-2 gap-3 pt-[16vh] pb-[5vh]">
 		<!-- <div class="col-span-2 bg-white p-10 rounded">1</div>
 	  <div class="bg-white p-10 rounded">2</div> -->
-		<div class="row-span-2 text-black backdrop-blur-xl bg-white/5 rounded-3xl shadow-xl">
-			<h1 class=" font-bold text-[2vw] mt-2 ml-5">Welcome</h1>
-			<h2 class="text-[1.3vw] ml-5">Learn English with AI</h2>
+		<div class=" text-black backdrop-blur-lg bg-white/5 rounded-3xl shadow-xl col-span-3 lg:row-span-2 lg:col-span-1">
+			<h1 class=" font-bold lg:text-[2vw] mt-2 ml-5 text-[3vh]">Welcome</h1>
+			<h2 class="lg:text-[1.3vw] text-[2vh] ml-5">Learn English with AI</h2>
 			<img
 				src={welcomeImg}
-				class=" w-[18vw] mt-[4vw] mx-auto animate-[wiggle_4s_ease-in-out_infinite]"
+				class=" lg:w-[18vw] w-[30vh] mt-[4vw] mx-auto animate-[wiggle_4s_ease-in-out_infinite]"
 				alt=""
 			/>
 			<button
-				class="p-[1vw] bg-white shadow-lg border-black/10 border-[1px] rounded-full w-[15vw] text-black mt-[3vw] mx-[3.5vw]"
-				>How to use Learnliko?
+				class="p-[1vw] backdrop-blur-xl bg-white/10 shadow-lg  rounded-full w-[15vw] text-black mt-[3vw] mx-[3.5vw]"
+				>⬇️Download App
 			</button>
 		</div>
 		<!-- <div class="bg-white p-10 rounded">6</div> -->
@@ -136,7 +136,7 @@
 
 <button
 	on:click={openAssistantChat}
-	class="p-1 w-16 fixed h-16 bg-white rounded-full bottom-14 right-14 hover:bg-black active:shadow-xl mouse shadow transition ease-in duration-200 focus:outline-none"
+	class="p-1 w-16 fixed h-16 backdrop-blur-lg bg-white/20 rounded-full bottom-14 right-14 hover:bg-white active:shadow-xl mouse shadow transition ease-in duration-200 focus:outline-none"
 >
 	<img src={assistant} alt="assistant" />
 </button>

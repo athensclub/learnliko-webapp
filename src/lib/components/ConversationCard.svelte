@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { chatContext, showChatbox } from '$lib/global/chatbox';
+	import { chatContext, currentChatboxView, showChatbox } from '$lib/global/chatbox';
 	import type { ConversationCarouselItem, ConversationDetails } from '$lib/types/conversationData';
 
 	export let small = false;
@@ -8,6 +8,7 @@
 	export let disabled = false;
 
 	const openChatbox = () => {
+		$currentChatboxView = 'CONVERSATION';
 		$showChatbox = true;
 		$chatContext = { conversation };
 	};

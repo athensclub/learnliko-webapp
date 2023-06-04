@@ -1,6 +1,14 @@
 <script lang="ts">
 	import Header from '$lib/components/Header.svelte';
 	import userProfileImage from '$lib/images/sample_kid_image.png';
+
+	let history: {
+		role: 'user' | 'friend';
+		text: string;
+	}[] = [
+		{ role: 'friend', text: 'Hello.' },
+		{ role: 'user', text: 'Hello.' }
+	];
 </script>
 
 <div class="w-full h-full min-h-[100vh] bg-white">
@@ -48,7 +56,55 @@
 				</div>
 			</div>
 
-			<div class="flex flex-col ml-4 w-[35vw] h-[60vh] bg-[#F5F5F5] rounded-2xl p-4" />
+			<div
+				class="flex flex-col items-center ml-4 w-[35vw] h-[60vh] bg-[#F5F5F5] rounded-2xl relative p-4 overflow-y-auto"
+			>
+				<div class="absolute top-4 flex flex-col bg-white w-[95%] px-4 py-2 rounded-lg">
+					<div class="text-lg font-bold">Quest</div>
+					<div>Ask your friend about their Holidays</div>
+				</div>
+
+                <!-- spacing -->
+                <div class="w-full h-[64px]"></div>
+
+				{#each history as chat, index (index)}
+					<div
+						class={`flex flex-col px-4 w-full ${
+							chat.role === 'user' ? 'items-end' : 'items-start'
+						}`}
+					>
+						<div
+							class={`flex pt-6 flex-row items-center  w-full ${
+								chat.role === 'user' ? 'flex-row-reverse' : ''
+							}`}
+						>
+							{#if chat.role === 'friend'}
+								<div
+									class={`w-[42px] h-[42px] bg-center bg-cover rounded-full`}
+									style="background-image: url('{userProfileImage}'), linear-gradient(#9BA1FD, #FFA7A7);"
+								/>
+							{/if}
+
+							{#if chat.role === 'user'}
+								<div
+									class={`w-[42px] h-[42px] bg-center bg-cover rounded-full`}
+									style="background-image: url('{userProfileImage}');"
+								/>
+							{/if}
+
+							<div class={`mx-3 bg-white py-2 px-5 rounded-xl`}>{chat.text}</div>
+						</div>
+					</div>
+				{/each}
+
+                <div class="absolute bottom-0 w-[95%] h-[48px] font-line-seed">
+                    <div class="flex flex-row">
+                        <input class="bg-white border border-black/[0.15] h-fit flex-1 text-lg rounded-3xl px-5 py-1" type="text" />
+                
+                        <button class="bg-black text-white py-1 px-3 rounded-xl ml-3">Send</button>
+                    </div>
+                </div>                
+			</div>
 		</div>
 	</div>
 </div>

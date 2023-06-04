@@ -117,7 +117,8 @@
 			</div>
 		</a>
 		<!-- <div class="bg-white p-10 rounded">6</div> -->
-		<div
+		<a
+			href="/friends"
 			class="col-span-2 text-black backdrop-blur-3xl bg-white/90 h-[16vw] rounded-3xl shadow-xl border-white/30 border-[2px]"
 		>
 			<div class=" flex justify-between">
@@ -127,7 +128,7 @@
 				</div>
 				<img src={friend} class=" w-[17vw] mr-[2vw] top-0" alt="" />
 			</div>
-		</div>
+		</a>
 		<!-- <div class="bg-white p-10 rounded">8</div>
 	  <div class="bg-white p-10 rounded">9</div> -->
 	</div>

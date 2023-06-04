@@ -13,6 +13,7 @@
 
 	let name = 'Natsataporn M.';
 	let learningDiaries: LearningDiaryItem[] | null = null;
+	let CEFRLevel: string = '';
 
 	let showingItem: LearningDiaryItem | null = null;
 
@@ -22,11 +23,11 @@
 		$showChatbox = true;
 	};
 
-	const CEFRLevel = getCurrentCEFRLevel();
 
 	onMount(async () => {
 		// TODO: implement db using actual database (cloud) and probably move this to ssr.
 		learningDiaries = await queryLearningDiariesLocal();
+		CEFRLevel = getCurrentCEFRLevel();
 		console.log(learningDiaries);
 	});
 

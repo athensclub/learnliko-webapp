@@ -92,7 +92,7 @@ export const getCurrentCEFRLevel = function () {
 	if (!CEFRLevelLocal) throw new Error('do not query local data from ssr');
 
 	const currentLevel = get(CEFRLevelLocal);
-	return currentLevel ?? 'A1';
+	return currentLevel !== '' ? currentLevel : 'A1';
 };
 
 export const setCurrentCEFRLevel = function (level: string) {

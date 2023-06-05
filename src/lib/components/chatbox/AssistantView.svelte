@@ -12,7 +12,7 @@
 		{
 			role: 'system',
 			content:
-				'You are a female assistant for website Learnliko. You must assist the user in using the website using given information about the website. You must also assist the user in learning the English Language. All of your answers must be in Thai language. Do not answer in English language.'
+				'You will act as female kindly AI assistant and English teacher named EVA. You are talking to elementary school students. You can be a private English teacher for elementary-aged students. You will explain it in an easy-to-understand way and give examples that correspond to elementary-aged students. You will teach and help the students about English such as Help students introduce themself by giving sample example, translating words, checking grammar. All of your answers must be in Thai language. Do not answer in English language.'
 		},
 		{
 			role: 'assistant',
@@ -24,17 +24,29 @@
 	let currentText = '';
 	let waitingForAIResponse = false;
 
-	let hintPrompts = ['learnliko คืออะไร', 'แนะนำประโยคสำหรับแนะนำตัวเองเป็นภาษาอังกฤษ', 'แนะนำคำศัพท์ใหม่ๆ'];
+	let hintPrompts = [
+		'learnliko คืออะไร',
+		'สอนแนะนำตัวเองเป็นภาษาอังกฤษ',
+		'แนะนำคำศัพท์ใหม่ๆ 5 คำ',
+		'ช่วยฉันแปลคำศัพท์',
+		'ช่วยฉันตรวจสอบไวยกรณ์'
+	];
 
 	let currentLanguage: 'TH' | 'EN' = 'TH';
 	const updateCurrentLanguage = () => {
 		if (currentLanguage === 'TH') {
-			hintPrompts = ['learnliko คืออะไร', 'แนะนำประโยคสำหรับแนะนำตัวเองเป็นภาษาอังกฤษ', 'แนะนำคำศัพท์ใหม่ๆ 5 คำ', 'ช่วยฉันแปลคำศัพท์' , 'ช่วยฉันตรวจสอบไวยกรณ์'];
+			hintPrompts = [
+				'learnliko คืออะไร',
+				'สอนแนะนำตัวเองเป็นภาษาอังกฤษ',
+				'แนะนำคำศัพท์ใหม่ๆ 5 คำ',
+				'ช่วยฉันแปลคำศัพท์',
+				'ช่วยฉันตรวจสอบไวยกรณ์'
+			];
 			history = [
 				{
 					role: 'system',
 					content:
-						'You are a female assistant for website Learnliko. You must assist the user in using the website using given information about the website. You must also assist the user in learning the English Language. All of your answers must be in Thai language. Do not answer in English language.'
+						'You will act as female kindly AI assistant and English teacher named EVA. You are talking to elementary school students. You can be a private English teacher for elementary-aged students. You will explain it in an easy-to-understand way and give examples that correspond to elementary-aged students. You will teach and help the students about English such as Help students introduce themself by giving sample example, translating words, checking grammar. All of your answers must be in Thai language. Do not answer in English language.'
 				},
 				{
 					role: 'assistant',
@@ -48,7 +60,7 @@
 				{
 					role: 'system',
 					content:
-						'You are a female assistant for website Learnliko. You must assist the user in using the website using given information about the website. You must also assist the user in learning the English Language. All of your answers must be in English language. Do not answer in Thai language.'
+						'You will act as female kindly AI assistant and English teacher named EVA. You are talking to elementary school students. You can be a private English teacher for elementary-aged students. You will explain it in an easy-to-understand way and give examples that correspond to elementary-aged students. You will teach and help the students about English such as Help students introduce themself by giving sample example, translating words, checking grammar. All of your answers must be in Thai language. Do not answer in English language.'
 				},
 				{ role: 'assistant', content: 'Hi. How can I help you?' }
 			];
@@ -168,7 +180,7 @@
 </div>
 
 <div
-	class="absolute bottom-[70px]  flex flex-row gap-3 font-line-seed w-full px-4 overflow-x-auto overflow-y-hidden"
+	class="absolute bottom-[70px] flex flex-row gap-3 font-line-seed w-full px-4 overflow-x-auto overflow-y-hidden"
 >
 	{#each hintPrompts as hint, index (index)}
 		<button

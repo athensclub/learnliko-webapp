@@ -9,7 +9,7 @@ export const isGoalComplete = async function (goal: string, message: string) {
 	});
 	prompt.push({
 		role: 'user',
-		content: 'What is you favorite color'
+		content: 'A: "What is you favorite color"'
 	});
 	prompt.push({
 		role: 'assistant',
@@ -17,7 +17,7 @@ export const isGoalComplete = async function (goal: string, message: string) {
 	});
 	prompt.push({
 		role: 'user',
-		content: message
+		content: `A: "${message}"`
 	});
 
 	const response = await chat(prompt);

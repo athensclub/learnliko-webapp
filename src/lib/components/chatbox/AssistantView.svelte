@@ -29,7 +29,7 @@
 	let currentLanguage: 'TH' | 'EN' = 'TH';
 	const updateCurrentLanguage = () => {
 		if (currentLanguage === 'TH') {
-			hintPrompts = ['learnliko คืออะไร', 'แนะนำประโยคสำหรับแนะนำตัวเองเป็นภาษาอังกฤษ', 'แนะนำคำศัพท์ใหม่ๆ 5 คำ', 'ช่วยฉันแปลคำศัพท์' , 'แนะนำการใช้ grammar'];
+			hintPrompts = ['learnliko คืออะไร', 'แนะนำประโยคสำหรับแนะนำตัวเองเป็นภาษาอังกฤษ', 'แนะนำคำศัพท์ใหม่ๆ 5 คำ', 'ช่วยฉันแปลคำศัพท์' , 'ช่วยฉันตรวจสอบไวยกรณ์'];
 			history = [
 				{
 					role: 'system',

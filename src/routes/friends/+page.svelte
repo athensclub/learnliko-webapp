@@ -39,11 +39,14 @@
 		gptHistory.push({ role: 'user', content: message });
 
 		const promises: Promise<any>[] = [];
-		promises.push(
-			isGoalComplete('Ask your friend their favorite color', message).then(
-				(completed) => (goalCompleted = completed)
-			)
-		);
+
+		if (!goalCompleted) {
+			promises.push(
+				isGoalComplete('Ask your friend their favorite color', message).then(
+					(completed) => (goalCompleted = completed)
+				)
+			);
+		}
 		promises.push(friendReply());
 		message = '';
 
@@ -57,7 +60,7 @@
 	 * */
 	gptHistory.push({
 		role: 'user',
-		content: `Your role: I want you to act as a male student, you are friendly. You don't seem to expose yourself that much unless being ask. About yourself: Your name is Steve. You are from USA, Seattle, you are 12 years old, like color Red.`
+		content: `Your role: I want you to act as a male student, you are friendly. You don't seem to expose yourself that much unless being ask. About yourself: Your name is Steve. You are from USA, Seattle, you are 12 years old. Your favorite color is Red.`
 	});
 </script>
 
@@ -107,7 +110,7 @@
 			</div>
 
 			<div
-				class="flex flex-col items-center ml-4 w-[35vw] h-[60vh] bg-[#F5F5F5] rounded-2xl relative p-4 overflow-y-auto"
+				class="flex flex-col items-center justify-between ml-4 w-[35vw] h-[60vh] bg-[#F5F5F5] rounded-2xl relative p-4"
 			>
 				<div class="absolute top-4 flex flex-col bg-white w-[95%] px-4 py-2 rounded-lg shadow-md">
 					<div class="text-lg font-bold">Quest</div>
@@ -116,40 +119,39 @@
 					<h3 class=" absolute top-1 right-4">{goalCompleted ? '✅ completed' : 'in progress'}</h3>
 				</div>
 
-				<!-- spacing -->
-				<div class="w-full h-[64px]" />
-
-				{#each history as chat, index (index)}
-					<div
-						class={`flex flex-col px-4 w-full ${
-							chat.role === 'user' ? 'items-end' : 'items-start'
-						}`}
-					>
+				<div class="w-full mt-[64px] overflow-y-auto">
+					{#each history as chat, index (index)}
 						<div
-							class={`flex pt-6 flex-row items-center  w-full ${
-								chat.role === 'user' ? 'flex-row-reverse' : ''
+							class={`flex flex-col px-4 w-full ${
+								chat.role === 'user' ? 'items-end' : 'items-start'
 							}`}
 						>
-							{#if chat.role === 'friend'}
-								<div
-									class={`w-[42px] h-[42px] bg-center bg-cover rounded-full`}
-									style="background-image: url('{userProfileImage}'), linear-gradient(#9BA1FD, #FFA7A7);"
-								/>
-							{/if}
+							<div
+								class={`flex pt-6 flex-row items-center  w-full ${
+									chat.role === 'user' ? 'flex-row-reverse' : ''
+								}`}
+							>
+								{#if chat.role === 'friend'}
+									<div
+										class={`w-[42px] h-[42px] bg-center bg-cover rounded-full`}
+										style="background-image: url('{userProfileImage}'), linear-gradient(#9BA1FD, #FFA7A7);"
+									/>
+								{/if}
 
-							{#if chat.role === 'user'}
-								<div
-									class={`w-[42px] h-[42px] bg-center bg-cover rounded-full`}
-									style="background-image: url('{userProfileImage}');"
-								/>
-							{/if}
+								{#if chat.role === 'user'}
+									<div
+										class={`w-[42px] h-[42px] bg-center bg-cover rounded-full`}
+										style="background-image: url('{userProfileImage}');"
+									/>
+								{/if}
 
-							<div class={`mx-3 bg-white py-2 px-5 rounded-xl`}>{chat.text}</div>
+								<div class={`mx-3 bg-white py-2 px-5 rounded-xl`}>{chat.text}</div>
+							</div>
 						</div>
-					</div>
-				{/each}
+					{/each}
+				</div>
 
-				<div class="absolute bottom-8 w-[95%] h-[48px] font-line-seed">
+				<div class="w-[95%] h-[48px] font-line-seed mb-4">
 					<h4
 						class={`text-gray-700 transition-opacity ${
 							waitingForFriendResponse ? 'opacity-100' : 'opacity-0'

@@ -3,14 +3,16 @@
 	import { isGoalComplete } from '$api/friendConversation';
 	import Header from '$lib/components/Header.svelte';
 	import userProfileImage from '$lib/images/sample_kid_image.png';
+	import friend1 from '$lib/images/kids1.jpg';
+	import friend2 from '$lib/images/kids2.jpg';
 	import type { ChatMessage } from '$lib/types/requests/chatCompletion';
 
 	let history: {
 		role: 'user' | 'friend';
 		text: string;
 	}[] = [
-		{ role: 'friend', text: 'Hello.' },
-		{ role: 'user', text: 'Hello.' }
+		{ role: 'friend', text: 'Hi everyone.' },
+		
 	];
 	let message: string = '';
 	let waitingForFriendResponse = false;
@@ -72,7 +74,7 @@
 	<div class="flex flex-col w-full font-line-seed">
 		<div class="mx-auto font-bold text-2xl">🤗Friends Space</div>
 
-		<div class="flex flex-row mt-8 mx-auto">
+		<div class="flex flex-row mt-6 mx-auto">
 			<div class="flex flex-col w-[22vw] h-[60vh] bg-[#F5F5F5] rounded-2xl p-4 overflow-y-auto">
 				<div class="font-bold text-3xl">Friends</div>
 
@@ -90,20 +92,20 @@
 				<div class="flex flex-row w-full bg-white mt-3 p-3 rounded-xl items-center">
 					<div
 						class={`w-[42px] h-[42px] bg-center bg-cover rounded-full`}
-						style="background-image: url('{userProfileImage}');"
+						style="background-image: url('{friend2}');"
 					/>
 
-					<div class="font-bold text-sm ml-2">Natsataporn M.</div>
+					<div class="font-bold text-sm ml-2">Vorada T.</div>
 
 					<!-- <div class="bg-black text-white py-1 px-4 text-sm rounded-lg ml-2">A1</div> -->
 				</div>
 				<div class="flex flex-row w-full bg-white mt-3 p-3 rounded-xl items-center">
 					<div
 						class={`w-[42px] h-[42px] bg-center bg-cover rounded-full`}
-						style="background-image: url('{userProfileImage}');"
+						style="background-image: url('{friend1}');"
 					/>
 
-					<div class="font-bold text-sm ml-2">Natsataporn M.</div>
+					<div class="font-bold text-sm ml-2">Phumpat S.</div>
 
 					<!-- <div class="bg-black text-white py-1 px-4 text-sm rounded-lg ml-2">A1</div> -->
 				</div>
@@ -119,32 +121,31 @@
 					<h3 class=" absolute top-1 right-4">{goalCompleted ? '✅ completed' : 'in progress'}</h3>
 				</div>
 
-				<div class="w-full mt-[64px] overflow-y-auto">
+				<div class="w-full mt-[80px] overflow-y-auto">
 					{#each history as chat, index (index)}
 						<div
 							class={`flex flex-col px-4 w-full ${
 								chat.role === 'user' ? 'items-end' : 'items-start'
 							}`}
 						>
+							{#if chat.role === 'friend'}
+								<div
+									class={`w-[42px] h-[42px] bg-center bg-cover rounded-full`}
+									style="background-image: url('{friend2}'), linear-gradient(#9BA1FD, #FFA7A7);"
+								/>
+							{/if}
+
+							{#if chat.role === 'user'}
+								<div
+									class={`w-[42px] h-[42px] bg-center bg-cover rounded-full`}
+									style="background-image: url('{userProfileImage}');"
+								/>
+							{/if}
 							<div
-								class={`flex pt-6 flex-row items-center  w-full ${
+								class={`flex pt-3 flex-row items-center  w-full ${
 									chat.role === 'user' ? 'flex-row-reverse' : ''
 								}`}
 							>
-								{#if chat.role === 'friend'}
-									<div
-										class={`w-[42px] h-[42px] bg-center bg-cover rounded-full`}
-										style="background-image: url('{userProfileImage}'), linear-gradient(#9BA1FD, #FFA7A7);"
-									/>
-								{/if}
-
-								{#if chat.role === 'user'}
-									<div
-										class={`w-[42px] h-[42px] bg-center bg-cover rounded-full`}
-										style="background-image: url('{userProfileImage}');"
-									/>
-								{/if}
-
 								<div class={`mx-3 bg-white py-2 px-5 rounded-xl`}>{chat.text}</div>
 							</div>
 						</div>

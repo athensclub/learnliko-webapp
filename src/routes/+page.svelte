@@ -42,7 +42,7 @@
 			/>
 			<button
 				class="p-[1vw] backdrop-blur-xl bg-white/10 shadow-lg font-line-seed font-bold rounded-full w-[15vw] text-black mt-[3vw] mx-[3.5vw]"
-				>⬇️Download App
+				>📱Download App
 			</button>
 		</div>
 		<!-- <div class="bg-white p-10 rounded">6</div> -->

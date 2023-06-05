@@ -9,12 +9,20 @@
 		{ role: 'friend', text: 'Hello.' },
 		{ role: 'user', text: 'Hello.' }
 	];
+	let message: string = '';
+
+	const sendMessage = async function () {
+		console.log(message);
+		history = [...history, { role: 'user', text: message }];
+
+		message = '';
+	};
 </script>
 
 <div class="w-full h-full min-h-[100vh] bg-white">
 	<Header />
 	<!-- top spacing -->
-	<div class="w-full h-[100px]" />
+	<div class="w-full h-[120px]" />
 
 	<div class="flex flex-col w-full font-line-seed">
 		<div class="mx-auto font-bold text-2xl">Friends Space</div>
@@ -61,11 +69,11 @@
 			>
 				<div class="absolute top-4 flex flex-col bg-white w-[95%] px-4 py-2 rounded-lg">
 					<div class="text-lg font-bold">Quest</div>
-					<div>Ask your friend about their Holidays</div>
+					<div>Ask your friend their favorite color</div>
 				</div>
 
-                <!-- spacing -->
-                <div class="w-full h-[64px]"></div>
+				<!-- spacing -->
+				<div class="w-full h-[64px]" />
 
 				{#each history as chat, index (index)}
 					<div
@@ -97,13 +105,22 @@
 					</div>
 				{/each}
 
-                <div class="absolute bottom-0 w-[95%] h-[48px] font-line-seed">
-                    <div class="flex flex-row">
-                        <input class="bg-white border border-black/[0.15] h-fit flex-1 text-lg rounded-3xl px-5 py-1" type="text" />
-                
-                        <button class="bg-black text-white py-1 px-3 rounded-xl ml-3">Send</button>
-                    </div>
-                </div>                
+				<div class="absolute bottom-0 w-[95%] h-[48px] font-line-seed">
+					<div class="flex flex-row">
+						<input
+							class="bg-white border border-black/[0.15] h-fit flex-1 text-lg rounded-3xl px-5 py-1"
+							type="text"
+							bind:value={message}
+							on:keydown={(e) => {
+								if (e.key == 'Enter') sendMessage();
+							}}
+						/>
+
+						<button class="bg-black text-white py-1 px-3 rounded-xl ml-3" on:click={sendMessage}
+							>Send</button
+						>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

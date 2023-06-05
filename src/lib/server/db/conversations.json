@@ -45,7 +45,7 @@
 			"image": "https://media.discordapp.net/attachments/1087307553471463514/1103188064358125618/vi_A_young_woman_teacher_kindly_3d_stylize_profile_image_38556d17-9767-44cf-8adf-729f61ea9ce7.png?width=1357&height=1357",
 			"intro": "Hello! I'm English teacher.",
 			"topic": "What would you like to learn today?",
-			"CEFRlevel": "A2",
+			"CEFRlevel": "A1",
 			"details": {
 				"intro": "What would you like to learn today about animals? Let's start by telling me your favorite animal.",
 				"learner": {
@@ -65,7 +65,7 @@
 			"image": "https://media.discordapp.net/attachments/1087307553471463514/1103187114692202536/vi_A_man_farmer_fruit_3d_stylize_profile_image_244b73e8-dd85-4668-835f-c8c35a592146.png?width=1357&height=1357",
 			"intro": "Hi, I'm a farmer",
 			"topic": "Let's talk about your favorite fruit",
-			"CEFRlevel": "A2",
+			"CEFRlevel": "A1",
 			"details": {
 				"intro": "Hi, I'm a farmer named Raj. What fruit do you like to eat? I can tell you about their benefits.",
 				"learner": {
@@ -85,7 +85,7 @@
 			"image": "https://media.discordapp.net/attachments/1087307553471463514/1103190062734254110/vi_backpack_traveller_face_anime_3d_profile_image_ecd2ca83-4090-4b55-8057-868c19789a1d.png?width=1357&height=1357",
 			"intro": "Hi, I'm a traveler",
 			"topic": "Help me recommend Thai foods and places to visit",
-			"CEFRlevel": "B1",
+			"CEFRlevel": "A1",
 			"details": {
 				"intro": "Hello, my name is Anna and I'm a traveler. I'm interested in trying spicy Thai food. What menu items should I try?",
 				"learner": {

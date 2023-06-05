@@ -1,238 +1,319 @@
 [
 	{
 		"id": "1",
-		"blogName": "The Magic Paintbrush",
-		"content": "Once upon a time, there was a poor young boy named Ma Liang who loved to paint more than anything else. However, he didn’t have a paintbrush, so he used a stick to draw in the dirt. One day, he met an old man who gave him a magic paintbrush. The old explained to Ma Liang that the paintbrush was special and if he painted something, it would come to life. Ma Liang was very excited and went home to test his new paintbrush. When he drew a tree, it grew in front of his eyes. He then drew a pig, and it came to life and ran away. From that day on, Ma Liang used the magic paintbrush to help people. Whenever a person was hungry or sick, he drew food or medicine, and it would come to life. The news of Ma Liang’s magic paintbrush spread quickly, and the greedy emperor heard about him. He ordered Ma Liang to paint gold and treasure for him. However, Ma Liang refused to use his magic paintbrush for selfish reasons. The emperor was angry and locked him up. But Ma Liang’s magic paintbrush came to the rescue, drawing a door and allowing him to escape. From that day on, Ma Liang continued to use his magic paintbrush to help others selflessly, and he lived happily ever after.",
+		"blogName": "The Brave Little Mouse",
+		"content": "Once upon a time, in a tiny village nestled between the rolling hills, there lived a brave little mouse named Milo. Milo was unlike any other mouse in the village. He was curious and adventurous, always seeking new experiences.\n\nOne sunny morning, Milo ventured out of his cozy mouse hole and embarked on a grand adventure. He had heard rumors about a magical cheese hidden deep within the enchanted forest. Determined to find it, Milo scurried through the tall grass and into the unknown.\n\nAs he entered the forest, Milo's heart started pounding with excitement. The ancient trees whispered secrets, and the sunlight danced through the leaves above. But the forest was vast, and Milo soon found himself lost in its labyrinth of paths.\n\nJust as Milo was about to give up, he spotted a friendly squirrel named Sammy. With a cheerful smile, Sammy offered to help Milo find his way. Together, they traversed moss-covered rocks, crossed babbling brooks, and climbed towering tree trunks.\n\nAfter what felt like an eternity, they stumbled upon a hidden clearing. In the center stood an enormous tree, and beneath it, a glowing golden cheese. Milo's eyes widened with joy.\n\nBut their excitement was short-lived. A fearsome owl named Ophelia swooped down, blocking their path. Ophelia was known for her sharp claws and piercing screech, terrifying all who crossed her path.\n\nWith bravery in his heart, Milo confronted the owl. He explained that they were just humble mice in search of the magical cheese. Surprisingly, Ophelia listened and softened her gaze.\n\nImpressed by Milo's courage, Ophelia allowed him to take a small piece of the golden cheese. Milo thanked Ophelia and, with Sammy by his side, made their way back to the village.\n\nWord of their adventure spread quickly, and the entire village celebrated their return. The golden cheese became a symbol of bravery and friendship.\n\nFrom that day forward, Milo's tale was told throughout the land, reminding everyone that even the smallest creatures can achieve greatness.\n\nAnd so, the brave little mouse, Milo, became a legend, teaching us all that courage and determination can lead to extraordinary adventures.\n\nThe End",
 		"topic": "Tale",
-		"image": "https://cdn.discordapp.com/attachments/842737146321174558/1115380759759425556/img-x849Lb0uesO9MwW1EIxkMWvv.png",
+		"image": "https://media.discordapp.net/attachments/842737146321174558/1112388831853936660/img-UWWVcVNWmtDYYMRjXuv4bIdA.png?width=655&height=655",
 		"dateTime": "2023-05-20T09:30:00Z",
 		"quiz": [
 			{
-				"question": "What does the term 'selflessly' mean in the story?",
-				"choices": ["selfishly", "bravely", " sincerely", "without selfishness"],
-				"answer": 3
-			},
-			{
-				"question": "What did Ma Liang use before he was given the magic paintbrush?",
-				"choices": ["A pencil", "A crayon", "A stick", "A paintbrush"],
-				"answer": 2
-			},
-			{
-				"question": "What did Ma Liang draw that came to life and ran away?",
-				"choices": ["A tree", "A house", "A pig", "A flower"],
-				"answer": 2
-			},
-			{
-				"question": "What does the term 'greedy' mean in the story?",
-				"choices": ["generous", "selfish", "wise", "content"],
+				"question": "What did Milo and Sammy find in the enchanted forest?",
+				"choices": [
+					"A hidden treasure chest",
+					"A magical cheese",
+					"A friendly squirrel",
+					"An ancient tree"
+				],
 				"answer": 1
 			},
 			{
-				"question": "What tone of voice did Ma Liang use when he refused to use his magic paintbrush for selfish reasons?",
-				"choices": ["Angry", "Sad", "Humble", "Confused"],
+				"question": "What did Ophelia, the fearsome owl, do when Milo confronted her?",
+				"choices": [
+					"She attacked Milo and Sammy.",
+					"She flew away and left them alone.",
+					"She listened to Milo and softened her gaze.",
+					"She screeched loudly to scare them away."
+				],
+				"answer": 2
+			},
+			{
+				"question": "What is the meaning of the word \"labyrinth\" as used in the story?",
+				"choices": [
+					"A small, cozy hole",
+					"A vast, dense forest",
+					"A winding and complex maze",
+					"A brightly shining object"
+				],
+				"answer": 2
+			},
+			{
+				"question": "What is the meaning of the word \"traversed\" as used in the story?",
+				"choices": [
+					"To hide or conceal",
+					"To fly or soar",
+					"To move quickly and lightly",
+					"To travel across or through"
+				],
+				"answer": 3
+			},
+			{
+				"question": "What tone of voice is used to describe Milo's encounter with the fearsome owl, Ophelia?",
+				"choices": ["Joyful", "Terrified", "Serious", "Surprised"],
 				"answer": 3
 			}
 		],
 		"vocabs": [
-			"poor",
-			"paintbrush",
-			"stick",
-			"draw",
-			"dirt",
-			"old man",
-			"magic",
-			"explained",
-			"special",
-			"excited",
-			"test",
-			"tree",
-			"grew",
-			"pig",
-			"ran away",
-			"help",
-			"hungry",
-			"sick",
-			"food",
-			"medicine",
-			"news",
-			"greedy",
-			"emperor",
-			"ordered",
-			"gold",
-			"treasure",
-			"refused",
-			"selfish",
-			"locked up",
-			"rescue",
-			"door",
-			"escape",
-			"selflessly",
-			"happily ever after"
+			"tiny",
+			"nestled",
+			"brave",
+			"adventurous",
+			"ventured",
+			"rumors",
+			"hidden",
+			"deep",
+			"enchanted",
+			"scurried",
+			"labyrinth",
+			"cheerful",
+			"traversed",
+			"moss-covered",
+			"babbling",
+			"towering",
+			"stumbled",
+			"clearing",
+			"enormous",
+			"beneath",
+			"glowing",
+			"widened",
+			"short-lived",
+			"fearsome",
+			"swooped",
+			"blocking",
+			"sharp",
+			"piercing",
+			"terrifying",
+			"confronted",
+			"humble",
+			"gaze",
+			"impressed",
+			"allowed",
+			"symbol",
+			"celebrated",
+			"tale",
+			"throughout",
+			"reminding",
+			"creatures",
+			"greatness"
 		]
 	},
 	{
 		"id": "2",
-		"blogName": "The Clever Tortoise and the Hare",
-		"content": "Once upon a time, there was a fast and boastful hare who always talked about how he could outrun anyone. One day, the tortoise heard the hare bragging and challenged him to a race. The hare thought it was silly to race against a slow-moving tortoise, but he accepted the challenge anyway. He got so confident he took a nap while the tortoise worked hard to finish the race and won. The hare woke up too late to catch up to the slow-moving tortoise. He was shocked at how the tortoise managed to win the race, so he demanded a rematch. The tortoise agreed, and the race began. This time, the tortoise knew he couldn't win by running, so he thought cleverly and decided to wear himself out just a little so the hare wouldn't know he was in the lead and would get complacent. When the hare took a nap again, the tortoise kept walking steadily, and when the hare woke up, it was too late. The tortoise won again! The hare learnt an important lesson and never boasted about his speed again. The End.",
+		"blogName": "The Little Red Hen",
+		"content": "The Little Red Hen. Once upon a time, there was a little red hen who lived on a farm. She was a hardworking and diligent hen. One sunny morning, as she pecked the ground for grains, she found a few grains of wheat. The little red hen had an idea.\n\nShe went to the other farm animals and said, \"Who will help me plant these grains of wheat?\"\n\n\"Not I,\" said the lazy dog. \"I prefer to lie in the sun and do nothing.\"\n\n\"Not I,\" said the sleepy cat. \"I'd rather take a nap under the tree.\"\n\n\"Not I,\" said the greedy pig. \"I am too busy eating.\"\n\nSo, the little red hen decided to plant the grains of wheat all by herself. She worked hard, digging the soil, sowing the seeds, and watering the ground. Days and weeks passed, and the wheat grew tall and golden.\n\nWhen the time came to harvest the wheat, the little red hen asked again, \"Who will help me gather the wheat?\"\n\n\"I won't,\" said the lazy dog.\n\n\"I won't,\" said the sleepy cat.\n\n\"I won't,\" said the greedy pig.\n\nUndeterred, the little red hen gathered the wheat all by herself. She threshed the wheat, ground it into flour, and baked a loaf of bread. The smell of fresh bread wafted through the farm.\n\nWhen the bread was ready, the little red hen asked one more time, \"Who will help me eat this delicious bread?\"\n\n\"I will!\" exclaimed the lazy dog.\n\n\"I will!\" exclaimed the sleepy cat.\n\n\"I will!\" exclaimed the greedy pig.\n\nBut the little red hen shook her head and said, \"No, I will eat the bread all by myself. I worked hard, and I deserve it.\"\n\nAnd so, the little red hen enjoyed her bread, knowing that hard work and perseverance pay off.\n\nMoral of the story: It is important to work hard and be responsible for our tasks.",
 		"topic": "Tale",
-		"image": "https://cdn.discordapp.com/attachments/842737146321174558/1115381043135008869/img-wnApxDwQXFJvmoEkntVtFY2Q.png",
-		"dateTime": "2023-05-20T09:30:00Z",
+		"image": "https://media.discordapp.net/attachments/842737146321174558/1112388417276346448/img-R3sdovxfsO7AvnA4ddAsoqLC.png?width=655&height=655",
+		"dateTime": "2023-05-18T14:15:00Z",
 		"quiz": [
 			{
-				"question": "What was the tone of voice of the hare when he talked about his speed?",
-				"choices": ["Arrogant", "Modest", "Excited", "Indifferent"],
-				"answer": 0
-			},
-			{
-				"question": "What does the word 'complacent' mean in this story?",
-				"choices": ["arrogant", "lazy", "unpredictable", "content"],
-				"answer": 3
-			},
-			{
-				"question": "What did the tortoise do differently in the second race?",
+				"question": "Why did the little red hen refuse to share the bread with the lazy dog, sleepy cat, and greedy pig?",
 				"choices": [
-					"He ran faster than before",
-					"He took a nap like the hare",
-					"He wore himself out a little so the hare wouldn't know he was in the lead",
-					"He gave up and let the hare win"
+					"She didn't like them.",
+					"She wanted to eat all the bread herself.",
+					"They had refused to help her throughout the process.",
+					"She wanted to teach them a lesson."
 				],
 				"answer": 2
 			},
 			{
-				"question": "What does the word 'cleverly' mean in this story?",
-				"choices": ["in a foolish way", "wisely and resourcefully", "rudely", "slowly"],
+				"question": "What was the response of the lazy dog when the little red hen asked for help in planting the grains of wheat?",
+				"choices": [
+					"\"I prefer to lie in the sun and do nothing.\"",
+					"\"I am too busy eating.\"",
+					"\"I'd rather take a nap under the tree.\"",
+					"\"I will help you.\""
+				],
+				"answer": 0
+			},
+			{
+				"question": "What does the word \"diligent\" mean in the story?",
+				"choices": ["Lazy", "Hardworking", "Greedy", "Sleepy"],
 				"answer": 1
 			},
 			{
-				"question": "Why did the hare lose the first race?",
-				"choices": [
-					"He got lost on the track",
-					"He stopped to eat some carrots",
-					"He took a nap while the tortoise kept moving",
-					"He got distracted by other animals on the way"
-				],
+				"question": "What does the word \"threshed\" mean in the story?",
+				"choices": ["Harvested", "Watered", "Ground", "Gathered"],
+				"answer": 2
+			},
+			{
+				"question": "What is the tone of the little red hen's response when the other animals finally offer to help her eat the bread?",
+				"choices": ["Excitement", "Gratitude", "Disappointment", "Indifference"],
 				"answer": 2
 			}
 		],
 		"vocabs": [
-			"boastful",
-			"outrun",
-			"challenge",
-			"confident",
-			"slow-moving",
-			"nap",
-			"shocked",
-			"rematch",
-			"cleverly",
-			"complacent",
-			"steadily",
-			"lesson"
+			"hen",
+			"hardworking",
+			"diligent",
+			"pecked",
+			"grains",
+			"wheat",
+			"farm",
+			"sowing",
+			"threshed",
+			"flour",
+			"loaf",
+			"wafted",
+			"delicious",
+			"exclaimed",
+			"perseverance"
 		]
 	},
 	{
 		"id": "3",
-		"blogName": "The Three Little Pigs",
-		"content": "Once upon a time, there were three little pigs who decided that they were old enough to build their own houses. The first little pig was lazy and built his house out of straw. The second little pig was a little bit smarter and decided to build his house out of sticks. The third little pig was very wise and built his house out of bricks. \nOne day, a big, bad wolf came and knocked on the door of the first little pig's straw house. The pig was frightened and refused to open the door. But the wolf huffed and puffed and blew the straw house down in one big breath. The little pig ran to his brother's house made of sticks. \nThe wolf followed him and knocked on the door. But when the wolf tried to blow down the stick house, it didn't work either. So the two little pigs ran to their brother's house made of bricks. The wolf followed them there, but no matter how hard he huffed and puffed, he couldn't blow down the brick house. \nThe three little pigs lived happily ever after in their safe and sturdy brick house, out of reach of the big bad wolf.",
+		"blogName": "The Tortoise and the Hare",
+		"content": "Once upon a time, there was a tortoise and a hare. The hare was very proud of his speed and often boasted about how fast he could run. The tortoise, on the other hand, was slow and steady.\n\nOne sunny day, the hare challenged the tortoise to a race. The tortoise accepted the challenge, even though he knew he was not as fast as the hare. The animals in the forest gathered around to watch the race.\n\nAs the race began, the hare quickly zoomed ahead, leaving the tortoise far behind. Confident in his speed, the hare decided to take a nap under a shady tree, thinking he had plenty of time to catch up and win the race.\n\nMeanwhile, the tortoise continued to plod along, step by step, without stopping. He didn't care about being the fastest; he only focused on moving forward.\n\nWhen the hare woke up from his nap, he looked around and saw the tortoise nearing the finish line. Shocked and determined to win, he sprinted as fast as he could. But it was too late.\n\nThe tortoise crossed the finish line before the hare could catch up. The animals cheered for the tortoise, amazed at his perseverance and determination. The hare felt foolish for underestimating his opponent.\n\nThe moral of the story is that slow and steady wins the race. It's not always about being the fastest or the most talented. Consistency, patience, and never giving up are what lead to success in the end.\n\nThe hare learned a valuable lesson that day, and from then on, he respected the tortoise and never boasted about his speed again. And the tortoise, though slow, felt a sense of accomplishment and pride in his steady progress.",
 		"topic": "Tale",
-		"image": "https://cdn.discordapp.com/attachments/842737146321174558/1115381294633844777/img-JtpzXYfhPxZzQ0PwYPwP90qJ.png",
-		"dateTime": "2023-05-20T09:30:00Z",
+		"image": "https://media.discordapp.net/attachments/842737146321174558/1112386594301804585/img-PIkqq3Tw3FkRSnradEzbUqJ5.png?width=655&height=655",
+		"dateTime": "2023-05-15T11:45:00Z",
 		"quiz": [
 			{
-				"question": "What was the material used by the third little pig to build his house?",
-				"choices": ["Straw", "Sticks", "Bricks", "Wood"],
-				"answer": 2
-			},
-			{
-				"question": "What did the third little pig build his house out of?",
-				"choices": ["Straw", "Sticks", "Bricks", "Wood"],
-				"answer": 2
-			},
-			{
-				"question": "What tone of voice did the big, bad wolf most likely have when he knocked on the doors of the three little pigs?",
-				"choices": ["Polite", "Friendly", "Menacing", "Happy"],
-				"answer": 2
-			},
-			{
-				"question": "What did the big bad wolf do when he couldn't blow down the brick house?",
+				"question": "What is the moral of the story of the tortoise and the hare?",
 				"choices": [
-					"He gave up and left",
-					"He climbed down the chimney",
-					"He knocked down the door",
-					"He apologized to the pigs"
-				],
-				"answer": 1
-			},
-			{
-				"question": "What material did the second little pig use to build his house?",
-				"choices": ["Straw", "Sticks", "Bricks", "Wood"],
-				"answer": 1
-			}
-		],
-		"vocabs": ["straw", "sticks", "bricks", "huffed", "puffed"]
-	},
-	{
-		"id": "4",
-		"blogName": "The Ant and the Grasshopper",
-		"content": "In a field, there lived an ant and a grasshopper. The ant was busy all year storing food for the winter, while the grasshopper spent his time singing, playing, and enjoying the weather. The grasshopper thought the ant was wasting his life working so hard, but the ant didn't care and kept working every day. \n\nWhen the winter came, the ant had enough food to survive, but the grasshopper had none. He started to get hungry and went to the ant's house, asking for food. But the ant reminded him of how he spent his time all year and refused to give him any food. The grasshopper had to suffer through the cold winter without any food.\n\nFrom then on, the grasshopper learned a valuable lesson: work hard and prepare for the future. Don't waste your time and enjoy the present moment, but also don't forget about the future. The ant and the grasshopper became friends, and the grasshopper promised to work hard and store food for the next winter.",
-		"topic": "Tale",
-		"image": "https://cdn.discordapp.com/attachments/842737146321174558/1115381508434296912/img-q1VcnwBd1r20xylNW2Ts6vGS.png",
-		"dateTime": "2023-05-20T09:30:00Z",
-		"quiz": [
-			{
-				"question": "What does 'storing food' mean in the context of the story?",
-				"choices": ["Eating food", "Collecting food", "Sharing food", "Burying food"],
-				"answer": 1
-			},
-			{
-				"question": "What tone of voice did the ant use when refusing to give food to the grasshopper?",
-				"choices": ["Gentle", "Rude", "Stern", "Friendly"],
-				"answer": 2
-			},
-			{
-				"question": "What lesson did the grasshopper learn?",
-				"choices": [
-					"To never ask the ant for food",
-					"To waste time and enjoy the present moment",
-					"To work hard and prepare for the future",
-					"To only sing and play all day"
+					"Speed is the most important factor in winning a race.",
+					"Boasting about one's abilities can lead to failure.",
+					"Consistency and determination are key to success.",
+					"Slow and steady progress is not worth celebrating."
 				],
 				"answer": 2
 			},
 			{
-				"question": "What does the word 'valuable' mean in the following sentence? 'The grasshopper learned a valuable lesson.'",
-				"choices": ["Worthless", "Useless", "Important", "Heavy"],
+				"question": "What caused the hare to lose the race against the tortoise in the story?",
+				"choices": [
+					"The tortoise took a shortcut.",
+					"The hare fell asleep during the race.",
+					"The hare got distracted by the cheering animals.",
+					"The tortoise was faster than the hare."
+				],
+				"answer": 1
+			},
+			{
+				"question": "What does the word \"perseverance\" mean in the story?",
+				"choices": [
+					"Being boastful and proud",
+					"Moving forward slowly and steadily",
+					"Consistency, patience, and never giving up",
+					"Being fast and talented"
+				],
 				"answer": 2
 			},
 			{
-				"question": "What did the ant do when the grasshopper asked for food in the winter?",
+				"question": "What does the word \"plod\" mean in the story?",
 				"choices": [
-					"Gave him all the food",
-					"Refused to give him any food",
-					"Gave him some food",
-					"Laughed and sang in front of him"
+					"To move quickly and swiftly",
+					"To take a nap under a shady tree",
+					"To boast and show off",
+					"To move forward slowly and heavily"
+				],
+				"answer": 3
+			},
+			{
+				"question": "How would you describe the tone of the story?",
+				"choices": [
+					"Joyful and playful",
+					"Serious and cautionary",
+					"Sad and tragic",
+					"Exciting and suspenseful"
 				],
 				"answer": 1
 			}
 		],
 		"vocabs": [
-			"field",
-			"ant",
-			"grasshopper",
-			"storing",
-			"winter",
-			"singing",
-			"playing",
-			"enjoying",
-			"wasting",
-			"survive",
-			"suffering",
-			"valuable",
-			"lesson",
-			"prepare",
-			"present moment",
-			"forget",
-			"friends",
-			"promised"
+			"once",
+			"proud",
+			"boasted",
+			"challenged",
+			"accepted",
+			"confident",
+			"zoomed",
+			"nap",
+			"shady",
+			"plenty",
+			"plod",
+			"determined",
+			"sprinted",
+			"perseverance",
+			"underestimating",
+			"moral",
+			"talented",
+			"consistency",
+			"patience",
+			"respected",
+			"accomplishment"
+		]
+	},
+	{
+		"id": "4",
+		"blogName": "The Lion and the Mouse",
+		"content": "Once upon a time, in a dense jungle, there lived a mighty lion. The lion was strong and feared by all the animals in the jungle. One day, while taking a nap under a tree, the lion was awakened by the tiny footsteps of a little mouse running across his body.\n\nAnnoyed by the disturbance, the lion grabbed the mouse with his massive paw and growled, \"How dare you wake me up, little mouse! I could easily crush you with one swipe of my paw. You are insignificant!\"\n\nThe frightened mouse begged for mercy and said, \"Oh great lion, please forgive me. I didn't mean to disturb you. I am small and weak, but I promise I will be forever grateful if you spare my life.\"\n\nThe lion paused for a moment, amused by the mouse's plea. He decided to grant mercy and let the mouse go. The mouse scurried away, relieved and thankful.\n\nDays passed, and one sunny afternoon, the lion found himself trapped in a hunter's net. He roared in frustration, struggling to break free. The noise caught the attention of the little mouse, who recognized the lion's roar.\n\nWithout hesitation, the mouse rushed to the scene. With its tiny teeth, the mouse began gnawing at the ropes of the net. The lion watched in amazement as the little mouse's efforts slowly freed him from the trap.\n\nFinally, the mouse successfully chewed through the last rope, setting the lion free. The lion expressed his gratitude and realized the importance of the tiny creature he had once underestimated.\n\nFrom that day forward, the lion and the mouse became unlikely friends. The lion understood that even the smallest acts of kindness could be significant, and the mouse learned that bravery comes in all sizes.\n\nThe moral of the story is that no act of kindness, no matter how small, is ever wasted. We should treat everyone with kindness and respect, regardless of their size or strength. You never know when you might need help from the most unexpected source.\n\nThe lion and the mouse taught the animals of the jungle a valuable lesson about the power of friendship and the importance of treating others with compassion and gratitude.",
+		"topic": "Tale",
+		"image": "https://media.discordapp.net/attachments/842737146321174558/1112386213828100246/img-zHE1zrH1vPAP5aNIGz5BTxzc.png?width=655&height=655",
+		"dateTime": "2023-05-12T16:20:00Z",
+		"quiz": [
+			{
+				"question": "What is the moral of the story \"The Lion and the Mouse\"?",
+				"choices": [
+					"Small acts of kindness can have a big impact.",
+					" Bravery is the key to success.",
+					"The lion is the king of the jungle.",
+					"Size and strength determine one's worth."
+				],
+				"answer": 0
+			},
+			{
+				"question": "What did the lion do when he first caught the mouse?",
+				"choices": [
+					"He crushed the mouse with his paw.",
+					"He ignored the mouse and went back to sleep.",
+					"He decided to keep the mouse as his pet.",
+					"He granted mercy and let the mouse go."
+				],
+				"answer": 3
+			},
+			{
+				"question": "In the story, the lion was awakened by the tiny footsteps of a little mouse running across his body. What does \"gnawing\" mean when the mouse began gnawing at the ropes of the net?",
+				"choices": [
+					"Running quickly",
+					"Biting or chewing persistently",
+					"Climbing up and down",
+					"Squeaking loudly"
+				],
+				"answer": 1
+			},
+			{
+				"question": "In the story, the lion expressed his gratitude towards the little mouse. What does \"gratitude\" mean?",
+				"choices": ["Extreme fear", "Deep sadness", "Strong anger", "Thankfulness or appreciation"],
+				"answer": 3
+			},
+			{
+				"question": "Which tone of voice did the lion use when speaking to the mouse initially?",
+				"choices": [
+					"Angry and threatening",
+					"Amused and entertained",
+					"Sympathetic and understanding",
+					"Grateful and appreciative"
+				],
+				"answer": 0
+			}
+		],
+		"vocabs": [
+			"dense",
+			"mighty",
+			"swipe",
+			"insignificant",
+			"amused",
+			"mercy",
+			"scurried",
+			"relieved",
+			"hesitant",
+			"gnawing",
+			"amazement",
+			"underestimated",
+			"gratitude",
+			"unlikely",
+			"moral",
+			"regardless",
+			"compassion"
 		]
 	},
 	{

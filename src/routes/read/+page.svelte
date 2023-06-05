@@ -15,6 +15,8 @@
 		items = await getReadingItems(data.topics[selectedTopic]);
 	};
 
+	// generateReadingItem("Tale").then(res => console.log(JSON.stringify(res))).catch(console.error);
+
 	$: selectedTopic, onSelectedTopicChanged();
 </script>
 

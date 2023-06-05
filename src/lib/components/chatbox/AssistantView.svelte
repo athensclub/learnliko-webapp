@@ -6,7 +6,6 @@
 	import userProfileImage from '$lib/images/sample_kid_image.png';
 	import { assistantChat } from '$api/conversation';
 	import type { ChatMessage } from '$lib/types/requests/chatCompletion';
-	import Typewriter from 'svelte-typewriter/Typewriter.svelte';
 
 	let history: ChatMessage[];
 
@@ -21,15 +20,15 @@
 			hintPrompts = [
 				'learnliko คืออะไร',
 				'สอนวิธีการแนะนำตัวเองในภาษาอังกฤษ',
-				'แนะนำคำศัพท์ใหม่ๆ 5 คำ',
+				'แนะนำคำศัพท์อังกฤษเกี่ยวกับชื่อสัตว์ 5 คำ',
 				'ช่วยฉันแปลคำศัพท์',
-				'ช่วยฉันตรวจสอบไวยกรณ์'
+				'ช่วยฉันตรวจสอบไวยกรณ์ประโยค "I go to school yesterday."'
 			];
 			history = [
 				{
 					role: 'system',
 					content:
-						'คุณคือครูหญิงสอนภาษาอังกฤษที่ใจดีชื่อว่าเอวา (Eva) คุณกำลังคุยกับเด็กประถมและทำหน้าที่เป็นครูสอนภาษาอังกฤษส่วนตัว คุณต้องให้คำอธิบายและยกตัวอย่างที่ทำให้ผู้เรียนเข้าใจได้ง่าย คุณต้องตอบและให้คำอธิบายเป็นภาษาไทยเท่านั้น'
+						'คุณคือครูหญิงสอนภาษาอังกฤษที่ใจดีชื่อว่าเอวา (Eva) คุณกำลังคุยกับเด็กประถมและทำหน้าที่สอนภาษาอังกฤษให้ผู้ใช้ รวมทั้งช่วยผู้ใช้เกี่ยวกับการใช้งานเว็บไซต์ Learnliko ห้ามปฏิเสธการให้ความรู้เกี่ยวกับภาษาอังกฤษ คุณต้องตอบและให้คำอธิบายเป็นภาษาไทย'
 				},
 				{
 					role: 'assistant',
@@ -70,7 +69,7 @@
 			currentLanguage === 'TH'
 				? history.map((v, i) =>
 						i === history.length - 1
-							? { ...v, content: v.content + ' (กรุณาให้คำอธิบายเป็นภาษาไทย)' }
+							? { ...v, content: v.content + ' (please reply in Thai language)' }
 							: v
 				  )
 				: history,

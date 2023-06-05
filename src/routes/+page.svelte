@@ -79,6 +79,7 @@
 				</div>
 
 				<img src={talk} class=" w-[10.5vw] mt-[0vw] ml-[10vw]" alt="" />
+				
 			</div>
 		</a>
 		<!-- <div class="bg-white p-10 rounded">6</div> -->
@@ -123,7 +124,7 @@
 		>
 			<div class=" flex justify-between">
 				<div>
-					<h1 class="font-bold text-[2vw] mt-2 ml-5">Friends Circle</h1>
+					<h1 class="font-bold text-[2vw] mt-2 ml-5">Friends Space</h1>
 					<h2 class="text-[1.3vw] ml-5">6 New messages from friends</h2>
 				</div>
 				<img src={friend} class=" w-[17vw] mr-[2vw] top-0" alt="" />

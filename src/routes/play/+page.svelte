@@ -29,7 +29,7 @@
 </script>
 
 <header
-	class="z-20 flex top-0 items-center justify-left h-[48px]font-line-seed text-xl font-bold w-full fixed bg-transparent py-8 px-6 pt-10"
+	class="z-20 flex top-0 items-center justify-left h-[48px]font-line-seed text-xl font-bold w-full fixed bg-transparent py-8 px-6 pt-6"
 >
 	<a href="/" class="flex">
 		<img
@@ -53,7 +53,7 @@
 </header>
 
 <div
-	class="xl:mt-[5vw] w-[42vh]  justify-center font-bold xl:text-[1.5vw] lg:text-[3.5vh] text-[2.2vh] z-1 lg:flex lg:mt-[15vh] mt-[8vh] lg:w-[32vw]  mx-auto  rounded-full"
+	class="xl:mt-[5vw] py-3   justify-center font-bold xl:text-[1.5vw] lg:text-[3.5vh] text-[2.2vh] z-1 lg:flex lg:mt-[15vh] mt-[8vh] lg:w-[32vw]  mx-auto  rounded-xl"
 >
 	<br />
 
@@ -64,7 +64,7 @@
 	</h3>
 
 	<h3
-		class=" md:portrait:invisible font-line-seed font-bold text-center text-white  lg:text-[1.5vw]"
+		class=" md:portrait:invisible font-line-seed font-bold text-center text-white  lg:text-[1.5vw] "
 	>
 		Today, You have 5 people to Talk!
 	</h3>

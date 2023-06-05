@@ -101,7 +101,7 @@
 			<button
 				on:click={submit}
 				disabled={selected.some((s) => s === null)}
-				class="mt-7 bg-[#D9D9D9] border border-black w-fit mx-auto px-5 py-1 rounded-xl"
+				class="mt-7 bg-[#6C80E8] w-fit mx-auto px-5 py-1 rounded-lg shadow-md text-white"
 			>
 				Submit
 			</button>

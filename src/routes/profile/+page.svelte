@@ -60,10 +60,19 @@
 					</div>
 				</div>
 			</div>
-
 			<div class="flex flex-col w-full">
 				<button class="text-sm font-bold border border-black/[0.15] py-2 rounded-3xl">
 					Change Password
+				</button>
+			</div>
+			<div class="flex flex-col w-full">
+				<a class="text-sm font-bold border border-black/[0.15] py-2 rounded-3xl text-center" href="/cert">
+					CEFR Certificate
+				</a>
+			</div>
+			<div class="flex flex-col w-full">
+				<button class="text-sm font-bold border border-black/[0.15] py-2 rounded-3xl">
+					Terms and Policy
 				</button>
 			</div>
 		</div>
@@ -140,7 +149,7 @@
 
 										<button
 											on:click={() => showItemRecap(item)}
-											class="mt-3 w-fit bg-[#D9D9D9] rounded-2xl py-1 px-4"
+											class="mt-3 w-fit bg-[#000] rounded-full py-1 px-4 text-white"
 										>
 											See Recap
 										</button>

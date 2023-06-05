@@ -8,7 +8,7 @@
 	import type { LearnedConversationItem, LearningDiaryItem } from '$lib/types/learningDiary';
 	import ConversationCard from '$lib/components/ConversationCard.svelte';
 	import { formatAMPM } from '$lib/utils/time';
-	import { currentChatboxView, recapHistory, showChatbox } from '$lib/global/chatbox';
+	import { chatContext, currentChatboxView, recapHistory, showChatbox } from '$lib/global/chatbox';
 	import ReadMore from '$lib/components/ReadMore.svelte';
 
 	let name = 'Natsataporn M.';
@@ -18,11 +18,11 @@
 	let showingItem: LearningDiaryItem | null = null;
 
 	const showItemRecap = (item: LearnedConversationItem) => {
+		$chatContext = { conversation: item.conversation };
 		$recapHistory = item.recap;
 		$currentChatboxView = 'RECAP';
 		$showChatbox = true;
 	};
-
 
 	onMount(async () => {
 		// TODO: implement db using actual database (cloud) and probably move this to ssr.

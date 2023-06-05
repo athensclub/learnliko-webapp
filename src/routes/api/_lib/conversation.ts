@@ -13,15 +13,27 @@ export const chat = async function (messages: ChatMessage[]) {
 	return String(message);
 };
 
-export const assistantChat =  async function (messages: ChatMessage[]) {
+/**
+ * The output is a stream. It finishes when this function finishes (await assistantChat(...) is finished).
+ * 
+ * @param messages the message history to query assistant.
+ * @param callback the function that is called each time it receives token through stream.
+ * @see https://stackoverflow.com/a/74336207
+ */
+export const assistantChat = async function (messages: ChatMessage[], callback: (token: string) => void) {
+	// modified from https://stackoverflow.com/a/74336207
 	const response = await fetch('/api/v1/conversation/assistant', {
 		method: 'POST',
 		body: JSON.stringify({ messages })
 	});
-	const val = await response.json();
-	if (!val) throw new Error('No response from chat bot');
+	if (!response.body) throw new Error('No response from chat bot');
 
-	return String(val.message);
+	const reader = response.body.pipeThrough(new TextDecoderStream()).getReader();
+	while (true) {
+		const { value, done } = await reader.read();
+		if (done) break;
+		callback(value);
+	}
 };
 
 export const analyzeDialog = async function (assistant: string, user: string) {

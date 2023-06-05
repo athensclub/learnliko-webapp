@@ -10,10 +10,9 @@ import { HumanChatMessage, SystemChatMessage, AIChatMessage } from "langchain/sc
 /* Load in the file we want to do question answering over */
 import text from "$lib/server/db/learnliko_info.txt?raw";
 
-/* Initialize the LLM to use to answer the question */
-const model = new ChatOpenAI({
+const nonStreamingModel = new ChatOpenAI({
     modelName: "gpt-3.5-turbo",
-    openAIApiKey: SECRET_OPENAI_API_KEY
+    openAIApiKey: SECRET_OPENAI_API_KEY,
 });
 /* Split the text into chunks */
 const textSplitter = new RecursiveCharacterTextSplitter({ chunkSize: 1000 });
@@ -22,11 +21,6 @@ const docs = await textSplitter.createDocuments([text]);
 const vectorStore = await HNSWLib.fromDocuments(docs, new OpenAIEmbeddings(
     { openAIApiKey: SECRET_OPENAI_API_KEY }
 ));
-/* Create the chain */
-const chain = ConversationalRetrievalQAChain.fromLLM(
-    model,
-    vectorStore.asRetriever()
-);
 
 const chatMessageToLangchainMessage = (message: ChatMessage) => {
     if (message.role === 'assistant') {
@@ -43,6 +37,38 @@ export const assistantChatCompletion = async (message: ChatMessage[]) => {
     if (!query)
         throw new Error("Call assistant chat completion with empty arguments");
 
-    const res = await chain.call({ question: query.content, chat_history: message.map(chatMessageToLangchainMessage) });
-    return res.text;
+    // modified from https://stackoverflow.com/a/74336207
+    const stream = new ReadableStream<string>({
+        async start(controller) {
+            /* Initialize the LLM to use to answer the question */
+            const model = new ChatOpenAI({
+                modelName: "gpt-3.5-turbo",
+                openAIApiKey: SECRET_OPENAI_API_KEY,
+                streaming: true,
+                callbacks: [
+                    {
+                        handleLLMNewToken(token) {
+                            controller.enqueue(token);
+                        },
+                    },
+                ],
+            });
+
+            /* Create the chain */
+            const chain = ConversationalRetrievalQAChain.fromLLM(
+                model,
+                vectorStore.asRetriever(),
+                {
+                    returnSourceDocuments: true,
+                    questionGeneratorChainOptions: {
+                        llm: nonStreamingModel,
+                    },
+                }
+            );
+
+            await chain.call({ question: query.content, chat_history: message.map(chatMessageToLangchainMessage) });
+            controller.close();
+        },
+    })
+    return stream;
 }

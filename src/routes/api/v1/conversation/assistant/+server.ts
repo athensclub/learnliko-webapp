@@ -6,8 +6,12 @@ export const POST: RequestHandler = async ({ request }) => {
     const { messages } = await request.json();
     if (!messages) throw error(400, `Error: No messages provided`);
     try {
-        const chatGPTMessage = await assistantChatCompletion(messages);
-        return json({ message: chatGPTMessage });
+        const stream = await assistantChatCompletion(messages);
+        return new Response(stream, {
+            headers: {
+                'content-type': 'text/event-stream',
+            }
+        });
     } catch (e) {
         throw error(500, `Error: ${e}`);
     }

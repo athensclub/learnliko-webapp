@@ -8,36 +8,19 @@
 	import type { ChatMessage } from '$lib/types/requests/chatCompletion';
 	import Typewriter from 'svelte-typewriter/Typewriter.svelte';
 
-	let history: ChatMessage[] = [
-		{
-			role: 'system',
-			content:
-				'You will act as female kindly AI assistant and English teacher named EVA. You are talking to elementary school students. You can be a private English teacher for elementary-aged students. You will explain it in an easy-to-understand way and give examples that correspond to elementary-aged students. You will teach and help the students about English such as Help students introduce themself by giving sample example, translating words, checking grammar. All of your answers must be in Thai language. Do not answer in English language.'
-		},
-		{
-			role: 'assistant',
-			content:
-				'สวัสดี ฉันคือผู้ช่วยของเธอ ฉันสามารถให้ความช่วยเหลือในการใช้งาน Learnliko รวมถึงให้ความช่วยเหลือด้านภาษาอังกฤษ เช่น การแปลคำศัพท์, การใช้แกรมมา และ อื่นๆ'
-		}
-	];
+	let history: ChatMessage[];
 
 	let currentText = '';
 	let waitingForAIResponse = false;
 
-	let hintPrompts = [
-		'learnliko คืออะไร',
-		'สอนแนะนำตัวเองเป็นภาษาอังกฤษ',
-		'แนะนำคำศัพท์ใหม่ๆ 5 คำ',
-		'ช่วยฉันแปลคำศัพท์',
-		'ช่วยฉันตรวจสอบไวยกรณ์'
-	];
+	let hintPrompts: string[];
 
 	let currentLanguage: 'TH' | 'EN' = 'TH';
 	const updateCurrentLanguage = () => {
 		if (currentLanguage === 'TH') {
 			hintPrompts = [
 				'learnliko คืออะไร',
-				'สอนแนะนำตัวเองเป็นภาษาอังกฤษ',
+				'สอนวิธีการแนะนำตัวเองในภาษาอังกฤษ',
 				'แนะนำคำศัพท์ใหม่ๆ 5 คำ',
 				'ช่วยฉันแปลคำศัพท์',
 				'ช่วยฉันตรวจสอบไวยกรณ์'
@@ -46,7 +29,7 @@
 				{
 					role: 'system',
 					content:
-						'You will act as female kindly AI assistant and English teacher named EVA. You are talking to elementary school students. You can be a private English teacher for elementary-aged students. You will explain it in an easy-to-understand way and give examples that correspond to elementary-aged students. You will teach and help the students about English such as Help students introduce themself by giving sample example, translating words, checking grammar. All of your answers must be in Thai language. Do not answer in English language.'
+						'คุณคือครูหญิงสอนภาษาอังกฤษที่ใจดีชื่อว่าเอวา (Eva) คุณกำลังคุยกับเด็กประถมและทำหน้าที่เป็นครูสอนภาษาอังกฤษส่วนตัว คุณต้องให้คำอธิบายและยกตัวอย่างที่ทำให้ผู้เรียนเข้าใจได้ง่าย คุณต้องตอบและให้คำอธิบายเป็นภาษาไทย'
 				},
 				{
 					role: 'assistant',
@@ -60,7 +43,7 @@
 				{
 					role: 'system',
 					content:
-						'You will act as female kindly AI assistant and English teacher named EVA. You are talking to elementary school students. You can be a private English teacher for elementary-aged students. You will explain it in an easy-to-understand way and give examples that correspond to elementary-aged students. You will teach and help the students about English such as Help students introduce themself by giving sample example, translating words, checking grammar. All of your answers must be in Thai language. Do not answer in English language.'
+						'You will act as female kindly AI assistant and English teacher named EVA. You are talking to elementary school students. You can be a private English teacher for elementary-aged students. You will explain it in an easy-to-understand way and give examples that correspond to elementary-aged students. You will teach and help the students about English such as Help students introduce themself by giving sample example, translating words, checking grammar. '
 				},
 				{ role: 'assistant', content: 'Hi. How can I help you?' }
 			];
@@ -81,7 +64,13 @@
 		history = [...history, { role: 'user', content: text }];
 
 		waitingForAIResponse = true;
-		const assistantAnswer = await assistantChat(history);
+		const assistantAnswer = await assistantChat(
+			currentLanguage === 'TH'
+				? history.map((v, i) =>
+						i === history.length - 1 ? { ...v, content: v.content + ' (กรุณาให้คำอธิบายเป็นภาษาไทย)' } : v
+				  )
+				: history
+		);
 		history = [...history, { role: 'assistant', content: assistantAnswer }];
 		waitingForAIResponse = false;
 	};
@@ -98,8 +87,6 @@
 	const onKeyPressed = (e: KeyboardEvent) => {
 		if (e.key === 'Enter') submitCurrentText();
 	};
-
-	// assistantChat(history).then(console.log).catch(console.log);
 </script>
 
 <div

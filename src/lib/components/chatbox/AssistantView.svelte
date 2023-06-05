@@ -21,8 +21,8 @@
 				'learnliko คืออะไร',
 				'สอนวิธีการแนะนำตัวเองในภาษาอังกฤษ',
 				'แนะนำคำศัพท์อังกฤษเกี่ยวกับชื่อสัตว์ 5 คำ',
-				'ช่วยฉันแปลคำศัพท์',
-				'ช่วยฉันตรวจสอบไวยกรณ์ประโยค "I go to school yesterday."'
+				'"comprehension" แปลว่าอะไร',
+				'ช่วยฉันตรวจสอบไวยกรณ์ประโยคว่า "I go to school yesterday."'
 			];
 			history = [
 				{
@@ -172,7 +172,7 @@
 >
 	{#each hintPrompts as hint, index (index)}
 		<button
-			on:click={() => submitText(hint)}
+			on:click={() => currentText = hint}
 			class="text-sm border border-black/[0.15] py-2 px-5 rounded-full whitespace-nowrap mb-5 backdrop-blur-lg"
 		>
 			{hint}

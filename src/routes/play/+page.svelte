@@ -70,7 +70,7 @@
 	</h3>
 </div>
 
-<div class="md:portrait:invisible lg:mt-6">
+<div class="md:portrait:invisible lg:mt-2">
 	<CardSlider cards={data.conversationCorouselItems} />
 </div>
 

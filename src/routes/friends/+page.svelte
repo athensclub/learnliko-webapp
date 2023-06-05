@@ -85,7 +85,7 @@
 
 					<div class="font-bold text-sm ml-2">Natsataporn M.</div>
 
-					<div class="bg-black text-white py-1 px-4 text-sm rounded-lg ml-2">A1</div>
+					<!-- <div class="bg-black text-white py-1 px-4 text-sm rounded-lg ml-2">A1</div> -->
 				</div>
 				<div class="flex flex-row w-full bg-white mt-3 p-3 rounded-xl items-center">
 					<div
@@ -95,7 +95,7 @@
 
 					<div class="font-bold text-sm ml-2">Natsataporn M.</div>
 
-					<div class="bg-black text-white py-1 px-4 text-sm rounded-lg ml-2">A1</div>
+					<!-- <div class="bg-black text-white py-1 px-4 text-sm rounded-lg ml-2">A1</div> -->
 				</div>
 				<div class="flex flex-row w-full bg-white mt-3 p-3 rounded-xl items-center">
 					<div
@@ -105,7 +105,7 @@
 
 					<div class="font-bold text-sm ml-2">Natsataporn M.</div>
 
-					<div class="bg-black text-white py-1 px-4 text-sm rounded-lg ml-2">A1</div>
+					<!-- <div class="bg-black text-white py-1 px-4 text-sm rounded-lg ml-2">A1</div> -->
 				</div>
 			</div>
 

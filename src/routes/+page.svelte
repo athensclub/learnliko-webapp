@@ -41,7 +41,7 @@
 				alt=""
 			/>
 			<button
-				class="p-[1vw] backdrop-blur-xl bg-white/10 shadow-lg  rounded-full w-[15vw] text-black mt-[3vw] mx-[3.5vw]"
+				class="p-[1vw] backdrop-blur-xl bg-white/10 shadow-lg font-line-seed font-bold rounded-full w-[15vw] text-black mt-[3vw] mx-[3.5vw]"
 				>⬇️Download App
 			</button>
 		</div>

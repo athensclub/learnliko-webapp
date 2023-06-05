@@ -63,7 +63,7 @@
 	</ul>
 
 	<div
-		class=" w-[23vw] top-[24vh] fixed right-[8vw] bg-transparent rounded-xl border-black/20 border-dashed border-2"
+		class=" w-[23vw] top-[24vh] fixed right-[8vw] bg-transparent"
 	>
 		<svg
 			class="w-full"

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { chat } from '$api/conversation';
+	import { isGoalComplete } from '$api/friendConversation';
 	import Header from '$lib/components/Header.svelte';
 	import userProfileImage from '$lib/images/sample_kid_image.png';
 	import type { ChatMessage } from '$lib/types/requests/chatCompletion';
@@ -13,6 +14,7 @@
 	];
 	let message: string = '';
 	let waitingForFriendResponse = false;
+	let goalCompleted = false;
 
 	// an array of chatGPT's history in raw data, used for chat completion
 	const gptHistory: ChatMessage[] = [];
@@ -35,8 +37,17 @@
 	const sendMessage = async function () {
 		history = [...history, { role: 'user', text: message }];
 		gptHistory.push({ role: 'user', content: message });
+
+		const promises: Promise<any>[] = [];
+		promises.push(
+			isGoalComplete('Ask your friend their favorite color', message).then(
+				(completed) => (goalCompleted = completed)
+			)
+		);
+		promises.push(friendReply());
 		message = '';
-		await friendReply();
+
+		await Promise.all(promises);
 	};
 
 	/**
@@ -101,6 +112,8 @@
 				<div class="absolute top-4 flex flex-col bg-white w-[95%] px-4 py-2 rounded-lg shadow-md">
 					<div class="text-lg font-bold">Quest</div>
 					<div>Ask your friend their favorite color</div>
+
+					<h3 class=" absolute top-1 right-4">{goalCompleted ? '✅ completed' : 'in progress'}</h3>
 				</div>
 
 				<!-- spacing -->

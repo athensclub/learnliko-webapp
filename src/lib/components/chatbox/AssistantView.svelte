@@ -64,16 +64,21 @@
 		history = [...history, { role: 'user', content: text }];
 
 		waitingForAIResponse = true;
-		const assistantAnswer = await assistantChat(
+		history = [...history, { role: 'assistant', content: '' }];
+		// use streaming
+		await assistantChat(
 			currentLanguage === 'TH'
 				? history.map((v, i) =>
 						i === history.length - 1
 							? { ...v, content: v.content + ' (กรุณาให้คำอธิบายเป็นภาษาไทย)' }
 							: v
 				  )
-				: history
+				: history,
+			(s) =>
+				(history = history.map((v, i) =>
+					i === history.length - 1 ? { ...v, content: v.content + s } : v
+				))
 		);
-		history = [...history, { role: 'assistant', content: assistantAnswer }];
 		waitingForAIResponse = false;
 	};
 
@@ -146,23 +151,18 @@
 						style="background-image: url('{userProfileImage}');"
 					/>
 				{/if}
-				<div class={`mx-3 border border-black/[0.15] py-2 px-5 rounded-xl max-w-[18rem] `}>
+				<span
+					class={`inline flex-wrap mx-3 border border-black/[0.15] py-2 px-5 rounded-xl max-w-[18rem] `}
+				>
 					{chat.content}
-				</div>
+
+					{#if waitingForAIResponse && index === history.length - 1}
+						<div class="cursor" />
+					{/if}
+				</span>
 			</div>
 		{/if}
 	{/each}
-
-	{#if waitingForAIResponse}
-		<div class="flex flex-row items-center">
-			<div
-				class={`w-[42px] h-[42px] bg-center bg-cover rounded-full mr-3 bg-[#FFD281]`}
-				style="background-image: url('{assistantProfileImage}')"
-			/>
-			Thinking
-			<Typewriter mode="loop">...</Typewriter>
-		</div>
-	{/if}
 
 	<!-- bottom spacing -->
 	<div class="w-full h-[100px]" />
@@ -207,3 +207,27 @@
 		</button>
 	</div>
 </div>
+
+<style>
+	/* Modified from https://www.npmjs.com/package/svelte-typewriter?activeTab=code */
+	@keyframes cursorFade {
+		0%,
+		100% {
+			opacity: 1;
+		}
+
+		50% {
+			opacity: 0;
+		}
+	}
+
+	.cursor {
+		content: '';
+		width: var(--cursor-width, 1ch);
+		height: 2ch;
+		vertical-align: text-top;
+		display: inline-block;
+		background-color: var(--cursor-color, #000000);
+		animation: cursorFade 1.25s infinite;
+	}
+</style>

@@ -190,10 +190,10 @@
 				? 'lg:text-[0.6vw] text-[3vw] px-1'
 				: 'lg:text-[0.9vw] text-[4vw]  px-6'
 		} flex flex-row w-fit items-center justify-center h-[5vh] shadow-lg z-40 
-		 rounded-full mb-6 bg-black/10 border border-white/10 backdrop-blur-sm text-white font-bold transition-[width,height,font] `}
+		 rounded-full mb-6 bg-white text-black font-bold transition-[width,height,font] `}
 	>
 		<svg
-			class="lg:h-[1vw] h-[4vw] mr-1 transition-size fill-white"
+			class="lg:h-[1vw] h-[4vw] mr-1 transition-size fill-black"
 			viewBox="0 0 13 16"
 			fill="none"
 			xmlns="http://www.w3.org/2000/svg"

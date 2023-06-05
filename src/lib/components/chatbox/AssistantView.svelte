@@ -8,33 +8,28 @@
 	import type { ChatMessage } from '$lib/types/requests/chatCompletion';
 	import Typewriter from 'svelte-typewriter/Typewriter.svelte';
 
-	let history: ChatMessage[] = [
-		{
-			role: 'system',
-			content:
-				'You are a female assistant for website Learnliko. You must assist the user in using the website using given information about the website. You must also assist the user in learning the English Language. All of your answers must be in Thai language. Do not answer in English language.'
-		},
-		{
-			role: 'assistant',
-			content:
-				'สวัสดี ฉันคือผู้ช่วยของเธอ ฉันสามารถให้ความช่วยเหลือในการใช้งาน Learnliko รวมถึงให้ความช่วยเหลือด้านภาษาอังกฤษ เช่น การแปลคำศัพท์, การใช้แกรมมา และ อื่นๆ'
-		}
-	];
+	let history: ChatMessage[];
 
 	let currentText = '';
 	let waitingForAIResponse = false;
 
-	let hintPrompts = ['learnliko คืออะไร', 'แนะนำประโยคสำหรับแนะนำตัวเองเป็นภาษาอังกฤษ', 'แนะนำคำศัพท์ใหม่ๆ'];
+	let hintPrompts: string[];
 
 	let currentLanguage: 'TH' | 'EN' = 'TH';
 	const updateCurrentLanguage = () => {
 		if (currentLanguage === 'TH') {
-			hintPrompts = ['learnliko คืออะไร', 'แนะนำประโยคสำหรับแนะนำตัวเองเป็นภาษาอังกฤษ', 'แนะนำคำศัพท์ใหม่ๆ 5 คำ', 'ช่วยฉันแปลคำศัพท์' , 'แนะนำการใช้ grammar'];
+			hintPrompts = [
+				'learnliko คืออะไร',
+				'สอนวิธีการแนะนำตัวเองในภาษาอังกฤษ',
+				'แนะนำคำศัพท์ใหม่ๆ 5 คำ',
+				'ช่วยฉันแปลคำศัพท์',
+				'ช่วยฉันตรวจสอบไวยกรณ์'
+			];
 			history = [
 				{
 					role: 'system',
 					content:
-						'You are a female assistant for website Learnliko. You must assist the user in using the website using given information about the website. You must also assist the user in learning the English Language. All of your answers must be in Thai language. Do not answer in English language.'
+						'คุณคือครูหญิงสอนภาษาอังกฤษที่ใจดีชื่อว่าเอวา (Eva) คุณกำลังคุยกับเด็กประถมและทำหน้าที่เป็นครูสอนภาษาอังกฤษส่วนตัว คุณต้องให้คำอธิบายและยกตัวอย่างที่ทำให้ผู้เรียนเข้าใจได้ง่าย คุณต้องตอบและให้คำอธิบายเป็นภาษาไทยเท่านั้น'
 				},
 				{
 					role: 'assistant',
@@ -48,7 +43,7 @@
 				{
 					role: 'system',
 					content:
-						'You are a female assistant for website Learnliko. You must assist the user in using the website using given information about the website. You must also assist the user in learning the English Language. All of your answers must be in English language. Do not answer in Thai language.'
+						'You will act as female kindly AI assistant and English teacher named EVA. You are talking to elementary school students. You can be a private English teacher for elementary-aged students. You will explain it in an easy-to-understand way and give examples that correspond to elementary-aged students. You will teach and help the students about English such as Help students introduce themself by giving sample example, translating words, checking grammar. '
 				},
 				{ role: 'assistant', content: 'Hi. How can I help you?' }
 			];
@@ -69,7 +64,15 @@
 		history = [...history, { role: 'user', content: text }];
 
 		waitingForAIResponse = true;
-		const assistantAnswer = await assistantChat(history);
+		const assistantAnswer = await assistantChat(
+			currentLanguage === 'TH'
+				? history.map((v, i) =>
+						i === history.length - 1
+							? { ...v, content: v.content + ' (กรุณาให้คำอธิบายเป็นภาษาไทย)' }
+							: v
+				  )
+				: history
+		);
 		history = [...history, { role: 'assistant', content: assistantAnswer }];
 		waitingForAIResponse = false;
 	};
@@ -86,8 +89,6 @@
 	const onKeyPressed = (e: KeyboardEvent) => {
 		if (e.key === 'Enter') submitCurrentText();
 	};
-
-	// assistantChat(history).then(console.log).catch(console.log);
 </script>
 
 <div
@@ -155,8 +156,8 @@
 	{#if waitingForAIResponse}
 		<div class="flex flex-row items-center">
 			<div
-				class={`w-[42px] h-[42px] bg-center bg-cover rounded-full mr-3`}
-				style="background-image: url('{assistantProfileImage}'), linear-gradient(#9BA1FD, #FFA7A7);"
+				class={`w-[42px] h-[42px] bg-center bg-cover rounded-full mr-3 bg-[#FFD281]`}
+				style="background-image: url('{assistantProfileImage}')"
 			/>
 			Thinking
 			<Typewriter mode="loop">...</Typewriter>
@@ -164,11 +165,11 @@
 	{/if}
 
 	<!-- bottom spacing -->
-	<div class="w-full h-[80px]" />
+	<div class="w-full h-[100px]" />
 </div>
 
 <div
-	class="absolute bottom-[70px]  flex flex-row gap-3 font-line-seed w-full px-4 overflow-x-auto overflow-y-hidden"
+	class="absolute bottom-[70px] flex flex-row gap-3 font-line-seed w-full px-4 overflow-x-auto overflow-y-hidden"
 >
 	{#each hintPrompts as hint, index (index)}
 		<button
@@ -191,7 +192,18 @@
 		/>
 
 		<button on:click={submitCurrentText} class="bg-[#9BA1FD] py-1 px-3 rounded-full ml-3"
-			>Send</button
-		>
+			><svg
+				width="24"
+				height="24"
+				viewBox="0 0 66 66"
+				fill="none"
+				xmlns="http://www.w3.org/2000/svg"
+			>
+				<path
+					d="M47.468 1.38637L15.9101 11.8742C-5.30336 18.9709 -5.30336 30.5425 15.9101 37.6043L25.2761 40.7157L28.3864 50.0848C35.4459 71.3051 47.0486 71.3051 54.1081 50.0848L64.6275 18.5514C69.3105 4.39287 61.6219 -3.33314 47.468 1.38637ZM48.5863 20.1945L35.3061 33.549C34.7819 34.0734 34.1179 34.3181 33.4538 34.3181C32.7898 34.3181 32.1258 34.0734 31.6016 33.549C30.5881 32.5352 30.5881 30.8572 31.6016 29.8433L44.8818 16.4888C45.8953 15.475 47.5728 15.475 48.5863 16.4888C49.5998 17.5026 49.5998 19.1807 48.5863 20.1945Z"
+					fill="white"
+				/>
+			</svg>
+		</button>
 	</div>
 </div>

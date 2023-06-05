@@ -24,12 +24,12 @@
 	let currentText = '';
 	let waitingForAIResponse = false;
 
-	let hintPrompts = ['learnliko คืออะไร', 'ฉันจะเริ่มเล่นบทสนทนาอย่างไร'];
+	let hintPrompts = ['learnliko คืออะไร', 'แนะนำประโยคสำหรับแนะนำตัวเองเป็นภาษาอังกฤษ', 'แนะนำคำศัพท์ใหม่ๆ'];
 
 	let currentLanguage: 'TH' | 'EN' = 'TH';
 	const updateCurrentLanguage = () => {
 		if (currentLanguage === 'TH') {
-			hintPrompts = ['learnliko คืออะไร', 'ฉันจะเริ่มเล่นบทสนทนาอย่างไร'];
+			hintPrompts = ['learnliko คืออะไร', 'แนะนำประโยคสำหรับแนะนำตัวเองเป็นภาษาอังกฤษ', 'แนะนำคำศัพท์ใหม่ๆ 5 คำ', 'ช่วยฉันแปลคำศัพท์' , 'แนะนำการใช้ grammar'];
 			history = [
 				{
 					role: 'system',
@@ -134,7 +134,7 @@
 			>
 				{#if chat.role === 'assistant'}
 					<div
-						class={`w-[42px] h-[42px] bg-center bg-cover rounded-full bg-[#FFD281]`}
+						class={`w-[42px] h-[42px] bg-center bg-cover rounded-full bg-[#FFD281] `}
 						style="background-image: url('{assistantProfileImage}');"
 					/>
 				{/if}
@@ -145,8 +145,7 @@
 						style="background-image: url('{userProfileImage}');"
 					/>
 				{/if}
-
-				<div class={`mx-3 border border-black/[0.15] py-2 px-5 rounded-xl max-w-[18rem] mt-6`}>
+				<div class={`mx-3 border border-black/[0.15] py-2 px-5 rounded-xl max-w-[18rem] `}>
 					{chat.content}
 				</div>
 			</div>
@@ -165,34 +164,34 @@
 	{/if}
 
 	<!-- bottom spacing -->
-	<div class="w-full h-[48px]" />
+	<div class="w-full h-[80px]" />
 </div>
 
-{#if history.length <= 2}
-	<div
-		class="absolute bottom-[86px] flex flex-row gap-6 font-line-seed w-full px-4 overflow-x-auto overflow-y-hidden"
-	>
-		{#each hintPrompts as hint, index (index)}
-			<button
-				on:click={() => submitText(hint)}
-				class="text-sm border border-black/[0.15] py-2 px-5 rounded-2xl whitespace-nowrap"
-			>
-				{hint}
-			</button>
-		{/each}
-	</div>
-{/if}
+<div
+	class="absolute bottom-[70px]  flex flex-row gap-3 font-line-seed w-full px-4 overflow-x-auto overflow-y-hidden"
+>
+	{#each hintPrompts as hint, index (index)}
+		<button
+			on:click={() => submitText(hint)}
+			class="text-sm border border-black/[0.15] py-2 px-5 rounded-full whitespace-nowrap mb-5 backdrop-blur-lg"
+		>
+			{hint}
+		</button>
+	{/each}
+</div>
 
 <div class="w-full h-[64px] font-line-seed">
 	<div class="flex flex-row">
 		<input
 			on:keypress={onKeyPressed}
 			bind:value={currentText}
+			placeholder="พิมพ์สิ่งที่ต้องการให้ Eva สอนคุณ"
 			class="bg-[#E6E6E657] h-fit flex-1 text-lg rounded-3xl px-5 py-1"
 			type="text"
 		/>
 
-		<button on:click={submitCurrentText} class="bg-[#9BA1FD] py-1 px-3 rounded-xl ml-3">Send</button
+		<button on:click={submitCurrentText} class="bg-[#9BA1FD] py-1 px-3 rounded-full ml-3"
+			>Send</button
 		>
 	</div>
 </div>

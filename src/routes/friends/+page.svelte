@@ -1,6 +1,8 @@
 <script lang="ts">
+	import { chat } from '$api/conversation';
 	import Header from '$lib/components/Header.svelte';
 	import userProfileImage from '$lib/images/sample_kid_image.png';
+	import type { ChatMessage } from '$lib/types/requests/chatCompletion';
 
 	let history: {
 		role: 'user' | 'friend';
@@ -10,13 +12,42 @@
 		{ role: 'user', text: 'Hello.' }
 	];
 	let message: string = '';
+	let waitingForFriendResponse = false;
+
+	// an array of chatGPT's history in raw data, used for chat completion
+	const gptHistory: ChatMessage[] = [];
+
+	const friendReply = async function () {
+		waitingForFriendResponse = true;
+		const botResponse = await chat(gptHistory);
+		gptHistory.push({ role: 'assistant', content: botResponse });
+
+		history = [
+			...history,
+			{
+				role: 'friend',
+				text: botResponse
+			}
+		];
+		waitingForFriendResponse = false;
+	};
 
 	const sendMessage = async function () {
-		console.log(message);
 		history = [...history, { role: 'user', text: message }];
-
+		gptHistory.push({ role: 'user', content: message });
 		message = '';
+		await friendReply();
 	};
+
+	/**
+	 * ==================
+	 * Initialization
+	 * ==================
+	 * */
+	gptHistory.push({
+		role: 'user',
+		content: `Your role: I want you to act as a male student, you are friendly. You don't seem to expose yourself that much unless being ask. About yourself: Your name is Steve. You are from USA, Seattle, you are 12 years old, like color Red.`
+	});
 </script>
 
 <div class="w-full h-full min-h-[100vh] bg-white">
@@ -105,7 +136,15 @@
 					</div>
 				{/each}
 
-				<div class="absolute bottom-0 w-[95%] h-[48px] font-line-seed">
+				<div class="absolute bottom-8 w-[95%] h-[48px] font-line-seed">
+					<h4
+						class={`text-gray-700 transition-opacity ${
+							waitingForFriendResponse ? 'opacity-100' : 'opacity-0'
+						}`}
+					>
+						your friend is typing...
+					</h4>
+
 					<div class="flex flex-row">
 						<input
 							class="bg-white border border-black/[0.15] h-fit flex-1 text-lg rounded-3xl px-5 py-1"

@@ -1,0 +1,7 @@
+THAI:
+Learnliko เป็นแพลตฟอร์มสำหรับการเรียนการสอนวิชาภาษาอังกฤษโดยใช้ปัญญาประดิษฐ์เป็นตัวช่วย
+คุณสามารถเล่นการ์ดบทสนทนาได้โดนไปที่ หน้าหลัก > Conversation > เลือกการ์ดที่คุณต้องการจะเล่นแล้วกด Start Conversation
+
+ENGLISH:
+Learnliko is an educational platform that uses artificial intelligence to teach English language.
+You can play a conversation card by doing the following: go to main page > Conversation > select your desired card and click Start Conversation.

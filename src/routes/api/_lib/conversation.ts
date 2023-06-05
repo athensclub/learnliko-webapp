@@ -13,6 +13,17 @@ export const chat = async function (messages: ChatMessage[]) {
 	return String(message);
 };
 
+export const assistantChat =  async function (messages: ChatMessage[]) {
+	const response = await fetch('/api/v1/conversation/assistant', {
+		method: 'POST',
+		body: JSON.stringify({ messages })
+	});
+	const val = await response.json();
+	if (!val) throw new Error('No response from chat bot');
+
+	return String(val.message);
+};
+
 export const analyzeDialog = async function (assistant: string, user: string) {
 	const prompt: ChatMessage[] = [];
 	prompt.push({

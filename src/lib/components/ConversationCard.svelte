@@ -149,7 +149,7 @@
 		</svg> -->
 
 	<div
-		class={`lg:text-[0.5vw] ${
+		class={`lg:text-[1vw] ${
 			extraSmall ? 'text-[0.5vh]' : 'text-[2vh]'
 		} lg:w-[20vw] w-[18vh] transition-font lg:mt-[2vw] mt-[2vh] text-center`}
 	>
@@ -189,7 +189,7 @@
 			extraSmall
 				? 'lg:text-[0.6vw] text-[3vw] px-1'
 				: 'lg:text-[0.9vw] text-[4vw]  px-6'
-		} flex flex-row w-fit items-center justify-center h-[5vh] shadow-lg z-40 
+		} flex flex-row w-fit items-center justify-center h-[6vh] shadow-lg z-40 
 		 rounded-full mb-6 bg-white text-black font-bold transition-[width,height,font] `}
 	>
 		<svg

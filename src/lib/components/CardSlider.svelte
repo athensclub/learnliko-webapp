@@ -1,47 +1,47 @@
 <!-- Swiper requires window browser global so it can't use SSR -->
 <script lang="ts">
-	import type KeenSliderInternal from 'keen-slider';
-	import KeenSlider from 'svelte-keen-slider/src/KeenSlider.svelte';
-	import KeenSlide from 'svelte-keen-slider/src/KeenSlide.svelte';
+	import KeenSlider from '$lib/components/keenSlider/KeenSlider.svelte';
+	import KeenSlide from '$lib/components/keenSlider/KeenSlide.svelte';
 	import ConversationCard from '$lib/components/ConversationCard.svelte';
 	import { showChatbox } from '$lib/global/chatbox';
 	import type { ConversationCarouselItem } from '$lib/types/conversationData';
 	import { MOBILE_BREAKPOINT_WIDTH_QUERY, isMobile } from '$lib/global/breakpoints';
 	import { tick } from 'svelte';
+	import type { KeenSliderInstance } from 'keen-slider';
 
 	export let cards: ConversationCarouselItem[];
 
 	let selectedSlide = 0;
 
-	let sliderInternal: KeenSliderInternal | null = null;
+	let sliderInternal: KeenSliderInstance | null = null;
 
-	const onSelectedChanged = (slider: KeenSliderInternal) => {
-		selectedSlide = slider.details().relativeSlide;
+	const onSelectedChanged = (slider:  KeenSliderInstance) => {
+		selectedSlide = slider.track.details.rel;
 	};
 
-	const initializeSlider = (slider: KeenSliderInternal) => {
+	const initializeSlider = (slider: KeenSliderInstance) => {
 		sliderInternal = slider;
 	};
 
-	isMobile.subscribe(async (isMobile) => {
+	const refreshSlider = async () => {
+		// wait for the slider's container to update its width, then make the slider recalculate
 		if (sliderInternal) {
-			// wait for the slider's container to update its width, then make the slider recalculate
 			await tick();
-			sliderInternal.refresh();
+			sliderInternal.update();
 		}
-	});
+	};
+
+	isMobile.subscribe((_) => refreshSlider());
+
+	$: cards, refreshSlider();
 </script>
 
 <div class={`${$isMobile ? 'w-[250vw] relative left-[-75vw]' : 'w-[100vw]'}  overflow-hidden`}>
 	<KeenSlider
+		initial={0}
 		slideChanged={onSelectedChanged}
-		mounted={initializeSlider}
-		slidesPerView={5}
-		breakpoints={{
-			[MOBILE_BREAKPOINT_WIDTH_QUERY]: {
-				slidesPerView: 3
-			}
-		}}
+		created={initializeSlider}
+		slidesPerView={3}
 		arrows={!$showChatbox}
 		dots={false}
 		centered
@@ -53,13 +53,7 @@
 				<div
 					class={`w-full lg:h-[30vw] xl:h-[27vw] flex items-center justify-center mt-[2vh] h-[55vh]`}
 				>
-					<ConversationCard
-						small={index !== selectedSlide}
-						intro={card.intro}
-						topic={card.topic}
-						background={card.background}
-						details={card.details}
-					/>
+					<ConversationCard small={index !== selectedSlide} conversation={card} />
 				</div>
 			</KeenSlide>
 		{/each}

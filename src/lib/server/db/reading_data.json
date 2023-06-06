@@ -1,0 +1,763 @@
+[
+	{
+		"id": "1",
+		"blogName": "The Magic Paintbrush",
+		"content": "Once upon a time, there was a poor young boy named Ma Liang who loved to paint more than anything else. However, he didn’t have a paintbrush, so he used a stick to draw in the dirt. One day, he met an old man who gave him a magic paintbrush. The old explained to Ma Liang that the paintbrush was special and if he painted something, it would come to life. Ma Liang was very excited and went home to test his new paintbrush. When he drew a tree, it grew in front of his eyes. He then drew a pig, and it came to life and ran away. From that day on, Ma Liang used the magic paintbrush to help people. Whenever a person was hungry or sick, he drew food or medicine, and it would come to life. The news of Ma Liang’s magic paintbrush spread quickly, and the greedy emperor heard about him. He ordered Ma Liang to paint gold and treasure for him. However, Ma Liang refused to use his magic paintbrush for selfish reasons. The emperor was angry and locked him up. But Ma Liang’s magic paintbrush came to the rescue, drawing a door and allowing him to escape. From that day on, Ma Liang continued to use his magic paintbrush to help others selflessly, and he lived happily ever after.",
+		"topic": "Tale",
+		"image": "https://cdn.discordapp.com/attachments/842737146321174558/1115380759759425556/img-x849Lb0uesO9MwW1EIxkMWvv.png",
+		"dateTime": "2023-05-20T09:30:00Z",
+		"quiz": [
+			{
+				"question": "What does the term 'selflessly' mean in the story?",
+				"choices": ["selfishly", "bravely", " sincerely", "without selfishness"],
+				"answer": 3
+			},
+			{
+				"question": "What did Ma Liang use before he was given the magic paintbrush?",
+				"choices": ["A pencil", "A crayon", "A stick", "A paintbrush"],
+				"answer": 2
+			},
+			{
+				"question": "What did Ma Liang draw that came to life and ran away?",
+				"choices": ["A tree", "A house", "A pig", "A flower"],
+				"answer": 2
+			},
+			{
+				"question": "What does the term 'greedy' mean in the story?",
+				"choices": ["generous", "selfish", "wise", "content"],
+				"answer": 1
+			},
+			{
+				"question": "What tone of voice did Ma Liang use when he refused to use his magic paintbrush for selfish reasons?",
+				"choices": ["Angry", "Sad", "Humble", "Confused"],
+				"answer": 3
+			}
+		],
+		"vocabs": [
+			"poor",
+			"paintbrush",
+			"stick",
+			"draw",
+			"dirt",
+			"old man",
+			"magic",
+			"explained",
+			"special",
+			"excited",
+			"test",
+			"tree",
+			"grew",
+			"pig",
+			"ran away",
+			"help",
+			"hungry",
+			"sick",
+			"food",
+			"medicine",
+			"news",
+			"greedy",
+			"emperor",
+			"ordered",
+			"gold",
+			"treasure",
+			"refused",
+			"selfish",
+			"locked up",
+			"rescue",
+			"door",
+			"escape",
+			"selflessly",
+			"happily ever after"
+		]
+	},
+	{
+		"id": "2",
+		"blogName": "The Clever Tortoise and the Hare",
+		"content": "Once upon a time, there was a fast and boastful hare who always talked about how he could outrun anyone. One day, the tortoise heard the hare bragging and challenged him to a race. The hare thought it was silly to race against a slow-moving tortoise, but he accepted the challenge anyway. He got so confident he took a nap while the tortoise worked hard to finish the race and won. The hare woke up too late to catch up to the slow-moving tortoise. He was shocked at how the tortoise managed to win the race, so he demanded a rematch. The tortoise agreed, and the race began. This time, the tortoise knew he couldn't win by running, so he thought cleverly and decided to wear himself out just a little so the hare wouldn't know he was in the lead and would get complacent. When the hare took a nap again, the tortoise kept walking steadily, and when the hare woke up, it was too late. The tortoise won again! The hare learnt an important lesson and never boasted about his speed again. The End.",
+		"topic": "Tale",
+		"image": "https://cdn.discordapp.com/attachments/842737146321174558/1115381043135008869/img-wnApxDwQXFJvmoEkntVtFY2Q.png",
+		"dateTime": "2023-05-20T09:30:00Z",
+		"quiz": [
+			{
+				"question": "What was the tone of voice of the hare when he talked about his speed?",
+				"choices": ["Arrogant", "Modest", "Excited", "Indifferent"],
+				"answer": 0
+			},
+			{
+				"question": "What does the word 'complacent' mean in this story?",
+				"choices": ["arrogant", "lazy", "unpredictable", "content"],
+				"answer": 3
+			},
+			{
+				"question": "What did the tortoise do differently in the second race?",
+				"choices": [
+					"He ran faster than before",
+					"He took a nap like the hare",
+					"He wore himself out a little so the hare wouldn't know he was in the lead",
+					"He gave up and let the hare win"
+				],
+				"answer": 2
+			},
+			{
+				"question": "What does the word 'cleverly' mean in this story?",
+				"choices": ["in a foolish way", "wisely and resourcefully", "rudely", "slowly"],
+				"answer": 1
+			},
+			{
+				"question": "Why did the hare lose the first race?",
+				"choices": [
+					"He got lost on the track",
+					"He stopped to eat some carrots",
+					"He took a nap while the tortoise kept moving",
+					"He got distracted by other animals on the way"
+				],
+				"answer": 2
+			}
+		],
+		"vocabs": [
+			"boastful",
+			"outrun",
+			"challenge",
+			"confident",
+			"slow-moving",
+			"nap",
+			"shocked",
+			"rematch",
+			"cleverly",
+			"complacent",
+			"steadily",
+			"lesson"
+		]
+	},
+	{
+		"id": "3",
+		"blogName": "The Three Little Pigs",
+		"content": "Once upon a time, there were three little pigs who decided that they were old enough to build their own houses. The first little pig was lazy and built his house out of straw. The second little pig was a little bit smarter and decided to build his house out of sticks. The third little pig was very wise and built his house out of bricks. \nOne day, a big, bad wolf came and knocked on the door of the first little pig's straw house. The pig was frightened and refused to open the door. But the wolf huffed and puffed and blew the straw house down in one big breath. The little pig ran to his brother's house made of sticks. \nThe wolf followed him and knocked on the door. But when the wolf tried to blow down the stick house, it didn't work either. So the two little pigs ran to their brother's house made of bricks. The wolf followed them there, but no matter how hard he huffed and puffed, he couldn't blow down the brick house. \nThe three little pigs lived happily ever after in their safe and sturdy brick house, out of reach of the big bad wolf.",
+		"topic": "Tale",
+		"image": "https://cdn.discordapp.com/attachments/842737146321174558/1115381294633844777/img-JtpzXYfhPxZzQ0PwYPwP90qJ.png",
+		"dateTime": "2023-05-20T09:30:00Z",
+		"quiz": [
+			{
+				"question": "What was the material used by the third little pig to build his house?",
+				"choices": ["Straw", "Sticks", "Bricks", "Wood"],
+				"answer": 2
+			},
+			{
+				"question": "What did the third little pig build his house out of?",
+				"choices": ["Straw", "Sticks", "Bricks", "Wood"],
+				"answer": 2
+			},
+			{
+				"question": "What tone of voice did the big, bad wolf most likely have when he knocked on the doors of the three little pigs?",
+				"choices": ["Polite", "Friendly", "Menacing", "Happy"],
+				"answer": 2
+			},
+			{
+				"question": "What did the big bad wolf do when he couldn't blow down the brick house?",
+				"choices": [
+					"He gave up and left",
+					"He climbed down the chimney",
+					"He knocked down the door",
+					"He apologized to the pigs"
+				],
+				"answer": 1
+			},
+			{
+				"question": "What material did the second little pig use to build his house?",
+				"choices": ["Straw", "Sticks", "Bricks", "Wood"],
+				"answer": 1
+			}
+		],
+		"vocabs": ["straw", "sticks", "bricks", "huffed", "puffed"]
+	},
+	{
+		"id": "4",
+		"blogName": "The Ant and the Grasshopper",
+		"content": "In a field, there lived an ant and a grasshopper. The ant was busy all year storing food for the winter, while the grasshopper spent his time singing, playing, and enjoying the weather. The grasshopper thought the ant was wasting his life working so hard, but the ant didn't care and kept working every day. \n\nWhen the winter came, the ant had enough food to survive, but the grasshopper had none. He started to get hungry and went to the ant's house, asking for food. But the ant reminded him of how he spent his time all year and refused to give him any food. The grasshopper had to suffer through the cold winter without any food.\n\nFrom then on, the grasshopper learned a valuable lesson: work hard and prepare for the future. Don't waste your time and enjoy the present moment, but also don't forget about the future. The ant and the grasshopper became friends, and the grasshopper promised to work hard and store food for the next winter.",
+		"topic": "Tale",
+		"image": "https://cdn.discordapp.com/attachments/842737146321174558/1115381508434296912/img-q1VcnwBd1r20xylNW2Ts6vGS.png",
+		"dateTime": "2023-05-20T09:30:00Z",
+		"quiz": [
+			{
+				"question": "What does 'storing food' mean in the context of the story?",
+				"choices": ["Eating food", "Collecting food", "Sharing food", "Burying food"],
+				"answer": 1
+			},
+			{
+				"question": "What tone of voice did the ant use when refusing to give food to the grasshopper?",
+				"choices": ["Gentle", "Rude", "Stern", "Friendly"],
+				"answer": 2
+			},
+			{
+				"question": "What lesson did the grasshopper learn?",
+				"choices": [
+					"To never ask the ant for food",
+					"To waste time and enjoy the present moment",
+					"To work hard and prepare for the future",
+					"To only sing and play all day"
+				],
+				"answer": 2
+			},
+			{
+				"question": "What does the word 'valuable' mean in the following sentence? 'The grasshopper learned a valuable lesson.'",
+				"choices": ["Worthless", "Useless", "Important", "Heavy"],
+				"answer": 2
+			},
+			{
+				"question": "What did the ant do when the grasshopper asked for food in the winter?",
+				"choices": [
+					"Gave him all the food",
+					"Refused to give him any food",
+					"Gave him some food",
+					"Laughed and sang in front of him"
+				],
+				"answer": 1
+			}
+		],
+		"vocabs": [
+			"field",
+			"ant",
+			"grasshopper",
+			"storing",
+			"winter",
+			"singing",
+			"playing",
+			"enjoying",
+			"wasting",
+			"survive",
+			"suffering",
+			"valuable",
+			"lesson",
+			"prepare",
+			"present moment",
+			"forget",
+			"friends",
+			"promised"
+		]
+	},
+	{
+		"id": "5",
+		"blogName": "The Lost Kitten",
+		"content": "Once upon a time, in a small village, there was a little girl named Lily. Lily loved animals and dreamed of having a pet of her own. One sunny day, as she was walking through the park, she heard a soft meowing sound. Curious, she followed the sound and discovered a tiny, gray kitten hiding behind a bush. The kitten looked scared and lost.\n\nLily's heart melted with compassion, and she knew she had to help the little creature. She gently picked up the kitten and cradled it in her arms. It purred contentedly, feeling safe in Lily's warm embrace.\n\nDetermined to find the kitten's home, Lily knocked on every door in the neighborhood, asking if anyone had lost a kitten. Unfortunately, no one claimed the kitten as their own. Lily couldn't bear the thought of leaving the kitten alone, so she decided to take it home.\n\nAt home, Lily named the kitten Snowball because of its soft, white fur. She fed Snowball some milk and prepared a cozy bed for it. Snowball curled up and fell asleep, feeling loved and cared for.\n\nDays turned into weeks, and Snowball became a part of Lily's family. They played together, and Snowball brought joy to Lily's life. Lily realized that sometimes the things we find unexpectedly can become our most treasured possessions.\n\nLily and Snowball's bond grew stronger each day. The little lost kitten had found its forever home, and Lily had found a loyal friend.\n\nFrom that day forward, Lily and Snowball shared many adventures together. They learned to understand each other without words and created a beautiful friendship that would last a lifetime.\n\nRemember, sometimes the smallest creatures can bring the greatest happiness.",
+		"topic": "Short story",
+		"image": "https://cdn.discordapp.com/attachments/842737146321174558/1112389162750971994/img-1cEeLEoCuTZ8TY92KJPzKoXM.png",
+		"dateTime": "2023-05-09T13:10:00Z",
+		"quiz": [
+			{
+				"question": "What did Lily name the little kitten she found?",
+				"choices": ["Fluffy", "Snowball", "Whiskers", "Mittens"],
+				"answer": 1
+			},
+			{
+				"question": "What did Lily do when she found the lost kitten in the park?",
+				"choices": [
+					"She left it alone and continued walking.",
+					"She called animal control to pick it up.",
+					"She picked it up and cradled it in her arms.",
+					"She asked other people to take care of it."
+				],
+				"answer": 2
+			},
+			{
+				"question": "What does the word \"compassion\" mean in the story?",
+				"choices": ["Fear", "Joy", "Love", "Sympathy"],
+				"answer": 3
+			},
+			{
+				"question": "What does the word \"embrace\" mean in the story?",
+				"choices": [
+					"A type of dance",
+					"A warm hug",
+					"A way to catch something",
+					"A kind of animal"
+				],
+				"answer": 0
+			},
+			{
+				"question": "How would you describe the tone of the story?",
+				"choices": ["Suspenseful", "Heartwarming", "Mysterious", "Hilarious"],
+				"answer": 1
+			}
+		],
+		"vocabs": [
+			"village",
+			"meowing",
+			"curious",
+			"bush",
+			"scared",
+			"compassion",
+			"cradled",
+			"contentedly",
+			"determined",
+			"neighborhood",
+			"claimed",
+			"bear",
+			"fur",
+			"curled",
+			"treasured",
+			"possessions",
+			"bond",
+			"adventures",
+			"lifetime",
+			"creatures",
+			"happiness"
+		]
+	},
+	{
+		"id": "6",
+		"blogName": "The Picnic Adventure",
+		"content": "Emma and Tom were best friends who loved going on outdoor adventures. One sunny day, they decided to have a picnic in the nearby park. They packed a basket full of delicious sandwiches, fruit, and juice.\n\nAs they arrived at the park, they searched for the perfect spot. Under a big oak tree, they found a grassy area with a cozy blanket spread out on the ground. They set down their basket and sat down eagerly, ready to enjoy their picnic feast.\n\nJust as they were about to take their first bite, they noticed a mischievous squirrel eyeing their food from a nearby branch. The squirrel chattered excitedly, as if asking for a share. Emma and Tom giggled and tossed a small piece of bread to the squirrel, making a new friend in the process.\n\nWith their stomachs full, Emma and Tom decided to explore the park. They discovered a winding trail that led to a sparkling lake. They skipped rocks on the water, laughing as they competed to see whose rock could go the farthest.\n\nFurther along the trail, they stumbled upon a colorful meadow filled with wildflowers. They bent down to smell the sweet blossoms and admired the vibrant colors that surrounded them. Emma picked a small bouquet and put it in her hair, while Tom pretended to be a butterfly fluttering from flower to flower.\n\nAs the sun started to set, casting a golden glow over the park, Emma and Tom knew it was time to head back home. They gathered their things, said goodbye to their squirrel friend, and started their journey back.\n\nWalking hand in hand, they reflected on their wonderful day. They realized that simple moments of joy, like sharing a picnic and exploring nature, could create the fondest memories.\n\nEmma and Tom returned home with hearts full of happiness, already planning their next adventure. They knew that as long as they had each other, every day would be an opportunity for new and exciting experiences.\n\nSo, remember to embrace the beauty of nature, cherish your friendships, and create lasting memories with every adventure you embark upon.",
+		"topic": "Short story",
+		"image": "https://cdn.discordapp.com/attachments/842737146321174558/1112389473548902450/img-uHPcfCafo0rtzhveT1lFI1x2.png",
+		"dateTime": "2023-05-06T09:45:00Z",
+		"quiz": [
+			{
+				"question": "What did Emma and Tom do when they noticed the mischievous squirrel eyeing their food?",
+				"choices": [
+					"They ignored the squirrel and continued eating.",
+					"They shooed the squirrel away and protected their food.",
+					"They threw a small piece of bread to the squirrel.",
+					"They called for help to scare the squirrel away."
+				],
+				"answer": 2
+			},
+			{
+				"question": "What did Emma and Tom do when they reached the sparkling lake?",
+				"choices": [
+					"They jumped into the lake for a refreshing swim.",
+					"They sat by the lake and enjoyed the view.",
+					"They skipped rocks on the water and competed with each other.",
+					"They decided to have a picnic near the lake."
+				],
+				"answer": 2
+			},
+			{
+				"question": "What does the word \"mischievous\" mean in the story?",
+				"choices": ["Friendly", "Curious", "Naughty", "Playful"],
+				"answer": 2
+			},
+			{
+				"question": "What does the word \"vibrant\" mean in the story?",
+				"choices": ["Dull", "Colorful", "Quiet", "Mysterious"],
+				"answer": 1
+			},
+			{
+				"question": "What is the tone of voice used in the story?",
+				"choices": [
+					"Serious and somber",
+					"Playful and lighthearted",
+					"Mysterious and suspenseful",
+					"Sad and melancholic"
+				],
+				"answer": 1
+			}
+		],
+		"vocabs": [
+			"adventures",
+			"picnic",
+			"nearby",
+			"delicious",
+			"sandwiches",
+			"fruit",
+			"juice",
+			"arrived",
+			"searched",
+			"oak tree",
+			"grassy",
+			"cozy",
+			"blanket",
+			"spread",
+			"eagerly",
+			"feast",
+			"mischievous",
+			"squirrel",
+			"chattered",
+			"branch",
+			"giggled",
+			"tossed",
+			"piece",
+			"bread",
+			"process",
+			"stomachs",
+			"explore",
+			"winding",
+			"sparkling",
+			"lake",
+			"skipped",
+			"rocks",
+			"competed",
+			"stumbled",
+			"colorful",
+			"meadow",
+			"wildflowers",
+			"bent down",
+			"admired",
+			"vibrant",
+			"bouquet",
+			"pretended",
+			"butterfly",
+			"fluttering",
+			"casting",
+			"golden",
+			"gather",
+			"journey",
+			"reflected",
+			"wonderful",
+			"realized",
+			"fond",
+			"returned",
+			"hearts",
+			"planning",
+			"opportunity",
+			"embrace",
+			"cherish",
+			"embark"
+		]
+	},
+	{
+		"id": "7",
+		"blogName": "The Magical Key",
+		"content": "Once upon a time, in a small village nestled in the mountains, there lived a curious boy named Max. Max loved exploring and discovering hidden treasures. One day, while playing in his grandmother's attic, he stumbled upon an old, rusty key.\n\nIntrigued by the key's mysterious appearance, Max decided to embark on a quest to find its corresponding lock. With the key in his pocket, he set off on an adventure through the enchanted forest.\n\nAs Max ventured deeper into the forest, he encountered magical creatures. A friendly squirrel guided him through a winding path, and a wise owl shared wisdom about the forest's secrets. Max felt excitement and anticipation bubbling inside him.\n\nAfter hours of searching, Max stumbled upon an ancient door hidden within the trees. It was covered in moss and vines, seemingly untouched for years. With a trembling hand, he inserted the key into the lock.\n\nTo his amazement, the door creaked open, revealing a breathtaking sight—a hidden garden filled with vibrant flowers and sparkling waterfalls. Butterflies danced around him, and the sweet scent of blossoms filled the air. Max had discovered a secret paradise.\n\nIn the middle of the garden, he found a fountain with a magical inscription. It read, \"Wishes granted for those with pure hearts.\" Max closed his eyes, made a wish, and threw a coin into the fountain.\n\nAs the coin hit the water's surface, a burst of light filled the garden. Max's wish had come true. He had discovered not only a hidden garden but also the power of believing in dreams.\n\nFilled with gratitude, Max thanked the magical garden and retraced his steps through the forest. He realized that the real treasure he had found wasn't the key or the garden itself, but the joy and wonder that came from exploring the unknown.\n\nBack in his grandmother's attic, Max carefully placed the old key in a small box. It served as a reminder of the magical adventure he had embarked upon and the limitless possibilities that awaited him in the world.\n\nFrom that day forward, Max cherished every adventure, big or small, knowing that the most extraordinary treasures are often found in the most unexpected places. And he never stopped believing in the magic that lies within every heart.",
+		"topic": "Short story",
+		"image": "https://cdn.discordapp.com/attachments/842737146321174558/1112389640641585202/img-8GM0F63Wm1c94hzMjeJ95ck1.png",
+		"dateTime": "2023-05-03T14:30:00Z",
+		"quiz": [
+			{
+				"question": "What did Max find behind the ancient door in the enchanted forest?",
+				"choices": [
+					"A hidden garden filled with vibrant flowers and sparkling waterfalls.",
+					"A treasure chest filled with gold and jewels.",
+					"A mystical portal to another world.",
+					"A secret map leading to hidden pirate treasure."
+				],
+				"answer": 0
+			},
+			{
+				"question": "What did Max find inside his grandmother's attic?",
+				"choices": [
+					"An old, rusty key.",
+					"A dusty, forgotten book.",
+					"A magical wand.",
+					"A hidden treasure map."
+				],
+				"answer": 0
+			},
+			{
+				"question": "What does the word \"cherished\" mean in the context of the story?",
+				"choices": ["Explored", "Appreciated", "Hidden", "Discovered"],
+				"answer": 1
+			},
+			{
+				"question": "What does the word \"embark\" mean in the context of the story?",
+				"choices": ["Continue", "Finish", "Begin", "Stop"],
+				"answer": 2
+			},
+			{
+				"question": "How would you describe the tone of the story?",
+				"choices": [
+					"Fearful and suspenseful",
+					"Joyful and adventurous",
+					"Melancholic and nostalgic",
+					"Serious and thought-provoking"
+				],
+				"answer": 1
+			}
+		],
+		"vocabs": [
+			"curious",
+			"nestled",
+			"treasures",
+			"stumbled",
+			"rusty",
+			"mysterious",
+			"embark",
+			"quest",
+			"enchanted",
+			"ventured",
+			"encountered",
+			"squirrel",
+			"winding",
+			"anticipation",
+			"stumbled",
+			"ancient",
+			"moss",
+			"vines",
+			"untouched",
+			"breathtaking",
+			"vibrant",
+			"sparkling",
+			"butterflies",
+			"scent",
+			"blossoms",
+			"paradise",
+			"inscription",
+			"burst",
+			"gratitude",
+			"retraced",
+			"limitless",
+			"cherished",
+			"extraordinary"
+		]
+	},
+	{
+		"id": "8",
+		"blogName": "The Pyramids of Egypt",
+		"content": "In ancient times, the land of Egypt was home to magnificent structures known as pyramids. These pyramids were built as tombs for the pharaohs, who were the rulers of ancient Egypt. They were constructed with large blocks of stone and were designed to stand tall and majestic.\n\nThe most famous pyramid is the Great Pyramid of Giza, built around 4,500 years ago. It is the largest pyramid in Egypt and was built for the pharaoh Khufu. The pyramid is an impressive sight, reaching a height of about 480 feet and covering an area of more than 13 acres. It took thousands of workers many years to complete this incredible structure.\n\nThe pyramids were built with great precision and engineering skills. The builders used advanced techniques for their time, such as ramps and pulleys, to transport and lift the heavy stone blocks. It is amazing to think about how these ancient people were able to construct such massive structures without modern machinery.\n\nInside the pyramids, there were many chambers and passages. The pharaohs were buried with their belongings and treasures, including precious jewels and statues. The pyramids were believed to be the final resting places of the pharaohs' souls, and they were designed to ensure a smooth journey into the afterlife.\n\nToday, the pyramids continue to captivate people from all over the world. They are a testament to the ingenuity and skills of the ancient Egyptians. Visiting these incredible structures allows us to step back in time and marvel at the rich history of Egypt.\n\nAs you read more about ancient Egypt, you will discover many fascinating stories and facts about the pyramids and the pharaohs who ruled this ancient civilization. History has a way of connecting us to our past and teaching us valuable lessons about the achievements of those who came before us.",
+		"topic": "History",
+		"image": "https://media.discordapp.net/attachments/842737146321174558/1112390063955918848/img-VjoArHtyL8eo2afRH4fqSQD3.png?width=655&height=655",
+		"dateTime": "2023-04-30T11:20:00Z",
+		"quiz": [
+			{
+				"question": "What was the purpose of the pyramids in ancient Egypt?",
+				"choices": [
+					"They were used as forts for defense against invaders.",
+					"They served as places of worship for ancient Egyptian gods.",
+					"They were built as tombs for the pharaohs.",
+					"They were used as astronomical observatories."
+				],
+				"answer": 2
+			},
+			{
+				"question": "Which pharaoh was the Great Pyramid of Giza built for?",
+				"choices": ["Tutankhamun", "Ramses II", "Akhenaten", "Khufu"],
+				"answer": 3
+			},
+			{
+				"question": "What does the word \"ingenuity\" mean in the context of the story?",
+				"choices": [
+					"The process of constructing pyramids",
+					"The belief in the afterlife",
+					"The ability to transport heavy stone blocks",
+					"Cleverness and creativity in solving problems"
+				],
+				"answer": 3
+			},
+			{
+				"question": "What is the meaning of the word \"pharaoh\" as used in the story?",
+				"choices": [
+					"Ancient Egyptian structures",
+					"Rulers of ancient Egypt",
+					"Burial chambers within the pyramids",
+					"Techniques used for pyramid construction"
+				],
+				"answer": 1
+			},
+			{
+				"question": "What is the tone of voice used in the passage about the pyramids?",
+				"choices": ["Exuberant", "Nostalgic", "Informative", "Mournful"],
+				"answer": 2
+			}
+		],
+		"vocabs": [
+			"ancient",
+			"structures",
+			"pyramids",
+			"tombs",
+			"pharaohs",
+			"rulers",
+			"constructed",
+			"majestic",
+			"giza",
+			"khufu",
+			"impressive",
+			"reaching",
+			"acres",
+			"workers",
+			"incredible",
+			"precision",
+			"engineering",
+			"techniques",
+			"ramps",
+			"pulleys",
+			"transport",
+			"machinery",
+			"chambers",
+			"passages",
+			"belongings",
+			"treasures",
+			"precious",
+			"jewels",
+			"statues",
+			"final resting places",
+			"souls",
+			"afterlife",
+			"captivate",
+			"testament",
+			"ingenuity",
+			"ancient egyptians",
+			"visiting",
+			"step back in time",
+			"marvel",
+			"rich history",
+			"civilization",
+			"fascinating",
+			"achievements"
+		]
+	},
+	{
+		"id": "9",
+		"blogName": "The Statue of Liberty",
+		"content": "The Statue of Liberty is an iconic symbol located in New York City, United States. It stands proudly on Liberty Island in the middle of New York Harbor. This colossal statue holds great significance and represents freedom and democracy.\n\nThe statue was a gift from France to the United States and was dedicated on October 28, 1886. It was designed by Frédéric Auguste Bartholdi, a French sculptor, and Gustave Eiffel, the engineer who later built the Eiffel Tower, was responsible for its internal framework.\n\nStanding at a height of about 305 feet, the Statue of Liberty depicts a robed female figure holding a torch in one hand and a tablet in the other. The tablet bears the date of the American Declaration of Independence, July 4, 1776. The statue's torch symbolizes enlightenment and knowledge, while her broken chains at the feet represent freedom from oppression.\n\nVisitors can climb up to the crown of the statue, which offers a breathtaking view of the city. Inside the pedestal, there is a museum that tells the story of the statue's history and construction. The statue has become a popular tourist attraction and a symbol of hope for immigrants coming to the United States in search of a better life.\n\nThe Statue of Liberty has witnessed many significant events throughout history, including waves of immigration, celebrations, and protests. It serves as a reminder of the values of liberty and democracy that the United States holds dear.\n\nAs you continue to explore history, you will encounter many more remarkable landmarks and symbols that carry stories of their own. These symbols remind us of the struggles and triumphs of humanity and the importance of preserving freedom and equality for all.",
+		"topic": "History",
+		"image": "https://media.discordapp.net/attachments/842737146321174558/1112391100091609168/img-EoVuAk3lt3Tds3hf7ZDP477e.png?width=655&height=655",
+		"dateTime": "2023-04-27T15:50:00Z",
+		"quiz": [
+			{
+				"question": "Who designed the Statue of Liberty?",
+				"choices": [
+					"Gustave Eiffel",
+					"Frédéric Auguste Bartholdi",
+					"Thomas Jefferson",
+					"Leonardo da Vinci"
+				],
+				"answer": 1
+			},
+			{
+				"question": "Which date is inscribed on the tablet held by the Statue of Liberty?",
+				"choices": ["July 4, 1776", "June 30, 1900", "October 28, 1886", "September 3, 1783"],
+				"answer": 0
+			},
+			{
+				"question": "What does the word \"colossal\" mean in the context of the story?",
+				"choices": ["Beautiful", "Small", "Enormous", "Old"],
+				"answer": 2
+			},
+			{
+				"question": "What is the meaning of the word \"pedestal\" as used in the story?",
+				"choices": [
+					"A type of building",
+					"A type of statue",
+					"A platform or base",
+					"A religious symbol"
+				],
+				"answer": 2
+			},
+			{
+				"question": "Based on the tone of the story, how would you describe the portrayal of the Statue of Liberty?",
+				"choices": [
+					"Somber and mournful",
+					"Proud and celebratory",
+					"Indifferent and apathetic",
+					"Critical and skeptical"
+				],
+				"answer": 1
+			}
+		],
+		"vocabs": [
+			"provide",
+			"significance",
+			"represents",
+			"dedicated",
+			"sculptor",
+			"framework",
+			"depicts",
+			"robed",
+			"tablet",
+			"declaration of independence",
+			"enlightenment",
+			"chains",
+			"pedestal",
+			"breathtaking",
+			"witnessed",
+			"immigration",
+			"protests",
+			"values",
+			"explore",
+			"landmarks",
+			"triumphs",
+			"preserving",
+			"equality"
+		]
+	},
+	{
+		"id": "10",
+		"blogName": "The Colosseum",
+		"content": "The Colosseum, also known as the Flavian Amphitheatre, is an ancient Roman monument located in the heart of Rome, Italy. It is an architectural marvel and one of the most famous landmarks in the world. Built over 2,000 years ago, the Colosseum stands as a testament to the grandeur and engineering prowess of the Roman Empire.\n\nConstruction of the Colosseum began in 72 AD and was completed in 80 AD. It was commissioned by the Roman Emperor Vespasian and later inaugurated by his son, Emperor Titus. The amphitheater was primarily used for hosting various spectacles and events, including gladiatorial contests, animal hunts, and mock sea battles.\n\nThe Colosseum is an immense structure, standing about 157 feet tall with a circumference of 1,788 feet. It could accommodate an estimated 50,000 to 80,000 spectators, who would gather to witness the thrilling spectacles that took place within its walls. The seating arrangements were divided into different sections, with the higher tiers reserved for the lower social classes.\n\nThe construction of the Colosseum showcased remarkable engineering techniques of the time. The amphitheater was built using concrete, arches, and vaults, which allowed for its impressive size and durability. The exterior of the Colosseum was adorned with intricate carvings and statues, creating a visually stunning spectacle.\n\nOver the centuries, the Colosseum has undergone various changes and suffered from natural disasters and human activities. However, it still stands as a magnificent symbol of Roman history and architecture. Today, it attracts millions of visitors from around the world, who come to admire its grandeur and learn about its historical significance.\n\nExploring the Colosseum provides us with a glimpse into the ancient Roman world, where gladiators fought for their lives and emperors entertained their subjects. It serves as a reminder of the rich cultural heritage that has shaped our modern world.\n\nAs you delve deeper into history, you will encounter numerous extraordinary structures and stories that have shaped civilizations. The Colosseum is just one example of the wonders waiting to be discovered and appreciated.",
+		"topic": "History",
+		"image": "https://cdn.discordapp.com/attachments/842737146321174558/1112391333533974579/img-B20Sw7PNtdn1QuOTQsUOIgwW.png",
+		"dateTime": "2023-04-24T10:40:00Z",
+		"quiz": [
+			{
+				"question": "When was the construction of the Colosseum completed?",
+				"choices": ["72 AD", "80 AD", "50,000 to 80,000 spectators", "1,788 feet"],
+				"answer": 1
+			},
+			{
+				"question": "Who commissioned the construction of the Colosseum?",
+				"choices": ["Emperor Titus", "Roman Emperor Vespasian", "Gladiators", "Ancient Romans"],
+				"answer": 1
+			},
+			{
+				"question": "What does the word \"amphitheater\" mean in the context of the story?",
+				"choices": [
+					"A large open-air venue for hosting events and spectacles.",
+					"An ancient Roman emperor.",
+					"A type of Roman architectural technique.",
+					"A historical symbol of Roman history and architecture."
+				],
+				"answer": 0
+			},
+			{
+				"question": "What is the meaning of the word \"grandeur\" as used in the story?",
+				"choices": [
+					"Magnificence or impressiveness, especially in scale or appearance.",
+					"A type of Roman Emperor.",
+					"The act of entertaining or providing amusement.",
+					"The process of constructing a large monument."
+				],
+				"answer": 0
+			},
+			{
+				"question": "What tone of voice does the passage about the Colosseum convey?",
+				"choices": ["Informative", "Melancholic", "Humorous", "Indifferent"],
+				"answer": 0
+			}
+		],
+		"vocabs": [
+			"colosseum",
+			"flavian amphitheatre",
+			"architectural",
+			"grandeur",
+			"prowess",
+			"commissioned",
+			"inaugurated",
+			"spectacles",
+			"gladiatorial",
+			"contests",
+			"animal hunts",
+			"mock sea battles",
+			"immense",
+			"circumference",
+			"spectators",
+			"seating arrangements",
+			"tiers",
+			"social classes",
+			"showcased",
+			"techniques",
+			"concrete",
+			"arches",
+			"vaults",
+			"adorned",
+			"intricate",
+			"carvings",
+			"visually stunning",
+			"undergone",
+			"disasters",
+			"human activities",
+			"magnificent",
+			"symbol",
+			"architecture",
+			"grandeur",
+			"historical significance",
+			"glimpse",
+			"emperors",
+			"entertained",
+			"subjects",
+			"reminder",
+			"cultural heritage",
+			"civilizations",
+			"extraordinary",
+			"appreciated"
+		]
+	}
+]

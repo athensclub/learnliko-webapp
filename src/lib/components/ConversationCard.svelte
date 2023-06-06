@@ -1,26 +1,28 @@
 <script lang="ts">
-	import { chatContext, showChatbox } from '$lib/global/chatbox';
-	import type { ConversationDetails } from '$lib/types/conversationData';
+	import { chatContext, currentChatboxView, showChatbox } from '$lib/global/chatbox';
+	import type { ConversationCarouselItem, ConversationDetails } from '$lib/types/conversationData';
 
 	export let small = false;
-	export let topic: string;
-	export let intro: string;
-	export let background: string;
-	export let details: ConversationDetails;
+	export let extraSmall = false;
+	export let conversation: ConversationCarouselItem;
+	export let disabled = false;
 
 	const openChatbox = () => {
+		$currentChatboxView = 'CONVERSATION';
 		$showChatbox = true;
-		$chatContext = { details };
+		$chatContext = { conversation };
 	};
 </script>
 
 <div
-	style="background-image: {background};"
+	style="background-image: {conversation.background};"
 	class={`${
-		small
-			? 'lg:w-[18vw] lg:h-[22vw] w-[20vh] h-[40vh]'
-			: 'lg:w-[20vw] lg:h-[24vw] w-[35vh] h-[45vh]'
-	} w-full font-line-seed text-white lg:rounded-[3vw] rounded-[8vw]  shadow-lg transition-size bg-gradient-to-t from-[#D0B3FF] to-[#FF785B] flex flex-col items-center justify-around`}
+		extraSmall
+			? 'lg:w-[12vw] lg:h-[16vw] w-[12vh] h-[34vh] rounded-3xl'
+			: small
+			? 'lg:w-[18vw] lg:h-[22vw] w-[20vh] h-[40vh] lg:rounded-[3vw] rounded-[8vw] '
+			: 'lg:w-[20vw] lg:h-[24vw] w-[35vh] h-[45vh] lg:rounded-[3vw] rounded-[8vw] '
+	} w-full font-line-seed text-white shadow-lg transition-size flex flex-col items-center justify-around relative`}
 >
 	<!-- <svg
 			class="w-[65%] mt-4 transition-size"
@@ -147,46 +149,70 @@
 		</svg> -->
 
 	<div
-		class=" lg:text-[1vw] text-[2vh] lg:w-[20vw] w-[18vh] transition-font lg:mt-[2vw] mt-[2vh] text-center"
+		class={`lg:text-[1vw] ${
+			extraSmall ? 'text-[0.5vh]' : 'text-[2vh]'
+		} lg:w-[20vw] w-[18vh] transition-font lg:mt-[2vw] mt-[2vh] text-center`}
 	>
-		{intro}
+		{conversation.intro}
 	</div>
-	
+
 	<div class="flex flex-col w-full items-center justify-center">
 		<div
 			class={`${
-				small ? 'w-[6vw] h-[6vw]' : 'lg:w-[7vw] lg:h-[7vw] w-[10vh] h-[10vh] '
+				extraSmall
+					? 'w-[4vw] h-[4vw]'
+					: small
+					? 'w-[6vw] h-[6vw]'
+					: 'lg:w-[7vw] lg:h-[7vw] w-[10vh] h-[10vh] '
 			} bg-center bg-cover  rounded-full lg:mt-[0.5vw] shadow-md transition-size`}
-			style="background-image: url('{details.bot.avatar}');"
+			style="background-image: url('{conversation.details.bot.avatar}');"
 		/>
 
 		<div
-			class="lg:text-[1.2vw] text-[5vw] px-6 py-4 transition-font font-bold text-center"
-			class:xl:text-[1vw]={small}
-			class:text-[0.79vh]={small}
-			class:lg:text-[1vh]={small}
+			class={`${
+				extraSmall
+					? 'xl:text-[0.7vw] text-[0.49vh] lg:text-[0.7vh]'
+					: small
+					? 'xl:text-[1vw] text-[0.79vh] lg:text-[1vh]'
+					: 'lg:text-[1.2vw] text-[5vw]'
+			} px-6 py-4 transition-font font-bold text-center`}
 		>
-			{topic}
+			{conversation.topic}
 		</div>
 	</div>
 
 	<button
+		{disabled}
 		on:click={openChatbox}
-		class:animate-bounce={!small}
-		class="flex flex-row items-center justify-center w-[50vw] h-[5vh] lg:w-[12vw] lg:h-[3vw] lg:text-[0.9vw] text-[3.5vw] shadow-lg z-40
-		 rounded-full mb-6 bg-white text-black font-bold transition-[width,height,font]"
+		class:animate-bounce={!(small || extraSmall)}
+		class={`${
+			extraSmall
+				? 'lg:text-[0.6vw] text-[3vw] px-1'
+				: 'lg:text-[0.9vw] text-[4vw]  px-6'
+		} flex flex-row w-fit items-center justify-center h-[6vh] shadow-lg z-40 
+		 rounded-full mb-6 bg-white text-black font-bold transition-[width,height,font] `}
 	>
 		<svg
-			class="lg:h-[1vw] h-[4vw] mr-1 transition-size"
+			class="lg:h-[1vw] h-[4vw] mr-1 transition-size fill-black"
 			viewBox="0 0 13 16"
 			fill="none"
 			xmlns="http://www.w3.org/2000/svg"
 		>
 			<path
 				d="M6.49992 10.0833C5.8402 10.0833 5.27943 9.85235 4.81763 9.39054C4.35582 8.92874 4.12492 8.36797 4.12492 7.70825V2.95825C4.12492 2.29853 4.35582 1.73777 4.81763 1.27596C5.27943 0.814155 5.8402 0.583252 6.49992 0.583252C7.15964 0.583252 7.72041 0.814155 8.18221 1.27596C8.64402 1.73777 8.87492 2.29853 8.87492 2.95825V7.70825C8.87492 8.36797 8.64402 8.92874 8.18221 9.39054C7.72041 9.85235 7.15964 10.0833 6.49992 10.0833ZM5.70825 15.6249V13.1905C4.33603 13.0058 3.20131 12.3923 2.30409 11.3499C1.40686 10.3076 0.958252 9.09367 0.958252 7.70825H2.54159C2.54159 8.80339 2.92765 9.73676 3.69979 10.5084C4.47141 11.2805 5.40478 11.6666 6.49992 11.6666C7.59506 11.6666 8.5287 11.2805 9.30084 10.5084C10.0724 9.73676 10.4583 8.80339 10.4583 7.70825H12.0416C12.0416 9.09367 11.593 10.3076 10.6958 11.3499C9.79853 12.3923 8.66381 13.0058 7.29159 13.1905V15.6249H5.70825Z"
-				fill="#1E1E1E"
+			
 			/>
 		</svg>
 		Start Conversation
 	</button>
+	
+	<div
+		class={`
+		rounded-full text-[0.9vw] shadow-md bg-black/5 backdrop-blur-xl border border-white/5
+		lg:w-[6vw] lg:h-[2.5vw]
+		flex flex-row items-center justify-center p-2 absolute -top-2 right-0
+		`}
+	>
+		<h3 class="font-bold text-white opacity-80">CEFR: {conversation.CEFRlevel}</h3>
+	</div>
 </div>

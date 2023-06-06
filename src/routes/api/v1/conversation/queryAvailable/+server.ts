@@ -1,12 +1,8 @@
 import { queryConversations } from '$lib/server/conversation';
-import type { RequestHandler } from '@sveltejs/kit';
+import type { ConversationCarouselItem } from '$lib/types/conversationData';
+import { json, type RequestHandler } from '@sveltejs/kit';
 
 export const GET: RequestHandler = async () => {
-	await queryConversations();
-	return new Response(
-		JSON.stringify({
-			message: 'Hello world!'
-		}),
-		{ status: 200 }
-	);
+	const result = await queryConversations();
+	return json(result);
 };

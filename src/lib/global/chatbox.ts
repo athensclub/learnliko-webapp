@@ -1,15 +1,20 @@
-import type { ConversationDetails } from '$lib/types/conversationData';
+import type { ConversationCarouselItem } from '$lib/types/conversationData';
 import { writable } from 'svelte/store';
 
-export type ChatboxView = 'CONVERSATION' | 'RECAP';
+export type ChatboxView = 'CONVERSATION' | 'RECAP' | 'ASSISTANT';
 
 /**
  * Whether to show the chatbox or not.
  */
 export const showChatbox = writable(false);
 
+/**
+ * Tha current view that is being shown in chatbox.
+ */
+export const currentChatboxView = writable<ChatboxView>('CONVERSATION');
+
 type ChatboxContext = {
-	details: ConversationDetails;
+	conversation: ConversationCarouselItem;
 };
 
 /**

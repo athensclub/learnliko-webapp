@@ -1,0 +1,9 @@
+THAI:
+Learnliko เป็นแพลตฟอร์มการศึกษาที่ใช้ปัญญาประดิษฐ์เพื่อสอนภาษาอังกฤษ
+วิธีการแนะนำตัวเองเป็นภาษาอังกฤษสามารถทำได้โดยการพูด "Hello my name is (ชื่อของคุณ)". โดยสามารถเพิ่มข้อมูลเกี่ยวกับตัวเองเช่น "I am (อายุ) years old".
+
+
+ENGLISH:
+Learnliko is an educational platform that uses artificial intelligence to teach English.
+
+

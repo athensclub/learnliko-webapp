@@ -10,7 +10,6 @@ export const POST: RequestHandler = async ({ request }) => {
 		const result = await transcribe(audioBlob);
 		return json({ text: result });
 	} catch (e) {
-		console.log(e);
 		throw error(500, `Error: ${e}`);
 	}
 };

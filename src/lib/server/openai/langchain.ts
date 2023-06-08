@@ -2,6 +2,7 @@
 import { ChatOpenAI } from "langchain/chat_models/openai";
 import { ConversationalRetrievalQAChain } from "langchain/chains";
 import { HNSWLib } from "langchain/vectorstores/hnswlib";
+import { FaissStore } from "langchain/vectorstores/faiss";
 import { OpenAIEmbeddings } from "langchain/embeddings/openai";
 import { RecursiveCharacterTextSplitter } from "langchain/text_splitter";
 import { SECRET_OPENAI_API_KEY } from '$env/static/private';
@@ -18,9 +19,12 @@ const nonStreamingModel = new ChatOpenAI({
 const textSplitter = new RecursiveCharacterTextSplitter({ chunkSize: 1000 });
 const docs = await textSplitter.createDocuments([text]);
 /* Create the vectorstore */
-const vectorStore = await HNSWLib.fromDocuments(docs, new OpenAIEmbeddings(
+const vectorStore = await FaissStore.fromDocuments(docs, new OpenAIEmbeddings(
     { openAIApiKey: SECRET_OPENAI_API_KEY }
 ));
+// const vectorStore = await HNSWLib.fromDocuments(docs, new OpenAIEmbeddings(
+//     { openAIApiKey: SECRET_OPENAI_API_KEY }
+// ));
 
 const chatMessageToLangchainMessage = (message: ChatMessage) => {
     if (message.role === 'assistant') {

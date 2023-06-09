@@ -49,7 +49,7 @@
 		"@macfja/svelte-persistent-store": "^2.3.0",
 		"@sentry/sveltekit": "^7.51.2",
 		"axios": "^1.3.5",
-		"hnswlib-node": "^1.4.2",
+		"faiss-node": "^0.2.1",
 		"keen-slider": "^6.8.5",
 		"langchain": "^0.0.90",
 		"openai": "^3.2.1",

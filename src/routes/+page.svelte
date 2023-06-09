@@ -90,7 +90,7 @@
 				<div class=" flex justify-between">
 					<div>
 						<h1 class="font-bold text-[2vw] mt-2 ml-5">Reading</h1>
-						<h2 class="text-[1.1vw] ml-5">You have <strong>5</strong> people to talk</h2>
+						<h2 class="text-[1.1vw] ml-5">You have <strong>10</strong> stories to talk</h2>
 					</div>
 
 					<svg

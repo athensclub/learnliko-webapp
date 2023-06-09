@@ -10,7 +10,8 @@
 	import Typewriter from 'svelte-typewriter/Typewriter.svelte';
 	import { showModal } from '$lib/global/modal';
 	import ConfirmModal from '$lib/components/modals/ConfirmModal.svelte';
-	let options = ['Grade 1', 'Grade 2', 'Grade 3', 'Grade 4', 'Grade 5', 'Grade 6'];
+	import { isMobile } from '$lib/global/breakpoints';
+	// let options = ['Grade 1', 'Grade 2', 'Grade 3', 'Grade 4', 'Grade 5', 'Grade 6'];
 
 	// TODO: probably switch back to querying in ssr when we switch the db to cloud.
 	// export let data: PageData;
@@ -43,38 +44,53 @@
 <!-- If there's current conversation going, display it instead of choosing conversation -->
 {#if $chatContext?.conversation}
 	<div
-		class="w-[100vw] h-[100vh] bg-cover bg-center relative"
+		class="w-[100vw] h-[100vh] text-white bg-cover bg-center relative"
 		style="background-image: url('{$chatContext.conversation.conversationBackground}');"
 	>
 		<div
-			class="absolute top-0 w-full backdrop-blur-xl p-4 shadow-sm border border-black/15 rounded-t-none rounded-xl text-white text-[1.3vw]"
+			class={`absolute ${
+				$isMobile
+					? 'top-0 w-full text-[1.3vw] rounded-t-none'
+					: 'top-[25vh] left-[3vw] w-[33%] text-[1vw]'
+			} backdrop-blur-sm backdrop-brightness-75 p-4 shadow-sm border border-black/15 rounded-xl`}
 		>
-			<div class="flex flex-row justify-between items-center h-[2.5vh]">
-				<strong class="text-[4vw]"> 🎯Coversation Goal </strong>
-
-				<button
-					on:click={hideConversation}
-					class="flex flex-row items-center justify-around px-2 text-[2.5vw] h-full border border-white rounded-lg"
-				>
-					<svg
-						class="h-[50%] mr-1"
-						viewBox="0 0 12 12"
-						fill="none"
-						xmlns="http://www.w3.org/2000/svg"
-					>
-						<line x1="0.353553" y1="0.646447" x2="11.3536" y2="11.6464" stroke="white" />
-						<line x1="11.3536" y1="0.353553" x2="0.353553" y2="11.3536" stroke="white" />
-					</svg>
-					Exit
-				</button>
+			<div class="flex flex-row justify-between items-center">
+				<strong class={`${$isMobile ? 'text-[4vw]' : 'text-[2vw]'}`}> 🎯Coversation Goal </strong>
 			</div>
 			<Typewriter>
 				<pre class="mt-3">{$chatContext.conversation.details.learner.goal}</pre>
 			</Typewriter>
 		</div>
 
+		<button
+			on:click={hideConversation}
+			class={`absolute flex flex-row items-center justify-around rounded-full ${
+				$isMobile
+					? 'top-[2.5vh] right-[4vw] h-[2.3vh] text-[3vw] border border-white px-2'
+					: 'bg-white text-black left-[3vw] top-[6vh] h-[6vh] text-[1.8vw] px-5'
+			}`}
+		>
+			<svg class="h-[45%] mr-1" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<line
+					x1="0.353553"
+					y1="0.646447"
+					x2="11.3536"
+					y2="11.6464"
+					stroke={$isMobile ? 'white' : 'black'}
+				/>
+				<line
+					x1="11.3536"
+					y1="0.353553"
+					x2="0.353553"
+					y2="11.3536"
+					stroke={$isMobile ? 'white' : 'black'}
+				/>
+			</svg>
+			Exit
+		</button>
+
 		<img
-			class="w-full absolute bottom-0"
+			class={`${$isMobile ? 'w-full' : 'h-[90%] left-[50%] translate-x-[-50%]'} absolute bottom-0`}
 			src={$chatContext.conversation.avatars.normal}
 			alt="Avatar"
 		/>

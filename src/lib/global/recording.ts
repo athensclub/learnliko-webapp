@@ -30,14 +30,14 @@ export const isRecording = writable(false);
  */
 export const initializeAudioRecording = async () => {
     const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-    mediaRecorder = new MediaRecorder(stream);
+    mediaRecorder = new MediaRecorder(stream, { mimeType: 'audio/webm' });
     mediaRecorder.ondataavailable = (e) => media.push(e.data);
     mediaRecorder.onstop = async function () {
         if (resetting) {
             media = [];
             return;
         }
-        const blob = new Blob(media, { 'type': 'audio/ogg; codecs=opus' });
+        const blob = new Blob(media, { 'type': 'audio/webm' });
         const url = await blobToBase64(blob);
         media = [];
         audioRecording.set({ data: blob, url });

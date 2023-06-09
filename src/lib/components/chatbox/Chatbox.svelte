@@ -8,7 +8,9 @@
 
 <div
 	transition:fly={{ y: 800, duration: 800 }}
-	class="w-full h-full bg-white z-30 font-line-seed relative flex flex-col items-center shadow-2xl rounded-t-xl shadow-gray-700 border-[1px] border-black/10 border-b-0 px-2"
+	class={`w-full h-full z-30 font-line-seed relative flex flex-col items-center shadow-2xl rounded-t-xl shadow-gray-700 border-[1px] border-black/10 border-b-0 px-2 ${
+		$currentChatboxView === 'CONVERSATION' ? 'backdrop-blur-lg bg-transparent' : 'backdrop-blur-none bg-white'
+	}`}
 >
 	{#if $currentChatboxView === 'CONVERSATION'}
 		{#if $chatContext}

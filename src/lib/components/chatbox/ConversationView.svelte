@@ -84,13 +84,6 @@
 
 	const showRecap = async () => ($currentChatboxView = 'RECAP');
 
-	const hide = () =>
-		showModal(ConfirmModal, {
-			title: 'Confirm',
-			description: 'Are you sure you want to finish this conversation?',
-			onConfirm: () => ($showChatbox = false)
-		});
-
 	/**
 	 * Call bot to reply base on chat history
 	 * @param message ignore chat history if [message] is provided
@@ -200,29 +193,8 @@
 	audioRecording.subscribe(onUserReply);
 </script>
 
-<div
-	class="z-10 flex items-center justify-center w-full h-[48px] font-bold text-md border-b border-black/[0.15] relative"
->
-	<h1>Voice Chat</h1>
-	<div class="flex flex-row absolute right-0">
-		<button
-			on:click={hide}
-			class="rounded-full border border-black/[0.15] h-[28px] aspect-square text-sm"
-		>
-			✕
-		</button>
-	</div>
-</div>
-
 {#if initializedConversation}
-	<div class="w-full h-[calc(100%-48px)] overflow-y-auto">
-		<h1
-			class=" sticky p-4 shadow-sm border border-black/15 rounded-xl mt-3 text-black text-[1.3vw]"
-		>
-			<strong class=" text-[2vw]">🎯Coversation Goal</strong><br /><Typewriter
-				><pre>{conversationDetails.learner.goal}</pre></Typewriter
-			>
-		</h1>
+	<div class="w-full h-full overflow-y-auto text-white">
 		<VoiceChatHistory
 			{history}
 			assistantProfileImage={conversationDetails.bot.avatar}
@@ -230,9 +202,9 @@
 		/>
 
 		{#if waitingForAIResponse}
-			<div class="flex flex-row items-center">
+			<div class="flex flex-row items-center px-4 mt-6">
 				<div
-					class={`w-[42px] h-[42px] px-4 bg-center bg-cover rounded-full border border-white`}
+					class={`mr-2 w-[42px] h-[42px] px-4 bg-center bg-cover rounded-full border border-white`}
 					style="background-image: url('{conversationDetails.bot.avatar}');"
 				/>
 				Thinking
@@ -279,8 +251,7 @@
 		</svg>
 		{#if $isRecording}
 			Recording
-		{/if}
-		{#if !$isRecording}
+		{:else}
 			Press to Talk
 		{/if}
 	</button>

@@ -160,7 +160,7 @@
 			/>
 		{/each}
 
-		<div class=" bg-white rounded-full px-2 text-[0.8vw] ml-2">
+		<div class="bg-white text-black rounded-full px-2 text-[0.8vw] ml-2">
 			{timeText}
 		</div>
 	</div>

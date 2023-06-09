@@ -25,7 +25,13 @@ export interface ConversationCarouselItem {
 	CEFRlevel: string;
 	background: string;
 	details: ConversationDetails;
+	avatars: ConversationAvatar;
+	conversationBackground: string;
 	id: string;
+}
+
+export interface ConversationAvatar {
+	normal: string;
 }
 
 export interface FinishedConversation {

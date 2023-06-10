@@ -1,7 +1,7 @@
 <script>
 	import '../app.css';
 	import Chatbox from '$lib/components/chatbox/Chatbox.svelte';
-	import { showChatbox } from '$lib/global/chatbox';
+	import { currentChatboxView, showChatbox } from '$lib/global/chatbox';
 	import { onMount } from 'svelte';
 	import { initializeAudioRecording, resetRecordingData } from '$lib/global/recording';
 	import Modal from 'svelte-simple-modal';
@@ -23,8 +23,13 @@
 
 	{#if $showChatbox}
 		<div
-			class={`fixed bottom-0 ${
-				$isMobile ? 'w-[100vw] h-[40vh]' : 'w-[40vw] h-[calc(100vh-48px)] right-0'
+			class={`fixed ${
+				$isMobile
+					? 'w-[100vw] h-[40vh] bottom-0'
+					: 'w-[37vw] ' +
+					  ($currentChatboxView === 'CONVERSATION'
+							? 'h-[70vh] bottom-[15vh] right-[3vw]'
+							: 'h-[85vh] bottom-0 left-[50%] translate-x-[-50%]')
 			} z-30`}
 		>
 			<Chatbox />

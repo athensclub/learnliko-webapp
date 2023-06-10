@@ -8,8 +8,10 @@
 
 <div
 	transition:fly={{ y: 800, duration: 800 }}
-	class={`w-full h-full z-30 font-line-seed relative flex flex-col items-center shadow-2xl rounded-t-3xl shadow-gray-700 border-[1px] border-black/10 border-b-0 px-2 ${
-		$currentChatboxView === 'CONVERSATION' ? 'backdrop-blur-sm backdrop-brightness-75 bg-transparent' : 'backdrop-blur-none bg-white'
+	class={`w-full h-full z-30 font-line-seed relative flex flex-col items-center shadow-2xl shadow-gray-700 border-[1px] border-black/10 border-b-0 px-2 ${
+		$currentChatboxView === 'CONVERSATION'
+			? 'backdrop-blur-sm backdrop-brightness-75 bg-transparent rounded-3xl'
+			: 'backdrop-blur-none bg-white rounded-t-3xl'
 	}`}
 >
 	{#if $currentChatboxView === 'CONVERSATION'}

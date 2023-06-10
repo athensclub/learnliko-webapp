@@ -229,7 +229,7 @@
 		<div class="w-full h-[80px]" />
 	</div>
 {:else}
-	<div class="w-full h-full flex flex-row items-center justify-center">
+	<div class="w-full h-full flex flex-row items-center justify-center text-white">
 		Initializing Conversation<Typewriter mode="loop">...</Typewriter>
 	</div>
 {/if}

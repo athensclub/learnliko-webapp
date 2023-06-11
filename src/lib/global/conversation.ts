@@ -9,6 +9,7 @@ import { blobToBase64 } from "$lib/utils/io";
 import { round } from "$lib/utils/math";
 import { setCurrentCEFRLevel } from "$lib/localdb/profileLocal";
 import { completeConversationLocal } from "$lib/localdb/conversationLocal";
+import { audioRecording } from "./recording";
 
 /** chat's history, used for display only */
 export const history = writable<{
@@ -24,6 +25,9 @@ export const initializedConversation = writable(false);
 export const transcribing = writable(false);
 
 export const conversationFinished = writable(false);
+
+export const currentRecording = writable<{ data: Blob; url: string; } | null>(null);
+audioRecording.subscribe(currentRecording.set);
 
 let finishedTime: Date;
 
@@ -119,7 +123,6 @@ const botReply = async function (message?: string) {
 };
 
 export const submitUserReply = async function (audioRecording: { data: Blob; url: string } | null) {
-    console.log('submit')
     if (audioRecording !== null) {
         transcribing.set(true);
         history.set([

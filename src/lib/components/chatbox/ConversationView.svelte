@@ -1,207 +1,42 @@
 <script lang="ts">
 	import { audioRecording, isRecording, toggleRecording } from '$lib/global/recording';
-	import { transcribe } from '$api/transcription';
-	import { showModal } from '$lib/global/modal';
-	import {
-		showChatbox,
-		recapHistory,
-		type RecapHistory,
-		currentChatboxView,
-		chatContext
-	} from '$lib/global/chatbox';
+	import { currentChatboxView, chatContext } from '$lib/global/chatbox';
 	import Typewriter from 'svelte-typewriter';
-	import ConfirmModal from '$lib/components/modals/ConfirmModal.svelte';
-	import { synthesize, type SynthesizeAccent, type SynthesizeGender } from '$api/tts';
 	import userImage from '$lib/images/sample_kid_image.png';
-	import { analyzeDialog, chat } from '$api/conversation';
-	import type { ChatMessage } from '$lib/types/requests/chatCompletion';
-	import type { ChatBotMessage } from '$lib/types/conversationData';
 	import VoiceChatHistory from './VoiceChatHistory.svelte';
-	import { blobToBase64 } from '$lib/utils/io';
-	import { completeConversationLocal } from '$lib/localdb/conversationLocal';
-	import { round } from '$lib/utils/math';
-	import { setCurrentCEFRLevel } from '$lib/localdb/profileLocal';
-
-	// chat's history, used for display only
-	let history: {
-		role: 'user' | 'assistant';
-		audioURL: string;
-		transcription: string | null;
-	}[] = [];
-	let finished = false;
-	let finishedTime: Date;
-	let initializedConversation = false;
-	let waitingForAIResponse = false;
-	let transcribing = false;
-
-	// an array of chatGPT's history in raw data, used for chat completion
-	const gptHistory: ChatMessage[] = [];
+	import {
+		conversationFinished,
+		history,
+		initializeConversationBot,
+		initializedConversation,
+		resetConversationData,
+		submitUserReply,
+		transcribing,
+		waitingForAIResponse
+	} from '$lib/global/conversation';
+	import { onDestroy } from 'svelte';
 
 	let conversationDetails = $chatContext!.conversation.details;
 
-	const computeRecap = async () => {
-		$recapHistory = null;
-		let result: RecapHistory = [];
-		const promises: Promise<any>[] = [];
-
-		for (let i = 0; i < history.length; i += 2) {
-			// the last dialog will have no user's response
-			if (i + 1 >= history.length) break;
-
-			promises.push(
-				analyzeDialog(history[i].transcription!, history[i + 1].transcription!).then((recap) => {
-					result[i / 2] = {
-						assistant: {
-							...history[i],
-							role: 'assistant',
-							transcription: history[i].transcription!
-						},
-						user: { ...history[i + 1], role: 'user', transcription: history[i + 1].transcription! },
-
-						score: recap.overallScore,
-						suggestion: recap.suggestion
-					};
-				})
-			);
-		}
-		await Promise.all(promises);
-
-		$recapHistory = result;
-
-		const totalScore = result ? result.map((x) => x.score).reduce((x, y) => x + y, 0) : 0;
-		round((totalScore / result.length) * 100, 2);
-
-		// TODO: find a better approach to promote/demote user's CEFR level
-		if (totalScore > 90) setCurrentCEFRLevel($chatContext!.conversation.CEFRlevel);
-
-		// TODO: use actual db (cloud).
-		completeConversationLocal({
-			recap: result,
-			finishedTime,
-			conversationID: $chatContext!.conversation.id
-		});
-	};
+	// initialization
+	resetConversationData();
+	initializeConversationBot();
 
 	const showRecap = async () => ($currentChatboxView = 'RECAP');
 
-	/**
-	 * Call bot to reply base on chat history
-	 * @param message ignore chat history if [message] is provided
-	 */
-	const botReply = async function (message?: string) {
-		waitingForAIResponse = true;
-		// if no message provide, get response from chatGPT
-		if (!message) {
-			let data: ChatBotMessage | undefined;
-			let attempt = 0;
-			while (true) {
-				try {
-					const botResponse = await chat(gptHistory);
-
-					// gpt will response in JSON format, parse it to object
-					data = JSON.parse(botResponse);
-
-					gptHistory.push({ role: 'assistant', content: botResponse });
-					console.log(botResponse);
-					break;
-				} catch (error) {
-					// max attempt at 5
-					if (attempt++ >= 5) break;
-
-					gptHistory.push({ role: 'user', content: 'Reply with provided JSON scheme' });
-					console.error("error: parsing bot's message, retring...");
-				}
-			}
-
-			if (!data) throw new Error('Error: Bot failed to reply');
-			message = data.message;
-
-			// TODO: implement behavior regarding bot's message status
-			switch (data.status) {
-				case 'NORMAL':
-					break;
-				case 'INAPPROPRIATE':
-					break;
-				case 'END-OF-CONVERSATION':
-					finished = true;
-					finishedTime = new Date();
-					computeRecap();
-					break;
-				default:
-					break;
-			}
-		}
-
-		const audio = await synthesize(
-			message,
-			conversationDetails.bot.accent,
-			conversationDetails.bot.gender
-		);
-
-		history = [
-			...history,
-			{
-				role: 'assistant',
-				audioURL: await blobToBase64(audio),
-				transcription: message
-			}
-		];
-		waitingForAIResponse = false;
-	};
-
-	const onUserReply = async function (audioRecording: { data: Blob; url: string } | null) {
-		if (audioRecording !== null) {
-			transcribing = true;
-			history = [
-				...history,
-				{
-					role: 'user',
-					audioURL: audioRecording.url,
-					transcription: null
-				}
-			];
-
-			const targetIndex = history.length - 1;
-			const transcription = await transcribe(audioRecording.data);
-			history[targetIndex] = {
-				...history[targetIndex],
-				transcription: transcription
-			};
-			gptHistory.push({ role: 'user', content: transcription });
-
-			transcribing = false;
-			botReply();
-		}
-	};
-
-	const initializeBot = async function () {
-		gptHistory.push({ role: 'user', content: conversationDetails.bot.prompt });
-		gptHistory.push({
-			role: 'assistant',
-			content: `{"message":"${conversationDetails.intro}","status":"NORMAL"}`
-		});
-
-		await botReply(conversationDetails.intro);
-
-		// finish initialization
-		initializedConversation = true;
-		console.log('Finish init bot');
-	};
-
-	// initialization
-	initializeBot();
-	audioRecording.subscribe(onUserReply);
+	let unsubscribeAudioRecording = audioRecording.subscribe(submitUserReply);
+	onDestroy(() => unsubscribeAudioRecording());
 </script>
 
-{#if initializedConversation}
+{#if $initializedConversation}
 	<div class="w-full h-full overflow-y-auto text-white">
 		<VoiceChatHistory
-			{history}
+			history={$history}
 			assistantProfileImage={conversationDetails.bot.avatar}
 			userProfileImage={userImage}
 		/>
 
-		{#if waitingForAIResponse}
+		{#if $waitingForAIResponse}
 			<div class="flex flex-row items-center px-4 mt-6">
 				<div
 					class={`mr-2 w-[42px] h-[42px] px-4 bg-center bg-cover rounded-full border border-white`}
@@ -212,7 +47,7 @@
 			</div>
 		{/if}
 
-		{#if finished}
+		{#if $conversationFinished}
 			<div class="w-full text-center flex flex-col mt-4 items-center font-bold">
 				Conversation Finished
 
@@ -234,9 +69,12 @@
 	</div>
 {/if}
 
-{#if !finished}
+{#if !$conversationFinished}
 	<button
-		disabled={waitingForAIResponse || transcribing || finished || !initializedConversation}
+		disabled={$waitingForAIResponse ||
+			$transcribing ||
+			$conversationFinished ||
+			!$initializedConversation}
 		on:click={toggleRecording}
 		class="absolute bg-white/[0.8] mx-auto bottom-8 w-[200px] h-[44px] shadow-all rounded-xl flex items-center justify-center z-[1000]"
 	>

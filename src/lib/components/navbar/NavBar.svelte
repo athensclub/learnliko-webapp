@@ -5,17 +5,25 @@
 	import userProfileImage from '$lib/images/sample_kid_image.png';
 	import { currentChatboxView, showChatbox } from '$lib/global/chatbox';
 	import NavBarLinkList from './NavBarLinkList.svelte';
+	import { page } from '$app/stores';
+
+	/**
+	 * (Only affect in desktop) Whether this NavBar will 'counted' in layout calculation. When true, the sibling elements will be placed after NavBar instead of Navbar being overlay because it is fixed.
+	 */
+	export let spaced = false;
 
 	const openAssistantChat = () => {
 		$currentChatboxView = 'ASSISTANT';
 		$showChatbox = true;
 	};
+
+	$: isInProfile = $page.url.pathname.startsWith('/profile');
 </script>
 
 {#if $isMobile}
 	<nav
 		style="box-shadow: 0px -3px 10px 0px #00000040;"
-		class="fixed bottom-0 w-[100vw] py-[2vh] flex flex-row justify-around"
+		class="fixed bg-white bottom-0 w-[100vw] py-[2vh] flex flex-row justify-around"
 	>
 		<NavBarLinkList noText eachIconStyle="width: 10vw;">
 			<button
@@ -29,22 +37,36 @@
 		</NavBarLinkList>
 	</nav>
 {:else}
+	{#if spaced}
+		<!-- "empty" space to help with layout -->
+		<div class="w-[23vw] h-[100vh]" />
+	{/if}
 	<nav
-		class="flex flex-col justify-around w-[23vw] h-[100vh] shadow-xl px-[2vw] py-[3vh] font-line-seed"
+		style="box-shadow: 4px 1px 20px 0px #0000000D;"
+		class="fixed left-0 flex flex-col bg-white justify-around w-[23vw] h-[100vh] px-[2vw] py-[3vh] font-line-seed"
 	>
 		<div class="flex flex-col">
 			<img class="w-[25%]" src={icon} alt="Learnliko" />
 
-			<div class="w-full flex flex-row items-center bg-[#F5F5F5] rounded-xl p-[5%] mt-[6vh]">
+			<a
+				href="/profile"
+				class={`w-full flex flex-row items-center rounded-2xl p-[5%] mt-[6vh] ${
+					isInProfile
+						? 'bg-gradient-to-r from-[#7280FF] via-[#C698FF] to-[#FFD68D]'
+						: 'bg-[#F5F5F5]'
+				}`}
+			>
 				<div
 					class={`w-[3.5vw] h-[3.5vw] bg-center bg-cover rounded-full `}
 					style="background-image: url('{userProfileImage}');"
 				/>
-				<div class="flex flex-col ml-[1vw] font-bold">
+				<div
+					class={`flex flex-col ml-[1vw] font-bold ${isInProfile ? 'text-white' : 'text-black'}`}
+				>
 					<div class="text-[1.4vw]">Natsataporn M.</div>
 					<div class="text-[1vw]">🧿 3300 coin</div>
 				</div>
-			</div>
+			</a>
 		</div>
 
 		<div class="flex flex-col w-full font-bold gap-[4vh] text-[2vw]">

@@ -8,7 +8,7 @@
 	import { page } from '$app/stores';
 
 	/**
-	 * (Only affect in desktop) Whether this NavBar will 'counted' in layout calculation. When true, the sibling elements will be placed after NavBar instead of Navbar being overlay because it is fixed.
+	 * (Only has effect in desktop breakpoint) Whether this NavBar will be 'counted' in layout calculation. When true, the sibling elements will be placed after NavBar instead of Navbar being overlay because it is fixed.
 	 */
 	export let spaced = false;
 

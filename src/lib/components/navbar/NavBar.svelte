@@ -1,17 +1,24 @@
 <script lang="ts">
 	import { isMobile } from '$lib/global/breakpoints';
 	import assistantIcon from './assistant_icon.png';
+	import conversationFocusedIcon from './conversation_focused_icon.png';
 	import conversationIcon from './conversation_icon.png';
 	import icon from '$lib/images/learnliko_icon.png';
 	import userProfileImage from '$lib/images/sample_kid_image.png';
 	import NavBarLink from './NavBarLink.svelte';
+	import { currentChatboxView, showChatbox } from '$lib/global/chatbox';
+
+	const openAssistantChat = () => {
+		$currentChatboxView = 'ASSISTANT';
+		$showChatbox = true;
+	};
 </script>
 
 {#if $isMobile}
 	<div />
 {:else}
 	<nav
-		class="fixed flex flex-col justify-around w-[23vw] h-[100vh] shadow-xl px-[2vw] py-[3vh] font-line-seed"
+		class="flex flex-col justify-around w-[23vw] h-[100vh] shadow-xl px-[2vw] py-[3vh] font-line-seed"
 	>
 		<div class="flex flex-col">
 			<img class="w-[25%]" src={icon} alt="Learnliko" />
@@ -30,6 +37,19 @@
 
 		<div class="flex flex-col w-full font-bold gap-[4vh] text-[2vw]">
 			<NavBarLink href="/discover" text="Discover">
+				<svg
+					slot="normalIcon"
+					class="w-[2vw] mr-[1.5vw]"
+					viewBox="0 0 28 28"
+					fill="none"
+					xmlns="http://www.w3.org/2000/svg"
+				>
+					<path
+						d="M25.9744 2.02778C24.8144 0.867781 23.1744 0.414448 21.5877 0.814448L8.52111 4.08111C6.32111 4.62778 4.62778 6.33445 4.08111 8.52111L0.814448 21.6011C0.414448 23.1877 0.867781 24.8277 2.02778 25.9877C2.90778 26.8544 4.06778 27.3344 5.26778 27.3344C5.64111 27.3344 6.02778 27.2944 6.40111 27.1877L19.4811 23.9211C21.6677 23.3744 23.3744 21.6811 23.9211 19.4811L27.1877 6.40111C27.5877 4.81445 27.1344 3.17445 25.9744 2.02778ZM14.0011 19.1744C11.1478 19.1744 8.82778 16.8544 8.82778 14.0011C8.82778 11.1478 11.1478 8.82778 14.0011 8.82778C16.8544 8.82778 19.1744 11.1478 19.1744 14.0011C19.1744 16.8544 16.8544 19.1744 14.0011 19.1744Z"
+						fill="black"
+					/>
+				</svg>
+
 				<svg
 					slot="focusedIcon"
 					class="w-[2vw] mr-[1.5vw]"
@@ -63,6 +83,12 @@
 					slot="normalIcon"
 					class="w-[2vw] object-contain mr-[1.5vw]"
 					src={conversationIcon}
+					alt="Conversation"
+				/>
+				<img
+					slot="focusedIcon"
+					class="w-[2vw] object-contain mr-[1.5vw]"
+					src={conversationFocusedIcon}
 					alt="Conversation"
 				/>
 			</NavBarLink>
@@ -115,6 +141,7 @@
 		</div>
 
 		<button
+			on:click={openAssistantChat}
 			style="box-shadow: 0px 2px 15px 0px #9BA1FD82; "
 			class="w-[70%] py-2 rounded-full mx-auto flex flex-row items-center justify-center font-bold"
 		>

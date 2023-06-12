@@ -84,7 +84,7 @@
 					</div>
 				</div>
 
-				<div
+				<a href="/cert"
 					class="w-[35%] h-[30vh] flex flex-col gap-[2vh] items-center justify-center bg-black rounded-3xl"
 				>
 					<svg class="h-[35%]" viewBox="0 0 114 114" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -182,7 +182,7 @@
 					>
 						Certificate
 					</div>
-				</div>
+				</a>
 			</div>
 
 			<div class="font-extrabold text-[2vw] mt-[10vh]">Learning Diary</div>

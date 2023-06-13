@@ -51,7 +51,7 @@
 
 				<button
 					on:click={showRecap}
-					class="mt-3 rounded-lg w-fit border border-black/[0.15] font-normal text-base mr-4 px-4 py-1"
+					class="mt-3 rounded-lg w-fit border border-white/[0.15] font-normal text-base mr-4 px-4 py-1"
 				>
 					Finish!
 				</button>

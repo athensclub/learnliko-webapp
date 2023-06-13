@@ -23,7 +23,7 @@
 {#if $isMobile}
 	<nav
 		style="box-shadow: 0px -3px 10px 0px #00000040;"
-		class="fixed bg-white bottom-0 w-[100vw] py-[2vh] flex flex-row justify-around"
+		class="fixed z-[1000] bg-white bottom-0 w-[100vw] py-[2vh] flex flex-row justify-around"
 	>
 		<NavBarLinkList noText eachIconStyle="width: 10vw;">
 			<button

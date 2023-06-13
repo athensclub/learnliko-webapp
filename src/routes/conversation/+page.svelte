@@ -91,7 +91,8 @@
 			<div class="mt-[5vh] text-[2vw] font-bold">Today Tasks</div>
 			<div class="grid gap-[2vw] grid-cols-3 mt-[5vh]">
 				{#each data.conversationCorouselItems as item, index (item.id)}
-					<ConversationCard class="w-full h-[50vh]" conversation={item} />
+					<!-- Use vw to set height to keep ratio when viewport width change -->
+					<ConversationCard class="w-full h-[27vw]" conversation={item} />
 				{/each}
 			</div>
 		</div>

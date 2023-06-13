@@ -1,4 +1,4 @@
-import type { ConversationCarouselItem } from '$lib/types/conversationData';
+import type { BotEmotion, ConversationCarouselItem } from '$lib/types/conversationData';
 import { writable } from 'svelte/store';
 
 export type ChatboxView = 'CONVERSATION' | 'RECAP' | 'ASSISTANT';
@@ -13,8 +13,13 @@ export const showChatbox = writable(false);
  */
 export const currentChatboxView = writable<ChatboxView>('CONVERSATION');
 
+type BotContext = {
+	emotion: BotEmotion;
+};
+
 type ChatboxContext = {
 	conversation: ConversationCarouselItem;
+	bot: BotContext;
 };
 
 /**

@@ -1,7 +1,7 @@
 import { analyzeDialog, chat } from '$api/conversation';
 import { transcribe } from '$api/transcription';
 import { synthesize } from '$api/tts';
-import type { ChatBotMessage } from '$lib/types/conversationData';
+import { BotEmotionValues, type ChatBotMessage } from '$lib/types/conversationData';
 import type { ChatMessage } from '$lib/types/requests/chatCompletion';
 import { get, writable } from 'svelte/store';
 import { chatContext, recapHistory, type RecapHistory } from './chatbox';
@@ -65,7 +65,11 @@ export const initializeConversationBot = async function () {
  * @param message ignore chat history if [message] is provided
  */
 const botReply = async function (message?: string) {
+	const ct = get(chatContext);
+	if (!ct) throw new Error('required chatbox context');
+
 	waitingForAIResponse.set(true);
+
 	// if no message provide, get response from chatGPT
 	if (!message) {
 		let data: ChatBotMessage | undefined;
@@ -77,8 +81,13 @@ const botReply = async function (message?: string) {
 				// gpt will response in JSON format, parse it to object
 				data = JSON.parse(botResponse);
 
+				// ensure `data` is available and emotion is provided correctly
+				if (!data) continue;
+				if (!data.emotion || !BotEmotionValues.includes(data.emotion)) data.emotion = 'neutral';
+
+				chatContext.set({ ...ct, bot: { ...ct.bot, emotion: data.emotion } });
 				gptHistory.push({ role: 'assistant', content: botResponse });
-				console.log(botResponse);
+				console.log(data);
 				break;
 			} catch (error) {
 				// max attempt at 5
@@ -108,11 +117,10 @@ const botReply = async function (message?: string) {
 		}
 	}
 
-	const ct = get(chatContext);
 	const audio = await synthesize(
 		message,
-		ct!.conversation.details.bot.accent,
-		ct!.conversation.details.bot.gender
+		ct.conversation.details.bot.accent,
+		ct.conversation.details.bot.gender
 	);
 
 	history.set([

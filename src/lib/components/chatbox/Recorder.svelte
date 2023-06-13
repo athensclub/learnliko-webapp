@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { chatContext } from '$lib/global/chatbox';
 	import {
 		conversationFinished,
 		transcribing,

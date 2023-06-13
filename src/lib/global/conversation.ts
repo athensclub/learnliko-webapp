@@ -92,7 +92,7 @@ const botReply = async function (message?: string) {
 		if (!data) throw new Error('Error: Bot failed to reply');
 		message = data.message;
 
-		// TODO: implement behavior regarding bot's message status
+		// behavior regarding bot's message status
 		switch (data.status) {
 			case 'NORMAL':
 				break;

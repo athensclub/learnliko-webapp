@@ -1,51 +1,27 @@
 <script lang="ts">
-	import Header from '$lib/components/Header.svelte';
-	import ReadMore from '$lib/components/ReadMore.svelte';
-	import ConfirmModal from '$lib/components/modals/ConfirmModal.svelte';
+	import ReadingQuizModal from '$lib/components/modals/ReadingQuizModal.svelte';
 	import { showModal } from '$lib/global/modal';
 	import {
-		completeReadingLocal,
-		getUserSubmissionLocal,
-		queryAnswersLocal
-	} from '$lib/localdb/readingLocal';
+		initializeReadingData,
+		readingAnswers,
+		resetReadingData,
+		selectedQuizChoices
+	} from '$lib/global/reading';
 	import type { ReadingItem } from '$lib/types/reading';
 	import { onMount } from 'svelte';
 
 	export let data: PageData;
 	let item: ReadingItem = data.item;
-	let selected: (null | number)[] = Array(item.quiz.length).fill(null);
+	let coin = 300;
 
-	// if not null -> user submitted
-	let answers: null | number[] = null;
+	const showQuiz = () => showModal(ReadingQuizModal, { item });
 
-	// TODO: use cloud db when ready. also should move to ssr.
-	onMount(async () => {
-		let userSubmission = await getUserSubmissionLocal(item.id);
+	$: correct = $readingAnswers
+		? $readingAnswers.filter((v, i) => $selectedQuizChoices[i] === v).length
+		: null;
 
-		if (userSubmission) {
-			selected = userSubmission;
-			answers = await queryAnswersLocal(item.id);
-		}
-	});
-
-	const submit = () => {
-		showModal(ConfirmModal, {
-			title: 'Confirm',
-			description: 'Are you sure you want to submit your answer?',
-			onConfirm: async () => {
-				// TODO: use data from cloud db when ready.
-				answers = (await queryAnswersLocal(item.id)) ?? null;
-
-				// TODO: also use cloud db here
-				// to submit all user answers must not be null already, safely cast selected.
-				await completeReadingLocal({
-					readingID: item.id,
-					userAnswers: selected as number[],
-					finishedTime: new Date()
-				});
-			}
-		});
-	};
+	resetReadingData();
+	onMount(() => initializeReadingData(item));
 </script>
 
 <div class="w-full min-h-[100vh]">
@@ -57,28 +33,37 @@
 
 		<div class="absolute top-0 left-0 flex flex-col w-full px-[15vw] pt-[5vh]">
 			<img
-				class="max-w-[30vw] max-h-[60vh] w-auto h-auto mx-auto rounded-3xl"
+				class="max-w-[60vw] max-h-[70vh] w-auto h-auto mx-auto rounded-3xl"
 				src={item.image}
 				alt={item.blogName}
 			/>
 
 			<div class="flex flex-row items-center justify-center w-full gap-[4vw] mt-[5vh] font-bold">
-				<div class="text-white flex items-center justify-center text-[1.6vw]">
-					You will get 🧿 300 coin if you correct all quizzes
+				<div class="text-white flex items-center justify-center text-[2vw]">
+					{#if $readingAnswers && correct}
+						You correct {correct}/{item.quiz.length} of quizzes and got 🧿{(correct /
+							item.quiz.length) *
+							coin} coin
+					{:else}
+						You will get 🧿 {coin} coin if you correct all quizzes
+					{/if}
 				</div>
 
-				<button class="bg-white h-fit py-[1vh] px-[3vw] text-[1.2vw] rounded-3xl">Take Quiz</button>
+				<button
+					on:click={showQuiz}
+					class="bg-white h-fit py-[1vh] px-[3vw] text-[1.35vw] rounded-3xl">Take Quiz</button
+				>
 			</div>
 		</div>
 	</div>
 
 	<div class="bg-white px-[15vw] pt-[5vh] font-line-seed">
 		<div class="font-bold text-[3.5vw]">{item.blogName}</div>
-		<div class="text-[1.7vw] mt-[5vh]">{item.content}</div>
+		<div class="whitespace-pre-wrap text-[1.7vw] mt-[5vh]">{item.content}</div>
 	</div>
 
 	<!-- Bottom spacing -->
-	<div class="w-full h-[15vh]"></div>
+	<div class="w-full h-[15vh]" />
 </div>
 
 <!-- <div class="w-full h-full min-h-[100vh] bg-white">

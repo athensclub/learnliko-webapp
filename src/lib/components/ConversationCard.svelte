@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
 	import { chatContext, currentChatboxView, showChatbox } from '$lib/global/chatbox';
 	import type { ConversationCarouselItem, ConversationDetails } from '$lib/types/conversationData';
 
@@ -14,6 +15,7 @@
 		$chatContext = { conversation, bot: { emotion: 'neutral' } };
 		$currentChatboxView = 'CONVERSATION';
 		$showChatbox = true;
+		goto('/conversation/play');
 	};
 </script>
 
@@ -51,6 +53,7 @@
 		<div class="w-full text-center text-[1.2vw]">{conversation.topic}</div>
 
 		<button
+			{disabled}
 			on:click={openChatbox}
 			class="flex flex-row items-center justify-center gap-[1vw] w-full h-[35%] bg-[#FFFFFF38] text-white text-[1.1vw] rounded-full"
 		>

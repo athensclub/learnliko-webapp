@@ -15,7 +15,6 @@
 	onMount(async () => {
 		// TODO: use cloud db and probably move this to ssr.
 		items = await queryDiscoverItemsLocal();
-		console.log(items);
 	});
 </script>
 

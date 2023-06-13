@@ -36,7 +36,15 @@ export interface ConversationAvatar {
 }
 
 export interface AvatarModel {
-	normal: string;
+	neutral: string;
+	joy: string;
+	trust: string;
+	fear: string;
+	surprise: string;
+	sadness: string;
+	disgust: string;
+	anger: string;
+	anticipation: string;
 }
 
 export interface FinishedConversation {

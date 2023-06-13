@@ -41,7 +41,7 @@
 </script>
 
 <div class="w-full h-full min-h-[100vh] bg-[#F4F4F4] flex flex-row font-line-seed">
-	<NavBar spaced/>
+	<NavBar spaced />
 
 	<div class="flex flex-col flex-1">
 		<div
@@ -84,7 +84,8 @@
 					</div>
 				</div>
 
-				<a href="/cert"
+				<a
+					href="/cert"
 					class="w-[35%] h-[30vh] flex flex-col gap-[2vh] items-center justify-center bg-black rounded-3xl"
 				>
 					<svg class="h-[35%]" viewBox="0 0 114 114" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -187,9 +188,9 @@
 
 			<div class="font-extrabold text-[2vw] mt-[10vh]">Learning Diary</div>
 			{#if learningDiaries}
-				<div class="w-full flex flex-row justify-between flex-wrap mt-[2vh]">
+				<div class="w-full grid grid-cols-2 gap-[2vw] mt-[2vh]">
 					{#each learningDiaries as diary (diary.date)}
-						<div class="w-[47%] bg-white h-fit flex flex-col rounded-2xl font-bold p-3">
+						<div class="w-full bg-white h-fit flex flex-col rounded-2xl font-bold p-3">
 							<div class="flex flex-row items-center justify-between">
 								<div class="text-sm">{diary.date}</div>
 

@@ -4,6 +4,8 @@
 	import type { ReadingItem } from '$lib/types/reading';
 	import { browser } from '$app/environment';
 	import Header from '$lib/components/Header.svelte';
+	import NavBar from '$lib/components/navbar/NavBar.svelte';
+	import ReadingCard from '$lib/components/ReadingCard.svelte';
 
 	export let data: PageData;
 	let selectedTopic = 0;
@@ -20,6 +22,31 @@
 	$: selectedTopic, onSelectedTopicChanged();
 </script>
 
+<div class="w-full h-full min-h-[100vh] bg-[#F4F4F4] flex flex-row font-line-seed">
+	<NavBar spaced />
+
+	<div class="flex flex-col flex-1 px-[3vw] py-[2vh]">
+		<div class="flex flex-row overflow-x-auto gap-[1.5vw]">
+			{#each data.topics as topic, index (topic)}
+				<button
+					on:click={() => (selectedTopic = index)}
+					class={`rounded-full py-[1vh] text-[1.3vw] px-[2vw] font-bold border ${
+						selectedTopic === index ? 'bg-black text-white border-none' : 'bg-white text-black'
+					}`}
+				>
+					{topic}
+				</button>
+			{/each}
+		</div>
+
+		<div class="grid grid-cols-2 gap-[2.5vw] mt-[5vh]">
+			{#each items as item (item.id)}
+				<ReadingCard class="w-full h-[70vh]" {item} />
+			{/each}
+		</div>
+	</div>
+</div>
+
 <!-- <video
 	autoplay
 	muted
@@ -30,7 +57,7 @@
 	<source src={read} type="video/mp4" />
 </video> -->
 
-<div class="w-full h-full min-h-[100vh]">
+<!-- <div class="w-full h-full min-h-[100vh]">
 	<Header />
 
 	<div class="font-line-seed w-[24vw] fixed top-[23vh] left-[6vw] flex flex-col p-4">
@@ -120,4 +147,4 @@
 		min-height: 100%;
 		z-index: -1;
 	}
-</style>
+</style> -->

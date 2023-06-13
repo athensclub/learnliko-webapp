@@ -65,7 +65,7 @@
 
 		<img
 			class={`${$isMobile ? 'w-full' : 'h-[90%] left-[50%] translate-x-[-50%]'} absolute bottom-0`}
-			src={$chatContext.conversation.avatar.models.normal}
+			src={$chatContext.conversation.avatar.models.neutral}
 			alt="Avatar"
 		/>
 	</div>

@@ -21,7 +21,7 @@
 			"avatar": {
 				"name": "Jane",
 				"models": {
-					"normal": "https://cdn.discordapp.com/attachments/842737146321174558/1116747283132842105/avatar.png"
+					"neutral": "https://cdn.discordapp.com/attachments/842737146321174558/1116747283132842105/avatar.png"
 				}
 			},
 			"id": "1"
@@ -47,7 +47,7 @@
 			"avatar": {
 				"name": "Jane",
 				"models": {
-					"normal": "https://cdn.discordapp.com/attachments/842737146321174558/1116747283132842105/avatar.png"
+					"neutral": "https://cdn.discordapp.com/attachments/842737146321174558/1116747283132842105/avatar.png"
 				}
 			},
 			"id": "2"
@@ -73,7 +73,7 @@
 			"avatar": {
 				"name": "Jane",
 				"models": {
-					"normal": "https://cdn.discordapp.com/attachments/842737146321174558/1116747283132842105/avatar.png"
+					"neutral": "https://cdn.discordapp.com/attachments/842737146321174558/1116747283132842105/avatar.png"
 				}
 			},
 			"id": "3"
@@ -99,7 +99,7 @@
 			"avatar": {
 				"name": "Jane",
 				"models": {
-					"normal": "https://cdn.discordapp.com/attachments/842737146321174558/1116747283132842105/avatar.png"
+					"neutral": "https://cdn.discordapp.com/attachments/842737146321174558/1116747283132842105/avatar.png"
 				}
 			},
 			"id": "4"
@@ -125,7 +125,7 @@
 			"avatar": {
 				"name": "Jane",
 				"models": {
-					"normal": "https://cdn.discordapp.com/attachments/842737146321174558/1116747283132842105/avatar.png"
+					"neutral": "https://cdn.discordapp.com/attachments/842737146321174558/1116747283132842105/avatar.png"
 				}
 			},
 			"id": "5"

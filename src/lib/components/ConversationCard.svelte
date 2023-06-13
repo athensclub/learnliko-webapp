@@ -25,7 +25,7 @@
 	<div class="w-full h-[17%] flex flex-row justify-between items-center backdrop-blur-sm px-[1vw]">
 		<div class="flex flex-row h-full items-center gap-[1vw]">
 			<div
-				style="background-image: url('{conversation.avatar.models.normal}')"
+				style="background-image: url('{conversation.avatar.models.neutral}')"
 				class="h-[70%] bg-[#FFD281] aspect-square rounded-full bg-cover bg-top"
 			/>
 			<div class="flex flex-col">
@@ -41,7 +41,7 @@
 
 	<img
 		class="absolute bottom-0 left-[50%] translate-x-[-50%] h-[80%]"
-		src={conversation.avatar.models.normal}
+		src={conversation.avatar.models.neutral}
 		alt="Avatar"
 	/>
 

@@ -15,7 +15,7 @@
 		class="relative bg-cover bg-center w-full h-[50%]"
 	>
 		<div
-			class="absolute top-[3vh] right-[1vw] w-fit text-white text-[1.3vw] rounded-full px-[1.5vw] py-[1vh] bg-[#0000009E]"
+			class="absolute top-[3vh] right-[2vw] w-fit text-white text-[1.3vw] rounded-full px-[1.5vw] py-[1vh] bg-[#0000009E]"
 		>
 			🧿 300 coin
 		</div>

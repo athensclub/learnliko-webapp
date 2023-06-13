@@ -21,7 +21,15 @@
 			"avatar": {
 				"name": "Jane",
 				"models": {
-					"neutral": "https://cdn.discordapp.com/attachments/842737146321174558/1116747283132842105/avatar.png"
+					"neutral": "https://cdn.discordapp.com/attachments/842737146321174558/1116747283132842105/avatar.png",
+					"joy": "https://media.discordapp.net/attachments/1087307553471463514/1117525687318876170/vi_3d_avatar_girl_read_a_book_talk_stylize_smile_4074955b-10d3-43de-bd55-23f9a85f2ccc.png?width=1170&height=1170",
+					"trust": "https://cdn.discordapp.com/attachments/842737146321174558/1116747283132842105/avatar.png",
+					"fear": "https://cdn.discordapp.com/attachments/842737146321174558/1116747283132842105/avatar.png",
+					"surprise": "https://cdn.discordapp.com/attachments/842737146321174558/1116747283132842105/avatar.png",
+					"sadness": "https://cdn.discordapp.com/attachments/842737146321174558/1116747283132842105/avatar.png",
+					"disgust": "https://cdn.discordapp.com/attachments/842737146321174558/1116747283132842105/avatar.png",
+					"anger": "https://cdn.discordapp.com/attachments/842737146321174558/1116747283132842105/avatar.png",
+					"anticipation": "https://cdn.discordapp.com/attachments/842737146321174558/1116747283132842105/avatar.png"
 				}
 			},
 			"id": "1"

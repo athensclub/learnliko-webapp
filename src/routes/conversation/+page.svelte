@@ -35,7 +35,10 @@
 			</div>
 
 			<div class="w-full flex flex-row justify-between mt-[6vh] font-bold">
-				<div class="w-[48%] h-[35vh] py-[3vh] px-[3vw] flex flex-row bg-white rounded-xl">
+				<a
+					href="/conversation/character"
+					class="w-[48%] h-[35vh] py-[3vh] px-[3vw] flex flex-row bg-white rounded-xl"
+				>
 					<img class="w-[30%] object-contain" src={convButtonImage} alt="Conversation" />
 
 					<div class="flex flex-col flex-1 pl-[2vw]">
@@ -59,7 +62,7 @@
 						<div class="text-[2.5vw] mt-[2vh]">Character</div>
 						<div class="text-[1vw]">You unlocked 8/50 characters</div>
 					</div>
-				</div>
+				</a>
 
 				<div class="w-[48%] h-[35vh] py-[3vh] px-[3vw] flex flex-row bg-white rounded-xl">
 					<img class="w-[40%] object-contain" src={locButtonImage} alt="Conversation" />

@@ -12,32 +12,22 @@
 	import { chatContext, currentChatboxView, recapHistory, showChatbox } from '$lib/global/chatbox';
 	import ReadMore from '$lib/components/ReadMore.svelte';
 	import NavBar from '$lib/components/navbar/NavBar.svelte';
+	import { showModal } from '$lib/global/modal';
+	import LearningDiaryModal from '$lib/components/modals/LearningDiaryModal.svelte';
 
 	let name = 'Natsataporn M.';
 	let learningDiaries: LearningDiaryItem[] | null = null;
 	let CEFRLevel: string = '';
 
-	let showingItem: LearningDiaryItem | null = null;
-
-	const showItemRecap = (item: LearnedConversationItem) => {
-		$chatContext = { conversation: item.conversation, bot: { emotion: 'neutral' } };
-		$recapHistory = item.recap;
-		$currentChatboxView = 'RECAP';
-		$showChatbox = true;
+	const showDiary = (item: LearningDiaryItem) => {
+		showModal(LearningDiaryModal, { item });
 	};
 
 	onMount(async () => {
 		// TODO: implement db using actual database (cloud) and probably move this to ssr.
 		learningDiaries = await queryLearningDiariesLocal();
 		CEFRLevel = getCurrentCEFRLevel();
-		console.log(learningDiaries);
 	});
-
-	// combined vocabs from the selected diary item.
-	$: vocabs = [
-		...(showingItem?.learnedConversations.flatMap((item) => item.vocabs) ?? []),
-		...(showingItem?.learnedReadings.flatMap((item) => item.vocabs) ?? [])
-	];
 </script>
 
 <div class="w-full h-full min-h-[100vh] bg-[#F4F4F4] flex flex-row font-line-seed">
@@ -195,7 +185,7 @@
 								<div class="text-sm">{diary.date}</div>
 
 								<button
-									on:click={() => (showingItem = diary)}
+									on:click={() => showDiary(diary)}
 									class="bg-black text-white text-sm flex flex-row px-2 py-1 items-center justify-center rounded-2xl"
 								>
 									Read more

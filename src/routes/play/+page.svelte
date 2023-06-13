@@ -45,7 +45,7 @@
 {#if $chatContext?.conversation}
 	<div
 		class="w-[100vw] h-[100vh] text-white bg-cover bg-center relative"
-		style="background-image: url('{$chatContext.conversation.conversationBackground}');"
+		style="background-image: url('{$chatContext.conversation.background}');"
 	>
 		<div
 			class={`absolute ${
@@ -91,7 +91,7 @@
 
 		<img
 			class={`${$isMobile ? 'w-full' : 'h-[90%] left-[50%] translate-x-[-50%]'} absolute bottom-0`}
-			src={$chatContext.conversation.avatars.normal}
+			src={$chatContext.conversation.avatar.models.neutral}
 			alt="Avatar"
 		/>
 	</div>

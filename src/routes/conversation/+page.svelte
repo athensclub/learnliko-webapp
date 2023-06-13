@@ -1,7 +1,23 @@
 <script lang="ts">
+	import ConversationCard from '$lib/components/ConversationCard.svelte';
 	import NavBar from '$lib/components/navbar/NavBar.svelte';
+	import { onMount } from 'svelte';
 	import convButtonImage from './conversation_button_image.png';
 	import locButtonImage from './location_button_image.png';
+	import { queryConversationsLocal } from '$lib/localdb/conversationLocal';
+	import type { ConversationCarouselItem } from '$lib/types/conversationData';
+
+	// TODO: probably switch back to querying in ssr when we switch the db to cloud.
+	// export let data: PageData;
+	let data: { conversationCorouselItems: ConversationCarouselItem[] } = {
+		conversationCorouselItems: []
+	};
+	onMount(async () => {
+		const result = await queryConversationsLocal();
+		data = {
+			conversationCorouselItems: result
+		};
+	});
 </script>
 
 <div class="w-full h-full min-h-[100vh] bg-[#F4F4F4] flex flex-row font-line-seed">
@@ -18,10 +34,12 @@
 				<img class="w-[30%] object-contain" src={convButtonImage} alt="Conversation" />
 
 				<div class="flex flex-col flex-1 pl-[2vw]">
-					<div class="flex flex-row ml-auto w-fit items-center justify-center text-[1vw] px-[1vw] py-[1vh] border border-[#00000026] rounded-full">
+					<div
+						class="flex flex-row ml-auto w-fit items-center justify-center text-[1vw] px-[1vw] py-[1vh] border border-[#00000026] rounded-full"
+					>
 						view all
 						<svg
-                        class="ml-[0.5vw] w-[1.2vw]"
+							class="ml-[0.5vw] w-[1.2vw]"
 							viewBox="0 0 21 14"
 							fill="none"
 							xmlns="http://www.w3.org/2000/svg"
@@ -33,19 +51,21 @@
 						</svg>
 					</div>
 
-                    <div class="text-[2.5vw] mt-[2vh]">Character</div>
-                    <div class="text-[1vw]">You unlocked 8/50 characters</div>
+					<div class="text-[2.5vw] mt-[2vh]">Character</div>
+					<div class="text-[1vw]">You unlocked 8/50 characters</div>
 				</div>
 			</div>
 
-            <div class="w-[48%] h-[35vh] py-[3vh] px-[3vw] flex flex-row bg-white rounded-xl">
+			<div class="w-[48%] h-[35vh] py-[3vh] px-[3vw] flex flex-row bg-white rounded-xl">
 				<img class="w-[40%] object-contain" src={locButtonImage} alt="Conversation" />
 
 				<div class="flex flex-col flex-1 pl-[2vw]">
-					<div class="flex flex-row ml-auto w-fit items-center justify-center text-[1vw] px-[1vw] py-[1vh] border border-[#00000026] rounded-full">
+					<div
+						class="flex flex-row ml-auto w-fit items-center justify-center text-[1vw] px-[1vw] py-[1vh] border border-[#00000026] rounded-full"
+					>
 						view all
 						<svg
-                        class="ml-[0.5vw] w-[1.2vw]"
+							class="ml-[0.5vw] w-[1.2vw]"
 							viewBox="0 0 21 14"
 							fill="none"
 							xmlns="http://www.w3.org/2000/svg"
@@ -57,10 +77,17 @@
 						</svg>
 					</div>
 
-                    <div class="text-[2.5vw] mt-[2vh]">Location</div>
-                    <div class="text-[1vw]">You unlock 8/20 locations</div>
+					<div class="text-[2.5vw] mt-[2vh]">Location</div>
+					<div class="text-[1vw]">You unlocked 8/20 locations</div>
 				</div>
 			</div>
+		</div>
+
+		<div class="mt-[5vh] text-[2vw] font-bold">Today Tasks</div>
+		<div class="grid gap-[2vw] grid-cols-3 mt-[5vh]">
+			{#each data.conversationCorouselItems as item, index (item.id)}
+				<ConversationCard class="w-full h-[50vh]" conversation={item} />
+			{/each}
 		</div>
 	</div>
 </div>

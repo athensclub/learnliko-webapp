@@ -43,7 +43,7 @@
 	{/if}
 	<nav
 		style="box-shadow: 4px 1px 20px 0px #0000000D;"
-		class="fixed left-0 flex flex-col bg-white justify-around w-[23vw] h-[100vh] px-[2vw] py-[3vh] font-line-seed"
+		class="fixed top-0 left-0 flex flex-col bg-white justify-around w-[23vw] h-[100vh] px-[2vw] py-[3vh] font-line-seed"
 	>
 		<div class="flex flex-col">
 			<img class="w-[25%]" src={icon} alt="Learnliko" />

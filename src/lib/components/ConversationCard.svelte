@@ -20,7 +20,7 @@
 <!-- Specify the size(width, height) of the card in the user of the component, not in the component itself. -->
 <div
 	style="background-image: url('{conversation.background}');"
-	class={`relative overflow-hidden flex flex-col justify-between bg-center bg-cover rounded-xl ${clazz}`}
+	class={`relative overflow-hidden flex flex-col justify-between bg-center bg-cover rounded-[2vw] ${clazz}`}
 >
 	<div class="w-full h-[17%] flex flex-row justify-between items-center backdrop-blur-sm px-[1vw]">
 		<div class="flex flex-row h-full items-center gap-[1vw]">

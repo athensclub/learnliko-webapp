@@ -36,7 +36,7 @@
 
 			<AudioPlayer
 				class={`mx-3 w-[70%] h-[44px] rounded-full ${
-					chat.role === 'user' ? 'bg-[#F0F0F0]' : 'bg-[#6E6CE8]'
+					chat.role === 'user' ? 'backdrop-blur-lg bg-white/20 shadow-lg' : ' backdrop-blur-lg bg-white/20 shadow-lg'
 				}`}
 				defaultBlockColor={chat.role === 'user' ? 'white' : 'black'}
 				playedBlockColor={chat.role === 'user' ? 'black' : 'white'}

@@ -32,7 +32,7 @@
 		<div class="flex flex-row justify-between px-[5%] w-full h-full items-center text-white">
 			<div class="flex flex-row items-center w-[80%] h-full">
 				<AudioPlayer
-					class={`mx-3 w-[80%] h-[38px] rounded-full bg-[#F0F0F0]`}
+					class={`mx-3 w-[80%] h-[38px] rounded-full backdrop-blur-lg bg-white/20 shadow-lg`}
 					defaultBlockColor="white"
 					playedBlockColor="black"
 					src={$currentRecording.url}
@@ -76,7 +76,7 @@
 
 			<button
 				on:click={stopRecording}
-				class="px-5 py-1 bg-[#D9D9D9] rounded-3xl font-bold text-black text-md">Done</button
+				class="px-5 py-1 bg-[#fff] rounded-3xl font-bold text-black text-md">Done</button
 			>
 		</div>
 	{:else}
@@ -86,7 +86,7 @@
 				$conversationFinished ||
 				!$initializedConversation}
 			on:click={startRecording}
-			class="bg-white/[0.8] w-[200px] h-[40px] shadow-all rounded-full flex items-center justify-center z-[1000]"
+			class="bg-white w-[200px] h-[40px] shadow-all rounded-full flex items-center justify-center z-[1000]"
 		>
 			<svg class="w-[8%] mr-2" viewBox="0 0 41 56" fill="none" xmlns="http://www.w3.org/2000/svg">
 				<path

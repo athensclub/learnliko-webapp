@@ -20,7 +20,7 @@
 	let showingItem: LearningDiaryItem | null = null;
 
 	const showItemRecap = (item: LearnedConversationItem) => {
-		$chatContext = { conversation: item.conversation };
+		$chatContext = { conversation: item.conversation, bot: { emotion: 'neutral' } };
 		$recapHistory = item.recap;
 		$currentChatboxView = 'RECAP';
 		$showChatbox = true;

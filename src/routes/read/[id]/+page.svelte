@@ -48,9 +48,41 @@
 	};
 </script>
 
-<div class="w-full h-full min-h-[100vh] bg-white">
+<div class="w-full min-h-[100vh]">
+	<div
+		style="background-image: url('{item.image}');"
+		class="relative bg-cover bg-center w-[100vw] h-[100vh] font-line-seed"
+	>
+		<div class="w-[100vw] h-[100vh] backdrop-blur-md bg-[#FFFFFF0D]" />
+
+		<div class="absolute top-0 left-0 flex flex-col w-full px-[15vw] pt-[5vh]">
+			<img
+				class="max-w-[30vw] max-h-[60vh] w-auto h-auto mx-auto rounded-3xl"
+				src={item.image}
+				alt={item.blogName}
+			/>
+
+			<div class="flex flex-row items-center justify-center w-full gap-[4vw] mt-[5vh] font-bold">
+				<div class="text-white flex items-center justify-center text-[1.6vw]">
+					You will get 🧿 300 coin if you correct all quizzes
+				</div>
+
+				<button class="bg-white h-fit py-[1vh] px-[3vw] text-[1.2vw] rounded-3xl">Take Quiz</button>
+			</div>
+		</div>
+	</div>
+
+	<div class="bg-white px-[15vw] pt-[5vh] font-line-seed">
+		<div class="font-bold text-[3.5vw]">{item.blogName}</div>
+		<div class="text-[1.7vw] mt-[5vh]">{item.content}</div>
+	</div>
+
+	<!-- Bottom spacing -->
+	<div class="w-full h-[15vh]"></div>
+</div>
+
+<!-- <div class="w-full h-full min-h-[100vh] bg-white">
 	<Header />
-	<!-- top spacing -->
 	<div class="w-full h-[100px]" />
 
 	<div class="font-line-seed w-[24vw] fixed top-[23vh] left-[6vw] flex flex-col p-4">
@@ -107,4 +139,4 @@
 			</button>
 		{/if}
 	</div>
-</div>
+</div> -->

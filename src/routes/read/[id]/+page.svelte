@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
 	import ReadingQuizModal from '$lib/components/modals/ReadingQuizModal.svelte';
 	import { showModal } from '$lib/global/modal';
 	import {

@@ -4,6 +4,7 @@ import type { RecapHistory } from '$lib/global/chatbox';
 interface LearnerDetails {
 	goal: string;
 }
+
 interface BotDetails {
 	avatar: string;
 	accent: SynthesizeAccent;
@@ -25,12 +26,16 @@ export interface ConversationCarouselItem {
 	CEFRlevel: string;
 	background: string;
 	details: ConversationDetails;
-	avatars: ConversationAvatar;
-	conversationBackground: string;
+	avatar: ConversationAvatar;
 	id: string;
 }
 
 export interface ConversationAvatar {
+	name: string;
+	models: AvatarModel;
+}
+
+export interface AvatarModel {
 	normal: string;
 }
 

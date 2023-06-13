@@ -14,7 +14,7 @@
 	{/if}
 
 	<div
-		class={`${
+		class={` ${
 			focused
 				? 'bg-clip-text text-transparent bg-gradient-to-r from-[#7280FF] via-[#C698FF] to-[#FFD68D]'
 				: 'text-black'

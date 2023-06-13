@@ -53,16 +53,19 @@ export interface FinishedConversation {
 	conversationID: string;
 }
 
-export type BotEmotion =
-	| 'neutral'
-	| 'joy'
-	| 'trust'
-	| 'fear'
-	| 'surprise'
-	| 'sadness'
-	| 'disgust'
-	| 'anger'
-	| 'anticipation';
+export const BotEmotionValues = [
+	'neutral',
+	'joy',
+	'trust',
+	'fear',
+	'surprise',
+	'sadness',
+	'disgust',
+	'anger',
+	'anticipation'
+] as const;
+
+export type BotEmotion = (typeof BotEmotionValues)[number];
 
 export interface ChatBotMessage {
 	message: string;

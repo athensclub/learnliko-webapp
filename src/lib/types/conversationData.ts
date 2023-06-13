@@ -45,17 +45,19 @@ export interface FinishedConversation {
 	conversationID: string;
 }
 
+export type BotEmotion =
+	| 'neutral'
+	| 'joy'
+	| 'trust'
+	| 'fear'
+	| 'surprise'
+	| 'sadness'
+	| 'disgust'
+	| 'anger'
+	| 'anticipation';
+
 export interface ChatBotMessage {
 	message: string;
-	mood:
-		| 'neutral'
-		| 'joy'
-		| 'trust'
-		| 'fear'
-		| 'surprise'
-		| 'sadness'
-		| 'disgust'
-		| 'anger'
-		| 'anticipation';
+	emotion: BotEmotion;
 	status: 'NORMAL' | 'INAPPROPRIATE' | 'END-OF-CONVERSATION';
 }

@@ -29,7 +29,7 @@
 				class="h-[70%] bg-[#FFD281] aspect-square rounded-full bg-cover bg-top"
 			/>
 			<div class="flex flex-col">
-				<div class="text-white font-bold text-[1vw]">Jenny</div>
+				<div class="text-white font-bold text-[1vw]">{conversation.avatar.name}</div>
 				<div class="text-[#FFFFFF99] text-[0.7vw]">student</div>
 			</div>
 		</div>

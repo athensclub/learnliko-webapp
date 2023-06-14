@@ -35,7 +35,7 @@
 			"id": "11"
 		},
 		{
-			"background": "https://cdn.discordapp.com/attachments/842737146321174558/1116706222452777021/image.png",
+			"background": "https://media.discordapp.net/attachments/1087307553471463514/1118398197518323773/vi_loft_minimal_office_room_background_3d_stylize_004456cf-f3bc-418a-aec8-ebf91407af2f.png?width=655&height=655",
 			"image": "https://media.discordapp.net/attachments/1087307553471463514/1103186686311145473/vi_A_new_boy_class_mate_3d_stylize_profile_image_b5ef15a9-31e1-4eb8-b30b-403e7573c03c.png?width=862&height=862",
 			"intro": "Hey, I'm your new friend",
 			"topic": "Howdy! I'm Alan nice to meet you",
@@ -53,9 +53,9 @@
 				}
 			},
 			"avatar": {
-				"name": "Jane",
+				"name": "Alan",
 				"models": {
-					"neutral": "https://cdn.discordapp.com/attachments/842737146321174558/1116747283132842105/avatar.png",
+					"neutral": "https://cdn.discordapp.com/attachments/842737146321174558/1118638509004173334/avatar.png",
 					"joy": "https://media.discordapp.net/attachments/1087307553471463514/1118379821488152699/joy.png?width=1170&height=1170",
 					"trust": "https://media.discordapp.net/attachments/1087307553471463514/1118379822394122250/trust.png?width=1000&height=1000",
 					"fear": "https://cdn.discordapp.com/attachments/842737146321174558/1116747283132842105/avatar.png",
@@ -69,7 +69,7 @@
 			"id": "12"
 		},
 		{
-			"background": "https://cdn.discordapp.com/attachments/842737146321174558/1116706222452777021/image.png",
+			"background": "https://media.discordapp.net/attachments/1087307553471463514/1117426229272924161/vi_computer_classroom_background_3d_stylize_27af6990-0b59-4843-a022-8f6eac61f170.png?width=655&height=655",
 			"image": "https://media.discordapp.net/attachments/1087307553471463514/1103188064358125618/vi_A_young_woman_teacher_kindly_3d_stylize_profile_image_38556d17-9767-44cf-8adf-729f61ea9ce7.png?width=1357&height=1357",
 			"intro": "Hello! I'm English teacher.",
 			"topic": "Today we will learn English with animal!",
@@ -87,15 +87,15 @@
 				}
 			},
 			"avatar": {
-				"name": "Jane",
+				"name": "Alex",
 				"models": {
-					"neutral": "https://cdn.discordapp.com/attachments/842737146321174558/1116747283132842105/avatar.png"
+					"neutral": "https://cdn.discordapp.com/attachments/842737146321174558/1118641600822788116/avatar.png"
 				}
 			},
 			"id": "13"
 		},
 		{
-			"background": "https://cdn.discordapp.com/attachments/842737146321174558/1116706222452777021/image.png",
+			"background": "https://cdn.discordapp.com/attachments/1087307553471463514/1118398197895794698/vi_meeting_room_background_3d_stylize_c9578461-e0b9-4720-b866-161d69b45fa3.png",
 			"image": "https://media.discordapp.net/attachments/1087307553471463514/1103187114692202536/vi_A_man_farmer_fruit_3d_stylize_profile_image_244b73e8-dd85-4668-835f-c8c35a592146.png?width=1357&height=1357",
 			"intro": "Hi, I'm a farmer",
 			"topic": "Let's talk about your favorite fruit",
@@ -113,9 +113,9 @@
 				}
 			},
 			"avatar": {
-				"name": "Jane",
+				"name": "Raj",
 				"models": {
-					"neutral": "https://cdn.discordapp.com/attachments/842737146321174558/1116747283132842105/avatar.png"
+					"neutral": "https://cdn.discordapp.com/attachments/842737146321174558/1118640141330821201/avatar.png"
 				}
 			},
 			"id": "14"
@@ -139,9 +139,9 @@
 				}
 			},
 			"avatar": {
-				"name": "Jane",
+				"name": "Lisa",
 				"models": {
-					"neutral": "https://cdn.discordapp.com/attachments/842737146321174558/1116747283132842105/avatar.png"
+					"neutral": "https://cdn.discordapp.com/attachments/842737146321174558/1118642297882550302/avatar.png"
 				}
 			},
 			"id": "15"

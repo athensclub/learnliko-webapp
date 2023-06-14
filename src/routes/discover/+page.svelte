@@ -10,12 +10,17 @@
 	import type { DiscoverItem } from '$lib/types/discover';
 	import { onMount } from 'svelte';
 	import { isMobile } from '$lib/global/breakpoints';
+	import { currentMode } from '$lib/global/mode';
+	import { browser } from '$app/environment';
 
 	let items: DiscoverItem[] = [];
-	onMount(async () => {
-		// TODO: use cloud db and probably move this to ssr.
+	const loadData = async () => {
+		if(!browser) return;
 		items = await queryDiscoverItemsLocal();
-	});
+	};
+
+	onMount(loadData);
+	$: $currentMode, loadData();
 </script>
 
 <div class="w-[100vw] h-full min-h-[100vh] bg-[#F4F4F4] font-line-seed">

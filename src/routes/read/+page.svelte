@@ -1,15 +1,24 @@
 <script lang="ts">
 	import ReadMore from '$lib/components/ReadMore.svelte';
-	import { getReadingItems } from '$api/reading';
+	import { getReadingItems, getReadingTopics } from '$api/reading';
 	import type { ReadingItem } from '$lib/types/reading';
 	import { browser } from '$app/environment';
 	import Header from '$lib/components/Header.svelte';
 	import NavBar from '$lib/components/navbar/NavBar.svelte';
 	import ReadingCard from '$lib/components/ReadingCard.svelte';
+	import { currentMode } from '$lib/global/mode';
 
 	export let data: PageData;
 	let selectedTopic = 0;
 	let items: ReadingItem[] = [];
+
+	const loadData = async () => {
+		if(!browser) return; 
+		data = { topics: await getReadingTopics() };
+		let changed = selectedTopic !== 0;
+		selectedTopic = 0;
+		if (!changed) onSelectedTopicChanged();
+	};
 
 	const onSelectedTopicChanged = async () => {
 		// avoid the first time when it is still in SSR
@@ -20,6 +29,7 @@
 	// generateReadingItem("Tale").then(res => console.log(JSON.stringify(res))).catch(console.error);
 
 	$: selectedTopic, onSelectedTopicChanged();
+	$: $currentMode, loadData();
 </script>
 
 <div class="w-full h-full min-h-[100vh] bg-[#F4F4F4] flex flex-row font-line-seed">

@@ -33,7 +33,7 @@
 				<strong class={`${$isMobile ? 'text-[4vw]' : 'text-[2vw]'}`}> 🎯Coversation Goal </strong>
 			</div>
 			<Typewriter>
-				<pre class="mt-3 text-sm">{$chatContext.conversation.details.learner.goal}</pre>
+				<pre class="mt-3 text-sm whitespace-pre-wrap">{$chatContext.conversation.details.learner.goal}</pre>
 			</Typewriter>
 		</div>
 

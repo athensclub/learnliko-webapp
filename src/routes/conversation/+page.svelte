@@ -6,18 +6,24 @@
 	import locButtonImage from './location_button_image.png';
 	import { queryConversationsLocal } from '$lib/localdb/conversationLocal';
 	import type { ConversationCarouselItem } from '$lib/types/conversationData';
+	import { currentMode } from '$lib/global/mode';
+	import { browser } from '$app/environment';
 
 	// TODO: probably switch back to querying in ssr when we switch the db to cloud.
 	// export let data: PageData;
 	let data: { conversationCorouselItems: ConversationCarouselItem[] } = {
 		conversationCorouselItems: []
 	};
-	onMount(async () => {
+	const loadData = async () => {
+		if(!browser) return;
 		const result = await queryConversationsLocal();
 		data = {
 			conversationCorouselItems: result
 		};
-	});
+	};
+
+	onMount(loadData);
+	$: $currentMode, loadData();
 </script>
 
 <div class="w-full h-full min-h-[100vh] bg-[#F4F4F4] flex flex-row font-line-seed">

@@ -82,6 +82,96 @@
 	},
 	{
 		"id": "1",
+		"blogName": "What is AI?",
+		"image": "https://res.cloudinary.com/lwgatsby/f_auto/www/uploads/2020/04/1200px-What-is-artificial-intelligence-_What_is_artificial_intelligence.jpg",
+		"topic": "Technology",
+		"dateTime": "2023-05-20T09:30:00Z",
+		"title": "What is AI?",
+		"content": "Artificial Intelligence, or AI for short, refers to a computer program that can perform tasks that would normally require human intelligence to complete. This includes things like learning, reasoning, and problem-solving. AI can be used in a variety of different industries, such as healthcare, finance, and manufacturing.\n\nAI is made possible through the use of algorithms and machine learning. Algorithms are sets of rules that a computer follows to complete a task. Machine learning is a type of AI that allows a computer to learn and improve its performance over time.\n\nThere are many potential benefits of AI, such as improved efficiency, increased accuracy, and reduced costs. However, there are also some concerns about AI, such as job displacement and privacy concerns.\n\nIt's important for professionals in all industries to have a basic understanding of AI, as it will likely become increasingly prevalent in the years to come. This includes understanding the benefits and risks of AI, as well as how it can be used to improve operations and processes.",
+		"quiz": [
+			{
+				"question": "What does the term algorithms refer to in the context of AI?",
+				"choices": [
+					"A set of rules that the computer follows to complete a task",
+					"A type of AI that allows a computer to learn and improve its performance over time",
+					"A computer program that can perform tasks that would normally require human intelligence to complete",
+					"A machine that performs tasks automatically without human intervention"
+				],
+				"answer": 0
+			},
+			{
+				"question": "What is the tone of the story regarding the potential benefits and risks of AI?",
+				"choices": [
+					"Positive",
+					"Negative",
+					"Neutral",
+					"Unsure"
+				],
+				"answer": 2
+			},
+			{
+				"question": "What is Artificial Intelligence (AI)?",
+				"choices": [
+					"a) A computer program that can perform tasks only humans can do",
+					"b) A type of machine that can learn and improve its performance over time",
+					"c) A set of rules that a computer follows to complete a task",
+					"d) A computer program that can perform tasks that would normally require human intelligence to complete"
+				],
+				"answer": 3
+			},
+			{
+				"question": "What do we mean by 'job displacement' in relation to AI?",
+				"choices": [
+					"The risk of AI leading to job loss due to automation of tasks",
+					"The ability of AI to learn and improve its performance over time",
+					"The process of creating sets of rules that a computer follows to complete a task",
+					"The use of AI in manufacturing industries"
+				],
+				"answer": 0
+			},
+			{
+				"question": "What are some potential benefits of AI?",
+				"choices": [
+					"a) Increased job opportunities and reduced costs",
+					"b) Improved efficiency and increased accuracy",
+					"c) Reduced privacy concerns and job displacement",
+					"d) Increased training costs and reduced accuracy"
+				],
+				"answer": 1
+			}
+		],
+		"vocabs": [
+			"artificial intelligence",
+			"computer program",
+			"human intelligence",
+			"tasks",
+			"learning",
+			"reasoning",
+			"problem-solving",
+			"industries",
+			"healthcare",
+			"finance",
+			"manufacturing",
+			"algorithms",
+			"sets of rules",
+			"machine learning",
+			"type of ai",
+			"benefits",
+			"improved efficiency",
+			"increased accuracy",
+			"reduced costs",
+			"concerns",
+			"job displacement",
+			"privacy concerns",
+			"professionals",
+			"prevalent",
+			"risks",
+			"improve operations",
+			"processes"
+		]
+	},
+	{
+		"id": "2",
 		"blogName": "Digital Marketing: What You Need to Know as a Professional Worker",
 		"image": "https://www.simplilearn.com/ice9/free_resources_article_thumb/What_is_digital_marketing.jpg",
 		"topic": "Digital Marketing",
@@ -180,7 +270,7 @@
 		]
 	},
 	{
-		"id": "2",
+		"id": "3",
 		"blogName": "Improving Your Reading Skills for Technology-Related Content",
 		"image": "https://images.ctfassets.net/pdf29us7flmy/WvjkDSdBkrrwMkREC9TRb/925aa462fb03c7fe55aacb0f4bdf1b11/Screen_Shot_2022-05-30_at_2.58.46_PM.png",
 		"topic": "Technology",

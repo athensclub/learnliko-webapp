@@ -6,6 +6,11 @@
 	import { currentChatboxView, showChatbox } from '$lib/global/chatbox';
 	import NavBarLinkList from './NavBarLinkList.svelte';
 	import { page } from '$app/stores';
+	import Select from 'svelte-select';
+	import type { Mode } from '$lib/types/mode';
+	import { currentMode } from '$lib/global/mode';
+
+	const modes: Mode[] = ['Professional', 'Student'];
 
 	/**
 	 * (Only has effect in desktop breakpoint) Whether this NavBar will be 'counted' in layout calculation. When true, the sibling elements will be placed after NavBar instead of Navbar being overlay because it is fixed.
@@ -41,12 +46,28 @@
 		<!-- "empty" space to help with layout -->
 		<div class="w-[23vw] h-[100vh]" />
 	{/if}
+
 	<nav
 		style="box-shadow: 4px 1px 20px 0px #0000000D;"
 		class="fixed top-0 left-0 flex flex-col bg-white justify-around w-[23vw] h-[100vh] px-[2vw] py-[3vh] font-line-seed"
 	>
 		<div class="flex flex-col">
-			<img class="w-[25%]" src={icon} alt="Learnliko" />
+			<div class="flex flex-row justify-between w-full">
+				<img class="w-[25%]" src={icon} alt="Learnliko" />
+
+				<!-- https://github.com/rob-balfre/svelte-select/blob/HEAD/docs/theming_variables.md -->
+				<Select
+					on:change={(e) => ($currentMode = e.detail.value)}
+					--width="55%"
+					--height="2vw"
+					--padding="1vw"
+					--font-size="1vw"
+					--clear-select-width="0"
+					--clear-icon-width="0"
+					items={modes}
+					value={$currentMode}
+				/>
+			</div>
 
 			<a
 				href="/profile"

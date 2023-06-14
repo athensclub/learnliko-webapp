@@ -10,11 +10,8 @@
 		initializeConversationBot,
 		initializedConversation,
 		resetConversationData,
-		submitUserReply,
-		transcribing,
 		waitingForAIResponse
 	} from '$lib/global/conversation';
-	import { onDestroy } from 'svelte';
 	import Recorder from './Recorder.svelte';
 
 	let conversationDetails = $chatContext!.conversation.details;

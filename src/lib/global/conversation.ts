@@ -50,7 +50,7 @@ export const initializeConversationBot = async function () {
 	gptHistory.push({ role: 'user', content: ct!.conversation.details.bot.prompt });
 	gptHistory.push({
 		role: 'assistant',
-		content: `{"message":"${ct!.conversation.details.intro}","status":"NORMAL"}`
+		content: `{"message":"${ct!.conversation.details.intro}","status":"NORMAL","emotion":"neutral"}`
 	});
 
 	await botReply(ct!.conversation.details.intro);

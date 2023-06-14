@@ -22,14 +22,14 @@
 				"name": "Jane",
 				"models": {
 					"neutral": "https://cdn.discordapp.com/attachments/842737146321174558/1116747283132842105/avatar.png",
-					"joy": "https://media.discordapp.net/attachments/1087307553471463514/1117525687318876170/vi_3d_avatar_girl_read_a_book_talk_stylize_smile_4074955b-10d3-43de-bd55-23f9a85f2ccc.png?width=1170&height=1170",
-					"trust": "https://cdn.discordapp.com/attachments/842737146321174558/1116747283132842105/avatar.png",
+					"joy": "https://media.discordapp.net/attachments/1087307553471463514/1118379821488152699/joy.png?width=1170&height=1170",
+					"trust": "https://media.discordapp.net/attachments/1087307553471463514/1118379822394122250/trust.png?width=1000&height=1000",
 					"fear": "https://cdn.discordapp.com/attachments/842737146321174558/1116747283132842105/avatar.png",
-					"surprise": "https://cdn.discordapp.com/attachments/842737146321174558/1116747283132842105/avatar.png",
-					"sadness": "https://cdn.discordapp.com/attachments/842737146321174558/1116747283132842105/avatar.png",
-					"disgust": "https://cdn.discordapp.com/attachments/842737146321174558/1116747283132842105/avatar.png",
-					"anger": "https://cdn.discordapp.com/attachments/842737146321174558/1116747283132842105/avatar.png",
-					"anticipation": "https://cdn.discordapp.com/attachments/842737146321174558/1116747283132842105/avatar.png"
+					"surprise": "https://media.discordapp.net/attachments/1087307553471463514/1118379822155055184/surprise.png?width=1000&height=1000",
+					"sadness": "https://media.discordapp.net/attachments/1087307553471463514/1118379821869846548/sad.png?width=1170&height=1170",
+					"disgust": "https://media.discordapp.net/attachments/1087307553471463514/1118379821265862686/disgust.png?width=1000&height=1000",
+					"anger": "https://media.discordapp.net/attachments/1087307553471463514/1118379820699623564/anger.png?width=1000&height=1000",
+					"anticipation": "https://media.discordapp.net/attachments/1087307553471463514/1118379821026791556/anticipation.png?width=1000&height=1000"
 				}
 			},
 			"id": "1"
@@ -49,13 +49,21 @@
 					"avatar": "https://media.discordapp.net/attachments/1087307553471463514/1103186686311145473/vi_A_new_boy_class_mate_3d_stylize_profile_image_b5ef15a9-31e1-4eb8-b30b-403e7573c03c.png?width=862&height=862",
 					"accent": "US",
 					"gender": "MALE",
-					"prompt": "Your role: I want you to act as a male student, you are kind, and friendly. Your name is Alan. Your Goal: You have to introduce yourself, and get to know your new friend’s name and some information about themselves. About yourself: You are from USA, Seattle, you are 12 years old, like eating pizza, playing football. Answer Format: You have to answer in the JSON format by using to following JSON schema {//your response“message”: string,// \"neutral\", \"joy\", \"trust\", \"fear\", \"surprise\", \"sadness\", \"disgust\", \"anger\", \"anticipation\"\"emotion\": string, // the enum value in string type // “NORMAL” used when the situation is normal // “INAPPROPRIATE” used when the situation is out of context or say something inappropriate // “END-OF-CONVERSATION” used when students get to know each other about 1.ages, 2.hometown, 3.hobbies, and 4.favorite foods “status”: string}"
+					"prompt": "Your role: I want you to act as a male student, you are kind, and friendly. Your name is Alan. Your Goal: You have to introduce yourself, and get to know your new friend’s name and some information about themselves. About yourself: You are from USA, Seattle, you are 12 years old, like eating pizza, playing football. Answer Format: You have to answer in the JSON format by using to following JSON schema {//your response“message”: string,// the enum value of your emotion in the message \"neutral\", \"joy\", \"trust\", \"fear\", \"surprise\", \"sadness\", \"disgust\", \"anger\", \"anticipation\"\"emotion\": string, // the enum value in string type // “NORMAL” used when the situation is normal // “INAPPROPRIATE” used when the situation is out of context or say something inappropriate // “END-OF-CONVERSATION” used when students get to know each other about 1.ages, 2.hometown, 3.hobbies, and 4.favorite foods “status”: string}"
 				}
 			},
 			"avatar": {
 				"name": "Jane",
 				"models": {
-					"neutral": "https://cdn.discordapp.com/attachments/842737146321174558/1116747283132842105/avatar.png"
+					"neutral": "https://cdn.discordapp.com/attachments/842737146321174558/1116747283132842105/avatar.png",
+					"joy": "https://media.discordapp.net/attachments/1087307553471463514/1118379821488152699/joy.png?width=1170&height=1170",
+					"trust": "https://media.discordapp.net/attachments/1087307553471463514/1118379822394122250/trust.png?width=1000&height=1000",
+					"fear": "https://cdn.discordapp.com/attachments/842737146321174558/1116747283132842105/avatar.png",
+					"surprise": "https://media.discordapp.net/attachments/1087307553471463514/1118379822155055184/surprise.png?width=1000&height=1000",
+					"sadness": "https://media.discordapp.net/attachments/1087307553471463514/1118379821869846548/sad.png?width=1170&height=1170",
+					"disgust": "https://media.discordapp.net/attachments/1087307553471463514/1118379821265862686/disgust.png?width=1000&height=1000",
+					"anger": "https://media.discordapp.net/attachments/1087307553471463514/1118379820699623564/anger.png?width=1000&height=1000",
+					"anticipation": "https://media.discordapp.net/attachments/1087307553471463514/1118379821026791556/anticipation.png?width=1000&height=1000"
 				}
 			},
 			"id": "2"

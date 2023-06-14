@@ -1,6 +1,14 @@
 import type { ReadingItem } from '$lib/types/reading';
 import type { ChatMessage } from '$lib/types/requests/chatCompletion';
+import { get } from 'svelte/store';
 import { chat } from './conversation';
+import { currentMode } from '$lib/global/mode';
+
+export const getReadingTopics = async (): Promise<string[]> => {
+	const result = await fetch('/api/v1/reading/topics?' + new URLSearchParams({ mode: get(currentMode) }), { method: 'GET' });
+	const val = await result.json();
+	return val;
+}
 
 export const getReadingItems = async (topic: string): Promise<ReadingItem[]> => {
 	const response = await fetch('/api/v1/reading?' + new URLSearchParams({ topic }));

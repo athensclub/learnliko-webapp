@@ -1,6 +1,9 @@
 import type { RecapHistory } from '$lib/global/chatbox';
+import { currentMode } from '$lib/global/mode';
 import type { ConversationCarouselItem } from '$lib/types/conversationData';
+import type { Mode } from '$lib/types/mode';
 import type { ChatMessage } from '$lib/types/requests/chatCompletion';
+import { get } from 'svelte/store';
 
 export const chat = async function (messages: ChatMessage[]) {
 	const response = await fetch('/api/v1/conversation/chat', {
@@ -125,7 +128,7 @@ export const getVocabsFromConversation = async (history: RecapHistory) => {
 }
 
 export const getConversations = async () => {
-	const result = await fetch('/api/v1/conversation/queryAvailable', { method: 'GET' });
+	const result = await fetch('/api/v1/conversation/queryAvailable?' + new URLSearchParams({ mode: get(currentMode) }), { method: 'GET' });
 	const val: ConversationCarouselItem[] = await result.json();
 	return val;
 }

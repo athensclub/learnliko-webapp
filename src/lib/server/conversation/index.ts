@@ -1,9 +1,17 @@
 import type { ConversationCarouselItem } from '$lib/types/conversationData';
+import type { Mode } from '$lib/types/mode';
 
-export const queryConversations = async function () {
-	const data = await import('$lib/server/db/conversations.json');
-	return data.results.map((item) => item as ConversationCarouselItem);
-};
+export const queryConversations = async function (mode: Mode) {
+	let data; // = await import(mapping[mode]);
+	if (mode === 'Professional') {
+		data = await import('$lib/server/db/conversations.json');
+	} else if (mode === 'Student') {
+		data = await import('$lib/server/db/student_conversations.json');
+	} else {
+		throw new Error("Unknown mode: " + mode);
+	}
+	return data.results.map(val => val as ConversationCarouselItem);
+}
 
 /**
 {

@@ -22,7 +22,7 @@
 		>
 			{#if chat.role === 'assistant'}
 				<div
-					class={`w-[42px] h-[42px]  bg-center bg-cover rounded-full border border-white`}
+					class={`w-[42px] h-[42px]  bg-top bg-cover rounded-full border border-white`}
 					style="background-image: url('{assistantProfileImage}');"
 				/>
 			{/if}

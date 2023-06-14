@@ -1,37 +1,37 @@
-import type { ReadingItem } from "$lib/types/reading";
-import type { ChatMessage } from "$lib/types/requests/chatCompletion";
-import { chat } from "./conversation";
+import type { ReadingItem } from '$lib/types/reading';
+import type { ChatMessage } from '$lib/types/requests/chatCompletion';
+import { chat } from './conversation';
 
 export const getReadingItems = async (topic: string): Promise<ReadingItem[]> => {
-    const response = await fetch("/api/v1/reading?" + new URLSearchParams({ topic }));
-    const val = await response.json();
-    return val;
+	const response = await fetch('/api/v1/reading?' + new URLSearchParams({ topic }));
+	const val = await response.json();
+	return val;
 };
 
 export const getReadingItemById = async (id: string): Promise<ReadingItem> => {
-    const response = await fetch("/api/v1/reading?" + new URLSearchParams({ id }));
-    const val = await response.json();
-    return val;
-}
+	const response = await fetch('/api/v1/reading?' + new URLSearchParams({ id }));
+	const val = await response.json();
+	return val;
+};
 
 export const generateReadingItem = async (topic: string) => {
 	let prompt: ChatMessage[] = [];
 	prompt.push({
 		role: 'user',
-		content: `Write me a story to be used for teaching student's reading skill. Write the story so that primary student can understand.
+		content: `Write me a article to be used for teaching professional worker's reading skill. Write the article so that primary worker can understand.
 		The text must pass the following specifications:
 		-Topic: ${topic}
 		-Minimum length: 150 words
 		You will have to reply in the following JSON schema format:
 		{
-		// title of the generated story
+		// title of the generated article
 		"title": string,
-		// the content of the story
+		// the content of the article
 		"content": string,
 		}`
 	});
 
-	let item: { title: string, content: string } | null = null;
+	let item: { title: string; content: string } | null = null;
 	let attempt = 0;
 	while (true) {
 		let response: any;
@@ -45,14 +45,14 @@ export const generateReadingItem = async (topic: string) => {
 			// max attempt at 5
 			if (attempt++ >= 5) break;
 
+			prompt.push({ role: 'user', content: 'reply in the provided json format only' });
 			console.error('error: generating reading item, retring...', response);
 		}
 	}
 
-	if (!item)
-		throw new Error("Failed to generate story topic: " + topic);
+	if (!item) throw new Error('Failed to generate story topic: ' + topic);
 
-	const quiz: { question: string, choices: string[], answer: number }[] = [];
+	const quiz: { question: string; choices: string[]; answer: number }[] = [];
 
 	const addQuiz = async (brief: string, amt: number) => {
 		const p: ChatMessage[] = [];
@@ -76,7 +76,7 @@ export const generateReadingItem = async (topic: string) => {
 		});
 
 		for (let i = 0; i < amt; i++) {
-			let q: { question: string, choices: string[], answer: number } | null = null;
+			let q: { question: string; choices: string[]; answer: number } | null = null;
 			while (true) {
 				let response: string | null = null;
 				try {
@@ -88,11 +88,11 @@ export const generateReadingItem = async (topic: string) => {
 					p.push({
 						role: 'assistant',
 						content: response
-					})
+					});
 					p.push({
 						role: 'user',
 						content: `give me another one`
-					})
+					});
 					break;
 				} catch (error) {
 					// max attempt at 5
@@ -102,8 +102,7 @@ export const generateReadingItem = async (topic: string) => {
 				}
 			}
 
-			if (!q)
-				throw new Error("Failed to generate quiz for story with topic: " + topic);
+			if (!q) throw new Error('Failed to generate quiz for story with topic: ' + topic);
 
 			quiz.push(q);
 		}
@@ -118,12 +117,26 @@ export const generateReadingItem = async (topic: string) => {
 		${item.content}`
 	});
 	const response = await chat(prompt);
-	const vocabs = response.replace(".", "").split(",").map(s => s.trim().toLowerCase());
+	const vocabs = response
+		.replace('.', '')
+		.split(',')
+		.map((s) => s.trim().toLowerCase());
 
-	const promises = [addQuiz('Write a 4 choices question with one correct answer to test the reader knowledge from a story that will be given and provide the correct answer.', 2),
-	addQuiz('Write a 4 choices question with one correct answer to test the reader vocabulary knowledge from a story that will be given and provide the correct answer. Write a question asking the meaning of vocabularies found in the story.', 2),
-	addQuiz('Write a 4 choices question with one correct answer to test the reader knowledge from a story that will be given and provide the correct answer. Write the question about a tone of voice from parts of the story.', 1)]
+	const promises = [
+		addQuiz(
+			'Write a 4 choices question with one correct answer to test the reader knowledge from a story that will be given and provide the correct answer.',
+			2
+		),
+		addQuiz(
+			'Write a 4 choices question with one correct answer to test the reader vocabulary knowledge from a story that will be given and provide the correct answer. Write a question asking the meaning of vocabularies found in the story.',
+			2
+		),
+		addQuiz(
+			'Write a 4 choices question with one correct answer to test the reader knowledge from a story that will be given and provide the correct answer. Write the question about a tone of voice from parts of the story.',
+			1
+		)
+	];
 	await Promise.all(promises);
 
 	return { ...item, quiz, vocabs };
-}
+};

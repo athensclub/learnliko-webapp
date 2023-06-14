@@ -104,26 +104,34 @@
 		},
 		{
 			"background": "https://media.discordapp.net/attachments/1087307553471463514/1118398197191151687/vi_meeting_room_background_3d_stylize_76f8485f-1e5c-4370-8667-8cd7384a171f.png?width=1170&height=1170",
-			"image": "https://media.discordapp.net/attachments/1087307553471463514/1103187114692202536/vi_A_man_farmer_fruit_3d_stylize_profile_image_244b73e8-dd85-4668-835f-c8c35a592146.png?width=1357&height=1357",
-			"intro": "Hi, I'm a farmer",
-			"topic": "Let's talk about your favorite fruit",
+			"image": "https://media.discordapp.net/attachments/1087307553471463514/1118410227902058506/image-removebg_5.png?width=1170&height=1170",
+			"intro": "Good day! I'm Lisa, a Sales Interviewer.",
+			"topic": "Sales department interview",
 			"CEFRlevel": "A1",
 			"details": {
-				"intro": "Hi, I'm a farmer named Raj. What fruit do you like to eat? I can tell you about their benefits.",
+				"intro": "Good day! I'm Lisa, a Sales Interviewer.",
 				"learner": {
-					"goal": "Learn about different types of fruits and their benefits"
+					"goal": "1.Elaborate on your purpose for wanting to work in the sales\n2.Why do you believe you are a suitable candidate for this sales position?\n3.What relevant experience do you have?"
 				},
 				"bot": {
-					"avatar": "https://media.discordapp.net/attachments/1087307553471463514/1103187114692202536/vi_A_man_farmer_fruit_3d_stylize_profile_image_244b73e8-dd85-4668-835f-c8c35a592146.png?width=1357&height=1357",
-					"accent": "India",
-					"gender": "MALE",
+					"avatar": "https://media.discordapp.net/attachments/1087307553471463514/1118410227902058506/image-removebg_5.png?width=1170&height=1170",
+					"accent": "UK",
+					"gender": "FEMALE",
 					"prompt": "Your role: You are a male farmer, you are passionate about farming and you are knowledgeable about different types of fruits. Your name is Raj. Your Goal: You have to give the student information about different types of fruits, explain short and easy to understand for kids, their benefits, and how they are grown. Answer Format: You have to answer in the JSON format by using the following JSON schema: {// your response\"message\": string,// \"neutral\", \"joy\", \"trust\", \"fear\", \"surprise\", \"sadness\", \"disgust\", \"anger\", \"anticipation\"\"emotion\": string,// the enum value// “NORMAL” used when the situation is normal// “INAPPROPRIATE” used when the situation is out of context or say something inappropriate// “END-OF-CONVERSATION” used when the conversation is finished.\"status\": string} Fruit information: There are many different types of fruits, including apples, bananas, oranges, and strawberries. Each fruit has unique benefits that make them healthy and nutritious."
 				}
 			},
 			"avatar": {
-				"name": "Jane",
+				"name": "Lisa",
 				"models": {
-					"neutral": "https://cdn.discordapp.com/attachments/842737146321174558/1116747283132842105/avatar.png"
+					"neutral": "https://media.discordapp.net/attachments/1087307553471463514/1118410227902058506/image-removebg_5.png?width=1170&height=1170",
+					"joy": "https://media.discordapp.net/attachments/1087307553471463514/1118410227902058506/image-removebg_5.png?width=1170&height=1170",
+					"trust": "https://media.discordapp.net/attachments/1087307553471463514/1118410227902058506/image-removebg_5.png?width=1170&height=1170",
+					"fear": "https://media.discordapp.net/attachments/1087307553471463514/1118410227902058506/image-removebg_5.png?width=1170&height=1170",
+					"surprise": "https://media.discordapp.net/attachments/1087307553471463514/1118410227902058506/image-removebg_5.png?width=1170&height=1170",
+					"sadness": "https://media.discordapp.net/attachments/1087307553471463514/1118410227902058506/image-removebg_5.png?width=1170&height=1170",
+					"disgust": "https://media.discordapp.net/attachments/1087307553471463514/1118410227902058506/image-removebg_5.png?width=1170&height=1170",
+					"anger": "https://media.discordapp.net/attachments/1087307553471463514/1118410227902058506/image-removebg_5.png?width=1170&height=1170",
+					"anticipation": "https://media.discordapp.net/attachments/1087307553471463514/1118410227902058506/image-removebg_5.png?width=1170&height=1170"
 				}
 			},
 			"id": "4"

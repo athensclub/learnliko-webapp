@@ -35,41 +35,41 @@
 			"id": "1"
 		},
 		{
-			"background": "https://cdn.discordapp.com/attachments/842737146321174558/1116706222452777021/image.png",
-			"image": "https://media.discordapp.net/attachments/1087307553471463514/1103186686311145473/vi_A_new_boy_class_mate_3d_stylize_profile_image_b5ef15a9-31e1-4eb8-b30b-403e7573c03c.png?width=862&height=862",
-			"intro": "Hey, I'm your new friend",
-			"topic": "Howdy! I'm Alan nice to meet you",
+			"background": "https://media.discordapp.net/attachments/1087307553471463514/1118398198252322917/vi_customer_service_room_minimal_modern_background_3d_stylize_73293979-9949-4520-b161-42a39db04f99.png?width=1170&height=1170",
+			"image": "https://media.discordapp.net/attachments/1087307553471463514/1118406363329069086/image-removebg.png?width=1170&height=1170",
+			"intro": "Hello, my name is Alex. It's a pleasure to meet you.",
+			"topic": "Brainstorming marketing ideas",
 			"CEFRlevel": "A1",
 			"details": {
-				"intro": "Howdy! I'm Alan nice to meet you. What's your name?",
+				"intro": "Hello, my name is Alex. It's a pleasure to meet you.",
 				"learner": {
-					"goal": "1.Introduce yourself to Alan\n2.Get to know Alan's ages\n3.Get to know Alan's hobby\n4.Get to know Alan's hometown\n5.Get to know Alan's favorite food"
+					"goal": "1.Present product slogan message idea\n2.Determining pricing for the new mineral water product\n3. Providing ideas for a logo design"
 				},
 				"bot": {
-					"avatar": "https://media.discordapp.net/attachments/1087307553471463514/1103186686311145473/vi_A_new_boy_class_mate_3d_stylize_profile_image_b5ef15a9-31e1-4eb8-b30b-403e7573c03c.png?width=862&height=862",
+					"avatar": "https://media.discordapp.net/attachments/1087307553471463514/1118406363329069086/image-removebg.png?width=1170&height=1170",
 					"accent": "US",
 					"gender": "MALE",
 					"prompt": "Your role: I want you to act as a male student, you are kind, and friendly. Your name is Alan. Your Goal: You have to introduce yourself, and get to know your new friend’s name and some information about themselves. About yourself: You are from USA, Seattle, you are 12 years old, like eating pizza, playing football. Answer Format: You have to answer in the JSON format by using to following JSON schema {//your response“message”: string,// the enum value of your emotion in the message \"neutral\", \"joy\", \"trust\", \"fear\", \"surprise\", \"sadness\", \"disgust\", \"anger\", \"anticipation\"\"emotion\": string, // the enum value in string type // “NORMAL” used when the situation is normal // “INAPPROPRIATE” used when the situation is out of context or say something inappropriate // “END-OF-CONVERSATION” used when students get to know each other about 1.ages, 2.hometown, 3.hobbies, and 4.favorite foods “status”: string}"
 				}
 			},
 			"avatar": {
-				"name": "Jane",
+				"name": "Alex",
 				"models": {
-					"neutral": "https://cdn.discordapp.com/attachments/842737146321174558/1116747283132842105/avatar.png",
-					"joy": "https://media.discordapp.net/attachments/1087307553471463514/1118379821488152699/joy.png?width=1170&height=1170",
-					"trust": "https://media.discordapp.net/attachments/1087307553471463514/1118379822394122250/trust.png?width=1000&height=1000",
-					"fear": "https://cdn.discordapp.com/attachments/842737146321174558/1116747283132842105/avatar.png",
-					"surprise": "https://media.discordapp.net/attachments/1087307553471463514/1118379822155055184/surprise.png?width=1000&height=1000",
-					"sadness": "https://media.discordapp.net/attachments/1087307553471463514/1118379821869846548/sad.png?width=1170&height=1170",
-					"disgust": "https://media.discordapp.net/attachments/1087307553471463514/1118379821265862686/disgust.png?width=1000&height=1000",
-					"anger": "https://media.discordapp.net/attachments/1087307553471463514/1118379820699623564/anger.png?width=1000&height=1000",
-					"anticipation": "https://media.discordapp.net/attachments/1087307553471463514/1118379821026791556/anticipation.png?width=1000&height=1000"
+					"neutral": "https://media.discordapp.net/attachments/1087307553471463514/1118406363329069086/image-removebg.png?width=1170&height=1170",
+					"joy": "https://media.discordapp.net/attachments/1087307553471463514/1118406363329069086/image-removebg.png?width=1170&height=1170",
+					"trust": "https://media.discordapp.net/attachments/1064912891653926982/1118413940049838110/trust.png?width=1170&height=1170",
+					"fear": "https://media.discordapp.net/attachments/1087307553471463514/1118406363329069086/image-removebg.png?width=1170&height=1170",
+					"surprise": "https://media.discordapp.net/attachments/1087307553471463514/1118406363329069086/image-removebg.png?width=1170&height=1170",
+					"sadness": "https://media.discordapp.net/attachments/1064912891653926982/1118413939508793385/sad.png?width=1170&height=1170",
+					"disgust": "https://media.discordapp.net/attachments/1087307553471463514/1118406363329069086/image-removebg.png?width=1170&height=1170",
+					"anger": "https://media.discordapp.net/attachments/1087307553471463514/1118406363329069086/image-removebg.png?width=1170&height=1170",
+					"anticipation": "https://media.discordapp.net/attachments/1064912891653926982/1118413938309222430/anticipation.png?width=1170&height=1170"
 				}
 			},
 			"id": "2"
 		},
 		{
-			"background": "https://cdn.discordapp.com/attachments/842737146321174558/1116706222452777021/image.png",
+			"background": "https://media.discordapp.net/attachments/1087307553471463514/1118398196876595250/vi_loft_minimal_office_room_background_3d_stylize_3b6c1622-b2fc-4cf2-a051-475aa4388735.png?width=1170&height=1170",
 			"image": "https://media.discordapp.net/attachments/1087307553471463514/1103188064358125618/vi_A_young_woman_teacher_kindly_3d_stylize_profile_image_38556d17-9767-44cf-8adf-729f61ea9ce7.png?width=1357&height=1357",
 			"intro": "Hello! I'm English teacher.",
 			"topic": "Today we will learn English with animal!",
@@ -95,7 +95,7 @@
 			"id": "3"
 		},
 		{
-			"background": "https://cdn.discordapp.com/attachments/842737146321174558/1116706222452777021/image.png",
+			"background": "https://media.discordapp.net/attachments/1087307553471463514/1118398197191151687/vi_meeting_room_background_3d_stylize_76f8485f-1e5c-4370-8667-8cd7384a171f.png?width=1170&height=1170",
 			"image": "https://media.discordapp.net/attachments/1087307553471463514/1103187114692202536/vi_A_man_farmer_fruit_3d_stylize_profile_image_244b73e8-dd85-4668-835f-c8c35a592146.png?width=1357&height=1357",
 			"intro": "Hi, I'm a farmer",
 			"topic": "Let's talk about your favorite fruit",
@@ -121,7 +121,7 @@
 			"id": "4"
 		},
 		{
-			"background": "https://cdn.discordapp.com/attachments/842737146321174558/1116706222452777021/image.png",
+			"background": "https://media.discordapp.net/attachments/1087307553471463514/1118398198696923146/vi_office_bar_minimal_modern_loft_background_3d_stylize_661793f4-22fe-44c9-a896-3161d6e2c5ff.png?width=1170&height=1170",
 			"image": "https://media.discordapp.net/attachments/1087307553471463514/1103190062734254110/vi_backpack_traveller_face_anime_3d_profile_image_ecd2ca83-4090-4b55-8057-868c19789a1d.png?width=1357&height=1357",
 			"intro": "Hi, I'm a traveler",
 			"topic": "Help me recommend Thai foods and places to visit",

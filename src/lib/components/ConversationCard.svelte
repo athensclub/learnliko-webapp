@@ -32,7 +32,7 @@
 			/>
 			<div class="flex flex-col">
 				<div class="text-white font-bold text-[1vw]">{conversation.avatar.name}</div>
-				<div class="text-[#FFFFFF99] text-[0.7vw]">student</div>
+				<div class="text-[#FFFFFF99] text-[0.7vw]">employee</div>
 			</div>
 		</div>
 

@@ -37,7 +37,13 @@
 				}
 			];
 		} else if (currentLanguage === 'EN') {
-			hintPrompts = ['What is learnliko?', 'How to start conversation?'];
+			hintPrompts = [
+				'What is learnliko?',
+				'How to start conversation?',
+				'Recommend me 5 interesting words.',
+				'What is the meaning of the word "comprehension"?',
+				'Check grammar for the sentence "I go to school yesterday."'
+			];
 			history = [
 				{
 					role: 'system',
@@ -172,7 +178,7 @@
 >
 	{#each hintPrompts as hint, index (index)}
 		<button
-			on:click={() => currentText = hint}
+			on:click={() => (currentText = hint)}
 			class="text-sm border border-black/[0.15] py-2 px-5 rounded-full whitespace-nowrap mb-5 backdrop-blur-lg"
 		>
 			{hint}

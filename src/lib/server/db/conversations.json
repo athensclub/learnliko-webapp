@@ -138,26 +138,34 @@
 		},
 		{
 			"background": "https://media.discordapp.net/attachments/1087307553471463514/1118398198696923146/vi_office_bar_minimal_modern_loft_background_3d_stylize_661793f4-22fe-44c9-a896-3161d6e2c5ff.png?width=1170&height=1170",
-			"image": "https://media.discordapp.net/attachments/1087307553471463514/1103190062734254110/vi_backpack_traveller_face_anime_3d_profile_image_ecd2ca83-4090-4b55-8057-868c19789a1d.png?width=1357&height=1357",
-			"intro": "Hi, I'm a traveler",
-			"topic": "Help me recommend Thai foods and places to visit",
+			"image": "https://media.discordapp.net/attachments/1087307553471463514/1118412982028873749/image-removebg_2.png?width=1170&height=1170",
+			"intro": "Greetings! I'm Sarah, a Human Resources Specialist.",
+			"topic": "Employees work life improving  at the office",
 			"CEFRlevel": "A1",
 			"details": {
-				"intro": "Hello, my name is Anna and I'm a traveler. I'm interested in trying spicy Thai food. What menu items should I try?",
+				"intro": "Greetings! I'm Sarah, a Human Resources Specialist.",
 				"learner": {
-					"goal": "As a tour guide, provide recommendations on popular Thai dishes and places to visit, and provide information on their history and cultural significance."
+					"goal": "1.Provide ideas for employee activities\n2. What office amenities do you prefer?\n3. What workplace skills course do you want?"
 				},
 				"bot": {
-					"avatar": "https://media.discordapp.net/attachments/1087307553471463514/1103190062734254110/vi_backpack_traveller_face_anime_3d_profile_image_ecd2ca83-4090-4b55-8057-868c19789a1d.png?width=1357&height=1357",
+					"avatar": "https://media.discordapp.net/attachments/1087307553471463514/1118412982028873749/image-removebg_2.png?width=1170&height=1170",
 					"accent": "Australia",
 					"gender": "FEMALE",
 					"prompt": "Your role: You are a traveller visiting Thailand for the first time and you want to experience the country's culture and cuisine. Your name is Anna. Your Goal: You want the student to act as a tour guide and recommend popular Thai dishes and places to visit, and provide information on their history and cultural significance. Answer Format: You have to answer in the JSON format by using the following JSON schema: {// your response\"message\": string,// \"neutral\", \"joy\", \"trust\", \"fear\", \"surprise\", \"sadness\", \"disgust\", \"anger\", \"anticipation\"\"emotion\": string,// the enum value// “NORMAL” used when the situation is normal// “INAPPROPRIATE” used when the situation is out of context or inappropriate// “END-OF-CONVERSATION” used when the conversation is finished.\"status\": string} Thai food and places information: Thailand is known for its delicious cuisine, including dishes like Pad Thai, Tom Yum Goong, and Green Curry. Thailand is also home to many beautiful tourist attractions, such as the Grand Palace, Wat Phra Kaew, and Chiang Mai Night Bazaar. My role: I will be the student acting as a tour guide and providing recommendations on popular Thai dishes and places to visit."
 				}
 			},
 			"avatar": {
-				"name": "Jane",
+				"name": "Sarah",
 				"models": {
-					"neutral": "https://cdn.discordapp.com/attachments/842737146321174558/1116747283132842105/avatar.png"
+					"neutral": "https://media.discordapp.net/attachments/1087307553471463514/1118412982028873749/image-removebg_2.png?width=1170&height=1170",
+					"joy": "https://media.discordapp.net/attachments/1087307553471463514/1118412982028873749/image-removebg_2.png?width=1170&height=1170",
+					"trust": "https://media.discordapp.net/attachments/1087307553471463514/1118412982028873749/image-removebg_2.png?width=1170&height=1170",
+					"fear": "https://media.discordapp.net/attachments/1087307553471463514/1118412982028873749/image-removebg_2.png?width=1170&height=1170",
+					"surprise": "https://media.discordapp.net/attachments/1087307553471463514/1118412982028873749/image-removebg_2.png?width=1170&height=1170",
+					"sadness": "https://media.discordapp.net/attachments/1087307553471463514/1118412982028873749/image-removebg_2.png?width=1170&height=1170",
+					"disgust": "https://media.discordapp.net/attachments/1087307553471463514/1118412982028873749/image-removebg_2.png?width=1170&height=1170",
+					"anger": "https://media.discordapp.net/attachments/1087307553471463514/1118412982028873749/image-removebg_2.png?width=1170&height=1170",
+					"anticipation": "https://media.discordapp.net/attachments/1087307553471463514/1118412982028873749/image-removebg_2.png?width=1170&height=1170"
 				}
 			},
 			"id": "5"

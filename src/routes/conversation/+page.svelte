@@ -35,7 +35,7 @@
 			</div>
 
 			<div class="w-full flex flex-row justify-between mt-[6vh] font-bold">
-				<div class="w-[48%] h-[35vh] py-[3vh] px-[3vw] flex flex-row bg-white rounded-xl">
+				<div class="w-[48%] h-[35vh] py-[3vh] px-[3vw] flex flex-row bg-white rounded-[2vw] shadow-md">
 					<img class="w-[30%] object-contain" src={convButtonImage} alt="Conversation" />
 
 					<div class="flex flex-col flex-1 pl-[2vw]">
@@ -61,7 +61,7 @@
 					</div>
 				</div>
 
-				<div class="w-[48%] h-[35vh] py-[3vh] px-[3vw] flex flex-row bg-white rounded-xl">
+				<div class="w-[48%] h-[35vh] py-[3vh] px-[3vw] flex flex-row bg-white rounded-[2vw] shadow-md">
 					<img class="w-[40%] object-contain" src={locButtonImage} alt="Conversation" />
 
 					<div class="flex flex-col flex-1 pl-[2vw]">

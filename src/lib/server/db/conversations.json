@@ -111,7 +111,7 @@
 			"details": {
 				"intro": "Good day! I'm Lisa, a Sales Interviewer.",
 				"learner": {
-					"goal": "1.Elaborate on your purpose for wanting to work in the sales\n2.Why do you believe you are a suitable candidate for this sales position?\n3.What relevant experience do you have?"
+					"goal": "1.Elaborate on your purpose \nfor wanting to work in the sales\n2.Why do you believe you are a suitable \ncandidate for this sales position?\n3.What relevant experience do you have?"
 				},
 				"bot": {
 					"avatar": "https://media.discordapp.net/attachments/1087307553471463514/1118410227902058506/image-removebg_5.png?width=1170&height=1170",

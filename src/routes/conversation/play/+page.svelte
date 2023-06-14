@@ -27,13 +27,13 @@
 				$isMobile
 					? 'top-0 w-full text-[1.3vw] rounded-t-none'
 					: 'top-[25vh] left-[3vw] w-[33%] text-[1vw]'
-			} backdrop-blur-sm backdrop-brightness-75 p-4 shadow-sm border border-black/15 rounded-xl`}
+			} backdrop-blur-lg backdrop-brightness-75 p-4 shadow-sm border  rounded-xl`}
 		>
 			<div class="flex flex-row justify-between items-center">
 				<strong class={`${$isMobile ? 'text-[4vw]' : 'text-[2vw]'}`}> 🎯Coversation Goal </strong>
 			</div>
 			<Typewriter>
-				<pre class="mt-3">{$chatContext.conversation.details.learner.goal}</pre>
+				<pre class="mt-3 text-sm">{$chatContext.conversation.details.learner.goal}</pre>
 			</Typewriter>
 		</div>
 

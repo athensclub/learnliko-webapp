@@ -1,5 +1,82 @@
 [
 	{
+		"id": "0",
+		"blogName": "The Lemonade Stand",
+		"title": "The Lemonade Stand",
+		"image": "https://www.nwselfstorage.com/blog/wp-content/uploads/2016/06/shutterstock_1184105992-scaled.jpg",
+		"topic": "Short story",
+		"dateTime": "2023-05-20T09:30:00Z",
+		"content": "Samantha wanted to earn some money during the summer. She loved sweet lemonade, so she decided to start a lemonade stand. She asked her parents if they could help her. They loved her idea and agreed to support her with everything she needed. \n\nThe first thing Samantha had to do was to make a list of what she needed. She wrote down lemons, sugar, cups, a pitcher, ice, and a sign. She asked her dad to drive her to the store, and there she bought all the things she needed. \n\n Squeezing the juice from the lemons took some time, but Samantha was careful and managed to extract all the juice without making any mess. Then she mixed the lemon juice with sugar and water and put it in the pitcher. \n\nThe next step was to make the sign. Samantha found some cardboard and markers and wrote in big letters: 'Fresh Lemonade for Sale.' \n\nFinally, it was time to open the stand. Samantha set up a table and put the cups and the pitcher on it. She also added some ice to make the lemonade cool and refreshing.  \n\nPeople soon started coming over. They saw the sign and were curious to try the lemonade. Samantha was happy to serve them and take their cash. She quickly became a successful businesswoman, and her lemonade stand became a popular spot in the neighborhood. \n\nSamantha learned that running a business was not easy, but it was fun and rewarding. She decided to save the money she earned to buy more supplies and to start a new business soon!",
+		"quiz": [
+			{
+				"question": "What tone of voice does the passage have?",
+				"choices": [
+					"Tense",
+					"Joyful",
+					"Sad",
+					"Angry"
+				],
+				"answer": 1
+			},
+			{
+				"question": "What did Samantha mix with lemon juice?",
+				"choices": [
+					"Ice",
+					"Sugar",
+					"Water",
+					"Salt"
+				],
+				"answer": 1
+			},
+			{
+				"question": "What did Samantha need to make her lemonade stand?",
+				"choices": [
+					"Apples, bread, pencils, scissors",
+					"Lemons, sugar, cups, a pitcher, ice, and a sign",
+					"Chicken, milk, rice, plates, and a bike",
+					"Books, shoes, hats, glasses, and a computer"
+				],
+				"answer": 1
+			},
+			{
+				"question": "What did Samantha use to write the sign for her lemonade stand?",
+				"choices": [
+					"Chalk and blackboard",
+					"A pen and paper",
+					"Markers and cardboard",
+					"Paint and canvas"
+				],
+				"answer": 2
+			},
+			{
+				"question": "What did Samantha write on her lemonade stand sign?",
+				"choices": [
+					"Fresh Lemonade for Sale",
+					"Iced Tea",
+					"Soda",
+					"Free Lemonade"
+				],
+				"answer": 0
+			}
+		],
+		"vocabs": [
+			"earn",
+			"lemonade stand",
+			"support",
+			"list",
+			"lemons",
+			"pitcher",
+			"extract",
+			"cardboard",
+			"markers",
+			"sign",
+			"refreshing",
+			"successful",
+			"businesswoman",
+			"supplies"
+		]
+	},
+	{
 		"id": "1",
 		"blogName": "The Magic Paintbrush",
 		"content": "Once upon a time, there was a poor young boy named Ma Liang who loved to paint more than anything else. However, he didn’t have a paintbrush, so he used a stick to draw in the dirt. One day, he met an old man who gave him a magic paintbrush. The old explained to Ma Liang that the paintbrush was special and if he painted something, it would come to life. Ma Liang was very excited and went home to test his new paintbrush. When he drew a tree, it grew in front of his eyes. He then drew a pig, and it came to life and ran away. From that day on, Ma Liang used the magic paintbrush to help people. Whenever a person was hungry or sick, he drew food or medicine, and it would come to life. The news of Ma Liang’s magic paintbrush spread quickly, and the greedy emperor heard about him. He ordered Ma Liang to paint gold and treasure for him. However, Ma Liang refused to use his magic paintbrush for selfish reasons. The emperor was angry and locked him up. But Ma Liang’s magic paintbrush came to the rescue, drawing a door and allowing him to escape. From that day on, Ma Liang continued to use his magic paintbrush to help others selflessly, and he lived happily ever after.",
@@ -9,27 +86,52 @@
 		"quiz": [
 			{
 				"question": "What does the term 'selflessly' mean in the story?",
-				"choices": ["selfishly", "bravely", " sincerely", "without selfishness"],
+				"choices": [
+					"selfishly",
+					"bravely",
+					" sincerely",
+					"without selfishness"
+				],
 				"answer": 3
 			},
 			{
 				"question": "What did Ma Liang use before he was given the magic paintbrush?",
-				"choices": ["A pencil", "A crayon", "A stick", "A paintbrush"],
+				"choices": [
+					"A pencil",
+					"A crayon",
+					"A stick",
+					"A paintbrush"
+				],
 				"answer": 2
 			},
 			{
 				"question": "What did Ma Liang draw that came to life and ran away?",
-				"choices": ["A tree", "A house", "A pig", "A flower"],
+				"choices": [
+					"A tree",
+					"A house",
+					"A pig",
+					"A flower"
+				],
 				"answer": 2
 			},
 			{
 				"question": "What does the term 'greedy' mean in the story?",
-				"choices": ["generous", "selfish", "wise", "content"],
+				"choices": [
+					"generous",
+					"selfish",
+					"wise",
+					"content"
+				],
 				"answer": 1
 			},
 			{
 				"question": "What tone of voice did Ma Liang use when he refused to use his magic paintbrush for selfish reasons?",
-				"choices": ["Angry", "Sad", "Humble", "Confused"],
+				"choices": [
+					"Angry",
+					"Sad",
+					"Humble",
+					"Confused"
+				],
 				"answer": 3
 			}
 		],
@@ -80,12 +182,22 @@
 		"quiz": [
 			{
 				"question": "What was the tone of voice of the hare when he talked about his speed?",
-				"choices": ["Arrogant", "Modest", "Excited", "Indifferent"],
+				"choices": [
+					"Arrogant",
+					"Modest",
+					"Excited",
+					"Indifferent"
+				],
 				"answer": 0
 			},
 			{
 				"question": "What does the word 'complacent' mean in this story?",
-				"choices": ["arrogant", "lazy", "unpredictable", "content"],
+				"choices": [
+					"arrogant",
+					"lazy",
+					"unpredictable",
+					"content"
+				],
 				"answer": 3
 			},
 			{
@@ -100,7 +212,12 @@
 			},
 			{
 				"question": "What does the word 'cleverly' mean in this story?",
-				"choices": ["in a foolish way", "wisely and resourcefully", "rudely", "slowly"],
+				"choices": [
+					"in a foolish way",
+					"wisely and resourcefully",
+					"rudely",
+					"slowly"
+				],
 				"answer": 1
 			},
 			{
@@ -139,17 +256,32 @@
 		"quiz": [
 			{
 				"question": "What was the material used by the third little pig to build his house?",
-				"choices": ["Straw", "Sticks", "Bricks", "Wood"],
+				"choices": [
+					"Straw",
+					"Sticks",
+					"Bricks",
+					"Wood"
+				],
 				"answer": 2
 			},
 			{
 				"question": "What did the third little pig build his house out of?",
-				"choices": ["Straw", "Sticks", "Bricks", "Wood"],
+				"choices": [
+					"Straw",
+					"Sticks",
+					"Bricks",
+					"Wood"
+				],
 				"answer": 2
 			},
 			{
 				"question": "What tone of voice did the big, bad wolf most likely have when he knocked on the doors of the three little pigs?",
-				"choices": ["Polite", "Friendly", "Menacing", "Happy"],
+				"choices": [
+					"Polite",
+					"Friendly",
+					"Menacing",
+					"Happy"
+				],
 				"answer": 2
 			},
 			{
@@ -164,11 +296,22 @@
 			},
 			{
 				"question": "What material did the second little pig use to build his house?",
-				"choices": ["Straw", "Sticks", "Bricks", "Wood"],
+				"choices": [
+					"Straw",
+					"Sticks",
+					"Bricks",
+					"Wood"
+				],
 				"answer": 1
 			}
 		],
-		"vocabs": ["straw", "sticks", "bricks", "huffed", "puffed"]
+		"vocabs": [
+			"straw",
+			"sticks",
+			"bricks",
+			"huffed",
+			"puffed"
+		]
 	},
 	{
 		"id": "4",
@@ -180,12 +323,22 @@
 		"quiz": [
 			{
 				"question": "What does 'storing food' mean in the context of the story?",
-				"choices": ["Eating food", "Collecting food", "Sharing food", "Burying food"],
+				"choices": [
+					"Eating food",
+					"Collecting food",
+					"Sharing food",
+					"Burying food"
+				],
 				"answer": 1
 			},
 			{
 				"question": "What tone of voice did the ant use when refusing to give food to the grasshopper?",
-				"choices": ["Gentle", "Rude", "Stern", "Friendly"],
+				"choices": [
+					"Gentle",
+					"Rude",
+					"Stern",
+					"Friendly"
+				],
 				"answer": 2
 			},
 			{
@@ -200,7 +353,12 @@
 			},
 			{
 				"question": "What does the word 'valuable' mean in the following sentence? 'The grasshopper learned a valuable lesson.'",
-				"choices": ["Worthless", "Useless", "Important", "Heavy"],
+				"choices": [
+					"Worthless",
+					"Useless",
+					"Important",
+					"Heavy"
+				],
 				"answer": 2
 			},
 			{
@@ -245,7 +403,12 @@
 		"quiz": [
 			{
 				"question": "What did Lily name the little kitten she found?",
-				"choices": ["Fluffy", "Snowball", "Whiskers", "Mittens"],
+				"choices": [
+					"Fluffy",
+					"Snowball",
+					"Whiskers",
+					"Mittens"
+				],
 				"answer": 1
 			},
 			{
@@ -260,7 +423,12 @@
 			},
 			{
 				"question": "What does the word \"compassion\" mean in the story?",
-				"choices": ["Fear", "Joy", "Love", "Sympathy"],
+				"choices": [
+					"Fear",
+					"Joy",
+					"Love",
+					"Sympathy"
+				],
 				"answer": 3
 			},
 			{
@@ -275,7 +443,12 @@
 			},
 			{
 				"question": "How would you describe the tone of the story?",
-				"choices": ["Suspenseful", "Heartwarming", "Mysterious", "Hilarious"],
+				"choices": [
+					"Suspenseful",
+					"Heartwarming",
+					"Mysterious",
+					"Hilarious"
+				],
 				"answer": 1
 			}
 		],
@@ -333,12 +506,22 @@
 			},
 			{
 				"question": "What does the word \"mischievous\" mean in the story?",
-				"choices": ["Friendly", "Curious", "Naughty", "Playful"],
+				"choices": [
+					"Friendly",
+					"Curious",
+					"Naughty",
+					"Playful"
+				],
 				"answer": 2
 			},
 			{
 				"question": "What does the word \"vibrant\" mean in the story?",
-				"choices": ["Dull", "Colorful", "Quiet", "Mysterious"],
+				"choices": [
+					"Dull",
+					"Colorful",
+					"Quiet",
+					"Mysterious"
+				],
 				"answer": 1
 			},
 			{
@@ -444,12 +627,22 @@
 			},
 			{
 				"question": "What does the word \"cherished\" mean in the context of the story?",
-				"choices": ["Explored", "Appreciated", "Hidden", "Discovered"],
+				"choices": [
+					"Explored",
+					"Appreciated",
+					"Hidden",
+					"Discovered"
+				],
 				"answer": 1
 			},
 			{
 				"question": "What does the word \"embark\" mean in the context of the story?",
-				"choices": ["Continue", "Finish", "Begin", "Stop"],
+				"choices": [
+					"Continue",
+					"Finish",
+					"Begin",
+					"Stop"
+				],
 				"answer": 2
 			},
 			{
@@ -519,7 +712,12 @@
 			},
 			{
 				"question": "Which pharaoh was the Great Pyramid of Giza built for?",
-				"choices": ["Tutankhamun", "Ramses II", "Akhenaten", "Khufu"],
+				"choices": [
+					"Tutankhamun",
+					"Ramses II",
+					"Akhenaten",
+					"Khufu"
+				],
 				"answer": 3
 			},
 			{
@@ -544,7 +742,12 @@
 			},
 			{
 				"question": "What is the tone of voice used in the passage about the pyramids?",
-				"choices": ["Exuberant", "Nostalgic", "Informative", "Mournful"],
+				"choices": [
+					"Exuberant",
+					"Nostalgic",
+					"Informative",
+					"Mournful"
+				],
 				"answer": 2
 			}
 		],
@@ -614,12 +817,22 @@
 			},
 			{
 				"question": "Which date is inscribed on the tablet held by the Statue of Liberty?",
-				"choices": ["July 4, 1776", "June 30, 1900", "October 28, 1886", "September 3, 1783"],
+				"choices": [
+					"July 4, 1776",
+					"June 30, 1900",
+					"October 28, 1886",
+					"September 3, 1783"
+				],
 				"answer": 0
 			},
 			{
 				"question": "What does the word \"colossal\" mean in the context of the story?",
-				"choices": ["Beautiful", "Small", "Enormous", "Old"],
+				"choices": [
+					"Beautiful",
+					"Small",
+					"Enormous",
+					"Old"
+				],
 				"answer": 2
 			},
 			{
@@ -679,12 +892,22 @@
 		"quiz": [
 			{
 				"question": "When was the construction of the Colosseum completed?",
-				"choices": ["72 AD", "80 AD", "50,000 to 80,000 spectators", "1,788 feet"],
+				"choices": [
+					"72 AD",
+					"80 AD",
+					"50,000 to 80,000 spectators",
+					"1,788 feet"
+				],
 				"answer": 1
 			},
 			{
 				"question": "Who commissioned the construction of the Colosseum?",
-				"choices": ["Emperor Titus", "Roman Emperor Vespasian", "Gladiators", "Ancient Romans"],
+				"choices": [
+					"Emperor Titus",
+					"Roman Emperor Vespasian",
+					"Gladiators",
+					"Ancient Romans"
+				],
 				"answer": 1
 			},
 			{
@@ -709,7 +932,12 @@
 			},
 			{
 				"question": "What tone of voice does the passage about the Colosseum convey?",
-				"choices": ["Informative", "Melancholic", "Humorous", "Indifferent"],
+				"choices": [
+					"Informative",
+					"Melancholic",
+					"Humorous",
+					"Indifferent"
+				],
 				"answer": 0
 			}
 		],

@@ -12,6 +12,7 @@
 			onConfirm: () => {
 				$showChatbox = false;
 				$chatContext = null;
+                window.history.back();
 			}
 		});
 </script>

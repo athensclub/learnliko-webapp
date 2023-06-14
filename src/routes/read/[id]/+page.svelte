@@ -14,6 +14,7 @@
 	let item: ReadingItem = data.item;
 	let coin = 300;
 
+	const goBack = () => window.history.back();
 	const showQuiz = () => showModal(ReadingQuizModal, { item });
 
 	$: correct = $readingAnswers
@@ -32,6 +33,15 @@
 		<div class="w-[100vw] h-[100vh] backdrop-blur-md bg-[#FFFFFF0D]" />
 
 		<div class="absolute top-0 left-0 flex flex-col w-full px-[15vw] pt-[5vh]">
+			<button on:click={goBack} class="bg-black rounded-full h-[5vh] px-[2vw] w-fit">
+				<svg class="h-[50%]" viewBox="0 0 48 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<path
+						d="M46.08 15.8758C47.1404 15.8758 48 15.0363 48 14.0008C48 12.9653 47.1404 12.1258 46.08 12.1258V15.8758ZM0.562355 12.675C-0.187452 13.4072 -0.187452 14.5944 0.562355 15.3266L12.7812 27.2591C13.531 27.9913 14.7466 27.9913 15.4965 27.2591C16.2463 26.5267 16.2463 25.3397 15.4965 24.6075L4.63528 14.0008L15.4965 3.39419C16.2463 2.66195 16.2463 1.47477 15.4965 0.742534C14.7466 0.0103012 13.531 0.0103012 12.7812 0.742534L0.562355 12.675ZM46.08 12.1258H1.92V15.8758H46.08V12.1258Z"
+						fill="white"
+					/>
+				</svg>
+			</button>
+
 			<img
 				class="max-w-[60vw] max-h-[70vh] w-auto h-auto mx-auto rounded-3xl"
 				src={item.image}

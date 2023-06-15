@@ -24,7 +24,7 @@
 	style="background-image: url('{conversation.background}');"
 	class={`relative overflow-hidden flex flex-col justify-between bg-center bg-cover rounded-[2vw] ${clazz}`}
 >
-	<div class="w-full h-[17%] flex flex-row justify-between items-center backdrop-blur-sm px-[1vw]">
+	<div class="w-full h-[17%] flex flex-row justify-between items-center backdrop-blur-sm bg-black/40 px-[1vw]">
 		<div class="flex flex-row h-full items-center gap-[1vw]">
 			<div
 				style="background-image: url('{conversation.avatar.models.neutral}')"
@@ -42,20 +42,20 @@
 	</div>
 
 	<img
-		class="absolute bottom-0 left-[50%] translate-x-[-50%] h-[80%]"
+		class="absolute bottom-5 left-[50%] translate-x-[-50%] h-[70%]"
 		src={conversation.avatar.models.neutral}
 		alt="Avatar"
 	/>
 
 	<div
-		class="w-full h-[38%] flex flex-col justify-between backdrop-blur-sm px-[1.5vw] py-[2vh] text-white [text-1vw] font-bold"
+		class="w-full h-[30%] flex flex-col justify-between bg-black/40 backdrop-blur-sm px-[1.5vw] py-[2vh] text-white [text-1vw] font-bold"
 	>
 		<div class="w-full text-center text-[1.2vw]">{conversation.topic}</div>
 
 		<button
 			{disabled}
 			on:click={openChatbox}
-			class="flex flex-row items-center justify-center gap-[1vw] w-full h-[35%] bg-[#FFFFFF38] text-white text-[1.1vw] rounded-full"
+			class="flex flex-row items-center justify-center gap-[1vw] w-full h-[45%] bg-[#FFFFFF38] text-white text-[1.1vw] rounded-full"
 		>
 			<svg class="h-[60%]" viewBox="0 0 19 25" fill="none" xmlns="http://www.w3.org/2000/svg">
 				<path

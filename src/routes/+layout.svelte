@@ -25,7 +25,7 @@
 		<div
 			class={`fixed ${
 				$isMobile
-					? 'w-[100vw] h-[40vh] bottom-0'
+					? `w-[100vw] ${$currentChatboxView === 'CONVERSATION' ? 'h-[40vh]' : 'h-[65vh]'} bottom-0`
 					: 'w-[37vw] ' +
 					  ($currentChatboxView === 'CONVERSATION'
 							? 'h-[70vh] bottom-[15vh] right-[3vw]'

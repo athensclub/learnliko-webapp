@@ -11,6 +11,7 @@ import { HumanChatMessage, SystemChatMessage, AIChatMessage } from "langchain/sc
 import text from "$lib/server/db/learnliko_info.txt?raw";
 
 const nonStreamingModel = new ChatOpenAI({
+    temperature: 0.5,
     modelName: "gpt-3.5-turbo",
     openAIApiKey: SECRET_OPENAI_API_KEY,
 });
@@ -45,6 +46,7 @@ export const assistantChatCompletion = async (message: ChatMessage[]) => {
         async start(controller) {
             /* Initialize the LLM to use to answer the question */
             const model = new ChatOpenAI({
+                temperature: 0.5,
                 modelName: "gpt-3.5-turbo",
                 openAIApiKey: SECRET_OPENAI_API_KEY,
                 streaming: true,

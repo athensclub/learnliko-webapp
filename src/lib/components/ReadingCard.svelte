@@ -17,7 +17,7 @@
 		<div
 			class="absolute top-[3vh] right-[2vw] w-fit text-white text-[1.3vw] rounded-full px-[1.5vw] py-[1vh] bg-[#0000009E]"
 		>
-			🧿 300 coin
+			🧿 300
 		</div>
 	</div>
 

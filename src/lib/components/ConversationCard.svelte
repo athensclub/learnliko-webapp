@@ -2,6 +2,7 @@
 	import { goto } from '$app/navigation';
 	import { chatContext, currentChatboxView, showChatbox } from '$lib/global/chatbox';
 	import type { ConversationCarouselItem, ConversationDetails } from '$lib/types/conversationData';
+	import Typewriter from 'svelte-typewriter/Typewriter.svelte';
 
 	// export let small = false;
 	// export let extraSmall = false;
@@ -22,7 +23,7 @@
 <!-- Specify the size(width, height) of the card in the user of the component, not in the component itself. -->
 <div
 	style="background-image: url('{conversation.background}');"
-	class={`relative overflow-hidden flex flex-col justify-between bg-center bg-cover rounded-[2vw] ${clazz}`}
+	class={`relative overflow-hidden flex flex-col justify-between shadow-xl bg-center bg-cover rounded-[2vw] ${clazz}`}
 >
 	<div class="w-full h-[17%] flex flex-row justify-between items-center backdrop-blur-sm bg-black/40 px-[1vw]">
 		<div class="flex flex-row h-full items-center gap-[1vw]">
@@ -31,13 +32,13 @@
 				class="h-[70%] bg-[#FFD281] aspect-square rounded-full bg-cover bg-top"
 			/>
 			<div class="flex flex-col">
-				<div class="text-white font-bold text-[1vw]">{conversation.avatar.name}</div>
-				<div class="text-[#FFFFFF99] text-[0.7vw]">employee</div>
+				<div class="text-white font-bold text-[1.3vw]">{conversation.avatar.name}</div>
+				<div class="text-[#FFFFFF99] text-[1vw]">employee</div>
 			</div>
 		</div>
 
 		<div class="rounded-full bg-[#FFFFFF21] px-[1vw] py-[1vh] text-white text-[1vw]">
-			🧿 300 coin
+			🧿 300
 		</div>
 	</div>
 
@@ -48,23 +49,23 @@
 	/>
 
 	<div
-		class="w-full h-[30%] flex flex-col justify-between bg-black/40 backdrop-blur-sm px-[1.5vw] py-[2vh] text-white [text-1vw] font-bold"
+		class="w-full h-[30%] flex flex-col justify-between bg-black/40 backdrop-blur-sm px-[1.5vw] py-[2.5vh] text-white [text-1vw] font-bold"
 	>
-		<div class="w-full text-center text-[1.2vw]">{conversation.topic}</div>
+		<div class="w-full text-center text-[1.2vw]"><Typewriter  mode=loopRandom>{conversation.topic}</Typewriter></div>
 
 		<button
 			{disabled}
 			on:click={openChatbox}
-			class="flex flex-row items-center justify-center gap-[1vw] w-full h-[45%] bg-[#FFFFFF38] text-white text-[1.1vw] rounded-full"
+			class="flex flex-row items-center justify-center gap-[1vw] w-full h-[45%] bg-[#FFFFFF38] text-white text-[1.25vw] rounded-full"
 		>
-			<svg class="h-[60%]" viewBox="0 0 19 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+			<svg class="h-[45%]" viewBox="0 0 19 25" fill="none" xmlns="http://www.w3.org/2000/svg">
 				<path
 					d="M9.5 15.7895C8.36905 15.7895 7.40774 15.4057 6.61607 14.6382C5.8244 13.8706 5.42857 12.9386 5.42857 11.8421V3.94737C5.42857 2.85088 5.8244 1.91886 6.61607 1.15132C7.40774 0.383772 8.36905 0 9.5 0C10.631 0 11.5923 0.383772 12.3839 1.15132C13.1756 1.91886 13.5714 2.85088 13.5714 3.94737V11.8421C13.5714 12.9386 13.1756 13.8706 12.3839 14.6382C11.5923 15.4057 10.631 15.7895 9.5 15.7895ZM8.14286 25V20.9539C5.79048 20.6469 3.84524 19.6272 2.30714 17.8947C0.769047 16.1623 0 14.1447 0 11.8421H2.71429C2.71429 13.6623 3.37612 15.2136 4.69979 16.4961C6.02255 17.7794 7.62262 18.4211 9.5 18.4211C11.3774 18.4211 12.9779 17.7794 14.3016 16.4961C15.6243 15.2136 16.2857 13.6623 16.2857 11.8421H19C19 14.1447 18.231 16.1623 16.6929 17.8947C15.1548 19.6272 13.2095 20.6469 10.8571 20.9539V25H8.14286Z"
 					fill="white"
 				/>
 			</svg>
 
-			Start Conversation
+			Start Conversation 
 		</button>
 	</div>
 </div>

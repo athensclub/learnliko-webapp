@@ -90,16 +90,16 @@
 			</a>
 		</div>
 
-		<div class="flex flex-col w-full font-bold gap-[4vh] text-[2vw]">
-			<NavBarLinkList eachIconStyle="width: 2vw; margin-right: 2vw;" />
+		<div class="flex flex-col w-full font-bold gap-[4vh] text-[1.6vw]">
+			<NavBarLinkList eachIconStyle="width: 1.6vw; margin-right: 1vw;" />
 		</div>
 
 		<button
 			on:click={openAssistantChat}
 			style="box-shadow: 0px 2px 15px 0px #9BA1FD82; "
-			class="w-[70%] py-2 rounded-full mx-auto flex flex-row items-center justify-center font-bold"
+			class="w-[60%] py-2 rounded-full mx-auto flex flex-row text-[1.2vw]  items-center justify-center font-bold"
 		>
-			<img class="w-[25%]" src={assistantIcon} alt="Assistant" />
+			<img class="w-[22%]" src={assistantIcon} alt="Assistant" />
 
 			Assistant
 		</button>

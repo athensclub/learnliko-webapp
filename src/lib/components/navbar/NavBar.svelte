@@ -28,7 +28,7 @@
 {#if $isMobile}
 	<nav
 		style="box-shadow: 0px -3px 10px 0px #00000040;"
-		class="fixed z-[1000] bg-white bottom-0 w-[100vw] py-[2vh] flex flex-row justify-around"
+		class="fixed z-[500] bg-white bottom-0 w-[100vw] py-[2vh] flex flex-row justify-around"
 	>
 		<NavBarLinkList noText eachIconStyle="width: 10vw;">
 			<button
@@ -49,9 +49,9 @@
 
 	<nav
 		style="box-shadow: 4px 1px 20px 0px #0000000D;"
-		class="fixed top-0 left-0 flex flex-col bg-white justify-around w-[23vw] h-[100vh] px-[2vw] py-[3vh] font-line-seed"
+		class="fixed top-0 left-0 flex flex-col bg-white justify-around w-[23vw] h-[100vh] py-[3vh] font-line-seed"
 	>
-		<div class="flex flex-col">
+		<div class="flex flex-col px-[2vw]">
 			<div class="flex flex-row justify-between w-full">
 				<img class="w-[25%]" src={icon} alt="Learnliko" />
 
@@ -73,7 +73,7 @@
 				href="/profile"
 				class={`w-full flex flex-row items-center rounded-2xl p-[5%] mt-[6vh] ${
 					isInProfile
-						? 'bg-gradient-to-r from-[#7280FF] via-[#C698FF] to-[#FFD68D]'
+						? 'bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD]'
 						: 'bg-[#F5F5F5]'
 				}`}
 			>
@@ -97,7 +97,7 @@
 		<button
 			on:click={openAssistantChat}
 			style="box-shadow: 0px 2px 15px 0px #9BA1FD82; "
-			class="w-[60%] py-2 rounded-full mx-auto flex flex-row text-[1.2vw]  items-center justify-center font-bold"
+			class="w-[60%] py-[1.5vh] rounded-full mx-auto flex flex-row text-[1.2vw] text-white items-center justify-center font-bold bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD]"
 		>
 			<img class="w-[22%]" src={assistantIcon} alt="Assistant" />
 

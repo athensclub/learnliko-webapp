@@ -30,7 +30,7 @@
 					  ($currentChatboxView === 'CONVERSATION'
 							? 'h-[70vh] bottom-[15vh] right-[3vw]'
 							: 'h-[85vh] bottom-0 left-[50%] translate-x-[-50%]')
-			} z-30`}
+			} z-[600]`}
 		>
 			<Chatbox />
 		</div>

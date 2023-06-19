@@ -9,7 +9,7 @@
 </script>
 
 <!-- Specify the size(width, height) of the card in the user of the component, not in the component itself. -->
-<a href="/read/{item.id}" class={`bg-white shadow-xl rounded-3xl flex flex-col overflow-hidden ${clazz}`}>
+<a href="/read/{item.id}" class={`bg-white shadow-xl rounded-[2vw] flex flex-col overflow-hidden ${clazz}`}>
 	<div
 		style="background-image: url('{item.image}');"
 		class="relative bg-cover bg-center w-full h-[50%]"

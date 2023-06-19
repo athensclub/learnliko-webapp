@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
+	import { isMobile } from '$lib/global/breakpoints';
 	import { chatContext, currentChatboxView, showChatbox } from '$lib/global/chatbox';
 	import type { ConversationCarouselItem, ConversationDetails } from '$lib/types/conversationData';
 	import Typewriter from 'svelte-typewriter/Typewriter.svelte';
@@ -23,7 +24,7 @@
 <!-- Specify the size(width, height) of the card in the user of the component, not in the component itself. -->
 <div
 	style="background-image: url('{conversation.background}');"
-	class={`relative overflow-hidden flex flex-col justify-between shadow-xl bg-center bg-cover rounded-[2vw] ${clazz}`}
+	class={`relative overflow-hidden flex flex-col justify-between shadow-xl bg-center bg-cover rounded-[2vw] ${$isMobile ? 'rounded-[6vw]' : ''} ${clazz}`}
 >
 	<div class="w-full h-[17%] flex flex-row justify-between items-center backdrop-blur-sm bg-black/40 px-[1vw]">
 		<div class="flex flex-row h-full items-center gap-[1vw]">
@@ -51,7 +52,7 @@
 	<div
 		class="w-full h-[30%] flex flex-col justify-between bg-black/40 backdrop-blur-sm px-[1.5vw] py-[2.5vh] text-white [text-1vw] font-bold"
 	>
-		<div class="w-full text-center text-[1.2vw]"><Typewriter  mode=loopRandom>{conversation.topic}</Typewriter></div>
+		<div class={`w-full text-center text-[1.2vw] ${$isMobile ? 'text-[3.2vw]' : ''} ${clazz}`}><Typewriter  mode=loopRandom>{conversation.topic}</Typewriter></div>
 
 		<button
 			{disabled}

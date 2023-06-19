@@ -13,19 +13,34 @@
 		waitingForAIResponse
 	} from '$lib/global/conversation';
 	import Recorder from './Recorder.svelte';
+	import { onMount } from 'svelte';
 
 	let conversationDetails = $chatContext!.conversation.details;
 
+	let clazz = '';
+	export { clazz as class };
+
+	export let initializingClass = '';
+
+	export let aiChatBackgroundColor = '#6C80E8';
+	export let userChatBackgroundColor = '#404040';
+
+	export let recorderClass = '';
+
 	// initialization
-	resetConversationData();
-	initializeConversationBot();
+	onMount(() => {
+		resetConversationData();
+		initializeConversationBot();
+	});
 
 	const showRecap = async () => ($currentChatboxView = 'RECAP');
 </script>
 
 {#if $initializedConversation}
-	<div class="w-full h-full overflow-y-auto text-white">
+	<div class={`w-full h-full overflow-y-auto text-white ${clazz}`}>
 		<VoiceChatHistory
+			aiBackgroundColor={aiChatBackgroundColor}
+			userBackgroundColor={userChatBackgroundColor}
 			history={$history}
 			assistantProfileImage={conversationDetails.bot.avatar}
 			userProfileImage={userImage}
@@ -59,11 +74,11 @@
 		<div class="w-full h-[120px]" />
 	</div>
 {:else}
-	<div class="w-full h-full flex flex-row items-center justify-center text-white">
+	<div class={`w-full h-full flex flex-row items-center justify-center ${initializingClass}`}>
 		Initializing Conversation<Typewriter mode="loop">...</Typewriter>
 	</div>
 {/if}
 
 {#if !$conversationFinished}
-	<Recorder class="absolute bottom-8 w-[calc(100%-48px)] mx-auto" />
+	<Recorder class={`absolute bottom-[3vh] left-[50%] translate-x-[-50%] ${recorderClass}`} />
 {/if}

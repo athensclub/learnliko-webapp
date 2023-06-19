@@ -4,7 +4,7 @@ import { currentMode } from '$lib/global/mode';
 import { get } from 'svelte/store';
 
 export const load: PageServerLoad = async ({ params }) => {
-    const item = await queryReadingItemById(params.id, get(currentMode));
+    const item = await queryReadingItemById(params.id);
     if(!item)
         throw new Error("No reading item with id: " + params.id);
 

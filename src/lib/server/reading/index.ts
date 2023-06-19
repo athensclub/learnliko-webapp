@@ -40,14 +40,15 @@ export const queryReadingItems = async (topic: string, mode: Mode) => {
     return data.default.map(item => item as ReadingItem).filter(item => topic === "All" || item.topic === topic);
 };
 
-export const queryReadingItemById = async (id: string, mode: Mode) => {
-    let data;
-    if (mode === 'Professional') {
-        data = await import('$lib/server/db/reading_data.json');
-    } else if (mode === 'Student') {
-        data = await import('$lib/server/db/reading_data_student.json');
-    } else {
-        throw new Error("Unknown mode: " + mode);
-    }
-    return data.default.map(item => item as ReadingItem).find(item => item.id === id);
+export const queryReadingItemById = async (id: string) => {
+    const data = await allItems();
+    // if (mode === 'Professional') {
+    //     data = await import('$lib/server/db/reading_data.json');
+    // } else if (mode === 'Student') {
+    //     data = await import('$lib/server/db/reading_data_student.json');
+    // } else {
+    //     throw new Error("Unknown mode: " + mode);
+    // }
+    // console.log(data,mode)
+    return data.map(item => item as ReadingItem).find(item => item.id === id);
 }

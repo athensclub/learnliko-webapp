@@ -1,6 +1,10 @@
 <script lang="ts">
 	import AudioPlayer from '../AudioPlayer.svelte';
 	import Typewriter from 'svelte-typewriter';
+
+	export let aiBackgroundColor = '#FFFFFF3D';
+	export let userBackgroundColor = '#FFFFFF3D';
+
 	export let history: {
 		role: 'user' | 'assistant';
 		audioURL: string;
@@ -35,8 +39,9 @@
 			{/if}
 
 			<AudioPlayer
+				style="background-color: {chat.role === 'user' ? userBackgroundColor : aiBackgroundColor};"
 				class={`mx-3 w-[70%] h-[44px] rounded-full ${
-					chat.role === 'user' ? 'backdrop-blur-lg bg-white/20 shadow-lg' : ' backdrop-blur-lg bg-white/20 shadow-lg'
+					chat.role === 'user' ? 'backdrop-blur-lg shadow-lg' : ' backdrop-blur-lg shadow-lg'
 				}`}
 				defaultBlockColor={chat.role === 'user' ? 'white' : 'black'}
 				playedBlockColor={chat.role === 'user' ? 'black' : 'white'}

@@ -27,10 +27,10 @@
 	<NavBar />
 
 	<div
-		class={`fixed ${
+		class={`${
 			$isMobile
-				? 'top-[0] w-[100vw] px-[5vw] py-[1vh] z-[1000] gap-[1.6vh]'
-				: 'top-0 right-0 w-[23vw] h-[100vh] px-[2vw] py-[4vh] gap-[7vh] '
+				? 'sticky top-0 w-[100vw] px-[5vw] py-[1vh] z-[1000] gap-[1.6vh]'
+				: 'fixed top-0 right-0 w-[23vw] h-[100vh] px-[2vw] py-[4vh] gap-[7vh] '
 		} flex flex-col bg-white font-bold`}
 	>
 		{#if $isMobile}

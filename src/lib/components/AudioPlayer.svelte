@@ -16,6 +16,7 @@
 
 	let clazz = '';
 	export { clazz as class };
+	export let style = '';
 
 	let player: HTMLAudioElement | null = null;
 	let currentTime: number;
@@ -103,7 +104,8 @@
 		}
 	};
 	$: if (!Number.isFinite(duration)) {
-		fixDuration();
+		// fix duration when player is bind
+		player, fixDuration();
 	}
 
 	// https://stackoverflow.com/a/1322771
@@ -112,7 +114,7 @@
 		: '00:00';
 </script>
 
-<div class={`flex flex-row items-center px-5 py-1 gap-3 ${clazz}`}>
+<div {style} class={`flex flex-row items-center px-5 py-1 gap-3 ${clazz}`}>
 	<button on:click={togglePlaying} class="h-[50%] flex">
 		{#if playing}
 			<svg

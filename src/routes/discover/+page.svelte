@@ -15,7 +15,7 @@
 
 	let items: DiscoverItem[] = [];
 	const loadData = async () => {
-		if(!browser) return;
+		if (!browser) return;
 		items = await queryDiscoverItemsLocal();
 	};
 
@@ -195,16 +195,16 @@
 		<div class="w-full h-[15vh]" />
 	{/if}
 
-	<div class="flex flex-col w-fit mx-auto gap-[6vh] px-[3vw] py-[6vh]">
+	<div class={`fixed top-0 left-0 w-[100vw] h-[100vh] overflow-y-auto snap-y snap-mandatory ${$isMobile ?'pt-[15vh]':'pt-0'}`}>
 		{#each items as item, index (index)}
 			{#if item.conversation}
 				<ConversationCard
-					class={`${$isMobile ? 'w-[80vw] h-[120vw]' : 'w-[27vw] h-[38vw]'}`}
+					class={`snap-center mx-auto ${$isMobile ? 'w-[80vw] h-[110vw] mt-[5vh]' : 'w-[27vw] h-[38vw] mt-[7vh]'}`}
 					conversation={item.conversation}
 				/>
 			{:else if item.reading}
 				<ReadingCard
-					class={`${$isMobile ? 'w-[80vw] h-[120vw]' : 'w-[27vw] h-[38vw]'}`}
+					class={`snap-center mx-auto ${$isMobile ? 'w-[80vw] h-[110vw] mt-[5vh]' : 'w-[27vw] h-[38vw] mt-[7vh]'}`}
 					item={item.reading}
 				/>
 			{/if}

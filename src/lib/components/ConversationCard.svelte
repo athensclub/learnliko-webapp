@@ -13,11 +13,13 @@
 	let clazz = '';
 	export { clazz as class };
 
-	const openChatbox = () => {
+	const openChatbox = async () => {
+		// navigate first, then set data (to avoid conversation chatbox appearing in other pages).
+		await goto('/conversation/play');
+
 		$chatContext = { conversation, bot: { emotion: 'neutral' } };
 		$currentChatboxView = 'CONVERSATION';
 		$showChatbox = true;
-		goto('/conversation/play');
 	};
 </script>
 

@@ -30,7 +30,7 @@
 		class={`fixed ${
 			$isMobile
 				? 'top-[0] w-[100vw] px-[5vw] py-[1vh] z-[1000] gap-[1.6vh]'
-				: 'top-0 right-0 w-[25vw] h-[100vh] px-[2vw] py-[4vh] gap-[7vh] '
+				: 'top-0 right-0 w-[23vw] h-[100vh] px-[2vw] py-[4vh] gap-[7vh] '
 		} flex flex-col bg-white font-bold`}
 	>
 		{#if $isMobile}
@@ -195,19 +195,27 @@
 		<div class="w-full h-[15vh]" />
 	{/if}
 
-	<div class={`fixed top-0 left-0 w-[100vw] h-[100vh] overflow-y-auto snap-y snap-mandatory ${$isMobile ?'pt-[15vh]':'pt-0'}`}>
-		{#each items as item, index (index)}
-			{#if item.conversation}
-				<ConversationCard
-					class={`snap-center mx-auto ${$isMobile ? 'w-[80vw] h-[110vw] mt-[5vh]' : 'w-[27vw] h-[38vw] mt-[7vh]'}`}
-					conversation={item.conversation}
-				/>
-			{:else if item.reading}
-				<ReadingCard
-					class={`snap-center mx-auto ${$isMobile ? 'w-[80vw] h-[110vw] mt-[5vh]' : 'w-[27vw] h-[38vw] mt-[7vh]'}`}
-					item={item.reading}
-				/>
-			{/if}
-		{/each}
+	<div
+		class={`fixed z-[100] top-0 left-0 w-[100vw] h-[100vh] overflow-y-auto snap-y snap-mandatory pointer-events-none`}
+	>
+		<div class={`pointer-events-auto mx-auto ${$isMobile ? 'w-full py-[15vh]' : 'w-[54vw] pt-0 pb-[10vh]'}`}>
+			{#each items as item, index (index)}
+				{#if item.conversation}
+					<ConversationCard
+						class={`snap-center mx-auto ${
+							$isMobile ? 'w-[80vw] h-[110vw] mt-[5vh]' : 'w-[27vw] h-[38vw] mt-[7vh]'
+						}`}
+						conversation={item.conversation}
+					/>
+				{:else if item.reading}
+					<ReadingCard
+						class={`snap-center mx-auto ${
+							$isMobile ? 'w-[80vw] h-[110vw] mt-[5vh]' : 'w-[27vw] h-[38vw] mt-[7vh]'
+						}`}
+						item={item.reading}
+					/>
+				{/if}
+			{/each}
+		</div>
 	</div>
 </div>

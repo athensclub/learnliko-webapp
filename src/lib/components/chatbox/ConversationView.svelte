@@ -22,11 +22,12 @@
 
 	export let initializingClass = '';
 	export let voiceChatHistoryClass = '';
+	export let recorderClass = '';
+	export let finishButtonClass = '';
 
 	export let aiChatBackgroundColor = '#6C80E8';
 	export let userChatBackgroundColor = '#404040';
 
-	export let recorderClass = '';
 
 	export let onFinishClicked: () => void = () => ($currentChatboxView = 'RECAP');
 
@@ -65,7 +66,7 @@
 
 				<button
 					on:click={onFinishClicked}
-					class="mt-3 rounded-lg w-fit border border-white/[0.15] font-normal text-base mr-4 px-4 py-1"
+					class={`mt-3 rounded-lg w-fit border font-normal text-base mr-4 px-4 py-1 ${finishButtonClass}`}
 				>
 					Finish!
 				</button>

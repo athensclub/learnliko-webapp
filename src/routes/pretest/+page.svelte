@@ -7,6 +7,7 @@
 	import { onMount } from 'svelte';
 	import ImageMatchingQuizView from './ImageMatchingQuizView.svelte';
 	import FillInTheBlankQuizView from './FillInTheBlankQuizView.svelte';
+	import { isMobile } from '$lib/global/breakpoints';
 
 	let items: PretestItem[] = [
 		{
@@ -82,22 +83,28 @@
 		$saveCurrentConversation = false;
 	});
 
-	let currentItem = 1;
+	let currentItem = 0;
 	$: item = items[currentItem];
-	const updateCurrentItem = () => {
+	const updateItem = () => {
 		if (item.conversation) {
 			$chatContext = { conversation: item.conversation, bot: { emotion: 'neutral' } };
 		}
 	};
-	$: currentItem, updateCurrentItem();
+	$: item, updateItem();
 </script>
 
 <div class="w-full h-full min-h-[100vh] bg-[#F4F4F4] flex flex-col font-line-seed">
 	<div
-		class="w-full h-[5.5vw] flex flex-row gap-[4vw] justify-between items-center fixed top-0 left-0 bg-white px-[2vw]"
+		class={`w-full flex flex-row gap-[4vw] justify-between items-center fixed top-0 left-0 bg-white px-[2vw] ${
+			$isMobile ? 'h-[13vw]' : ' h-[5.5vw]'
+		}`}
 	>
-		<div class="flex flex-row font-extrabold text-[2vw] items-center">
-			<img class="w-[3.5vw] object-contain mr-[2vw]" src={icon} alt="Learnliko" />
+		<div
+			class={`flex flex-row h-full font-extrabold items-center ${
+				$isMobile ? 'text-[4vw]' : 'text-[2vw]'
+			}`}
+		>
+			<img class="h-[60%] object-contain mr-[2vw]" src={icon} alt="Learnliko" />
 			Pre-test
 		</div>
 
@@ -110,26 +117,36 @@
 	</div>
 
 	<!-- Top spacing -->
-	<div class="w-full h-[18vh]" />
+	<div class={`w-full ${$isMobile ? 'h-[9vh]' : 'h-[18vh]'}`} />
 
 	{#if item.conversation}
-		<div class="text-[1.75vw] font-bold mx-auto">ฟังสิ่งที่เพื่อนเอไอถามและตอบคำถาม</div>
+		<div class={`font-bold mx-auto ${$isMobile ? 'text-[6vw]' : 'text-[1.75vw]'}`}>
+			ฟังสิ่งที่เพื่อนเอไอถามและตอบคำถาม
+		</div>
 
-		<div class="w-[50vw] h-[60vh] mt-[6vh] mx-auto relative">
+		<div
+			class={`mx-auto relative ${
+				$isMobile ? 'w-[90vw] h-[80vh] mt-[2vh]' : 'w-[50vw] h-[60vh] mt-[6vh]'
+			}`}
+		>
 			<ConversationView
 				onFinishClicked={() => (currentItem = currentItem + 1)}
 				class="bg-white rounded-[2vw] px-[6vw]"
 				initializingClass="bg-white"
-				recorderClass="bg-[#6C80E8] w-[50%]"
+				recorderClass={`bg-[#6C80E8] ${$isMobile ? 'w-[90%]' : 'w-[50%]'}`}
 			/>
 		</div>
 	{:else if item.imageMatching}
-		<div class="text-[1.75vw] font-bold mx-auto">เลือกคำศัพท์ที่ตรงกับรูปภาพ</div>
+		<div class={`font-bold mx-auto ${$isMobile ? 'text-[6vw]' : 'text-[1.75vw]'}`}>
+			เลือกคำศัพท์ที่ตรงกับรูปภาพ
+		</div>
 
 		<ImageMatchingQuizView item={item.imageMatching} />
 	{:else if item.fillInTheBlank}
-		<div class="text-[1.75vw] font-bold mx-auto">เติมคำในช่องว่าง</div>
+		<div class={`font-bold mx-auto ${$isMobile ? 'text-[6vw]' : 'text-[1.75vw]'}`}>
+			เติมคำในช่องว่าง
+		</div>
 
-		<FillInTheBlankQuizView item={item.fillInTheBlank}/>
+		<FillInTheBlankQuizView item={item.fillInTheBlank} />
 	{/if}
 </div>

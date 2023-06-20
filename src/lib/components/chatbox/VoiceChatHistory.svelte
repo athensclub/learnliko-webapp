@@ -5,6 +5,9 @@
 	export let aiBackgroundColor = '#FFFFFF3D';
 	export let userBackgroundColor = '#FFFFFF3D';
 
+	let clazz = '';
+	export { clazz as class };
+
 	export let history: {
 		role: 'user' | 'assistant';
 		audioURL: string;
@@ -18,7 +21,11 @@
 </script>
 
 {#each history as chat, index (index)}
-	<div class={`flex flex-col px-4 w-full ${chat.role === 'user' ? 'items-end' : 'items-start'}`}>
+	<div
+		class={`flex flex-col px-4 w-full ${
+			chat.role === 'user' ? 'items-end' : 'items-start'
+		} ${clazz}`}
+	>
 		<div
 			class={`flex pt-6 flex-row items-center  w-full ${
 				chat.role === 'user' ? 'flex-row-reverse' : ''

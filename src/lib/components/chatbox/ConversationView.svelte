@@ -21,24 +21,26 @@
 	export { clazz as class };
 
 	export let initializingClass = '';
+	export let voiceChatHistoryClass = '';
 
 	export let aiChatBackgroundColor = '#6C80E8';
 	export let userChatBackgroundColor = '#404040';
 
 	export let recorderClass = '';
 
+	export let onFinishClicked: () => void = () => ($currentChatboxView = 'RECAP');
+
 	// initialization
 	onMount(() => {
 		resetConversationData();
 		initializeConversationBot();
 	});
-
-	const showRecap = async () => ($currentChatboxView = 'RECAP');
 </script>
 
 {#if $initializedConversation}
-	<div class={`w-full h-full overflow-y-auto text-white ${clazz}`}>
+	<div class={`w-full h-full overflow-y-auto ${clazz}`}>
 		<VoiceChatHistory
+			class={voiceChatHistoryClass}
 			aiBackgroundColor={aiChatBackgroundColor}
 			userBackgroundColor={userChatBackgroundColor}
 			history={$history}
@@ -62,7 +64,7 @@
 				Conversation Finished
 
 				<button
-					on:click={showRecap}
+					on:click={onFinishClicked}
 					class="mt-3 rounded-lg w-fit border border-white/[0.15] font-normal text-base mr-4 px-4 py-1"
 				>
 					Finish!

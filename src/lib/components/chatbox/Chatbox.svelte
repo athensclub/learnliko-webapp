@@ -16,7 +16,7 @@
 >
 	{#if $currentChatboxView === 'CONVERSATION'}
 		{#if $chatContext}
-			<ConversationView initializingClass="text-white" recorderClass="bg-black/[0.5] backdrop-blur-md w-[90%]" />
+			<ConversationView class="text-white" initializingClass="text-white" recorderClass="bg-black/[0.5] backdrop-blur-md w-[90%]" />
 		{:else}
 			<h3>No Data Available</h3>
 		{/if}

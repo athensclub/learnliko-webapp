@@ -5,6 +5,8 @@
 	import icon from '$lib/images/learnliko_icon.png';
 	import type { PretestItem } from '$lib/types/pretest';
 	import { onMount } from 'svelte';
+	import ImageMatchingQuizView from './ImageMatchingQuizView.svelte';
+	import FillInTheBlankQuizView from './FillInTheBlankQuizView.svelte';
 
 	let items: PretestItem[] = [
 		{
@@ -80,7 +82,7 @@
 		$saveCurrentConversation = false;
 	});
 
-	let currentItem = 0;
+	let currentItem = 1;
 	$: item = items[currentItem];
 	const updateCurrentItem = () => {
 		if (item.conversation) {
@@ -121,5 +123,13 @@
 				recorderClass="bg-[#6C80E8] w-[50%]"
 			/>
 		</div>
+	{:else if item.imageMatching}
+		<div class="text-[1.75vw] font-bold mx-auto">เลือกคำศัพท์ที่ตรงกับรูปภาพ</div>
+
+		<ImageMatchingQuizView item={item.imageMatching} />
+	{:else if item.fillInTheBlank}
+		<div class="text-[1.75vw] font-bold mx-auto">เติมคำในช่องว่าง</div>
+
+		<FillInTheBlankQuizView item={item.fillInTheBlank}/>
 	{/if}
 </div>

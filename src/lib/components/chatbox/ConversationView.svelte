@@ -51,7 +51,7 @@
 		{#if $waitingForAIResponse}
 			<div class="flex flex-row items-center px-4 mt-6">
 				<div
-					class={`mr-2 w-[42px] h-[42px] px-4 bg-center bg-cover rounded-full border border-white`}
+					class={`mr-2 w-[42px] h-[42px] px-4 bg-top bg-cover rounded-full border border-white`}
 					style="background-image: url('{conversationDetails.bot.avatar}');"
 				/>
 				Thinking

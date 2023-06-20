@@ -1,8 +1,10 @@
 <script lang="ts">
 	import ConversationView from '$lib/components/chatbox/ConversationView.svelte';
 	import { chatContext } from '$lib/global/chatbox';
+	import { saveCurrentConversation } from '$lib/global/conversation';
 	import icon from '$lib/images/learnliko_icon.png';
 	import type { PretestItem } from '$lib/types/pretest';
+	import { onMount } from 'svelte';
 
 	let items: PretestItem[] = [
 		{
@@ -73,6 +75,11 @@
 		}
 	];
 
+	// initialization
+	onMount(() => {
+		$saveCurrentConversation = false;
+	});
+
 	let currentItem = 0;
 	$: item = items[currentItem];
 	const updateCurrentItem = () => {
@@ -108,8 +115,9 @@
 
 		<div class="w-[50vw] h-[60vh] mt-[6vh] mx-auto relative">
 			<ConversationView
+				onFinishClicked={() => (currentItem = currentItem + 1)}
 				class="bg-white rounded-[2vw] px-[6vw]"
-                initializingClass="bg-white"
+				initializingClass="bg-white"
 				recorderClass="bg-[#6C80E8] w-[50%]"
 			/>
 		</div>

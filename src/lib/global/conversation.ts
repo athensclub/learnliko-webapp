@@ -31,6 +31,11 @@ export const conversationFinished = writable(false);
 export const currentRecording = writable<{ data: Blob; url: string } | null>(null);
 audioRecording.subscribe(currentRecording.set);
 
+/**
+ * If set to false, recap will not be calculated and the conversation will not be saved in user's diary. Used in pretest.
+ */
+export const saveCurrentConversation = writable(true);
+
 let finishedTime: Date;
 
 /** an array of chatGPT's history in raw data, used for chat completion */
@@ -109,8 +114,10 @@ const botReply = async function (message?: string) {
 				break;
 			case 'END-OF-CONVERSATION':
 				conversationFinished.set(true);
-				finishedTime = new Date();
-				computeRecap();
+				if (get(saveCurrentConversation)) {
+					finishedTime = new Date();
+					computeRecap();
+				}
 				break;
 			default:
 				break;

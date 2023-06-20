@@ -2,8 +2,15 @@
 	import ConfirmModal from '$lib/components/modals/ConfirmModal.svelte';
 	import { isMobile } from '$lib/global/breakpoints';
 	import { chatContext, showChatbox } from '$lib/global/chatbox';
+	import { saveCurrentConversation } from '$lib/global/conversation';
 	import { showModal } from '$lib/global/modal';
+	import { onMount } from 'svelte';
 	import Typewriter from 'svelte-typewriter/Typewriter.svelte';
+
+	// initialization
+	onMount(() => {
+		$saveCurrentConversation = true;
+	});
 
 	const hideConversation = () =>
 		showModal(ConfirmModal, {

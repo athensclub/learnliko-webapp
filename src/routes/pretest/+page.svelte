@@ -112,7 +112,7 @@
 		<div class="flex-1 h-[60%] rounded-full bg-[#F4F4F4] overflow-hidden">
 			<div
 				style="width: {(currentItem / items.length) * 100}%;"
-				class="h-full bg-gradient-to-r from-[#C698FF] to-[#FFD281] rounded-full"
+				class="h-full bg-gradient-to-r from-[#C698FF] to-[#FFD281] rounded-full transition-size"
 			/>
 		</div>
 	</div>

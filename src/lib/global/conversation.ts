@@ -36,6 +36,11 @@ audioRecording.subscribe(currentRecording.set);
  */
 export const saveCurrentConversation = writable(true);
 
+/**
+ * If the number of dialogue (pair of ai/user chat) exceed this amount, 
+ */
+export const maxDialogueCount = writable(1000000)
+
 let finishedTime: Date;
 
 /** an array of chatGPT's history in raw data, used for chat completion */
@@ -107,21 +112,28 @@ const botReply = async function (message?: string) {
 		message = data.message;
 
 		// behavior regarding bot's message status
-		switch (data.status) {
-			case 'NORMAL':
-				break;
-			case 'INAPPROPRIATE':
-				break;
-			case 'END-OF-CONVERSATION':
-				conversationFinished.set(true);
-				if (get(saveCurrentConversation)) {
-					finishedTime = new Date();
-					computeRecap();
-				}
-				break;
-			default:
-				break;
+		if (data.status === 'END-OF-CONVERSATION' || get(history).length >= 2*get(maxDialogueCount)) {
+			conversationFinished.set(true);
+			if (get(saveCurrentConversation)) {
+				finishedTime = new Date();
+				computeRecap();
+			}
 		}
+		// switch (data.status) {
+		// 	case 'NORMAL':
+		// 		break;
+		// 	case 'INAPPROPRIATE':
+		// 		break;
+		// 	case 'END-OF-CONVERSATION':
+		// 		conversationFinished.set(true);
+		// 		if (get(saveCurrentConversation)) {
+		// 			finishedTime = new Date();
+		// 			computeRecap();
+		// 		}
+		// 		break;
+		// 	default:
+		// 		break;
+		// }
 	}
 
 	const audio = await synthesize(

@@ -3,17 +3,25 @@
 	import { chatContext } from '$lib/global/chatbox';
 	import { maxDialogueCount, saveCurrentConversation } from '$lib/global/conversation';
 	import icon from '$lib/images/learnliko_icon.png';
-	import type { PretestCEFRLevel, PretestItem } from '$lib/types/pretest';
-	import { onMount } from 'svelte';
+	import type {
+		FillInTheBlankMultipleChoicesQuestion,
+		ImageMatchingMultipleChoicesQuestion,
+		PretestCEFRLevel,
+		PretestItem
+	} from '$lib/types/pretest';
+	import { getContext, onMount } from 'svelte';
 	import ImageMatchingQuizView from './ImageMatchingQuizView.svelte';
 	import FillInTheBlankQuizView from './FillInTheBlankQuizView.svelte';
 	import { isMobile } from '$lib/global/breakpoints';
-	import { getPretestQuestionGroup } from '$api/pretest';
+	import { getPretestQuestionGroup, getPretestQuizAnswer } from '$api/pretest';
+	import PretestQuizAnsweredModal from '$lib/components/modals/PretestQuizAnsweredModal.svelte';
+	import type { Context } from 'svelte-simple-modal';
 
 	let items: PretestItem[] | null = null;
 
 	let currentLevel: PretestCEFRLevel = 'pre-A1';
 
+	const { open, close }: Context = getContext('simple-modal');
 	// initialization
 	onMount(async () => {
 		$saveCurrentConversation = false;
@@ -34,6 +42,24 @@
 		}
 	};
 	$: item, updateItem();
+
+	const submitAnswer = async (
+		quiz: FillInTheBlankMultipleChoicesQuestion | ImageMatchingMultipleChoicesQuestion,
+		userAnswer: number
+	) => {
+		open(
+			PretestQuizAnsweredModal,
+			{
+				quiz,
+				userAnswer,
+				nextClicked: () => {
+					close();
+					nextItem();
+				}
+			},
+			{ closeButton: false, closeOnEsc: false, closeOnOuterClick: false }
+		);
+	};
 </script>
 
 <div class="w-full h-full min-h-[100vh] bg-[#F4F4F4] flex flex-col font-line-seed">
@@ -85,12 +111,12 @@
 			เลือกคำศัพท์ที่ตรงกับรูปภาพ
 		</div>
 
-		<ImageMatchingQuizView item={item.imageMatching} />
+		<ImageMatchingQuizView submit={submitAnswer} item={item.imageMatching} />
 	{:else if item?.fillInTheBlank}
 		<div class={`font-bold mx-auto ${$isMobile ? 'text-[6vw]' : 'text-[1.75vw]'}`}>
 			เติมคำในช่องว่าง
 		</div>
 
-		<FillInTheBlankQuizView item={item.fillInTheBlank} />
+		<FillInTheBlankQuizView submit={submitAnswer} item={item.fillInTheBlank} />
 	{/if}
 </div>

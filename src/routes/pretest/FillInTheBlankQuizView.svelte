@@ -27,7 +27,7 @@
 		{/each}
 	</div>
 
-	<div class="grid grid-cols-2 gap-[4vw] mt-[10vh]">
+	<div class="grid grid-cols-2 gap-[4vw] mt-[10vh] min-w-[30vw]">
 		{#each item.choices as choice, index (index)}
 			<button
 				on:click={() => submit(item, index)}

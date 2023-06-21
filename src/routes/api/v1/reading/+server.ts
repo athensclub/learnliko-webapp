@@ -18,7 +18,7 @@ export const GET: RequestHandler = async ({ url }) => {
         const result = await queryReadingItems(topic, mode as Mode);
         return json(result);
     } else if (id) {
-        const result = await queryReadingItemById(id, mode as Mode);
+        const result = await queryReadingItemById(id);
         if (!result) {
             throw error(404, "no reading items with id: " + id);
         }

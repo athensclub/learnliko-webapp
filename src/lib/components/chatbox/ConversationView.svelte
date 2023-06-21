@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { audioRecording } from '$lib/global/recording';
+	import { audioRecording, resetRecordingData } from '$lib/global/recording';
 	import { currentChatboxView, chatContext } from '$lib/global/chatbox';
 	import Typewriter from 'svelte-typewriter';
 	import userImage from '$lib/images/sample_kid_image.png';
@@ -13,7 +13,7 @@
 		waitingForAIResponse
 	} from '$lib/global/conversation';
 	import Recorder from './Recorder.svelte';
-	import { onMount } from 'svelte';
+	import { onDestroy, onMount } from 'svelte';
 
 	let conversationDetails = $chatContext!.conversation.details;
 
@@ -28,13 +28,16 @@
 	export let aiChatBackgroundColor = '#6C80E8';
 	export let userChatBackgroundColor = '#404040';
 
-
 	export let onFinishClicked: () => void = () => ($currentChatboxView = 'RECAP');
 
 	// initialization
 	onMount(() => {
 		resetConversationData();
 		initializeConversationBot();
+	});
+
+	onDestroy(() => {
+		resetRecordingData();
 	});
 </script>
 

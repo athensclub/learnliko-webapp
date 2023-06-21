@@ -3,91 +3,33 @@
 	import { chatContext } from '$lib/global/chatbox';
 	import { maxDialogueCount, saveCurrentConversation } from '$lib/global/conversation';
 	import icon from '$lib/images/learnliko_icon.png';
-	import type { PretestItem } from '$lib/types/pretest';
+	import type { PretestCEFRLevel, PretestItem } from '$lib/types/pretest';
 	import { onMount } from 'svelte';
 	import ImageMatchingQuizView from './ImageMatchingQuizView.svelte';
 	import FillInTheBlankQuizView from './FillInTheBlankQuizView.svelte';
 	import { isMobile } from '$lib/global/breakpoints';
+	import { getPretestQuestionGroup } from '$api/pretest';
 
-	let items: PretestItem[] = [
-		{
-			fillInTheBlank: null,
-			imageMatching: null,
-			conversation: {
-				background:
-					'https://assetstorev1-prd-cdn.unity3d.com/package-screenshot/e15c6e4b-b429-4fae-a68e-87e09c141af2_scaled.jpg',
-				image:
-					'https://media.discordapp.net/attachments/1087307553471463514/1103186216712671242/vi_A_girl_shopkeeper_profile_image_3d_stylelize_fortnite_48710422-4877-4262-95a2-66ddfd36ff9d.png?width=1357&height=1357',
-				intro: 'Welcome to the coffee shop, I’m the Barista, What would you like to drink today?',
-				topic: 'Welcome to the coffee shop',
-				CEFRlevel: 'A2',
-				details: {
-					intro: 'Welcome to the coffee shop, What would you like to drink today?',
-					learner: {
-						goal: '1.Ask for drink you would like to order\n2.Order the drink\n3.Making a purchase'
-					},
-					bot: {
-						avatar:
-							'https://cdn.discordapp.com/attachments/842737146321174558/1116747283132842105/avatar.png',
-						accent: 'US',
-						gender: 'FEMALE',
-						prompt:
-							'Your role: You are a female barista at coffee shop, you are kind, and friendly. Your name is Lucy. Your Goal: You have to give customer an information about the drink available in you shop, the sell them to the customer. Answer Format: You have to answer in the JSON format by using to following JSON schema {// your response"message": string,// "neutral", "joy", "trust", "fear", "surprise", "sadness", "disgust", "anger", "anticipation""emotion": string,// the enum value// “NORMAL” used when the situation is normal// “INAPPROPRIATE” used when the situation is out of context or say something inappropriate// “END-OF-CONVERSATION” used when the customer have left or finish purchased your drink"status": string} Shop information: There are only Espresso cost 50฿, Cappuccino cost 40฿ and Matcha Latte cost 60฿.'
-					}
-				},
-				avatar: {
-					name: 'Lucy',
-					models: {
-						neutral:
-							'https://cdn.discordapp.com/attachments/842737146321174558/1116747283132842105/avatar.png',
-						joy: 'https://media.discordapp.net/attachments/1087307553471463514/1118379821488152699/joy.png?width=1170&height=1170',
-						trust:
-							'https://media.discordapp.net/attachments/1087307553471463514/1118379822394122250/trust.png?width=1000&height=1000',
-						fear: 'https://cdn.discordapp.com/attachments/842737146321174558/1116747283132842105/avatar.png',
-						surprise:
-							'https://media.discordapp.net/attachments/1087307553471463514/1118379822155055184/surprise.png?width=1000&height=1000',
-						sadness:
-							'https://media.discordapp.net/attachments/1087307553471463514/1118379821869846548/sad.png?width=1170&height=1170',
-						disgust:
-							'https://media.discordapp.net/attachments/1087307553471463514/1118379821265862686/disgust.png?width=1000&height=1000',
-						anger:
-							'https://media.discordapp.net/attachments/1087307553471463514/1118379820699623564/anger.png?width=1000&height=1000',
-						anticipation:
-							'https://media.discordapp.net/attachments/1087307553471463514/1118379821026791556/anticipation.png?width=1000&height=1000'
-					}
-				},
-				id: '1'
-			}
-		},
-		{
-			conversation: null,
-			fillInTheBlank: null,
-			imageMatching: {
-				image:
-					'https://cdn.discordapp.com/attachments/842737146321174558/1120433057699209236/image.png',
-				choices: ['pen', 'pencil', 'eraser', 'box']
-			}
-		},
-		{
-			conversation: null,
-			fillInTheBlank: {
-				text: ['I', null, 'a student and love to study'],
-				choices: ['am', 'were', 'is', 'are']
-			},
-			imageMatching: null
-		}
-	];
+	let items: PretestItem[] | null = null;
+
+	let currentLevel: PretestCEFRLevel = 'pre-A1';
 
 	// initialization
-	onMount(() => {
+	onMount(async () => {
 		$saveCurrentConversation = false;
 		$maxDialogueCount = 1;
+
+		items = await getPretestQuestionGroup(currentLevel);
 	});
 
 	let currentItem = 0;
-	$: item = items[currentItem];
+	const nextItem = () => {
+		currentItem = currentItem + 1;
+	};
+
+	$: item = items ? items[currentItem] : null;
 	const updateItem = () => {
-		if (item.conversation) {
+		if (item?.conversation) {
 			$chatContext = { conversation: item.conversation, bot: { emotion: 'neutral' } };
 		}
 	};
@@ -111,7 +53,7 @@
 
 		<div class="flex-1 h-[60%] rounded-full bg-[#F4F4F4] overflow-hidden">
 			<div
-				style="width: {(currentItem / items.length) * 100}%;"
+				style="width: {items ? (currentItem / items.length) * 100 : 0}%;"
 				class="h-full bg-gradient-to-r from-[#C698FF] to-[#FFD281] rounded-full transition-size"
 			/>
 		</div>
@@ -120,7 +62,7 @@
 	<!-- Top spacing -->
 	<div class={`w-full ${$isMobile ? 'h-[9vh]' : 'h-[18vh]'}`} />
 
-	{#if item.conversation}
+	{#if item?.conversation}
 		<div class={`font-bold mx-auto ${$isMobile ? 'text-[6vw]' : 'text-[1.75vw]'}`}>
 			ฟังสิ่งที่เพื่อนเอไอถามและตอบคำถาม
 		</div>
@@ -131,20 +73,20 @@
 			}`}
 		>
 			<ConversationView
-				onFinishClicked={() => (currentItem = currentItem + 1)}
+				onFinishClicked={nextItem}
 				class="bg-white rounded-[2vw] px-[6vw]"
 				initializingClass="bg-white"
 				finishButtonClass="border-black"
 				recorderClass={`bg-[#6C80E8] ${$isMobile ? 'w-[90%]' : 'w-[50%]'}`}
 			/>
 		</div>
-	{:else if item.imageMatching}
+	{:else if item?.imageMatching}
 		<div class={`font-bold mx-auto ${$isMobile ? 'text-[6vw]' : 'text-[1.75vw]'}`}>
 			เลือกคำศัพท์ที่ตรงกับรูปภาพ
 		</div>
 
 		<ImageMatchingQuizView item={item.imageMatching} />
-	{:else if item.fillInTheBlank}
+	{:else if item?.fillInTheBlank}
 		<div class={`font-bold mx-auto ${$isMobile ? 'text-[6vw]' : 'text-[1.75vw]'}`}>
 			เติมคำในช่องว่าง
 		</div>

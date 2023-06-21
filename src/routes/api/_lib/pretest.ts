@@ -5,3 +5,9 @@ export const getPretestQuestionGroup = async (level: PretestCEFRLevel): Promise<
     const val = await result.json();
     return val;
 }
+
+export const getPretestQuizAnswer = async (id: string): Promise<number> => {
+    const result = await fetch('/api/v1/pretest/answer?' + new URLSearchParams({ id }), { method: 'GET' });
+    const val = await result.json();
+    return val;
+}

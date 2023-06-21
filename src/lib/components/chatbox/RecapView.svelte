@@ -1,16 +1,18 @@
 <script lang="ts">
 	import { chatContext, currentChatboxView, recapHistory, showChatbox } from '$lib/global/chatbox';
 	import ConfirmModal from '$lib/components/modals/ConfirmModal.svelte';
-	import { showModal } from '$lib/global/modal';
 	import DialogueCard from './DialogueCard.svelte';
 	import { round } from '$lib/utils/math';
 	import Typewriter from 'svelte-typewriter/Typewriter.svelte';
+	import type { Context } from 'svelte-simple-modal';
+	import { getContext } from 'svelte';
 
 	// we have to wait for recapHistory to finish loading.
 	$: totalScore = $recapHistory ? $recapHistory.map((x) => x.score).reduce((x, y) => x + y, 0) : 0;
 
+	const { open }: Context = getContext('simple-modal');
 	const hide = () =>
-		showModal(ConfirmModal, {
+		open(ConfirmModal, {
 			title: 'Confirm',
 			description: 'Are you sure you want to end the recap?',
 			onConfirm: () => {

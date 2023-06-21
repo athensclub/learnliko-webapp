@@ -1,27 +1,20 @@
 <script lang="ts">
-	import Header from '$lib/components/Header.svelte';
-	import chatBubbleImage from '$lib/images/chat_bubble_gradient.png';
-	import blueBookImage from '$lib/images/blue_book.png';
-	import profileImage from '$lib/images/sample_kid_image.png';
 	import userProfileImage from '$lib/images/sample_kid_image.png';
 	import { getCurrentCEFRLevel, queryLearningDiariesLocal } from '$lib/localdb/profileLocal';
-	import { onMount } from 'svelte';
-	import type { LearnedConversationItem, LearningDiaryItem } from '$lib/types/learningDiary';
-	import ConversationCard from '$lib/components/ConversationCard.svelte';
-	import { formatAMPM } from '$lib/utils/time';
-	import { chatContext, currentChatboxView, recapHistory, showChatbox } from '$lib/global/chatbox';
-	import ReadMore from '$lib/components/ReadMore.svelte';
+	import { getContext, onMount } from 'svelte';
+	import type { LearningDiaryItem } from '$lib/types/learningDiary';
 	import NavBar from '$lib/components/navbar/NavBar.svelte';
-	import { showModal } from '$lib/global/modal';
 	import LearningDiaryModal from '$lib/components/modals/LearningDiaryModal.svelte';
 	import { isMobile } from '$lib/global/breakpoints';
+	import type { Context } from 'svelte-simple-modal';
 
 	let name = 'Natsataporn M.';
 	let learningDiaries: LearningDiaryItem[] | null = null;
 	let CEFRLevel: string = '';
 
+	const { open }: Context = getContext('simple-modal');
 	const showDiary = (item: LearningDiaryItem) => {
-		showModal(LearningDiaryModal, { item });
+		open(LearningDiaryModal, { item });
 	};
 
 	const goBack = () => {
@@ -48,7 +41,12 @@
 			class="sticky top-0 w-[100vw] px-[6vw] py-[2vh]"
 		>
 			<button on:click={goBack} class="flex flex-row items-center font-bold text-[6vw]">
-				<svg class="w-[8vw] mr-[4vw]" viewBox="0 0 34 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<svg
+					class="w-[8vw] mr-[4vw]"
+					viewBox="0 0 34 24"
+					fill="none"
+					xmlns="http://www.w3.org/2000/svg"
+				>
 					<path
 						d="M32 13.5C32.8284 13.5 33.5 12.8284 33.5 12C33.5 11.1716 32.8284 10.5 32 10.5L32 13.5ZM0.939339 10.9393C0.353552 11.5251 0.353552 12.4749 0.939339 13.0607L10.4853 22.6066C11.0711 23.1924 12.0208 23.1924 12.6066 22.6066C13.1924 22.0208 13.1924 21.0711 12.6066 20.4853L4.12132 12L12.6066 3.51472C13.1924 2.92893 13.1924 1.97918 12.6066 1.3934C12.0208 0.80761 11.0711 0.80761 10.4853 1.3934L0.939339 10.9393ZM32 10.5L2 10.5L2 13.5L32 13.5L32 10.5Z"
 						fill="black"

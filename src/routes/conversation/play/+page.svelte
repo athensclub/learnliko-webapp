@@ -3,8 +3,8 @@
 	import { isMobile } from '$lib/global/breakpoints';
 	import { chatContext, showChatbox } from '$lib/global/chatbox';
 	import { maxDialogueCount, saveCurrentConversation } from '$lib/global/conversation';
-	import { showModal } from '$lib/global/modal';
-	import { onMount } from 'svelte';
+	import { getContext, onMount } from 'svelte';
+	import type { Context } from 'svelte-simple-modal';
 	import Typewriter from 'svelte-typewriter/Typewriter.svelte';
 
 	// initialization
@@ -13,8 +13,9 @@
 		$maxDialogueCount = 1000000;
 	});
 
+	const { open }: Context = getContext('simple-modal');
 	const hideConversation = () =>
-		showModal(ConfirmModal, {
+		open(ConfirmModal, {
 			title: 'Confirm',
 			description: 'Are you sure you want to finish this conversation?',
 			onConfirm: () => {

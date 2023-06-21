@@ -1,11 +1,12 @@
 <script lang="ts">
 	import { showChatbox } from '$lib/global/chatbox';
-	import { showModal } from '$lib/global/modal';
 	import ConfirmModal from '../modals/ConfirmModal.svelte';
 	import assistantProfileImage from '$lib/images/assistant.png';
 	import userProfileImage from '$lib/images/sample_kid_image.png';
 	import { assistantChat } from '$api/conversation';
 	import type { ChatMessage } from '$lib/types/requests/chatCompletion';
+	import type { Context } from 'svelte-simple-modal';
+	import { getContext } from 'svelte';
 
 	let history: ChatMessage[];
 
@@ -56,8 +57,9 @@
 	};
 	$: currentLanguage, updateCurrentLanguage();
 
+	const { open }: Context = getContext('simple-modal');
 	const hide = () =>
-		showModal(ConfirmModal, {
+		open(ConfirmModal, {
 			title: 'Confirm',
 			description: 'Are you sure you want to finish this conversation?',
 			onConfirm: () => ($showChatbox = false)

@@ -1,5 +1,7 @@
 import type { ConversationCarouselItem } from "./conversationData";
 
+export type PretestCEFRLevel = 'pre-A1';
+
 /**
  * There must be only one non-null field.
  */
@@ -15,9 +17,11 @@ export interface FillInTheBlankMultipleChoicesQuestion {
      */
     text: (string | null)[];
     choices: string[];
+    id: string;
 }
 
 export interface ImageMatchingMultipleChoicesQuestion {
     image: string;
     choices: string[];
+    id: string;
 }

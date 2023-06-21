@@ -1,11 +1,10 @@
 <script>
-	import '../app.css';
+	import '../app.scss';
 	import Chatbox from '$lib/components/chatbox/Chatbox.svelte';
 	import { currentChatboxView, showChatbox } from '$lib/global/chatbox';
 	import { onMount } from 'svelte';
 	import { initializeAudioRecording, resetRecordingData } from '$lib/global/recording';
 	import Modal from 'svelte-simple-modal';
-	import { modal } from '$lib/global/modal';
 	import { browser } from '$app/environment';
 	import { isMobile } from '$lib/global/breakpoints';
 
@@ -19,8 +18,6 @@
 </script>
 
 <div class="w-full max-w-[100vw] h-full overflow-x-hidden">
-	<slot />
-
 	{#if $showChatbox}
 		<div
 			class={`fixed ${
@@ -37,6 +34,8 @@
 	{/if}
 
 	{#if browser}
-		<Modal show={$modal} />
+		<Modal>
+			<slot />
+		</Modal>
 	{/if}
 </div>

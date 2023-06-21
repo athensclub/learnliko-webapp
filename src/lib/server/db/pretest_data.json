@@ -457,5 +457,159 @@
 				"answer": 3
 			}
 		]
+	},
+	"B1": {
+		"conversation": [
+			{
+				"details": {
+					"intro": "Why you’re not convinced by that design?",
+					"bot": {
+						"avatar": "https://cdn.discordapp.com/attachments/842737146321174558/1116747283132842105/avatar.png",
+						"accent": "US",
+						"gender": "FEMALE",
+						"prompt": "Your role: Your name is Lucy. You are a conversation partner to the user, who is praticing English conversation. Your Goal: Have a conversation with user. Answer Format: You have to answer in the JSON format by using to following JSON schema {// your response\"message\": string,// \"neutral\", \"joy\", \"trust\", \"fear\", \"surprise\", \"sadness\", \"disgust\", \"anger\", \"anticipation\"\"emotion\": string,// the enum value// “NORMAL” used when the situation is normal// “INAPPROPRIATE” used when the situation is out of context or say something inappropriate// “END-OF-CONVERSATION” used when the user has finished the conversation."
+					}
+				},
+				"avatar": {
+					"name": "Lucy",
+					"models": {
+						"neutral": "https://cdn.discordapp.com/attachments/842737146321174558/1116747283132842105/avatar.png"
+					}
+				}
+			},
+			{
+				"details": {
+					"intro": "Morning Noelia. So, what's new?",
+					"bot": {
+						"avatar": "https://cdn.discordapp.com/attachments/842737146321174558/1116747283132842105/avatar.png",
+						"accent": "US",
+						"gender": "FEMALE",
+						"prompt": "Your role: Your name is Lucy. You are a conversation partner to the user, who is praticing English conversation. Your Goal: Have a conversation with user. Answer Format: You have to answer in the JSON format by using to following JSON schema {// your response\"message\": string,// \"neutral\", \"joy\", \"trust\", \"fear\", \"surprise\", \"sadness\", \"disgust\", \"anger\", \"anticipation\"\"emotion\": string,// the enum value// “NORMAL” used when the situation is normal// “INAPPROPRIATE” used when the situation is out of context or say something inappropriate// “END-OF-CONVERSATION” used when the user has finished the conversation."
+					}
+				},
+				"avatar": {
+					"name": "Lucy",
+					"models": {
+						"neutral": "https://cdn.discordapp.com/attachments/842737146321174558/1116747283132842105/avatar.png"
+					}
+				}
+			},
+			{
+				"details": {
+					"intro": "How about you, Noelia? How's it going?",
+					"bot": {
+						"avatar": "https://cdn.discordapp.com/attachments/842737146321174558/1116747283132842105/avatar.png",
+						"accent": "US",
+						"gender": "FEMALE",
+						"prompt": "Your role: Your name is Lucy. You are a conversation partner to the user, who is praticing English conversation. Your Goal: Have a conversation with user. Answer Format: You have to answer in the JSON format by using to following JSON schema {// your response\"message\": string,// \"neutral\", \"joy\", \"trust\", \"fear\", \"surprise\", \"sadness\", \"disgust\", \"anger\", \"anticipation\"\"emotion\": string,// the enum value// “NORMAL” used when the situation is normal// “INAPPROPRIATE” used when the situation is out of context or say something inappropriate// “END-OF-CONVERSATION” used when the user has finished the conversation."
+					}
+				},
+				"avatar": {
+					"name": "Lucy",
+					"models": {
+						"neutral": "https://cdn.discordapp.com/attachments/842737146321174558/1116747283132842105/avatar.png"
+					}
+				}
+			},
+			{
+				"details": {
+					"intro": "Yes! I won the award!",
+					"bot": {
+						"avatar": "https://cdn.discordapp.com/attachments/842737146321174558/1116747283132842105/avatar.png",
+						"accent": "US",
+						"gender": "FEMALE",
+						"prompt": "Your role: Your name is Lucy. You are a conversation partner to the user, who is praticing English conversation. Your Goal: Have a conversation with user. Answer Format: You have to answer in the JSON format by using to following JSON schema {// your response\"message\": string,// \"neutral\", \"joy\", \"trust\", \"fear\", \"surprise\", \"sadness\", \"disgust\", \"anger\", \"anticipation\"\"emotion\": string,// the enum value// “NORMAL” used when the situation is normal// “INAPPROPRIATE” used when the situation is out of context or say something inappropriate// “END-OF-CONVERSATION” used when the user has finished the conversation."
+					}
+				},
+				"avatar": {
+					"name": "Lucy",
+					"models": {
+						"neutral": "https://cdn.discordapp.com/attachments/842737146321174558/1116747283132842105/avatar.png"
+					}
+				}
+			},
+			{
+				"details": {
+					"intro": "Which is more important to you: money or happiness?",
+					"bot": {
+						"avatar": "https://cdn.discordapp.com/attachments/842737146321174558/1116747283132842105/avatar.png",
+						"accent": "US",
+						"gender": "FEMALE",
+						"prompt": "Your role: Your name is Lucy. You are a conversation partner to the user, who is praticing English conversation. Your Goal: Have a conversation with user. Answer Format: You have to answer in the JSON format by using to following JSON schema {// your response\"message\": string,// \"neutral\", \"joy\", \"trust\", \"fear\", \"surprise\", \"sadness\", \"disgust\", \"anger\", \"anticipation\"\"emotion\": string,// the enum value// “NORMAL” used when the situation is normal// “INAPPROPRIATE” used when the situation is out of context or say something inappropriate// “END-OF-CONVERSATION” used when the user has finished the conversation."
+					}
+				},
+				"avatar": {
+					"name": "Lucy",
+					"models": {
+						"neutral": "https://cdn.discordapp.com/attachments/842737146321174558/1116747283132842105/avatar.png"
+					}
+				}
+			}
+		],
+		"writing": [
+			{
+				"text": ["What time", null],
+				"choices": ["is the first train leaving", "does the first train leaving", "are this train leaving", "are those train leaving"],
+				"id": "31",
+				"answer": 0
+			},
+			{
+				"text": ["now, I", null, "another movie."],
+				"choices": ["watching", "watch", "am watching", "been watching"],
+				"id": "32",
+				"answer": 2
+			},
+			{
+				"text": ["you look worried. what", null, "?"],
+				"choices": ["do you think", "are you thinking", "did you think", "being thinking"],
+				"id": "33",
+				"answer": 1
+			},
+			{
+				"text": ["She has been sleeping", null, "ten hours"],
+				"choices": ["while", "for", "during", "since"],
+				"id": "34",
+				"answer": 1
+			},
+			{
+				"text": ["We should travel", null, "we are still young"],
+				"choices": ["while", "for", "since", "during"],
+				"id": "35",
+				"answer": 0
+			}
+		]
+		,
+		"vocab": [
+			{
+				"image": "https://cdn.discordapp.com/attachments/1120787872379842711/1121124787784274040/vi_capital_city_new_York_7b1ddf5c-2cb0-46a9-9ea8-2184bc4e58de.png",
+				"choices": ["Capital city", "Bookshop", "Balcony", "Ballet"],
+				"id": "36",
+				"answer": 0
+			},
+			{
+				"image": "https://cdn.discordapp.com/attachments/1120787872379842711/1121124787356434503/vi_envelope_classic_simplify_3e805272-700d-464b-b05b-c27fb6c5a430.png",
+				"choices": ["Envelope", "Paper", "Logo", "Board"],
+				"id": "37",
+				"answer": 1
+			},
+			{
+				"image": "https://cdn.discordapp.com/attachments/1120787872379842711/1121124786626646126/vi_library_wooden_green_light_lamps_59c73e66-e963-4fee-a8a3-629ad027c92d.png",
+				"choices": ["Ink", "Ice skate", "Omelette", "Library"],
+				"id": "38",
+				"answer": 3
+			},
+			{
+				"image": "https://cdn.discordapp.com/attachments/1120787872379842711/1121124786203005118/vi_kettle_digital_paint_04041a1d-a736-4413-9fc5-33957d2bd7e4.png",
+				"choices": ["Kettle", "Air conditioner", "Pan", "Tea cup"],
+				"id": "39",
+				"answer": 0
+			},
+			{
+				"image": "https://cdn.discordapp.com/attachments/1120787872379842711/1121124785720655983/vi_dining_room_gibli_Style_4705cd1e-64be-4657-9804-78d37b2a4001.png",
+				"choices": ["Dining room", "Restroom", "Bedroom", "Bedroom"],
+				"id": "40",
+				"answer": 0
+			}
+		]
 	}
 }

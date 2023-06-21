@@ -3,6 +3,7 @@
 	import type { FillInTheBlankMultipleChoicesQuestion } from '$lib/types/pretest';
 
 	export let item: FillInTheBlankMultipleChoicesQuestion;
+	export let submit: (quiz: FillInTheBlankMultipleChoicesQuestion, index: number) => void;
 </script>
 
 <div class={`flex flex-col mx-auto ${$isMobile ? 'mt-[6vh]' : 'mt-[4vh]'}`}>
@@ -29,6 +30,7 @@
 	<div class="grid grid-cols-2 gap-[4vw] mt-[10vh]">
 		{#each item.choices as choice, index (index)}
 			<button
+				on:click={() => submit(item, index)}
 				class={`w-full rounded-full border-[0.25vw] border-[#6C80E8] hover:bg-[#6C80E8] hover:text-white bg-white text-black ${
 					$isMobile ? 'min-h-[13vw] text-[5vw]' : 'min-h-[5vw] text-[1.7vw]'
 				}`}

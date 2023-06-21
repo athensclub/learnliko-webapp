@@ -9,10 +9,19 @@ export const queryPretestQuestionGroup = async (level: PretestCEFRLevel): Promis
     const data = await import('$lib/server/db/pretest_data.json');
     const items = data.default[level];
 
-    const result: PretestItem[] = [...shuffle(items.writing).map(val => ({
+    const result: PretestItem[] = [{
+        conversation: shuffle(items.conversation)[0],
+        imageMatching: null,
+        fillInTheBlank: null
+    }, ...shuffle(items.writing).map(val => ({
         conversation: null,
         imageMatching: null,
         fillInTheBlank: { ...val, answer: undefined }
+    })).slice(0, 3),
+    ...shuffle(items.vocab).map(val => ({
+        conversation: null,
+        imageMatching: { ...val, answer: undefined },
+        fillInTheBlank: null
     })).slice(0, 3)];
     return result;
 }
@@ -22,9 +31,13 @@ export const queryPretestQuizAnswer = async (id: string) => {
     for (const key in data.default) {
         const current = data.default[key as PretestCEFRLevel];
 
-        let val = current.writing.find(item => item.id === id);
-        if (val)
-            return val.answer;
+        const temp = current.writing.find(item => item.id === id);
+        if (temp)
+            return temp.answer;
+
+        const temp2 = current.vocab.find(item => item.id === id);
+        if (temp2)
+            return temp2.answer;
     }
     throw new Error("Pretest Quiz with unknown id: " + id);
 };

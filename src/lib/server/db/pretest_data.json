@@ -1,0 +1,33 @@
+{
+	"pre-A1": {
+		"conversation": [],
+		"writing": [
+			{
+				"text": ["he", null, "bananas"],
+				"choices": ["eats", "drinks", "sleep", "play"],
+				"id": "1"
+			},
+			{
+				"text": ["who", "is", null, "jacket"],
+				"choices": ["do", "wear", "write", "walk"],
+				"id": "2"
+			},
+			{
+				"text": ["I", "play", null],
+				"choices": ["dinner", "horses", "baseball", "zoo"],
+				"id": "3"
+			},
+			{
+				"text": ["Mark", null, "picture"],
+				"choices": ["do", "sing", "draw", "write"],
+				"id": "4"
+			},
+			{
+				"text": ["I", "go", "to", null, "at", "night"],
+				"choices": ["sleep", "zoo", "ride", "play"],
+				"id": "5"
+			}
+		],
+		"vocab": []
+	}
+}

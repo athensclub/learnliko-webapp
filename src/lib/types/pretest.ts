@@ -1,6 +1,6 @@
 import type { ConversationCarouselItem } from "./conversationData";
 
-export type PretestCEFRLevel = 'pre-A1' | 'A1' | 'A2' | 'B1';
+export type PretestCEFRLevel = 'pre-A1' | 'A1' | 'A2' | 'B1' | 'B2';
 
 /**
  * There must be only one non-null field.

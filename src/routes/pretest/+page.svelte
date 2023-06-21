@@ -13,13 +13,13 @@
 	import ImageMatchingQuizView from './ImageMatchingQuizView.svelte';
 	import FillInTheBlankQuizView from './FillInTheBlankQuizView.svelte';
 	import { isMobile } from '$lib/global/breakpoints';
-	import { getPretestQuestionGroup, getPretestQuizAnswer } from '$api/pretest';
+	import { getPretestQuestionGroup } from '$api/pretest';
 	import PretestQuizAnsweredModal from '$lib/components/modals/PretestQuizAnsweredModal.svelte';
 	import type { Context } from 'svelte-simple-modal';
 
 	let items: PretestItem[] | null = null;
 
-	let currentLevel: PretestCEFRLevel = 'pre-A1';
+	let currentLevel: PretestCEFRLevel = 'A1';
 
 	const { open, close }: Context = getContext('simple-modal');
 	// initialization

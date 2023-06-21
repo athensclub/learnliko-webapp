@@ -28,6 +28,7 @@ export const queryPretestQuestionGroup = async (level: PretestCEFRLevel): Promis
 
 export const queryPretestQuizAnswer = async (id: string) => {
     const data = await import('$lib/server/db/pretest_data.json');
+    // assuming that writing item id never conflict with vocab item id
     for (const key in data.default) {
         const current = data.default[key as PretestCEFRLevel];
 

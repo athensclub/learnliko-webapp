@@ -13,7 +13,9 @@
 	>
 		{#each item.text as t, index (index)}
 			{#if t}
-				{t}
+				<div class="inline-block mx-[0.7vw]">
+					{t}
+				</div>
 			{:else}
 				<div
 					class={`inline-block align-bottom rounded-[1vw] border border-[#00000033] bg-white ${

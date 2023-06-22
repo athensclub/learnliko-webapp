@@ -9,16 +9,18 @@ interface UserSessionData {
 	profile?: UserProfile | null;
 }
 
-const userSession = writable<UserSessionData>({
+const userSessionStore = writable<UserSessionData>({
 	initialized: false,
 	isLoggedIn: false
 });
 
-export default {
-	subscribe: userSession.subscribe,
-	set: userSession.set,
+const userSession = {
+	subscribe: userSessionStore.subscribe,
+	set: userSessionStore.set,
 	update: (data: UserSessionData) => {
-		userSession.set({ ...get(userSession), ...data });
+		userSessionStore.set({ ...get(userSessionStore), ...data });
 	},
-	value: () => get(userSession)
+	value: () => get(userSessionStore)
 };
+
+export default userSession;

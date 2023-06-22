@@ -13,7 +13,11 @@
 	import { goto } from '$app/navigation';
 	import { getCurrentUserProfile } from '$lib/temp/user';
 
+	let loading = true;
+
 	const OnAuthStateChanged = async function (user: User | null) {
+		loading = true;
+
 		userSession.set({
 			initialized: false,
 			isLoggedIn: user !== null,
@@ -28,11 +32,10 @@
 			} else {
 				userSession.update({ profile: profileData });
 			}
-		} else {
-			goto('/');
 		}
 
 		userSession.update({ initialized: true });
+		loading = false;
 	};
 
 	onMount(() => {
@@ -65,7 +68,9 @@
 
 	{#if browser}
 		<Modal>
-			<slot />
+			{#if !loading}
+				<slot />
+			{/if}
 		</Modal>
 	{/if}
 </div>

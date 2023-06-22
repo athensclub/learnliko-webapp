@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import '../app.scss';
 	import Chatbox from '$lib/components/chatbox/Chatbox.svelte';
 	import { currentChatboxView, showChatbox } from '$lib/global/chatbox';
@@ -7,9 +7,30 @@
 	import Modal from 'svelte-simple-modal';
 	import { browser } from '$app/environment';
 	import { isMobile } from '$lib/global/breakpoints';
+	import { auth } from '$lib/configs/firebase.config';
+	import type { User } from 'firebase/auth';
+	import userSession from '$lib/stores/userSession';
+	import { goto } from '$app/navigation';
+
+	const OnAuthStateChanged = async function (user: User | null) {
+		$userSession = {
+			initialized: true,
+			isLoggedIn: user !== null,
+			authUser: user
+		};
+
+		if (!$userSession.isLoggedIn) {
+			goto('/');
+		}else{
+			goto('/get-started');
+		}
+	};
 
 	onMount(() => {
 		initializeAudioRecording();
+
+		// Subscribe on firebase auth state change
+		auth.onAuthStateChanged(OnAuthStateChanged);
 	});
 
 	$: if (!$showChatbox) {

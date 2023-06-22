@@ -1,7 +1,12 @@
 <script lang="ts">
 	import ConversationView from '$lib/components/chatbox/ConversationView.svelte';
 	import { chatContext } from '$lib/global/chatbox';
-	import { maxDialogueCount, saveCurrentConversation } from '$lib/global/conversation';
+	import {
+		conversationFinished,
+		history,
+		maxDialogueCount,
+		saveCurrentConversation
+	} from '$lib/global/conversation';
 	import icon from '$lib/images/learnliko_icon.png';
 	import type {
 		FillInTheBlankMultipleChoicesQuestion,
@@ -16,6 +21,18 @@
 	import { getPretestQuestionGroup } from '$api/pretest';
 	import PretestQuizAnsweredModal from '$lib/components/modals/PretestQuizAnsweredModal.svelte';
 	import type { Context } from 'svelte-simple-modal';
+	import Typewriter from 'svelte-typewriter/Typewriter.svelte';
+	import { analyzeDialog } from '$api/conversation';
+	import { nextLevel, nextPretestLevel, previousPretestLevel } from '$lib/utils/cefr';
+	import { createUserAccount } from '$lib/temp/user';
+	import PretestFinishedModal from '$lib/components/modals/PretestFinishedModal.svelte';
+
+	const GROUP_COUNT = 4;
+	const QUESTIONS_PER_GROUP = 7;
+	const TOTAL_QUESTIONS = GROUP_COUNT * QUESTIONS_PER_GROUP;
+
+	// full score 100%: conversation 30%, writing 40%, vocabs 30%
+	let currentScore = 0;
 
 	let items: PretestItem[] | null = null;
 
@@ -30,12 +47,53 @@
 		items = await getPretestQuestionGroup(currentLevel);
 	});
 
+	let currentGroup = 0;
 	let currentItem = 0;
-	const nextItem = () => {
+	/**
+	 * Note that we should always update score first before going to next item.
+	 */
+	const nextItem = async () => {
+		if (!items) throw new Error('Call nextItem when items is null.');
+
 		currentItem = currentItem + 1;
+		// if end of current group
+		if (currentItem - QUESTIONS_PER_GROUP * currentGroup >= items.length) {
+			// set null to show loading
+			items = null;
+
+			// finish pretest
+			if (currentGroup + 1 >= GROUP_COUNT) {
+				if (currentScore < 80) currentLevel = previousPretestLevel(currentLevel);
+				await createUserAccount({
+					CEFRLevel: {
+						general: currentLevel,
+						communication: currentLevel,
+						grammar: currentLevel,
+						vocabulary: currentLevel
+					},
+					mode: 'Student'
+				});
+				open(
+					PretestFinishedModal,
+					{ level: currentLevel },
+					{ closeButton: false, closeOnEsc: false, closeOnOuterClick: false }
+				);
+				return;
+			}
+
+			if (currentScore >= 80) {
+				currentLevel = nextPretestLevel(currentLevel);
+			} else {
+				currentLevel = previousPretestLevel(currentLevel);
+			}
+
+			currentGroup = currentGroup + 1;
+			currentScore = 0;
+			items = await getPretestQuestionGroup(currentLevel);
+		}
 	};
 
-	$: item = items ? items[currentItem] : null;
+	$: item = items ? items[currentItem % QUESTIONS_PER_GROUP] : null;
 	const updateItem = () => {
 		if (item?.conversation) {
 			$chatContext = { conversation: item.conversation, bot: { emotion: 'neutral' } };
@@ -55,11 +113,30 @@
 				nextClicked: () => {
 					close();
 					nextItem();
+				},
+				onUserCorrect: () => {
+					if (item?.fillInTheBlank) currentScore = currentScore + (1 / 3) * 40;
+					else if (item?.imageMatching) currentScore = currentScore + (1 / 3) * 30;
 				}
 			},
 			{ closeButton: false, closeOnEsc: false, closeOnOuterClick: false }
 		);
 	};
+
+	let calculatingConversationScore = false;
+	const updateConversationFinished = async () => {
+		if ($conversationFinished) {
+			calculatingConversationScore = true;
+
+			const result = await analyzeDialog($history[0].transcription!, $history[1].transcription!);
+			currentScore = currentScore + result.overallScore * 30;
+
+			calculatingConversationScore = false;
+		}
+	};
+	$: $conversationFinished, updateConversationFinished();
+
+	$: console.log('currentScore', currentScore);
 </script>
 
 <div class="w-full h-full min-h-[100vh] bg-[#F4F4F4] flex flex-col font-line-seed">
@@ -79,7 +156,7 @@
 
 		<div class="flex-1 h-[60%] rounded-full bg-[#F4F4F4] overflow-hidden">
 			<div
-				style="width: {items ? (currentItem / items.length) * 100 : 0}%;"
+				style="width: {(currentItem / TOTAL_QUESTIONS) * 100}%;"
 				class="h-full bg-gradient-to-r from-[#C698FF] to-[#FFD281] rounded-full transition-size"
 			/>
 		</div>
@@ -99,12 +176,28 @@
 			}`}
 		>
 			<ConversationView
-				onFinishClicked={nextItem}
 				class="bg-white rounded-[2vw] px-[6vw]"
 				initializingClass="bg-white"
 				finishButtonClass="border-black"
 				recorderClass={`bg-[#6C80E8] ${$isMobile ? 'w-[90%]' : 'w-[50%]'}`}
-			/>
+			>
+				<div slot="finished" class="w-full text-center flex flex-col mt-4 items-center font-bold">
+					{#if calculatingConversationScore}
+						<div class="flex flex-row">
+							Loading<Typewriter mode="loop">...</Typewriter>
+						</div>
+					{:else}
+						Conversation Finished
+
+						<button
+							on:click={nextItem}
+							class={`mt-3 rounded-lg w-fit border font-normal text-base mr-4 px-4 py-1`}
+						>
+							Finish!
+						</button>
+					{/if}
+				</div>
+			</ConversationView>
 		</div>
 	{:else if item?.imageMatching}
 		<div class={`font-bold mx-auto ${$isMobile ? 'text-[6vw]' : 'text-[1.75vw]'}`}>
@@ -118,5 +211,9 @@
 		</div>
 
 		<FillInTheBlankQuizView submit={submitAnswer} item={item.fillInTheBlank} />
+	{:else}
+		<div class="flex flex-row mx-auto text-[2.5vw]">
+			Loading. Please wait<Typewriter mode="loop">...</Typewriter>
+		</div>
 	{/if}
 </div>

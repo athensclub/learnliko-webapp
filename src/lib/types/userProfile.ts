@@ -9,5 +9,4 @@ export interface UserProfile {
 		grammar: CEFRLevel;
 		vocabulary: CEFRLevel;
 	};
-	uid: string;
 }

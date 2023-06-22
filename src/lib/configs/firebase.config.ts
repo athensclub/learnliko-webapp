@@ -1,6 +1,7 @@
 import { isOnProduction } from '$lib/utils/environment';
 import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
+import { getFirestore } from 'firebase/firestore/lite';
 
 const _firebaseConfig = {
 	development: {
@@ -30,7 +31,10 @@ const _envSelector = function (target: { development: any; production: any }) {
 // initialize firebase instance
 const _app = initializeApp(_envSelector(_firebaseConfig));
 
+// initialize database instance
+const firestore = getFirestore(_app);
+
 // initialize auth instance
 const auth = getAuth(_app);
 
-export { auth };
+export { auth, firestore };

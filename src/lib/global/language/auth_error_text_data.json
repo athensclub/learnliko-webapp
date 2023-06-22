@@ -1,0 +1,86 @@
+{
+	"argumentError": {
+		"th": "Argument error.",
+		"en": "Argument error."
+	},
+	"loginAgain": {
+		"th": "Please logout, re-login, and try again.",
+		"en": "Please logout, re-login, and try again."
+	},
+	"incorrectPassword": {
+		"th": "รหัสผ่านของคุณผิด",
+		"en": "Incorrect password."
+	},
+	"tokenExpired": {
+		"th": "Your token has expired.  Please logout and re-login.",
+		"en": "Your token has expired.  Please logout and re-login."
+	},
+	"userCancelled": {
+		"th": "Login process was stopped by you.",
+		"en": "Login process was stopped by you."
+	},
+	"userDeleted": {
+		"th": "User does not exist.",
+		"en": "User does not exist."
+	},
+	"userDisabled": {
+		"th": "Your account has been disabled.",
+		"en": "Your account has been disabled."
+	},
+	"userMismatch": {
+		"th": "Credential given does not correspond to you.",
+		"en": "Credential given does not correspond to you."
+	},
+	"userSignedOut": {
+		"th": "You are signed out. Please re-sign in.",
+		"en": "You are signed out. Please re-sign in."
+	},
+	"weakPassword": {
+		"th": "Your password is too weak.  It must be at least six characters long.",
+		"en": "Your password is too weak.  It must be at least six characters long."
+	},
+	"invalidEmail": {
+		"th": "The email address is improperly formatted.",
+		"en": "The email address is improperly formatted."
+	},
+	"interalError": {
+		"th": "Internal Error.",
+		"en": "Internal Error."
+	},
+	"invalidApiKey": {
+		"th": "Invalid API key.",
+		"en": "Invalid API key."
+	},
+	"invalidAppCredential": {
+		"th": "Invalid app credential.",
+		"en": "Invalid app credential."
+	},
+	"invalidAppID": {
+		"th": "Invalid app ID.",
+		"en": "Invalid app ID."
+	},
+	"invalidAuth": {
+		"th": "Invalid user token.",
+		"en": "Invalid user token."
+	},
+	"timeout": {
+		"th": "Authentication timeout.",
+		"en": "Authentication timeout."
+	},
+	"unverifiedEmail": {
+		"th": "Your email address is not verified.  Please verify it.",
+		"en": "Your email address is not verified.  Please verify it."
+	},
+	"webStorageUnsuppprted": {
+		"th": "Web storage is unsupported. Please update or use a different browser.",
+		"en": "Web storage is unsupported. Please update or use a different browser."
+	},
+	"alreadyInitialized": {
+		"th": "Already initialized.",
+		"en": "Already initialized."
+	},
+	"tooManyRequests": {
+		"th": "Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later.",
+		"en": "Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later."
+	}
+}

@@ -64,16 +64,18 @@
 		{/if}
 
 		{#if $conversationFinished}
-			<div class="w-full text-center flex flex-col mt-4 items-center font-bold">
-				Conversation Finished
+			<slot name="finished">
+				<div class="w-full text-center flex flex-col mt-4 items-center font-bold">
+					Conversation Finished
 
-				<button
-					on:click={onFinishClicked}
-					class={`mt-3 rounded-lg w-fit border font-normal text-base mr-4 px-4 py-1 ${finishButtonClass}`}
-				>
-					Finish!
-				</button>
-			</div>
+					<button
+						on:click={onFinishClicked}
+						class={`mt-3 rounded-lg w-fit border font-normal text-base mr-4 px-4 py-1 ${finishButtonClass}`}
+					>
+						Finish!
+					</button>
+				</div>
+			</slot>
 		{/if}
 
 		<!-- Just a bottom space -->

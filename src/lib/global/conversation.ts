@@ -112,7 +112,7 @@ const botReply = async function (message?: string) {
 		message = data.message;
 
 		// behavior regarding bot's message status
-		if (data.status === 'END-OF-CONVERSATION' || get(history).length >= 2*get(maxDialogueCount)) {
+		if (data.status === 'END-OF-CONVERSATION' || get(history).length >= 2 * get(maxDialogueCount)) {
 			conversationFinished.set(true);
 			if (get(saveCurrentConversation)) {
 				finishedTime = new Date();
@@ -183,6 +183,7 @@ const computeRecap = async () => {
 	const result: RecapHistory = [];
 	const promises: Promise<any>[] = [];
 
+	// history store does not contain system prompt so we can start from index 0.
 	for (let i = 0; i < get(history).length; i += 2) {
 		// the last dialog will have no user's response
 		if (i + 1 >= get(history).length) break;
@@ -218,7 +219,7 @@ const computeRecap = async () => {
 
 	const ct = get(chatContext);
 	// TODO: find a better approach to promote/demote user's CEFR level
-	if (totalScore > 90) setCurrentCEFRLevel(ct!.conversation.CEFRlevel);
+	// if (totalScore > 90) setCurrentCEFRLevel(ct!.conversation.CEFRlevel);
 
 	// TODO: use actual db (cloud).
 	completeConversationLocal({

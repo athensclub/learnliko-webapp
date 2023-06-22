@@ -9,7 +9,7 @@ export const createUserAccount = async function (data: UserProfile) {
 	await setDoc(userDocRef, data);
 };
 
-export const getUserProfile = async function () {
+export const getCurrentUserProfile = async function () {
 	const uid = _safeGetUID();
 
 	const userDocRef = doc(firestore, `Users/${uid}`);

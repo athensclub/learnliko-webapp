@@ -11,19 +11,28 @@
 	import type { User } from 'firebase/auth';
 	import userSession from '$lib/stores/userSession';
 	import { goto } from '$app/navigation';
+	import { getCurrentUserProfile } from '$lib/temp/user';
 
 	const OnAuthStateChanged = async function (user: User | null) {
-		$userSession = {
-			initialized: true,
+		userSession.set({
+			initialized: false,
 			isLoggedIn: user !== null,
-			authUser: user
-		};
+			authUser: user,
+			profile: null
+		});
 
-		if (!$userSession.isLoggedIn) {
+		if ($userSession.isLoggedIn) {
+			const profileData = await getCurrentUserProfile();
+			if (!profileData) {
+				goto('/get-started');
+			} else {
+				userSession.update({ profile: profileData });
+			}
+		} else {
 			goto('/');
-		}else{
-			goto('/get-started');
 		}
+
+		userSession.update({ initialized: true });
 	};
 
 	onMount(() => {

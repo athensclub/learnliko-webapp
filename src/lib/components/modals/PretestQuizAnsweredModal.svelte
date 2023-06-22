@@ -12,10 +12,12 @@
 	export let quiz: FillInTheBlankMultipleChoicesQuestion | ImageMatchingMultipleChoicesQuestion;
 	export let userAnswer: number;
 	export let nextClicked: () => void;
+	export let onUserCorrect: () => void;
 
 	let answer: number | null = null;
 	onMount(async () => {
 		answer = await getPretestQuizAnswer(quiz.id);
+		if (answer === userAnswer) onUserCorrect();
 	});
 </script>
 

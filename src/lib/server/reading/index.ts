@@ -19,14 +19,9 @@ export const queryReadingTopics = async (mode: Mode) => {
 /**
  * Include both student and profiession items.
  */
-const allItems = async (): Promise<ReadingItem[]> => {
-    return [...(await import('$lib/server/db/reading_data.json')).default.map(item => ({
-        ...item,
-        quiz: item.quiz.map(q => ({ ...q, answer: undefined }))
-    })), ...(await import('$lib/server/db/reading_data_student.json')).default.map(item => ({
-        ...item,
-        quiz: item.quiz.map(q => ({ ...q, answer: undefined }))
-    }))]
+const allItems = async () => {
+    return [...(await import('$lib/server/db/reading_data.json')).default,
+    ...(await import('$lib/server/db/reading_data_student.json')).default]
 }
 
 /**
@@ -48,7 +43,23 @@ export const queryReadingItems = async (topic: string, mode: Mode): Promise<Read
     })).filter(item => topic === "All" || item.topic === topic);
 };
 
-export const queryReadingItemById = async (id: string) => {
+export const queryReadingItemById = async (id: string): Promise<ReadingItem> => {
     const data = await allItems();
-    return data.map(item => item as ReadingItem).find(item => item.id === id);
+
+    const result = data.map(item => ({
+        ...item,
+        quiz: item.quiz.map(q => ({ ...q, answer: undefined }))
+    })).find(item => item.id === id);
+    if (!result)
+        throw new Error("No reading item with id: " + id);
+
+    return result;
+}
+
+export const queryReadingAnswers = async (id: string) => {
+    const data = await allItems();
+    const item = data.find(item => item.id === id);
+    if (!item)
+        throw new Error("No reading item with id: " + id);
+    return item.quiz.map(q => q.answer);
 }

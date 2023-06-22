@@ -22,6 +22,12 @@ export const getReadingItemById = async (id: string): Promise<ReadingItem> => {
 	return val;
 };
 
+export const getReadingAnswers = async (id: string): Promise<number[]> => {
+	const result = await fetch('/api/v1/reading/answers?' + new URLSearchParams({ id }), { method: 'GET' });
+	const val = await result.json();
+	return val;
+}
+
 export const generateReadingItem = async (topic: string) => {
 	let prompt: ChatMessage[] = [];
 	prompt.push({

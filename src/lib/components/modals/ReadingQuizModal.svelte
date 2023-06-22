@@ -1,15 +1,15 @@
 <script lang="ts">
+	import { getReadingAnswers } from '$api/reading';
 	import { readingAnswers, selectedQuizChoices } from '$lib/global/reading';
-	import { completeReadingLocal, queryAnswersLocal } from '$lib/localdb/readingLocal';
+	import { completeReadingLocal } from '$lib/localdb/readingLocal';
 	import type { ReadingItem } from '$lib/types/reading';
 
 	export let item: ReadingItem;
 
 	const submit = async () => {
-		// TODO: use data from cloud db when ready.
-		$readingAnswers = (await queryAnswersLocal(item.id)) ?? null;
+		$readingAnswers = (await getReadingAnswers(item.id)) ?? null;
 
-		// TODO: also use cloud db here
+		// TODO: use cloud db here
 		// to submit all user answers must not be null already, safely cast selected.
 		await completeReadingLocal({
 			readingID: item.id,

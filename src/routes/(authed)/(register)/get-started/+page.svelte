@@ -19,7 +19,7 @@
 
 	const selectStudentMode = () => {
 		$currentMode = 'Student';
-		goto('/discover');
+		goto('/pretest');
 	};
 
 	const openAssistantChat = () => {

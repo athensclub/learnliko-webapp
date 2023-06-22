@@ -1,6 +1,5 @@
 <script lang="ts">
 	import ReadingQuizModal from '$lib/components/modals/ReadingQuizModal.svelte';
-	import { showModal } from '$lib/global/modal';
 	import {
 		initializeReadingData,
 		readingAnswers,
@@ -8,14 +7,17 @@
 		selectedQuizChoices
 	} from '$lib/global/reading';
 	import type { ReadingItem } from '$lib/types/reading';
-	import { onMount } from 'svelte';
+	import { getContext, onMount } from 'svelte';
+	import type { Context } from 'svelte-simple-modal';
 
 	export let data: PageData;
 	let item: ReadingItem = data.item;
 	let coin = 300;
 
 	const goBack = () => window.history.back();
-	const showQuiz = () => showModal(ReadingQuizModal, { item });
+
+	const { open }: Context = getContext('simple-modal');
+	const showQuiz = () => open(ReadingQuizModal, { item });
 
 	$: correct = $readingAnswers
 		? $readingAnswers.filter((v, i) => $selectedQuizChoices[i] === v).length

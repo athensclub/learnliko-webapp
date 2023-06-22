@@ -1,3 +1,4 @@
+import preprocess from 'svelte-preprocess';
 import adapter from '@sveltejs/adapter-netlify';
 import { vitePreprocess } from '@sveltejs/kit/vite';
 import path from 'path';
@@ -6,7 +7,14 @@ import path from 'path';
 const config = {
 	// Consult https://kit.svelte.dev/docs/integrations#preprocessors
 	// for more information about preprocessors
-	preprocess: vitePreprocess(),
+	preprocess: [
+		vitePreprocess(),
+		preprocess({
+			scss: {
+				prependData: '@use "src/variables.scss" as *;'
+			}
+		})
+	],
 
 	kit: {
 		// See https://kit.svelte.dev/docs/adapters for more information about adapters.

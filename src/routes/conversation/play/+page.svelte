@@ -2,17 +2,26 @@
 	import ConfirmModal from '$lib/components/modals/ConfirmModal.svelte';
 	import { isMobile } from '$lib/global/breakpoints';
 	import { chatContext, showChatbox } from '$lib/global/chatbox';
-	import { showModal } from '$lib/global/modal';
+	import { maxDialogueCount, saveCurrentConversation } from '$lib/global/conversation';
+	import { getContext, onMount } from 'svelte';
+	import type { Context } from 'svelte-simple-modal';
 	import Typewriter from 'svelte-typewriter/Typewriter.svelte';
 
+	// initialization
+	onMount(() => {
+		$saveCurrentConversation = true;
+		$maxDialogueCount = 1000000;
+	});
+
+	const { open }: Context = getContext('simple-modal');
 	const hideConversation = () =>
-		showModal(ConfirmModal, {
+		open(ConfirmModal, {
 			title: 'Confirm',
 			description: 'Are you sure you want to finish this conversation?',
 			onConfirm: () => {
 				$showChatbox = false;
 				$chatContext = null;
-                window.history.back();
+				window.history.back();
 			}
 		});
 </script>
@@ -33,7 +42,8 @@
 				<strong class={`${$isMobile ? 'text-[4vw]' : 'text-[2vw]'}`}> 🎯Coversation Goal </strong>
 			</div>
 			<Typewriter>
-				<pre class="mt-3 text-sm whitespace-pre-wrap">{$chatContext.conversation.details.learner.goal}</pre>
+				<pre class="mt-3 text-sm whitespace-pre-wrap">{$chatContext.conversation.details.learner
+						.goal}</pre>
 			</Typewriter>
 		</div>
 

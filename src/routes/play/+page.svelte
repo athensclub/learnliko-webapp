@@ -3,14 +3,14 @@
 	import type { PageData } from './$types';
 	import bgvd from '$lib/images/play.mp4';
 	import type { ConversationCarouselItem } from '$lib/types/conversationData';
-	import { onMount } from 'svelte';
+	import { getContext, onMount } from 'svelte';
 	import { queryConversationsLocal } from '$lib/localdb/conversationLocal';
 	import assistant from '$lib/images/assistant.png';
 	import { chatContext, currentChatboxView, showChatbox } from '$lib/global/chatbox';
 	import Typewriter from 'svelte-typewriter/Typewriter.svelte';
-	import { showModal } from '$lib/global/modal';
 	import ConfirmModal from '$lib/components/modals/ConfirmModal.svelte';
 	import { isMobile } from '$lib/global/breakpoints';
+	import type { Context } from 'svelte-simple-modal';
 	// let options = ['Grade 1', 'Grade 2', 'Grade 3', 'Grade 4', 'Grade 5', 'Grade 6'];
 
 	// TODO: probably switch back to querying in ssr when we switch the db to cloud.
@@ -25,8 +25,9 @@
 		};
 	});
 
+	const { open }: Context = getContext('simple-modal');
 	const hideConversation = () =>
-		showModal(ConfirmModal, {
+		open(ConfirmModal, {
 			title: 'Confirm',
 			description: 'Are you sure you want to finish this conversation?',
 			onConfirm: () => {

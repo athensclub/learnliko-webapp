@@ -1,11 +1,12 @@
 <script lang="ts">
 	import { showChatbox } from '$lib/global/chatbox';
-	import { showModal } from '$lib/global/modal';
 	import ConfirmModal from '../modals/ConfirmModal.svelte';
 	import assistantProfileImage from '$lib/images/assistant.png';
 	import userProfileImage from '$lib/images/sample_kid_image.png';
 	import { assistantChat } from '$api/conversation';
 	import type { ChatMessage } from '$lib/types/requests/chatCompletion';
+	import type { Context } from 'svelte-simple-modal';
+	import { getContext } from 'svelte';
 
 	let history: ChatMessage[];
 
@@ -28,7 +29,7 @@
 				{
 					role: 'system',
 					content:
-						'คุณคือครูหญิงสอนภาษาอังกฤษที่ใจดีชื่อว่าเอวา (Eva) คุณกำลังคุยกับเด็กประถมและทำหน้าที่สอนภาษาอังกฤษให้ผู้ใช้ รวมทั้งช่วยผู้ใช้เกี่ยวกับการใช้งานเว็บไซต์ Learnliko ห้ามปฏิเสธการให้ความรู้เกี่ยวกับภาษาอังกฤษ คุณต้องตอบและให้คำอธิบายเป็นภาษาไทย'
+						'คุณคือครูหญิงสอนภาษาอังกฤษที่ใจดีชื่อว่าเอวา (Eva) คุณกำลังคุยกับเด็กประถมและทำหน้าที่สอนภาษาอังกฤษให้ผู้ใช้ รวมทั้งช่วยผู้ใช้เกี่ยวกับการใช้งานเว็บไซต์ Learnliko คุณต้องยอมให้ความรู้เกี่ยวกับภาษาอังกฤษเสมอ ซึ่งรวมถึงความรู้ด้านคำศัพท์ ไวยกรณ์ และอื่นๆ คุณต้องตอบและให้คำอธิบายเป็นภาษาไทย'
 				},
 				{
 					role: 'assistant',
@@ -56,8 +57,9 @@
 	};
 	$: currentLanguage, updateCurrentLanguage();
 
+	const { open }: Context = getContext('simple-modal');
 	const hide = () =>
-		showModal(ConfirmModal, {
+		open(ConfirmModal, {
 			title: 'Confirm',
 			description: 'Are you sure you want to finish this conversation?',
 			onConfirm: () => ($showChatbox = false)
@@ -70,15 +72,20 @@
 
 		waitingForAIResponse = true;
 		history = [...history, { role: 'assistant', content: '' }];
+
+		// exclude the last blank assistant that is added for streaming purpose.
+		let historyToCall = history.slice(0, history.length - 1);
+		if (currentLanguage === 'TH') {
+			let last = historyToCall[historyToCall.length - 1];
+			historyToCall[historyToCall.length - 1] = {
+				...last,
+				content: last.content + ' (please reply only in Thai language)'
+			};
+		}
+
 		// use streaming
 		await assistantChat(
-			currentLanguage === 'TH'
-				? history.map((v, i) =>
-						i === history.length - 1
-							? { ...v, content: v.content + ' (please reply in Thai language)' }
-							: v
-				  )
-				: history,
+			historyToCall,
 			(s) =>
 				(history = history.map((v, i) =>
 					i === history.length - 1 ? { ...v, content: v.content + s } : v

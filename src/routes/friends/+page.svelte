@@ -169,6 +169,10 @@
 			</div>
 		</div>
 	</div>
+
+	<div class="fixed w-[77vw] h-[100vh] bg-[#000000B8] backdrop-blur-md right-0 top-0 flex justify-center items-center text-white text-[3vw] font-bold">
+		Not Available in Trial Version
+	</div>
 </div>
 
 <!-- <div class="w-full h-full min-h-[100vh] bg-white">

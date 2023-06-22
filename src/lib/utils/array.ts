@@ -4,7 +4,7 @@
  * @param array 
  * @returns 
  */
-export function shuffle(array: unknown[]) {
+export function shuffle<T>(array: T[]) {
     let m = array.length, t, i;
 
     // While there remain elements to shuffle…

@@ -1,9 +1,7 @@
 <script lang="ts">
-	import { showModal } from '$lib/global/modal';
 	import { readingAnswers, selectedQuizChoices } from '$lib/global/reading';
 	import { completeReadingLocal, queryAnswersLocal } from '$lib/localdb/readingLocal';
 	import type { ReadingItem } from '$lib/types/reading';
-	import ConfirmModal from './ConfirmModal.svelte';
 
 	export let item: ReadingItem;
 

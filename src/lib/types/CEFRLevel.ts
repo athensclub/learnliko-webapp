@@ -1,4 +1,5 @@
 export const CEFRLevelValues = [
+	'pre-A1',
 	'A1',
 	'A2',
 	'B1',

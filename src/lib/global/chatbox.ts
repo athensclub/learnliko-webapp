@@ -1,7 +1,7 @@
 import type { BotEmotion, ConversationCarouselItem } from '$lib/types/conversationData';
 import { writable } from 'svelte/store';
 
-export type ChatboxView = 'CONVERSATION' | 'RECAP' | 'ASSISTANT';
+export type ChatboxView = 'RECAP' | 'ASSISTANT';
 
 /**
  * Whether to show the chatbox or not.
@@ -11,7 +11,7 @@ export const showChatbox = writable(false);
 /**
  * Tha current view that is being shown in chatbox.
  */
-export const currentChatboxView = writable<ChatboxView>('CONVERSATION');
+export const currentChatboxView = writable<ChatboxView>('RECAP');
 
 type BotContext = {
 	emotion: BotEmotion;

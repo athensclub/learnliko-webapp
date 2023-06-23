@@ -18,8 +18,6 @@
 		await goto('/conversation/play');
 
 		$chatContext = { conversation, bot: { emotion: 'neutral' } };
-		$currentChatboxView = 'CONVERSATION';
-		$showChatbox = true;
 	};
 </script>
 

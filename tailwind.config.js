@@ -6,6 +6,7 @@ export default {
 		extend: {
 			transitionProperty: {
 				size: 'width, height',
+				position: 'left, right, top, bottom',
 				font: 'font'
 			},
 			boxShadow: {

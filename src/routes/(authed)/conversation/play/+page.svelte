@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { beforeNavigate } from '$app/navigation';
+	import ConversationView from '$lib/components/chatbox/ConversationView.svelte';
 	import ConfirmModal from '$lib/components/modals/ConfirmModal.svelte';
 	import { isMobile } from '$lib/global/breakpoints';
 	import { chatContext, showChatbox } from '$lib/global/chatbox';
@@ -6,6 +8,9 @@
 	import { getContext, onMount } from 'svelte';
 	import type { Context } from 'svelte-simple-modal';
 	import Typewriter from 'svelte-typewriter/Typewriter.svelte';
+	import { fly } from 'svelte/transition';
+
+	let briefing = true;
 
 	// initialization
 	onMount(() => {
@@ -24,6 +29,19 @@
 				window.history.back();
 			}
 		});
+
+	const beforeUnload = (event: BeforeUnloadEvent) => {
+		// Chrome requires returnValue to be set.
+		event.returnValue = 'Are you sure you want to end conversation?';
+		return 'Are you sure you want to end conversation?';
+	};
+
+	// window before unload won't trigger on navigation in the same site, use: https://stackoverflow.com/a/76238933
+	beforeNavigate(({ cancel }) => {
+		if (!confirm('Are you sure you want to end conversation?')) {
+			cancel();
+		}
+	});
 </script>
 
 {#if $chatContext}
@@ -33,19 +51,35 @@
 	>
 		<!-- Mission Details container -->
 		<div
-			class={`absolute ${
+			class={`absolute transition-position backdrop-blur-lg backdrop-brightness-75 p-[1.5vw] shadow-sm border rounded-xl font-line-seed ${
 				$isMobile
 					? 'top-0 w-full text-[1.3vw] rounded-t-none'
-					: 'top-[25vh] left-[3vw] w-[33%] text-[1vw]'
-			} backdrop-blur-lg backdrop-brightness-75 p-4 shadow-sm border  rounded-xl`}
+					: `top-[18vh] w-[33%] ${briefing ? 'left-[20vw]' : 'left-[3vw]'}`
+			}`}
 		>
-			<div class="flex flex-row justify-between items-center">
-				<strong class={`${$isMobile ? 'text-[4vw]' : 'text-[2vw]'}`}> 🎯Coversation Goal </strong>
-			</div>
-			<Typewriter>
-				<pre class="mt-3 text-sm whitespace-pre-wrap">{$chatContext.conversation.details.learner
-						.goal}</pre>
-			</Typewriter>
+			{#if briefing}
+				<div class="text-[1.7vw] font-bold">🎯ภารกิจของคุณ</div>
+				<div class="text-[1.3vw] mt-[1vw]">{$chatContext.conversation.details.learner.mission}</div>
+
+				<!-- Divider -->
+				<div class="w-full h-[0.15vh] my-[2vw] bg-white" />
+
+				<div class="text-[1.7vw] font-bold">เป้าหมาย</div>
+				<div class="text-[1.3vw] mt-[1vw] whitespace-pre-wrap">
+					{$chatContext.conversation.details.learner.goal}
+				</div>
+
+				<div class="text-[1.1vw] font-bold mt-[2vw] text-center">
+					คุณจะได้รับเหรียญสูงสุด 🧿 300 สำหรับภารกิจนี้
+				</div>
+
+				<button
+					on:click={() => (briefing = false)}
+					class="w-full bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] rounded-full mt-[2vw] text-[1.3vw] py-[1.3vh]"
+				>
+					เริ่มการพูดคุย
+				</button>
+			{/if}
 		</div>
 
 		<!-- Exit Button -->
@@ -78,9 +112,37 @@
 
 		<!-- Avatar zone -->
 		<img
-			class={`${$isMobile ? 'w-full' : 'h-[90%] left-[50%] translate-x-[-50%]'} absolute bottom-0`}
+			class={`${
+				$isMobile
+					? 'w-full'
+					: `h-[90%] absolute bottom-0 transition-transform ${
+							briefing ? 'right-[25vw] translate-x-0' : 'right-[50%] translate-x-[50%]'
+					  }`
+			}`}
 			src={$chatContext.conversation.avatar.models[$chatContext.bot.emotion]}
 			alt="Avatar"
 		/>
+
+		{#if !briefing}
+			<div
+				class={`fixed ${
+					$isMobile ? 'w-[100vw] h-[40vh] bottom-0' : 'w-[37vw] h-[70vh] bottom-[15vh] right-[3vw]'
+				} z-[600]`}
+			>
+				<div
+					transition:fly={{ y: 800, duration: 800 }}
+					class={`overflow-hidden w-full h-full font-line-seed relative flex flex-col items-center shadow-2xl shadow-gray-700 border-[1px] border-black/10 border-b-0 backdrop-blur-sm backdrop-brightness-75 bg-transparent rounded-3xl`}
+				>
+					<ConversationView
+						class="text-white"
+						initializingClass="text-white"
+						recorderClass="text-black bg-black/[0.5] backdrop-blur-md w-[90%]"
+						finishButtonClass="border-white/[0.15]"
+					/>
+				</div>
+			</div>
+		{/if}
 	</div>
 {/if}
+
+<svelte:window on:beforeunload|preventDefault={beforeUnload} />

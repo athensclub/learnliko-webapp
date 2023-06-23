@@ -9,6 +9,7 @@
 			"details": {
 				"intro": "Welcome to the shop how can I help you?",
 				"learner": {
+					"mission": "คุณกำลังอยู่ในร้านเครื่องเขียน และคุณต้องซื้อเครื่องเขียนจากพนักงานขายที่ชื่อ Lucy",
 					"goal": "1.Ask for product available in the shop\n2.Choose products to buy\n3.Making purchase"
 				},
 				"bot": {
@@ -43,6 +44,7 @@
 			"details": {
 				"intro": "Howdy! I'm Alan nice to meet you. What's your name?",
 				"learner": {
+					"mission": "คุณพบเจอกับคนที่ชื่อ Alan คุณต้องทำความรู้จักและเรียนรู้เกี่ยวกับเขา",
 					"goal": "1.Introduce yourself to Alan\n2.Get to know Alan's ages\n3.Get to know Alan's hobby\n4.Get to know Alan's hometown\n5.Get to know Alan's favorite food"
 				},
 				"bot": {
@@ -55,7 +57,7 @@
 			"avatar": {
 				"name": "Alan",
 				"models": {
-					"neutral": "https://media.discordapp.net/attachments/987411564858576946/1118734315958837278/download.png?width=1170&height=1170",
+					"neutral": "https://cdn.discordapp.com/attachments/842737146321174558/1121859550367191111/y2viqdsh.png",
 					"joy": "https://media.discordapp.net/attachments/987411564858576946/1118734315958837278/download.png?width=1170&height=1170",
 					"trust": "https://media.discordapp.net/attachments/987411564858576946/1118734315958837278/download.png?width=1170&height=1170",
 					"fear": "https://media.discordapp.net/attachments/987411564858576946/1118734315958837278/download.png?width=1170&height=1170",
@@ -77,6 +79,7 @@
 			"details": {
 				"intro": "Hello, Today we will learn English with animal, Let's start by telling me your favorite animal.",
 				"learner": {
+					"mission": "คุณกำลังคุยกับครูภาษาอังกฤษที่ชื่อ Jane คุณต้องพูดคุยเกี่ยวกับสัตว์เป็นภาษาอังกฤษ",
 					"goal": "1.Tell your favorite animal to teacher\n2.Know what your favorite animal color's name is.\n2.Know what your favorite animal eats.\n3.Know where your favorite animal lives."
 				},
 				"bot": {
@@ -112,6 +115,7 @@
 			"details": {
 				"intro": "Hi, I'm a farmer named Raj. What fruit do you like to eat? I can tell you about their benefits.",
 				"learner": {
+					"mission": "คุณกำลังคุยกับชาวนาที่ชื่อ Raj คุณต้องคุยกับเขาเกี่ยวกับเรื่องผลไม้",
 					"goal": "Learn about different types of fruits and their benefits"
 				},
 				"bot": {
@@ -146,6 +150,7 @@
 			"details": {
 				"intro": "Hello, my name is Anna and I'm a traveler. I'm interested in trying spicy Thai food. What menu items should I try?",
 				"learner": {
+					"mission": "คุณเจอกับนักท่องเที่ยวชื่อ Anna คุณต้องให้คำแนะนำเกี่ยวการท่องเที่ยวในท้องถิ่นคุณ",
 					"goal": "As a tour guide, provide recommendations on popular Thai dishes and places to visit, and provide information on their history and cultural significance."
 				},
 				"bot": {

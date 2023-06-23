@@ -1,13 +1,15 @@
 <script lang="ts">
 	import userProfileImage from '$lib/images/sample_kid_image.png';
 	import { getCurrentCEFRLevel, queryLearningDiariesLocal } from '$lib/localdb/profileLocal';
-	import { getContext, onMount } from 'svelte';
+	import { getContext, onDestroy, onMount } from 'svelte';
 	import type { LearningDiaryItem } from '$lib/types/learningDiary';
 	import NavBar from '$lib/components/navbar/NavBar.svelte';
 	import LearningDiaryModal from '$lib/components/modals/LearningDiaryModal.svelte';
 	import { isMobile } from '$lib/global/breakpoints';
 	import type { Context } from 'svelte-simple-modal';
 	import userSession from '$lib/stores/userSession';
+	import { showChatbox } from '$lib/global/chatbox';
+	import { navigating } from '$app/stores';
 
 	let name = 'Natsataporn M.';
 	let learningDiaries: LearningDiaryItem[] | null = null;
@@ -25,6 +27,9 @@
 		// TODO: implement db using actual database (cloud) and probably move this to ssr.
 		learningDiaries = await queryLearningDiariesLocal();
 	});
+
+	// hide chatbox on exit in case it is showing recap.
+	onDestroy(() => ($showChatbox = false));
 </script>
 
 <div

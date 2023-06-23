@@ -2,6 +2,7 @@ import type { SynthesizeAccent, SynthesizeGender } from '$api/tts';
 import type { RecapHistory } from '$lib/global/chatbox';
 
 interface LearnerDetails {
+	mission: string;
 	goal: string;
 }
 

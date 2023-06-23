@@ -7,10 +7,10 @@
 	import LearningDiaryModal from '$lib/components/modals/LearningDiaryModal.svelte';
 	import { isMobile } from '$lib/global/breakpoints';
 	import type { Context } from 'svelte-simple-modal';
+	import userSession from '$lib/stores/userSession';
 
 	let name = 'Natsataporn M.';
 	let learningDiaries: LearningDiaryItem[] | null = null;
-	let CEFRLevel: string = '';
 
 	const { open }: Context = getContext('simple-modal');
 	const showDiary = (item: LearningDiaryItem) => {
@@ -24,7 +24,6 @@
 	onMount(async () => {
 		// TODO: implement db using actual database (cloud) and probably move this to ssr.
 		learningDiaries = await queryLearningDiariesLocal();
-		CEFRLevel = getCurrentCEFRLevel();
 	});
 </script>
 
@@ -91,7 +90,9 @@
 				>
 					<div class="flex flex-col items-center">
 						<div class={`${$isMobile ? 'text-[4vw]' : 'text-[1.35vw]'}`}>CEFR Level</div>
-						<div class={`${$isMobile ? 'text-[14vw]' : 'text-[4.5vw]'}`}>{CEFRLevel}</div>
+						<div class={`${$isMobile ? 'text-[14vw]' : 'text-[4.5vw]'}`}>
+							{$userSession.profile?.CEFRLevel.general}
+						</div>
 					</div>
 
 					<div class="flex flex-col">

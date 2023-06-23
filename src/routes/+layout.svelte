@@ -12,6 +12,7 @@
 	import userSession from '$lib/stores/userSession';
 	import { goto } from '$app/navigation';
 	import { getCurrentUserProfile } from '$lib/temp/user';
+	import { currentMode } from '$lib/global/mode';
 
 	let loading = true;
 
@@ -31,6 +32,7 @@
 				goto('/get-started');
 			} else {
 				userSession.update({ profile: profileData });
+				currentMode.set(profileData.mode);
 			}
 		}
 

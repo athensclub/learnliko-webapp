@@ -53,23 +53,25 @@
 </script>
 
 <div class="w-full max-w-[100vw] h-full overflow-x-hidden">
-	{#if $showChatbox}
-		<div
-			class={`fixed ${
-				$isMobile
-					? `w-[100vw] ${$currentChatboxView === 'CONVERSATION' ? 'h-[40vh]' : 'h-[65vh]'} bottom-0`
-					: 'w-[37vw] ' +
-					  ($currentChatboxView === 'CONVERSATION'
-							? 'h-[70vh] bottom-[15vh] right-[3vw]'
-							: 'h-[85vh] bottom-0 left-[50%] translate-x-[-50%]')
-			} z-[600]`}
-		>
-			<Chatbox />
-		</div>
-	{/if}
-
 	{#if browser}
 		<Modal>
+			{#if $showChatbox}
+				<div
+					class={`fixed ${
+						$isMobile
+							? `w-[100vw] ${
+									$currentChatboxView === 'CONVERSATION' ? 'h-[40vh]' : 'h-[65vh]'
+							  } bottom-0`
+							: 'w-[37vw] ' +
+							  ($currentChatboxView === 'CONVERSATION'
+									? 'h-[70vh] bottom-[15vh] right-[3vw]'
+									: 'h-[85vh] bottom-0 left-[50%] translate-x-[-50%]')
+					} z-[600]`}
+				>
+					<Chatbox />
+				</div>
+			{/if}
+
 			{#if !loading}
 				<slot />
 			{/if}

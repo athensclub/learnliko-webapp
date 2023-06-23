@@ -105,10 +105,10 @@
 						<button
 							disabled={character.unlocked}
 							class={`px-[2vw] py-[0.35vw] rounded-full mt-[1.5vw] text-[1.2vw] ${
-								character.unlocked ? 'bg-white text-black' : 'border border-white text-white'
+								character.unlocked ? 'border border-white text-white' : 'bg-white text-black'
 							}`}
 						>
-							{character.unlocked ? `🧿${character.price}` : 'Unlocked'}
+							{character.unlocked ? 'Unlocked' : `🧿${character.price}`}
 						</button>
 					</div>
 				</div>

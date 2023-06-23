@@ -4,7 +4,12 @@
 	import ConfirmModal from '$lib/components/modals/ConfirmModal.svelte';
 	import { isMobile } from '$lib/global/breakpoints';
 	import { chatContext, showChatbox } from '$lib/global/chatbox';
-	import { maxDialogueCount, saveCurrentConversation } from '$lib/global/conversation';
+	import {
+		currentGoal,
+		isCheckConversationGoal,
+		maxDialogueCount,
+		saveCurrentConversation
+	} from '$lib/global/conversation';
 	import { getContext, onMount } from 'svelte';
 	import type { Context } from 'svelte-simple-modal';
 	import Typewriter from 'svelte-typewriter/Typewriter.svelte';
@@ -14,6 +19,7 @@
 
 	// initialization
 	onMount(() => {
+		$isCheckConversationGoal = true;
 		$saveCurrentConversation = true;
 		$maxDialogueCount = 1000000;
 	});
@@ -66,7 +72,9 @@
 
 				<div class="text-[1.7vw] font-bold">เป้าหมาย</div>
 				<div class="text-[1.3vw] mt-[1vw] whitespace-pre-wrap">
-					{$chatContext.conversation.details.learner.goal}
+					{$chatContext.conversation.details.learner.goal
+						.map((g, i) => `${i + 1}. ${g}`)
+						.join('\n')}
 				</div>
 
 				<div class="text-[1.1vw] font-bold mt-[2vw] text-center">
@@ -79,6 +87,12 @@
 				>
 					เริ่มการพูดคุย
 				</button>
+			{:else}
+				<div class="text-[1.7vw] font-bold mt-[5vh] whitespace-pre-wrap text-center">
+					{$currentGoal + 1}. {$chatContext.conversation.details.learner.goal[$currentGoal]}
+				</div>
+
+				<div class="text-[1.35vw] px-[1vw] py-[0.3vw] mt-[3vh] mb-[5vh] bg-[#0000007D] w-fit rounded-full mx-auto">🧿 100</div>
 			{/if}
 		</div>
 

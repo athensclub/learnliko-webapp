@@ -4,6 +4,7 @@
 	import {
 		conversationFinished,
 		history,
+		isCheckConversationGoal,
 		maxDialogueCount,
 		saveCurrentConversation
 	} from '$lib/global/conversation';
@@ -22,7 +23,7 @@
 	import PretestQuizAnsweredModal from '$lib/components/modals/PretestQuizAnsweredModal.svelte';
 	import type { Context } from 'svelte-simple-modal';
 	import Typewriter from 'svelte-typewriter/Typewriter.svelte';
-	import { analyzeDialog } from '$api/conversation';
+	import { analyzeDialog, checkGoalProgress } from '$api/conversation';
 	import { nextLevel, nextPretestLevel, previousPretestLevel } from '$lib/utils/cefr';
 	import { createUserAccount } from '$lib/temp/user';
 	import PretestFinishedModal from '$lib/components/modals/PretestFinishedModal.svelte';
@@ -41,6 +42,7 @@
 	const { open, close }: Context = getContext('simple-modal');
 	// initialization
 	onMount(async () => {
+		$isCheckConversationGoal = false;
 		$saveCurrentConversation = false;
 		$maxDialogueCount = 1;
 

@@ -1,4 +1,4 @@
-import { analyzeDialog, chat } from '$api/conversation';
+import { analyzeDialog, chat, checkGoalProgress } from '$api/conversation';
 import { transcribe } from '$api/transcription';
 import { synthesize } from '$api/tts';
 import { BotEmotionValues, type ChatBotMessage } from '$lib/types/conversationData';
@@ -10,6 +10,7 @@ import { round } from '$lib/utils/math';
 import { setCurrentCEFRLevel } from '$lib/localdb/profileLocal';
 import { completeConversationLocal } from '$lib/localdb/conversationLocal';
 import { audioRecording } from './recording';
+import { isGoalComplete } from '$api/friendConversation';
 
 /** chat's history, used for display only */
 export const history = writable<
@@ -32,6 +33,11 @@ export const currentRecording = writable<{ data: Blob; url: string } | null>(nul
 audioRecording.subscribe(currentRecording.set);
 
 /**
+ * If set to false, conversations will not be checked for goal completion. Used in pretest.
+ */
+export const isCheckConversationGoal = writable(true);
+
+/**
  * If set to false, recap will not be calculated and the conversation will not be saved in user's diary. Used in pretest.
  */
 export const saveCurrentConversation = writable(true);
@@ -41,12 +47,18 @@ export const saveCurrentConversation = writable(true);
  */
 export const maxDialogueCount = writable(1000000)
 
+/**
+ * The index of the current goal that the user need to achieve.
+ */
+export const currentGoal = writable(0);
+
 let finishedTime: Date;
 
 /** an array of chatGPT's history in raw data, used for chat completion */
 let gptHistory: ChatMessage[] = [];
 
 export const resetConversationData = () => {
+	currentGoal.set(0);
 	transcribing.set(false);
 	conversationFinished.set(false);
 	initializedConversation.set(false);
@@ -110,30 +122,6 @@ const botReply = async function (message?: string) {
 
 		if (!data) throw new Error('Error: Bot failed to reply');
 		message = data.message;
-
-		// behavior regarding bot's message status
-		if (data.status === 'END-OF-CONVERSATION' || get(history).length >= 2 * get(maxDialogueCount)) {
-			conversationFinished.set(true);
-			if (get(saveCurrentConversation)) {
-				finishedTime = new Date();
-				computeRecap();
-			}
-		}
-		// switch (data.status) {
-		// 	case 'NORMAL':
-		// 		break;
-		// 	case 'INAPPROPRIATE':
-		// 		break;
-		// 	case 'END-OF-CONVERSATION':
-		// 		conversationFinished.set(true);
-		// 		if (get(saveCurrentConversation)) {
-		// 			finishedTime = new Date();
-		// 			computeRecap();
-		// 		}
-		// 		break;
-		// 	default:
-		// 		break;
-		// }
 	}
 
 	const audio = await synthesize(
@@ -150,6 +138,38 @@ const botReply = async function (message?: string) {
 			transcription: message
 		}
 	]);
+
+	if (get(isCheckConversationGoal)) {
+		const passed = await checkGoalProgress(get(history).map(item => `${item.role === 'user' ? 'User' : ct.conversation.avatar.name}: ${item.transcription}`).join("\n"), ct.conversation.details.learner.goal[get(currentGoal)]);
+		console.log(passed)
+		if (passed) {
+			currentGoal.set(get(currentGoal) + 1)
+		}
+	}
+
+	// behavior regarding bot's message status
+	if ((ct && get(currentGoal) >= ct.conversation.details.learner.goal.length) || get(history).length >= 2 * get(maxDialogueCount)) {
+		conversationFinished.set(true);
+		if (get(saveCurrentConversation)) {
+			finishedTime = new Date();
+			computeRecap();
+		}
+	}
+	// switch (data.status) {
+	// 	case 'NORMAL':
+	// 		break;
+	// 	case 'INAPPROPRIATE':
+	// 		break;
+	// 	case 'END-OF-CONVERSATION':
+	// 		conversationFinished.set(true);
+	// 		if (get(saveCurrentConversation)) {
+	// 			finishedTime = new Date();
+	// 			computeRecap();
+	// 		}
+	// 		break;
+	// 	default:
+	// 		break;
+	// }
 
 	waitingForAIResponse.set(false);
 };
@@ -174,6 +194,7 @@ export const submitUserReply = async function (audioRecording: { data: Blob; url
 		gptHistory.push({ role: 'user', content: transcription });
 
 		transcribing.set(false);
+
 		botReply();
 	}
 };

@@ -18,12 +18,15 @@ export const chat = async function (messages: ChatMessage[]) {
 
 /**
  * The output is a stream. It finishes when this function finishes (await assistantChat(...) is finished).
- * 
+ *
  * @param messages the message history to query assistant.
  * @param callback the function that is called each time it receives token through stream.
  * @see https://stackoverflow.com/a/74336207
  */
-export const assistantChat = async function (messages: ChatMessage[], callback: (token: string) => void) {
+export const assistantChat = async function (
+	messages: ChatMessage[],
+	callback: (token: string) => void
+) {
 	// modified from https://stackoverflow.com/a/74336207
 	const response = await fetch('/api/v1/conversation/assistant', {
 		method: 'POST',
@@ -119,16 +122,32 @@ export const getVocabsFromConversation = async (history: RecapHistory) => {
 	});
 	prompt.push({
 		role: 'user',
-		content: history.map(
-			item => `A: ${item.assistant.transcription}\nB: ${item.user?.transcription}`
-		).join("\n")
-	})
+		content: history
+			.map((item) => `A: ${item.assistant.transcription}\nB: ${item.user?.transcription}`)
+			.join('\n')
+	});
 	const response = await chat(prompt);
-	return response.replace(".", "").split(",").map(s => s.trim().toLowerCase());
-}
+	return response
+		.replace('.', '')
+		.split(',')
+		.map((s) => s.trim().toLowerCase());
+};
 
 export const getConversations = async () => {
-	const result = await fetch('/api/v1/conversation/queryAvailable?' + new URLSearchParams({ mode: get(currentMode) }), { method: 'GET' });
+	const result = await fetch(
+		'/api/v1/conversation/queryAvailable?' + new URLSearchParams({ mode: get(currentMode) }),
+		{ method: 'GET' }
+	);
 	const val: ConversationCarouselItem[] = await result.json();
 	return val;
-}
+};
+
+export const checkGoalProgress = async function (dialogue: string, goal: string) {
+	const response = await fetch('/api/v1/conversation/utils/goalProgress', {
+		method: 'POST',
+		body: JSON.stringify({ dialogue, goal })
+	});
+
+	const { result } = await response.json();
+	return result;
+};

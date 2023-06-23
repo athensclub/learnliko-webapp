@@ -19,9 +19,13 @@ export const textAdaptor = async function (text: string, targetLevel: CEFRLevel)
 			required: ['result']
 		}
 	};
-	const response = await gptFunctionCalling([{ role: 'user', content: text }], [_function], {
-		name: _function.name
-	});
+	const response = await gptFunctionCalling(
+		[{ role: 'user', content: `text: "${text}"` }],
+		[_function],
+		{
+			name: _function.name
+		}
+	);
 
 	if (!response) throw new Error('No output from adaptor');
 

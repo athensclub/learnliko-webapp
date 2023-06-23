@@ -1,5 +1,7 @@
 import type { ConversationCarouselItem } from '$lib/types/conversationData';
 import type { Mode } from '$lib/types/mode';
+import type { ChatCompletionFunctions } from 'openai';
+import { gptFunctionCalling } from '../openai';
 
 export const queryConversations = async function (mode: Mode) {
 	let data; // = await import(mapping[mode]);
@@ -8,10 +10,41 @@ export const queryConversations = async function (mode: Mode) {
 	} else if (mode === 'Student') {
 		data = await import('$lib/server/db/student_conversations.json');
 	} else {
-		throw new Error("Unknown mode: " + mode);
+		throw new Error('Unknown mode: ' + mode);
 	}
-	return data.results.map(val => val as ConversationCarouselItem);
-}
+	return data.results.map((val) => val as ConversationCarouselItem);
+};
+
+export const isDialogueAchieveGoal = async function (dialogue: string, goal: string) {
+	if (!dialogue) throw new Error('No dialogue provided');
+	if (!goal) throw new Error('No goal provided');
+
+	const _function: ChatCompletionFunctions = {
+		name: 'is_dialogue_achieve_goal',
+		description: `Check whether the provided dialogue has achieved the goal which is "${goal}"`,
+		parameters: {
+			type: 'object',
+			properties: {
+				result: {
+					type: 'boolean',
+					description: `true if the provided dialogue has achieved the goal, false otherwise`
+				}
+			},
+			required: ['result']
+		}
+	};
+	const response = await gptFunctionCalling(
+		[{ role: 'user', content: `dialogue: "${dialogue}"` }],
+		[_function],
+		{
+			name: _function.name
+		}
+	);
+
+	if (!response) throw new Error('No output from checker');
+
+	return JSON.parse(response);
+};
 
 /**
 {

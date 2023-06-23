@@ -1,23 +1,42 @@
 <script lang="ts">
 	import { chatContext, currentChatboxView, recapHistory, showChatbox } from '$lib/global/chatbox';
-	import type { LearnedConversationItem, LearningDiaryItem } from '$lib/types/learningDiary';
+	import userSession from '$lib/stores/userSession';
+	import type {
+		LearnedConversationItem,
+		LearnedReadingItem,
+		LearningDiaryItem
+	} from '$lib/types/learningDiary';
 	import { formatAMPM } from '$lib/utils/time';
+	import type { Context } from 'svelte-simple-modal';
 	import ConversationCard from '../ConversationCard.svelte';
 	import ReadMore from '../ReadMore.svelte';
+	import { getContext } from 'svelte';
+	import { goto } from '$app/navigation';
 
 	export let item: LearningDiaryItem;
 
+	const { close }: Context = getContext('simple-modal');
 	const showItemRecap = (item: LearnedConversationItem) => {
 		$chatContext = { conversation: item.conversation, bot: { emotion: 'neutral' } };
 		$recapHistory = item.recap;
 		$currentChatboxView = 'RECAP';
 		$showChatbox = true;
+
+		close();
+	};
+
+	const readAgain = async (item: LearnedReadingItem) => {
+		await goto(`/read/${item.item.id}`);
+		close();
 	};
 
 	// combined vocabs from the selected diary item.
 	$: vocabs = [
-		...(item.learnedConversations.flatMap((it) => it.vocabs) ?? []),
-		...(item.learnedReadings.flatMap((it) => it.vocabs) ?? [])
+		// only unique items
+		...new Set([
+			...(item.learnedConversations.flatMap((it) => it.vocabs) ?? []),
+			...(item.learnedReadings.flatMap((it) => it.vocabs) ?? [])
+		])
 	];
 </script>
 
@@ -91,9 +110,12 @@
 							<ReadMore textContent="Vocabularies: {it.vocabs.join(', ')}" maxChars={100} />
 						</div>
 
-						<a href="/read/{it.item.id}" class="mt-[3vh] w-fit bg-[#D9D9D9] rounded-2xl py-1 px-4">
+						<button
+							on:click={() => readAgain(it)}
+							class="mt-[3vh] w-fit bg-[#D9D9D9] rounded-2xl py-1 px-4"
+						>
 							Read again
-						</a>
+						</button>
 					</div>
 				</div>
 			</div>

@@ -142,7 +142,7 @@
 	</div>
 </div>
 
-<div class="w-full h-[calc(100%-48px-64px)] overflow-y-auto font-line-seed">
+<div class="w-full px-[2vw] h-[calc(100%-48px-64px)] overflow-y-auto font-line-seed">
 	{#each history as chat, index (index)}
 		{#if chat.role !== 'system'}
 			<div
@@ -193,7 +193,7 @@
 	{/each}
 </div>
 
-<div class="w-full h-[64px] font-line-seed">
+<div class="w-[90%] h-[64px] font-line-seed">
 	<div class="flex flex-row">
 		<input
 			on:keypress={onKeyPressed}

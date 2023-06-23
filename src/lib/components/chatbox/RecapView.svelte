@@ -41,7 +41,7 @@
 		</button>
 	</div>
 
-	<div class="w-full h-[calc(100%-48px)] overflow-y-auto">
+	<div class="w-[full] px-[2vw] h-[calc(100%-48px)] overflow-y-auto">
 		{#each $recapHistory as dialogue, index (index)}
 			{#if dialogue.user}
 				<DialogueCard

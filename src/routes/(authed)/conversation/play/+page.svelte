@@ -1,4 +1,5 @@
 <script lang="ts">
+	import ConversationView from '$lib/components/chatbox/ConversationView.svelte';
 	import ConfirmModal from '$lib/components/modals/ConfirmModal.svelte';
 	import { isMobile } from '$lib/global/breakpoints';
 	import { chatContext, showChatbox } from '$lib/global/chatbox';
@@ -6,6 +7,7 @@
 	import { getContext, onMount } from 'svelte';
 	import type { Context } from 'svelte-simple-modal';
 	import Typewriter from 'svelte-typewriter/Typewriter.svelte';
+	import { fly } from 'svelte/transition';
 
 	// initialization
 	onMount(() => {
@@ -42,8 +44,9 @@
 				<strong class={`${$isMobile ? 'text-[4vw]' : 'text-[2vw]'}`}> 🎯Coversation Goal </strong>
 			</div>
 			<Typewriter>
-				<pre class="mt-3 text-sm whitespace-pre-wrap">{$chatContext.conversation.details.learner
-						.goal}</pre>
+				<div class="mt-3 text-[1.3vw] font-line-seed whitespace-pre-wrap">
+					{$chatContext.conversation.details.learner.goal}
+				</div>
 			</Typewriter>
 		</div>
 
@@ -79,5 +82,23 @@
 			src={$chatContext.conversation.avatar.models[$chatContext.bot.emotion]}
 			alt="Avatar"
 		/>
+
+		<div
+			class={`fixed ${
+				$isMobile ? 'w-[100vw] h-[40vh] bottom-0' : 'w-[37vw] h-[70vh] bottom-[15vh] right-[3vw]'
+			} z-[600]`}
+		>
+			<div
+				transition:fly={{ y: 800, duration: 800 }}
+				class={`overflow-hidden w-full h-full font-line-seed relative flex flex-col items-center shadow-2xl shadow-gray-700 border-[1px] border-black/10 border-b-0 backdrop-blur-sm backdrop-brightness-75 bg-transparent rounded-3xl`}
+			>
+				<ConversationView
+					class="text-white"
+					initializingClass="text-white"
+					recorderClass="text-black bg-black/[0.5] backdrop-blur-md w-[90%]"
+					finishButtonClass="border-white/[0.15]"
+				/>
+			</div>
+		</div>
 	</div>
 {/if}

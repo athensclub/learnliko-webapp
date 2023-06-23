@@ -31,6 +31,7 @@
 		class="w-[100vw] h-[100vh] text-white bg-cover bg-center relative"
 		style="background-image: url('{$chatContext.conversation.background}');"
 	>
+		<!-- Mission Details container -->
 		<div
 			class={`absolute ${
 				$isMobile
@@ -47,6 +48,7 @@
 			</Typewriter>
 		</div>
 
+		<!-- Exit Button -->
 		<button
 			on:click={hideConversation}
 			class={`absolute flex flex-row items-center justify-around rounded-full ${
@@ -74,6 +76,7 @@
 			Exit
 		</button>
 
+		<!-- Avatar zone -->
 		<img
 			class={`${$isMobile ? 'w-full' : 'h-[90%] left-[50%] translate-x-[-50%]'} absolute bottom-0`}
 			src={$chatContext.conversation.avatar.models[$chatContext.bot.emotion]}

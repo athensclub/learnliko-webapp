@@ -23,5 +23,7 @@ export const textAdaptor = async function (text: string, targetLevel: CEFRLevel)
 		name: _function.name
 	});
 
-	return response;
+	if (!response) throw new Error('No output from adaptor');
+
+	return JSON.parse(response);
 };

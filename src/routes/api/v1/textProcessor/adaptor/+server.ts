@@ -10,6 +10,6 @@ export const POST: RequestHandler = async ({ request }) => {
 		const result = await textAdaptor(text, targetLevel);
 		return json(result);
 	} catch (e) {
-		throw error(500, e as string);
+		throw error(500, `Error: ${e}`);
 	}
 };

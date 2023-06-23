@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { beforeNavigate } from '$app/navigation';
 	import ConversationView from '$lib/components/chatbox/ConversationView.svelte';
 	import ConfirmModal from '$lib/components/modals/ConfirmModal.svelte';
 	import { isMobile } from '$lib/global/breakpoints';
@@ -26,6 +27,19 @@
 				window.history.back();
 			}
 		});
+
+	const beforeUnload = (event: BeforeUnloadEvent) => {
+		// Chrome requires returnValue to be set.
+		event.returnValue = 'Are you sure you want to end conversation?';
+		return 'Are you sure you want to end conversation?';
+	};
+
+	// window before unload won't trigger on navigation in the same site, use: https://stackoverflow.com/a/76238933
+	beforeNavigate(({ cancel }) => {
+		if (!confirm('Are you sure you want to end conversation?')) {
+			cancel();
+		}
+	});
 </script>
 
 {#if $chatContext}
@@ -102,3 +116,5 @@
 		</div>
 	</div>
 {/if}
+
+<svelte:window on:beforeunload|preventDefault={beforeUnload} />

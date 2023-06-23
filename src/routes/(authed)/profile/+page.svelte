@@ -10,6 +10,7 @@
 	import userSession from '$lib/stores/userSession';
 	import { showChatbox } from '$lib/global/chatbox';
 	import { navigating } from '$app/stores';
+	import { beforeNavigate } from '$app/navigation';
 
 	let name = 'Natsataporn M.';
 	let learningDiaries: LearningDiaryItem[] | null = null;
@@ -29,9 +30,7 @@
 	});
 
 	// hide chatbox on exit in case it is showing recap.
-	$: if ($navigating) {
-		$showChatbox = false;
-	}
+	beforeNavigate(() => ($showChatbox = false));
 </script>
 
 <div

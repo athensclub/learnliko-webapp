@@ -17,7 +17,6 @@
 			description: 'Are you sure you want to end the recap?',
 			onConfirm: () => {
 				$showChatbox = false;
-				$currentChatboxView = 'CONVERSATION';
 			}
 		});
 </script>

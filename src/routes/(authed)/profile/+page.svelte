@@ -29,7 +29,9 @@
 	});
 
 	// hide chatbox on exit in case it is showing recap.
-	onDestroy(() => ($showChatbox = false));
+	$: if ($navigating) {
+		$showChatbox = false;
+	}
 </script>
 
 <div

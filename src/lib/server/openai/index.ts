@@ -30,12 +30,12 @@ export const gptFunctionCalling = async function (
 ) {
 	const chatGPT = await _openai.createChatCompletion({
 		model: 'gpt-3.5-turbo-0613',
-		function_call,
+		messages,
 		functions,
-		messages
+		function_call
 	});
 
-	return chatGPT.data.choices[0].message?.content;
+	return chatGPT.data.choices[0].message?.function_call?.arguments;
 };
 
 export const transcribe = async function (audio: Blob) {

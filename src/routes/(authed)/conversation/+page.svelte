@@ -16,7 +16,7 @@
 		conversationCorouselItems: []
 	};
 	const loadData = async () => {
-		if(!browser) return;
+		if (!browser) return;
 		const result = await queryConversationsLocal();
 		data = {
 			conversationCorouselItems: result
@@ -65,7 +65,10 @@
 				</div>
 			</a>
 
-			<div class="w-[48%] h-[35vh] py-[3vh] px-[3vw] flex flex-row bg-white rounded-[2vw]">
+			<a
+				href="/conversation/location"
+				class="w-[48%] h-[35vh] py-[3vh] px-[3vw] flex flex-row bg-white rounded-[2vw]"
+			>
 				<img class="w-[40%] object-contain" src={locButtonImage} alt="Conversation" />
 
 				<div class="flex flex-col flex-1 pl-[2vw]">
@@ -89,7 +92,7 @@
 					<div class="text-[2.5vw] mt-[2vh]">Location</div>
 					<div class="text-[1vw]">You unlocked 8/20 locations</div>
 				</div>
-			</div>
+			</a>
 		</div>
 
 		<div class="mt-[5vh] text-[2vw] font-bold">Today Tasks</div>

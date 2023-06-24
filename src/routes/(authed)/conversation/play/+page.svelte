@@ -55,47 +55,6 @@
 		class="w-[100vw] h-[100vh] text-white bg-cover bg-center relative"
 		style="background-image: url('{$chatContext.conversation.background}');"
 	>
-		<!-- Mission Details container -->
-		<div
-			class={`absolute transition-position backdrop-blur-lg backdrop-brightness-75 p-[1.5vw] shadow-sm border rounded-xl font-line-seed ${
-				$isMobile
-					? 'top-0 w-full text-[1.3vw] rounded-t-none'
-					: `top-[18vh] w-[33%] ${briefing ? 'left-[20vw]' : 'left-[3vw]'}`
-			}`}
-		>
-			{#if briefing}
-				<div class="text-[1.7vw] font-bold">🎯ภารกิจของคุณ</div>
-				<div class="text-[1.3vw] mt-[1vw]">{$chatContext.conversation.details.learner.mission}</div>
-
-				<!-- Divider -->
-				<div class="w-full h-[0.15vh] my-[2vw] bg-white" />
-
-				<div class="text-[1.7vw] font-bold">เป้าหมาย</div>
-				<div class="text-[1.3vw] mt-[1vw] whitespace-pre-wrap">
-					{$chatContext.conversation.details.learner.goal
-						.map((g, i) => `${i + 1}. ${g}`)
-						.join('\n')}
-				</div>
-
-				<div class="text-[1.1vw] font-bold mt-[2vw] text-center">
-					คุณจะได้รับเหรียญสูงสุด 🧿 300 สำหรับภารกิจนี้
-				</div>
-
-				<button
-					on:click={() => (briefing = false)}
-					class="w-full bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] rounded-full mt-[2vw] text-[1.3vw] py-[1.3vh]"
-				>
-					เริ่มการพูดคุย
-				</button>
-			{:else}
-				<div class="text-[1.7vw] font-bold mt-[5vh] whitespace-pre-wrap text-center">
-					{$currentGoal + 1}. {$chatContext.conversation.details.learner.goal[$currentGoal]}
-				</div>
-
-				<div class="text-[1.35vw] px-[1vw] py-[0.3vw] mt-[3vh] mb-[5vh] bg-[#0000007D] w-fit rounded-full mx-auto">🧿 100</div>
-			{/if}
-		</div>
-
 		<!-- Exit Button -->
 		<button
 			on:click={hideConversation}
@@ -124,38 +83,91 @@
 			Exit
 		</button>
 
-		<!-- Avatar zone -->
-		<img
-			class={`${
-				$isMobile
-					? 'w-full'
-					: `h-[90%] absolute bottom-0 transition-transform ${
-							briefing ? 'right-[25vw] translate-x-0' : 'right-[50%] translate-x-[50%]'
-					  }`
-			}`}
-			src={$chatContext.conversation.avatar.models[$chatContext.bot.emotion]}
-			alt="Avatar"
-		/>
-
-		{#if !briefing}
+		<div
+			class={`flex flex-row h-full items-center ${briefing ? 'w-full justify-center' : 'w-[60%]'}`}
+		>
+			<!-- Mission Details container -->
 			<div
-				class={`fixed ${
-					$isMobile ? 'w-[100vw] h-[40vh] bottom-0' : 'w-[37vw] h-[70vh] bottom-[15vh] right-[3vw]'
-				} z-[600]`}
+				class={`transition-transform backdrop-blur-lg backdrop-brightness-75 p-[1.5vw] shadow-sm border rounded-xl font-line-seed ${
+					$isMobile
+						? 'absolute top-0 w-full text-[1.3vw] rounded-t-none'
+						: `${briefing ? 'w-[33%]' : 'ml-[5%] w-[45%]'} h-fit`
+				}`}
 			>
-				<div
-					transition:fly={{ y: 800, duration: 800 }}
-					class={`overflow-hidden w-full h-full font-line-seed relative flex flex-col items-center shadow-2xl shadow-gray-700 border-[1px] border-black/10 border-b-0 backdrop-blur-sm backdrop-brightness-75 bg-transparent rounded-3xl`}
-				>
-					<ConversationView
-						class="text-white"
-						initializingClass="text-white"
-						recorderClass="text-black bg-black/[0.5] backdrop-blur-md w-[90%]"
-						finishButtonClass="border-white/[0.15]"
-					/>
-				</div>
+				{#if briefing}
+					<div class="text-[1.7vw] font-bold">🎯ภารกิจของคุณ</div>
+					<div class="text-[1.3vw] mt-[1vw]">
+						{$chatContext.conversation.details.learner.mission}
+					</div>
+
+					<!-- Divider -->
+					<div class="w-full h-[0.15vh] my-[2vw] bg-white" />
+
+					<div class="text-[1.7vw] font-bold">เป้าหมาย</div>
+					<div class="text-[1.3vw] mt-[1vw] whitespace-pre-wrap">
+						{$chatContext.conversation.details.learner.goal
+							.map((g, i) => `${i + 1}. ${g}`)
+							.join('\n')}
+					</div>
+
+					<div class="text-[1.1vw] font-bold mt-[2vw] text-center">
+						คุณจะได้รับเหรียญสูงสุด 🧿 300 สำหรับภารกิจนี้
+					</div>
+
+					<button
+						on:click={() => (briefing = false)}
+						class="w-full bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] rounded-full mt-[2vw] text-[1.3vw] py-[1.3vh]"
+					>
+						เริ่มการพูดคุย
+					</button>
+				{:else}
+					<div class="text-[1.7vw] font-bold mt-[5vh] whitespace-pre-wrap text-center">
+						{$currentGoal + 1}. {$chatContext.conversation.details.learner.goal[$currentGoal]}
+					</div>
+
+					<div
+						class="text-[1.35vw] px-[1vw] py-[0.3vw] mt-[3vh] mb-[5vh] bg-[#0000007D] w-fit rounded-full mx-auto"
+					>
+						🧿 100
+					</div>
+				{/if}
 			</div>
-		{/if}
+
+			<!-- Avatar zone -->
+			<div class="w-fit h-full flex flex-col justify-end">
+				<img
+					class={`${
+						$isMobile
+							? 'w-full max-h-full object-contain mx-auto'
+							: `${briefing ? 'h-[90%]' : 'w-full max-h-[90%]'} bottom-0 transition-transform`
+					}`}
+					src={$chatContext.conversation.avatar.models[$chatContext.bot.emotion]}
+					alt="Avatar"
+				/>
+			</div>
+
+			{#if !briefing}
+				<div
+					class={`fixed ${
+						$isMobile
+							? 'w-[100vw] h-[40vh] bottom-0'
+							: 'w-[37vw] h-[70vh] bottom-[15vh] right-[3vw]'
+					} z-[600]`}
+				>
+					<div
+						transition:fly={{ y: 800, duration: 800 }}
+						class={`overflow-hidden w-full h-full font-line-seed relative flex flex-col items-center shadow-2xl shadow-gray-700 border-[1px] border-black/10 border-b-0 backdrop-blur-sm backdrop-brightness-75 bg-transparent rounded-3xl`}
+					>
+						<ConversationView
+							class="text-white"
+							initializingClass="text-white"
+							recorderClass="text-black bg-black/[0.5] backdrop-blur-md w-[90%]"
+							finishButtonClass="border-white/[0.15]"
+						/>
+					</div>
+				</div>
+			{/if}
+		</div>
 	</div>
 {/if}
 

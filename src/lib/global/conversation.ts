@@ -7,10 +7,10 @@ import { get, writable } from 'svelte/store';
 import { chatContext, recapHistory, type RecapHistory } from './chatbox';
 import { blobToBase64 } from '$lib/utils/io';
 import { round } from '$lib/utils/math';
-import { setCurrentCEFRLevel } from '$lib/localdb/profileLocal';
 import { completeConversationLocal } from '$lib/localdb/conversationLocal';
 import { audioRecording } from './recording';
-import { isGoalComplete } from '$api/friendConversation';
+import { textAdaptor } from '$api/textProcessor';
+import type { CEFRLevel } from '$lib/types/CEFRLevel';
 
 /** chat's history, used for display only */
 export const history = writable<
@@ -43,9 +43,9 @@ export const isCheckConversationGoal = writable(true);
 export const saveCurrentConversation = writable(true);
 
 /**
- * If the number of dialogue (pair of ai/user chat) exceed this amount, 
+ * If the number of dialogue (pair of ai/user chat) exceed this amount,
  */
-export const maxDialogueCount = writable(1000000)
+export const maxDialogueCount = writable(1000000);
 
 /**
  * The index of the current goal that the user need to achieve.
@@ -85,8 +85,9 @@ export const initializeConversationBot = async function () {
 /**
  * Call bot to reply base on chat history
  * @param message ignore chat history if [message] is provided
+ * @param targetLevel target CEFR level of bot's message
  */
-const botReply = async function (message?: string) {
+const botReply = async function (message?: string, targetLevel: CEFRLevel = 'A1') {
 	const ct = get(chatContext);
 	if (!ct) throw new Error('required chatbox context');
 
@@ -106,6 +107,8 @@ const botReply = async function (message?: string) {
 				// ensure `data` is available and emotion is provided correctly
 				if (!data) continue;
 				if (!data.emotion || !BotEmotionValues.includes(data.emotion)) data.emotion = 'neutral';
+
+				data.message = await textAdaptor(data.message, targetLevel);
 
 				chatContext.set({ ...ct, bot: { ...ct.bot, emotion: data.emotion } });
 				gptHistory.push({ role: 'assistant', content: botResponse });
@@ -140,15 +143,26 @@ const botReply = async function (message?: string) {
 	]);
 
 	if (get(isCheckConversationGoal)) {
-		const passed = await checkGoalProgress(get(history).map(item => `${item.role === 'user' ? 'User' : ct.conversation.avatar.name}: ${item.transcription}`).join("\n"), ct.conversation.details.learner.goal[get(currentGoal)]);
-		console.log(passed)
+		const passed = await checkGoalProgress(
+			get(history)
+				.map(
+					(item) =>
+						`${item.role === 'user' ? 'User' : ct.conversation.avatar.name}: ${item.transcription}`
+				)
+				.join('\n'),
+			ct.conversation.details.learner.goal[get(currentGoal)]
+		);
+		console.log(passed);
 		if (passed) {
-			currentGoal.set(get(currentGoal) + 1)
+			currentGoal.set(get(currentGoal) + 1);
 		}
 	}
 
 	// behavior regarding bot's message status
-	if ((ct && get(currentGoal) >= ct.conversation.details.learner.goal.length) || get(history).length >= 2 * get(maxDialogueCount)) {
+	if (
+		(ct && get(currentGoal) >= ct.conversation.details.learner.goal.length) ||
+		get(history).length >= 2 * get(maxDialogueCount)
+	) {
 		conversationFinished.set(true);
 		if (get(saveCurrentConversation)) {
 			finishedTime = new Date();

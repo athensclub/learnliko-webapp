@@ -19,7 +19,6 @@ export const isDialogueAchieveGoal = async function (dialogue: string, goal: str
 	if (!dialogue) throw new Error('No dialogue provided');
 	if (!goal) throw new Error('No goal provided');
 
-	console.log(dialogue);
 	const _function: ChatCompletionFunctions = {
 		name: 'is_dialogue_achieve_goal',
 		description: `Check whether the User in the provided dialogue has achieved the goal which is "${goal}"`,

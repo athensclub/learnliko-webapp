@@ -20,7 +20,8 @@
 	>
 		<div class="text-[2.7vw]">Friends</div>
 
-		<button
+		<a
+			href="/friends/hangbot"
 			class="flex flex-row items-center bg-gradient-to-r from-[#C698FF] to-[#FFD281] rounded-3xl w-full h-[20vh]"
 		>
 			<img class="h-[65%]" src={hangbot} alt="Hangbot" />
@@ -29,7 +30,7 @@
 				<div class="inline-block font-bold">Hangman</div>
 				with friends
 			</div>
-		</button>
+		</a>
 
 		<div class="flex flex-row w-full bg-[#F8F8F8] mt-3 p-3 rounded-xl items-center">
 			<div
@@ -77,8 +78,8 @@
 			{#each $friendsHistory as chat, index (index)}
 				<div class={`flex flex-row px-4 w-full items-center`}>
 					<div
-						class={`flex pt-3 flex-row items-center  w-full ${
-							chat.role === 'user' ? 'flex-row-reverse' : ''
+						class={`flex pt-3 flex-row items-center w-full gap-[2vw] ${
+							chat.role === 'user' ? 'flex-row-reverse pl-[5vw]' : 'pr-[5vw]'
 						}`}
 					>
 						{#if chat.role === 'friend'}
@@ -90,11 +91,33 @@
 
 						{#if chat.role === 'user'}
 							<div
-								class={`w-[42px] h-[42px] bg-center bg-cover rounded-full`}
+								class={`w-[3.6vw] h-[3.6vw] bg-center bg-cover rounded-full`}
 								style="background-image: url('{userProfileImage}');"
 							/>
 						{/if}
-						<div class={`mx-3 bg-white py-2 px-5 rounded-xl`}>{chat.text}</div>
+
+						<div
+							class={`flex-1 flex flex-row ${
+								chat.role === 'user' ? 'justify-end' : 'justify-start'
+							}`}
+						>
+							<div
+								class={`text-[1.2vw] rounded-xl font-bold ${
+									chat.text === null
+										? 'bg-gradient-to-r from-[#C698FF] to-[#FFD281] text-white w-[60%] px-[2vw] py-[1vw] flex flex-col'
+										: 'bg-[#F4F4F4] text-black w-fit py-[0.5vw] px-[1.5vw]'
+								}`}
+							>
+								{#if chat.text === null}
+								<!-- Null means hangbot invite -->
+								Invite you to play crossword!
+								<img class="w-[70%] mx-auto my-[1vw]" src={hangbot} alt="Hangbot"/>
+								<a href="/friends/hangbot/online" class="w-full py-[0.35vw] bg-white rounded-full text-black text-[1.2vw] text-center">Join</a>
+								{:else}
+									{chat.text}
+								{/if}
+							</div>
+						</div>
 					</div>
 				</div>
 			{/each}

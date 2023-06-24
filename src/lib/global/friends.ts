@@ -8,11 +8,11 @@ import { get, writable } from "svelte/store";
 export const friendsInputMessage = writable('');
 
 /**
- * Chat history in friends group
+ * Chat history in friends group. If text is null, then that chat item is a game invite.
  */
 export const friendsHistory = writable<{
     role: 'user' | 'friend';
-    text: string;
+    text: string | null;
 }[]>([{ role: 'friend', text: 'Hi everyone.' }]);
 
 export const waitingForFriendResponse = writable(false);
@@ -23,7 +23,7 @@ let gptHistory: ChatMessage[] = [];
 export const resetFriendsSpaceData = () => {
     friendsInputMessage.set('');
     waitingForFriendResponse.set(false);
-    friendsHistory.set([{ role: 'friend', text: 'Hi everyone.' }]);
+    friendsHistory.set([{ role: 'friend', text: 'Hi everyone.' }, {role: 'user', text: null}]);
     gptHistory = [{
         role: 'user',
         content: `Your role: I want you to act as a male student, you are friendly. You don't seem to expose yourself that much unless being ask. About yourself: Your name is Steve. You are from USA, Seattle, you are 12 years old. Your favorite color is Red.`
@@ -52,7 +52,7 @@ export const sendFriendsMessage = async function () {
     friendsHistory.set([...get(friendsHistory), { role: 'user', text: get(friendsInputMessage) }]);
     gptHistory.push({ role: 'user', content: get(friendsInputMessage) });
 
-    const promises: Promise<any>[] = [];
+    const promises: Promise<unknown>[] = [];
     promises.push(friendReply());
     friendsInputMessage.set('')
 

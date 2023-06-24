@@ -1,9 +1,18 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
+	import { beforeNavigate, goto } from '$app/navigation';
+	import EnteringConversation from '$lib/components/loading/EnteringConversation.svelte';
 	import userSession from '$lib/stores/userSession';
 	import { onMount } from 'svelte';
 
 	let loading = true;
+
+	let enteringConversation = false;
+
+	beforeNavigate(({ to }) => {
+		if (to?.url.pathname === '/conversation/play') {
+			enteringConversation = true;
+		}
+	});
 
 	onMount(() => {
 		// Subscribe on user's session
@@ -23,5 +32,9 @@
 </script>
 
 {#if !loading}
-	<slot />
+	{#if enteringConversation}
+		<EnteringConversation onFinish={() => (enteringConversation = false)} />
+	{:else}
+		<slot />
+	{/if}
 {/if}

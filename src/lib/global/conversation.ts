@@ -159,10 +159,7 @@ const botReply = async function (message?: string, targetLevel: CEFRLevel = 'A1'
 	}
 
 	// behavior regarding bot's message status
-	if (
-		(ct && get(currentGoal) >= ct.conversation.details.learner.goal.length) ||
-		get(history).length >= 2 * get(maxDialogueCount)
-	) {
+	if ((get(isCheckConversationGoal) && get(currentGoal) >= ct.conversation.details.learner.goal.length) || get(history).length >= 2 * get(maxDialogueCount)) {
 		conversationFinished.set(true);
 		if (get(saveCurrentConversation)) {
 			finishedTime = new Date();

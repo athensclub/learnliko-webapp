@@ -47,7 +47,7 @@
 
 			<div class="text-[4vw]">Today Tasks</div>
 
-			<div class="flex flex-row text-[1vw] justify-between">
+			<div class="flex flex-row  justify-between">
 				<div class="flex flex-row gap-[2vw]">
 					<img class="h-[4vh]" src={convTaskImage} alt="Conversation" />
 
@@ -123,13 +123,13 @@
 				</div>
 			</div>
 		{:else}
-			<div class="text-[2vw]">Today Tasks</div>
-
+			<div class="text-[1.8vw]">Today Tasks</div>
+			
 			<div
-				class="flex flex-col py-[2vh] w-full items-center text-[1.5vw] bg-[#F8F8F8] rounded-[2vw]"
+				class="flex flex-col py-[2vh] w-full items-center text-[1.2vw] bg-[#F8F8F8] rounded-[2vw]"
 			>
-				Talk with 3 AI friends
-
+				
+			<h1>Talk with 3 AI friends</h1>
 				<img class="w-[50%]" src={convTaskImage} alt="Conversation" />
 
 				<svg
@@ -149,18 +149,17 @@
 							y2="11.6116"
 							gradientUnits="userSpaceOnUse"
 						>
-							<stop stop-color="#7280FF" />
-							<stop offset="0.4375" stop-color="#C698FF" />
-							<stop offset="1" stop-color="#FFD68D" />
+						<stop stop-color="#6C80E8" />
+						<stop offset="1" stop-color="#9BA1FD" />
 						</linearGradient>
 					</defs>
 				</svg>
 			</div>
 
 			<div
-				class="flex flex-col py-[2vh] w-full items-center text-[1.5vw] bg-[#F8F8F8] rounded-[2vw]"
+				class="flex flex-col py-[2vh] w-full items-center text-[1.2vw] bg-[#F8F8F8] rounded-[2vw]"
 			>
-				Read 5 Stories
+				<h1>Read 5 Stories</h1>
 				<img class="w-[50%]" src={readingTaskImage} alt="Conversation" />
 
 				<svg
@@ -180,9 +179,8 @@
 							y2="11.6116"
 							gradientUnits="userSpaceOnUse"
 						>
-							<stop stop-color="#7280FF" />
-							<stop offset="0.4375" stop-color="#C698FF" />
-							<stop offset="1" stop-color="#FFD68D" />
+							<stop stop-color="#6C80E8" />
+							<stop offset="1" stop-color="#9BA1FD" />
 						</linearGradient>
 					</defs>
 				</svg>

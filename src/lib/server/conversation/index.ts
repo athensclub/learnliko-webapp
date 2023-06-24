@@ -19,10 +19,10 @@ export const isDialogueAchieveGoal = async function (dialogue: string, goal: str
 	if (!dialogue) throw new Error('No dialogue provided');
 	if (!goal) throw new Error('No goal provided');
 
-	console.log(dialogue)
+	console.log(dialogue);
 	const _function: ChatCompletionFunctions = {
 		name: 'is_dialogue_achieve_goal',
-		description: `Check whether the user in the provided dialogue has achieved the goal which is "${goal}"`,
+		description: `Check whether the User in the provided dialogue has achieved the goal which is "${goal}"`,
 		parameters: {
 			type: 'object',
 			properties: {
@@ -35,7 +35,14 @@ export const isDialogueAchieveGoal = async function (dialogue: string, goal: str
 		}
 	};
 	const response = await gptFunctionCalling(
-		[{ role: 'user', content: `dialogue: "${dialogue}"` }],
+		[
+			{
+				role: 'system',
+				content:
+					'You are a dialogue evaluator tasked with assessing whether a given dialogue has achieved its goal. Your task is to read the provided dialogue and determine if the participants in the conversation have successfully accomplished what they set out to do. Evaluate the dialogue and provide your analysis, stating whether the goal has been achieved or not'
+			},
+			{ role: 'user', content: `dialogue: "${dialogue}"` }
+		],
 		[_function],
 		{
 			name: _function.name

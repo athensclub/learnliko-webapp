@@ -1,8 +1,15 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
+	import { sendHangbotInvite } from '$lib/global/friends';
 	import icon from '$lib/images/hangbot_icon.png';
 	import FriendsGameLogo from './FriendsGameLogo.svelte';
 	import playAlone from './play_alone_image.png';
 	import playWithFriends from './play_with_friends_image.png';
+
+	const playWithFriendsClicked = () => {
+		sendHangbotInvite();
+		goto('/friends/hangbot/online');
+	};
 </script>
 
 <div
@@ -31,13 +38,13 @@
 				Play Alone
 			</a>
 
-			<a
-				href="/friends/hangbot/online"
+			<button
+				on:click={playWithFriendsClicked}
 				class="w-full h-[13vw] gap-[2vh] flex flex-col items-center justify-center rounded-[2vw] bg-gradient-to-r from-[#DCDCDC] via-white to-[#DCDCDC] text-[1.7vw] font-bold"
 			>
 				<img src={playWithFriends} class="h-[35%]" alt="Play Alone" />
 				Play With Friends
-			</a>
+			</button>
 		</div>
 	</div>
 </div>

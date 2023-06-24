@@ -13,7 +13,7 @@ export const friendsInputMessage = writable('');
 export const friendsHistory = writable<{
     role: 'user' | 'friend';
     text: string | null;
-}[]>([{ role: 'friend', text: 'Hi everyone.' }]);
+}[]>([]);
 
 export const waitingForFriendResponse = writable(false);
 
@@ -23,7 +23,7 @@ let gptHistory: ChatMessage[] = [];
 export const resetFriendsSpaceData = () => {
     friendsInputMessage.set('');
     waitingForFriendResponse.set(false);
-    friendsHistory.set([{ role: 'friend', text: 'Hi everyone.' }, {role: 'user', text: null}]);
+    friendsHistory.set([{ role: 'friend', text: 'Hi everyone.' }]);
     gptHistory = [{
         role: 'user',
         content: `Your role: I want you to act as a male student, you are friendly. You don't seem to expose yourself that much unless being ask. About yourself: Your name is Steve. You are from USA, Seattle, you are 12 years old. Your favorite color is Red.`
@@ -43,6 +43,10 @@ const friendReply = async function () {
         }
     ])
     waitingForFriendResponse.set(false);
+};
+
+export const sendHangbotInvite = function () {
+    friendsHistory.set([...get(friendsHistory), { role: 'user', text: null }]);
 };
 
 /**

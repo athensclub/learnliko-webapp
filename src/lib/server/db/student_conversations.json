@@ -27,14 +27,14 @@
 				"name": "Lucy",
 				"models": {
 					"neutral": "https://cdn.discordapp.com/attachments/842737146321174558/1116747283132842105/avatar.png",
-					"joy": "https://media.discordapp.net/attachments/1087307553471463514/1118379821488152699/joy.png?width=1170&height=1170",
-					"trust": "https://media.discordapp.net/attachments/1087307553471463514/1118379822394122250/trust.png?width=1000&height=1000",
+					"joy": "https://cdn.discordapp.com/attachments/842737146321174558/1116747283132842105/avatar.png",
+					"trust": "https://cdn.discordapp.com/attachments/842737146321174558/1116747283132842105/avatar.png",
 					"fear": "https://cdn.discordapp.com/attachments/842737146321174558/1116747283132842105/avatar.png",
-					"surprise": "https://media.discordapp.net/attachments/1087307553471463514/1118379822155055184/surprise.png?width=1000&height=1000",
-					"sadness": "https://media.discordapp.net/attachments/1087307553471463514/1118379821869846548/sad.png?width=1170&height=1170",
-					"disgust": "https://media.discordapp.net/attachments/1087307553471463514/1118379821265862686/disgust.png?width=1000&height=1000",
-					"anger": "https://media.discordapp.net/attachments/1087307553471463514/1118379820699623564/anger.png?width=1000&height=1000",
-					"anticipation": "https://media.discordapp.net/attachments/1087307553471463514/1118379821026791556/anticipation.png?width=1000&height=1000"
+					"surprise": "https://cdn.discordapp.com/attachments/842737146321174558/1116747283132842105/avatar.png",
+					"sadness": "https://cdn.discordapp.com/attachments/842737146321174558/1116747283132842105/avatar.png",
+					"disgust": "https://cdn.discordapp.com/attachments/842737146321174558/1116747283132842105/avatar.png",
+					"anger": "https://cdn.discordapp.com/attachments/842737146321174558/1116747283132842105/avatar.png",
+					"anticipation": "https://cdn.discordapp.com/attachments/842737146321174558/1116747283132842105/avatar.png"
 				}
 			},
 			"id": "1"
@@ -68,14 +68,14 @@
 				"name": "Alan",
 				"models": {
 					"neutral": "https://cdn.discordapp.com/attachments/842737146321174558/1121859550367191111/y2viqdsh.png",
-					"joy": "https://media.discordapp.net/attachments/987411564858576946/1118734315958837278/download.png?width=1170&height=1170",
-					"trust": "https://media.discordapp.net/attachments/987411564858576946/1118734315958837278/download.png?width=1170&height=1170",
-					"fear": "https://media.discordapp.net/attachments/987411564858576946/1118734315958837278/download.png?width=1170&height=1170",
-					"surprise": "https://media.discordapp.net/attachments/987411564858576946/1118734315958837278/download.png?width=1170&height=1170",
-					"sadness": "https://media.discordapp.net/attachments/987411564858576946/1118734315958837278/download.png?width=1170&height=1170",
-					"disgust": "https://media.discordapp.net/attachments/987411564858576946/1118734315958837278/download.png?width=1170&height=1170",
-					"anger": "https://media.discordapp.net/attachments/987411564858576946/1118734315958837278/download.png?width=1170&height=1170",
-					"anticipation": "https://media.discordapp.net/attachments/987411564858576946/1118734315958837278/download.png?width=1170&height=1170"
+					"joy": "https://cdn.discordapp.com/attachments/842737146321174558/1121859550367191111/y2viqdsh.png",
+					"trust": "https://cdn.discordapp.com/attachments/842737146321174558/1121859550367191111/y2viqdsh.png",
+					"fear": "https://cdn.discordapp.com/attachments/842737146321174558/1121859550367191111/y2viqdsh.png",
+					"surprise": "https://cdn.discordapp.com/attachments/842737146321174558/1121859550367191111/y2viqdsh.png",
+					"sadness": "https://cdn.discordapp.com/attachments/842737146321174558/1121859550367191111/y2viqdsh.png",
+					"disgust": "https://cdn.discordapp.com/attachments/842737146321174558/1121859550367191111/y2viqdsh.png",
+					"anger": "https://cdn.discordapp.com/attachments/842737146321174558/1121859550367191111/y2viqdsh.png",
+					"anticipation": "https://cdn.discordapp.com/attachments/842737146321174558/1121859550367191111/y2viqdsh.png"
 				}
 			},
 			"id": "12"

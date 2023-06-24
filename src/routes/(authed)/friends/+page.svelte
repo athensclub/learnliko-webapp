@@ -1,67 +1,15 @@
 <script lang="ts">
-	import { chat } from '$api/conversation';
-	import { isGoalComplete } from '$api/friendConversation';
-	import Header from '$lib/components/Header.svelte';
 	import userProfileImage from '$lib/images/sample_kid_image.png';
 	import friend1 from '$lib/images/kids1.jpg';
 	import friend2 from '$lib/images/kids2.jpg';
-	import type { ChatMessage } from '$lib/types/requests/chatCompletion';
 	import NavBar from '$lib/components/navbar/NavBar.svelte';
-
-	let history: {
-		role: 'user' | 'friend';
-		text: string;
-	}[] = [{ role: 'friend', text: 'Hi everyone.' }];
-	let message: string = '';
-	let waitingForFriendResponse = false;
-	let goalCompleted = false;
-
-	// an array of chatGPT's history in raw data, used for chat completion
-	const gptHistory: ChatMessage[] = [];
-
-	const friendReply = async function () {
-		waitingForFriendResponse = true;
-		const botResponse = await chat(gptHistory);
-		gptHistory.push({ role: 'assistant', content: botResponse });
-
-		history = [
-			...history,
-			{
-				role: 'friend',
-				text: botResponse
-			}
-		];
-		waitingForFriendResponse = false;
-	};
-
-	const sendMessage = async function () {
-		history = [...history, { role: 'user', text: message }];
-		gptHistory.push({ role: 'user', content: message });
-
-		const promises: Promise<any>[] = [];
-
-		if (!goalCompleted) {
-			promises.push(
-				isGoalComplete('Ask your friend their favorite color', message).then(
-					(completed) => (goalCompleted = completed)
-				)
-			);
-		}
-		promises.push(friendReply());
-		message = '';
-
-		await Promise.all(promises);
-	};
-
-	/**
-	 * ==================
-	 * Initialization
-	 * ==================
-	 * */
-	gptHistory.push({
-		role: 'user',
-		content: `Your role: I want you to act as a male student, you are friendly. You don't seem to expose yourself that much unless being ask. About yourself: Your name is Steve. You are from USA, Seattle, you are 12 years old. Your favorite color is Red.`
-	});
+	import hangbot from '$lib/images/hangbot_icon.png';
+	import {
+		friendsHistory,
+		friendsInputMessage,
+		sendFriendsMessage,
+		waitingForFriendResponse
+	} from '$lib/global/friends';
 </script>
 
 <div class="w-[100vw] h-full min-h-[100vh] bg-[#F4F4F4] font-line-seed">
@@ -71,8 +19,16 @@
 		class="fixed top-0 right-0 w-[23vw] h-[100vh] px-[2vw] py-[4vh] gap-[3.5vh] bg-white flex flex-col font-bold"
 	>
 		<div class="text-[2.7vw]">Friends</div>
-		<button class="bg-[#D9D9D9] rounded-3xl text-[1.2vw] text-center w-full py-[6vh]">
-			Play cross word with friends
+
+		<button
+			class="flex flex-row items-center bg-gradient-to-r from-[#C698FF] to-[#FFD281] rounded-3xl w-full h-[20vh]"
+		>
+			<img class="h-[65%]" src={hangbot} alt="Hangbot" />
+			<div class="text-start inline-block font-medium text-[1.2vw] text-white">
+				Play
+				<div class="inline-block font-bold">Hangman</div>
+				with friends
+			</div>
 		</button>
 
 		<div class="flex flex-row w-full bg-[#F8F8F8] mt-3 p-3 rounded-xl items-center">
@@ -111,14 +67,14 @@
 			style="box-shadow: 0px 4px 30px 0px #00000040;"
 			class="absolute top-[2vh] flex flex-col bg-white w-[95%] px-[2vw] py-[1vh] rounded-xl"
 		>
-			<div class="text-lg font-bold">Quest</div>
-			<div>Ask your friend their favorite color</div>
+			<div class="text-lg font-bold">Tips</div>
+			<div>Be nice to your friends.</div>
 
-			<h3 class=" absolute top-1 right-4">{goalCompleted ? '✅ completed' : 'in progress'}</h3>
+			<!-- <h3 class=" absolute top-1 right-4">{goalCompleted ? '✅ completed' : 'in progress'}</h3> -->
 		</div>
 
 		<div class="w-full mt-[15vh] overflow-y-auto">
-			{#each history as chat, index (index)}
+			{#each $friendsHistory as chat, index (index)}
 				<div class={`flex flex-row px-4 w-full items-center`}>
 					<div
 						class={`flex pt-3 flex-row items-center  w-full ${
@@ -147,7 +103,7 @@
 		<div class="w-[95%] h-[48px] font-line-seed mb-4">
 			<h4
 				class={`text-gray-700 transition-opacity ${
-					waitingForFriendResponse ? 'opacity-100' : 'opacity-0'
+					$waitingForFriendResponse ? 'opacity-100' : 'opacity-0'
 				}`}
 			>
 				your friend is typing...
@@ -157,21 +113,17 @@
 				<input
 					class="bg-white border border-black/[0.15] h-fit flex-1 text-lg rounded-3xl px-5 py-1"
 					type="text"
-					bind:value={message}
+					bind:value={$friendsInputMessage}
 					on:keydown={(e) => {
-						if (e.key == 'Enter') sendMessage();
+						if (e.key == 'Enter') sendFriendsMessage();
 					}}
 				/>
 
-				<button class="bg-black text-white py-1 px-3 rounded-xl ml-3" on:click={sendMessage}
-					>Send</button
-				>
+				<button class="bg-black text-white py-1 px-3 rounded-xl ml-3" on:click={sendFriendsMessage}>
+					Send
+				</button>
 			</div>
 		</div>
-	</div>
-
-	<div class="fixed w-[77vw] h-[100vh] bg-[#000000B8] backdrop-blur-md right-0 top-0 flex justify-center items-center text-white text-[3vw] font-bold">
-		Not Available in Trial Version
 	</div>
 </div>
 

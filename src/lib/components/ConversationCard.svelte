@@ -52,12 +52,12 @@
 	<div
 		class="w-full h-[30%] flex flex-col justify-between bg-black/40 backdrop-blur-sm px-[1.5vw] py-[2.5vh] text-white [text-1vw] font-bold"
 	>
-		<div class={`w-full text-center text-[1.2vw] ${$isMobile ? 'text-[3.2vw]' : ''} ${clazz}`}><Typewriter  mode=loopRandom>{conversation.topic}</Typewriter></div>
+		<div class={`w-full text-center text-[1.3vw] ${$isMobile ? 'text-[3.2vw]' : ''}`}><Typewriter  mode=loopRandom>{conversation.topic}</Typewriter></div>
 
 		<button
 			{disabled}
 			on:click={openChatbox}
-			class="flex flex-row items-center justify-center gap-[1vw] w-full h-[45%] bg-[#FFFFFF38] text-white text-[1.25vw] rounded-full"
+			class="flex flex-row items-center justify-center gap-[1vw] w-full h-[45%] bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] text-white text-[1.25vw] rounded-full animate-pulse"
 		>
 			<svg class="h-[45%]" viewBox="0 0 19 25" fill="none" xmlns="http://www.w3.org/2000/svg">
 				<path

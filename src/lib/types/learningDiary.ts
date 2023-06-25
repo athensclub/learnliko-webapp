@@ -1,4 +1,4 @@
-import type { RecapHistory, RecapResult } from "$lib/global/chatbox";
+import type {  RecapResult } from "$lib/global/chatbox";
 import type { ConversationCarouselItem } from "./conversationData";
 import type { ReadingItem } from "./reading";
 

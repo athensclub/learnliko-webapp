@@ -25,8 +25,9 @@
 	import Typewriter from 'svelte-typewriter/Typewriter.svelte';
 	import { analyzeDialog, checkGoalProgress } from '$api/conversation';
 	import { nextLevel, nextPretestLevel, previousPretestLevel } from '$lib/utils/cefr';
-	import { createUserAccount } from '$lib/temp/user';
+	import { createUserAccount, getCurrentUserProfile } from '$lib/temp/user';
 	import PretestFinishedModal from '$lib/components/modals/PretestFinishedModal.svelte';
+	import userSession from '$lib/stores/userSession';
 
 	const GROUP_COUNT = 4;
 	const QUESTIONS_PER_GROUP = 7;
@@ -75,6 +76,9 @@
 					},
 					mode: 'Student'
 				});
+				const profileData = await getCurrentUserProfile();
+				userSession.update({ profile: profileData });
+
 				open(
 					PretestFinishedModal,
 					{ level: currentLevel },
@@ -137,8 +141,6 @@
 		}
 	};
 	$: $conversationFinished, updateConversationFinished();
-
-	$: console.log('currentScore', currentScore);
 </script>
 
 <div class="w-full h-full min-h-[100vh] bg-[#F4F4F4] flex flex-col font-line-seed">

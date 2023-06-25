@@ -71,6 +71,11 @@ export type RecapResult = {
  */
 export const recapHistory = writable<RecapHistory | null>();
 
+/**
+ * A history to be used to show in recap.
+ * Fill this store's data before showing recap view.
+ * If the history is not loaded yet, it will be null.
+ */
 export const recapResult = writable<RecapResult | null>();
 
 export const isLoadingRecapHistory = writable(false);

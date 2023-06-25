@@ -284,7 +284,7 @@ const computeRecap = async () => {
 
 	const _history = get(history);
 	const goalsResult: RecapResult[] = [];
-	const promises: Promise<any>[] = [];
+	const promises: Promise<unknown>[] = [];
 	let startDialogueIndex = 0;
 
 	// Calculate from each completed goal
@@ -363,9 +363,9 @@ const computeRecap = async () => {
 	// if (totalScore > 90) setCurrentCEFRLevel(ct!.conversation.CEFRlevel);
 
 	// TODO: use actual db (cloud).
-	// completeConversationLocal({
-	// 	recap: result,
-	// 	finishedTime,
-	// 	conversationID: ct.conversation.id
-	// });
+	completeConversationLocal({
+		recap: { score: overallScore, coins: totalCoins, history: recapDialogues },
+		finishedTime,
+		conversationID: ct.conversation.id
+	});
 };

@@ -1,3 +1,4 @@
+import type { RecapResult } from '$lib/global/chatbox';
 import type { RecapHistory, DialogueScore } from '$lib/global/chatbox';
 import { currentMode } from '$lib/global/mode';
 import type { CEFRLevel } from '$lib/types/CEFRLevel';
@@ -103,7 +104,7 @@ export const analyzeDialog = async function (assistant: string, user: string) {
 	return { ...data, overallScore: (data.clarity + data.grammar + data.appropriateness) / 300 };
 };
 
-export const getVocabsFromConversation = async (history: RecapHistory) => {
+export const getVocabsFromConversation = async (recap: RecapResult) => {
 	const prompt: ChatMessage[] = [];
 	prompt.push({
 		role: 'user',
@@ -124,7 +125,7 @@ export const getVocabsFromConversation = async (history: RecapHistory) => {
 	});
 	prompt.push({
 		role: 'user',
-		content: history
+		content: recap.history
 			.map((item) => `A: ${item.assistant.transcription}\nB: ${item.user?.transcription}`)
 			.join('\n')
 	});

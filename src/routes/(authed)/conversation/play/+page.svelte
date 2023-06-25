@@ -61,7 +61,9 @@
 			class={`absolute flex flex-row items-center justify-around rounded-full ${
 				$isMobile
 					? `right-[4vw] h-[2.3vh] text-[3vw] px-2 z-10 ${
-							briefing ? 'bg-white text-black top-[2.5vh]' : 'text-white border border-white top-[1vh]'
+							briefing
+								? 'bg-white text-black top-[2.5vh]'
+								: 'text-white border border-white top-[1vh]'
 					  }`
 					: 'bg-white text-black left-[3vw] top-[6vh] h-[6vh] text-[1.8vw] px-5'
 			}`}
@@ -95,7 +97,9 @@
 				class={`transition-transform backdrop-blur-lg backdrop-brightness-75 p-[1.5vw] shadow-sm border rounded-xl font-line-seed flex ${
 					$isMobile
 						? `absolute w-full text-[1.3vw] ${
-								briefing ? 'bottom-0 rounded-b-none flex-col' : 'top-0 py-[4vh] rounded-t-none flex-row justify-between items-center'
+								briefing
+									? 'bottom-0 rounded-b-none flex-col'
+									: 'top-0 py-[4vh] rounded-t-none flex-row justify-between items-center'
 						  }`
 						: `h-fit flex-col ${briefing ? 'w-[33%]' : 'ml-[5%] w-[45%]'}`
 				}`}
@@ -140,7 +144,7 @@
 					>
 						เริ่มการพูดคุย
 					</button>
-				{:else}
+				{:else if $currentGoal < $chatContext.conversation.details.learner.goal.length}
 					<div
 						class={`font-bold whitespace-pre-wrap text-center ${
 							$isMobile ? 'text-[4vw]' : 'text-[1.7vw] mt-[5vh]'
@@ -150,10 +154,16 @@
 					</div>
 
 					<div
-						class={`bg-[#0000007D] w-fit rounded-full mx-auto ${$isMobile?'text-[3vw] px-[2vw] py-[1vw]':'text-[1.35vw] px-[1vw] py-[0.3vw] mt-[3vh] mb-[5vh]'}`}
+						class={`bg-[#0000007D] w-fit rounded-full mx-auto ${
+							$isMobile
+								? 'text-[3vw] px-[2vw] py-[1vw]'
+								: 'text-[1.35vw] px-[1vw] py-[0.3vw] mt-[3vh] mb-[5vh]'
+						}`}
 					>
 						🧿 100
 					</div>
+				{:else}
+					<div class="text-[1.7vw]">All goals are completed!</div>
 				{/if}
 			</div>
 
@@ -176,7 +186,7 @@
 						$isMobile
 							? 'w-[100vw] h-[40vh] bottom-0'
 							: 'w-[37vw] h-[70vh] bottom-[15vh] right-[3vw]'
-					} z-[600]`}
+					} z-10`}
 				>
 					<div
 						transition:fly={{ y: 800, duration: 800 }}

@@ -1,7 +1,11 @@
 import { analyzeDialog, analyzeGoalScore, chat, checkGoalProgress } from '$api/conversation';
 import { transcribe } from '$api/transcription';
 import { synthesize } from '$api/tts';
-import { BotEmotionValues, type ChatBotMessage, type ConversationHistoryItem } from '$lib/types/conversationData';
+import {
+	BotEmotionValues,
+	type ChatBotMessage,
+	type ConversationHistoryItem
+} from '$lib/types/conversationData';
 import type { ChatMessage } from '$lib/types/requests/chatCompletion';
 import { get, writable } from 'svelte/store';
 import {
@@ -87,7 +91,7 @@ export const resetConversationData = () => {
 	waitingForAIResponse.set(false);
 	history.set([]);
 	goalTracking = [];
-	conversationHistory.set([])
+	conversationHistory.set([]);
 	gptHistory = [];
 };
 
@@ -187,22 +191,21 @@ const botReply = async function (message?: string, targetLevel: CEFRLevel = 'A1'
 		console.log(passed);
 		if (passed) {
 			goalTracking[get(currentGoal)].lastDialogueIndex = get(history).length - 1;
-			conversationHistory.set([
-				...get(conversationHistory),
-				{ endOfGoal: get(currentGoal) + 1 }
-			])
+			conversationHistory.set([...get(conversationHistory), { endOfGoal: get(currentGoal) + 1 }]);
 			currentGoal.set(get(currentGoal) + 1);
 		}
 	}
 
-	conversationHistory.set([...get(conversationHistory),
-	{
-		chat: {
-			role: 'assistant',
-			audioURL: await blobToBase64(audio),
-			transcription: message
+	conversationHistory.set([
+		...get(conversationHistory),
+		{
+			chat: {
+				role: 'assistant',
+				audioURL: await blobToBase64(audio),
+				transcription: message
+			}
 		}
-	}])
+	]);
 
 	// behavior regarding bot's message status
 	if (
@@ -246,19 +249,23 @@ export const submitUserReply = async function (audioRecording: { data: Blob; url
 	if (audioRecording !== null) {
 		transcribing.set(true);
 
-
-		conversationHistory.set([...get(conversationHistory), {
-			chat: {
-				role: 'user',
-				audioURL: audioRecording.url,
-				transcription: null
+		conversationHistory.set([
+			...get(conversationHistory),
+			{
+				chat: {
+					role: 'user',
+					audioURL: audioRecording.url,
+					transcription: null
+				}
 			}
-		}])
+		]);
 
 		const targetIndex = get(conversationHistory).length - 1;
 		const transcription = await transcribe(audioRecording.data);
 		conversationHistory.set(
-			get(conversationHistory).map((v, i) => (i === targetIndex ? { ...v, chat: { ...v.chat!, transcription: transcription } } : v))
+			get(conversationHistory).map((v, i) =>
+				i === targetIndex ? { ...v, chat: { ...v.chat!, transcription: transcription } } : v
+			)
 		);
 		history.set([
 			...get(history),
@@ -309,8 +316,7 @@ const computeRecap = async () => {
 				});
 			}
 		}
-
-		analyzeGoalScore(
+		const task = analyzeGoalScore(
 			details.hintUsed,
 			ct.conversation.CEFRlevel,
 			ct.conversation.details.learner.mission,
@@ -343,6 +349,8 @@ const computeRecap = async () => {
 				history: dialoguesResult
 			};
 		});
+
+		promises.push(task);
 		startDialogueIndex = details.lastDialogueIndex;
 	}
 	await Promise.all(promises);

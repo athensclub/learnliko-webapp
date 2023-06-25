@@ -25,7 +25,9 @@ export const queryConversationsLocal = async () => {
 export const completeConversationLocal = async (conversation: FinishedConversation) => {
     if (!completedConversations)
         throw new Error("do not query local data from ssr");
-        
+
+    const vocabs = await getVocabsFromConversation(conversation.recap);
+
     completedConversations.set([...get(completedConversations),
-    { conversation, vocabs: await getVocabsFromConversation(conversation.recap) }]);
+    { conversation, vocabs }]);
 }

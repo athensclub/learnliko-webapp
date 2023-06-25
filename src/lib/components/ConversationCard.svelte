@@ -5,10 +5,18 @@
 	import type { ConversationCarouselItem, ConversationDetails } from '$lib/types/conversationData';
 	import Typewriter from 'svelte-typewriter/Typewriter.svelte';
 
-	// export let small = false;
-	// export let extraSmall = false;
 	export let conversation: ConversationCarouselItem;
 	export let disabled = false;
+
+	/**
+	 * Scale to be multiplied to font size in this component.
+	 */
+	export let scale = 1;
+
+	/**
+	 * Whether the intro text has typewriter effect.
+	 */
+	export let typewriter = false;
 
 	let clazz = '';
 	export { clazz as class };
@@ -24,21 +32,30 @@
 <!-- Specify the size(width, height) of the card in the user of the component, not in the component itself. -->
 <div
 	style="background-image: url('{conversation.background}');"
-	class={`relative overflow-hidden flex flex-col justify-between shadow-xl bg-center bg-cover rounded-[2vw] ${$isMobile ? 'rounded-[6vw]' : ''} ${clazz}`}
+	class={`relative overflow-hidden flex flex-col justify-between shadow-xl bg-center bg-cover rounded-[2vw] ${
+		$isMobile ? 'rounded-[6vw]' : ''
+	} ${clazz}`}
 >
-	<div class="w-full h-[17%] flex flex-row justify-between items-center backdrop-blur-sm bg-black/40 px-[1vw]">
+	<div
+		class="w-full h-[17%] flex flex-row justify-between items-center backdrop-blur-sm bg-black/40 px-[1vw]"
+	>
 		<div class="flex flex-row h-full items-center gap-[1vw]">
 			<div
 				style="background-image: url('{conversation.avatar.models.neutral}')"
 				class="h-[70%] bg-[#FFD281] aspect-square rounded-full bg-cover bg-top"
 			/>
 			<div class="flex flex-col">
-				<div class="text-white font-bold text-[1.3vw]">{conversation.avatar.name}</div>
-				<div class="text-[#FFFFFF99] text-[1vw]">employee</div>
+				<div style="font-size: {scale * 1.3}vw;" class="text-white font-bold">
+					{conversation.avatar.name}
+				</div>
+				<div style="font-size: {scale*1}vw;" class="text-[#FFFFFF99]">employee</div>
 			</div>
 		</div>
 
-		<div class="rounded-full bg-[#FFFFFF21] px-[1vw] py-[1vh] text-white text-[1vw]">
+		<div
+			style="font-size: {scale * 1}vw;"
+			class="rounded-full bg-[#FFFFFF21] px-[1vw] py-[1vh] text-white"
+		>
 			🧿 300
 		</div>
 	</div>
@@ -52,12 +69,19 @@
 	<div
 		class="w-full h-[30%] flex flex-col justify-between bg-black/40 backdrop-blur-sm px-[1.5vw] py-[2.5vh] text-white [text-1vw] font-bold"
 	>
-		<div class={`w-full text-center text-[1.3vw] ${$isMobile ? 'text-[3.2vw]' : ''}`}><Typewriter  mode=loopRandom>{conversation.topic}</Typewriter></div>
+		<div style="font-size: {scale * ($isMobile ? 3.2 : 1.3)}vw;" class={`w-full text-center`}>
+			{#if typewriter}
+				<Typewriter mode="loopRandom">{conversation.topic}</Typewriter>
+			{:else}
+				{conversation.topic}
+			{/if}
+		</div>
 
 		<button
 			{disabled}
 			on:click={openChatbox}
-			class="flex flex-row items-center justify-center gap-[1vw] w-full h-[45%] bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] text-white text-[1.25vw] rounded-full animate-pulse"
+			style="font-size: {scale*1.25}vw;"
+			class="flex flex-row items-center justify-center gap-[1vw] w-full h-[45%] bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] text-white rounded-full animate-pulse"
 		>
 			<svg class="h-[45%]" viewBox="0 0 19 25" fill="none" xmlns="http://www.w3.org/2000/svg">
 				<path
@@ -66,7 +90,7 @@
 				/>
 			</svg>
 
-			Start Conversation 
+			Start Conversation
 		</button>
 	</div>
 </div>

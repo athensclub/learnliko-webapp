@@ -99,7 +99,7 @@
 		<div class="grid gap-[2vw] grid-cols-3 mt-[5vh]">
 			{#each data.conversationCorouselItems as item, index (item.id)}
 				<!-- Use vw to set height to keep ratio when viewport width change -->
-				<ConversationCard class="w-full h-[29vw]" conversation={item} />
+				<ConversationCard scale={0.8} class="w-full h-[29vw]" conversation={item} />
 			{/each}
 		</div>
 	</div>

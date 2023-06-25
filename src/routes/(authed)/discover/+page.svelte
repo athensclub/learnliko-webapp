@@ -204,6 +204,7 @@
 							$isMobile ? 'w-[80vw] h-[110vw] mt-[5vh]' : 'w-[27vw] h-[38vw] mt-[7vh]'
 						}`}
 						conversation={item.conversation}
+						typewriter
 					/>
 				{:else if item.reading}
 					<ReadingCard

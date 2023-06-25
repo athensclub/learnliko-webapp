@@ -5,14 +5,19 @@
 	import { isMobile } from '$lib/global/breakpoints';
 	import { chatContext, showChatbox } from '$lib/global/chatbox';
 	import {
+	checkConversationFinished,
+	conversationFinished,
 		currentGoal,
+		history,
 		isCheckConversationGoal,
 		maxDialogueCount,
+		nextConversationGoal,
 		saveCurrentConversation
 	} from '$lib/global/conversation';
 	import { getContext, onMount } from 'svelte';
 	import type { Context } from 'svelte-simple-modal';
 	import Typewriter from 'svelte-typewriter/Typewriter.svelte';
+	import { get } from 'svelte/store';
 	import { fly } from 'svelte/transition';
 
 	let briefing = true;
@@ -48,6 +53,14 @@
 			cancel();
 		}
 	});
+
+	// TODO: remove this black magickery
+	const keyPressed = (e: KeyboardEvent) => {
+		if (e.code === 'KeyP') {
+			nextConversationGoal();
+			checkConversationFinished();
+		}
+	};
 </script>
 
 {#if $chatContext}
@@ -205,4 +218,4 @@
 	</div>
 {/if}
 
-<svelte:window on:beforeunload|preventDefault={beforeUnload} />
+<svelte:window on:beforeunload|preventDefault={beforeUnload} on:keypress={keyPressed} />

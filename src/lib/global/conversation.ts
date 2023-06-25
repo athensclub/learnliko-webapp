@@ -115,6 +115,32 @@ export const initializeConversationBot = async function () {
 	console.log('Finish init bot');
 };
 
+export const nextConversationGoal = () => {
+	goalTracking[get(currentGoal)].lastDialogueIndex = get(history).length - 1;
+	conversationHistory.set([...get(conversationHistory), { endOfGoal: get(currentGoal) + 1 }]);
+	currentGoal.set(get(currentGoal) + 1);
+}
+
+/**
+ * Check if the conversation has finished, but only check if isCheckConversationGoal is true.
+ * In other words, this is a no-op when isCheckConversationGoal is false.
+ */
+export const checkConversationFinished = () => {
+	const ct = get(chatContext);
+	if (!ct) throw new Error('required chatbox context');
+	if (
+		(get(isCheckConversationGoal) &&
+			get(currentGoal) >= ct.conversation.details.learner.goal.length) ||
+		get(history).length >= 2 * get(maxDialogueCount)
+	) {
+		conversationFinished.set(true);
+		if (get(saveCurrentConversation)) {
+			finishedTime = new Date();
+			computeRecap();
+		}
+	}
+}
+
 /**
  * Call bot to reply base on chat history
  * @param message ignore chat history if [message] is provided
@@ -190,9 +216,7 @@ const botReply = async function (message?: string, targetLevel: CEFRLevel = 'A1'
 		);
 		console.log(passed);
 		if (passed) {
-			goalTracking[get(currentGoal)].lastDialogueIndex = get(history).length - 1;
-			conversationHistory.set([...get(conversationHistory), { endOfGoal: get(currentGoal) + 1 }]);
-			currentGoal.set(get(currentGoal) + 1);
+			nextConversationGoal();
 		}
 	}
 
@@ -207,33 +231,7 @@ const botReply = async function (message?: string, targetLevel: CEFRLevel = 'A1'
 		}
 	]);
 
-	// behavior regarding bot's message status
-	if (
-		(get(isCheckConversationGoal) &&
-			get(currentGoal) >= ct.conversation.details.learner.goal.length) ||
-		get(history).length >= 2 * get(maxDialogueCount)
-	) {
-		conversationFinished.set(true);
-		if (get(saveCurrentConversation)) {
-			finishedTime = new Date();
-			computeRecap();
-		}
-	}
-	// switch (data.status) {
-	// 	case 'NORMAL':
-	// 		break;
-	// 	case 'INAPPROPRIATE':
-	// 		break;
-	// 	case 'END-OF-CONVERSATION':
-	// 		conversationFinished.set(true);
-	// 		if (get(saveCurrentConversation)) {
-	// 			finishedTime = new Date();
-	// 			computeRecap();
-	// 		}
-	// 		break;
-	// 	default:
-	// 		break;
-	// }
+	checkConversationFinished();
 
 	waitingForAIResponse.set(false);
 };

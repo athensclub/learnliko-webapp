@@ -74,10 +74,23 @@ export const analyzeDialogue = async function (
 					description: `Assess the appropriateness of the language used in the User's dialogue based on the context of "${context}" and the relationship between the participants. Consider factors such as formality, politeness, and cultural sensitivity, true if the User's dialogue is appropriate, false otherwise`
 				},
 				grammar: {
-					type: 'number',
-					minimum: 0,
-					maximum: 100,
-					description: `Evaluate the grammar used in the User's dialogue and determine its correctness and clarity, scale from 0 to 100`
+					type: 'object',
+					properties: {
+						score: {
+							type: 'number',
+							minimum: 0,
+							maximum: 100,
+							description: `Evaluate the grammar used in the User's dialogue and determine its correctness and clarity, scale from 0 to 100`
+						},
+						examples: {
+							type: 'array',
+							items: {
+								type: 'string'
+							},
+							maxItems: 3,
+							description: `Provide User the examples of the response with correct grammar`
+						}
+					}
 				},
 				advancement: {
 					type: 'object',

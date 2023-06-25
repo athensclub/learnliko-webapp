@@ -165,9 +165,9 @@ export const analyzeDialogueScore = async function (
 
 	const data = (await response.json()) as {
 		appropriateness: boolean;
-		grammar: number;
+		grammar: { score: number; examples: string[] };
 		advancement: { score: number; examples: string[] };
 	};
-	console.log(data);
+
 	return data;
 };

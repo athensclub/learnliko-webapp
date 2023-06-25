@@ -1,4 +1,4 @@
-import type { RecapHistory } from '$lib/global/chatbox';
+import type { RecapHistory, DialogueScore } from '$lib/global/chatbox';
 import { currentMode } from '$lib/global/mode';
 import type { CEFRLevel } from '$lib/types/CEFRLevel';
 import type { ConversationCarouselItem } from '$lib/types/conversationData';
@@ -163,11 +163,7 @@ export const analyzeDialogueScore = async function (
 		body: JSON.stringify({ assistant, user, context })
 	});
 
-	const data = (await response.json()) as {
-		appropriateness: boolean;
-		grammar: { score: number; examples: string[] };
-		advancement: { score: number; examples: string[] };
-	};
+	const data = (await response.json()) as DialogueScore;
 
 	return data;
 };
@@ -178,7 +174,7 @@ export const analyzeGoalScore = async function (
 	context: string,
 	dialogues: { user: string; assistant: string }[]
 ) {
-	const result = { overall: 0, coins: 0, scores: <any>[] };
+	const result = { overall: 0, coins: 0, scores: Array<DialogueScore>() };
 
 	if (hintUsed) {
 		result.coins = 40;
@@ -198,6 +194,19 @@ export const analyzeGoalScore = async function (
 		promises.push(_promise);
 	}
 	await Promise.all(promises);
+
+	result.overall =
+		(result.scores
+			.map((e) => (e.appropriateness ? 50 + e.advancement.score * 0.3 + e.grammar.score * 0.2 : 0))
+			.reduce((x, y) => x + y, 0) /
+			result.scores.length) *
+		100;
+	result.coins =
+		(result.scores
+			.map((e) => (e.appropriateness ? 50 + e.advancement.score * 0.3 + e.grammar.score * 0.2 : 40))
+			.reduce((x, y) => x + y, 0) /
+			result.scores.length) *
+		100;
 
 	return result;
 };

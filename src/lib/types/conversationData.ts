@@ -1,5 +1,6 @@
 import type { SynthesizeAccent, SynthesizeGender } from '$api/tts';
 import type { RecapHistory } from '$lib/global/chatbox';
+import type { CEFRLevel } from './CEFRLevel';
 
 interface LearnerDetails {
 	mission: string;
@@ -24,7 +25,7 @@ export interface ConversationCarouselItem {
 	image: string;
 	intro: string;
 	topic: string;
-	CEFRlevel: string;
+	CEFRlevel: CEFRLevel;
 	background: string;
 	details: ConversationDetails;
 	avatar: ConversationAvatar;

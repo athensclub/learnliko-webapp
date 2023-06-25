@@ -80,5 +80,14 @@
 			<!-- Divider -->
 			<div class="flex-1 h-[0.15vh] bg-white" />
 		</div>
+	{:else if item.hint !== undefined}
+		<div class=" flex flex-col items-end px-4">
+			<h4 class=" font-bold text-xs mb-1">Help</h4>
+			<div
+				class="border border-white rounded-full h-[44px] text-white opacity-50 text-xs flex flex-row items-center justify-center px-2"
+			>
+				{item.hint}
+			</div>
+		</div>
 	{/if}
 {/each}

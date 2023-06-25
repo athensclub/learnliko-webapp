@@ -5,6 +5,7 @@ import type { CEFRLevel } from './CEFRLevel';
 interface LearnerDetails {
 	mission: string;
 	goal: string[];
+	hint: string[];
 }
 
 interface BotDetails {
@@ -80,6 +81,7 @@ export interface ConversationHistoryItem {
 		role: 'user' | 'assistant';
 		audioURL: string;
 		transcription: string | null;
-	},
-	endOfGoal?: number
+	};
+	endOfGoal?: number;
+	hint?: string;
 }

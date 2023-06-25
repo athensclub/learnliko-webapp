@@ -14,6 +14,11 @@
 						"Ask for product available in the shop",
 						"Choose products to buy",
 						"Making purchase"
+					],
+					"hint": [
+						"Do you have any pens in your shop?",
+						"I would like to buy a pen",
+						"Here you are"
 					]
 				},
 				"bot": {
@@ -55,6 +60,13 @@
 						"Get to know Alan's hobby",
 						"Get to know Alan's hometown",
 						"Get to know Alan's favorite food"
+					],
+					"hint": [
+						"Hi, my name is [your name]",
+						"How old are you?",
+						"What's your hobby?",
+						"Where are you come from?",
+						"What's your favorite food?"
 					]
 				},
 				"bot": {
@@ -92,9 +104,15 @@
 					"mission": "คุณกำลังคุยกับครูภาษาอังกฤษที่ชื่อ Jane คุณต้องพูดคุยเกี่ยวกับสัตว์เป็นภาษาอังกฤษ",
 					"goal": [
 						"Tell your favorite animal to teacher",
-						"Know what your favorite animal color's name is.",
+						"Know what your favorite animal color is",
 						"Know what your favorite animal eats.",
 						"Know where your favorite animal lives."
+					],
+					"hint": [
+						"My favorite animal is [animals name]",
+						"Teacher, do you know what [animals name] color is?",
+						"Do you know what [animals name] eat?",
+						"Do you know where [animals name] live?"
 					]
 				},
 				"bot": {
@@ -130,7 +148,12 @@
 				"intro": "Hi, I'm a farmer named Raj. What fruit do you like to eat? I can tell you about their benefits.",
 				"learner": {
 					"mission": "คุณกำลังคุยกับชาวนาที่ชื่อ Raj คุณต้องคุยกับเขาเกี่ยวกับเรื่องผลไม้",
-					"goal": ["Learn about different types of fruits and their benefits"]
+					"goal": [
+						"Learn about different types of fruits and their benefits"
+					],
+					"hint": [
+						"Hi, Teacher. Today, I wanted to learn about different types of fruits and their benefits"
+					]
 				},
 				"bot": {
 					"avatar": "https://media.discordapp.net/attachments/1091669790898278471/1118732113429143552/farmer.png?width=1170&height=1170",
@@ -167,6 +190,9 @@
 					"mission": "คุณเจอกับนักท่องเที่ยวชื่อ Anna คุณต้องให้คำแนะนำเกี่ยวการท่องเที่ยวในท้องถิ่นคุณ",
 					"goal": [
 						"As a tour guide, provide recommendations on popular Thai dishes and places to visit, and provide information on their history and cultural significance."
+					],
+					"hint": [
+						"Hi there! As a tour guide, I'd be delighted to provide you with recommendations on popular Thai dishes and places to visit, along with their history and cultural significance"
 					]
 				},
 				"bot": {

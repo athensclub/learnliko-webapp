@@ -34,7 +34,7 @@
 	const showHintModal = () => open(DialogueHintModal, {});
 </script>
 
-<div class={`flex items-center justify-center rounded-xl h-[5vw] font-line-seed ${clazz}`}>
+<div class={`flex items-center justify-center rounded-xl p-2 font-line-seed ${clazz}`}>
 	{#if $waitingForAIResponse}
 		<div
 			class="flex flex-row justify-between items-center gap-[7%] px-[5%] w-full h-full text-white"

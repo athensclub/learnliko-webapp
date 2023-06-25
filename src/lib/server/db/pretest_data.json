@@ -9,6 +9,9 @@
 						"accent": "US",
 						"gender": "FEMALE",
 						"prompt": "Your role: Your name is Lucy. You are a conversation partner to the user, who is praticing English conversation. Your Goal: Have a conversation with user. Answer Format: You have to answer in the JSON format by using to following JSON schema {// your response\"message\": string,// \"neutral\", \"joy\", \"trust\", \"fear\", \"surprise\", \"sadness\", \"disgust\", \"anger\", \"anticipation\"\"emotion\": string,// the enum value// “NORMAL” used when the situation is normal// “INAPPROPRIATE” used when the situation is out of context or say something inappropriate// “END-OF-CONVERSATION” used when the user has finished the conversation."
+					},
+					"learner": {
+						"goal": ["Have a meaningful conversation"]
 					}
 				},
 				"avatar": {
@@ -26,12 +29,18 @@
 						"accent": "US",
 						"gender": "FEMALE",
 						"prompt": "Your role: Your name is Lucy. You are a conversation partner to the user, who is praticing English conversation. Your Goal: Have a conversation with user. Answer Format: You have to answer in the JSON format by using to following JSON schema {// your response\"message\": string,// \"neutral\", \"joy\", \"trust\", \"fear\", \"surprise\", \"sadness\", \"disgust\", \"anger\", \"anticipation\"\"emotion\": string,// the enum value// “NORMAL” used when the situation is normal// “INAPPROPRIATE” used when the situation is out of context or say something inappropriate// “END-OF-CONVERSATION” used when the user has finished the conversation."
+					},
+					"learner": {
+						"goal": ["Have a meaningful conversation"]
 					}
 				},
 				"avatar": {
 					"name": "Lucy",
 					"models": {
 						"neutral": "https://cdn.discordapp.com/attachments/842737146321174558/1116747283132842105/avatar.png"
+					},
+					"learner": {
+						"goal": ["Have a meaningful conversation"]
 					}
 				}
 			},
@@ -43,6 +52,9 @@
 						"accent": "US",
 						"gender": "FEMALE",
 						"prompt": "Your role: Your name is Lucy. You are a conversation partner to the user, who is praticing English conversation. Your Goal: Have a conversation with user. Answer Format: You have to answer in the JSON format by using to following JSON schema {// your response\"message\": string,// \"neutral\", \"joy\", \"trust\", \"fear\", \"surprise\", \"sadness\", \"disgust\", \"anger\", \"anticipation\"\"emotion\": string,// the enum value// “NORMAL” used when the situation is normal// “INAPPROPRIATE” used when the situation is out of context or say something inappropriate// “END-OF-CONVERSATION” used when the user has finished the conversation."
+					},
+					"learner": {
+						"goal": ["Have a meaningful conversation"]
 					}
 				},
 				"avatar": {
@@ -60,6 +72,9 @@
 						"accent": "US",
 						"gender": "FEMALE",
 						"prompt": "Your role: Your name is Lucy. You are a conversation partner to the user, who is praticing English conversation. Your Goal: Have a conversation with user. Answer Format: You have to answer in the JSON format by using to following JSON schema {// your response\"message\": string,// \"neutral\", \"joy\", \"trust\", \"fear\", \"surprise\", \"sadness\", \"disgust\", \"anger\", \"anticipation\"\"emotion\": string,// the enum value// “NORMAL” used when the situation is normal// “INAPPROPRIATE” used when the situation is out of context or say something inappropriate// “END-OF-CONVERSATION” used when the user has finished the conversation."
+					},
+					"learner": {
+						"goal": ["Have a meaningful conversation"]
 					}
 				},
 				"avatar": {
@@ -77,6 +92,9 @@
 						"accent": "US",
 						"gender": "FEMALE",
 						"prompt": "Your role: Your name is Lucy. You are a conversation partner to the user, who is praticing English conversation. Your Goal: Have a conversation with user. Answer Format: You have to answer in the JSON format by using to following JSON schema {// your response\"message\": string,// \"neutral\", \"joy\", \"trust\", \"fear\", \"surprise\", \"sadness\", \"disgust\", \"anger\", \"anticipation\"\"emotion\": string,// the enum value// “NORMAL” used when the situation is normal// “INAPPROPRIATE” used when the situation is out of context or say something inappropriate// “END-OF-CONVERSATION” used when the user has finished the conversation."
+					},
+					"learner": {
+						"goal": ["Have a meaningful conversation"]
 					}
 				},
 				"avatar": {
@@ -162,6 +180,9 @@
 						"accent": "US",
 						"gender": "FEMALE",
 						"prompt": "Your role: Your name is Lucy. You are a conversation partner to the user, who is praticing English conversation. Your Goal: Have a conversation with user. Answer Format: You have to answer in the JSON format by using to following JSON schema {// your response\"message\": string,// \"neutral\", \"joy\", \"trust\", \"fear\", \"surprise\", \"sadness\", \"disgust\", \"anger\", \"anticipation\"\"emotion\": string,// the enum value// “NORMAL” used when the situation is normal// “INAPPROPRIATE” used when the situation is out of context or say something inappropriate// “END-OF-CONVERSATION” used when the user has finished the conversation."
+					},
+					"learner": {
+						"goal": ["Have a meaningful conversation"]
 					}
 				},
 				"avatar": {
@@ -179,6 +200,9 @@
 						"accent": "US",
 						"gender": "FEMALE",
 						"prompt": "Your role: Your name is Lucy. You are a conversation partner to the user, who is praticing English conversation. Your Goal: Have a conversation with user. Answer Format: You have to answer in the JSON format by using to following JSON schema {// your response\"message\": string,// \"neutral\", \"joy\", \"trust\", \"fear\", \"surprise\", \"sadness\", \"disgust\", \"anger\", \"anticipation\"\"emotion\": string,// the enum value// “NORMAL” used when the situation is normal// “INAPPROPRIATE” used when the situation is out of context or say something inappropriate// “END-OF-CONVERSATION” used when the user has finished the conversation."
+					},
+					"learner": {
+						"goal": ["Have a meaningful conversation"]
 					}
 				},
 				"avatar": {
@@ -196,6 +220,9 @@
 						"accent": "US",
 						"gender": "FEMALE",
 						"prompt": "Your role: Your name is Lucy. You are a conversation partner to the user, who is praticing English conversation. Your Goal: Have a conversation with user. Answer Format: You have to answer in the JSON format by using to following JSON schema {// your response\"message\": string,// \"neutral\", \"joy\", \"trust\", \"fear\", \"surprise\", \"sadness\", \"disgust\", \"anger\", \"anticipation\"\"emotion\": string,// the enum value// “NORMAL” used when the situation is normal// “INAPPROPRIATE” used when the situation is out of context or say something inappropriate// “END-OF-CONVERSATION” used when the user has finished the conversation."
+					},
+					"learner": {
+						"goal": ["Have a meaningful conversation"]
 					}
 				},
 				"avatar": {
@@ -213,6 +240,9 @@
 						"accent": "US",
 						"gender": "FEMALE",
 						"prompt": "Your role: Your name is Lucy. You are a conversation partner to the user, who is praticing English conversation. Your Goal: Have a conversation with user. Answer Format: You have to answer in the JSON format by using to following JSON schema {// your response\"message\": string,// \"neutral\", \"joy\", \"trust\", \"fear\", \"surprise\", \"sadness\", \"disgust\", \"anger\", \"anticipation\"\"emotion\": string,// the enum value// “NORMAL” used when the situation is normal// “INAPPROPRIATE” used when the situation is out of context or say something inappropriate// “END-OF-CONVERSATION” used when the user has finished the conversation."
+					},
+					"learner": {
+						"goal": ["Have a meaningful conversation"]
 					}
 				},
 				"avatar": {
@@ -230,6 +260,9 @@
 						"accent": "US",
 						"gender": "FEMALE",
 						"prompt": "Your role: Your name is Lucy. You are a conversation partner to the user, who is praticing English conversation. Your Goal: Have a conversation with user. Answer Format: You have to answer in the JSON format by using to following JSON schema {// your response\"message\": string,// \"neutral\", \"joy\", \"trust\", \"fear\", \"surprise\", \"sadness\", \"disgust\", \"anger\", \"anticipation\"\"emotion\": string,// the enum value// “NORMAL” used when the situation is normal// “INAPPROPRIATE” used when the situation is out of context or say something inappropriate// “END-OF-CONVERSATION” used when the user has finished the conversation."
+					},
+					"learner": {
+						"goal": ["Have a meaningful conversation"]
 					}
 				},
 				"avatar": {
@@ -315,6 +348,9 @@
 						"accent": "US",
 						"gender": "FEMALE",
 						"prompt": "Your role: Your name is Lucy. You are a conversation partner to the user, who is praticing English conversation. Your Goal: Have a conversation with user. Answer Format: You have to answer in the JSON format by using to following JSON schema {// your response\"message\": string,// \"neutral\", \"joy\", \"trust\", \"fear\", \"surprise\", \"sadness\", \"disgust\", \"anger\", \"anticipation\"\"emotion\": string,// the enum value// “NORMAL” used when the situation is normal// “INAPPROPRIATE” used when the situation is out of context or say something inappropriate// “END-OF-CONVERSATION” used when the user has finished the conversation."
+					},
+					"learner": {
+						"goal": ["Have a meaningful conversation"]
 					}
 				},
 				"avatar": {
@@ -332,6 +368,9 @@
 						"accent": "US",
 						"gender": "FEMALE",
 						"prompt": "Your role: Your name is Lucy. You are a conversation partner to the user, who is praticing English conversation. Your Goal: Have a conversation with user. Answer Format: You have to answer in the JSON format by using to following JSON schema {// your response\"message\": string,// \"neutral\", \"joy\", \"trust\", \"fear\", \"surprise\", \"sadness\", \"disgust\", \"anger\", \"anticipation\"\"emotion\": string,// the enum value// “NORMAL” used when the situation is normal// “INAPPROPRIATE” used when the situation is out of context or say something inappropriate// “END-OF-CONVERSATION” used when the user has finished the conversation."
+					},
+					"learner": {
+						"goal": ["Have a meaningful conversation"]
 					}
 				},
 				"avatar": {
@@ -349,6 +388,9 @@
 						"accent": "US",
 						"gender": "FEMALE",
 						"prompt": "Your role: Your name is Lucy. You are a conversation partner to the user, who is praticing English conversation. Your Goal: Have a conversation with user. Answer Format: You have to answer in the JSON format by using to following JSON schema {// your response\"message\": string,// \"neutral\", \"joy\", \"trust\", \"fear\", \"surprise\", \"sadness\", \"disgust\", \"anger\", \"anticipation\"\"emotion\": string,// the enum value// “NORMAL” used when the situation is normal// “INAPPROPRIATE” used when the situation is out of context or say something inappropriate// “END-OF-CONVERSATION” used when the user has finished the conversation."
+					},
+					"learner": {
+						"goal": ["Have a meaningful conversation"]
 					}
 				},
 				"avatar": {
@@ -366,6 +408,9 @@
 						"accent": "US",
 						"gender": "FEMALE",
 						"prompt": "Your role: Your name is Lucy. You are a conversation partner to the user, who is praticing English conversation. Your Goal: Have a conversation with user. Answer Format: You have to answer in the JSON format by using to following JSON schema {// your response\"message\": string,// \"neutral\", \"joy\", \"trust\", \"fear\", \"surprise\", \"sadness\", \"disgust\", \"anger\", \"anticipation\"\"emotion\": string,// the enum value// “NORMAL” used when the situation is normal// “INAPPROPRIATE” used when the situation is out of context or say something inappropriate// “END-OF-CONVERSATION” used when the user has finished the conversation."
+					},
+					"learner": {
+						"goal": ["Have a meaningful conversation"]
 					}
 				},
 				"avatar": {
@@ -383,6 +428,9 @@
 						"accent": "US",
 						"gender": "FEMALE",
 						"prompt": "Your role: Your name is Lucy. You are a conversation partner to the user, who is praticing English conversation. Your Goal: Have a conversation with user. Answer Format: You have to answer in the JSON format by using to following JSON schema {// your response\"message\": string,// \"neutral\", \"joy\", \"trust\", \"fear\", \"surprise\", \"sadness\", \"disgust\", \"anger\", \"anticipation\"\"emotion\": string,// the enum value// “NORMAL” used when the situation is normal// “INAPPROPRIATE” used when the situation is out of context or say something inappropriate// “END-OF-CONVERSATION” used when the user has finished the conversation."
+					},
+					"learner": {
+						"goal": ["Have a meaningful conversation"]
 					}
 				},
 				"avatar": {
@@ -468,6 +516,9 @@
 						"accent": "US",
 						"gender": "FEMALE",
 						"prompt": "Your role: Your name is Lucy. You are a conversation partner to the user, who is praticing English conversation. Your Goal: Have a conversation with user. Answer Format: You have to answer in the JSON format by using to following JSON schema {// your response\"message\": string,// \"neutral\", \"joy\", \"trust\", \"fear\", \"surprise\", \"sadness\", \"disgust\", \"anger\", \"anticipation\"\"emotion\": string,// the enum value// “NORMAL” used when the situation is normal// “INAPPROPRIATE” used when the situation is out of context or say something inappropriate// “END-OF-CONVERSATION” used when the user has finished the conversation."
+					},
+					"learner": {
+						"goal": ["Have a meaningful conversation"]
 					}
 				},
 				"avatar": {
@@ -485,6 +536,9 @@
 						"accent": "US",
 						"gender": "FEMALE",
 						"prompt": "Your role: Your name is Lucy. You are a conversation partner to the user, who is praticing English conversation. Your Goal: Have a conversation with user. Answer Format: You have to answer in the JSON format by using to following JSON schema {// your response\"message\": string,// \"neutral\", \"joy\", \"trust\", \"fear\", \"surprise\", \"sadness\", \"disgust\", \"anger\", \"anticipation\"\"emotion\": string,// the enum value// “NORMAL” used when the situation is normal// “INAPPROPRIATE” used when the situation is out of context or say something inappropriate// “END-OF-CONVERSATION” used when the user has finished the conversation."
+					},
+					"learner": {
+						"goal": ["Have a meaningful conversation"]
 					}
 				},
 				"avatar": {
@@ -502,6 +556,9 @@
 						"accent": "US",
 						"gender": "FEMALE",
 						"prompt": "Your role: Your name is Lucy. You are a conversation partner to the user, who is praticing English conversation. Your Goal: Have a conversation with user. Answer Format: You have to answer in the JSON format by using to following JSON schema {// your response\"message\": string,// \"neutral\", \"joy\", \"trust\", \"fear\", \"surprise\", \"sadness\", \"disgust\", \"anger\", \"anticipation\"\"emotion\": string,// the enum value// “NORMAL” used when the situation is normal// “INAPPROPRIATE” used when the situation is out of context or say something inappropriate// “END-OF-CONVERSATION” used when the user has finished the conversation."
+					},
+					"learner": {
+						"goal": ["Have a meaningful conversation"]
 					}
 				},
 				"avatar": {
@@ -519,6 +576,9 @@
 						"accent": "US",
 						"gender": "FEMALE",
 						"prompt": "Your role: Your name is Lucy. You are a conversation partner to the user, who is praticing English conversation. Your Goal: Have a conversation with user. Answer Format: You have to answer in the JSON format by using to following JSON schema {// your response\"message\": string,// \"neutral\", \"joy\", \"trust\", \"fear\", \"surprise\", \"sadness\", \"disgust\", \"anger\", \"anticipation\"\"emotion\": string,// the enum value// “NORMAL” used when the situation is normal// “INAPPROPRIATE” used when the situation is out of context or say something inappropriate// “END-OF-CONVERSATION” used when the user has finished the conversation."
+					},
+					"learner": {
+						"goal": ["Have a meaningful conversation"]
 					}
 				},
 				"avatar": {
@@ -536,6 +596,9 @@
 						"accent": "US",
 						"gender": "FEMALE",
 						"prompt": "Your role: Your name is Lucy. You are a conversation partner to the user, who is praticing English conversation. Your Goal: Have a conversation with user. Answer Format: You have to answer in the JSON format by using to following JSON schema {// your response\"message\": string,// \"neutral\", \"joy\", \"trust\", \"fear\", \"surprise\", \"sadness\", \"disgust\", \"anger\", \"anticipation\"\"emotion\": string,// the enum value// “NORMAL” used when the situation is normal// “INAPPROPRIATE” used when the situation is out of context or say something inappropriate// “END-OF-CONVERSATION” used when the user has finished the conversation."
+					},
+					"learner": {
+						"goal": ["Have a meaningful conversation"]
 					}
 				},
 				"avatar": {
@@ -626,6 +689,9 @@
 						"accent": "US",
 						"gender": "FEMALE",
 						"prompt": "Your role: Your name is Lucy. You are a conversation partner to the user, who is praticing English conversation. Your Goal: Have a conversation with user. Answer Format: You have to answer in the JSON format by using to following JSON schema {// your response\"message\": string,// \"neutral\", \"joy\", \"trust\", \"fear\", \"surprise\", \"sadness\", \"disgust\", \"anger\", \"anticipation\"\"emotion\": string,// the enum value// “NORMAL” used when the situation is normal// “INAPPROPRIATE” used when the situation is out of context or say something inappropriate// “END-OF-CONVERSATION” used when the user has finished the conversation."
+					},
+					"learner": {
+						"goal": ["Have a meaningful conversation"]
 					}
 				},
 				"avatar": {
@@ -643,6 +709,9 @@
 						"accent": "US",
 						"gender": "FEMALE",
 						"prompt": "Your role: Your name is Lucy. You are a conversation partner to the user, who is praticing English conversation. Your Goal: Have a conversation with user. Answer Format: You have to answer in the JSON format by using to following JSON schema {// your response\"message\": string,// \"neutral\", \"joy\", \"trust\", \"fear\", \"surprise\", \"sadness\", \"disgust\", \"anger\", \"anticipation\"\"emotion\": string,// the enum value// “NORMAL” used when the situation is normal// “INAPPROPRIATE” used when the situation is out of context or say something inappropriate// “END-OF-CONVERSATION” used when the user has finished the conversation."
+					},
+					"learner": {
+						"goal": ["Have a meaningful conversation"]
 					}
 				},
 				"avatar": {
@@ -660,6 +729,9 @@
 						"accent": "US",
 						"gender": "FEMALE",
 						"prompt": "Your role: Your name is Lucy. You are a conversation partner to the user, who is praticing English conversation. Your Goal: Have a conversation with user. Answer Format: You have to answer in the JSON format by using to following JSON schema {// your response\"message\": string,// \"neutral\", \"joy\", \"trust\", \"fear\", \"surprise\", \"sadness\", \"disgust\", \"anger\", \"anticipation\"\"emotion\": string,// the enum value// “NORMAL” used when the situation is normal// “INAPPROPRIATE” used when the situation is out of context or say something inappropriate// “END-OF-CONVERSATION” used when the user has finished the conversation."
+					},
+					"learner": {
+						"goal": ["Have a meaningful conversation"]
 					}
 				},
 				"avatar": {
@@ -677,6 +749,9 @@
 						"accent": "US",
 						"gender": "FEMALE",
 						"prompt": "Your role: Your name is Lucy. You are a conversation partner to the user, who is praticing English conversation. Your Goal: Have a conversation with user. Answer Format: You have to answer in the JSON format by using to following JSON schema {// your response\"message\": string,// \"neutral\", \"joy\", \"trust\", \"fear\", \"surprise\", \"sadness\", \"disgust\", \"anger\", \"anticipation\"\"emotion\": string,// the enum value// “NORMAL” used when the situation is normal// “INAPPROPRIATE” used when the situation is out of context or say something inappropriate// “END-OF-CONVERSATION” used when the user has finished the conversation."
+					},
+					"learner": {
+						"goal": ["Have a meaningful conversation"]
 					}
 				},
 				"avatar": {
@@ -694,6 +769,9 @@
 						"accent": "US",
 						"gender": "FEMALE",
 						"prompt": "Your role: Your name is Lucy. You are a conversation partner to the user, who is praticing English conversation. Your Goal: Have a conversation with user. Answer Format: You have to answer in the JSON format by using to following JSON schema {// your response\"message\": string,// \"neutral\", \"joy\", \"trust\", \"fear\", \"surprise\", \"sadness\", \"disgust\", \"anger\", \"anticipation\"\"emotion\": string,// the enum value// “NORMAL” used when the situation is normal// “INAPPROPRIATE” used when the situation is out of context or say something inappropriate// “END-OF-CONVERSATION” used when the user has finished the conversation."
+					},
+					"learner": {
+						"goal": ["Have a meaningful conversation"]
 					}
 				},
 				"avatar": {

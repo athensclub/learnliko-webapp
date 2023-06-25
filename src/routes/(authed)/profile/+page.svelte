@@ -90,6 +90,8 @@
 					<div class={`${$isMobile ? 'text-[3.5vw]' : 'text-[1vw]'}`}>🧿 3300 coin</div>
 				</div>
 			</div>
+
+			<a href="/login" class="w-[17vw] text-[1.2vw] text-center py-[1vh] border border-black rounded-[1vw]">Switch Account...</a>
 		</div>
 
 		<div class={`flex flex-col px-[6vw] ${$isMobile ? 'mt-[2vh]' : 'mt-[12vh]'}`}>

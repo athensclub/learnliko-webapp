@@ -15,13 +15,14 @@ export const synthesize = async (
 		| 'MALE'
 		| 'FEMALE'
 		| 'NEUTRAL'
-		| google.cloud.texttospeech.v1.SsmlVoiceGender
+		| google.cloud.texttospeech.v1.SsmlVoiceGender,
+	speakingRate = 1
 ) => {
 	try {
 		const [response] = await client.synthesizeSpeech({
 			input: { text: text },
 			voice: { languageCode, ssmlGender, name: voiceName },
-			audioConfig: { audioEncoding: 'MP3' }
+			audioConfig: { audioEncoding: 'MP3', speakingRate }
 		});
 		if (response.audioContent) {
 			return response.audioContent;

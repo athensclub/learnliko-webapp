@@ -74,3 +74,12 @@ export interface ChatBotMessage {
 	emotion: BotEmotion;
 	status: 'NORMAL' | 'INAPPROPRIATE' | 'END-OF-CONVERSATION';
 }
+
+export interface ConversationHistoryItem {
+	chat?: {
+		role: 'user' | 'assistant';
+		audioURL: string;
+		transcription: string | null;
+	},
+	endOfGoal?: number
+}

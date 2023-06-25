@@ -53,7 +53,6 @@ const modelsMapping = {
 		},
 		'languageCode': 'yue-HK'
 	},
-
 	'DK': {
 		'voiceName': {
 			'MALE': 'da-DK-Standard-C',
@@ -70,12 +69,13 @@ const modelsMapping = {
  * @param gender the geneder to be used for generating audio
  * @returns an audio generated from transcribing the given text.
  */
-export const synthesize = async function (text: string, accent: SynthesizeAccent, gender: SynthesizeGender) {
+export const synthesize = async function (text: string, accent: SynthesizeAccent, gender: SynthesizeGender, speakingRate = 1) {
 	const body: SynthesizeRequestBody = {
 		text,
 		languageCode: modelsMapping[accent]['languageCode'],
 		voiceName: modelsMapping[accent]['voiceName'][gender],
-		ssmlGender: gender
+		ssmlGender: gender,
+		speakingRate
 	};
 
 	const response = await fetch('/api/v1/synthesize', {

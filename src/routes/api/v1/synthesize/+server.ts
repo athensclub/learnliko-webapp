@@ -8,7 +8,7 @@ export const POST: RequestHandler = async ({ request }) => {
 	if (!body) throw error(400, `Error: No text provided`);
 
 	try {
-		const audio = await synthesize(body.text, body.languageCode, body.voiceName, body.ssmlGender);
+		const audio = await synthesize(body.text, body.languageCode, body.voiceName, body.ssmlGender, body.speakingRate);
 		return new Response(audio, { headers: { 'Content-Type': 'audio/mpeg' } });
 	} catch (e) {
 		throw error(500, `Error: ${e}`);

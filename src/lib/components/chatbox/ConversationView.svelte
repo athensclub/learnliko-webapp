@@ -6,7 +6,7 @@
 	import VoiceChatHistory from './VoiceChatHistory.svelte';
 	import {
 		conversationFinished,
-		history,
+		conversationHistory,
 		initializeConversationBot,
 		initializedConversation,
 		resetConversationData,
@@ -47,21 +47,10 @@
 			class={voiceChatHistoryClass}
 			aiBackgroundColor={aiChatBackgroundColor}
 			userBackgroundColor={userChatBackgroundColor}
-			history={$history}
+			history={$conversationHistory}
 			assistantProfileImage={conversationDetails.bot.avatar}
 			userProfileImage={userImage}
 		/>
-
-		{#if $waitingForAIResponse}
-			<div class="flex flex-row items-center px-4 mt-6">
-				<div
-					class={`mr-2 w-[42px] h-[42px] px-4 bg-top bg-cover rounded-full border border-white`}
-					style="background-image: url('{conversationDetails.bot.avatar}');"
-				/>
-				Thinking
-				<Typewriter mode="loop">...</Typewriter>
-			</div>
-		{/if}
 
 		{#if $conversationFinished}
 			<slot name="finished">

@@ -60,8 +60,8 @@
 			on:click={hideConversation}
 			class={`absolute flex flex-row items-center justify-around rounded-full ${
 				$isMobile
-					? `top-[2.5vh] right-[4vw] h-[2.3vh] text-[3vw] px-2 ${
-							briefing ? 'bg-white text-black' : 'text-white border border-white'
+					? `right-[4vw] h-[2.3vh] text-[3vw] px-2 z-10 ${
+							briefing ? 'bg-white text-black top-[2.5vh]' : 'text-white border border-white top-[1vh]'
 					  }`
 					: 'bg-white text-black left-[3vw] top-[6vh] h-[6vh] text-[1.8vw] px-5'
 			}`}
@@ -87,7 +87,7 @@
 
 		<div
 			class={`flex flex-row h-full items-center ${
-				$isMobile ? 'w-full' : `${briefing ? 'w-full justify-center' : 'w-[60%]'}`
+				$isMobile ? 'w-full' : `${briefing ? 'w-full justify-center' : 'w-[60%] justify-between'}`
 			}`}
 		>
 			<!-- Mission Details container -->
@@ -162,7 +162,7 @@
 				<img
 					class={`${
 						$isMobile
-							? 'w-full max-h-full mx-auto'
+							? 'max-w-full max-h-full mx-auto'
 							: `${briefing ? 'h-[90%]' : 'w-full max-h-[90%]'} bottom-0 transition-transform`
 					}`}
 					src={$chatContext.conversation.avatar.models[$chatContext.bot.emotion]}

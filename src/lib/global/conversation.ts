@@ -1,7 +1,7 @@
 import { analyzeDialog, analyzeGoalScore, chat, checkGoalProgress } from '$api/conversation';
 import { transcribe } from '$api/transcription';
 import { synthesize } from '$api/tts';
-import { BotEmotionValues, type ChatBotMessage } from '$lib/types/conversationData';
+import { BotEmotionValues, type ChatBotMessage, type ConversationHistoryItem } from '$lib/types/conversationData';
 import type { ChatMessage } from '$lib/types/requests/chatCompletion';
 import { get, writable } from 'svelte/store';
 import {
@@ -27,6 +27,16 @@ interface HistoryItem {
 /** chat's history, used for display only */
 export const history = writable<HistoryItem[]>([]);
 
+/**
+ * Chat history in conversation page (/conversation/play). Used for display. Only one field in each items will be non-null/undefined
+ */
+export const conversationHistory = writable<ConversationHistoryItem[]>([]);
+
+/**
+ * When set to true, the assistant will generate slower tts.
+ */
+export const isConversationFriendSpeakSlower = writable(false);
+
 export const waitingForAIResponse = writable(false);
 
 export const initializedConversation = writable(false);
@@ -35,6 +45,9 @@ export const transcribing = writable(false);
 
 export const conversationFinished = writable(false);
 
+/**
+ * The recording that is shown to user before being sent or rerecord again.
+ */
 export const currentRecording = writable<{ data: Blob; url: string } | null>(null);
 audioRecording.subscribe(currentRecording.set);
 
@@ -74,6 +87,7 @@ export const resetConversationData = () => {
 	waitingForAIResponse.set(false);
 	history.set([]);
 	goalTracking = [];
+	conversationHistory.set([])
 	gptHistory = [];
 };
 
@@ -107,6 +121,7 @@ const botReply = async function (message?: string, targetLevel: CEFRLevel = 'A1'
 	if (!ct) throw new Error('required chatbox context');
 
 	waitingForAIResponse.set(true);
+	const hasMessage = !!message;
 
 	// if no message provide, get response from chatGPT
 	if (!message) {
@@ -145,7 +160,8 @@ const botReply = async function (message?: string, targetLevel: CEFRLevel = 'A1'
 	const audio = await synthesize(
 		message,
 		ct.conversation.details.bot.accent,
-		ct.conversation.details.bot.gender
+		ct.conversation.details.bot.gender,
+		get(isConversationFriendSpeakSlower) ? 0.65 : 1
 	);
 
 	history.set([
@@ -157,7 +173,8 @@ const botReply = async function (message?: string, targetLevel: CEFRLevel = 'A1'
 		}
 	]);
 
-	if (get(isCheckConversationGoal)) {
+	// prevent checking for the first time (user has not chat yet, only assistant)
+	if (!hasMessage && get(isCheckConversationGoal)) {
 		const passed = await checkGoalProgress(
 			get(history)
 				.map(
@@ -170,9 +187,22 @@ const botReply = async function (message?: string, targetLevel: CEFRLevel = 'A1'
 		console.log(passed);
 		if (passed) {
 			goalTracking[get(currentGoal)].lastDialogueIndex = get(history).length - 1;
+			conversationHistory.set([
+				...get(conversationHistory),
+				{ endOfGoal: get(currentGoal) + 1 }
+			])
 			currentGoal.set(get(currentGoal) + 1);
 		}
 	}
+
+	conversationHistory.set([...get(conversationHistory),
+	{
+		chat: {
+			role: 'assistant',
+			audioURL: await blobToBase64(audio),
+			transcription: message
+		}
+	}])
 
 	// behavior regarding bot's message status
 	if (
@@ -215,20 +245,29 @@ export const revealGoalHint = async function () {
 export const submitUserReply = async function (audioRecording: { data: Blob; url: string } | null) {
 	if (audioRecording !== null) {
 		transcribing.set(true);
+
+
+		conversationHistory.set([...get(conversationHistory), {
+			chat: {
+				role: 'user',
+				audioURL: audioRecording.url,
+				transcription: null
+			}
+		}])
+
+		const targetIndex = get(conversationHistory).length - 1;
+		const transcription = await transcribe(audioRecording.data);
+		conversationHistory.set(
+			get(conversationHistory).map((v, i) => (i === targetIndex ? { ...v, chat: { ...v.chat!, transcription: transcription } } : v))
+		);
 		history.set([
 			...get(history),
 			{
 				role: 'user',
 				audioURL: audioRecording.url,
-				transcription: null
+				transcription: transcription
 			}
 		]);
-
-		const targetIndex = get(history).length - 1;
-		const transcription = await transcribe(audioRecording.data);
-		history.set(
-			get(history).map((v, i) => (i === targetIndex ? { ...v, transcription: transcription } : v))
-		);
 		gptHistory.push({ role: 'user', content: transcription });
 
 		transcribing.set(false);

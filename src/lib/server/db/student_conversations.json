@@ -107,15 +107,15 @@
 			"avatar": {
 				"name": "Jane",
 				"models": {
-					"neutral": "https://media.discordapp.net/attachments/987411564858576946/1118735587520811028/download_1.png?width=1170&height=1170",
-					"joy": "https://media.discordapp.net/attachments/987411564858576946/1118735587520811028/download_1.png?width=1170&height=1170",
-					"trust": "https://media.discordapp.net/attachments/987411564858576946/1118735587520811028/download_1.png?width=1170&height=1170",
-					"fear": "https://media.discordapp.net/attachments/987411564858576946/1118735587520811028/download_1.png?width=1170&height=1170",
-					"surprise": "https://media.discordapp.net/attachments/987411564858576946/1118735587520811028/download_1.png?width=1170&height=1170",
-					"sadness": "https://media.discordapp.net/attachments/987411564858576946/1118735587520811028/download_1.png?width=1170&height=1170",
-					"disgust": "https://media.discordapp.net/attachments/987411564858576946/1118735587520811028/download_1.png?width=1170&height=1170",
-					"anger": "https://media.discordapp.net/attachments/987411564858576946/1118735587520811028/download_1.png?width=1170&height=1170",
-					"anticipation": "https://media.discordapp.net/attachments/987411564858576946/1118735587520811028/download_1.png?width=1170&height=1170"
+					"neutral": "https://cdn.discordapp.com/attachments/842737146321174558/1122490455892967485/download_1.png",
+					"joy": "https://cdn.discordapp.com/attachments/842737146321174558/1122490455892967485/download_1.png",
+					"trust": "https://cdn.discordapp.com/attachments/842737146321174558/1122490455892967485/download_1.png",
+					"fear": "https://cdn.discordapp.com/attachments/842737146321174558/1122490455892967485/download_1.png",
+					"surprise": "https://cdn.discordapp.com/attachments/842737146321174558/1122490455892967485/download_1.png",
+					"sadness": "https://cdn.discordapp.com/attachments/842737146321174558/1122490455892967485/download_1.png",
+					"disgust": "https://cdn.discordapp.com/attachments/842737146321174558/1122490455892967485/download_1.png",
+					"anger": "https://cdn.discordapp.com/attachments/842737146321174558/1122490455892967485/download_1.png",
+					"anticipation": "https://cdn.discordapp.com/attachments/842737146321174558/1122490455892967485/download_1.png"
 				}
 			},
 			"id": "13"
@@ -142,15 +142,15 @@
 			"avatar": {
 				"name": "Raj",
 				"models": {
-					"neutral": "https://media.discordapp.net/attachments/1091669790898278471/1118732113429143552/farmer.png?width=1170&height=1170",
-					"joy": "https://media.discordapp.net/attachments/1091669790898278471/1118732113429143552/farmer.png?width=1170&height=1170",
-					"trust": "https://media.discordapp.net/attachments/1091669790898278471/1118732113429143552/farmer.png?width=1170&height=1170",
-					"fear": "https://media.discordapp.net/attachments/1091669790898278471/1118732113429143552/farmer.png?width=1170&height=1170",
-					"surprise": "https://media.discordapp.net/attachments/1091669790898278471/1118732113429143552/farmer.png?width=1170&height=1170",
-					"sadness": "https://media.discordapp.net/attachments/1091669790898278471/1118732113429143552/farmer.png?width=1170&height=1170",
-					"disgust": "https://media.discordapp.net/attachments/1091669790898278471/1118732113429143552/farmer.png?width=1170&height=1170",
-					"anger": "https://media.discordapp.net/attachments/1091669790898278471/1118732113429143552/farmer.png?width=1170&height=1170",
-					"anticipation": "https://media.discordapp.net/attachments/1091669790898278471/1118732113429143552/farmer.png?width=1170&height=1170"
+					"neutral": "https://cdn.discordapp.com/attachments/842737146321174558/1122491946900926605/farmer.png",
+					"joy": "https://cdn.discordapp.com/attachments/842737146321174558/1122491946900926605/farmer.png",
+					"trust": "https://cdn.discordapp.com/attachments/842737146321174558/1122491946900926605/farmer.png",
+					"fear": "https://cdn.discordapp.com/attachments/842737146321174558/1122491946900926605/farmer.png",
+					"surprise": "https://cdn.discordapp.com/attachments/842737146321174558/1122491946900926605/farmer.png",
+					"sadness": "https://cdn.discordapp.com/attachments/842737146321174558/1122491946900926605/farmer.png",
+					"disgust": "https://cdn.discordapp.com/attachments/842737146321174558/1122491946900926605/farmer.png",
+					"anger": "https://cdn.discordapp.com/attachments/842737146321174558/1122491946900926605/farmer.png",
+					"anticipation": "https://cdn.discordapp.com/attachments/842737146321174558/1122491946900926605/farmer.png"
 				}
 			},
 			"id": "14"
@@ -179,15 +179,15 @@
 			"avatar": {
 				"name": "Lisa",
 				"models": {
-					"neutral": "https://media.discordapp.net/attachments/1091669790898278471/1118732888171626496/C9uXumMBglqOAAAAAElFTkSuQmCC.png?width=1170&height=1170",
-					"joy": "https://media.discordapp.net/attachments/1091669790898278471/1118732888171626496/C9uXumMBglqOAAAAAElFTkSuQmCC.png?width=1170&height=1170",
-					"trust": "https://media.discordapp.net/attachments/1091669790898278471/1118732888171626496/C9uXumMBglqOAAAAAElFTkSuQmCC.png?width=1170&height=1170",
-					"fear": "https://media.discordapp.net/attachments/1091669790898278471/1118732888171626496/C9uXumMBglqOAAAAAElFTkSuQmCC.png?width=1170&height=1170",
-					"surprise": "https://media.discordapp.net/attachments/1091669790898278471/1118732888171626496/C9uXumMBglqOAAAAAElFTkSuQmCC.png?width=1170&height=1170",
-					"sadness": "https://media.discordapp.net/attachments/1091669790898278471/1118732888171626496/C9uXumMBglqOAAAAAElFTkSuQmCC.png?width=1170&height=1170",
-					"disgust": "https://media.discordapp.net/attachments/1091669790898278471/1118732888171626496/C9uXumMBglqOAAAAAElFTkSuQmCC.png?width=1170&height=1170",
-					"anger": "https://media.discordapp.net/attachments/1091669790898278471/1118732888171626496/C9uXumMBglqOAAAAAElFTkSuQmCC.png?width=1170&height=1170",
-					"anticipation": "https://media.discordapp.net/attachments/1091669790898278471/1118732888171626496/C9uXumMBglqOAAAAAElFTkSuQmCC.png?width=1170&height=1170"
+					"neutral": "https://cdn.discordapp.com/attachments/842737146321174558/1122496384382283816/C9uXumMBglqOAAAAAElFTkSuQmCC.png",
+					"joy": "https://cdn.discordapp.com/attachments/842737146321174558/1122496384382283816/C9uXumMBglqOAAAAAElFTkSuQmCC.png",
+					"trust": "https://cdn.discordapp.com/attachments/842737146321174558/1122496384382283816/C9uXumMBglqOAAAAAElFTkSuQmCC.png",
+					"fear": "https://cdn.discordapp.com/attachments/842737146321174558/1122496384382283816/C9uXumMBglqOAAAAAElFTkSuQmCC.png",
+					"surprise": "https://cdn.discordapp.com/attachments/842737146321174558/1122496384382283816/C9uXumMBglqOAAAAAElFTkSuQmCC.png",
+					"sadness": "https://cdn.discordapp.com/attachments/842737146321174558/1122496384382283816/C9uXumMBglqOAAAAAElFTkSuQmCC.png",
+					"disgust": "https://cdn.discordapp.com/attachments/842737146321174558/1122496384382283816/C9uXumMBglqOAAAAAElFTkSuQmCC.png",
+					"anger": "https://cdn.discordapp.com/attachments/842737146321174558/1122496384382283816/C9uXumMBglqOAAAAAElFTkSuQmCC.png",
+					"anticipation": "https://cdn.discordapp.com/attachments/842737146321174558/1122496384382283816/C9uXumMBglqOAAAAAElFTkSuQmCC.png"
 				}
 			},
 			"id": "15"

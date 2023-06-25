@@ -87,7 +87,7 @@
 
 		<div
 			class={`flex flex-row h-full items-center ${
-				$isMobile ? 'w-full' : `${briefing ? 'w-full justify-center' : 'w-[60%]'}`
+				$isMobile ? 'w-full' : `${briefing ? 'w-full justify-center' : 'w-[60%] justify-between'}`
 			}`}
 		>
 			<!-- Mission Details container -->

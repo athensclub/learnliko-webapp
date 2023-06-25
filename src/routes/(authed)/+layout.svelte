@@ -11,6 +11,8 @@
 	beforeNavigate(({ to }) => {
 		if (to?.url.pathname === '/conversation/play') {
 			enteringConversation = true;
+		}else{
+			enteringConversation = false;
 		}
 	});
 

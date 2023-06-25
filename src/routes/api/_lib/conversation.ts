@@ -171,3 +171,33 @@ export const analyzeDialogueScore = async function (
 
 	return data;
 };
+
+export const analyzeGoalScore = async function (
+	hintUsed: boolean,
+	CEFRLevel: CEFRLevel,
+	context: string,
+	dialogues: { user: string; assistant: string }[]
+) {
+	const result = { overall: 0, coins: 0, scores: <any>[] };
+
+	if (hintUsed) {
+		result.coins = 40;
+		return result;
+	}
+
+	const promises: Promise<any>[] = [];
+	for (let index = 0; index < dialogues.length; index++) {
+		const item = dialogues[index];
+		const _promise = analyzeDialogueScore(
+			item.assistant,
+			{ message: item.user, CEFRLevel },
+			context
+		).then((data) => {
+			result.scores[index] = data;
+		});
+		promises.push(_promise);
+	}
+	await Promise.all(promises);
+
+	return result;
+};

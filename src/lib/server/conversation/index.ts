@@ -2,6 +2,7 @@ import type { ConversationCarouselItem } from '$lib/types/conversationData';
 import type { Mode } from '$lib/types/mode';
 import type { ChatCompletionFunctions } from 'openai';
 import { gptFunctionCalling } from '../openai';
+import type { CEFRLevel } from '$lib/types/CEFRLevel';
 
 export const queryConversations = async function (mode: Mode) {
 	let data; // = await import(mapping[mode]);
@@ -49,6 +50,79 @@ export const isDialogueAchieveGoal = async function (dialogue: string, goal: str
 	);
 
 	if (!response) throw new Error('No output from checker');
+
+	return JSON.parse(response);
+};
+
+export const analyzeDialogue = async function (
+	assistant: string,
+	user: { message: string; CEFRLevel: CEFRLevel },
+	context: string
+) {
+	if (!assistant) throw new Error('No assistant dialogue provided');
+	if (!user) throw new Error('No user details provided');
+	if (!context) throw new Error('No context provided');
+
+	const _function: ChatCompletionFunctions = {
+		name: 'analyze_dialogue',
+		description: `Analyze the provided User's dialogue in terms of grammar, appropriateness, and advancement of vocabulary and sentence structure based on the context of "${context}". Assess each aspect separately, providing specific examples to support your analysis`,
+		parameters: {
+			type: 'object',
+			properties: {
+				appropriateness: {
+					type: 'boolean',
+					description: `Assess the appropriateness of the language used in the User's dialogue based on the context of "${context}" and the relationship between the participants. Consider factors such as formality, politeness, and cultural sensitivity, true if the User's dialogue is appropriate, false otherwise`
+				},
+				grammar: {
+					type: 'number',
+					minimum: 0,
+					maximum: 100,
+					description: `Evaluate the grammar used in the User's dialogue and determine its correctness and clarity, scale from 0 to 100`
+				},
+				advancement: {
+					type: 'object',
+					properties: {
+						score: {
+							type: 'number',
+							minimum: 0,
+							maximum: 100,
+							description: `Examine the vocabulary choices and sentence structures employed in the User's dialogue compared to CEFR level ${user.CEFRLevel}, scale from 0 to 100`
+						},
+						// suggestion: {
+						// 	type: 'string',
+						// 	description: `Provide User suggestion of how to reply in which advancement is satisfied with CEFR level ${user.CEFRLevel}`
+						// },
+						examples: {
+							type: 'array',
+							items: {
+								type: 'string'
+							},
+							maxItems: 3,
+							description: `Provide User the examples of the response which advancement at CEFR level ${user.CEFRLevel}`
+						}
+					},
+					required: ['score', 'suggestion']
+				}
+			},
+			required: ['appropriateness', 'grammar', 'advancement']
+		}
+	};
+
+	const response = await gptFunctionCalling(
+		[
+			{
+				role: 'system',
+				content: `Analyze the provided dialogue in terms of grammar, appropriateness, and advancement of vocabulary and sentence structure`
+			},
+			{ role: 'user', content: `A: "${assistant}"\nUser: "${user.message}"` }
+		],
+		[_function],
+		{
+			name: _function.name
+		}
+	);
+
+	if (!response) throw new Error('No output from function');
 
 	return JSON.parse(response);
 };

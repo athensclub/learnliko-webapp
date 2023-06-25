@@ -1,5 +1,6 @@
 import type { RecapHistory } from '$lib/global/chatbox';
 import { currentMode } from '$lib/global/mode';
+import type { CEFRLevel } from '$lib/types/CEFRLevel';
 import type { ConversationCarouselItem } from '$lib/types/conversationData';
 import type { Mode } from '$lib/types/mode';
 import type { ChatMessage } from '$lib/types/requests/chatCompletion';
@@ -150,4 +151,23 @@ export const checkGoalProgress = async function (dialogue: string, goal: string)
 
 	const { result } = await response.json();
 	return result;
+};
+
+export const analyzeDialogueScore = async function (
+	assistant: string,
+	user: { message: string; CEFRLevel: CEFRLevel },
+	context: string
+) {
+	const response = await fetch('/api/v1/conversation/utils/analyzeDialogue', {
+		method: 'POST',
+		body: JSON.stringify({ assistant, user, context })
+	});
+
+	const data = (await response.json()) as {
+		appropriateness: boolean;
+		grammar: number;
+		advancement: { score: number; examples: string[] };
+	};
+	console.log(data);
+	return data;
 };

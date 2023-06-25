@@ -26,10 +26,12 @@ export const chatCompletion = async function (messages: ChatMessage[]) {
 export const gptFunctionCalling = async function (
 	messages: ChatMessage[],
 	functions: ChatCompletionFunctions[],
-	function_call: CreateChatCompletionRequestFunctionCall
+	function_call: CreateChatCompletionRequestFunctionCall,
+	temperature = 0.5
 ) {
 	const chatGPT = await _openai.createChatCompletion({
 		model: 'gpt-3.5-turbo-0613',
+		temperature,
 		messages,
 		functions,
 		function_call

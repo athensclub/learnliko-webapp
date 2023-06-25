@@ -1,5 +1,15 @@
 <script lang="ts">
-	import userProfileImage from '$lib/images/sample_kid_image.png';
+	import LoginModal from '$lib/components/modals/LoginModal.svelte';
+	import type { CEFRLevel } from '$lib/types/CEFRLevel';
+	import { getContext } from 'svelte';
+	import type { Context } from 'svelte-simple-modal';
+
+	const { open }: Context = getContext('simple-modal');
+	const promptLogin = (level: CEFRLevel) => open(LoginModal, {
+		profileImage: 'https://cdn.discordapp.com/attachments/1120787872379842711/1120788019725729893/vi_Robot_3d_stylize_37aff20f-f0d6-431b-98e8-facc9049f1f4.png',
+		name: "Simon",
+		level
+	});
 </script>
 
 <div
@@ -9,7 +19,7 @@
 		<div class="text-[2.2vw]">Recent logins</div>
 
 		<div class="grid grid-cols-3 gap-[2vw] mt-[2vh]">
-			<button class="w-full h-[20vw] bg-white rounded-[1vw] flex flex-col overflow-hidden">
+			<button on:click={() => promptLogin('pre-A1')} class="w-full h-[20vw] bg-white rounded-[1vw] flex flex-col overflow-hidden">
 				<div
 					style="background-image: url('https://cdn.discordapp.com/attachments/1120787872379842711/1120788019725729893/vi_Robot_3d_stylize_37aff20f-f0d6-431b-98e8-facc9049f1f4.png');"
 					class="w-full aspect-square bg-cover bg-center"
@@ -17,10 +27,10 @@
 				<div
 					class="w-full flex-1 flex items-center justify-center font-medium text-center text-[1.5vw]"
 				>
-					Simon
+					Simon (pre-A1)
 				</div>
 			</button>
-			<button class="w-full h-[20vw] bg-white rounded-[1vw] flex flex-col overflow-hidden">
+			<button on:click={() => promptLogin('A1')} class="w-full h-[20vw] bg-white rounded-[1vw] flex flex-col overflow-hidden">
 				<div
 					style="background-image: url('https://cdn.discordapp.com/attachments/1120787872379842711/1120788019725729893/vi_Robot_3d_stylize_37aff20f-f0d6-431b-98e8-facc9049f1f4.png');"
 					class="w-full aspect-square bg-cover bg-center"
@@ -28,10 +38,10 @@
 				<div
 					class="w-full flex-1 flex items-center justify-center font-medium text-center text-[1.5vw]"
 				>
-					Simon
+					Simon (A1)
 				</div>
 			</button>
-			<button class="w-full h-[20vw] bg-white rounded-[1vw] flex flex-col overflow-hidden">
+			<button on:click={() => promptLogin('A2')} class="w-full h-[20vw] bg-white rounded-[1vw] flex flex-col overflow-hidden">
 				<div
 					style="background-image: url('https://cdn.discordapp.com/attachments/1120787872379842711/1120788019725729893/vi_Robot_3d_stylize_37aff20f-f0d6-431b-98e8-facc9049f1f4.png');"
 					class="w-full aspect-square bg-cover bg-center"
@@ -39,7 +49,7 @@
 				<div
 					class="w-full flex-1 flex items-center justify-center font-medium text-center text-[1.5vw]"
 				>
-					Simon
+					Simon (A2)
 				</div>
 			</button>
 		</div>

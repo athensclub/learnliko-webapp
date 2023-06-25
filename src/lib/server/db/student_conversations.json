@@ -14,6 +14,11 @@
 						"Ask for product available in the shop",
 						"Choose products to buy",
 						"Making purchase"
+					],
+					"hint": [
+						"Do you have any pens in your shop?",
+						"I would like to buy a pen",
+						"Here you are"
 					]
 				},
 				"bot": {
@@ -130,7 +135,9 @@
 				"intro": "Hi, I'm a farmer named Raj. What fruit do you like to eat? I can tell you about their benefits.",
 				"learner": {
 					"mission": "คุณกำลังคุยกับชาวนาที่ชื่อ Raj คุณต้องคุยกับเขาเกี่ยวกับเรื่องผลไม้",
-					"goal": ["Learn about different types of fruits and their benefits"]
+					"goal": [
+						"Learn about different types of fruits and their benefits"
+					]
 				},
 				"bot": {
 					"avatar": "https://media.discordapp.net/attachments/1091669790898278471/1118732113429143552/farmer.png?width=1170&height=1170",

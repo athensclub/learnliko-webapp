@@ -239,10 +239,14 @@ const botReply = async function (message?: string, targetLevel: CEFRLevel = 'A1'
 };
 
 export const revealGoalHint = async function () {
-	goalTracking[get(currentGoal)].hintUsed = true;
+	const ct = get(chatContext);
+	if (!ct) throw new Error('required chatbox context');
 
-	// TODO: return goal's hint from the conversation
-	return '';
+	goalTracking[get(currentGoal)].hintUsed = true;
+	conversationHistory.set([
+		...get(conversationHistory),
+		{ hint: ct.conversation.details.learner.hint[get(currentGoal)] }
+	]);
 };
 
 export const submitUserReply = async function (audioRecording: { data: Blob; url: string } | null) {

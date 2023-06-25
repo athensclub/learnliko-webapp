@@ -27,6 +27,12 @@ type ChatboxContext = {
  */
 export const chatContext = writable<ChatboxContext | null>();
 
+export interface DialogueScore {
+	appropriateness: boolean;
+	grammar: { score: number; examples: string[] };
+	advancement: { score: number; examples: string[] };
+}
+
 /**
  * pair of assistant message, then user message.
  */
@@ -42,6 +48,7 @@ export type RecapHistoryItem = {
 		transcription: string;
 	} | null;
 	suggestion: string;
+	dialogueScore: DialogueScore;
 	score: number;
 };
 
@@ -50,11 +57,20 @@ export type RecapHistoryItem = {
  */
 export type RecapHistory = RecapHistoryItem[];
 
+// new recap type
+export type RecapResult = {
+	history: RecapHistory;
+	coins: number;
+	score: number;
+};
+
 /**
  * A history to be used to show in recap.
  * Fill this store's data before showing recap view.
  * If the history is not loaded yet, it will be null.
  */
 export const recapHistory = writable<RecapHistory | null>();
+
+export const recapResult = writable<RecapResult | null>();
 
 export const isLoadingRecapHistory = writable(false);

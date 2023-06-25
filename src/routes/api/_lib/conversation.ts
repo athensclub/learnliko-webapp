@@ -4,6 +4,7 @@ import type { CEFRLevel } from '$lib/types/CEFRLevel';
 import type { ConversationCarouselItem } from '$lib/types/conversationData';
 import type { Mode } from '$lib/types/mode';
 import type { ChatMessage } from '$lib/types/requests/chatCompletion';
+import { round } from '$lib/utils/math';
 import { get } from 'svelte/store';
 
 export const chat = async function (messages: ChatMessage[]) {
@@ -201,12 +202,15 @@ export const analyzeGoalScore = async function (
 			.reduce((x, y) => x + y, 0) /
 			result.scores.length) *
 		100;
+	result.overall = round(result.overall, 2);
+
 	result.coins =
 		(result.scores
 			.map((e) => (e.appropriateness ? 50 + e.advancement.score * 0.3 + e.grammar.score * 0.2 : 40))
 			.reduce((x, y) => x + y, 0) /
 			result.scores.length) *
 		100;
+	result.coins = round(result.coins, 2);
 
 	return result;
 };

@@ -1,10 +1,16 @@
-import { analyzeDialog, chat, checkGoalProgress } from '$api/conversation';
+import { analyzeDialog, analyzeGoalScore, chat, checkGoalProgress } from '$api/conversation';
 import { transcribe } from '$api/transcription';
 import { synthesize } from '$api/tts';
 import { BotEmotionValues, type ChatBotMessage } from '$lib/types/conversationData';
 import type { ChatMessage } from '$lib/types/requests/chatCompletion';
 import { get, writable } from 'svelte/store';
-import { chatContext, recapHistory, type RecapHistory } from './chatbox';
+import {
+	chatContext,
+	recapHistory,
+	recapResult,
+	type RecapHistory,
+	type RecapResult
+} from './chatbox';
 import { blobToBase64 } from '$lib/utils/io';
 import { round } from '$lib/utils/math';
 import { completeConversationLocal } from '$lib/localdb/conversationLocal';
@@ -12,14 +18,14 @@ import { audioRecording } from './recording';
 import { textAdaptor } from '$api/textProcessor';
 import type { CEFRLevel } from '$lib/types/CEFRLevel';
 
+interface HistoryItem {
+	role: 'user' | 'assistant';
+	audioURL: string;
+	transcription: string | null;
+}
+
 /** chat's history, used for display only */
-export const history = writable<
-	{
-		role: 'user' | 'assistant';
-		audioURL: string;
-		transcription: string | null;
-	}[]
->([]);
+export const history = writable<HistoryItem[]>([]);
 
 export const waitingForAIResponse = writable(false);
 
@@ -57,6 +63,9 @@ let finishedTime: Date;
 /** an array of chatGPT's history in raw data, used for chat completion */
 let gptHistory: ChatMessage[] = [];
 
+/** The object used to collect the details of specific goal in the conversation */
+let goalTracking: { goal: string; hintUsed: boolean; lastDialogueIndex: number }[] = [];
+
 export const resetConversationData = () => {
 	currentGoal.set(0);
 	transcribing.set(false);
@@ -64,18 +73,24 @@ export const resetConversationData = () => {
 	initializedConversation.set(false);
 	waitingForAIResponse.set(false);
 	history.set([]);
+	goalTracking = [];
 	gptHistory = [];
 };
 
 export const initializeConversationBot = async function () {
 	const ct = get(chatContext);
-	gptHistory.push({ role: 'user', content: ct!.conversation.details.bot.prompt });
+	if (!ct) throw new Error('required chatbox context');
+
+	gptHistory.push({ role: 'user', content: ct.conversation.details.bot.prompt });
 	gptHistory.push({
 		role: 'assistant',
-		content: `{"message":"${ct!.conversation.details.intro}","status":"NORMAL","emotion":"neutral"}`
+		content: `{"message":"${ct.conversation.details.intro}","status":"NORMAL","emotion":"neutral"}`
+	});
+	ct.conversation.details.learner.goal.forEach((e) => {
+		goalTracking.push({ goal: e, hintUsed: false, lastDialogueIndex: 0 });
 	});
 
-	await botReply(ct!.conversation.details.intro);
+	await botReply(ct.conversation.details.intro);
 
 	// finish initialization
 	initializedConversation.set(true);
@@ -154,12 +169,17 @@ const botReply = async function (message?: string, targetLevel: CEFRLevel = 'A1'
 		);
 		console.log(passed);
 		if (passed) {
+			goalTracking[get(currentGoal)].lastDialogueIndex = get(history).length - 1;
 			currentGoal.set(get(currentGoal) + 1);
 		}
 	}
 
 	// behavior regarding bot's message status
-	if ((get(isCheckConversationGoal) && get(currentGoal) >= ct.conversation.details.learner.goal.length) || get(history).length >= 2 * get(maxDialogueCount)) {
+	if (
+		(get(isCheckConversationGoal) &&
+			get(currentGoal) >= ct.conversation.details.learner.goal.length) ||
+		get(history).length >= 2 * get(maxDialogueCount)
+	) {
 		conversationFinished.set(true);
 		if (get(saveCurrentConversation)) {
 			finishedTime = new Date();
@@ -183,6 +203,13 @@ const botReply = async function (message?: string, targetLevel: CEFRLevel = 'A1'
 	// }
 
 	waitingForAIResponse.set(false);
+};
+
+export const revealGoalHint = async function () {
+	goalTracking[get(currentGoal)].hintUsed = true;
+
+	// TODO: return goal's hint from the conversation
+	return '';
 };
 
 export const submitUserReply = async function (audioRecording: { data: Blob; url: string } | null) {
@@ -211,52 +238,95 @@ export const submitUserReply = async function (audioRecording: { data: Blob; url
 };
 
 const computeRecap = async () => {
-	recapHistory.set(null);
-	const result: RecapHistory = [];
+	const ct = get(chatContext);
+	if (!ct) throw new Error('required chatbox context');
+
+	recapResult.set(null);
+
+	const _history = get(history);
+	const goalsResult: RecapResult[] = [];
 	const promises: Promise<any>[] = [];
+	let startDialogueIndex = 0;
 
-	// history store does not contain system prompt so we can start from index 0.
-	for (let i = 0; i < get(history).length; i += 2) {
-		// the last dialog will have no user's response
-		if (i + 1 >= get(history).length) break;
+	// Calculate from each completed goal
+	for (let goalIndex = 0; goalIndex < goalTracking.length; goalIndex++) {
+		const details = goalTracking[goalIndex];
+		const pairDialogues: {
+			assistant: HistoryItem;
+			user: HistoryItem;
+		}[] = [];
 
-		promises.push(
-			analyzeDialog(get(history)[i].transcription!, get(history)[i + 1].transcription!).then(
-				(recap) => {
-					result[i / 2] = {
-						assistant: {
-							...get(history)[i],
-							role: 'assistant',
-							transcription: get(history)[i].transcription!
-						},
-						user: {
-							...get(history)[i + 1],
-							role: 'user',
-							transcription: get(history)[i + 1].transcription!
-						},
+		// Create a set of dialogues in each goal session
+		if (!details.hintUsed) {
+			// Because the `lastDialogueIndex` is assistant message with no pair of user message, so we can skip
+			for (let i = startDialogueIndex; i < details.lastDialogueIndex; i += 2) {
+				// In case the index is exceed the history length
+				if (i + 1 >= _history.length) break;
 
-						score: recap.overallScore,
-						suggestion: recap.suggestion
-					};
-				}
-			)
-		);
+				// assistant will always begin first
+				pairDialogues.push({
+					assistant: _history[i],
+					user: _history[i + 1]
+				});
+			}
+		}
+
+		analyzeGoalScore(
+			details.hintUsed,
+			ct.conversation.CEFRlevel,
+			ct.conversation.details.learner.mission,
+			pairDialogues.map((d) => {
+				return { assistant: d.assistant.transcription!, user: d.user.transcription! };
+			})
+		).then((result) => {
+			const dialoguesResult: RecapHistory = [];
+			for (let i = 0; i < result.scores.length; i++) {
+				dialoguesResult.push({
+					assistant: {
+						role: 'assistant',
+						audioURL: pairDialogues[i].assistant.audioURL,
+						transcription: pairDialogues[i].assistant.transcription!
+					},
+					user: {
+						role: 'user',
+						audioURL: pairDialogues[i].user.audioURL,
+						transcription: pairDialogues[i].user.transcription!
+					},
+					suggestion: '',
+					dialogueScore: result.scores[i],
+					score: 0
+				});
+			}
+
+			goalsResult[goalIndex] = {
+				coins: result.coins,
+				score: result.overall,
+				history: dialoguesResult
+			};
+		});
+		startDialogueIndex = details.lastDialogueIndex;
 	}
 	await Promise.all(promises);
 
-	recapHistory.set(result);
+	let overallScore = 0,
+		totalCoins = 0,
+		recapDialogues: RecapHistory = [];
+	goalsResult.forEach((e) => {
+		totalCoins += e.coins;
+		overallScore += e.score;
+		recapDialogues.push(...e.history);
+	});
+	overallScore = overallScore / goalTracking.length;
 
-	const totalScore = result ? result.map((x) => x.score).reduce((x, y) => x + y, 0) : 0;
-	round((totalScore / result.length) * 100, 2);
+	recapResult.set({ score: overallScore, coins: totalCoins, history: recapDialogues });
 
-	const ct = get(chatContext);
 	// TODO: find a better approach to promote/demote user's CEFR level
 	// if (totalScore > 90) setCurrentCEFRLevel(ct!.conversation.CEFRlevel);
 
 	// TODO: use actual db (cloud).
-	completeConversationLocal({
-		recap: result,
-		finishedTime,
-		conversationID: ct!.conversation.id
-	});
+	// completeConversationLocal({
+	// 	recap: result,
+	// 	finishedTime,
+	// 	conversationID: ct.conversation.id
+	// });
 };

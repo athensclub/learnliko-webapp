@@ -18,6 +18,9 @@
 	import AudioPlayer from '../AudioPlayer.svelte';
 	import { chatContext } from '$lib/global/chatbox';
 	import Checkbox from '../Checkbox.svelte';
+	import { getContext } from 'svelte';
+	import type { Context } from 'svelte-simple-modal';
+	import DialogueHintModal from '../modals/DialogueHintModal.svelte';
 
 	let clazz = '';
 	export { clazz as class };
@@ -26,6 +29,9 @@
 		submitUserReply($currentRecording);
 		$currentRecording = null;
 	};
+
+	const { open }: Context = getContext('simple-modal');
+	const showHintModal = () => open(DialogueHintModal, {});
 </script>
 
 <div class={`flex items-center justify-center rounded-xl h-[5vw] font-line-seed ${clazz}`}>
@@ -119,7 +125,7 @@
 				$transcribing ||
 				$conversationFinished ||
 				!$initializedConversation}
-			on:click={startRecording}
+			on:click={showHintModal}
 			class=" text-white font-bold bg-white bg-opacity-20 w-[6.7rem] h-[40px] shadow-all rounded-full flex items-center justify-center z-[1000] ml-3"
 		>
 			? Help

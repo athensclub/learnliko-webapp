@@ -32,11 +32,10 @@
 
 	const { open }: Context = getContext('simple-modal');
 	const showHintModal = () => open(DialogueHintModal, {});
-	$waitingForAIResponse = true
 </script>
 
 <div class={`flex items-center justify-center rounded-xl p-2 font-line-seed ${clazz}`}>
-	{#if $waitingForAIResponse}
+	{#if $waitingForAIResponse || $transcribing}
 		<div
 			class="flex flex-row justify-between items-center gap-[7%] px-[5%] w-full h-full text-white"
 		>

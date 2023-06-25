@@ -60,7 +60,9 @@
 			on:click={hideConversation}
 			class={`absolute flex flex-row items-center justify-around rounded-full ${
 				$isMobile
-					? 'top-[2.5vh] right-[4vw] h-[2.3vh] text-[3vw] border border-white px-2'
+					? `top-[2.5vh] right-[4vw] h-[2.3vh] text-[3vw] px-2 ${
+							briefing ? 'bg-white text-black' : 'text-white border border-white'
+					  }`
 					: 'bg-white text-black left-[3vw] top-[6vh] h-[6vh] text-[1.8vw] px-5'
 			}`}
 		>
@@ -70,63 +72,85 @@
 					y1="0.646447"
 					x2="11.3536"
 					y2="11.6464"
-					stroke={$isMobile ? 'white' : 'black'}
+					stroke={$isMobile && !briefing ? 'white' : 'black'}
 				/>
 				<line
 					x1="11.3536"
 					y1="0.353553"
 					x2="0.353553"
 					y2="11.3536"
-					stroke={$isMobile ? 'white' : 'black'}
+					stroke={$isMobile && !briefing ? 'white' : 'black'}
 				/>
 			</svg>
 			Exit
 		</button>
 
 		<div
-			class={`flex flex-row h-full items-center ${briefing ? 'w-full justify-center' : 'w-[60%]'}`}
+			class={`flex flex-row h-full items-center ${
+				$isMobile ? 'w-full' : `${briefing ? 'w-full justify-center' : 'w-[60%]'}`
+			}`}
 		>
 			<!-- Mission Details container -->
 			<div
-				class={`transition-transform backdrop-blur-lg backdrop-brightness-75 p-[1.5vw] shadow-sm border rounded-xl font-line-seed ${
+				class={`transition-transform backdrop-blur-lg backdrop-brightness-75 p-[1.5vw] shadow-sm border rounded-xl font-line-seed flex ${
 					$isMobile
-						? 'absolute top-0 w-full text-[1.3vw] rounded-t-none'
-						: `${briefing ? 'w-[33%]' : 'ml-[5%] w-[45%]'} h-fit`
+						? `absolute w-full text-[1.3vw] ${
+								briefing ? 'bottom-0 rounded-b-none flex-col' : 'top-0 py-[4vh] rounded-t-none flex-row justify-between items-center'
+						  }`
+						: `h-fit flex-col ${briefing ? 'w-[33%]' : 'ml-[5%] w-[45%]'}`
 				}`}
 			>
 				{#if briefing}
-					<div class="text-[1.7vw] font-bold">🎯ภารกิจของคุณ</div>
-					<div class="text-[1.3vw] mt-[1vw]">
+					<div class={`font-bold ${$isMobile ? 'text-[6vw]' : 'text-[1.7vw]'}`}>🎯ภารกิจของคุณ</div>
+					<div class={`${$isMobile ? 'text-[4.5vw] mt-[3vw]' : 'text-[1.3vw] mt-[1vw]'}`}>
 						{$chatContext.conversation.details.learner.mission}
 					</div>
 
 					<!-- Divider -->
-					<div class="w-full h-[0.15vh] my-[2vw] bg-white" />
+					<div
+						class={`w-full bg-white ${$isMobile ? 'h-[0.23vh] my-[6vw]' : 'h-[0.15vh] my-[2vw]'}`}
+					/>
 
-					<div class="text-[1.7vw] font-bold">เป้าหมาย</div>
-					<div class="text-[1.3vw] mt-[1vw] whitespace-pre-wrap">
+					<div class={`font-bold ${$isMobile ? 'text-[6vw]' : 'text-[1.7vw]'}`}>เป้าหมาย</div>
+					<div
+						class={`whitespace-pre-wrap ${
+							$isMobile ? 'text-[4.5vw] mt-[3vw]' : 'text-[1.3vw] mt-[1vw]'
+						}`}
+					>
 						{$chatContext.conversation.details.learner.goal
 							.map((g, i) => `${i + 1}. ${g}`)
 							.join('\n')}
 					</div>
 
-					<div class="text-[1.1vw] font-bold mt-[2vw] text-center">
+					<div
+						class={`font-bold text-center ${
+							$isMobile ? 'text-[3.5vw] mt-[5vw]' : 'text-[1.1vw] mt-[2vw]'
+						}`}
+					>
 						คุณจะได้รับเหรียญสูงสุด 🧿 300 สำหรับภารกิจนี้
 					</div>
 
 					<button
 						on:click={() => (briefing = false)}
-						class="w-full bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] rounded-full mt-[2vw] text-[1.3vw] py-[1.3vh]"
+						class={`bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] rounded-full ${
+							$isMobile
+								? 'w-[90%] mx-auto my-[4vw] text-[4.8vw] py-[1.5vh]'
+								: 'w-full mt-[2vw] text-[1.3vw] py-[1.3vh]'
+						}`}
 					>
 						เริ่มการพูดคุย
 					</button>
 				{:else}
-					<div class="text-[1.7vw] font-bold mt-[5vh] whitespace-pre-wrap text-center">
+					<div
+						class={`font-bold whitespace-pre-wrap text-center ${
+							$isMobile ? 'text-[4vw]' : 'text-[1.7vw] mt-[5vh]'
+						}`}
+					>
 						{$currentGoal + 1}. {$chatContext.conversation.details.learner.goal[$currentGoal]}
 					</div>
 
 					<div
-						class="text-[1.35vw] px-[1vw] py-[0.3vw] mt-[3vh] mb-[5vh] bg-[#0000007D] w-fit rounded-full mx-auto"
+						class={`bg-[#0000007D] w-fit rounded-full mx-auto ${$isMobile?'text-[3vw] px-[2vw] py-[1vw]':'text-[1.35vw] px-[1vw] py-[0.3vw] mt-[3vh] mb-[5vh]'}`}
 					>
 						🧿 100
 					</div>
@@ -134,11 +158,11 @@
 			</div>
 
 			<!-- Avatar zone -->
-			<div class="w-fit h-full flex flex-col justify-end">
+			<div class={`h-full flex flex-col justify-end ${$isMobile ? 'w-full' : 'w-fit'}`}>
 				<img
 					class={`${
 						$isMobile
-							? 'w-full max-h-full object-contain mx-auto'
+							? 'w-full max-h-full mx-auto'
 							: `${briefing ? 'h-[90%]' : 'w-full max-h-[90%]'} bottom-0 transition-transform`
 					}`}
 					src={$chatContext.conversation.avatar.models[$chatContext.bot.emotion]}

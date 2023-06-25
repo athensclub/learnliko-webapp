@@ -11,14 +11,23 @@
 	import { showChatbox } from '$lib/global/chatbox';
 	import { navigating } from '$app/stores';
 	import { beforeNavigate } from '$app/navigation';
+	import UserCEFRLevelDetailModal from '$lib/components/modals/UserCEFRLevelDetailModal.svelte';
 
 	let name = 'Natsataporn M.';
 	let learningDiaries: LearningDiaryItem[] | null = null;
 
 	const { open }: Context = getContext('simple-modal');
-	const showDiary = (item: LearningDiaryItem) => {
-		open(LearningDiaryModal, { item });
-	};
+	const showDiary = (item: LearningDiaryItem) => open(LearningDiaryModal, { item });
+
+	const showCEFRLevel = () =>
+		open(
+			UserCEFRLevelDetailModal,
+			{},
+			{
+				classWindow: 'overflow-hidden',
+				classContent: 'bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD]'
+			}
+		);
 
 	const goBack = () => {
 		window.history.back();
@@ -89,7 +98,8 @@
 					$isMobile ? 'flex-col gap-[2vh]' : 'flex-row'
 				}`}
 			>
-				<div
+				<button
+					on:click={showCEFRLevel}
 					class={`flex flex-row items-center justify-evenly bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] text-white rounded-3xl ${
 						$isMobile ? 'w-full h-[20vh]' : 'w-[55%] h-[30vh]'
 					}`}
@@ -99,16 +109,44 @@
 						<div class={`${$isMobile ? 'text-[14vw]' : 'text-[4.5vw]'}`}>
 							{$userSession.profile?.CEFRLevel.general}
 						</div>
+						<div class="text-[1.1vw] underline flex flex-row">
+							view detail
+							<svg
+								class="ml-[0.7vw] w-[1.1vw]"
+								viewBox="0 0 20 16"
+								fill="none"
+								xmlns="http://www.w3.org/2000/svg"
+							>
+								<path
+									d="M1 7C0.447715 7 -4.82823e-08 7.44772 0 8C4.82823e-08 8.55228 0.447715 9 1 9L1 7ZM19.7071 8.70711C20.0976 8.31658 20.0976 7.68342 19.7071 7.29289L13.3431 0.928931C12.9526 0.538407 12.3195 0.538407 11.9289 0.928931C11.5384 1.31946 11.5384 1.95262 11.9289 2.34314L17.5858 8L11.9289 13.6569C11.5384 14.0474 11.5384 14.6805 11.9289 15.0711C12.3195 15.4616 12.9526 15.4616 13.3431 15.0711L19.7071 8.70711ZM1 9L19 9L19 7L1 7L1 9Z"
+									fill="white"
+								/>
+							</svg>
+						</div>
 					</div>
 
-					<div class="flex flex-col">
+					<div class="flex flex-col items-center">
 						<div class={`${$isMobile ? 'text-[4vw]' : 'text-[1.35vw]'}`}>Average Time</div>
 						<div>
 							<div class={`inline-block ${$isMobile ? 'text-[14vw]' : 'text-[4.5vw]'}`}>31</div>
 							<div class={`inline-block ${$isMobile ? 'text-[4vw]' : 'text-[1.35vw]'}`}>min</div>
 						</div>
+						<div class="text-[1.1vw] underline flex flex-row">
+							view detail
+							<svg
+								class="ml-[0.7vw] w-[1.1vw]"
+								viewBox="0 0 20 16"
+								fill="none"
+								xmlns="http://www.w3.org/2000/svg"
+							>
+								<path
+									d="M1 7C0.447715 7 -4.82823e-08 7.44772 0 8C4.82823e-08 8.55228 0.447715 9 1 9L1 7ZM19.7071 8.70711C20.0976 8.31658 20.0976 7.68342 19.7071 7.29289L13.3431 0.928931C12.9526 0.538407 12.3195 0.538407 11.9289 0.928931C11.5384 1.31946 11.5384 1.95262 11.9289 2.34314L17.5858 8L11.9289 13.6569C11.5384 14.0474 11.5384 14.6805 11.9289 15.0711C12.3195 15.4616 12.9526 15.4616 13.3431 15.0711L19.7071 8.70711ZM1 9L19 9L19 7L1 7L1 9Z"
+									fill="white"
+								/>
+							</svg>
+						</div>
 					</div>
-				</div>
+				</button>
 
 				<a
 					href="/cert"
@@ -202,14 +240,15 @@
 				</a>
 			</div>
 
-			<div
-				class={`font-extrabold ${
-					$isMobile ? 'mx-auto text-[7vw] mt-[7vh]' : 'text-[2vw] mt-[10vh]'
-				}`}
-			>
-				Learning Diary
-			</div>
-			{#if learningDiaries}
+			{#if learningDiaries && learningDiaries.length > 0}
+				<div
+					class={`font-extrabold ${
+						$isMobile ? 'mx-auto text-[7vw] mt-[7vh]' : 'text-[2vw] mt-[10vh]'
+					}`}
+				>
+					Learning Diary
+				</div>
+
 				<div class="w-full grid grid-cols-2 gap-[2vw] mt-[2vh]">
 					{#each learningDiaries as diary (diary.date)}
 						<div class="w-full bg-white h-fit flex flex-col rounded-2xl font-bold p-3">

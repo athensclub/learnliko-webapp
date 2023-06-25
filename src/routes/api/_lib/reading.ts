@@ -3,15 +3,22 @@ import type { ChatMessage } from '$lib/types/requests/chatCompletion';
 import { get } from 'svelte/store';
 import { chat } from './conversation';
 import { currentMode } from '$lib/global/mode';
+import userSession from '$lib/stores/userSession';
 
 export const getReadingTopics = async (): Promise<string[]> => {
-	const result = await fetch('/api/v1/reading/topics?' + new URLSearchParams({ mode: get(currentMode) }), { method: 'GET' });
+	const profile = get(userSession).profile;
+	if (!profile)
+		throw Error("Please login and finish creaintg profile before querying reading items.")
+	const result = await fetch('/api/v1/reading/topics?' + new URLSearchParams({ mode: get(currentMode), level: profile.CEFRLevel.general }), { method: 'GET' });
 	const val = await result.json();
 	return val;
 }
 
 export const getReadingItems = async (topic: string): Promise<ReadingItem[]> => {
-	const response = await fetch('/api/v1/reading?' + new URLSearchParams({ topic, mode: get(currentMode) }));
+	const profile = get(userSession).profile;
+	if (!profile)
+		throw Error("Please login and finish creaintg profile before querying reading items.")
+	const response = await fetch('/api/v1/reading?' + new URLSearchParams({ topic, mode: get(currentMode), level: profile.CEFRLevel.general }));
 	const val = await response.json();
 	return val;
 };

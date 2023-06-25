@@ -1,7 +1,8 @@
+import type { CEFRLevel } from '$lib/types/CEFRLevel';
 import type { Mode } from '$lib/types/mode';
 import type { ReadingItem } from '$lib/types/reading';
 
-export const queryReadingTopics = async (mode: Mode) => {
+export const queryReadingTopics = async (mode: Mode, level: CEFRLevel) => {
     let data;
     if (mode === 'Professional') {
         data = await import('$lib/server/db/reading_data.json');
@@ -10,7 +11,7 @@ export const queryReadingTopics = async (mode: Mode) => {
     } else {
         throw new Error("Unknown mode: ", mode);
     }
-    const topics = ["All", ...data.default.map(item => (item as ReadingItem).topic)];
+    const topics = ["All", ...data.default.filter(item => item.level === level).map(item => (item as ReadingItem).topic)];
 
     // only return unique topics https://stackoverflow.com/a/14438954
     return [...new Set(topics)];
@@ -28,7 +29,7 @@ const allItems = async () => {
  * Note: Use topic "All" to query all items.
  * @param topic 
  */
-export const queryReadingItems = async (topic: string, mode: Mode): Promise<ReadingItem[]> => {
+export const queryReadingItems = async (topic: string, mode: Mode, level: CEFRLevel): Promise<ReadingItem[]> => {
     let data;
     if (mode === 'Professional') {
         data = await import('$lib/server/db/reading_data.json');
@@ -40,7 +41,7 @@ export const queryReadingItems = async (topic: string, mode: Mode): Promise<Read
     return data.default.map(item => ({
         ...item,
         quiz: item.quiz.map(q => ({ ...q, answer: undefined }))
-    })).filter(item => topic === "All" || item.topic === topic);
+    })).filter(item => item.level === level && (topic === "All" || item.topic === topic));
 };
 
 export const queryReadingItemById = async (id: string): Promise<ReadingItem> => {

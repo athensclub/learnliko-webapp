@@ -6,26 +6,17 @@
 		"image": "https://www.nwselfstorage.com/blog/wp-content/uploads/2016/06/shutterstock_1184105992-scaled.jpg",
 		"topic": "Short story",
 		"dateTime": "2023-05-20T09:30:00Z",
+		"level": "A1",
 		"content": "Samantha wanted to earn some money during the summer. She loved sweet lemonade, so she decided to start a lemonade stand. She asked her parents if they could help her. They loved her idea and agreed to support her with everything she needed. \n\nThe first thing Samantha had to do was to make a list of what she needed. She wrote down lemons, sugar, cups, a pitcher, ice, and a sign. She asked her dad to drive her to the store, and there she bought all the things she needed. \n\n Squeezing the juice from the lemons took some time, but Samantha was careful and managed to extract all the juice without making any mess. Then she mixed the lemon juice with sugar and water and put it in the pitcher. \n\nThe next step was to make the sign. Samantha found some cardboard and markers and wrote in big letters: 'Fresh Lemonade for Sale.' \n\nFinally, it was time to open the stand. Samantha set up a table and put the cups and the pitcher on it. She also added some ice to make the lemonade cool and refreshing.  \n\nPeople soon started coming over. They saw the sign and were curious to try the lemonade. Samantha was happy to serve them and take their cash. She quickly became a successful businesswoman, and her lemonade stand became a popular spot in the neighborhood. \n\nSamantha learned that running a business was not easy, but it was fun and rewarding. She decided to save the money she earned to buy more supplies and to start a new business soon!",
 		"quiz": [
 			{
 				"question": "What tone of voice does the passage have?",
-				"choices": [
-					"Tense",
-					"Joyful",
-					"Sad",
-					"Angry"
-				],
+				"choices": ["Tense", "Joyful", "Sad", "Angry"],
 				"answer": 1
 			},
 			{
 				"question": "What did Samantha mix with lemon juice?",
-				"choices": [
-					"Ice",
-					"Sugar",
-					"Water",
-					"Salt"
-				],
+				"choices": ["Ice", "Sugar", "Water", "Salt"],
 				"answer": 1
 			},
 			{
@@ -50,12 +41,7 @@
 			},
 			{
 				"question": "What did Samantha write on her lemonade stand sign?",
-				"choices": [
-					"Fresh Lemonade for Sale",
-					"Iced Tea",
-					"Soda",
-					"Free Lemonade"
-				],
+				"choices": ["Fresh Lemonade for Sale", "Iced Tea", "Soda", "Free Lemonade"],
 				"answer": 0
 			}
 		],
@@ -83,55 +69,31 @@
 		"topic": "Tale",
 		"image": "https://cdn.discordapp.com/attachments/842737146321174558/1115380759759425556/img-x849Lb0uesO9MwW1EIxkMWvv.png",
 		"dateTime": "2023-05-20T09:30:00Z",
+		"level": "pre-A1",
 		"quiz": [
 			{
 				"question": "What does the term 'selflessly' mean in the story?",
-				"choices": [
-					"selfishly",
-					"bravely",
-					" sincerely",
-					"without selfishness"
-				],
+				"choices": ["selfishly", "bravely", " sincerely", "without selfishness"],
 				"answer": 3
 			},
 			{
 				"question": "What did Ma Liang use before he was given the magic paintbrush?",
-				"choices": [
-					"A pencil",
-					"A crayon",
-					"A stick",
-					"A paintbrush"
-				],
+				"choices": ["A pencil", "A crayon", "A stick", "A paintbrush"],
 				"answer": 2
 			},
 			{
 				"question": "What did Ma Liang draw that came to life and ran away?",
-				"choices": [
-					"A tree",
-					"A house",
-					"A pig",
-					"A flower"
-				],
+				"choices": ["A tree", "A house", "A pig", "A flower"],
 				"answer": 2
 			},
 			{
 				"question": "What does the term 'greedy' mean in the story?",
-				"choices": [
-					"generous",
-					"selfish",
-					"wise",
-					"content"
-				],
+				"choices": ["generous", "selfish", "wise", "content"],
 				"answer": 1
 			},
 			{
 				"question": "What tone of voice did Ma Liang use when he refused to use his magic paintbrush for selfish reasons?",
-				"choices": [
-					"Angry",
-					"Sad",
-					"Humble",
-					"Confused"
-				],
+				"choices": ["Angry", "Sad", "Humble", "Confused"],
 				"answer": 3
 			}
 		],
@@ -179,25 +141,16 @@
 		"topic": "Tale",
 		"image": "https://cdn.discordapp.com/attachments/842737146321174558/1115381043135008869/img-wnApxDwQXFJvmoEkntVtFY2Q.png",
 		"dateTime": "2023-05-20T09:30:00Z",
+		"level": "A2",
 		"quiz": [
 			{
 				"question": "What was the tone of voice of the hare when he talked about his speed?",
-				"choices": [
-					"Arrogant",
-					"Modest",
-					"Excited",
-					"Indifferent"
-				],
+				"choices": ["Arrogant", "Modest", "Excited", "Indifferent"],
 				"answer": 0
 			},
 			{
 				"question": "What does the word 'complacent' mean in this story?",
-				"choices": [
-					"arrogant",
-					"lazy",
-					"unpredictable",
-					"content"
-				],
+				"choices": ["arrogant", "lazy", "unpredictable", "content"],
 				"answer": 3
 			},
 			{
@@ -212,12 +165,7 @@
 			},
 			{
 				"question": "What does the word 'cleverly' mean in this story?",
-				"choices": [
-					"in a foolish way",
-					"wisely and resourcefully",
-					"rudely",
-					"slowly"
-				],
+				"choices": ["in a foolish way", "wisely and resourcefully", "rudely", "slowly"],
 				"answer": 1
 			},
 			{
@@ -253,35 +201,21 @@
 		"topic": "Tale",
 		"image": "https://cdn.discordapp.com/attachments/842737146321174558/1115381294633844777/img-JtpzXYfhPxZzQ0PwYPwP90qJ.png",
 		"dateTime": "2023-05-20T09:30:00Z",
+		"level": "A2",
 		"quiz": [
 			{
 				"question": "What was the material used by the third little pig to build his house?",
-				"choices": [
-					"Straw",
-					"Sticks",
-					"Bricks",
-					"Wood"
-				],
+				"choices": ["Straw", "Sticks", "Bricks", "Wood"],
 				"answer": 2
 			},
 			{
 				"question": "What did the third little pig build his house out of?",
-				"choices": [
-					"Straw",
-					"Sticks",
-					"Bricks",
-					"Wood"
-				],
+				"choices": ["Straw", "Sticks", "Bricks", "Wood"],
 				"answer": 2
 			},
 			{
 				"question": "What tone of voice did the big, bad wolf most likely have when he knocked on the doors of the three little pigs?",
-				"choices": [
-					"Polite",
-					"Friendly",
-					"Menacing",
-					"Happy"
-				],
+				"choices": ["Polite", "Friendly", "Menacing", "Happy"],
 				"answer": 2
 			},
 			{
@@ -296,22 +230,11 @@
 			},
 			{
 				"question": "What material did the second little pig use to build his house?",
-				"choices": [
-					"Straw",
-					"Sticks",
-					"Bricks",
-					"Wood"
-				],
+				"choices": ["Straw", "Sticks", "Bricks", "Wood"],
 				"answer": 1
 			}
 		],
-		"vocabs": [
-			"straw",
-			"sticks",
-			"bricks",
-			"huffed",
-			"puffed"
-		]
+		"vocabs": ["straw", "sticks", "bricks", "huffed", "puffed"]
 	},
 	{
 		"id": "4",
@@ -320,25 +243,16 @@
 		"topic": "Tale",
 		"image": "https://cdn.discordapp.com/attachments/842737146321174558/1115381508434296912/img-q1VcnwBd1r20xylNW2Ts6vGS.png",
 		"dateTime": "2023-05-20T09:30:00Z",
+		"level": "A2",
 		"quiz": [
 			{
 				"question": "What does 'storing food' mean in the context of the story?",
-				"choices": [
-					"Eating food",
-					"Collecting food",
-					"Sharing food",
-					"Burying food"
-				],
+				"choices": ["Eating food", "Collecting food", "Sharing food", "Burying food"],
 				"answer": 1
 			},
 			{
 				"question": "What tone of voice did the ant use when refusing to give food to the grasshopper?",
-				"choices": [
-					"Gentle",
-					"Rude",
-					"Stern",
-					"Friendly"
-				],
+				"choices": ["Gentle", "Rude", "Stern", "Friendly"],
 				"answer": 2
 			},
 			{
@@ -353,12 +267,7 @@
 			},
 			{
 				"question": "What does the word 'valuable' mean in the following sentence? 'The grasshopper learned a valuable lesson.'",
-				"choices": [
-					"Worthless",
-					"Useless",
-					"Important",
-					"Heavy"
-				],
+				"choices": ["Worthless", "Useless", "Important", "Heavy"],
 				"answer": 2
 			},
 			{
@@ -400,15 +309,11 @@
 		"topic": "Short story",
 		"image": "https://cdn.discordapp.com/attachments/842737146321174558/1112389162750971994/img-1cEeLEoCuTZ8TY92KJPzKoXM.png",
 		"dateTime": "2023-05-09T13:10:00Z",
+		"level": "A2",
 		"quiz": [
 			{
 				"question": "What did Lily name the little kitten she found?",
-				"choices": [
-					"Fluffy",
-					"Snowball",
-					"Whiskers",
-					"Mittens"
-				],
+				"choices": ["Fluffy", "Snowball", "Whiskers", "Mittens"],
 				"answer": 1
 			},
 			{
@@ -423,12 +328,7 @@
 			},
 			{
 				"question": "What does the word \"compassion\" mean in the story?",
-				"choices": [
-					"Fear",
-					"Joy",
-					"Love",
-					"Sympathy"
-				],
+				"choices": ["Fear", "Joy", "Love", "Sympathy"],
 				"answer": 3
 			},
 			{
@@ -443,12 +343,7 @@
 			},
 			{
 				"question": "How would you describe the tone of the story?",
-				"choices": [
-					"Suspenseful",
-					"Heartwarming",
-					"Mysterious",
-					"Hilarious"
-				],
+				"choices": ["Suspenseful", "Heartwarming", "Mysterious", "Hilarious"],
 				"answer": 1
 			}
 		],
@@ -483,6 +378,7 @@
 		"topic": "Short story",
 		"image": "https://cdn.discordapp.com/attachments/842737146321174558/1112389473548902450/img-uHPcfCafo0rtzhveT1lFI1x2.png",
 		"dateTime": "2023-05-06T09:45:00Z",
+		"level": "A2",
 		"quiz": [
 			{
 				"question": "What did Emma and Tom do when they noticed the mischievous squirrel eyeing their food?",
@@ -506,22 +402,12 @@
 			},
 			{
 				"question": "What does the word \"mischievous\" mean in the story?",
-				"choices": [
-					"Friendly",
-					"Curious",
-					"Naughty",
-					"Playful"
-				],
+				"choices": ["Friendly", "Curious", "Naughty", "Playful"],
 				"answer": 2
 			},
 			{
 				"question": "What does the word \"vibrant\" mean in the story?",
-				"choices": [
-					"Dull",
-					"Colorful",
-					"Quiet",
-					"Mysterious"
-				],
+				"choices": ["Dull", "Colorful", "Quiet", "Mysterious"],
 				"answer": 1
 			},
 			{
@@ -604,6 +490,7 @@
 		"topic": "Short story",
 		"image": "https://cdn.discordapp.com/attachments/842737146321174558/1112389640641585202/img-8GM0F63Wm1c94hzMjeJ95ck1.png",
 		"dateTime": "2023-05-03T14:30:00Z",
+		"level": "A2",
 		"quiz": [
 			{
 				"question": "What did Max find behind the ancient door in the enchanted forest?",
@@ -627,22 +514,12 @@
 			},
 			{
 				"question": "What does the word \"cherished\" mean in the context of the story?",
-				"choices": [
-					"Explored",
-					"Appreciated",
-					"Hidden",
-					"Discovered"
-				],
+				"choices": ["Explored", "Appreciated", "Hidden", "Discovered"],
 				"answer": 1
 			},
 			{
 				"question": "What does the word \"embark\" mean in the context of the story?",
-				"choices": [
-					"Continue",
-					"Finish",
-					"Begin",
-					"Stop"
-				],
+				"choices": ["Continue", "Finish", "Begin", "Stop"],
 				"answer": 2
 			},
 			{
@@ -699,6 +576,7 @@
 		"topic": "History",
 		"image": "https://media.discordapp.net/attachments/842737146321174558/1112390063955918848/img-VjoArHtyL8eo2afRH4fqSQD3.png?width=655&height=655",
 		"dateTime": "2023-04-30T11:20:00Z",
+		"level": "A2",
 		"quiz": [
 			{
 				"question": "What was the purpose of the pyramids in ancient Egypt?",
@@ -712,12 +590,7 @@
 			},
 			{
 				"question": "Which pharaoh was the Great Pyramid of Giza built for?",
-				"choices": [
-					"Tutankhamun",
-					"Ramses II",
-					"Akhenaten",
-					"Khufu"
-				],
+				"choices": ["Tutankhamun", "Ramses II", "Akhenaten", "Khufu"],
 				"answer": 3
 			},
 			{
@@ -742,12 +615,7 @@
 			},
 			{
 				"question": "What is the tone of voice used in the passage about the pyramids?",
-				"choices": [
-					"Exuberant",
-					"Nostalgic",
-					"Informative",
-					"Mournful"
-				],
+				"choices": ["Exuberant", "Nostalgic", "Informative", "Mournful"],
 				"answer": 2
 			}
 		],
@@ -804,6 +672,7 @@
 		"topic": "History",
 		"image": "https://media.discordapp.net/attachments/842737146321174558/1112391100091609168/img-EoVuAk3lt3Tds3hf7ZDP477e.png?width=655&height=655",
 		"dateTime": "2023-04-27T15:50:00Z",
+		"level": "A2",
 		"quiz": [
 			{
 				"question": "Who designed the Statue of Liberty?",
@@ -817,22 +686,12 @@
 			},
 			{
 				"question": "Which date is inscribed on the tablet held by the Statue of Liberty?",
-				"choices": [
-					"July 4, 1776",
-					"June 30, 1900",
-					"October 28, 1886",
-					"September 3, 1783"
-				],
+				"choices": ["July 4, 1776", "June 30, 1900", "October 28, 1886", "September 3, 1783"],
 				"answer": 0
 			},
 			{
 				"question": "What does the word \"colossal\" mean in the context of the story?",
-				"choices": [
-					"Beautiful",
-					"Small",
-					"Enormous",
-					"Old"
-				],
+				"choices": ["Beautiful", "Small", "Enormous", "Old"],
 				"answer": 2
 			},
 			{
@@ -889,25 +748,16 @@
 		"topic": "History",
 		"image": "https://cdn.discordapp.com/attachments/842737146321174558/1112391333533974579/img-B20Sw7PNtdn1QuOTQsUOIgwW.png",
 		"dateTime": "2023-04-24T10:40:00Z",
+		"level": "A2",
 		"quiz": [
 			{
 				"question": "When was the construction of the Colosseum completed?",
-				"choices": [
-					"72 AD",
-					"80 AD",
-					"50,000 to 80,000 spectators",
-					"1,788 feet"
-				],
+				"choices": ["72 AD", "80 AD", "50,000 to 80,000 spectators", "1,788 feet"],
 				"answer": 1
 			},
 			{
 				"question": "Who commissioned the construction of the Colosseum?",
-				"choices": [
-					"Emperor Titus",
-					"Roman Emperor Vespasian",
-					"Gladiators",
-					"Ancient Romans"
-				],
+				"choices": ["Emperor Titus", "Roman Emperor Vespasian", "Gladiators", "Ancient Romans"],
 				"answer": 1
 			},
 			{
@@ -932,12 +782,7 @@
 			},
 			{
 				"question": "What tone of voice does the passage about the Colosseum convey?",
-				"choices": [
-					"Informative",
-					"Melancholic",
-					"Humorous",
-					"Indifferent"
-				],
+				"choices": ["Informative", "Melancholic", "Humorous", "Indifferent"],
 				"answer": 0
 			}
 		],

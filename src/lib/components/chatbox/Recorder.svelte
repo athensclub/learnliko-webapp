@@ -6,9 +6,7 @@
 		initializedConversation,
 		currentRecording,
 		submitUserReply,
-
 		isConversationFriendSpeakSlower
-
 	} from '$lib/global/conversation';
 	import {
 		toggleRecording,
@@ -23,7 +21,7 @@
 
 	let clazz = '';
 	export { clazz as class };
-	
+
 	const submitCurrentRecording = () => {
 		submitUserReply($currentRecording);
 		$currentRecording = null;
@@ -40,7 +38,7 @@
 			</div>
 
 			<div class="flex flex-row items-center justify-center h-full gap-[1vw] text-[1.3vw]">
-				<Checkbox class="h-[40%] rounded-[0.5vw]" bind:checked={$isConversationFriendSpeakSlower}/>
+				<Checkbox class="h-[40%] rounded-[0.5vw]" bind:checked={$isConversationFriendSpeakSlower} />
 				พูดช้าลง
 			</div>
 		</div>
@@ -106,7 +104,7 @@
 				$conversationFinished ||
 				!$initializedConversation}
 			on:click={startRecording}
-			class="bg-white w-[200px] h-[40px] shadow-all rounded-full flex items-center justify-center z-[1000]"
+			class="font-bold bg-white w-[200px] h-[40px] shadow-all rounded-full flex items-center justify-center z-[1000]"
 		>
 			<svg class="w-[8%] mr-2" viewBox="0 0 41 56" fill="none" xmlns="http://www.w3.org/2000/svg">
 				<path
@@ -115,6 +113,16 @@
 				/>
 			</svg>
 			Press to Talk
+		</button>
+		<button
+			disabled={$waitingForAIResponse ||
+				$transcribing ||
+				$conversationFinished ||
+				!$initializedConversation}
+			on:click={startRecording}
+			class=" text-white font-bold bg-white bg-opacity-20 w-[6.7rem] h-[40px] shadow-all rounded-full flex items-center justify-center z-[1000] ml-3"
+		>
+			? Help
 		</button>
 	{/if}
 </div>

@@ -56,7 +56,7 @@
 				<img class="w-[25%]" src={icon} alt="Learnliko" />
 
 				<!-- https://github.com/rob-balfre/svelte-select/blob/HEAD/docs/theming_variables.md -->
-				<Select
+				<!-- <Select
 					on:change={(e) => ($currentMode = e.detail.value)}
 					--width="55%"
 					--height="2vw"
@@ -66,7 +66,7 @@
 					--clear-icon-width="0"
 					items={modes}
 					value={$currentMode}
-				/>
+				/> -->
 			</div>
 
 			<a

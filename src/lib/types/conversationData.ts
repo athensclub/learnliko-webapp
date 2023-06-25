@@ -1,5 +1,5 @@
 import type { SynthesizeAccent, SynthesizeGender } from '$api/tts';
-import type { RecapHistory } from '$lib/global/chatbox';
+import type { RecapResult } from '$lib/global/chatbox';
 import type { CEFRLevel } from './CEFRLevel';
 
 interface LearnerDetails {
@@ -51,7 +51,7 @@ export interface AvatarModel {
 }
 
 export interface FinishedConversation {
-	recap: RecapHistory;
+	recap: RecapResult;
 	finishedTime: Date;
 	conversationID: string;
 }

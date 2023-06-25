@@ -32,6 +32,7 @@
 
 	const { open }: Context = getContext('simple-modal');
 	const showHintModal = () => open(DialogueHintModal, {});
+	$waitingForAIResponse = true
 </script>
 
 <div class={`flex items-center justify-center rounded-xl p-2 font-line-seed ${clazz}`}>
@@ -43,8 +44,8 @@
 				{$chatContext?.conversation.avatar.name} กำลังคิด<Typewriter mode="loop">...</Typewriter>
 			</div>
 
-			<div class="flex flex-row items-center justify-center h-full gap-[1vw] text-[1.3vw]">
-				<Checkbox class="h-[40%] rounded-[0.5vw]" bind:checked={$isConversationFriendSpeakSlower} />
+			<div class="flex flex-row items-center justify-end h-full gap-[1vw] text-[1.3vw] w-[30%]">
+				<Checkbox class="w-[20%] rounded-[0.5vw]" bind:checked={$isConversationFriendSpeakSlower} />
 				พูดช้าลง
 			</div>
 		</div>
@@ -62,8 +63,8 @@
 				/>
 			</div>
 
-			<div class="flex flex-row h-full items-center gap-[15%]">
-				<button on:click={() => ($currentRecording = null)} class="h-[50%]">
+			<div class="flex flex-row w-[30%] h-full items-center gap-[15%]">
+				<button on:click={() => ($currentRecording = null)} class="flex-1">
 					<svg class="h-full" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<path
 							fill-rule="evenodd"
@@ -80,7 +81,7 @@
 
 				<button
 					on:click={submitCurrentRecording}
-					class="rounded-full flex items-center justify-center h-[55%] aspect-square bg-white"
+					class="flex-1 h-full rounded-full flex items-center justify-center aspect-square bg-white"
 				>
 					<svg class="h-[60%]" viewBox="0 0 66 66" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<path

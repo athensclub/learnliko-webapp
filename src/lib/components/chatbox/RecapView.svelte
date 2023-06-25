@@ -10,7 +10,6 @@
 
 	// we have to wait for recapHistory to finish loading.
 	// $: totalScore = $recapHistory ? $recapHistory.map((x) => x.score).reduce((x, y) => x + y, 0) : 0;
-	console.log($recapResult.history);
 	const { open }: Context = getContext('simple-modal');
 	const hide = () =>
 		open(ConfirmModal, {

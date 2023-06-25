@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { audioRecording, resetRecordingData } from '$lib/global/recording';
-	import { currentChatboxView, chatContext } from '$lib/global/chatbox';
+	import { currentChatboxView, chatContext, showChatbox } from '$lib/global/chatbox';
 	import Typewriter from 'svelte-typewriter';
 	import userImage from '$lib/images/sample_kid_image.png';
 	import VoiceChatHistory from './VoiceChatHistory.svelte';
@@ -15,7 +15,7 @@
 	import Recorder from './Recorder.svelte';
 	import { onDestroy, onMount } from 'svelte';
 
-	let conversationDetails = $chatContext!.conversation.details;
+	$: conversationDetails = $chatContext?.conversation.details;
 
 	let clazz = '';
 	export { clazz as class };
@@ -28,7 +28,10 @@
 	export let aiChatBackgroundColor = '#6C80E8';
 	export let userChatBackgroundColor = '#404040';
 
-	export let onFinishClicked: () => void = () => ($currentChatboxView = 'RECAP');
+	export let onFinishClicked: () => void = () => {
+		$currentChatboxView = 'RECAP';
+		$showChatbox = true;
+	};
 
 	// initialization
 	onMount(() => {
@@ -41,7 +44,7 @@
 	});
 </script>
 
-{#if $initializedConversation}
+{#if $initializedConversation && conversationDetails}
 	<div class={`w-full h-full overflow-y-auto ${clazz}`}>
 		<VoiceChatHistory
 			class={voiceChatHistoryClass}

@@ -1,15 +1,16 @@
 <script lang="ts">
-	import { chatContext, currentChatboxView, recapHistory, showChatbox } from '$lib/global/chatbox';
+	import { chatContext, currentChatboxView, recapResult, showChatbox } from '$lib/global/chatbox';
 	import ConfirmModal from '$lib/components/modals/ConfirmModal.svelte';
 	import DialogueCard from './DialogueCard.svelte';
 	import { round } from '$lib/utils/math';
 	import Typewriter from 'svelte-typewriter/Typewriter.svelte';
 	import type { Context } from 'svelte-simple-modal';
 	import { getContext } from 'svelte';
+	import summaryImage from './recap_summary_image.png';
 
 	// we have to wait for recapHistory to finish loading.
-	$: totalScore = $recapHistory ? $recapHistory.map((x) => x.score).reduce((x, y) => x + y, 0) : 0;
-
+	// $: totalScore = $recapHistory ? $recapHistory.map((x) => x.score).reduce((x, y) => x + y, 0) : 0;
+	console.log($recapResult.history);
 	const { open }: Context = getContext('simple-modal');
 	const hide = () =>
 		open(ConfirmModal, {
@@ -21,32 +22,37 @@
 		});
 </script>
 
-{#if $recapHistory && $chatContext}
-	<div
-		class="flex items-center justify-between w-full h-[48px] font-bold text-lg border-b border-black/[0.15] relative"
-	>
-		<div class="flex flex-row ml-4">
-			You got
-			<div class="font-extrabold ml-2">
-				{round((totalScore / $recapHistory.length) * 100, 2).toLocaleString()}%
-			</div>
-		</div>
-
+{#if $recapResult && $chatContext}
+	<div class="flex items-center justify-between w-full h-[48px] font-bold text-lg relative">
 		<button
 			on:click={hide}
-			class="rounded-lg mr-4 px-3 text-base text-center text-white h-[28px] bg-[#6C80E8]"
+			class="rounded-lg ml-auto mr-4 px-3 text-base text-center text-white h-[28px] bg-[#6C80E8]"
 		>
 			Finish
 		</button>
 	</div>
 
-	<div class="w-[full] px-[2vw] h-[calc(100%-48px)] overflow-y-auto">
-		{#each $recapHistory as dialogue, index (index)}
+	<div class="w-full px-[2vw] h-[calc(100%-48px)] overflow-y-auto">
+		<div
+			class="flex flex-row items-center justify-between w-full rounded-[2vw] px-[2vw] pt-[2vh] bg-gradient-to-r from-[#C698FF] to-[#FFD281]"
+		>
+			<div class="flex flex-col font-bold text-white">
+				<div class="text-[1.7vw]">Your score</div>
+				<div class="text-[4vw]">{$recapResult.score}</div>
+				<div class="text-[2vw]">+ 🧿{$recapResult.coins}</div>
+			</div>
+
+			<div class="flex flex-col w-[50%] h-full justify-end">
+				<img class="w-full" src={summaryImage} alt="Congratulations" />
+			</div>
+		</div>
+
+		{#each $recapResult.history as dialogue, index (index)}
 			{#if dialogue.user}
 				<DialogueCard
 					dialogueNumber={index + 1}
 					{dialogue}
-					assistantProfileImage={$chatContext.conversation.details.bot.avatar}
+					assistantProfileImage={$chatContext.conversation.avatar.models.neutral}
 				/>
 			{/if}
 		{/each}
@@ -64,4 +70,3 @@
 		</div>
 	</div>
 {/if}
-

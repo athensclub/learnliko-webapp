@@ -4,6 +4,7 @@
 	import VoiceChatHistory from './VoiceChatHistory.svelte';
 	import userImage from '$lib/images/sample_kid_image.png';
 	import { round } from '$lib/utils/math';
+	import type { ConversationHistoryItem } from '$lib/types/conversationData';
 
 	export let dialogueNumber: number;
 	export let assistantProfileImage: string;
@@ -13,7 +14,10 @@
 		? dialogue.suggestion
 		: "There's no suggestion for this dialogue.";
 
-	const mockHistory = [dialogue.assistant, dialogue.user!];
+	const mockHistory: ConversationHistoryItem[] = [
+		{ chat: dialogue.assistant },
+		{ chat: dialogue.user! }
+	];
 </script>
 
 <div class="w-[100%] mb-5 mt-5 mx-auto rounded-xl flex flex-col bg-[#F8F8F8] border-2 pb-4">
@@ -30,7 +34,7 @@
 		<VoiceChatHistory
 			showAssistantTranscription
 			history={mockHistory}
-			assistantProfileImage={assistantProfileImage}
+			{assistantProfileImage}
 			userProfileImage={userImage}
 		/>
 	</div>

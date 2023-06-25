@@ -6,7 +6,7 @@
 	import VoiceChatHistory from './VoiceChatHistory.svelte';
 	import {
 		conversationFinished,
-		history,
+		conversationHistory,
 		initializeConversationBot,
 		initializedConversation,
 		resetConversationData,
@@ -47,7 +47,7 @@
 			class={voiceChatHistoryClass}
 			aiBackgroundColor={aiChatBackgroundColor}
 			userBackgroundColor={userChatBackgroundColor}
-			history={$history}
+			history={$conversationHistory}
 			assistantProfileImage={conversationDetails.bot.avatar}
 			userProfileImage={userImage}
 		/>

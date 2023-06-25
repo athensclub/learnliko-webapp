@@ -26,6 +26,11 @@ export const history = writable<
 	}[]
 >([]);
 
+/**
+ * When set to true, the assistant will generate slower tts.
+ */
+export const isConversationFriendSpeakSlower = writable(false);
+
 export const waitingForAIResponse = writable(false);
 
 export const initializedConversation = writable(false);
@@ -140,7 +145,8 @@ const botReply = async function (message?: string, targetLevel: CEFRLevel = 'A1'
 	const audio = await synthesize(
 		message,
 		ct.conversation.details.bot.accent,
-		ct.conversation.details.bot.gender
+		ct.conversation.details.bot.gender,
+		get(isConversationFriendSpeakSlower) ? 0.65 : 1
 	);
 
 	history.set([

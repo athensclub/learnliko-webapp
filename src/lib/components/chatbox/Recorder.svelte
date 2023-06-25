@@ -5,7 +5,10 @@
 		waitingForAIResponse,
 		initializedConversation,
 		currentRecording,
-		submitUserReply
+		submitUserReply,
+
+		isConversationFriendSpeakSlower
+
 	} from '$lib/global/conversation';
 	import {
 		toggleRecording,
@@ -13,22 +16,38 @@
 		startRecording,
 		stopRecording
 	} from '$lib/global/recording';
+	import Typewriter from 'svelte-typewriter/Typewriter.svelte';
 	import AudioPlayer from '../AudioPlayer.svelte';
+	import { chatContext } from '$lib/global/chatbox';
+	import Checkbox from '../Checkbox.svelte';
 
 	let clazz = '';
 	export { clazz as class };
-
+	
 	const submitCurrentRecording = () => {
 		submitUserReply($currentRecording);
 		$currentRecording = null;
 	};
 </script>
 
-<div
-	class={`flex items-center justify-center rounded-xl h-[10vh] font-line-seed ${clazz}`}
->
-	{#if $currentRecording}
-		<div class="flex flex-row item justify-between items-center gap-[7%] px-[5%] w-full h-full text-white">
+<div class={`flex items-center justify-center rounded-xl h-[5vw] font-line-seed ${clazz}`}>
+	{#if $waitingForAIResponse}
+		<div
+			class="flex flex-row justify-between items-center gap-[7%] px-[5%] w-full h-full text-white"
+		>
+			<div class="flex flex-row font-bold text-[1.3vw]">
+				{$chatContext?.conversation.avatar.name} กำลังคิด<Typewriter mode="loop">...</Typewriter>
+			</div>
+
+			<div class="flex flex-row items-center justify-center h-full gap-[1vw] text-[1.3vw]">
+				<Checkbox class="h-[40%] rounded-[0.5vw]" bind:checked={$isConversationFriendSpeakSlower}/>
+				พูดช้าลง
+			</div>
+		</div>
+	{:else if $currentRecording}
+		<div
+			class="flex flex-row item justify-between items-center gap-[7%] px-[5%] w-full h-full text-white"
+		>
 			<div class="flex-row flex-1 items-center justify-center">
 				<AudioPlayer
 					class={`w-full h-[7vh] rounded-full backdrop-blur-lg bg-white/20 shadow-lg`}

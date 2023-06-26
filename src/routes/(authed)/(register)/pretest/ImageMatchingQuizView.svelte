@@ -4,6 +4,12 @@
 
 	export let item: ImageMatchingMultipleChoicesQuestion;
 	export let submit: (quiz: ImageMatchingMultipleChoicesQuestion, index: number) => void;
+
+	let loading = false;
+	const setLoadingImage = (val: boolean) => (loading = val);
+
+	// set loading every time image changes, call setter to avoid svelte listening for loading variable change?
+	$: item.image, setLoadingImage(true);
 </script>
 
 <div
@@ -11,7 +17,12 @@
 		$isMobile ? 'flex-col mt-[2vh] w-[90vw]' : 'mt-[4vh] flex-row'
 	}`}
 >
-	<img class={`object-contain ${$isMobile ? 'w-full' : 'h-full'}`} src={item.image} alt="Quiz" />
+	<img
+		on:load={() => setLoadingImage(false)}
+		class={`object-contain ${$isMobile ? 'w-full' : 'h-full'} ${loading ? 'hidden' : ''}`}
+		src={item.image}
+		alt="Quiz"
+	/>
 
 	<div class={`${$isMobile ? 'grid grid-cols-2 gap-[5vw]' : 'flex flex-col h-full gap-[4vh]'}`}>
 		{#each item.choices as choice, index (index)}

@@ -101,16 +101,14 @@
 				"learner": {
 					"mission": "คุณกำลังคุยกับครูภาษาอังกฤษที่ชื่อ Jane คุณต้องพูดคุยเกี่ยวกับสัตว์เป็นภาษาอังกฤษ",
 					"goal": [
-						"Tell your favorite animal to teacher",
-						"Know what your favorite animal color is",
-						"Know what your favorite animal eats.",
-						"Know where your favorite animal lives."
+						"Tell your favorite animal to teacher (บอกชื่อสัตว์ที่คุณชื่นชอบกับคุณครู)",
+						"Know what your favorite animal color is (ถามสีของสัตว์กับคุณครู)",
+						"Know what your favorite animal eats. (ถามอหารที่สัตว์กินกับคุณครู)"
 					],
 					"hint": [
 						"My favorite animal is [animals name]",
 						"Teacher, do you know what [animals name] color is?",
-						"Do you know what [animals name] eat?",
-						"Do you know where [animals name] live?"
+						"Do you know what [animals name] eat?"
 					]
 				},
 				"bot": {

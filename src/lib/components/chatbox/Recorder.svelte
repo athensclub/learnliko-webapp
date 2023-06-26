@@ -42,11 +42,6 @@
 			<div class="flex flex-row font-bold text-[1.3vw]">
 				{$chatContext?.conversation.avatar.name} กำลังคิด<Typewriter mode="loop">...</Typewriter>
 			</div>
-
-			<div class="flex flex-row items-center justify-end h-full gap-[1vw] text-[1.3vw] w-[30%]">
-				<Checkbox class="w-[20%] rounded-[0.5vw]" bind:checked={$isConversationFriendSpeakSlower} />
-				พูดช้าลง
-			</div>
 		</div>
 	{:else if $currentRecording}
 		<div

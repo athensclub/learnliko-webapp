@@ -14,6 +14,8 @@
 	export let playColor = 'white';
 	export let pauseColor = 'white';
 
+	export let playbackRate = 1;
+
 	let clazz = '';
 	export { clazz as class };
 	export let style = '';
@@ -167,7 +169,7 @@
 		</div>
 	</div>
 
-	<audio bind:duration bind:currentTime bind:this={player}>
+	<audio bind:playbackRate bind:duration bind:currentTime bind:this={player}>
 		<source {src} {type} />
 		Your browser does not support the audio element.
 	</audio>

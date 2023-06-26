@@ -1,10 +1,13 @@
 <script lang="ts">
+	import { isConversationFriendSpeakSlower } from '$lib/global/conversation';
 	import type { ConversationHistoryItem } from '$lib/types/conversationData';
 	import AudioPlayer from '../AudioPlayer.svelte';
 	import Typewriter from 'svelte-typewriter';
 
 	export let aiBackgroundColor = '#FFFFFF3D';
 	export let userBackgroundColor = '#FFFFFF3D';
+
+	export let allowFriendSpeakSlower = false;
 
 	let clazz = '';
 	export { clazz as class };
@@ -44,6 +47,7 @@
 				{/if}
 
 				<AudioPlayer
+					playbackRate={allowFriendSpeakSlower && $isConversationFriendSpeakSlower ? 0.65 : 1}
 					style="background-color: {item.chat.role === 'user'
 						? userBackgroundColor
 						: aiBackgroundColor};"

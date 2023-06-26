@@ -181,6 +181,13 @@ export const analyzeGoalScore = async function (
 
 	if (hintUsed) {
 		result.coins = 40;
+		for (let index = 0; index < dialogues.length; index++) {
+			result.scores[index] = {
+				grammar: { examples: [], score: 0 },
+				appropriateness: true,
+				advancement: { examples: [], score: 0 }
+			};
+		}
 		return result;
 	}
 

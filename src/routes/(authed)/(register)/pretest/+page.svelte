@@ -183,7 +183,7 @@
 				class="bg-white rounded-[2vw] px-[6vw]"
 				initializingClass="bg-white"
 				finishButtonClass="border-black"
-				recorderClass={`bg-[#6C80E8] ${$isMobile ? 'w-[90%]' : 'w-[50%]'}`}
+				recorderClass={`bg-[#6C80E8] ${$isMobile ? 'w-[90%]' : 'w-[60%]'}`}
 			>
 				<div slot="finished" class="w-full text-center flex flex-col mt-4 items-center font-bold">
 					{#if calculatingConversationScore}

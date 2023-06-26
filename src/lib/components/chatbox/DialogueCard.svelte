@@ -26,7 +26,7 @@
 
 		<div class="rounded-lg bg-black text-base text-center text-white px-2">
 			<!-- round to 2 decimal places https://stackoverflow.com/a/11832950 -->
-			{round(dialogue.score * 100, 2).toLocaleString()}%
+			{round(dialogue.score, 2).toLocaleString()}%
 		</div>
 	</div>
 

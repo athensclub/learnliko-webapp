@@ -30,7 +30,7 @@
 		if ($userSession.isLoggedIn) {
 			const profileData = await getCurrentUserProfile();
 			if (!profileData) {
-				goto('/get-started');
+				// goto('/get-started');
 			} else {
 				userSession.update({ profile: profileData });
 				currentMode.set(profileData.mode);

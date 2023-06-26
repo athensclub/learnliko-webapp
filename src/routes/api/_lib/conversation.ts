@@ -166,7 +166,8 @@ export const analyzeDialogueScore = async function (
 	});
 
 	const data = (await response.json()) as DialogueScore;
-
+	data.advancement.score *= 10;
+	data.grammar.score *= 10;
 	return data;
 };
 

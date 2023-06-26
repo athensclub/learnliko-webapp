@@ -353,7 +353,6 @@ const computeRecap = async () => {
 					dialogueScore: _result,
 					score: 50 + _result.advancement.score * 0.3 + _result.grammar.score * 0.2
 				});
-				console.log(dialoguesResult[i]);
 			}
 
 			goalsResult[goalIndex] = {

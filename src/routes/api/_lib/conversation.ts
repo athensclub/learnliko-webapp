@@ -198,19 +198,15 @@ export const analyzeGoalScore = async function (
 	await Promise.all(promises);
 
 	result.overall =
-		(result.scores
+		result.scores
 			.map((e) => (e.appropriateness ? 50 + e.advancement.score * 0.3 + e.grammar.score * 0.2 : 0))
-			.reduce((x, y) => x + y, 0) /
-			result.scores.length) *
-		100;
+			.reduce((x, y) => x + y, 0) / result.scores.length;
 	result.overall = round(result.overall, 2);
 
 	result.coins =
-		(result.scores
+		result.scores
 			.map((e) => (e.appropriateness ? 50 + e.advancement.score * 0.3 + e.grammar.score * 0.2 : 40))
-			.reduce((x, y) => x + y, 0) /
-			result.scores.length) *
-		100;
+			.reduce((x, y) => x + y, 0) / result.scores.length;
 	result.coins = round(result.coins, 2);
 
 	return result;

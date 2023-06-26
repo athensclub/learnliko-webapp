@@ -126,7 +126,7 @@
 			},
 			{
 				"text": ["Mark", null, "picture"],
-				"choices": ["do", "sing", "draw", "write"],
+				"choices": ["do", "sing", "draws", "write"],
 				"id": "4",
 				"answer": 2
 			},
@@ -293,7 +293,7 @@
 				"answer": 1
 			},
 			{
-				"text": ["does he have", null, "horses?"],
+				"text": ["does he have", null, "horse?"],
 				"choices": ["a", "an", "the", "ride"],
 				"id": "14",
 				"answer": 0

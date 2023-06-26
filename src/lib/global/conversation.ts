@@ -119,7 +119,7 @@ export const nextConversationGoal = () => {
 	goalTracking[get(currentGoal)].lastDialogueIndex = get(history).length - 1;
 	conversationHistory.set([...get(conversationHistory), { endOfGoal: get(currentGoal) + 1 }]);
 	currentGoal.set(get(currentGoal) + 1);
-}
+};
 
 /**
  * Check if the conversation has finished, but only check if isCheckConversationGoal is true.
@@ -139,7 +139,7 @@ export const checkConversationFinished = () => {
 			computeRecap();
 		}
 	}
-}
+};
 
 /**
  * Call bot to reply base on chat history
@@ -341,7 +341,8 @@ const computeRecap = async () => {
 					},
 					suggestion: '',
 					dialogueScore: result.scores[i],
-					score: 0
+					score:
+						50 + result.scores[i].advancement.score * 0.3 + result.scores[i].grammar.score * 0.2
 				});
 			}
 

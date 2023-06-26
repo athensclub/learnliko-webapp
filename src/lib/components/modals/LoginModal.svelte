@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
+	import { currentMode } from '$lib/global/mode';
 	import { profileImageLocal, usernameLocal } from '$lib/localdb/profileLocal';
 	import userSession from '$lib/stores/userSession';
 	import { createUserAccount, getCurrentUserProfile } from '$lib/temp/user';
@@ -13,8 +14,8 @@
 
 	const { close }: Context = getContext('simple-modal');
 	const login = async () => {
-        close();
-        
+		close();
+
 		await createUserAccount({
 			CEFRLevel: { communication: level, general: level, grammar: level, vocabulary: level },
 			mode: 'Student'
@@ -24,7 +25,8 @@
 
 		const profileData = await getCurrentUserProfile();
 		userSession.update({ profile: profileData });
-        goto('/discover');
+		currentMode.set('Student');
+		goto('/discover');
 	};
 </script>
 

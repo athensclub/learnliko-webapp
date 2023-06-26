@@ -207,7 +207,7 @@ export const analyzeGoalScore = async function (
 		result.scores
 			.map((e) => (e.appropriateness ? 50 + e.advancement.score * 0.3 + e.grammar.score * 0.2 : 40))
 			.reduce((x, y) => x + y, 0) / result.scores.length;
-	result.coins = round(result.coins, 2);
+	result.coins = round(result.coins, 0);
 
 	return result;
 };

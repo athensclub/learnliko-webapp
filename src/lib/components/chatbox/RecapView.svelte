@@ -37,8 +37,8 @@
 		>
 			<div class="flex flex-col font-bold text-white">
 				<div class="text-[1.7vw]">Your score</div>
-				<div class="text-[4vw]">{$recapResult.score}</div>
-				<div class="text-[2vw]">+ 🧿{$recapResult.coins}</div>
+				<div class="text-[4vw]">{round($recapResult.score, 2).toLocaleString()}%</div>
+				<div class="text-[2vw]">+ 🧿{round($recapResult.coins, 0)}</div>
 			</div>
 
 			<div class="flex flex-col w-[50%] h-full justify-end">

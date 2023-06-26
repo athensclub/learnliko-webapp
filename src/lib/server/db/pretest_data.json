@@ -167,6 +167,24 @@
 				"choices": ["Candy", "Food", "Ice cream", "Lemonade"],
 				"id": "10",
 				"answer": 0
+			},
+			{
+				"image": "https://cdn.discordapp.com/attachments/1087307553471463514/1122039393180471306/vi_balloon_ee1baddd-45a5-4845-b233-c11e63ea3d34.png",
+				"choices": ["Balloon", "Monster", "Girl", "Baby"],
+				"id": "11",
+				"answer": 0
+			},
+			{
+				"image": "https://cdn.discordapp.com/attachments/1087307553471463514/1122742185570353244/vi_digital_painting_lime_simple_background_b82c2d1b-fc0a-4ed3-a98a-5b4625f2e449.png",
+				"choices": ["Banana", "Lime", "Coconut", "Orange"],
+				"id": "12",
+				"answer": 1
+			},
+			{
+				"image": "https://cdn.discordapp.com/attachments/1087307553471463514/1122744638109917234/vi_painting_digital_art_style_women_holding_the_mic_singing_in__7d84c77f-617a-436f-9caf-4aefc58164e7.png",
+				"choices": ["Sing a song", "Piano", "Paint", "Sand"],
+				"id": "13",
+				"answer": 0
 			}
 		]
 	},
@@ -277,65 +295,79 @@
 			{
 				"text": ["turn right", null, "crossroad"],
 				"choices": ["at", "under", "on", "straight"],
-				"id": "11",
+				"id": "13",
 				"answer": 0
 			},
 			{
 				"text": [null, "the road"],
 				"choices": ["cross", "straight", "go", "under"],
-				"id": "12",
+				"id": "14",
 				"answer": 0
 			},
 			{
 				"text": ["Ted and Sophie", null, "play football"],
 				"choices": ["at", "can", "to", "be"],
-				"id": "13",
+				"id": "15",
 				"answer": 1
 			},
 			{
-				"text": ["does he have", null, "horse?"],
+				"text": ["does he has", null, "horse?"],
 				"choices": ["a", "an", "the", "ride"],
-				"id": "14",
+				"id": "16",
 				"answer": 0
 			},
 			{
 				"text": ["which", null, "your book?"],
 				"choices": ["an", "are", "is", "am"],
-				"id": "15",
+				"id": "17",
+				"answer": 2
+			},
+			{
+				"text": ["We", null, "cousin"],
+				"choices": ["not", "not are", "aren’t", "isn’t"],
+				"id": "18",
 				"answer": 2
 			}
+
 		],
 		"vocab": [
 			{
 				"image": "https://cdn.discordapp.com/attachments/1120787872379842711/1120795777283924048/vi_Village_3d_stylize_ea76ac7f-87e2-425f-84d8-98d7c30a0ffa.png",
 				"choices": ["Village", "Hockey", "Mirror", "City"],
-				"id": "16",
+				"id": "19",
 				"answer": 0
 			},
 			{
 				"image": "https://cdn.discordapp.com/attachments/1120787872379842711/1120795777762070728/vi_road_3d_stylize_1e53eb2a-bfdd-4833-8ffb-e82ea9ee72c1.png",
 				"choices": ["Road", "Living room", "Tree", "Sky"],
-				"id": "17",
+				"id": "20",
 				"answer": 0
 			},
 			{
 				"image": "https://cdn.discordapp.com/attachments/1120787872379842711/1120795778831618238/vi_square_34c14375-5456-408e-8698-cc51c7be5152.png",
 				"choices": ["Kitchen", "Square", "Road", "White"],
-				"id": "18",
+				"id": "21",
 				"answer": 1
 			},
 			{
 				"image": "https://cdn.discordapp.com/attachments/1120787872379842711/1120795778303139880/vi_smooth_wind_5e2f8dea-18d7-4444-832c-cdc67e782ef3.png",
 				"choices": ["Man", "Clothe", "Wind", "Flower"],
-				"id": "19",
+				"id": "22",
 				"answer": 2
 			},
 			{
 				"image": "https://cdn.discordapp.com/attachments/1120787872379842711/1120795779406233822/vi_water_Pool_3d_stylize_2eaa7f03-b171-4f7c-a22d-cd45fcea706d.png",
 				"choices": ["Playground", "Ruler", "Street", "Pool"],
-				"id": "20",
+				"id": "23",
 				"answer": 3
+			},
+			{
+				"image": "https://cdn.discordapp.com/attachments/1087307553471463514/1122745712266989698/vi_cute_kangaroo_cartoon_in_the_sivanna_84582767-535d-4926-94fb-b7eff9e59864.png",
+				"choices": ["Kangaroo", "Rabbit", "Bat", "Snail"],
+				"id": "24",
+				"answer": 0
 			}
+
 		]
 	},
 	"A2": {
@@ -445,31 +477,31 @@
 			{
 				"text": ["They travelled", null, "car"],
 				"choices": ["at", "by", "on", "in"],
-				"id": "21",
+				"id": "25",
 				"answer": 1
 			},
 			{
 				"text": ["we", null, "a car and went on a road trip"],
 				"choices": ["rented", "booked", "stayed", "travelled"],
-				"id": "22",
+				"id": "26",
 				"answer": 0
 			},
 			{
 				"text": ["we", null, "in a nice hotel by the beach."],
 				"choices": ["stay", "sightseeing", "travel", "buy"],
-				"id": "23",
+				"id": "27",
 				"answer": 0
 			},
 			{
 				"text": ["I like", null, "subject"],
 				"choices": ["running", "diploma", "chemistry", "swimming"],
-				"id": "24",
+				"id": "28",
 				"answer": 2
 			},
 			{
 				"text": ["We did some sightseeing", null, "bought some souvenirs."],
 				"choices": ["and", "so", "because", "but"],
-				"id": "25",
+				"id": "29",
 				"answer": 0
 			}
 		],
@@ -477,31 +509,31 @@
 			{
 				"image": "https://cdn.discordapp.com/attachments/1120787872379842711/1121124472041242716/vi_elevator_bright_style_a2a6f9bf-a7ec-440e-93cb-9d18d196685a.png",
 				"choices": ["Elevator", "Blouse", "Earrings", "Gallery"],
-				"id": "26",
+				"id": "30",
 				"answer": 0
 			},
 			{
 				"image": "https://cdn.discordapp.com/attachments/1120787872379842711/1121124471516971088/vi_room_with_sofa_lamps_and_tv_c8885e54-9ea9-4a04-87c9-0000bc05af52.png",
 				"choices": ["Gift", "furniture", "Grocery store", "Headphone"],
-				"id": "27",
+				"id": "31",
 				"answer": 1
 			},
 			{
 				"image": "https://cdn.discordapp.com/attachments/1120787872379842711/1121124471156256878/vi_island_summer_minimal_cd5989fb-6fc7-4c06-9e92-4b5944aca93f.png",
 				"choices": ["Island", "Horror", "Light", "Shelf"],
-				"id": "28",
+				"id": "32",
 				"answer": 0
 			},
 			{
 				"image": "https://cdn.discordapp.com/attachments/1120787872379842711/1121124470808133712/vi_minimal_necklace_on_the_neck_3d_animation_style_32050fc6-9a19-42e9-875b-9fceacb58e94.png",
 				"choices": ["Necklaces", "Luggage", "Bowl", "Folk"],
-				"id": "29",
+				"id": "33",
 				"answer": 0
 			},
 			{
 				"image": "https://cdn.discordapp.com/attachments/1120787872379842711/1121124470367727826/vi_comfy_pillow_white_4687b80a-0177-4f4f-a160-3512ccba42af.png",
 				"choices": ["Magazine", "Desk", "Cupboard", "Pillow"],
-				"id": "30",
+				"id": "34",
 				"answer": 3
 			}
 		]
@@ -618,19 +650,19 @@
 					"are this train leaving",
 					"are those train leaving"
 				],
-				"id": "31",
+				"id": "35",
 				"answer": 0
 			},
 			{
 				"text": ["now, I", null, "another movie."],
 				"choices": ["watching", "watch", "am watching", "been watching"],
-				"id": "32",
+				"id": "36",
 				"answer": 2
 			},
 			{
 				"text": ["you look worried. what", null, "?"],
 				"choices": ["do you think", "are you thinking", "did you think", "being thinking"],
-				"id": "33",
+				"id": "37",
 				"answer": 1
 			},
 			{

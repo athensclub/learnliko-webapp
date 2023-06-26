@@ -328,6 +328,17 @@ const computeRecap = async () => {
 		).then((result) => {
 			const dialoguesResult: RecapHistory = [];
 			for (let i = 0; i < result.scores.length; i++) {
+				const _result = result.scores[i];
+				const advancementSuggestion =
+					_result.advancement.score < 80
+						? 'The enhance your dialogue advancement try use the following examples\n' +
+						  _result.advancement.examples.join('\n')
+						: '';
+				const grammarSuggestion =
+					_result.grammar.score < 80
+						? 'Here are the exmaple of the correct grammar dialogue\n' +
+						  _result.grammar.examples.join('\n')
+						: '';
 				dialoguesResult.push({
 					assistant: {
 						role: 'assistant',
@@ -339,11 +350,11 @@ const computeRecap = async () => {
 						audioURL: pairDialogues[i].user.audioURL,
 						transcription: pairDialogues[i].user.transcription!
 					},
-					suggestion: '',
-					dialogueScore: result.scores[i],
-					score:
-						50 + result.scores[i].advancement.score * 0.3 + result.scores[i].grammar.score * 0.2
+					suggestion: advancementSuggestion + '\n' + grammarSuggestion,
+					dialogueScore: _result,
+					score: 50 + _result.advancement.score * 0.3 + _result.grammar.score * 0.2
 				});
+				console.log(dialoguesResult[i]);
 			}
 
 			goalsResult[goalIndex] = {

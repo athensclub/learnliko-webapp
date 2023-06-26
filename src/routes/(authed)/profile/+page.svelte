@@ -1,6 +1,11 @@
 <script lang="ts">
 	import userProfileImage from '$lib/images/sample_kid_image.png';
-	import { getCurrentCEFRLevel, queryLearningDiariesLocal } from '$lib/localdb/profileLocal';
+	import {
+		getCurrentCEFRLevel,
+		profileImageLocal,
+		queryLearningDiariesLocal,
+		usernameLocal
+	} from '$lib/localdb/profileLocal';
 	import { getContext, onDestroy, onMount } from 'svelte';
 	import type { LearningDiaryItem } from '$lib/types/learningDiary';
 	import NavBar from '$lib/components/navbar/NavBar.svelte';
@@ -79,19 +84,24 @@
 			}`}
 		>
 			<div class={`w-full flex flex-row items-center rounded-2xl`}>
+				<!-- TODO: use actual profile image from cloud db -->
 				<div
 					class={`bg-center bg-cover rounded-full ${
 						$isMobile ? 'w-[15vw] h-[15vw]' : 'w-[5vw] h-[5vw]'
 					}`}
-					style="background-image: url('{userProfileImage}');"
+					style="background-image: url('{$profileImageLocal}');"
 				/>
 				<div class={`flex flex-col font-bold ${$isMobile ? 'ml-[2.5vw]' : 'ml-[1vw]'}`}>
-					<div class={`${$isMobile ? 'text-[5.5vw]' : 'text-[1.5vw]'}`}>Natsataporn M.</div>
+					<div class={`${$isMobile ? 'text-[5.5vw]' : 'text-[1.5vw]'}`}>{$usernameLocal}</div>
 					<div class={`${$isMobile ? 'text-[3.5vw]' : 'text-[1vw]'}`}>🧿 3300 coin</div>
 				</div>
 			</div>
 
-			<a href="/login" class="w-[17vw] text-[1.2vw] text-center py-[1vh] border border-black rounded-[1vw]">Switch Account...</a>
+			<a
+				href="/login"
+				class="w-[17vw] text-[1.2vw] text-center py-[1vh] border border-black rounded-[1vw]"
+				>Switch Account...</a
+			>
 		</div>
 
 		<div class={`flex flex-col px-[6vw] ${$isMobile ? 'mt-[2vh]' : 'mt-[12vh]'}`}>

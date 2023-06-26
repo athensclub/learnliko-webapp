@@ -48,7 +48,7 @@
 				<div style="font-size: {scale * 1.3}vw;" class="text-white font-bold">
 					{conversation.avatar.name}
 				</div>
-				<div style="font-size: {scale*1}vw;" class="text-[#FFFFFF99]">employee</div>
+				<!-- <div style="font-size: {scale*1}vw;" class="text-[#FFFFFF99]">employee</div> -->
 			</div>
 		</div>
 

@@ -55,18 +55,16 @@
 				"learner": {
 					"mission": "คุณพบเจอกับคนที่ชื่อ Alan คุณต้องทำความรู้จักและเรียนรู้เกี่ยวกับเขา",
 					"goal": [
-						"Introduce yourself to Alan",
-						"Get to know Alan's ages",
-						"Get to know Alan's hobby",
-						"Get to know Alan's hometown",
-						"Get to know Alan's favorite food"
+						"Introduce yourself to Alan (แนะตัวเองกับ Alan)",
+						"Get to know Alan's ages (ถามอายุของ Alan)",
+						"Get to know Alan's hobby (ถามงานอดิเรกของ Alan)"
+				
 					],
 					"hint": [
 						"Hi, my name is [your name]",
 						"How old are you?",
-						"What's your hobby?",
-						"Where are you come from?",
-						"What's your favorite food?"
+						"What's your hobby?"
+				
 					]
 				},
 				"bot": {
@@ -103,16 +101,14 @@
 				"learner": {
 					"mission": "คุณกำลังคุยกับครูภาษาอังกฤษที่ชื่อ Jane คุณต้องพูดคุยเกี่ยวกับสัตว์เป็นภาษาอังกฤษ",
 					"goal": [
-						"Tell your favorite animal to teacher",
-						"Know what your favorite animal color is",
-						"Know what your favorite animal eats.",
-						"Know where your favorite animal lives."
+						"Tell your favorite animal to teacher (บอกชื่อสัตว์ที่คุณชื่นชอบกับคุณครู)",
+						"Know what your favorite animal color is (ถามสีของสัตว์กับคุณครู)",
+						"Know what your favorite animal eats. (ถามอหารที่สัตว์กินกับคุณครู)"
 					],
 					"hint": [
 						"My favorite animal is [animals name]",
 						"Teacher, do you know what [animals name] color is?",
-						"Do you know what [animals name] eat?",
-						"Do you know where [animals name] live?"
+						"Do you know what [animals name] eat?"
 					]
 				},
 				"bot": {

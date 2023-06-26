@@ -47,6 +47,7 @@
 {#if $initializedConversation && conversationDetails}
 	<div class={`w-full h-full overflow-y-auto ${clazz}`}>
 		<VoiceChatHistory
+			allowFriendSpeakSlower
 			class={voiceChatHistoryClass}
 			aiBackgroundColor={aiChatBackgroundColor}
 			userBackgroundColor={userChatBackgroundColor}

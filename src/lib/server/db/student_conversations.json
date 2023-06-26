@@ -11,9 +11,9 @@
 				"learner": {
 					"mission": "คุณกำลังอยู่ในร้านเครื่องเขียน และคุณต้องซื้อเครื่องเขียนจากพนักงานขายที่ชื่อ Lucy",
 					"goal": [
-						"Ask for product available in the shop",
-						"Choose products to buy",
-						"Making purchase"
+						"Asking for products available in the shop (สอบถามสินค้าที่ขาย)",
+						"Buy two pens (สั่งซื้อปากกา 2 ด้าม)",
+						"Asking for a product price (สอบถามราคาสินค้าที่ต้องการซื้อ)"
 					],
 					"hint": [
 						"Do you have any pens in your shop?",
@@ -55,18 +55,16 @@
 				"learner": {
 					"mission": "คุณพบเจอกับคนที่ชื่อ Alan คุณต้องทำความรู้จักและเรียนรู้เกี่ยวกับเขา",
 					"goal": [
-						"Introduce yourself to Alan",
-						"Get to know Alan's ages",
-						"Get to know Alan's hobby",
-						"Get to know Alan's hometown",
-						"Get to know Alan's favorite food"
+						"Introduce yourself to Alan (แนะตัวเองกับ Alan)",
+						"Get to know Alan's ages (ถามอายุของ Alan)",
+						"Get to know Alan's hobby (ถามงานอดิเรกของ Alan)"
+				
 					],
 					"hint": [
 						"Hi, my name is [your name]",
 						"How old are you?",
-						"What's your hobby?",
-						"Where are you come from?",
-						"What's your favorite food?"
+						"What's your hobby?"
+				
 					]
 				},
 				"bot": {

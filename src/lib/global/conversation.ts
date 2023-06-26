@@ -190,8 +190,7 @@ const botReply = async function (message?: string, targetLevel: CEFRLevel = 'A1'
 	const audio = await synthesize(
 		message,
 		ct.conversation.details.bot.accent,
-		ct.conversation.details.bot.gender,
-		get(isConversationFriendSpeakSlower) ? 0.65 : 1
+		ct.conversation.details.bot.gender
 	);
 
 	history.set([

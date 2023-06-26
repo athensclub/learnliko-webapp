@@ -1,15 +1,17 @@
 <script lang="ts">
 	import { beforeNavigate } from '$app/navigation';
+	import Checkbox from '$lib/components/Checkbox.svelte';
 	import ConversationView from '$lib/components/chatbox/ConversationView.svelte';
 	import ConfirmModal from '$lib/components/modals/ConfirmModal.svelte';
 	import { isMobile } from '$lib/global/breakpoints';
 	import { chatContext, showChatbox } from '$lib/global/chatbox';
 	import {
-	checkConversationFinished,
-	conversationFinished,
+		checkConversationFinished,
+		conversationFinished,
 		currentGoal,
 		history,
 		isCheckConversationGoal,
+		isConversationFriendSpeakSlower,
 		maxDialogueCount,
 		nextConversationGoal,
 		saveCurrentConversation
@@ -174,6 +176,14 @@
 						}`}
 					>
 						🧿 100
+					</div>
+
+					<div class="flex flex-row items-center justify-center mt-[2vh] h-full gap-[1vw] text-[1.3vw] w-full">
+						<Checkbox
+							class="w-[2vw] rounded-[0.5vw]"
+							bind:checked={$isConversationFriendSpeakSlower}
+						/>
+						ให้ AI พูดช้าลง
 					</div>
 				{:else}
 					<div class="text-[1.7vw]">All goals are completed!</div>

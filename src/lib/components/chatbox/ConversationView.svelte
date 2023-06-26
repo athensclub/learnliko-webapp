@@ -14,6 +14,7 @@
 	} from '$lib/global/conversation';
 	import Recorder from './Recorder.svelte';
 	import { onDestroy, onMount } from 'svelte';
+	import { profileImageLocal } from '$lib/localdb/profileLocal';
 
 	$: conversationDetails = $chatContext?.conversation.details;
 
@@ -38,7 +39,7 @@
 		resetConversationData();
 		initializeConversationBot();
 	});
-
+	
 	onDestroy(() => {
 		resetRecordingData();
 	});
@@ -46,6 +47,7 @@
 
 {#if $initializedConversation && conversationDetails}
 	<div class={`w-full h-full overflow-y-auto ${clazz}`}>
+		<!-- TODO: use profile image from cloud db. -->
 		<VoiceChatHistory
 			allowFriendSpeakSlower
 			class={voiceChatHistoryClass}
@@ -53,7 +55,7 @@
 			userBackgroundColor={userChatBackgroundColor}
 			history={$conversationHistory}
 			assistantProfileImage={conversationDetails.bot.avatar}
-			userProfileImage={userImage}
+			userProfileImage={$profileImageLocal ?? ''}
 		/>
 
 		{#if $conversationFinished}

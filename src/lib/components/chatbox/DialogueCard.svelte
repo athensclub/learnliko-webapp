@@ -5,11 +5,12 @@
 	import userImage from '$lib/images/sample_kid_image.png';
 	import { round } from '$lib/utils/math';
 	import type { ConversationHistoryItem } from '$lib/types/conversationData';
+	import { profileImageLocal } from '$lib/localdb/profileLocal';
 
 	export let dialogueNumber: number;
 	export let assistantProfileImage: string;
 	export let dialogue: RecapHistoryItem;
-
+	
 	dialogue.suggestion = dialogue.suggestion
 		? dialogue.suggestion
 		: "There's no suggestion for this dialogue.";
@@ -31,11 +32,12 @@
 	</div>
 
 	<div class="w-[100%] px-3">
+		<!-- TODO: use actual profile image from cloud db. -->
 		<VoiceChatHistory
 			showAssistantTranscription
 			history={mockHistory}
 			{assistantProfileImage}
-			userProfileImage={userImage}
+			userProfileImage={$profileImageLocal ?? ''}
 		/>
 	</div>
 

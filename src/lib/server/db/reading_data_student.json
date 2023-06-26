@@ -7,16 +7,26 @@
 		"topic": "Short story",
 		"dateTime": "2023-05-20T09:30:00Z",
 		"level": "A1",
-		"content": "Samantha wanted to earn some money during the summer. She loved sweet lemonade, so she decided to start a lemonade stand. She asked her parents if they could help her. They loved her idea and agreed to support her with everything she needed. \n\nThe first thing Samantha had to do was to make a list of what she needed. She wrote down lemons, sugar, cups, a pitcher, ice, and a sign. She asked her dad to drive her to the store, and there she bought all the things she needed. \n\n Squeezing the juice from the lemons took some time, but Samantha was careful and managed to extract all the juice without making any mess. Then she mixed the lemon juice with sugar and water and put it in the pitcher. \n\nThe next step was to make the sign. Samantha found some cardboard and markers and wrote in big letters: 'Fresh Lemonade for Sale.' \n\nFinally, it was time to open the stand. Samantha set up a table and put the cups and the pitcher on it. She also added some ice to make the lemonade cool and refreshing.  \n\nPeople soon started coming over. They saw the sign and were curious to try the lemonade. Samantha was happy to serve them and take their cash. She quickly became a successful businesswoman, and her lemonade stand became a popular spot in the neighborhood. \n\nSamantha learned that running a business was not easy, but it was fun and rewarding. She decided to save the money she earned to buy more supplies and to start a new business soon!",
+		"content": "Samantha wanted money for summer. She liked lemonade. She asked parents for help. They agreed to help. \n\nSamantha made a list. She went to store with dad. She bought things. \n\nSamantha squeezed lemon juice. She mixed it with sugar and water. She put it in a pitcher. \n\nSamantha made a sign. She wrote 'Fresh Lemonade for Sale.' \n\nSamantha set up a table. She put things on it. People came to try lemonade. She got money. She became successful. \n\nSamantha learned that it was fun. She saved money for future business.",
 		"quiz": [
 			{
 				"question": "What tone of voice does the passage have?",
-				"choices": ["Tense", "Joyful", "Sad", "Angry"],
+				"choices": [
+					"Tense",
+					"Joyful",
+					"Sad",
+					"Angry"
+				],
 				"answer": 1
 			},
 			{
 				"question": "What did Samantha mix with lemon juice?",
-				"choices": ["Ice", "Sugar", "Water", "Salt"],
+				"choices": [
+					"Ice",
+					"Sugar",
+					"Water",
+					"Salt"
+				],
 				"answer": 1
 			},
 			{
@@ -41,7 +51,12 @@
 			},
 			{
 				"question": "What did Samantha write on her lemonade stand sign?",
-				"choices": ["Fresh Lemonade for Sale", "Iced Tea", "Soda", "Free Lemonade"],
+				"choices": [
+					"Fresh Lemonade for Sale",
+					"Iced Tea",
+					"Soda",
+					"Free Lemonade"
+				],
 				"answer": 0
 			}
 		],
@@ -65,7 +80,7 @@
 	{
 		"id": "1",
 		"blogName": "The Magic Paintbrush",
-		"content": "Once upon a time, there was a poor young boy named Ma Liang who loved to paint more than anything else. However, he didn’t have a paintbrush, so he used a stick to draw in the dirt. One day, he met an old man who gave him a magic paintbrush. The old explained to Ma Liang that the paintbrush was special and if he painted something, it would come to life. Ma Liang was very excited and went home to test his new paintbrush. When he drew a tree, it grew in front of his eyes. He then drew a pig, and it came to life and ran away. From that day on, Ma Liang used the magic paintbrush to help people. Whenever a person was hungry or sick, he drew food or medicine, and it would come to life. The news of Ma Liang’s magic paintbrush spread quickly, and the greedy emperor heard about him. He ordered Ma Liang to paint gold and treasure for him. However, Ma Liang refused to use his magic paintbrush for selfish reasons. The emperor was angry and locked him up. But Ma Liang’s magic paintbrush came to the rescue, drawing a door and allowing him to escape. From that day on, Ma Liang continued to use his magic paintbrush to help others selflessly, and he lived happily ever after.",
+		"content": "There was an artist named Ma Liang. He was poor. He used a stick to paint. He didn't have brushes. An old man gave him a brush. It was a magic brush. Whatever he drew became real. Ma Liang drew a tree. It grew. He drew a pig. It came to life. He helped people with his brush. He drew food and medicine. It became real. The king heard about him. He wanted gold and treasure. Ma Liang refused. The king imprisoned him. Ma Liang drew a door. He escaped. He helped people with his brush. He was happy.",
 		"topic": "Tale",
 		"image": "https://cdn.discordapp.com/attachments/842737146321174558/1115380759759425556/img-x849Lb0uesO9MwW1EIxkMWvv.png",
 		"dateTime": "2023-05-20T09:30:00Z",
@@ -73,27 +88,52 @@
 		"quiz": [
 			{
 				"question": "What does the term 'selflessly' mean in the story?",
-				"choices": ["selfishly", "bravely", " sincerely", "without selfishness"],
+				"choices": [
+					"selfishly",
+					"bravely",
+					" sincerely",
+					"without selfishness"
+				],
 				"answer": 3
 			},
 			{
 				"question": "What did Ma Liang use before he was given the magic paintbrush?",
-				"choices": ["A pencil", "A crayon", "A stick", "A paintbrush"],
+				"choices": [
+					"A pencil",
+					"A crayon",
+					"A stick",
+					"A paintbrush"
+				],
 				"answer": 2
 			},
 			{
 				"question": "What did Ma Liang draw that came to life and ran away?",
-				"choices": ["A tree", "A house", "A pig", "A flower"],
+				"choices": [
+					"A tree",
+					"A house",
+					"A pig",
+					"A flower"
+				],
 				"answer": 2
 			},
 			{
 				"question": "What does the term 'greedy' mean in the story?",
-				"choices": ["generous", "selfish", "wise", "content"],
+				"choices": [
+					"generous",
+					"selfish",
+					"wise",
+					"content"
+				],
 				"answer": 1
 			},
 			{
 				"question": "What tone of voice did Ma Liang use when he refused to use his magic paintbrush for selfish reasons?",
-				"choices": ["Angry", "Sad", "Humble", "Confused"],
+				"choices": [
+					"Angry",
+					"Sad",
+					"Humble",
+					"Confused"
+				],
 				"answer": 3
 			}
 		],
@@ -137,7 +177,7 @@
 	{
 		"id": "2",
 		"blogName": "The Clever Tortoise and the Hare",
-		"content": "Once upon a time, there was a fast and boastful hare who always talked about how he could outrun anyone. One day, the tortoise heard the hare bragging and challenged him to a race. The hare thought it was silly to race against a slow-moving tortoise, but he accepted the challenge anyway. He got so confident he took a nap while the tortoise worked hard to finish the race and won. The hare woke up too late to catch up to the slow-moving tortoise. He was shocked at how the tortoise managed to win the race, so he demanded a rematch. The tortoise agreed, and the race began. This time, the tortoise knew he couldn't win by running, so he thought cleverly and decided to wear himself out just a little so the hare wouldn't know he was in the lead and would get complacent. When the hare took a nap again, the tortoise kept walking steadily, and when the hare woke up, it was too late. The tortoise won again! The hare learnt an important lesson and never boasted about his speed again. The End.",
+		"content": "There was a fast hare. \nHe said he was fastest. \nThe slow tortoise challenged him. \nThe hare accepted. \nThe hare slept, the tortoise won.\nThey raced again. \nTortoise walked slowly. \nThe hare took a nap. \nTortoise won again. \nThe hare learnt a lesson.",
 		"topic": "Tale",
 		"image": "https://cdn.discordapp.com/attachments/842737146321174558/1115381043135008869/img-wnApxDwQXFJvmoEkntVtFY2Q.png",
 		"dateTime": "2023-05-20T09:30:00Z",
@@ -145,12 +185,22 @@
 		"quiz": [
 			{
 				"question": "What was the tone of voice of the hare when he talked about his speed?",
-				"choices": ["Arrogant", "Modest", "Excited", "Indifferent"],
+				"choices": [
+					"Arrogant",
+					"Modest",
+					"Excited",
+					"Indifferent"
+				],
 				"answer": 0
 			},
 			{
 				"question": "What does the word 'complacent' mean in this story?",
-				"choices": ["arrogant", "lazy", "unpredictable", "content"],
+				"choices": [
+					"arrogant",
+					"lazy",
+					"unpredictable",
+					"content"
+				],
 				"answer": 3
 			},
 			{
@@ -165,7 +215,12 @@
 			},
 			{
 				"question": "What does the word 'cleverly' mean in this story?",
-				"choices": ["in a foolish way", "wisely and resourcefully", "rudely", "slowly"],
+				"choices": [
+					"in a foolish way",
+					"wisely and resourcefully",
+					"rudely",
+					"slowly"
+				],
 				"answer": 1
 			},
 			{
@@ -197,7 +252,7 @@
 	{
 		"id": "3",
 		"blogName": "The Three Little Pigs",
-		"content": "Once upon a time, there were three little pigs who decided that they were old enough to build their own houses. The first little pig was lazy and built his house out of straw. The second little pig was a little bit smarter and decided to build his house out of sticks. The third little pig was very wise and built his house out of bricks. \nOne day, a big, bad wolf came and knocked on the door of the first little pig's straw house. The pig was frightened and refused to open the door. But the wolf huffed and puffed and blew the straw house down in one big breath. The little pig ran to his brother's house made of sticks. \nThe wolf followed him and knocked on the door. But when the wolf tried to blow down the stick house, it didn't work either. So the two little pigs ran to their brother's house made of bricks. The wolf followed them there, but no matter how hard he huffed and puffed, he couldn't blow down the brick house. \nThe three little pigs lived happily ever after in their safe and sturdy brick house, out of reach of the big bad wolf.",
+		"content": "Three little pigs built three houses. \nThe first pig chose straw. \nThe second pig chose sticks. \nThe third pig chose bricks. \nThen, a big bad wolf came. \nThe wolf knocked on the straw house's door. \nThe pig was scared. \nThe wolf blew the house down. \nThe little pig ran to his brother's stick house. \nThe wolf blew the stick house too. \nThe little pigs ran to their brother's brick house. \nThe wolf couldn't blow the brick house down. \nThe pigs lived happily ever after.",
 		"topic": "Tale",
 		"image": "https://cdn.discordapp.com/attachments/842737146321174558/1115381294633844777/img-JtpzXYfhPxZzQ0PwYPwP90qJ.png",
 		"dateTime": "2023-05-20T09:30:00Z",
@@ -205,17 +260,32 @@
 		"quiz": [
 			{
 				"question": "What was the material used by the third little pig to build his house?",
-				"choices": ["Straw", "Sticks", "Bricks", "Wood"],
+				"choices": [
+					"Straw",
+					"Sticks",
+					"Bricks",
+					"Wood"
+				],
 				"answer": 2
 			},
 			{
 				"question": "What did the third little pig build his house out of?",
-				"choices": ["Straw", "Sticks", "Bricks", "Wood"],
+				"choices": [
+					"Straw",
+					"Sticks",
+					"Bricks",
+					"Wood"
+				],
 				"answer": 2
 			},
 			{
 				"question": "What tone of voice did the big, bad wolf most likely have when he knocked on the doors of the three little pigs?",
-				"choices": ["Polite", "Friendly", "Menacing", "Happy"],
+				"choices": [
+					"Polite",
+					"Friendly",
+					"Menacing",
+					"Happy"
+				],
 				"answer": 2
 			},
 			{
@@ -230,16 +300,27 @@
 			},
 			{
 				"question": "What material did the second little pig use to build his house?",
-				"choices": ["Straw", "Sticks", "Bricks", "Wood"],
+				"choices": [
+					"Straw",
+					"Sticks",
+					"Bricks",
+					"Wood"
+				],
 				"answer": 1
 			}
 		],
-		"vocabs": ["straw", "sticks", "bricks", "huffed", "puffed"]
+		"vocabs": [
+			"straw",
+			"sticks",
+			"bricks",
+			"huffed",
+			"puffed"
+		]
 	},
 	{
 		"id": "4",
 		"blogName": "The Ant and the Grasshopper",
-		"content": "In a field, there lived an ant and a grasshopper. The ant was busy all year storing food for the winter, while the grasshopper spent his time singing, playing, and enjoying the weather. The grasshopper thought the ant was wasting his life working so hard, but the ant didn't care and kept working every day. \n\nWhen the winter came, the ant had enough food to survive, but the grasshopper had none. He started to get hungry and went to the ant's house, asking for food. But the ant reminded him of how he spent his time all year and refused to give him any food. The grasshopper had to suffer through the cold winter without any food.\n\nFrom then on, the grasshopper learned a valuable lesson: work hard and prepare for the future. Don't waste your time and enjoy the present moment, but also don't forget about the future. The ant and the grasshopper became friends, and the grasshopper promised to work hard and store food for the next winter.",
+		"content": "Three little pigs built three houses. \n In a field, there were two insects. One was an ant. The other was a grasshopper. The ant worked hard all year. It stored food for the winter. The grasshopper spent his time singing and playing. He did not work. \n The grasshopper thought the ant was wasting his life. The ant did not care. He continued working every day. \n Winter came. The ant had food to eat. The grasshopper did not. He went to the ant's house and asked for food. The ant refused to give him any. The grasshopper had to suffer through the cold winter without food. \n The grasshopper learned a lesson. He promised to work hard and store food for the next winter. The ant and the grasshopper became friends.",
 		"topic": "Tale",
 		"image": "https://cdn.discordapp.com/attachments/842737146321174558/1115381508434296912/img-q1VcnwBd1r20xylNW2Ts6vGS.png",
 		"dateTime": "2023-05-20T09:30:00Z",
@@ -247,12 +328,22 @@
 		"quiz": [
 			{
 				"question": "What does 'storing food' mean in the context of the story?",
-				"choices": ["Eating food", "Collecting food", "Sharing food", "Burying food"],
+				"choices": [
+					"Eating food",
+					"Collecting food",
+					"Sharing food",
+					"Burying food"
+				],
 				"answer": 1
 			},
 			{
 				"question": "What tone of voice did the ant use when refusing to give food to the grasshopper?",
-				"choices": ["Gentle", "Rude", "Stern", "Friendly"],
+				"choices": [
+					"Gentle",
+					"Rude",
+					"Stern",
+					"Friendly"
+				],
 				"answer": 2
 			},
 			{
@@ -267,7 +358,12 @@
 			},
 			{
 				"question": "What does the word 'valuable' mean in the following sentence? 'The grasshopper learned a valuable lesson.'",
-				"choices": ["Worthless", "Useless", "Important", "Heavy"],
+				"choices": [
+					"Worthless",
+					"Useless",
+					"Important",
+					"Heavy"
+				],
 				"answer": 2
 			},
 			{
@@ -305,7 +401,7 @@
 	{
 		"id": "5",
 		"blogName": "The Lost Kitten",
-		"content": "Once upon a time, in a small village, there was a little girl named Lily. Lily loved animals and dreamed of having a pet of her own. One sunny day, as she was walking through the park, she heard a soft meowing sound. Curious, she followed the sound and discovered a tiny, gray kitten hiding behind a bush. The kitten looked scared and lost.\n\nLily's heart melted with compassion, and she knew she had to help the little creature. She gently picked up the kitten and cradled it in her arms. It purred contentedly, feeling safe in Lily's warm embrace.\n\nDetermined to find the kitten's home, Lily knocked on every door in the neighborhood, asking if anyone had lost a kitten. Unfortunately, no one claimed the kitten as their own. Lily couldn't bear the thought of leaving the kitten alone, so she decided to take it home.\n\nAt home, Lily named the kitten Snowball because of its soft, white fur. She fed Snowball some milk and prepared a cozy bed for it. Snowball curled up and fell asleep, feeling loved and cared for.\n\nDays turned into weeks, and Snowball became a part of Lily's family. They played together, and Snowball brought joy to Lily's life. Lily realized that sometimes the things we find unexpectedly can become our most treasured possessions.\n\nLily and Snowball's bond grew stronger each day. The little lost kitten had found its forever home, and Lily had found a loyal friend.\n\nFrom that day forward, Lily and Snowball shared many adventures together. They learned to understand each other without words and created a beautiful friendship that would last a lifetime.\n\nRemember, sometimes the smallest creatures can bring the greatest happiness.",
+		"content": "A little girl found a kitten in the park. She took it home because no one claimed it. Lily named the kitten Snowball. Snowball became a part of Lily's family and they became best friends.",
 		"topic": "Short story",
 		"image": "https://cdn.discordapp.com/attachments/842737146321174558/1112389162750971994/img-1cEeLEoCuTZ8TY92KJPzKoXM.png",
 		"dateTime": "2023-05-09T13:10:00Z",
@@ -313,7 +409,12 @@
 		"quiz": [
 			{
 				"question": "What did Lily name the little kitten she found?",
-				"choices": ["Fluffy", "Snowball", "Whiskers", "Mittens"],
+				"choices": [
+					"Fluffy",
+					"Snowball",
+					"Whiskers",
+					"Mittens"
+				],
 				"answer": 1
 			},
 			{
@@ -328,7 +429,12 @@
 			},
 			{
 				"question": "What does the word \"compassion\" mean in the story?",
-				"choices": ["Fear", "Joy", "Love", "Sympathy"],
+				"choices": [
+					"Fear",
+					"Joy",
+					"Love",
+					"Sympathy"
+				],
 				"answer": 3
 			},
 			{
@@ -343,7 +449,12 @@
 			},
 			{
 				"question": "How would you describe the tone of the story?",
-				"choices": ["Suspenseful", "Heartwarming", "Mysterious", "Hilarious"],
+				"choices": [
+					"Suspenseful",
+					"Heartwarming",
+					"Mysterious",
+					"Hilarious"
+				],
 				"answer": 1
 			}
 		],
@@ -374,7 +485,7 @@
 	{
 		"id": "6",
 		"blogName": "The Picnic Adventure",
-		"content": "Emma and Tom were best friends who loved going on outdoor adventures. One sunny day, they decided to have a picnic in the nearby park. They packed a basket full of delicious sandwiches, fruit, and juice.\n\nAs they arrived at the park, they searched for the perfect spot. Under a big oak tree, they found a grassy area with a cozy blanket spread out on the ground. They set down their basket and sat down eagerly, ready to enjoy their picnic feast.\n\nJust as they were about to take their first bite, they noticed a mischievous squirrel eyeing their food from a nearby branch. The squirrel chattered excitedly, as if asking for a share. Emma and Tom giggled and tossed a small piece of bread to the squirrel, making a new friend in the process.\n\nWith their stomachs full, Emma and Tom decided to explore the park. They discovered a winding trail that led to a sparkling lake. They skipped rocks on the water, laughing as they competed to see whose rock could go the farthest.\n\nFurther along the trail, they stumbled upon a colorful meadow filled with wildflowers. They bent down to smell the sweet blossoms and admired the vibrant colors that surrounded them. Emma picked a small bouquet and put it in her hair, while Tom pretended to be a butterfly fluttering from flower to flower.\n\nAs the sun started to set, casting a golden glow over the park, Emma and Tom knew it was time to head back home. They gathered their things, said goodbye to their squirrel friend, and started their journey back.\n\nWalking hand in hand, they reflected on their wonderful day. They realized that simple moments of joy, like sharing a picnic and exploring nature, could create the fondest memories.\n\nEmma and Tom returned home with hearts full of happiness, already planning their next adventure. They knew that as long as they had each other, every day would be an opportunity for new and exciting experiences.\n\nSo, remember to embrace the beauty of nature, cherish your friendships, and create lasting memories with every adventure you embark upon.",
+		"content": "Emma and Tom are friends. They like nature. They go to a park. They bring food. They find a good place. A squirrel wants food. They give it bread. They find a lake. They play with rocks. They find flowers. They smell them. They go home with happy hearts.",
 		"topic": "Short story",
 		"image": "https://cdn.discordapp.com/attachments/842737146321174558/1112389473548902450/img-uHPcfCafo0rtzhveT1lFI1x2.png",
 		"dateTime": "2023-05-06T09:45:00Z",
@@ -402,12 +513,22 @@
 			},
 			{
 				"question": "What does the word \"mischievous\" mean in the story?",
-				"choices": ["Friendly", "Curious", "Naughty", "Playful"],
+				"choices": [
+					"Friendly",
+					"Curious",
+					"Naughty",
+					"Playful"
+				],
 				"answer": 2
 			},
 			{
 				"question": "What does the word \"vibrant\" mean in the story?",
-				"choices": ["Dull", "Colorful", "Quiet", "Mysterious"],
+				"choices": [
+					"Dull",
+					"Colorful",
+					"Quiet",
+					"Mysterious"
+				],
 				"answer": 1
 			},
 			{
@@ -486,7 +607,7 @@
 	{
 		"id": "7",
 		"blogName": "The Magical Key",
-		"content": "Once upon a time, in a small village nestled in the mountains, there lived a curious boy named Max. Max loved exploring and discovering hidden treasures. One day, while playing in his grandmother's attic, he stumbled upon an old, rusty key.\n\nIntrigued by the key's mysterious appearance, Max decided to embark on a quest to find its corresponding lock. With the key in his pocket, he set off on an adventure through the enchanted forest.\n\nAs Max ventured deeper into the forest, he encountered magical creatures. A friendly squirrel guided him through a winding path, and a wise owl shared wisdom about the forest's secrets. Max felt excitement and anticipation bubbling inside him.\n\nAfter hours of searching, Max stumbled upon an ancient door hidden within the trees. It was covered in moss and vines, seemingly untouched for years. With a trembling hand, he inserted the key into the lock.\n\nTo his amazement, the door creaked open, revealing a breathtaking sight—a hidden garden filled with vibrant flowers and sparkling waterfalls. Butterflies danced around him, and the sweet scent of blossoms filled the air. Max had discovered a secret paradise.\n\nIn the middle of the garden, he found a fountain with a magical inscription. It read, \"Wishes granted for those with pure hearts.\" Max closed his eyes, made a wish, and threw a coin into the fountain.\n\nAs the coin hit the water's surface, a burst of light filled the garden. Max's wish had come true. He had discovered not only a hidden garden but also the power of believing in dreams.\n\nFilled with gratitude, Max thanked the magical garden and retraced his steps through the forest. He realized that the real treasure he had found wasn't the key or the garden itself, but the joy and wonder that came from exploring the unknown.\n\nBack in his grandmother's attic, Max carefully placed the old key in a small box. It served as a reminder of the magical adventure he had embarked upon and the limitless possibilities that awaited him in the world.\n\nFrom that day forward, Max cherished every adventure, big or small, knowing that the most extraordinary treasures are often found in the most unexpected places. And he never stopped believing in the magic that lies within every heart.",
+		"content": "Max finds a key in attic. He goes into a forest. He meets nice animals. He finds an old door. It opens, and shows a pretty garden. He makes a wish. It comes true. He leaves and learns that exploring is great. He puts the key away and remembers his adventure.",
 		"topic": "Short story",
 		"image": "https://cdn.discordapp.com/attachments/842737146321174558/1112389640641585202/img-8GM0F63Wm1c94hzMjeJ95ck1.png",
 		"dateTime": "2023-05-03T14:30:00Z",
@@ -514,12 +635,22 @@
 			},
 			{
 				"question": "What does the word \"cherished\" mean in the context of the story?",
-				"choices": ["Explored", "Appreciated", "Hidden", "Discovered"],
+				"choices": [
+					"Explored",
+					"Appreciated",
+					"Hidden",
+					"Discovered"
+				],
 				"answer": 1
 			},
 			{
 				"question": "What does the word \"embark\" mean in the context of the story?",
-				"choices": ["Continue", "Finish", "Begin", "Stop"],
+				"choices": [
+					"Continue",
+					"Finish",
+					"Begin",
+					"Stop"
+				],
 				"answer": 2
 			},
 			{
@@ -569,6 +700,7 @@
 			"extraordinary"
 		]
 	},
+	
 	{
 		"id": "8",
 		"blogName": "The Pyramids of Egypt",
@@ -576,7 +708,7 @@
 		"topic": "History",
 		"image": "https://media.discordapp.net/attachments/842737146321174558/1112390063955918848/img-VjoArHtyL8eo2afRH4fqSQD3.png?width=655&height=655",
 		"dateTime": "2023-04-30T11:20:00Z",
-		"level": "A2",
+		"level": "C1",
 		"quiz": [
 			{
 				"question": "What was the purpose of the pyramids in ancient Egypt?",
@@ -590,7 +722,12 @@
 			},
 			{
 				"question": "Which pharaoh was the Great Pyramid of Giza built for?",
-				"choices": ["Tutankhamun", "Ramses II", "Akhenaten", "Khufu"],
+				"choices": [
+					"Tutankhamun",
+					"Ramses II",
+					"Akhenaten",
+					"Khufu"
+				],
 				"answer": 3
 			},
 			{
@@ -615,7 +752,12 @@
 			},
 			{
 				"question": "What is the tone of voice used in the passage about the pyramids?",
-				"choices": ["Exuberant", "Nostalgic", "Informative", "Mournful"],
+				"choices": [
+					"Exuberant",
+					"Nostalgic",
+					"Informative",
+					"Mournful"
+				],
 				"answer": 2
 			}
 		],
@@ -672,7 +814,7 @@
 		"topic": "History",
 		"image": "https://media.discordapp.net/attachments/842737146321174558/1112391100091609168/img-EoVuAk3lt3Tds3hf7ZDP477e.png?width=655&height=655",
 		"dateTime": "2023-04-27T15:50:00Z",
-		"level": "A2",
+		"level": "C1",
 		"quiz": [
 			{
 				"question": "Who designed the Statue of Liberty?",
@@ -686,12 +828,22 @@
 			},
 			{
 				"question": "Which date is inscribed on the tablet held by the Statue of Liberty?",
-				"choices": ["July 4, 1776", "June 30, 1900", "October 28, 1886", "September 3, 1783"],
+				"choices": [
+					"July 4, 1776",
+					"June 30, 1900",
+					"October 28, 1886",
+					"September 3, 1783"
+				],
 				"answer": 0
 			},
 			{
 				"question": "What does the word \"colossal\" mean in the context of the story?",
-				"choices": ["Beautiful", "Small", "Enormous", "Old"],
+				"choices": [
+					"Beautiful",
+					"Small",
+					"Enormous",
+					"Old"
+				],
 				"answer": 2
 			},
 			{
@@ -748,16 +900,26 @@
 		"topic": "History",
 		"image": "https://cdn.discordapp.com/attachments/842737146321174558/1112391333533974579/img-B20Sw7PNtdn1QuOTQsUOIgwW.png",
 		"dateTime": "2023-04-24T10:40:00Z",
-		"level": "A2",
+		"level": "C1",
 		"quiz": [
 			{
 				"question": "When was the construction of the Colosseum completed?",
-				"choices": ["72 AD", "80 AD", "50,000 to 80,000 spectators", "1,788 feet"],
+				"choices": [
+					"72 AD",
+					"80 AD",
+					"50,000 to 80,000 spectators",
+					"1,788 feet"
+				],
 				"answer": 1
 			},
 			{
 				"question": "Who commissioned the construction of the Colosseum?",
-				"choices": ["Emperor Titus", "Roman Emperor Vespasian", "Gladiators", "Ancient Romans"],
+				"choices": [
+					"Emperor Titus",
+					"Roman Emperor Vespasian",
+					"Gladiators",
+					"Ancient Romans"
+				],
 				"answer": 1
 			},
 			{
@@ -782,7 +944,12 @@
 			},
 			{
 				"question": "What tone of voice does the passage about the Colosseum convey?",
-				"choices": ["Informative", "Melancholic", "Humorous", "Indifferent"],
+				"choices": [
+					"Informative",
+					"Melancholic",
+					"Humorous",
+					"Indifferent"
+				],
 				"answer": 0
 			}
 		],

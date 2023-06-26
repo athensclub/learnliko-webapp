@@ -79,8 +79,8 @@ export const analyzeDialogue = async function (
 						score: {
 							type: 'number',
 							minimum: 0,
-							maximum: 100,
-							description: `Evaluate the grammar used in the User's dialogue and determine its correctness and clarity, scale from 0 to 100`
+							maximum: 10,
+							description: `Evaluate the grammar used in the User's dialogue and determine its correctness and clarity, scale from 0 to 10`
 						},
 						examples: {
 							type: 'array',
@@ -98,8 +98,8 @@ export const analyzeDialogue = async function (
 						score: {
 							type: 'number',
 							minimum: 0,
-							maximum: 100,
-							description: `Examine the vocabulary choices and sentence structures employed in the User's dialogue compared to CEFR level ${user.CEFRLevel}, scale from 0 to 100`
+							maximum: 10,
+							description: `Examine the vocabulary choices and sentence structures employed in the User's dialogue compared to CEFR level ${user.CEFRLevel}, scale from 0 to 10`
 						},
 						// suggestion: {
 						// 	type: 'string',

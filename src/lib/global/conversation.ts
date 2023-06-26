@@ -119,7 +119,7 @@ export const nextConversationGoal = () => {
 	goalTracking[get(currentGoal)].lastDialogueIndex = get(history).length - 1;
 	conversationHistory.set([...get(conversationHistory), { endOfGoal: get(currentGoal) + 1 }]);
 	currentGoal.set(get(currentGoal) + 1);
-}
+};
 
 /**
  * Check if the conversation has finished, but only check if isCheckConversationGoal is true.
@@ -139,7 +139,7 @@ export const checkConversationFinished = () => {
 			computeRecap();
 		}
 	}
-}
+};
 
 /**
  * Call bot to reply base on chat history
@@ -328,6 +328,17 @@ const computeRecap = async () => {
 		).then((result) => {
 			const dialoguesResult: RecapHistory = [];
 			for (let i = 0; i < result.scores.length; i++) {
+				const _result = result.scores[i];
+				const advancementSuggestion =
+					_result.advancement.score < 80
+						? 'The enhance your dialogue advancement try use the following examples\n' +
+						  _result.advancement.examples.join('\n')
+						: '';
+				const grammarSuggestion =
+					_result.grammar.score < 80
+						? 'Here are the exmaple of the correct grammar dialogue\n' +
+						  _result.grammar.examples.join('\n')
+						: '';
 				dialoguesResult.push({
 					assistant: {
 						role: 'assistant',
@@ -339,9 +350,9 @@ const computeRecap = async () => {
 						audioURL: pairDialogues[i].user.audioURL,
 						transcription: pairDialogues[i].user.transcription!
 					},
-					suggestion: '',
-					dialogueScore: result.scores[i],
-					score: 0
+					suggestion: advancementSuggestion + '\n' + grammarSuggestion,
+					dialogueScore: _result,
+					score: 50 + _result.advancement.score * 0.3 + _result.grammar.score * 0.2
 				});
 			}
 

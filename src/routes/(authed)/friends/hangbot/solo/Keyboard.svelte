@@ -11,7 +11,7 @@
   <div class="keyboard">
     {#each letters as letter}
       {#if lettersChosen.includes(letter)}
-        <button disabled>{letter}</button>
+        <button class="line-through" disabled>{letter}</button>
       {:else}
         <button on:click={() => onLetter(letter)}>{letter}</button>
       {/if}

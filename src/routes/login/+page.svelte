@@ -5,11 +5,10 @@
 	import type { Context } from 'svelte-simple-modal';
 
 	const { open }: Context = getContext('simple-modal');
-	const promptLogin = (level: CEFRLevel) =>
+	const promptLogin = (level: CEFRLevel, profileImage: string, name: string) =>
 		open(LoginModal, {
-			profileImage:
-				'https://cdn.discordapp.com/attachments/1120787872379842711/1120788019725729893/vi_Robot_3d_stylize_37aff20f-f0d6-431b-98e8-facc9049f1f4.png',
-			name: 'Natsataporn M.',
+			profileImage,
+			name,
 			level
 		});
 </script>
@@ -22,39 +21,54 @@
 
 		<div class="grid grid-cols-3 gap-[2vw] mt-[2vh]">
 			<button
-				on:click={() => promptLogin('pre-A1')}
+				on:click={() =>
+					promptLogin(
+						'pre-A1',
+						'https://cdn.discordapp.com/attachments/842737146321174558/1122773873964892191/profile-portrait-of-a-cute-latin-american-boy.png',
+						'Kawin R.'
+					)}
 				class="w-full h-[20vw] bg-white rounded-[1vw] flex flex-col overflow-hidden"
 			>
 				<div
-					style="background-image: url('https://cdn.discordapp.com/attachments/1120787872379842711/1120788019725729893/vi_Robot_3d_stylize_37aff20f-f0d6-431b-98e8-facc9049f1f4.png');"
+					style="background-image: url('https://cdn.discordapp.com/attachments/842737146321174558/1122773873964892191/profile-portrait-of-a-cute-latin-american-boy.png');"
 					class="w-full aspect-square bg-cover bg-center"
 				/>
 				<div
 					class="w-full flex-1 flex items-center justify-center font-medium text-center text-[1.5vw]"
 				>
-					Natsataporn M. (pre-A1)
+					Kawin R. (pre-A1)
 				</div>
 			</button>
 			<button
-				on:click={() => promptLogin('A1')}
+				on:click={() =>
+					promptLogin(
+						'A1',
+						'https://cdn.discordapp.com/attachments/842737146321174558/1122776439566123048/photo-pretty-young-happy-boy-looking-away_186202-6515.png',
+						'Kittipob R.'
+					)}
 				class="w-full h-[20vw] bg-white rounded-[1vw] flex flex-col overflow-hidden"
 			>
 				<div
-					style="background-image: url('https://cdn.discordapp.com/attachments/1120787872379842711/1120788019725729893/vi_Robot_3d_stylize_37aff20f-f0d6-431b-98e8-facc9049f1f4.png');"
+					style="background-image: url('https://cdn.discordapp.com/attachments/842737146321174558/1122776439566123048/photo-pretty-young-happy-boy-looking-away_186202-6515.png');"
 					class="w-full aspect-square bg-cover bg-center"
 				/>
 				<div
 					class="w-full flex-1 flex items-center justify-center font-medium text-center text-[1.5vw]"
 				>
-					Natsataporn M. (A1)
+					Kittipob R. (A1)
 				</div>
 			</button>
 			<button
-				on:click={() => promptLogin('A2')}
+				on:click={() =>
+					promptLogin(
+						'A2',
+						'https://cdn.discordapp.com/attachments/842737146321174558/1122776594520490054/boy-face.png',
+						'Natsataporn M.'
+					)}
 				class="w-full h-[20vw] bg-white rounded-[1vw] flex flex-col overflow-hidden"
 			>
 				<div
-					style="background-image: url('https://cdn.discordapp.com/attachments/1120787872379842711/1120788019725729893/vi_Robot_3d_stylize_37aff20f-f0d6-431b-98e8-facc9049f1f4.png');"
+					style="background-image: url('https://cdn.discordapp.com/attachments/842737146321174558/1122776594520490054/boy-face.png');"
 					class="w-full aspect-square bg-cover bg-center"
 				/>
 				<div

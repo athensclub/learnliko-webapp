@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
+	import { profileImageLocal, usernameLocal } from '$lib/localdb/profileLocal';
 	import userSession from '$lib/stores/userSession';
 	import { createUserAccount, getCurrentUserProfile } from '$lib/temp/user';
 	import type { CEFRLevel } from '$lib/types/CEFRLevel';
@@ -18,6 +19,8 @@
 			CEFRLevel: { communication: level, general: level, grammar: level, vocabulary: level },
 			mode: 'Student'
 		});
+		$usernameLocal = name;
+		$profileImageLocal = profileImage;
 
 		const profileData = await getCurrentUserProfile();
 		userSession.update({ profile: profileData });

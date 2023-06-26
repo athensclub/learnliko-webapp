@@ -10,6 +10,7 @@
 	import type { Mode } from '$lib/types/mode';
 	import { currentMode } from '$lib/global/mode';
 	import TeacherNavBarLinkList from './TeacherNavBarLinkList.svelte';
+	import { profileImageLocal, usernameLocal } from '$lib/localdb/profileLocal';
 
 	const modes: Mode[] = ['Professional', 'Student'];
 
@@ -27,6 +28,8 @@
 		$currentChatboxView = 'ASSISTANT';
 		$showChatbox = true;
 	};
+
+	$: console.log('profile', $profileImageLocal);
 
 	$: isInProfile = $page.url.pathname.startsWith('/profile');
 </script>
@@ -86,16 +89,17 @@
 					isInProfile ? 'bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD]' : 'bg-[#F5F5F5]'
 				}`}
 			>
+				<!-- TODO: use actual profile image from cloud -->
 				<div
 					class={`w-[3.5vw] h-[3.5vw] bg-center bg-cover rounded-full `}
 					style="background-image: url('{teacher
 						? 'https://cdn.discordapp.com/attachments/842737146321174558/1122752653764595712/image.png'
-						: userProfileImage}');"
+						: $profileImageLocal}');"
 				/>
 				<div
 					class={`flex flex-col ml-[1vw] font-bold ${isInProfile ? 'text-white' : 'text-black'}`}
 				>
-					<div class="text-[1.4vw]">Natsataporn M.</div>
+					<div class="text-[1.4vw]">{$usernameLocal}</div>
 					<div class="text-[1vw]">🧿 3300 coin</div>
 				</div>
 			</a>

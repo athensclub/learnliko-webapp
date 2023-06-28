@@ -32,8 +32,8 @@
 <!-- Specify the size(width, height) of the card in the user of the component, not in the component itself. -->
 <div
 	style="background-image: url('{conversation.background}');"
-	class={`relative overflow-hidden flex flex-col justify-between shadow-xl bg-center bg-cover rounded-[2vw] ${
-		$isMobile ? 'rounded-[6vw]' : ''
+	class={`relative overflow-hidden flex flex-col justify-between shadow-xl bg-center bg-cover ${
+		$isMobile ? 'rounded-[6vw]' : 'rounded-[2vw]'
 	} ${clazz}`}
 >
 	<div
@@ -80,7 +80,7 @@
 		<button
 			{disabled}
 			on:click={openChatbox}
-			style="font-size: {scale*1.25}vw;"
+			style="font-size: {scale * 1.25}vw;"
 			class="flex flex-row items-center justify-center gap-[1vw] w-full h-[45%] bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] text-white rounded-full animate-pulse"
 		>
 			<svg class="h-[45%]" viewBox="0 0 19 25" fill="none" xmlns="http://www.w3.org/2000/svg">

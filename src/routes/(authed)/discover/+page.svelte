@@ -206,10 +206,12 @@
 					avatar:
 						'https://cdn.discordapp.com/attachments/842737146321174558/1123670586732839082/image.png',
 					avatarIntro: 'Hello, nice to meet you',
-					background: 'https://cdn.discordapp.com/attachments/842737146321174558/1123672047084646450/Rectangle_4917.png',
+					background:
+						'https://cdn.discordapp.com/attachments/842737146321174558/1123672047084646450/Rectangle_4917.png',
 					exp: 1500,
 					id: '1',
-					description: 'เช้าวันนี้ คุณกำลังไปโรงเรียนวันแรกและได้พบเจอกับเพื่อนๆมากมายที่โรงเรียนแห่งใหม่ของคุณ',
+					description:
+						'เช้าวันนี้ คุณกำลังไปโรงเรียนวันแรกและได้พบเจอกับเพื่อนๆมากมายที่โรงเรียนแห่งใหม่ของคุณ',
 					level: 'pre-A1',
 					topic: 'ทำความรู้จักและทักทาย!',
 					progress: 0.5

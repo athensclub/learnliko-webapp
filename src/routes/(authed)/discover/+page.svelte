@@ -5,6 +5,7 @@
 	import convTaskImage from './coversation_task_image.png';
 	import readingTaskImage from './reading_task_image.png';
 	import icon from '$lib/images/learnliko_icon.png';
+	import LessonCard from '$lib/components/LessonCard.svelte';
 	import userProfileImage from '$lib/images/sample_kid_image.png';
 	import { queryDiscoverItemsLocal } from '$lib/localdb/discoverLocal';
 	import type { DiscoverItem } from '$lib/types/discover';
@@ -47,7 +48,7 @@
 
 			<div class="text-[4vw]">Today Tasks</div>
 
-			<div class="flex flex-row  justify-between">
+			<div class="flex flex-row justify-between">
 				<div class="flex flex-row gap-[2vw]">
 					<img class="h-[4vh]" src={convTaskImage} alt="Conversation" />
 
@@ -124,12 +125,11 @@
 			</div>
 		{:else}
 			<div class="text-[1.8vw]">Today Tasks</div>
-			
+
 			<div
 				class="flex flex-col py-[2vh] w-full items-center text-[1.2vw] bg-[#F8F8F8] rounded-[2vw]"
 			>
-				
-			<h1>Talk with 3 AI friends</h1>
+				<h1>Talk with 3 AI friends</h1>
 				<img class="w-[50%]" src={convTaskImage} alt="Conversation" />
 
 				<svg
@@ -149,8 +149,8 @@
 							y2="11.6116"
 							gradientUnits="userSpaceOnUse"
 						>
-						<stop stop-color="#6C80E8" />
-						<stop offset="1" stop-color="#9BA1FD" />
+							<stop stop-color="#6C80E8" />
+							<stop offset="1" stop-color="#9BA1FD" />
 						</linearGradient>
 					</defs>
 				</svg>
@@ -196,8 +196,27 @@
 	<div
 		class={`fixed z-[100] top-0 left-0 w-[100vw] h-[100vh] overflow-y-auto snap-y snap-mandatory pointer-events-none`}
 	>
-		<div class={`pointer-events-auto mx-auto ${$isMobile ? 'w-full py-[15vh]' : 'w-[54vw] pt-0 pb-[10vh]'}`}>
-			{#each items as item, index (index)}
+		<div
+			class={`pointer-events-auto mx-auto ${
+				$isMobile ? 'w-full py-[15vh]' : 'w-[54vw] pt-0 pb-[10vh]'
+			}`}
+		>
+			<LessonCard
+				item={{
+					avatar:
+						'https://cdn.discordapp.com/attachments/842737146321174558/1123670586732839082/image.png',
+					avatarIntro: 'Hello, nice to meet you',
+					background: 'https://cdn.discordapp.com/attachments/842737146321174558/1123672047084646450/Rectangle_4917.png',
+					exp: 1500,
+					id: '1',
+					description: 'เช้าวันนี้ คุณกำลังไปโรงเรียนวันแรกและได้พบเจอกับเพื่อนๆมากมายที่โรงเรียนแห่งใหม่ของคุณ',
+					level: 'pre-A1',
+					topic: 'ทำความรู้จักและทักทาย!',
+					progress: 0.5
+				}}
+				class="snap-center mx-auto w-[27vw] h-[38vw] mt-[calc(50vh-19vw)]"
+			/>
+			<!-- {#each items as item, index (index)}
 				{#if item.conversation}
 					<ConversationCard
 						class={`snap-center mx-auto ${
@@ -214,7 +233,7 @@
 						item={item.reading}
 					/>
 				{/if}
-			{/each}
+			{/each} -->
 		</div>
 	</div>
 </div>

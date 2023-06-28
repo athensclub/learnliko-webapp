@@ -14,3 +14,8 @@ export interface LessonCardData {
     progress: number; 
     id: string;
 }
+
+export interface LessonIntroItem{
+    description: string;
+    background: string;
+}

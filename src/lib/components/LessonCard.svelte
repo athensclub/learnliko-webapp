@@ -108,7 +108,9 @@
 			<img class="max-h-full" src={item.avatar} alt="Avatar" />
 		</div>
 
-		<div class="relative right-[7%] bottom-[30%] h-fit p-[1vw] rounded-[2vw] rounded-bl-none bg-white font-bold text-[1.1vw]">
+		<div
+			class="relative right-[7%] bottom-[30%] h-fit p-[1vw] rounded-[2vw] rounded-bl-none bg-white font-bold text-[1.1vw]"
+		>
 			{item.avatarIntro}
 		</div>
 	</div>

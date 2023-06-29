@@ -1,13 +1,14 @@
 <script lang="ts">
 	import type { LessonIntroItem } from '$lib/types/lesson';
+	import { fade } from 'svelte/transition';
 
 	export let setBackground: (image: string) => void;
-	export let onFinish: () => void; 
+	export let onFinish: () => void;
 	export let items: LessonIntroItem[];
 
 	let currentItem = 0;
 	const nextItem = () => {
-		if(currentItem+1 >= items.length){
+		if (currentItem + 1 >= items.length) {
 			onFinish();
 			return;
 		}
@@ -18,6 +19,7 @@
 </script>
 
 <div
+	transition:fade
 	class="absolute bottom-0 left-0 flex flex-col items-center gap-[5vh] w-full py-[10vh] bg-gradient-to-b from-transparent via-black/60 to-black/80"
 >
 	<div class="text-white text-[1.5vw] max-w-[60%] text-center font-bold">

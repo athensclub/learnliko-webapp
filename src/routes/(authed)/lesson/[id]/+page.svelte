@@ -116,7 +116,7 @@
 	{/if}
 
 	{#if currentView != 'INTRO'}
-		<div class="w-full bg-[#FFFFFF1A] backdrop-blur-md p-[2vw]">
+		<div class="absolute left-0 bottom-0 z-[100] w-full bg-[#FFFFFF1A] backdrop-blur-md p-[2vw]">
 			<div class="flex flex-row justify-between text-white font-bold text-[1.3vw]">
 				<div>รู้จักคำศัพท์</div>
 				<div>รู้จักประโยค</div>

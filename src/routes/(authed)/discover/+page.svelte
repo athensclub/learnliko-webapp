@@ -218,24 +218,6 @@
 				}}
 				class="snap-center mx-auto w-[27vw] h-[38vw] mt-[calc(50vh-19vw)]"
 			/>
-			<!-- {#each items as item, index (index)}
-				{#if item.conversation}
-					<ConversationCard
-						class={`snap-center mx-auto ${
-							$isMobile ? 'w-[80vw] h-[110vw] mt-[5vh]' : 'w-[27vw] h-[38vw] mt-[7vh]'
-						}`}
-						conversation={item.conversation}
-						typewriter
-					/>
-				{:else if item.reading}
-					<ReadingCard
-						class={`snap-center mx-auto ${
-							$isMobile ? 'w-[80vw] h-[110vw] mt-[5vh]' : 'w-[27vw] h-[38vw] mt-[7vh]'
-						}`}
-						item={item.reading}
-					/>
-				{/if}
-			{/each} -->
 		</div>
 	</div>
 </div>

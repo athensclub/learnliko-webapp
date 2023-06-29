@@ -3,13 +3,15 @@
 	import EnteringLesson from '$lib/components/loading/EnteringLesson.svelte';
 	import FlipCardView from './FlipCardView.svelte';
 	import LessonIntros from './LessonIntros.svelte';
+	import ReadingView from './ReadingView.svelte';
 	import WritingCardView from './WritingCardView.svelte';
 
 	let entering = false;
 	let playingMusic = true;
 
-	let currentView: 'INTRO' | 'FLIP_CARD' | 'WRITING_CARD' = 'WRITING_CARD';
-	let background = 'https://cdn.discordapp.com/attachments/842737146321174558/1123691473804738620/image.png';
+	let currentView: 'INTRO' | 'FLIP_CARD' | 'WRITING_CARD' | 'READING' = 'READING';
+	let background =
+		'https://cdn.discordapp.com/attachments/842737146321174558/1123691473804738620/image.png';
 
 	let topic = 'ทำความรู้จักและทักทาย!';
 
@@ -116,6 +118,8 @@
 		<FlipCardView />
 	{:else if currentView === 'WRITING_CARD'}
 		<WritingCardView />
+	{:else if currentView === 'READING'}
+		<ReadingView />
 	{/if}
 
 	{#if currentView != 'INTRO'}

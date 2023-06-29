@@ -5,7 +5,7 @@
 	export let eachIconStyle = '';
 </script>
 
-<NavBarLink href="/discover" text={noText ? '' : 'Discover'}>
+<NavBarLink href="/discover" text={noText ? '' : 'เรียนรู้'}>
 	<svg
 		slot="normalIcon"
 		style={eachIconStyle}
@@ -46,7 +46,7 @@
 	</svg>
 </NavBarLink>
 
-<NavBarLink href="/conversation" text={noText ? '' : 'Conversation'}>
+<NavBarLink href="/conversation" text={noText ? '' : 'เพื่อนเอไอ'}>
 	<svg
 		slot="normalIcon"
 		style={eachIconStyle}
@@ -185,7 +185,7 @@
 
 <slot name="center" />
 
-<NavBarLink href="/read" text={noText ? '' : 'Reading'}>
+<NavBarLink href="/read" text={noText ? '' : 'ห้องสมุด'}>
 	<svg
 		slot="normalIcon"
 		style={eachIconStyle}
@@ -301,7 +301,7 @@
 	</svg>
 </NavBarLink>
 
-<NavBarLink href="/friends" text={noText ? '' : 'Friends space'}>
+<NavBarLink href="/friends" text={noText ? '' : 'ห้องเรียน'}>
 	<svg
 		slot="normalIcon"
 		style={eachIconStyle}

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { isMobile } from '$lib/global/breakpoints';
 	import type { LessonCardData } from '$lib/types/lesson';
+	import Typewriter from 'svelte-typewriter/Typewriter.svelte';
 
 	export let item: LessonCardData;
 
@@ -11,7 +12,7 @@
 <!-- Specify the size(width, height) of the card in the user of the component, not in the component itself. -->
 <div
 	style="background-image: url('{item.background}');"
-	class={`relative overflow-hidden flex flex-col justify-between shadow-xl bg-center bg-cover ${
+	class={`relative overflow-hidden flex flex-col  justify-between shadow-2xl bg-center bg-cover ${
 		$isMobile ? 'rounded-[6vw]' : 'rounded-[2vw]'
 	} ${clazz}`}
 >
@@ -104,14 +105,14 @@
 	</a>
 
 	<div class="flex flex-row items-center h-[50%]">
-		<div class="flex flex-col h-full justify-end ml-[5%]">
+		<div class="flex flex-col h-full justify-end ml-[5%] animate-slideInLeft ">
 			<img class="max-h-full" src={item.avatar} alt="Avatar" />
 		</div>
 
 		<div
-			class="relative right-[7%] bottom-[30%] h-fit p-[1vw] rounded-[2vw] rounded-bl-none bg-white font-bold text-[1.1vw]"
+			class="relative right-[7%] bottom-[30%] h-fit p-[1vw] rounded-[2vw] animate-wiggle rounded-bl-none bg-white font-bold text-[1vw]"
 		>
-			{item.avatarIntro}
+			<div class=" animate-puls cursor-pointer"><Typewriter>{item.avatarIntro}🔉</Typewriter></div>
 		</div>
 	</div>
 </div>

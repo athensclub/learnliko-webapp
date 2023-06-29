@@ -59,7 +59,7 @@
 
 {#if $chatContext}
 	<div
-		class="absolute top-0 left-0 w-[100vw] h-[100vh] text-white bg-cover bg-center"
+		class="absolute top-0 left-0 w-[100vw] h-[100vh] text-white bg-cover bg-center pointer-events-none"
 	>
 		<div
 			class={`flex flex-row h-full items-center ${
@@ -68,7 +68,7 @@
 		>
 			<!-- Mission Details container -->
 			<div
-				class={`transition-transform backdrop-blur-lg backdrop-brightness-75 p-[1.5vw] shadow-sm border rounded-xl font-line-seed flex ${
+				class={`transition-transform backdrop-blur-lg backdrop-brightness-75 p-[1.5vw] shadow-sm border rounded-xl font-line-seed flex pointer-events-auto ${
 					$isMobile
 						? `absolute w-full text-[1.3vw] ${
 								briefing
@@ -166,7 +166,7 @@
 
 			{#if !briefing}
 				<div
-					class={`fixed ${
+					class={`fixed pointer-events-auto ${
 						$isMobile
 							? 'w-[100vw] h-[40vh] bottom-0'
 							: 'w-[37vw] h-[70vh] bottom-[15vh] right-[3vw]'

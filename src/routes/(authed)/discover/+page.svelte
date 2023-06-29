@@ -13,6 +13,7 @@
 	import { isMobile } from '$lib/global/breakpoints';
 	import { currentMode } from '$lib/global/mode';
 	import { browser } from '$app/environment';
+	import background from '$lib/images/bgvd.mp4';
 
 	let items: DiscoverItem[] = [];
 	const loadData = async () => {
@@ -25,6 +26,11 @@
 </script>
 
 <div class="w-[100vw] h-full min-h-[100vh] bg-[#F4F4F4] font-line-seed">
+
+	<video autoplay muted loop class="absolute left-0 top-0 w-full h-full object-cover brightness-105 blur-sm">
+		<source src={background} type="video/mp4" />
+	</video>
+
 	<NavBar />
 
 	<div
@@ -32,7 +38,7 @@
 			$isMobile
 				? 'sticky top-0 w-[100vw] px-[5vw] py-[1vh] z-[1000] gap-[1.6vh]'
 				: 'fixed top-0 right-0 w-[23vw] h-[100vh] px-[2vw] py-[4vh] gap-[7vh] '
-		} flex flex-col bg-white font-bold`}
+		} flex flex-col bg-white/70 backdrop-blur-sm shadow-sm font-bold`}
 	>
 		{#if $isMobile}
 			<div class="flex flex-row justify-between w-full">
@@ -124,10 +130,10 @@
 				</div>
 			</div>
 		{:else}
-			<div class="text-[1.8vw]">Today Tasks</div>
+			<div class="text-[1.8vw] ">Today Tasks</div>
 
 			<div
-				class="flex flex-col py-[2vh] w-full items-center text-[1.2vw] bg-[#F8F8F8] rounded-[2vw]"
+				class="flex flex-col py-[2vh] w-full items-center text-[1.2vw] shadow-lg rounded-[2vw]"
 			>
 				<h1>Talk with 3 AI friends</h1>
 				<img class="w-[50%]" src={convTaskImage} alt="Conversation" />
@@ -157,7 +163,7 @@
 			</div>
 
 			<div
-				class="flex flex-col py-[2vh] w-full items-center text-[1.2vw] bg-[#F8F8F8] rounded-[2vw]"
+				class="flex flex-col py-[2vh] w-full items-center text-[1.2vw] shadow-lg rounded-[2vw]"
 			>
 				<h1>Read 5 Stories</h1>
 				<img class="w-[50%]" src={readingTaskImage} alt="Conversation" />

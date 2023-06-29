@@ -63,7 +63,7 @@
 
 	<nav
 		style="box-shadow: 4px 1px 20px 0px #0000000D;"
-		class="fixed top-0 left-0 flex flex-col bg-white justify-around w-[23vw] h-[100vh] py-[3vh] font-line-seed"
+		class="fixed top-0 left-0 flex flex-col bg-white/70 backdrop-blur-sm shadow-sm justify-around w-[23vw] h-[100vh] py-[3vh] font-line-seed"
 	>
 		<div class="flex flex-col px-[2vw]">
 			<div class="flex flex-row justify-between w-full">
@@ -85,7 +85,7 @@
 
 			<a
 				href="/profile"
-				class={`w-full flex flex-row items-center rounded-2xl p-[5%] mt-[6vh] ${
+				class={`w-full flex flex-row items-center rounded-[1.5vw] p-[5%] mt-[6vh] ${
 					isInProfile ? 'bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD]' : 'bg-[#F5F5F5]'
 				}`}
 			>

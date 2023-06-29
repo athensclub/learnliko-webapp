@@ -71,13 +71,15 @@
 	}
 </script>
 
-<h1>Hangbot</h1>
+<div class=" bg-black">
+	<h1 class=" text-center text-white">Hangbot</h1>
 
-<RobotGallows {stage} />
+	<RobotGallows {stage} />
 
-<h2>Secret word:</h2>
+	<h2>Secret word:</h2>
 
-<WordGuessed {word} {lettersChosen} />
+	<WordGuessed {word} {lettersChosen} />
+</div>
 
 <svelte:window on:keydown={handleKeydown} />
 
@@ -88,7 +90,8 @@
 	<button class="restart" on:click={restart}>RESTART GAME</button>
 {/if}
 
-<footer>Chibi & Taw</footer>
+
+
 
 <style>
 	h1 {

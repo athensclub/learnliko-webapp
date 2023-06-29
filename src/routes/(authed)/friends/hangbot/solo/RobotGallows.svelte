@@ -62,4 +62,4 @@
 	{/if}
 </div>
 
-<div class="text-center">Hanging of 🤖 at stage {stage} of 7.</div>
+<div class="text-center text-white">Hanging of 🤖 at stage {stage} of 7.</div>

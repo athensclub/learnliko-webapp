@@ -27,7 +27,7 @@
 
 <div class="w-[100vw] h-full min-h-[100vh] bg-[#F4F4F4] font-line-seed">
 
-	<video autoplay muted loop class="absolute left-0 top-0 w-full h-full object-cover brightness-105">
+	<video autoplay muted loop class="absolute left-0 top-0 w-full h-full object-cover brightness-105 blur-sm">
 		<source src={background} type="video/mp4" />
 	</video>
 

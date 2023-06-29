@@ -1,13 +1,16 @@
 <script lang="ts">
 	import { beforeNavigate } from '$app/navigation';
 	import EnteringLesson from '$lib/components/loading/EnteringLesson.svelte';
+	import FlipCardView from './FlipCardView.svelte';
 	import LessonIntros from './LessonIntros.svelte';
 
 	let entering = false;
 	let playingMusic = true;
 
-	let currentView: 'INTRO' = 'INTRO';
+	let currentView: 'INTRO' | 'FLIP_CARD' = 'INTRO';
 	let background = '';
+
+	let progress = 0.1;
 </script>
 
 <div
@@ -77,6 +80,7 @@
 		<EnteringLesson onFinish={() => (entering = false)} />
 	{:else if currentView === 'INTRO'}
 		<LessonIntros
+			onFinish={() => (currentView = 'FLIP_CARD')}
 			setBackground={(image) => (background = image)}
 			items={[
 				{
@@ -90,8 +94,35 @@
 						'https://cdn.discordapp.com/attachments/842737146321174558/1123693852172230666/image.png',
 					description:
 						'คุณนั่งรอในที่นั่งของคุณและเพื่อนๆ เริ่มกันทำความรู้จักใหม่กันอีกครั้ง มีเพื่อนคุณที่ชื่อเอมมี่ที่เป็นคนที่ขี้เล่นและตลกขบขัน ซามาที่เป็นคนที่อัศจรรย์และร่าเริง และมีแอนดี้ที่เป็นคนที่เชื่อใจได้และเป็นกำลังใจให้กับเพื่อนๆ ทุกคน'
+				},
+				{
+					background:
+						'https://cdn.discordapp.com/attachments/842737146321174558/1123691473804738620/image.png',
+					description:
+						'เวลาผ่านไปเร็วมาก เพื่อนๆ ของคุณและคุณต่างก็กำลังเริ่มเรียนรู้ภาษาอังกฤษอย่างเต็มที่ คุณและเพื่อนๆ ของคุณกำลังสนุกกับการเรียนรู้ภาษาอังกฤษด้วยกัน คุณจะได้เรียนรู้คำศัพท์จากสิ่งของในห้องเรียนและสนทนาภาษาอังกฤษกับเพื่อนๆของคุณ'
 				}
 			]}
 		/>
+	{:else if currentView === 'FLIP_CARD'}
+		<FlipCardView />
+	{/if}
+
+	{#if currentView != 'INTRO'}
+		<div class="absolute bottom-0 left-0 w-full bg-[#FFFFFF1A] backdrop-blur-md p-[2vw]">
+			<div class="flex flex-row justify-between text-white font-bold text-[1.3vw]">
+				<div>รู้จักคำศัพท์</div>
+				<div>รู้จักประโยค</div>
+				<div>อ่านเรื่องราว</div>
+				<div>พูดคุย</div>
+				<div>จบ</div>
+			</div>
+
+			<div class="w-full h-[1.7vw] bg-white rounded-full mt-[2vh]">
+				<div
+					style="width: {progress * 100}%;"
+					class="h-full transition-size bg-gradient-to-r rounded-full from-[#6C80E8] to-[#9BA1FD]"
+				/>
+			</div>
+		</div>
 	{/if}
 </div>

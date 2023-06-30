@@ -4,6 +4,7 @@
 	import NavBar from '$lib/components/navbar/NavBar.svelte';
 	import convTaskImage from './coversation_task_image.png';
 	import readingTaskImage from './reading_task_image.png';
+	import vocabTaskImage from './vocab_task_image.png';
 	import icon from '$lib/images/learnliko_icon.png';
 	import LessonCard from '$lib/components/LessonCard.svelte';
 	import userProfileImage from '$lib/images/sample_kid_image.png';
@@ -26,8 +27,12 @@
 </script>
 
 <div class="w-[100vw] h-full min-h-[100vh] bg-[#F4F4F4] font-line-seed">
-
-	<video autoplay muted loop class="absolute left-0 top-0 w-full h-full object-cover brightness-105 blur-sm">
+	<video
+		autoplay
+		muted
+		loop
+		class="absolute left-0 top-0 w-full h-full object-cover brightness-105 blur-sm"
+	>
 		<source src={background} type="video/mp4" />
 	</video>
 
@@ -37,7 +42,7 @@
 		class={`${
 			$isMobile
 				? 'sticky top-0 w-[100vw] px-[5vw] py-[1vh] z-[1000] gap-[1.6vh]'
-				: 'fixed top-0 right-0 w-[23vw] h-[100vh] px-[2vw] py-[4vh] gap-[7vh] '
+				: 'fixed top-0 right-0 w-[23vw] h-[100vh] px-[2vw] py-[4vh] '
 		} flex flex-col bg-white/70 backdrop-blur-sm shadow-sm font-bold`}
 	>
 		{#if $isMobile}
@@ -130,66 +135,45 @@
 				</div>
 			</div>
 		{:else}
-			<div class="text-[1.8vw] ">Today Tasks</div>
+			<div class="text-[1.8vw]">เลือกเรื่องราวเพื่อเรียนรู้</div>
 
-			<div
-				class="flex flex-col py-[2vh] w-full items-center text-[1.2vw] shadow-lg rounded-[2vw]"
-			>
-				<h1>Talk with 3 AI friends</h1>
-				<img class="w-[50%]" src={convTaskImage} alt="Conversation" />
+			<div class="w-full flex flex-col mt-[2vw]">
+				<div class="text-[1.5vw]">ความคืบหน้ารายวัน</div>
 
-				<svg
-					class="mt-[2vh] w-[80%]"
-					viewBox="0 0 261 23"
-					fill="none"
-					xmlns="http://www.w3.org/2000/svg"
-				>
-					<rect width="261" height="23" rx="11.5" fill="#EEEEEE" />
-					<rect width="170" height="23" rx="11.5" fill="url(#paint0_linear_0_1)" />
-					<defs>
-						<linearGradient
-							id="paint0_linear_0_1"
-							x1="-1.66375e-06"
-							y1="11.6117"
-							x2="170"
-							y2="11.6116"
-							gradientUnits="userSpaceOnUse"
-						>
-							<stop stop-color="#6C80E8" />
-							<stop offset="1" stop-color="#9BA1FD" />
-						</linearGradient>
-					</defs>
-				</svg>
+				<div class="w-full bg-[#F8F8F8] p-[2vw] rounded-[1vw] flex flex-row">
+					<img class="w-[40%]" src={vocabTaskImage} alt="Study Vocabularies" />
+
+					<div class="flex flex-col h-full ml-[1vw]">
+						<div class="text-[1.5vw]">คำศัพท์วันนี้</div>
+						<div class="text-transparent bg-clip-text bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD]">
+							<div class="inline-block text-[3vw]">15</div>
+							<div class="inline-block text-[1.35vw]">คำ</div>
+						</div>
+					</div>
+				</div>
 			</div>
 
-			<div
-				class="flex flex-col py-[2vh] w-full items-center text-[1.2vw] shadow-lg rounded-[2vw]"
-			>
-				<h1>Read 5 Stories</h1>
-				<img class="w-[50%]" src={readingTaskImage} alt="Conversation" />
+			
+			<div class="w-full flex flex-col mt-[2vw]">
+				<div class="text-[1.5vw]">เล่นต่อเรื่องราวล่าสุด</div>
 
-				<svg
-					class="mt-[2vh] w-[80%]"
-					viewBox="0 0 261 23"
-					fill="none"
-					xmlns="http://www.w3.org/2000/svg"
-				>
-					<rect width="261" height="23" rx="11.5" fill="#EEEEEE" />
-					<rect width="82" height="23" rx="11.5" fill="url(#paint0_linear_0_1)" />
-					<defs>
-						<linearGradient
-							id="paint0_linear_0_1"
-							x1="-8.02513e-07"
-							y1="11.6117"
-							x2="82"
-							y2="11.6116"
-							gradientUnits="userSpaceOnUse"
-						>
-							<stop stop-color="#6C80E8" />
-							<stop offset="1" stop-color="#9BA1FD" />
-						</linearGradient>
-					</defs>
-				</svg>
+				<LessonCard
+				item={{
+					avatar:
+						'https://cdn.discordapp.com/attachments/842737146321174558/1123670586732839082/image.png',
+					avatarIntro: 'Hello, nice to meet you',
+					background:
+						'https://cdn.discordapp.com/attachments/842737146321174558/1123672047084646450/Rectangle_4917.png',
+					exp: 1500,
+					id: '1',
+					description:
+						'เช้าวันนี้ คุณกำลังไปโรงเรียนวันแรกและได้พบเจอกับเพื่อนๆมากมายที่โรงเรียนแห่งใหม่ของคุณ',
+					level: 'pre-A1',
+					topic: 'ทำความรู้จักและทักทาย!',
+					progress: 0.5
+				}}
+				class="w-full h-[23vw]"
+			/>
 			</div>
 		{/if}
 	</div>

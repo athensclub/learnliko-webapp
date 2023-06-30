@@ -68,39 +68,99 @@
 		<div class="flex flex-col px-[2vw]">
 			<div class="flex flex-row justify-between w-full">
 				<img class="w-[25%]" src={icon} alt="Learnliko" />
-
-				<!-- https://github.com/rob-balfre/svelte-select/blob/HEAD/docs/theming_variables.md -->
-				<!-- <Select
-					on:change={(e) => ($currentMode = e.detail.value)}
-					--width="55%"
-					--height="2vw"
-					--padding="1vw"
-					--font-size="1vw"
-					--clear-select-width="0"
-					--clear-icon-width="0"
-					items={modes}
-					value={$currentMode}
-				/> -->
 			</div>
 
 			<a
 				href="/profile"
 				class={`w-full flex flex-row items-center rounded-[1.5vw] p-[5%] mt-[6vh] ${
-					isInProfile ? 'bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD]' : 'bg-[#F5F5F5]'
+					isInProfile ? 'outline outline-[0.3vw] outline-[#6C80E8] bg-[#F5F5F5]' : 'bg-[#F5F5F5]'
 				}`}
 			>
 				<!-- TODO: use actual profile image from cloud -->
 				<div
-					class={`w-[3.5vw] h-[3.5vw] bg-center bg-cover rounded-full `}
+					class={`w-[3.5vw] h-[3.5vw] bg-center bg-cover rounded-full border-[0.15vw] border-white`}
 					style="background-image: url('{teacher
 						? 'https://cdn.discordapp.com/attachments/842737146321174558/1122752653764595712/image.png'
 						: $profileImageLocal}');"
 				/>
-				<div
-					class={`flex flex-col ml-[1vw] font-bold ${isInProfile ? 'text-white' : 'text-black'}`}
-				>
-					<div class="text-[1.4vw]">{$usernameLocal}</div>
-					<div class="text-[1vw]">🧿 3300 coin</div>
+				<div class={`flex flex-col ml-[1vw] font-bold`}>
+					<div
+						class="text-[1.4vw] {isInProfile
+							? 'bg-clip-text text-transparent bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD]'
+							: 'text-black'}"
+					>
+						{$usernameLocal}
+					</div>
+					<div class="flex flex-row text-[1vw]">
+						<svg
+							class="w-[1vw]"
+							viewBox="0 0 566 566"
+							fill="none"
+							xmlns="http://www.w3.org/2000/svg"
+						>
+							<path
+								d="M282.85 0L0 282.85L282.85 565.7L565.7 282.85L282.85 0ZM141.425 282.85L282.85 141.425L424.275 282.85L282.85 424.275L141.425 282.85Z"
+								fill="url(#paint0_linear_1209_1015)"
+							/>
+							<defs>
+								<linearGradient
+									id="paint0_linear_1209_1015"
+									x1="-5.29141"
+									y1="5.33679"
+									x2="368.376"
+									y2="675.692"
+									gradientUnits="userSpaceOnUse"
+								>
+									<stop stop-color="#C698FF" />
+									<stop offset="1" stop-color="#6C80E8" />
+								</linearGradient>
+							</defs>
+						</svg>
+
+						<div
+							class="ml-[0.3vw] text-[1.1vw] bg-clip-text text-transparent bg-gradient-to-r from-[#C698FF] to-[#6C80E8]"
+						>
+							3300
+						</div>
+
+						<svg
+							class="ml-[2vw] w-[1vw]"
+							viewBox="0 0 566 566"
+							fill="none"
+							xmlns="http://www.w3.org/2000/svg"
+						>
+							<circle cx="282.85" cy="282.85" r="282.85" fill="url(#paint0_linear_1209_1018)" />
+							<path
+								d="M283.5 377.056H306.889C322.482 377.056 353.667 367.7 353.667 330.278C353.667 292.856 322.482 283.5 306.889 283.5H260.111C244.518 283.5 213.333 274.144 213.333 236.722C213.333 199.3 244.518 189.944 260.111 189.944H283.5M283.5 377.056H213.333M283.5 377.056V423.833M283.5 189.944H353.667M283.5 189.944V143.167M494 283.5C494 399.757 399.757 494 283.5 494C167.244 494 73 399.757 73 283.5C73 167.244 167.244 73 283.5 73C399.757 73 494 167.244 494 283.5Z"
+								stroke="white"
+								stroke-width="20"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+							/>
+							<defs>
+								<linearGradient
+									id="paint0_linear_1209_1018"
+									x1="282.85"
+									y1="0"
+									x2="282.85"
+									y2="565.7"
+									gradientUnits="userSpaceOnUse"
+								>
+									<stop stop-color="#FFE08F" />
+									<stop offset="0.255208" stop-color="#F0C862" />
+									<stop offset="0.494792" stop-color="#E4AE24" />
+									<stop offset="0.755208" stop-color="#F0C862" />
+									<stop offset="1" stop-color="#FFE08F" />
+								</linearGradient>
+							</defs>
+						</svg>
+
+						<div
+							class="ml-[0.3vw] text-[1.1vw] bg-clip-text text-transparent bg-gradient-to-t from-[#FFE08F] via-[#E4AE24] to-[#FFE08F]"
+						>
+							100
+						</div>
+					</div>
 				</div>
 			</a>
 		</div>

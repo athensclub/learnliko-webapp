@@ -17,8 +17,14 @@
 	import { navigating } from '$app/stores';
 	import { beforeNavigate } from '$app/navigation';
 	import UserCEFRLevelDetailModal from '$lib/components/modals/UserCEFRLevelDetailModal.svelte';
+	import CircularProgressBar from '$lib/components/CircularProgressBar.svelte';
+	import shoppingBag from '$lib/images/shopping_bag_icon.png';
 
 	let name = 'Natsataporn M.';
+	let background =
+		'https://cdn.discordapp.com/attachments/842737146321174558/1124288705864155216/image.png';
+	let exp = 25;
+	let coin = 100;
 	let learningDiaries: LearningDiaryItem[] | null = null;
 
 	const { open }: Context = getContext('simple-modal');
@@ -79,32 +85,27 @@
 
 	<div class="flex flex-col flex-1">
 		<div
-			class={`flex flex-row items-center justify-between bg-[#FFFFFFCC] gap-[3vw] ${
-				$isMobile ? 'px-[6vw] py-[2vh]' : 'sticky top-0 px-[2vw] py-[2vh]'
-			}`}
+			style="background-image: url('{background}');"
+			class="w-full h-[20vw] bg-cover bg-center relative"
 		>
-			<div class={`w-full flex flex-row items-center rounded-2xl`}>
-				<!-- TODO: use actual profile image from cloud db -->
-				<div
-					class={`bg-center bg-cover rounded-full ${
-						$isMobile ? 'w-[15vw] h-[15vw]' : 'w-[5vw] h-[5vw]'
-					}`}
-					style="background-image: url('{$profileImageLocal}');"
-				/>
-				<div class={`flex flex-col font-bold ${$isMobile ? 'ml-[2.5vw]' : 'ml-[1vw]'}`}>
-					<div class={`${$isMobile ? 'text-[5.5vw]' : 'text-[1.5vw]'}`}>{$usernameLocal}</div>
-					<div class={`${$isMobile ? 'text-[3.5vw]' : 'text-[1vw]'}`}>🧿 3300 coin</div>
-				</div>
-			</div>
-
 			<a
-				href="/login"
-				class="w-[17vw] text-[1.2vw] text-center py-[1vh] border border-black rounded-[1vw]"
-				>Switch Account...</a
+				href="/profile/shop"
+				class="absolute flex flex-row items-center rounded-full px-[1.5vw] py-[0.5vw] top-[2vw] right-[2vw] font-bold text-[1.35vw] bg-white"
 			>
+				<img class="w-[1vw] mr-[0.7vw]" src={shoppingBag} alt="Shopping Bag" />
+
+				Shop
+			</a>
+
+			<div
+				style="background-image: url('{$profileImageLocal}');"
+				class="absolute left-[5vw] bottom-[-6vw] w-[12vw] h-[12vw] border-[0.3vw] border-white bg-cover bg-center rounded-full"
+			/>
 		</div>
 
 		<div class={`flex flex-col px-[6vw] ${$isMobile ? 'mt-[2vh]' : 'mt-[12vh]'}`}>
+			<div class="mt-[2vw] mb-[3vw] font-bold text-[2vw]">{name}</div>
+
 			<div
 				class={`flex w-full justify-between font-bold ${
 					$isMobile ? 'flex-col gap-[2vh]' : 'flex-row'
@@ -112,144 +113,155 @@
 			>
 				<button
 					on:click={showCEFRLevel}
-					class={`flex flex-row items-center justify-evenly bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] text-white rounded-3xl ${
-						$isMobile ? 'w-full h-[20vh]' : 'w-[55%] h-[30vh]'
+					style="box-shadow: 0px 10px 30px 0px rgba(108, 128, 232, 0.25);"
+					class={`flex flex-row items-center justify-evenly bg-white rounded-3xl p-[2vw] ${
+						$isMobile ? 'w-full h-[20vh]' : 'w-[55%] h-[18vw]'
 					}`}
 				>
-					<div class="flex flex-col items-center">
-						<div class={`${$isMobile ? 'text-[4vw]' : 'text-[1.35vw]'}`}>CEFR Level</div>
-						<div class={`${$isMobile ? 'text-[14vw]' : 'text-[4.5vw]'}`}>
-							{$userSession.profile?.CEFRLevel.general}
-						</div>
-						<div class="text-[1.1vw] underline flex flex-row">
-							view detail
-							<svg
-								class="ml-[0.7vw] w-[1.1vw]"
-								viewBox="0 0 20 16"
-								fill="none"
-								xmlns="http://www.w3.org/2000/svg"
-							>
-								<path
-									d="M1 7C0.447715 7 -4.82823e-08 7.44772 0 8C4.82823e-08 8.55228 0.447715 9 1 9L1 7ZM19.7071 8.70711C20.0976 8.31658 20.0976 7.68342 19.7071 7.29289L13.3431 0.928931C12.9526 0.538407 12.3195 0.538407 11.9289 0.928931C11.5384 1.31946 11.5384 1.95262 11.9289 2.34314L17.5858 8L11.9289 13.6569C11.5384 14.0474 11.5384 14.6805 11.9289 15.0711C12.3195 15.4616 12.9526 15.4616 13.3431 15.0711L19.7071 8.70711ZM1 9L19 9L19 7L1 7L1 9Z"
-									fill="white"
-								/>
-							</svg>
+					<div class="flex flex-col h-full justify-between items-center">
+						<CircularProgressBar class="w-[9vw] h-[9vw]" value={50}>
+							<div class="flex flex-col items-center justify-center h-full">
+								<div class="text-[0.3vw]">CEFR</div>
+								<div class="text-[2vw]">{$userSession.profile?.CEFRLevel.general}</div>
+							</div>
+						</CircularProgressBar>
+
+						<div
+							class="px-[2vw] py-[0.5vw] border border-black rounded-full text-[1.3vw] flex flex-row justify-center"
+						>
+							ดูรายละเอียด
 						</div>
 					</div>
 
-					<div class="flex flex-col items-center">
-						<div class={`${$isMobile ? 'text-[4vw]' : 'text-[1.35vw]'}`}>Average Time</div>
-						<div>
-							<div class={`inline-block ${$isMobile ? 'text-[14vw]' : 'text-[4.5vw]'}`}>31</div>
-							<div class={`inline-block ${$isMobile ? 'text-[4vw]' : 'text-[1.35vw]'}`}>min</div>
+					<div class="flex flex-col h-full justify-between items-center">
+						<div class="flex flex-col">
+							<div class={`text-[#8A8A8A] ${$isMobile ? 'text-[4vw]' : 'text-[1.5vw]'}`}>
+								เวลาเรียนรู้เฉลี่ยต่อวัน
+							</div>
+							<div>
+								<div class={`inline-block ${$isMobile ? 'text-[14vw]' : 'text-[5vw]'}`}>31</div>
+								<div class={`inline-block ${$isMobile ? 'text-[4vw]' : 'text-[1.5vw]'}`}>min</div>
+							</div>
 						</div>
-						<div class="text-[1.1vw] underline flex flex-row">
-							view detail
-							<svg
-								class="ml-[0.7vw] w-[1.1vw]"
-								viewBox="0 0 20 16"
-								fill="none"
-								xmlns="http://www.w3.org/2000/svg"
-							>
-								<path
-									d="M1 7C0.447715 7 -4.82823e-08 7.44772 0 8C4.82823e-08 8.55228 0.447715 9 1 9L1 7ZM19.7071 8.70711C20.0976 8.31658 20.0976 7.68342 19.7071 7.29289L13.3431 0.928931C12.9526 0.538407 12.3195 0.538407 11.9289 0.928931C11.5384 1.31946 11.5384 1.95262 11.9289 2.34314L17.5858 8L11.9289 13.6569C11.5384 14.0474 11.5384 14.6805 11.9289 15.0711C12.3195 15.4616 12.9526 15.4616 13.3431 15.0711L19.7071 8.70711ZM1 9L19 9L19 7L1 7L1 9Z"
-									fill="white"
-								/>
-							</svg>
+
+						<div
+							class="px-[2vw] py-[0.5vw] border border-black rounded-full text-[1.3vw] flex flex-row justify-center"
+						>
+							ดูรายละเอียด
 						</div>
 					</div>
 				</button>
 
-				<a
-					href="/cert"
-					style="box-shadow: 0px 10px 30px 0px #0000001A;"
-					class={`flex items-center justify-center bg-white rounded-3xl ${
-						$isMobile ? 'w-full h-[15vh] flex-row gap-[5vw]' : 'w-[35%] h-[30vh] flex-col gap-[2vh]'
+				<div
+					style="box-shadow: 0px 10px 30px 0px rgba(108, 128, 232, 0.25);"
+					class={`flex items-start justify-center bg-white p-[2vw] rounded-3xl ${
+						$isMobile ? 'w-full h-[15vh] flex-row gap-[5vw]' : 'w-[35%] h-[18vw] flex-col gap-[2vh]'
 					}`}
 				>
-					<svg
-						class={`${$isMobile ? 'h-[42%]' : 'h-[35%]'}`}
-						viewBox="0 0 114 114"
-						fill="none"
-						xmlns="http://www.w3.org/2000/svg"
-					>
-						<g clip-path="url(#clip0_745_1332)">
+					<div class="flex flex-row">
+						<div
+							class="text-[4vw] mr-[1vw] bg-clip-text text-transparent bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD]"
+						>
+							{exp}
+						</div>
+						<svg
+							class="w-[6vw]"
+							viewBox="0 0 1650 792"
+							fill="none"
+							xmlns="http://www.w3.org/2000/svg"
+						>
 							<path
-								d="M60.5611 33.1523H25.4023V39.0122H60.5611V33.1523Z"
-								fill="url(#paint0_linear_745_1332)"
+								d="M720.35 572C716.016 572 713.85 569.833 713.85 565.5V211.5C713.85 207.167 716.016 205 720.35 205H952.35C956.683 205 958.85 207.167 958.85 211.5V262C958.85 266.333 956.683 268.5 952.35 268.5H781.35V352H935.85C940.183 352 942.35 354.167 942.35 358.5V408C942.35 412.333 940.183 414.5 935.85 414.5H781.35V508.5H958.35C962.683 508.5 964.85 510.667 964.85 515V565.5C964.85 569.833 962.683 572 958.35 572H720.35ZM1000.41 572C997.742 572 995.908 571.333 994.908 570C994.242 568.333 994.575 566.333 995.908 564L1111.91 382.5L1003.91 213C1003.24 211 1002.91 209.833 1002.91 209.5C1002.91 208.167 1003.41 207.167 1004.41 206.5C1005.41 205.5 1006.74 205 1008.41 205H1069.91C1072.91 205 1075.41 206.5 1077.41 209.5L1154.91 336L1231.41 209.5C1233.07 206.5 1235.57 205 1238.91 205H1299.91C1302.57 205 1304.24 205.833 1304.91 207.5C1305.91 208.833 1305.74 210.667 1304.41 213L1196.41 382L1312.41 564C1313.07 566 1313.41 567.167 1313.41 567.5C1313.41 568.833 1312.91 570 1311.91 571C1310.91 571.667 1309.57 572 1307.91 572H1246.41C1243.41 572 1240.91 570.5 1238.91 567.5L1153.41 428L1068.91 567.5C1067.57 570.5 1065.07 572 1061.41 572H1000.41ZM1370.74 572C1366.41 572 1364.24 569.833 1364.24 565.5V211.5C1364.24 207.167 1366.41 205 1370.74 205H1481.74C1529.41 205 1565.57 216.167 1590.24 238.5C1614.91 260.5 1627.24 292 1627.24 333C1627.24 374 1614.91 405.667 1590.24 428C1565.57 450 1529.41 461 1481.74 461H1431.74V565.5C1431.74 569.833 1429.57 572 1425.24 572H1370.74ZM1431.74 267.5V398.5H1479.24C1531.24 398.5 1557.24 376.167 1557.24 331.5C1557.24 310.167 1550.57 294.167 1537.24 283.5C1523.91 272.833 1504.57 267.5 1479.24 267.5H1431.74Z"
+								fill="url(#paint0_linear_1176_3107)"
 							/>
 							<path
-								d="M60.5611 54.6387H25.4023V60.4985H60.5611V54.6387Z"
-								fill="url(#paint1_linear_745_1332)"
+								d="M282.85 113.15L0 396L282.85 678.85L565.7 396L282.85 113.15ZM141.425 396L282.85 254.575L424.275 396L282.85 537.425L141.425 396Z"
+								fill="url(#paint1_linear_1176_3107)"
 							/>
-							<path
-								d="M101.298 19.2875C83.8956 21.6851 65.7106 63.7816 57.5093 78.8908C55.4493 82.6869 60.2399 85.855 62.3601 82.2213C63.8879 79.61 72.2218 63.1617 72.2218 63.1617C81.2994 63.4612 84.6473 57.1226 81.0191 53.1856C93.2193 53.4374 99.2663 46.723 95.8062 42.6486C99.4455 43.8008 102.597 43.03 107.278 40.4779C117.265 35.0297 116.8 16.7942 101.298 19.2875Z"
-								fill="url(#paint2_linear_745_1332)"
-							/>
-							<path
-								d="M78.1519 68.3629V98.6709C78.1519 99.5691 77.4194 100.3 76.5229 100.302H9.44218C8.54555 100.3 7.81501 99.5691 7.81323 98.6709V15.3307C7.81523 14.432 8.54577 13.7017 9.44218 13.6997H76.5229C77.4196 13.7017 78.1519 14.4323 78.1519 15.3307V30.4626C80.708 27.0197 83.3057 23.9735 85.9649 21.4442V15.3309C85.9609 10.1138 81.7418 5.89073 76.5227 5.88672H9.44218C4.22513 5.89073 0.00200391 10.1138 0 15.3309V98.6711C0.00200391 103.888 4.22513 108.111 9.44218 108.115H76.5229C81.742 108.111 85.9611 103.888 85.9651 98.6711V63.3919C84.1567 65.7743 81.4632 67.491 78.1519 68.3629Z"
-								fill="url(#paint3_linear_745_1332)"
-							/>
-						</g>
-						<defs>
-							<linearGradient
-								id="paint0_linear_745_1332"
-								x1="25.4023"
-								y1="36.1107"
-								x2="60.5611"
-								y2="36.1107"
-								gradientUnits="userSpaceOnUse"
-							>
-								<stop stop-color="#6C80E8" />
-								<stop offset="1" stop-color="#9BA1FD" />
-							</linearGradient>
-							<linearGradient
-								id="paint1_linear_745_1332"
-								x1="25.4023"
-								y1="57.5971"
-								x2="60.5611"
-								y2="57.5971"
-								gradientUnits="userSpaceOnUse"
-							>
-								<stop stop-color="#6C80E8" />
-								<stop offset="1" stop-color="#9BA1FD" />
-							</linearGradient>
-							<linearGradient
-								id="paint2_linear_745_1332"
-								x1="57.0059"
-								y1="51.7536"
-								x2="114"
-								y2="51.7536"
-								gradientUnits="userSpaceOnUse"
-							>
-								<stop stop-color="#6C80E8" />
-								<stop offset="1" stop-color="#9BA1FD" />
-							</linearGradient>
-							<linearGradient
-								id="paint3_linear_745_1332"
-								x1="-8.41319e-07"
-								y1="57.4971"
-								x2="85.9651"
-								y2="57.4971"
-								gradientUnits="userSpaceOnUse"
-							>
-								<stop stop-color="#6C80E8" />
-								<stop offset="1" stop-color="#9BA1FD" />
-							</linearGradient>
-							<clipPath id="clip0_745_1332">
-								<rect width="114" height="114" fill="white" />
-							</clipPath>
-						</defs>
-					</svg>
-
-					<div
-						class={`text-transparent bg-clip-text bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] ${
-							$isMobile ? 'text-[6.5vw]' : 'text-[2vw]'
-						}`}
-					>
-						Certificate
+							<defs>
+								<linearGradient
+									id="paint0_linear_1176_3107"
+									x1="664.72"
+									y1="7.4717"
+									x2="1126.64"
+									y2="1028.66"
+									gradientUnits="userSpaceOnUse"
+								>
+									<stop stop-color="#C698FF" />
+									<stop offset="1" stop-color="#6C80E8" />
+								</linearGradient>
+								<linearGradient
+									id="paint1_linear_1176_3107"
+									x1="-5.29141"
+									y1="118.487"
+									x2="368.376"
+									y2="788.842"
+									gradientUnits="userSpaceOnUse"
+								>
+									<stop stop-color="#C698FF" />
+									<stop offset="1" stop-color="#6C80E8" />
+								</linearGradient>
+							</defs>
+						</svg>
 					</div>
-				</a>
+
+					<div class="flex flex-row">
+						<div
+							class="text-[4vw] mr-[1vw] bg-clip-text text-transparent bg-gradient-to-t from-[#FFE08F] via-[#E4AE24] to-[#FFE08F]"
+						>
+							{coin}
+						</div>
+						<svg
+							class="w-[7vw]"
+							viewBox="0 0 2017 792"
+							fill="none"
+							xmlns="http://www.w3.org/2000/svg"
+						>
+							<path
+								d="M880.85 579C845.183 579 813.85 571.167 786.85 555.5C759.85 539.833 738.85 517.667 723.85 489C709.183 460 701.85 426.5 701.85 388.5C701.85 350.5 709.516 317.167 724.85 288.5C740.183 259.5 761.516 237.167 788.85 221.5C816.183 205.833 847.183 198 881.85 198C920.183 198 952.85 206.667 979.85 224C1006.85 241 1026.52 265.167 1038.85 296.5C1039.18 297.167 1039.35 298.167 1039.35 299.5C1039.35 302.5 1037.85 304.333 1034.85 305L981.35 320L979.35 320.5C976.35 320.5 974.35 319 973.35 316C964.683 299.333 952.516 286.5 936.85 277.5C921.516 268.5 903.516 264 882.85 264C848.183 264 821.016 275.333 801.35 298C781.683 320.333 771.85 350.5 771.85 388.5C771.85 426.5 781.683 456.833 801.35 479.5C821.35 501.833 848.516 513 882.85 513C906.85 513 927.183 507.333 943.85 496C960.85 484.667 973.35 467.667 981.35 445C982.683 441 985.35 439.5 989.35 440.5L1042.35 455.5C1046.35 456.5 1047.85 458.667 1046.85 462C1036.85 497.667 1017.52 526.167 988.85 547.5C960.183 568.5 924.183 579 880.85 579ZM1275.52 579C1240.19 579 1208.35 571.167 1180.02 555.5C1152.02 539.5 1130.02 517.167 1114.02 488.5C1098.35 459.5 1090.52 426.167 1090.52 388.5C1090.52 350.833 1098.35 317.667 1114.02 289C1130.02 260 1152.02 237.667 1180.02 222C1208.35 206 1240.19 198 1275.52 198C1310.85 198 1342.52 206 1370.52 222C1398.85 237.667 1420.85 260 1436.52 289C1452.52 317.667 1460.52 350.833 1460.52 388.5C1460.52 426.167 1452.52 459.5 1436.52 488.5C1420.85 517.167 1398.85 539.5 1370.52 555.5C1342.52 571.167 1310.85 579 1275.52 579ZM1275.52 513C1298.52 513 1318.69 507.667 1336.02 497C1353.69 486.333 1367.19 471.667 1376.52 453C1385.85 434 1390.52 412.5 1390.52 388.5C1390.52 364.5 1385.85 343.167 1376.52 324.5C1367.19 305.5 1353.69 290.667 1336.02 280C1318.69 269.333 1298.52 264 1275.52 264C1252.52 264 1232.19 269.333 1214.52 280C1197.19 290.667 1183.85 305.5 1174.52 324.5C1165.19 343.167 1160.52 364.5 1160.52 388.5C1160.52 412.5 1165.19 434 1174.52 453C1183.85 471.667 1197.19 486.333 1214.52 497C1232.19 507.667 1252.52 513 1275.52 513ZM1534.8 572C1530.47 572 1528.3 569.833 1528.3 565.5V211.5C1528.3 207.167 1530.47 205 1534.8 205H1589.3C1593.64 205 1595.8 207.167 1595.8 211.5V565.5C1595.8 569.833 1593.64 572 1589.3 572H1534.8ZM1682.26 572C1677.93 572 1675.76 569.833 1675.76 565.5V211.5C1675.76 207.167 1677.93 205 1682.26 205H1739.76C1743.1 205 1745.76 206.5 1747.76 209.5L1911.76 463V211.5C1911.76 207.167 1913.93 205 1918.26 205H1970.26C1974.6 205 1976.76 207.167 1976.76 211.5V565.5C1976.76 569.833 1974.6 572 1970.26 572H1913.26C1909.93 572 1907.26 570.5 1905.26 567.5L1740.76 313.5V565.5C1740.76 569.833 1738.6 572 1734.26 572H1682.26Z"
+								fill="url(#paint0_linear_1176_3108)"
+							/>
+							<circle cx="282.85" cy="395.85" r="282.85" fill="url(#paint1_linear_1176_3108)" />
+							<path
+								d="M283.5 490.056H306.889C322.482 490.056 353.667 480.7 353.667 443.278C353.667 405.856 322.482 396.5 306.889 396.5H260.111C244.518 396.5 213.333 387.144 213.333 349.722C213.333 312.3 244.518 302.944 260.111 302.944H283.5M283.5 490.056H213.333M283.5 490.056V536.833M283.5 302.944H353.667M283.5 302.944V256.167M494 396.5C494 512.757 399.757 607 283.5 607C167.244 607 73 512.757 73 396.5C73 280.244 167.244 186 283.5 186C399.757 186 494 280.244 494 396.5Z"
+								stroke="white"
+								stroke-width="20"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+							/>
+							<defs>
+								<linearGradient
+									id="paint0_linear_1176_3108"
+									x1="1345.35"
+									y1="0"
+									x2="1345.35"
+									y2="792"
+									gradientUnits="userSpaceOnUse"
+								>
+									<stop stop-color="#FFE08F" />
+									<stop offset="0.255208" stop-color="#F0C862" />
+									<stop offset="0.494792" stop-color="#E4AE24" />
+									<stop offset="0.755208" stop-color="#F0C862" />
+									<stop offset="1" stop-color="#FFE08F" />
+								</linearGradient>
+								<linearGradient
+									id="paint1_linear_1176_3108"
+									x1="282.85"
+									y1="113"
+									x2="282.85"
+									y2="678.7"
+									gradientUnits="userSpaceOnUse"
+								>
+									<stop stop-color="#FFE08F" />
+									<stop offset="0.255208" stop-color="#F0C862" />
+									<stop offset="0.494792" stop-color="#E4AE24" />
+									<stop offset="0.755208" stop-color="#F0C862" />
+									<stop offset="1" stop-color="#FFE08F" />
+								</linearGradient>
+							</defs>
+						</svg>
+					</div>
+				</div>
 			</div>
 
 			{#if learningDiaries && learningDiaries.length > 0}

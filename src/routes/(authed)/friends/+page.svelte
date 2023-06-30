@@ -10,253 +10,171 @@
 		sendFriendsMessage,
 		waitingForFriendResponse
 	} from '$lib/global/friends';
+
+	let leaderboard = [
+		{
+			username: 'Natsataporn M.',
+			exp: 30,
+			profileImage:
+				'https://cdn.discordapp.com/attachments/842737146321174558/1124349468247068764/image.png',
+			background:
+				'https://cdn.discordapp.com/attachments/842737146321174558/1124347122121195590/image.png'
+		},
+		{
+			username: 'Natsataporn M.',
+			exp: 25,
+			profileImage:
+				'https://cdn.discordapp.com/attachments/842737146321174558/1124349032685379605/image.png',
+			background:
+				'https://cdn.discordapp.com/attachments/842737146321174558/1124347056245452830/image.png'
+		},
+		{
+			username: 'Natsataporn M.',
+			exp: 25,
+			profileImage:
+				'https://cdn.discordapp.com/attachments/842737146321174558/1124349032685379605/image.png',
+			background:
+				'https://cdn.discordapp.com/attachments/842737146321174558/1124347056245452830/image.png'
+		},
+		{
+			username: 'Natsataporn M.',
+			exp: 25,
+			profileImage:
+				'https://cdn.discordapp.com/attachments/842737146321174558/1124349032685379605/image.png',
+			background:
+				'https://cdn.discordapp.com/attachments/842737146321174558/1124347056245452830/image.png'
+		},
+		{
+			username: 'Natsataporn M.',
+			exp: 25,
+			profileImage:
+				'https://cdn.discordapp.com/attachments/842737146321174558/1124349032685379605/image.png',
+			background:
+				'https://cdn.discordapp.com/attachments/842737146321174558/1124347056245452830/image.png'
+		},
+	];
 </script>
 
-<div class="w-[100vw] h-full min-h-[100vh] bg-[#F4F4F4] font-line-seed">
-	<NavBar />
+<div class="w-[100vw] h-full flex flex-row min-h-[100vh] bg-[#F4F4F4] font-line-seed">
+	<NavBar spaced />
 
 	<div
-		class="fixed top-0 right-0 w-[23vw] h-[100vh] px-[2vw] py-[4vh] gap-[3.5vh] bg-white flex flex-col font-bold"
+		class="flex-1 h-[100vh] p-[3vw] flex flex-row gap-[4vw] bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD]"
 	>
-		<div class="text-[2.7vw]">Friends</div>
-
-		<a
-			href="/friends/hangbot"
-			class="flex flex-row items-center bg-gradient-to-r from-[#C698FF] to-[#FFD281] rounded-3xl w-full h-[20vh]"
-		>
-			<img class="h-[65%]" src={hangbot} alt="Hangbot" />
-			<div class="text-start inline-block font-medium text-[1.2vw] text-white">
-				Play
-				<div class="inline-block font-bold">Hangman</div>
-				with friends
+		<div class="w-[40%] h-full bg-white rounded-[2vw] flex flex-col font-bold">
+			<div
+				style="box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.25);"
+				class="text-[1.35vw] w-full text-center py-[2vw]"
+			>
+				🏆 จัดอันดับผู้เรียนดีเด่นรายสัปดาห์
 			</div>
-		</a>
 
-		<div class="flex flex-row w-full bg-[#F8F8F8] mt-3 p-3 rounded-xl items-center">
-			<div
-				class={`w-[3.6vw] h-[3.6vw] bg-center bg-cover rounded-full`}
-				style="background-image: url('{userProfileImage}');"
-			/>
-
-			<div class="font-bold text-sm ml-2">Natsataporn M.</div>
-		</div>
-		<div class="flex flex-row w-full bg-[#F8F8F8] mt-3 p-3 rounded-xl items-center">
-			<div
-				class={`w-[3.6vw] h-[3.6vw] bg-center bg-cover rounded-full`}
-				style="background-image: url('{friend2}');"
-			/>
-
-			<div class="font-bold text-sm ml-2">Vorada T.</div>
-		</div>
-		<div class="flex flex-row w-full bg-[#F8F8F8] mt-3 p-3 rounded-xl items-center">
-			<div
-				class={`w-[3.6vw] h-[3.6vw] bg-center bg-cover rounded-full`}
-				style="background-image: url('{friend1}');"
-			/>
-
-			<div class="font-bold text-sm ml-2">Phumpat S.</div>
-		</div>
-	</div>
-
-	<!-- Top spacing -->
-	<div class="w-full h-[5vh]" />
-
-	<div
-		class="flex mx-auto flex-col items-center justify-between w-[40vw] h-[90vh] bg-white rounded-3xl relative"
-	>
-		<div
-			style="box-shadow: 0px 4px 30px 0px #00000040;"
-			class="absolute top-[2vh] flex flex-col bg-white w-[95%] px-[2vw] py-[1vh] rounded-xl"
-		>
-			<div class="text-lg font-bold">Tips</div>
-			<div>Be nice to your friends.</div>
-
-			<!-- <h3 class=" absolute top-1 right-4">{goalCompleted ? '✅ completed' : 'in progress'}</h3> -->
-		</div>
-
-		<div class="w-full mt-[15vh] overflow-y-auto">
-			{#each $friendsHistory as chat, index (index)}
-				<div class={`flex flex-row px-4 w-full items-center`}>
+			<div class="flex flex-col p-[2vw] gap-[2vw] overflow-y-auto">
+				{#each leaderboard as user, index (index)}
+					<!-- Somehow I have to specify the min height to fix the height -->
 					<div
-						class={`flex pt-3 flex-row items-center w-full gap-[2vw] ${
-							chat.role === 'user' ? 'flex-row-reverse pl-[5vw]' : 'pr-[5vw]'
-						}`}
+						style="background-image: url('{user.background}');"
+						class="w-full h-[6vw] min-h-[6vw] p-[1vw] bg-cover bg-center rounded-[2vw] flex flex-row items-center justify-between"
 					>
-						{#if chat.role === 'friend'}
+						<div class="flex flex-row items-center gap-[1vw] h-full">
 							<div
-								class={`w-[3.6vw] h-[3.6vw] bg-center bg-cover rounded-full`}
-								style="background-image: url('{friend2}'), linear-gradient(#9BA1FD, #FFA7A7);"
+								style="background-image: url('{user.profileImage}');"
+								class="h-[80%] aspect-square bg-cover bg-center rounded-full border-[0.15vw] border-white"
 							/>
-						{/if}
-
-						{#if chat.role === 'user'}
 							<div
-								class={`w-[3.6vw] h-[3.6vw] bg-center bg-cover rounded-full`}
-								style="background-image: url('{userProfileImage}');"
-							/>
-						{/if}
-
-						<div
-							class={`flex-1 flex flex-row ${
-								chat.role === 'user' ? 'justify-end' : 'justify-start'
-							}`}
-						>
-							<div
-								class={`text-[1.2vw] rounded-xl font-bold ${
-									chat.text === null
-										? 'bg-gradient-to-r from-[#C698FF] to-[#FFD281] text-white w-[60%] px-[2vw] py-[1vw] flex flex-col'
-										: 'bg-[#F4F4F4] text-black w-fit py-[0.5vw] px-[1.5vw]'
-								}`}
+								class="h-fit max-w-[10vw] px-[1vw] py-[0.3vw] bg-white flex items-center rounded-full"
 							>
-								{#if chat.text === null}
-								<!-- Null means hangbot invite -->
-								Invite you to play crossword!
-								<img class="w-[70%] mx-auto my-[1vw]" src={hangbot} alt="Hangbot"/>
-								<a href="/friends/hangbot/online" class="w-full py-[0.35vw] bg-white rounded-full text-black text-[1.2vw] text-center">Join</a>
-								{:else}
-									{chat.text}
-								{/if}
+								<!-- Somehow putting text inside another layer of div make ellipsis works -->
+								<div class="w-fit truncate text-[1.1vw] whitespace-nowrap">
+									{user.username}
+								</div>
+							</div>
+						</div>
+
+						<div class="flex flex-row h-fit bg-white rounded-full text-[1vw] px-[0.5vw] py-[0.3vw]">
+							<svg
+								class="w-[1vw]"
+								viewBox="0 0 17 17"
+								fill="none"
+								xmlns="http://www.w3.org/2000/svg"
+							>
+								<path
+									d="M8.5 0L0 8.5L8.5 17L17 8.5L8.5 0ZM4.25 8.5L8.5 4.25L12.75 8.5L8.5 12.75L4.25 8.5Z"
+									fill="url(#paint0_linear_1194_8403)"
+								/>
+								<defs>
+									<linearGradient
+										id="paint0_linear_1194_8403"
+										x1="-0.159014"
+										y1="0.160377"
+										x2="11.0702"
+										y2="20.3054"
+										gradientUnits="userSpaceOnUse"
+									>
+										<stop stop-color="#C698FF" />
+										<stop offset="1" stop-color="#6C80E8" />
+									</linearGradient>
+								</defs>
+							</svg>
+							<div
+								class="ml-[0.3vw] bg-clip-text text-transparent bg-gradient-to-r from-[#C698FF] to-[#6C80E8]"
+							>
+								{user.exp}
 							</div>
 						</div>
 					</div>
-				</div>
-			{/each}
+				{/each}
+			</div>
 		</div>
 
-		<div class="w-[95%] h-[48px] font-line-seed mb-4">
-			<h4
-				class={`text-gray-700 transition-opacity ${
-					$waitingForFriendResponse ? 'opacity-100' : 'opacity-0'
-				}`}
+		<div class="flex-1 h-full flex flex-col gap-[1vw] bg-white rounded-[2vw] p-[1vw] font-bold">
+			<div
+				style="box-shadow: 0px 1px 8px 0px rgba(0, 0, 0, 0.25);"
+				class="w-full p-[1vw] rounded-[1vw] flex flex-row items-center justify-between"
 			>
-				your friend is typing...
-			</h4>
+				<div class="text-[1.5vw]">Let's Talk!</div>
 
-			<div class="flex flex-row">
-				<input
-					class="bg-white border border-black/[0.15] h-fit flex-1 text-lg rounded-3xl px-5 py-1"
-					type="text"
-					bind:value={$friendsInputMessage}
-					on:keydown={(e) => {
-						if (e.key == 'Enter') sendFriendsMessage();
-					}}
-				/>
+				<a
+					href="/friends/hangbot"
+					class="p-[1.5vw] rounded-[1vw] bg-gradient-to-br from-[#C698FF] to-[#6C80E8] flex flex-row items-center relative"
+				>
+					<svg
+						class="w-[1vw] absolute top-[1vw] right-[1vw]"
+						viewBox="0 0 22 14"
+						fill="none"
+						xmlns="http://www.w3.org/2000/svg"
+					>
+						<path
+							d="M21.933 9.53576L20.6543 4.09763C20.0066 1.68055 17.8163 0 15.3138 0H6.6861C4.18364 0 1.99339 1.68051 1.34573 4.09763L0.0669751 9.53576C-0.260361 11.0957 0.640179 12.652 2.15637 13.1452L2.23114 13.1692C3.63442 13.626 5.16539 13.0372 5.90192 11.7584L7.01455 10.1132C7.29394 9.62819 7.81111 9.32904 8.37022 9.32904H13.6299C14.189 9.32904 14.7061 9.62819 14.9855 10.1132L16.0981 11.7584C16.8347 13.0372 18.366 13.626 19.7693 13.1692L19.8437 13.1452C21.3598 12.652 22.2604 11.0957 21.933 9.53576ZM8.209 5.89145H6.41767V7.68308H4.85812V5.89145H3.0668V4.33259H4.85812V2.54165H6.41767V4.33259H8.209V5.89145ZM16.1016 2.16842C16.6441 2.16842 17.0833 2.6076 17.0833 3.15017C17.0833 3.69201 16.6441 4.13119 16.1016 4.13119C15.5598 4.13119 15.1206 3.69201 15.1206 3.15017C15.1206 2.60756 15.5598 2.16842 16.1016 2.16842ZM14.1388 6.09426C13.597 6.09426 13.1575 5.65469 13.1575 5.11217C13.1575 4.57068 13.597 4.13115 14.1388 4.13115C14.681 4.13115 15.1202 4.57068 15.1202 5.11217C15.1202 5.65473 14.681 6.09426 14.1388 6.09426ZM16.1016 8.05665C15.5598 8.05665 15.1206 7.61746 15.1206 7.07563C15.1206 6.53306 15.5598 6.09388 16.1016 6.09388C16.6441 6.09388 17.0833 6.53306 17.0833 7.07563C17.0833 7.61746 16.6441 8.05665 16.1016 8.05665ZM18.0643 6.09426C17.5225 6.09426 17.0833 5.65469 17.0833 5.11217C17.0833 4.57068 17.5225 4.13115 18.0643 4.13115C18.6065 4.13115 19.046 4.57068 19.046 5.11217C19.046 5.65473 18.6065 6.09426 18.0643 6.09426Z"
+							fill="white"
+						/>
+					</svg>
 
-				<button class="bg-black text-white py-1 px-3 rounded-xl ml-3" on:click={sendFriendsMessage}>
-					Send
-				</button>
+					<img class="w-[6vw]" src={hangbot} alt="Hangbot" />
+
+					<div class="ml-[1vw] text-[1.1vw] text-white">
+						Play <div class="inline-block text-[1.2vw]">Hangbot</div>
+						<br /> with friends
+					</div>
+				</a>
+			</div>
+
+			<div class="w-full flex-1 flex flex-col p-[1vw] rounded-[2vw] relative overflow-hidden">
+				<div class="flex flex-row items-center gap-[2vw]">
+					<div
+						style="background-image: url('https://cdn.discordapp.com/attachments/842737146321174558/1124349080521420820/image.png');"
+						class="w-[3vw] h-[3vw] bg-cover bg-center rounded-full"
+					/>
+					<div class="px-[1.5vw] py-[0.5vw] text-[1.2vw] bg-gray-200 rounded-[1vw]">Hello</div>
+				</div>
+
+				<div
+					class="absolute left-0 top-0 w-full h-full p-[4vw] text-white bg-[#000000C7] flex flex-col justify-center"
+				>
+					<div class="text-[3vw]">ไม่มีในเวอร์ชัน Trial</div>
+					<div class="text-[2vw]">พูดคุยและ เล่นเกมกับเพื่อนๆ</div>
+				</div>
 			</div>
 		</div>
 	</div>
 </div>
-
-<!-- <div class="w-full h-full min-h-[100vh] bg-white">
-	<Header />
-
-	<div class="w-full h-[120px]" />
-
-	<div class="flex flex-col w-full font-line-seed">
-		<div class="mx-auto font-bold text-2xl">🤗Friends Space</div>
-
-		<div class="flex flex-row mt-6 mx-auto">
-			<div class="flex flex-col w-[22vw] h-[60vh] bg-[#F5F5F5] rounded-2xl p-4 overflow-y-auto">
-				<div class="font-bold text-3xl">Friends</div>
-
-				<div class="flex flex-row w-full bg-white mt-3 p-3 rounded-xl items-center">
-					<div
-						class={`w-[42px] h-[42px] bg-center bg-cover rounded-full`}
-						style="background-image: url('{userProfileImage}');"
-					/>
-
-					<div class="font-bold text-sm ml-2">Natsataporn M.</div>
-
-				</div>
-				<div class="flex flex-row w-full bg-white mt-3 p-3 rounded-xl items-center">
-					<div
-						class={`w-[42px] h-[42px] bg-center bg-cover rounded-full`}
-						style="background-image: url('{friend2}');"
-					/>
-
-					<div class="font-bold text-sm ml-2">Vorada T.</div>
-
-				</div>
-				<div class="flex flex-row w-full bg-white mt-3 p-3 rounded-xl items-center">
-					<div
-						class={`w-[42px] h-[42px] bg-center bg-cover rounded-full`}
-						style="background-image: url('{friend1}');"
-					/>
-
-					<div class="font-bold text-sm ml-2">Phumpat S.</div>
-
-				</div>
-			</div>
-
-			<div
-				class="flex flex-col items-center justify-between ml-4 w-[35vw] h-[60vh] bg-[#F5F5F5] rounded-2xl relative p-4"
-			>
-				<div class="absolute top-4 flex flex-col bg-white w-[95%] px-4 py-2 rounded-lg shadow-md">
-					<div class="text-lg font-bold">Quest</div>
-					<div>Ask your friend their favorite color</div>
-
-					<h3 class=" absolute top-1 right-4">{goalCompleted ? '✅ completed' : 'in progress'}</h3>
-				</div>
-
-				<div class="w-full mt-[80px] overflow-y-auto">
-					{#each history as chat, index (index)}
-						<div
-							class={`flex flex-col px-4 w-full ${
-								chat.role === 'user' ? 'items-end' : 'items-start'
-							}`}
-						>
-							{#if chat.role === 'friend'}
-								<div
-									class={`w-[42px] h-[42px] bg-center bg-cover rounded-full`}
-									style="background-image: url('{friend2}'), linear-gradient(#9BA1FD, #FFA7A7);"
-								/>
-							{/if}
-
-							{#if chat.role === 'user'}
-								<div
-									class={`w-[42px] h-[42px] bg-center bg-cover rounded-full`}
-									style="background-image: url('{userProfileImage}');"
-								/>
-							{/if}
-							<div
-								class={`flex pt-3 flex-row items-center  w-full ${
-									chat.role === 'user' ? 'flex-row-reverse' : ''
-								}`}
-							>
-								<div class={`mx-3 bg-white py-2 px-5 rounded-xl`}>{chat.text}</div>
-							</div>
-						</div>
-					{/each}
-				</div>
-
-				<div class="w-[95%] h-[48px] font-line-seed mb-4">
-					<h4
-						class={`text-gray-700 transition-opacity ${
-							waitingForFriendResponse ? 'opacity-100' : 'opacity-0'
-						}`}
-					>
-						your friend is typing...
-					</h4>
-
-					<div class="flex flex-row">
-						<input
-							class="bg-white border border-black/[0.15] h-fit flex-1 text-lg rounded-3xl px-5 py-1"
-							type="text"
-							bind:value={message}
-							on:keydown={(e) => {
-								if (e.key == 'Enter') sendMessage();
-							}}
-						/>
-
-						<button class="bg-black text-white py-1 px-3 rounded-xl ml-3" on:click={sendMessage}
-							>Send</button
-						>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div> -->

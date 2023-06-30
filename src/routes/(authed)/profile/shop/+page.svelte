@@ -1,11 +1,18 @@
 <script lang="ts">
+	import PurchaseProfileItemModal from '$lib/components/modals/PurchaseProfileItemModal.svelte';
 	import NavBar from '$lib/components/navbar/NavBar.svelte';
+	import { getContext } from 'svelte';
+	import type { Context } from 'svelte-simple-modal';
 
 	type ShopFilter = 'ProfileImage' | 'ProfileBackground';
 	const filters: { label: string; filter: ShopFilter }[] = [
 		{ label: 'รูปโปรไฟล์', filter: 'ProfileImage' },
 		{ label: 'รูปปก', filter: 'ProfileBackground' }
 	];
+
+	const { open }: Context = getContext('simple-modal');
+	const promptPurchase = (image: string, price: number) =>
+		open(PurchaseProfileItemModal, { image, price });
 
 	let currentFilter: ShopFilter = 'ProfileImage';
 	$: items =
@@ -153,6 +160,7 @@
 
 					{#if !item.owned}
 						<button
+							on:click={() => promptPurchase(item.image, item.price)}
 							class="w-fit px-[2.5vw] py-[0.35vw] mt-[2vw] rounded-full text-[1.35vw] border border-black"
 						>
 							ซื้อ

@@ -1,13 +1,13 @@
 <script lang="ts">
-	import FriendsGameLogo from "../FriendsGameLogo.svelte";
     import icon from '$lib/images/hangbot_icon.png';
+	import HangbotTopBar from '../HangbotTopBar.svelte';
 
 </script>
 
 <div
 	class="w-[100vw] h-full min-h-[100vh] flex flex-col gap-[2vh] items-center justify-center bg-gradient-to-r from-[#C698FF] to-[#FFD281] font-line-seed"
 >
-	<FriendsGameLogo />
+	<HangbotTopBar />
 
     <img class="w-[15vw]" src={icon} alt="Hangbot"/>
 

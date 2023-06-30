@@ -2,9 +2,9 @@
 	import { goto } from '$app/navigation';
 	import { sendHangbotInvite } from '$lib/global/friends';
 	import icon from '$lib/images/hangbot_icon.png';
-	import FriendsGameLogo from './FriendsGameLogo.svelte';
 	import playAlone from './play_alone_image.png';
 	import playWithFriends from './play_with_friends_image.png';
+	import HangbotTopBar from './HangbotTopBar.svelte';
 
 	const playWithFriendsClicked = () => {
 		sendHangbotInvite();
@@ -13,9 +13,9 @@
 </script>
 
 <div
-	class="w-[100vw] h-full min-h-[100vh] flex items-center justify-center bg-gradient-to-r from-[#C698FF] to-[#FFD281] font-line-seed"
+	class="w-[100vw] h-full min-h-[100vh] flex items-center justify-center bg-gradient-to-br from-[#C698FF] to-[#6C80E8] font-line-seed"
 >
-	<FriendsGameLogo />
+	<HangbotTopBar />
 
 	<div class="flex flex-col w-[50vw] gap-[5vh]">
 		<div class="flex flex-row gap-[2vw] items-center justify-center">

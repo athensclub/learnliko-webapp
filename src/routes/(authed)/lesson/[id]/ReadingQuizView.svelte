@@ -1,22 +1,24 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
 	import type { ReadingViewType } from './ReadingView.svelte';
+	import { selectedQuizChoices } from '$lib/global/reading';
 
-	export let quiz = [
+	let quiz = [
 		{
 			question: 'พ่อของ Andy ทำงานอะไร?',
 			choices: ['Teacher', 'Doctor', 'Police', 'Soldier']
 		}
 	];
+
 	export let setView: (view: ReadingViewType) => void;
 
-	let answers: (number | null)[] = Array(quiz.length).fill(null);
+	$selectedQuizChoices = Array(quiz.length).fill(null);
 
-	$: submittable = answers.every((val) => val !== null);
+	$: submittable = $selectedQuizChoices.every((val) => val !== null);
 </script>
 
 <!-- https://github.com/sveltejs/svelte/issues/544#issuecomment-586417387 -->
-<div in:fade={{delay:500}} out:fade class="w-full h-full font-bold">
+<div in:fade={{ delay: 500 }} out:fade class="w-full h-full font-bold">
 	<div class="flex flex-col overflow-y-auto">
 		<div class="text-[2.25vw]">คำถาม</div>
 
@@ -27,8 +29,8 @@
 				<div class="grid grid-cols-2 gap-[2vw] mt-[2vw]">
 					{#each q.choices as choice, i (choice)}
 						<button
-							on:click={() => (answers[index] = i)}
-							class="w-full py-[0.7vw] text-[1.35vw] rounded-full {answers[index] === i
+							on:click={() => ($selectedQuizChoices[index] = i)}
+							class="w-full py-[0.7vw] text-[1.35vw] rounded-full {$selectedQuizChoices[index] === i
 								? 'text-white bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD]'
 								: 'text-black border-[0.2vw] border-[#6C80E8]'}"
 						>

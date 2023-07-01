@@ -2,22 +2,35 @@
 	import { chatContext } from '$lib/global/chatbox';
 	import { fade } from 'svelte/transition';
 	import background from '$lib/images/traveling_background.mp4';
+	import audio from '$lib/audios/entering_lesson_transition_sound.wav';
+	import { tweened } from 'svelte/motion';
 
 	export let onFinish: () => void;
+
+	let audioInstance: HTMLAudioElement | null;
+
+	let audioVolume = tweened(1, { duration: 2000 });
 
 	let countdown = 10;
 	const interval = setInterval(() => {
 		countdown = countdown - 1;
+		if (countdown === 2) {
+			$audioVolume = 0;
+		}
 		if (countdown === 0) {
 			clearInterval(interval);
 			onFinish();
 		}
 	}, 1000);
+
+	$: if (audioInstance) {
+		audioInstance.volume = $audioVolume;
+	}
 </script>
 
 <div
 	transition:fade
-	class="w-[100vw] h-[100vh] px-[10vw] bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] relative flex flex-row justify-between items-center font-line-seed overflow-hidden"
+	class="fixed z-[1000] top-0 left-0 w-[100vw] h-[100vh] px-[10vw] bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] flex flex-row justify-between items-center font-line-seed overflow-hidden"
 >
 	<!-- <div
 		style="background-color: #FFD281; background-image: url('{$chatContext?.conversation.avatar
@@ -28,7 +41,11 @@
 		<source src={background} type="video/mp4" />
 	</video>
 
-	<div class="absolute left-[50%] translate-x-[-50%] flex flex-col items-center text-white text-[1.5vw] font-bold">
+	<audio bind:this={audioInstance} autoplay src={audio} />
+
+	<div
+		class="absolute left-[50%] translate-x-[-50%] flex flex-col items-center text-white text-[1.5vw] font-bold"
+	>
 		จะถึงภายใน {countdown} วินาที
 		<iframe
 			title="Moving Car"

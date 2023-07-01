@@ -2,23 +2,24 @@
 	import { beforeNavigate } from '$app/navigation';
 	import EnteringLesson from '$lib/components/loading/EnteringLesson.svelte';
 	import { chatContext } from '$lib/global/chatbox';
+	import { fade } from 'svelte/transition';
 	import FlipCardView from './FlipCardView.svelte';
 	import LessonConversationView from './LessonConversationView.svelte';
 	import LessonIntros from './LessonIntros.svelte';
 	import ReadingView from './ReadingView.svelte';
 	import WritingCardView from './WritingCardView.svelte';
 
-	let entering = false;
+	let entering = true;
 	let playingMusic = true;
 
-	let currentView: 'INTRO' | 'FLIP_CARD' | 'WRITING_CARD' | 'READING' | 'CONVERSATION' =
-		'CONVERSATION';
+	let currentView: 'INTRO' | 'FLIP_CARD' | 'WRITING_CARD' | 'READING' | 'CONVERSATION' = 'INTRO';
 	let background =
 		'https://cdn.discordapp.com/attachments/842737146321174558/1123691473804738620/image.png';
 
 	let topic = 'ทำความรู้จักและทักทาย!';
 
-	let progress = 0.1;
+	let progress = 0;
+	const addProgress = (val: number) => (progress = progress + val);
 
 	$chatContext = {
 		conversation: {
@@ -147,7 +148,9 @@
 
 	{#if entering}
 		<EnteringLesson onFinish={() => (entering = false)} />
-	{:else if currentView === 'INTRO'}
+	{/if}
+
+	{#if currentView === 'INTRO'}
 		<LessonIntros
 			onFinish={() => (currentView = 'FLIP_CARD')}
 			setBackground={(image) => (background = image)}
@@ -173,9 +176,9 @@
 			]}
 		/>
 	{:else if currentView === 'FLIP_CARD'}
-		<FlipCardView />
+		<FlipCardView {addProgress} onFinish={() => (currentView = 'WRITING_CARD')} />
 	{:else if currentView === 'WRITING_CARD'}
-		<WritingCardView />
+		<WritingCardView {addProgress} onFinish={() => (currentView = 'READING')} />
 	{:else if currentView === 'READING'}
 		<ReadingView />
 	{:else if currentView === 'CONVERSATION'}
@@ -183,7 +186,10 @@
 	{/if}
 
 	{#if currentView != 'INTRO'}
-		<div class="absolute left-0 bottom-0 z-[100] w-full bg-[#FFFFFF1A] backdrop-blur-md px-[2vw] py-[2vh]">
+		<div
+			transition:fade
+			class="absolute left-0 bottom-0 z-[100] w-full bg-[#FFFFFF1A] backdrop-blur-md px-[2vw] py-[2vh]"
+		>
 			<div class="flex flex-row justify-between text-white font-bold text-[1.3vw]">
 				<div>รู้จักคำศัพท์</div>
 				<div>รู้จักประโยค</div>

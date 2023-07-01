@@ -137,7 +137,7 @@
 		{:else}
 			<div class="text-[1.8vw]">เลือกเรื่องราวเพื่อเรียนรู้</div>
 
-			<div class="w-full flex flex-col mt-[2vw]">
+			<div class="w-full flex flex-col mt-[1.2vw]">
 				<div class="text-[1.5vw]">ความคืบหน้ารายวัน</div>
 
 				<div class="w-full bg-[#F8F8F8] p-[2vw] rounded-[1vw] flex flex-row">
@@ -153,27 +153,27 @@
 				</div>
 			</div>
 
-			
-			<div class="w-full flex flex-col mt-[2vw]">
+			<div class="w-full flex flex-col mt-[1.2vw]">
 				<div class="text-[1.5vw]">เล่นต่อเรื่องราวล่าสุด</div>
 
 				<LessonCard
-				item={{
-					avatar:
-						'https://cdn.discordapp.com/attachments/842737146321174558/1123670586732839082/image.png',
-					avatarIntro: 'Hello, nice to meet you',
-					background:
-						'https://cdn.discordapp.com/attachments/842737146321174558/1123672047084646450/Rectangle_4917.png',
-					exp: 1500,
-					id: '1',
-					description:
-						'เช้าวันนี้ คุณกำลังไปโรงเรียนวันแรกและได้พบเจอกับเพื่อนๆมากมายที่โรงเรียนแห่งใหม่ของคุณ',
-					level: 'pre-A1',
-					topic: 'ทำความรู้จักและทักทาย!',
-					progress: 0.5
-				}}
-				class="w-full h-[23vw]"
-			/>
+					scale={0.5}
+					item={{
+						avatar:
+							'https://cdn.discordapp.com/attachments/842737146321174558/1123670586732839082/image.png',
+						avatarIntro: 'Hello, nice to meet you',
+						background:
+							'https://cdn.discordapp.com/attachments/842737146321174558/1123672047084646450/Rectangle_4917.png',
+						exp: 1500,
+						id: '1',
+						description:
+							'เช้าวันนี้ คุณกำลังไปโรงเรียนวันแรกและได้พบเจอกับเพื่อนๆมากมายที่โรงเรียนแห่งใหม่ของคุณ',
+						level: 'pre-A1',
+						topic: 'ทำความรู้จักและทักทาย!',
+						progress: 0.5
+					}}
+					class="w-full h-[calc(56vh-3.5vw)]"
+				/>
 			</div>
 		{/if}
 	</div>

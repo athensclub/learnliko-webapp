@@ -1,5 +1,12 @@
 <script lang="ts">
-	import { chatContext, currentChatboxView, recapHistory, recapResult, showChatbox } from '$lib/global/chatbox';
+	import {
+		chatContext,
+		currentChatboxView,
+		onRecapFinished,
+		recapHistory,
+		recapResult,
+		showChatbox
+	} from '$lib/global/chatbox';
 	import userSession from '$lib/stores/userSession';
 	import type {
 		LearnedConversationItem,
@@ -21,6 +28,7 @@
 		$recapResult = item.recap;
 		$currentChatboxView = 'RECAP';
 		$showChatbox = true;
+		$onRecapFinished = () => ($showChatbox = false);
 
 		close();
 	};
@@ -67,7 +75,12 @@
 
 		{#each item.learnedConversations as it (it.conversation.id)}
 			<div class="flex flex-row w-full mt-[3vh]">
-				<ConversationCard class="w-[38%] aspect-[4/5]" scale={0.6} disabled conversation={it.conversation} />
+				<ConversationCard
+					class="w-[38%] aspect-[4/5]"
+					scale={0.6}
+					disabled
+					conversation={it.conversation}
+				/>
 
 				<div class="flex flex-col w-[62%] text-[1.5vw] ml-[2vw]">
 					<div>Played on {formatAMPM(it.finishedTime)}</div>

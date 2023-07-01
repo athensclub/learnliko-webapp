@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { chatContext, currentChatboxView, recapResult, showChatbox } from '$lib/global/chatbox';
+	import { chatContext, currentChatboxView, onRecapFinished, recapResult, showChatbox } from '$lib/global/chatbox';
 	import ConfirmModal from '$lib/components/modals/ConfirmModal.svelte';
 	import DialogueCard from './DialogueCard.svelte';
 	import { round } from '$lib/utils/math';
@@ -16,7 +16,7 @@
 			title: 'Confirm',
 			description: 'Are you sure you want to end the recap?',
 			onConfirm: () => {
-				$showChatbox = false;
+				$onRecapFinished();
 			}
 		});
 </script>

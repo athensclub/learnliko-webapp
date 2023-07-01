@@ -8,11 +8,18 @@
 	import LessonIntros from './LessonIntros.svelte';
 	import ReadingView from './ReadingView.svelte';
 	import WritingCardView from './WritingCardView.svelte';
+	import LessonFinishedView from './LessonFinishedView.svelte';
 
 	let entering = true;
 	let playingMusic = true;
 
-	let currentView: 'INTRO' | 'FLIP_CARD' | 'WRITING_CARD' | 'READING' | 'CONVERSATION' = 'INTRO';
+	let currentView:
+		| 'INTRO'
+		| 'FLIP_CARD'
+		| 'WRITING_CARD'
+		| 'READING'
+		| 'CONVERSATION'
+		| 'FINISHED' = 'INTRO';
 	let background =
 		'https://cdn.discordapp.com/attachments/842737146321174558/1123691473804738620/image.png';
 
@@ -182,7 +189,11 @@
 	{:else if currentView === 'READING'}
 		<ReadingView onFinish={() => (currentView = 'CONVERSATION')} />
 	{:else if currentView === 'CONVERSATION'}
-		<LessonConversationView />
+		<LessonConversationView onFinish={() => (currentView = 'FINISHED')} />
+	{:else if currentView === 'FINISHED'}
+		<LessonFinishedView
+			avatar="https://cdn.discordapp.com/attachments/842737146321174558/1124658451738533959/image.png"
+		/>
 	{/if}
 
 	{#if currentView != 'INTRO'}

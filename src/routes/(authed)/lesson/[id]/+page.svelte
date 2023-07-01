@@ -180,7 +180,7 @@
 	{:else if currentView === 'WRITING_CARD'}
 		<WritingCardView {addProgress} onFinish={() => (currentView = 'READING')} />
 	{:else if currentView === 'READING'}
-		<ReadingView />
+		<ReadingView onFinish={() => (currentView = 'CONVERSATION')} />
 	{:else if currentView === 'CONVERSATION'}
 		<LessonConversationView />
 	{/if}

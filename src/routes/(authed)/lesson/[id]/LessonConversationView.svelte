@@ -20,7 +20,7 @@
 	import type { Context } from 'svelte-simple-modal';
 	import Typewriter from 'svelte-typewriter/Typewriter.svelte';
 	import { get } from 'svelte/store';
-	import { fly } from 'svelte/transition';
+	import { fade, fly } from 'svelte/transition';
 
 	let briefing = true;
 
@@ -59,6 +59,7 @@
 
 {#if $chatContext}
 	<div
+		transition:fade
 		class="absolute top-0 left-0 w-[100vw] h-[100vh] text-white bg-cover bg-center pointer-events-none"
 	>
 		<div

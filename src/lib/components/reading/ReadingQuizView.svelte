@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
-	import type { ReadingViewType } from './ReadingView.svelte';
 	import { readingAnswers, selectedQuizChoices } from '$lib/global/reading';
 	import finishedImage from './reading_quiz_finished_image.png';
+	import type { ReadingViewType } from './ReadingContainer.svelte';
 
 	let quiz = [
 		{
@@ -13,8 +13,6 @@
 
 	export let setView: (view: ReadingViewType) => void;
 	export let onFinish: () => void;
-
-	$selectedQuizChoices = Array(quiz.length).fill(null);
 
 	$: submittable = $selectedQuizChoices.every((val) => val !== null);
 	const submit = () => {

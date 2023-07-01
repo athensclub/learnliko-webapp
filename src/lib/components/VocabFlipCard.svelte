@@ -1,14 +1,33 @@
 <script lang="ts">
 	import Flippable from '$lib/components/Flippable.svelte';
 	import type { FlipCardItem } from '$lib/types/flip_card';
+	import { fade } from 'svelte/transition';
 
 	export let item: FlipCardItem;
+
+	let clazz = '';
+	export { clazz as class };
+
+	export let onCorrect = () => {};
+	export let onWrong = () => {};
 
 	let flipped = false;
 	let selectedChoice: number | null = null;
 
-	let clazz = '';
-	export { clazz as class };
+	/**
+	 * Null -> user has not submitted.
+	 */
+	let correctAnswer: number | null = null;
+	const submit = () => {
+		// TODO: implement actual submit.
+		correctAnswer = 0;
+
+		if (selectedChoice === correctAnswer) {
+			onCorrect();
+		} else {
+			onWrong();
+		}
+	};
 </script>
 
 <Flippable class={clazz} flip={flipped}>
@@ -18,7 +37,7 @@
 		style="background-image: url('{item.image}');"
 		class="w-full h-full rounded-[2vw] bg-cover bg-center overflow-hidden"
 	>
-		<div class="w-full h-full backdrop-blur-[8px] flex flex-col items-center">
+		<div class="w-full h-full backdrop-blur-[8px] bg-[#0000005E] flex flex-col items-center">
 			<div
 				class="bg-white rounded-full w-fit px-[1vw] py-[0.5vw] text-[1vw] flex flex-row items-center ml-auto mt-[1vw] mr-[2vw]"
 			>
@@ -151,40 +170,67 @@
 	>
 		<!-- Can't nest button inside button so the outside is absolute button and inside is another absolute buttons instead -->
 		<div
-			class="w-full h-full backdrop-blur-[8px] flex flex-col items-center justify-center relative font-bold"
+			class="w-full h-full flex flex-col items-center justify-center relative bg-[#0000005E] font-bold"
 		>
-			<button on:click={() => (flipped = !flipped)} class="absolute left-0 top-0 w-full h-full" />
+			<button
+				on:click={() => (flipped = !flipped)}
+				class="absolute backdrop-blur-[8px] left-0 top-0 w-full h-full"
+			/>
 
-			<div
-				class="absolute pointer-events-none top-0 left-0 p-[2vw] w-full h-full flex flex-col justify-between"
-			>
-				<div class="w-full flex flex-col gap-[1.5vw]">
-					{#each item.choices as choice, index (choice)}
-						<button
-							class="pointer-events-auto w-full text-[1.4vw] py-[0.7vw] rounded-full {selectedChoice ===
-							index
-								? 'bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] border-[0.2vw] border-white text-white'
-								: 'bg-white text-black'}"
-							on:click={() => (selectedChoice = index)}
-						>
-							{choice}
-						</button>
-					{/each}
-				</div>
-
-				<button
-					disabled={selectedChoice === null}
-					class="pointer-events-auto w-full bg-white text-[1.2vw] py-[0.7vw] rounded-[1vw]"
+			{#if correctAnswer === null}
+				<div
+					in:fade={{ delay: 500 }}
+					out:fade
+					class="absolute pointer-events-none top-0 left-0 p-[2vw] w-full h-full flex flex-col justify-between"
 				>
-					<div
-						class={selectedChoice === null
-							? 'text-[#B8B8B8]'
-							: 'bg-clip-text text-transparent bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD]'}
-					>
-						ตรวจคำตอบ
+					<div class="w-full flex flex-col gap-[1.5vw]">
+						{#each item.choices as choice, index (choice)}
+							<button
+								class="pointer-events-auto w-full text-[1.4vw] py-[0.7vw] rounded-full {selectedChoice ===
+								index
+									? 'bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] border-[0.2vw] border-white text-white'
+									: 'bg-white text-black'}"
+								on:click={() => (selectedChoice = index)}
+							>
+								{choice}
+							</button>
+						{/each}
 					</div>
-				</button>
-			</div>
+
+					<button
+						on:click={submit}
+						disabled={selectedChoice === null}
+						class="pointer-events-auto w-full bg-white text-[1.2vw] py-[0.7vw] rounded-[1vw]"
+					>
+						<div
+							class={selectedChoice === null
+								? 'text-[#B8B8B8]'
+								: 'bg-clip-text text-transparent bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD]'}
+						>
+							ตรวจคำตอบ
+						</div>
+					</button>
+				</div>
+			{:else}
+				<div
+					in:fade={{ delay: 500 }}
+					out:fade
+					class="absolute pointer-events-none top-0 left-0 p-[2vw] w-full h-full flex flex-col items-center justify-center font-bold text-white"
+				>
+					<div class="text-[1.5vw]">
+						{correctAnswer === selectedChoice ? 'คุณตอบถูก!' : 'คุณตอบผิด!'}
+					</div>
+
+					<img src={item.image} class="max-w-[80%] mt-[2vw]" alt="Flip Card Content" />
+
+					<div class="text-[1.35vw] mt-[1vw]">คำตอบคือ</div>
+					<div
+						class="px-[2vw] py-[0.5vw] mt-[1vw] rounded-full text-[1.35vw] border-[0.15vw] border-white"
+					>
+						{item.choices[correctAnswer]}
+					</div>
+				</div>
+			{/if}
 		</div>
 	</div>
 </Flippable>

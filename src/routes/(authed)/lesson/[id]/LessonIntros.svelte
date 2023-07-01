@@ -18,6 +18,12 @@
 	$: setBackground(items[currentItem].background);
 </script>
 
+<svelte:head>
+	{#each items as item}
+		<link rel="preload" as="image" href={item.background} />
+	{/each}
+</svelte:head>
+
 <div
 	transition:fade
 	class="absolute bottom-0 left-0 flex flex-col items-center gap-[5vh] w-full py-[10vh] bg-gradient-to-b from-transparent via-black/60 to-black/80"

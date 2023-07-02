@@ -15,5 +15,9 @@ export default defineConfig({
 				additionalData: '@use "src/variables.scss" as *;'
 			}
 		}
+	},
+
+	optimizeDeps: {
+		exclude: ['@urql/svelte']
 	}
 });

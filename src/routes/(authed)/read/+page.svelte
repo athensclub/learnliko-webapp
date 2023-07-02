@@ -5,8 +5,8 @@
 	import { browser } from '$app/environment';
 	import Header from '$lib/components/Header.svelte';
 	import NavBar from '$lib/components/navbar/NavBar.svelte';
-	import ReadingCard from '$lib/components/ReadingCard.svelte';
 	import { currentMode } from '$lib/global/mode';
+	import ReadingCard from '$lib/components/reading/ReadingCard.svelte';
 
 	export let data: PageData;
 	let selectedTopic = 0;
@@ -51,7 +51,7 @@
 
 		<div class="grid grid-cols-2 gap-[2.5vw] mt-[5vh]">
 			{#each items as item (item.id)}
-				<ReadingCard class="w-full h-[70vh]" {item} />
+				<ReadingCard class="w-full h-[40vw]" {item} />
 			{/each}
 		</div>
 	</div>

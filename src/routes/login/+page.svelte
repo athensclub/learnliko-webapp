@@ -3,6 +3,8 @@
 	import type { CEFRLevel } from '$lib/types/CEFRLevel';
 	import { getContext } from 'svelte';
 	import type { Context } from 'svelte-simple-modal';
+	import background from '$lib/images/bgvd.mp4';
+	import icon from '$lib/images/learnliko_icon.png';
 
 	const { open }: Context = getContext('simple-modal');
 	const promptLogin = (level: CEFRLevel, profileImage: string, name: string) =>
@@ -14,6 +16,38 @@
 </script>
 
 <div
+	class="relative flex h-full min-h-[100vh] w-full flex-col items-center justify-center font-line-seed font-bold"
+>
+	<video
+		autoplay
+		muted
+		loop
+		class="absolute left-0 top-0 z-[-1] h-full w-full object-cover blur-sm brightness-105"
+	>
+		<source src={background} type="video/mp4" />
+	</video>
+
+	<img src={icon} class="w-[10vw]" alt="Learnliko" />
+
+	<input
+		placeholder="ชื่อผู้ใช้"
+		style="box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.10) inset;"
+		class="mt-[4vw] w-[25vw] rounded-full px-[1vw] py-[0.5vw] text-center text-[1.5vw]"
+	/>
+	<input
+		placeholder="รหัสผ่าน"
+		style="box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.10) inset;"
+		class="mt-[1vw] w-[25vw] rounded-full px-[1vw] py-[0.5vw] text-center text-[1.5vw]"
+	/>
+
+	<button
+		class="mt-[4vw] w-[25vw] rounded-full bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] py-[0.5vw] text-[1.5vw] text-white"
+	>
+		เข้าสู่ระบบ
+	</button>
+</div>
+
+<!-- <div
 	class="w-full h-full min-h-[100vh] bg-[#F4F4F4] flex flex-row gap-[8vw] items-center justify-center font-line-seed"
 >
 	<div class="flex flex-col w-[45vw]">
@@ -92,7 +126,6 @@
 		<button class="w-full py-[1vh] bg-[#1877F2] text-white text-[1.7vw] font-bold">Login</button>
 		<a href="#top" class="text-center text-[1.35vw] text-[#2E7DF2]">Forgotten password?</a>
 
-		<!-- Divider -->
 		<div class="w-full h-[0.15vh] bg-[#DADDE1]" />
 
 		<button
@@ -100,4 +133,4 @@
 			>Create new account</button
 		>
 	</div>
-</div>
+</div> -->

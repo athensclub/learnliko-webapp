@@ -10,7 +10,7 @@
 	export let dialogueNumber: number;
 	export let assistantProfileImage: string;
 	export let dialogue: RecapHistoryItem;
-	
+
 	dialogue.suggestion = dialogue.suggestion
 		? dialogue.suggestion
 		: "There's no suggestion for this dialogue.";
@@ -34,6 +34,8 @@
 	<div class="w-[100%] px-3">
 		<!-- TODO: use actual profile image from cloud db. -->
 		<VoiceChatHistory
+			userBackgroundColor="#6C80E8"
+			aiBackgroundColor="#6C80E8"
 			showAssistantTranscription
 			history={mockHistory}
 			{assistantProfileImage}

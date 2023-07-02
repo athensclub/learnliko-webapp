@@ -6,7 +6,7 @@
 	import ReadingTextView from './ReadingTextView.svelte';
 	import ReadingQuizView from './ReadingQuizView.svelte';
 	import { onMount } from 'svelte';
-	import { readingAnswers, resetReadingData, selectedQuizChoices } from '$lib/global/reading';
+	import { resetReadingData, selectedQuizChoices } from '$lib/global/reading';
 
 	/**
 	 * Called when the user click 'continue' button after submitting answers.

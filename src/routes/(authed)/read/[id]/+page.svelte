@@ -1,5 +1,6 @@
 <script lang="ts">
 	import ReadingQuizModal from '$lib/components/modals/ReadingQuizModal.svelte';
+	import ReadingContainer from '$lib/components/reading/ReadingContainer.svelte';
 	import {
 		initializeReadingData,
 		readingAnswers,
@@ -10,25 +11,176 @@
 	import { getContext, onMount } from 'svelte';
 	import type { Context } from 'svelte-simple-modal';
 
-	export let data: PageData;
-	let item: ReadingItem = data.item;
-	let coin = 300;
+	// export let data: PageData;
+	// let item: ReadingItem = data.item;
 
 	const goBack = () => window.history.back();
 
-	const { open }: Context = getContext('simple-modal');
-	const showQuiz = () => open(ReadingQuizModal, { item });
+	let exp = 25;
+	let coin = 100;
+	let background =
+		'https://cdn.discordapp.com/attachments/842737146321174558/1124045015631528038/image.png';
 
-	$: correct = $readingAnswers
-		? $readingAnswers.filter((v, i) => $selectedQuizChoices[i] === v).length
-		: null;
+	// const { open }: Context = getContext('simple-modal');
+	// const showQuiz = () => open(ReadingQuizModal, { item });
 
-	resetReadingData();
-	onMount(() => initializeReadingData(item));
+	// $: correct = $readingAnswers
+	// 	? $readingAnswers.filter((v, i) => $selectedQuizChoices[i] === v).length
+	// 	: null;
+
+	// resetReadingData();
+	// onMount(() => initializeReadingData(item));
 </script>
 
-<div class="w-full min-h-[100vh]">
+<div class="relative flex min-h-[100vh] w-full bg-cover bg-center pt-[10vh] font-line-seed">
 	<div
+		style="background-image: url('{background}');"
+		class="absolute left-0 top-0 h-[100vh] w-full bg-cover bg-center"
+	>
+		<div class="relative h-full w-full backdrop-blur-md">
+			<div
+				class="absolute left-0 top-0 h-[30vh] w-full bg-gradient-to-b from-black/80 via-black/60 to-transparent"
+			/>
+			<div
+				class="absolute bottom-0 left-0 h-[30vh] w-full bg-gradient-to-t from-black/80 via-black/60 to-transparent"
+			/>
+		</div>
+	</div>
+
+	<button on:click={goBack} class="absolute left-[2vw] top-[2vw] rounded-full bg-white px-[1.5vw] py-[0.7vw]">
+		<svg class="w-[5vw]" viewBox="0 0 78 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+			<g clip-path="url(#clip0_1192_5485)">
+				<path
+					d="M36.3671 19.1667C36.1692 19.1667 36.0703 19.067 36.0703 18.8677V2.58371C36.0703 2.38437 36.1692 2.28471 36.3671 2.28471H46.9599C47.1577 2.28471 47.2567 2.38437 47.2567 2.58371V4.90671C47.2567 5.10604 47.1577 5.20571 46.9599 5.20571H39.1523V9.04671H46.2065C46.4044 9.04671 46.5033 9.14637 46.5033 9.34571V11.6227C46.5033 11.822 46.4044 11.9217 46.2065 11.9217H39.1523V16.2457H47.2338C47.4317 16.2457 47.5306 16.3454 47.5306 16.5447V18.8677C47.5306 19.067 47.4317 19.1667 47.2338 19.1667H36.3671ZM49.1998 19.1667C49.0324 19.1667 48.9487 19.1054 48.9487 18.9827C48.9487 18.9214 48.9715 18.86 49.0172 18.7987L53.0123 13.0487L49.2455 7.62071C49.1998 7.54404 49.177 7.48271 49.177 7.43671C49.177 7.31404 49.2607 7.25271 49.4281 7.25271H52.1448C52.297 7.25271 52.4187 7.31404 52.5101 7.43671L54.8843 10.9787L57.2814 7.43671C57.3727 7.31404 57.4944 7.25271 57.6466 7.25271H60.1807C60.3481 7.25271 60.4318 7.31404 60.4318 7.43671C60.4318 7.48271 60.409 7.54404 60.3633 7.62071L56.5965 13.0487L60.5916 18.7987C60.6373 18.86 60.6601 18.9214 60.6601 18.9827C60.6601 19.1054 60.5764 19.1667 60.409 19.1667H57.6923C57.5401 19.1667 57.4183 19.1054 57.327 18.9827L54.7245 15.0957L52.0991 18.9827C52.0078 19.1054 51.8861 19.1667 51.7339 19.1667H49.1998ZM64.234 5.13671C63.7318 5.13671 63.3132 4.98337 62.9784 4.67671C62.6588 4.37004 62.499 3.97137 62.499 3.48071C62.499 2.99004 62.6588 2.59137 62.9784 2.28471C63.3132 1.97804 63.7318 1.82471 64.234 1.82471C64.7363 1.82471 65.1472 1.97804 65.4668 2.28471C65.8016 2.59137 65.969 2.99004 65.969 3.48071C65.969 3.97137 65.8016 4.37004 65.4668 4.67671C65.1472 4.98337 64.7363 5.13671 64.234 5.13671ZM63.0469 19.1667C62.849 19.1667 62.7501 19.067 62.7501 18.8677V7.55171C62.7501 7.35237 62.849 7.25271 63.0469 7.25271H65.4211C65.619 7.25271 65.7179 7.35237 65.7179 7.55171V18.8677C65.7179 19.067 65.619 19.1667 65.4211 19.1667H63.0469ZM73.4257 19.3967C72.132 19.3967 71.1427 18.9904 70.4579 18.1777C69.7882 17.365 69.4534 16.1614 69.4534 14.5667V9.92071H67.7183C67.5205 9.92071 67.4216 9.82104 67.4216 9.62171V7.55171C67.4216 7.35237 67.5205 7.25271 67.7183 7.25271H69.4534V4.05571C69.4534 3.85637 69.5523 3.75671 69.7501 3.75671H72.1244C72.3222 3.75671 72.4212 3.85637 72.4212 4.05571V7.25271H75.2292C75.427 7.25271 75.526 7.35237 75.526 7.55171V9.62171C75.526 9.82104 75.427 9.92071 75.2292 9.92071H72.4212V14.7507C72.4212 15.3947 72.5277 15.8777 72.7408 16.1997C72.9539 16.5217 73.2887 16.6827 73.7453 16.6827C74.1258 16.6827 74.4225 16.491 74.6356 16.1077C74.7421 15.9237 74.8791 15.8777 75.0465 15.9697L76.8272 16.7747C76.9338 16.8207 76.987 16.905 76.987 17.0277C76.987 17.089 76.9642 17.1657 76.9185 17.2577C76.5228 17.9937 76.0206 18.538 75.4118 18.8907C74.803 19.228 74.141 19.3967 73.4257 19.3967Z"
+					fill="black"
+				/>
+				<path d="M0.672852 1.23901L21.5998 22.3223" stroke="black" stroke-width="3" />
+				<path d="M21.5998 0.677734L0.672852 21.7612" stroke="black" stroke-width="3" />
+			</g>
+			<defs>
+				<clipPath id="clip0_1192_5485">
+					<rect width="78" height="23" fill="white" />
+				</clipPath>
+			</defs>
+		</svg>
+	</button>
+
+	<div
+		class="absolute bottom-0 left-[50%] flex w-[75vw] translate-x-[-50%] flex-row justify-between py-[4vh] font-bold text-white"
+	>
+		<div class="text-[1.35vw]">หากตอบคำถามถูกครบทุกข้อคุณจะได้รับรางวัล</div>
+
+		<div class="flex flex-row">
+			<div class="flex flex-row items-center rounded-full bg-[#FFFFFFE5] px-[1vw] py-[0.3vw]">
+				<div
+					class="bg-gradient-to-br from-[#C698FF] to-[#6C80E8] bg-clip-text text-[1.5vw] text-transparent"
+				>
+					+{exp}
+				</div>
+				<svg
+					class="ml-[0.5vw] w-[3.5vw]"
+					viewBox="0 0 1650 792"
+					fill="none"
+					xmlns="http://www.w3.org/2000/svg"
+				>
+					<path
+						d="M720.35 572C716.016 572 713.85 569.833 713.85 565.5V211.5C713.85 207.167 716.016 205 720.35 205H952.35C956.683 205 958.85 207.167 958.85 211.5V262C958.85 266.333 956.683 268.5 952.35 268.5H781.35V352H935.85C940.183 352 942.35 354.167 942.35 358.5V408C942.35 412.333 940.183 414.5 935.85 414.5H781.35V508.5H958.35C962.683 508.5 964.85 510.667 964.85 515V565.5C964.85 569.833 962.683 572 958.35 572H720.35ZM1000.41 572C997.742 572 995.908 571.333 994.908 570C994.242 568.333 994.575 566.333 995.908 564L1111.91 382.5L1003.91 213C1003.24 211 1002.91 209.833 1002.91 209.5C1002.91 208.167 1003.41 207.167 1004.41 206.5C1005.41 205.5 1006.74 205 1008.41 205H1069.91C1072.91 205 1075.41 206.5 1077.41 209.5L1154.91 336L1231.41 209.5C1233.07 206.5 1235.57 205 1238.91 205H1299.91C1302.57 205 1304.24 205.833 1304.91 207.5C1305.91 208.833 1305.74 210.667 1304.41 213L1196.41 382L1312.41 564C1313.07 566 1313.41 567.167 1313.41 567.5C1313.41 568.833 1312.91 570 1311.91 571C1310.91 571.667 1309.57 572 1307.91 572H1246.41C1243.41 572 1240.91 570.5 1238.91 567.5L1153.41 428L1068.91 567.5C1067.57 570.5 1065.07 572 1061.41 572H1000.41ZM1370.74 572C1366.41 572 1364.24 569.833 1364.24 565.5V211.5C1364.24 207.167 1366.41 205 1370.74 205H1481.74C1529.41 205 1565.57 216.167 1590.24 238.5C1614.91 260.5 1627.24 292 1627.24 333C1627.24 374 1614.91 405.667 1590.24 428C1565.57 450 1529.41 461 1481.74 461H1431.74V565.5C1431.74 569.833 1429.57 572 1425.24 572H1370.74ZM1431.74 267.5V398.5H1479.24C1531.24 398.5 1557.24 376.167 1557.24 331.5C1557.24 310.167 1550.57 294.167 1537.24 283.5C1523.91 272.833 1504.57 267.5 1479.24 267.5H1431.74Z"
+						fill="url(#paint0_linear_1176_3107)"
+					/>
+					<path
+						d="M282.85 113.15L0 396L282.85 678.85L565.7 396L282.85 113.15ZM141.425 396L282.85 254.575L424.275 396L282.85 537.425L141.425 396Z"
+						fill="url(#paint1_linear_1176_3107)"
+					/>
+					<defs>
+						<linearGradient
+							id="paint0_linear_1176_3107"
+							x1="664.72"
+							y1="7.4717"
+							x2="1126.64"
+							y2="1028.66"
+							gradientUnits="userSpaceOnUse"
+						>
+							<stop stop-color="#C698FF" />
+							<stop offset="1" stop-color="#6C80E8" />
+						</linearGradient>
+						<linearGradient
+							id="paint1_linear_1176_3107"
+							x1="-5.29141"
+							y1="118.487"
+							x2="368.376"
+							y2="788.842"
+							gradientUnits="userSpaceOnUse"
+						>
+							<stop stop-color="#C698FF" />
+							<stop offset="1" stop-color="#6C80E8" />
+						</linearGradient>
+					</defs>
+				</svg>
+			</div>
+
+			<div
+				class="ml-[2vw] flex flex-row items-center rounded-full bg-[#FFFFFFE5] px-[1vw] py-[0.3vw]"
+			>
+				<div
+					class="bg-gradient-to-t from-[#FFE08F] via-[#E4AE24] to-[#FFE08F] bg-clip-text text-[1.5vw] text-transparent"
+				>
+					+{coin}
+				</div>
+				<svg
+					class="ml-[0.5vw] w-[4vw]"
+					viewBox="0 0 2017 792"
+					fill="none"
+					xmlns="http://www.w3.org/2000/svg"
+				>
+					<path
+						d="M880.85 579C845.183 579 813.85 571.167 786.85 555.5C759.85 539.833 738.85 517.667 723.85 489C709.183 460 701.85 426.5 701.85 388.5C701.85 350.5 709.516 317.167 724.85 288.5C740.183 259.5 761.516 237.167 788.85 221.5C816.183 205.833 847.183 198 881.85 198C920.183 198 952.85 206.667 979.85 224C1006.85 241 1026.52 265.167 1038.85 296.5C1039.18 297.167 1039.35 298.167 1039.35 299.5C1039.35 302.5 1037.85 304.333 1034.85 305L981.35 320L979.35 320.5C976.35 320.5 974.35 319 973.35 316C964.683 299.333 952.516 286.5 936.85 277.5C921.516 268.5 903.516 264 882.85 264C848.183 264 821.016 275.333 801.35 298C781.683 320.333 771.85 350.5 771.85 388.5C771.85 426.5 781.683 456.833 801.35 479.5C821.35 501.833 848.516 513 882.85 513C906.85 513 927.183 507.333 943.85 496C960.85 484.667 973.35 467.667 981.35 445C982.683 441 985.35 439.5 989.35 440.5L1042.35 455.5C1046.35 456.5 1047.85 458.667 1046.85 462C1036.85 497.667 1017.52 526.167 988.85 547.5C960.183 568.5 924.183 579 880.85 579ZM1275.52 579C1240.19 579 1208.35 571.167 1180.02 555.5C1152.02 539.5 1130.02 517.167 1114.02 488.5C1098.35 459.5 1090.52 426.167 1090.52 388.5C1090.52 350.833 1098.35 317.667 1114.02 289C1130.02 260 1152.02 237.667 1180.02 222C1208.35 206 1240.19 198 1275.52 198C1310.85 198 1342.52 206 1370.52 222C1398.85 237.667 1420.85 260 1436.52 289C1452.52 317.667 1460.52 350.833 1460.52 388.5C1460.52 426.167 1452.52 459.5 1436.52 488.5C1420.85 517.167 1398.85 539.5 1370.52 555.5C1342.52 571.167 1310.85 579 1275.52 579ZM1275.52 513C1298.52 513 1318.69 507.667 1336.02 497C1353.69 486.333 1367.19 471.667 1376.52 453C1385.85 434 1390.52 412.5 1390.52 388.5C1390.52 364.5 1385.85 343.167 1376.52 324.5C1367.19 305.5 1353.69 290.667 1336.02 280C1318.69 269.333 1298.52 264 1275.52 264C1252.52 264 1232.19 269.333 1214.52 280C1197.19 290.667 1183.85 305.5 1174.52 324.5C1165.19 343.167 1160.52 364.5 1160.52 388.5C1160.52 412.5 1165.19 434 1174.52 453C1183.85 471.667 1197.19 486.333 1214.52 497C1232.19 507.667 1252.52 513 1275.52 513ZM1534.8 572C1530.47 572 1528.3 569.833 1528.3 565.5V211.5C1528.3 207.167 1530.47 205 1534.8 205H1589.3C1593.64 205 1595.8 207.167 1595.8 211.5V565.5C1595.8 569.833 1593.64 572 1589.3 572H1534.8ZM1682.26 572C1677.93 572 1675.76 569.833 1675.76 565.5V211.5C1675.76 207.167 1677.93 205 1682.26 205H1739.76C1743.1 205 1745.76 206.5 1747.76 209.5L1911.76 463V211.5C1911.76 207.167 1913.93 205 1918.26 205H1970.26C1974.6 205 1976.76 207.167 1976.76 211.5V565.5C1976.76 569.833 1974.6 572 1970.26 572H1913.26C1909.93 572 1907.26 570.5 1905.26 567.5L1740.76 313.5V565.5C1740.76 569.833 1738.6 572 1734.26 572H1682.26Z"
+						fill="url(#paint0_linear_1176_3108)"
+					/>
+					<circle cx="282.85" cy="395.85" r="282.85" fill="url(#paint1_linear_1176_3108)" />
+					<path
+						d="M283.5 490.056H306.889C322.482 490.056 353.667 480.7 353.667 443.278C353.667 405.856 322.482 396.5 306.889 396.5H260.111C244.518 396.5 213.333 387.144 213.333 349.722C213.333 312.3 244.518 302.944 260.111 302.944H283.5M283.5 490.056H213.333M283.5 490.056V536.833M283.5 302.944H353.667M283.5 302.944V256.167M494 396.5C494 512.757 399.757 607 283.5 607C167.244 607 73 512.757 73 396.5C73 280.244 167.244 186 283.5 186C399.757 186 494 280.244 494 396.5Z"
+						stroke="white"
+						stroke-width="20"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+					/>
+					<defs>
+						<linearGradient
+							id="paint0_linear_1176_3108"
+							x1="1345.35"
+							y1="0"
+							x2="1345.35"
+							y2="792"
+							gradientUnits="userSpaceOnUse"
+						>
+							<stop stop-color="#FFE08F" />
+							<stop offset="0.255208" stop-color="#F0C862" />
+							<stop offset="0.494792" stop-color="#E4AE24" />
+							<stop offset="0.755208" stop-color="#F0C862" />
+							<stop offset="1" stop-color="#FFE08F" />
+						</linearGradient>
+						<linearGradient
+							id="paint1_linear_1176_3108"
+							x1="282.85"
+							y1="113"
+							x2="282.85"
+							y2="678.7"
+							gradientUnits="userSpaceOnUse"
+						>
+							<stop stop-color="#FFE08F" />
+							<stop offset="0.255208" stop-color="#F0C862" />
+							<stop offset="0.494792" stop-color="#E4AE24" />
+							<stop offset="0.755208" stop-color="#F0C862" />
+							<stop offset="1" stop-color="#FFE08F" />
+						</linearGradient>
+					</defs>
+				</svg>
+			</div>
+		</div>
+	</div>
+
+	<ReadingContainer class="mx-auto h-[75vh] w-[75vw]" />
+	<!-- <div
 		style="background-image: url('{item.image}');"
 		class="relative bg-cover bg-center w-[100vw] h-[100vh] font-line-seed"
 	>
@@ -74,66 +226,5 @@
 		<div class="whitespace-pre-wrap text-[1.7vw] mt-[5vh]">{item.content}</div>
 	</div>
 
-	<!-- Bottom spacing -->
-	<div class="w-full h-[15vh]" />
+	<div class="w-full h-[15vh]" /> -->
 </div>
-
-<!-- <div class="w-full h-full min-h-[100vh] bg-white">
-	<Header />
-	<div class="w-full h-[100px]" />
-
-	<div class="font-line-seed w-[24vw] fixed top-[23vh] left-[6vw] flex flex-col p-4">
-		<h2 class="text-xl font-bold mb-2">{item.blogName}</h2>
-		<p class="text-gray-600">Topic: {item.topic}</p>
-		<p class="text-gray-600">Date and Time: {item.dateTime}</p>
-		<img class="mt-2 rounded-lg mb-2" src={item.image} alt="Blog" />
-	</div>
-
-	<div class="font-bold w-[32vw] mx-auto px-4 py-4 rounded-xl whitespace-pre-wrap font-line-seed">
-		{item.content}
-	</div>
-
-	<div
-		class="w-[28vw] h-[60vh] top-[24vh] bg-white shadow-md fixed right-[3vw] rounded-3xl font-line-seed text-lg font-bold p-5 flex flex-col overflow-y-auto"
-	>
-		Quiz
-
-		{#each item.quiz as problem, index (index)}
-			<div class="mt-5">
-				{index + 1}. {problem.question}
-
-				<div class="flex flex-row flex-wrap gap-5 mt-3">
-					{#each problem.choices as choice, choiceIndex (choiceIndex)}
-						<button
-							disabled={!!answers}
-							on:click={() => (selected = selected.map((v, i) => (i === index ? choiceIndex : v)))}
-							class={`${
-								answers
-									? choiceIndex === answers[index]
-										? 'bg-green-400'
-										: choiceIndex === selected[index]
-										? 'bg-red-400'
-										: 'bg-[#B6BAFF]'
-									: 'bg-[#B6BAFF]'
-							}  text-start py-1 px-4 rounded-full text-[1vw] text-[#fff] outline-black outline ${
-								selected[index] === choiceIndex ? 'outline-0 bg-[#FFD281]' : 'outline-0'
-							}`}
-						>
-							{String.fromCharCode(choiceIndex + 'A'.charCodeAt(0))}. {choice}
-						</button>
-					{/each}
-				</div>
-			</div>
-		{/each}
-
-		{#if !answers}
-			<button
-				on:click={submit}
-				disabled={selected.some((s) => s === null)}
-				class="mt-7 bg-[#6C80E8] w-fit mx-auto px-5 py-1 rounded-lg shadow-md text-white"
-			>
-				Submit
-			</button>
-		{/if}
-	</div>
-</div> -->

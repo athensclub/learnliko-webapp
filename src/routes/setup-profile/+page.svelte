@@ -18,7 +18,7 @@
 	<div class="flex flex-row items-center">
 		<img src={icon} class="w-[7vw]" alt="Learnliko" />
 
-        <div class="ml-[2vw] text-[2.5vw]">เพิ่มข้อมูลของคุณ</div>
+		<div class="ml-[2vw] text-[2.5vw]">เพิ่มข้อมูลของคุณ</div>
 	</div>
 
 	<input
@@ -35,6 +35,6 @@
 	<button
 		class="mt-[4vw] w-[25vw] rounded-full bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] py-[0.5vw] text-[1.5vw] text-white"
 	>
-    เริ่มเรียน
+		เริ่มเรียน
 	</button>
 </div>

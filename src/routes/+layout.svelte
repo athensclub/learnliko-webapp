@@ -14,9 +14,13 @@
 	import { getCurrentUserProfile } from '$lib/temp/user';
 	import { currentMode } from '$lib/global/mode';
 	import { page } from '$app/stores';
+	import successAudio from '$lib/audios/success_audio.wav';
+	import failAudio from '$lib/audios/fail_audio.wav';
+	import AnswerCorrectToast from '$lib/components/toasts/AnswerCorrectToast.svelte';
+	import ToastManager, { toast } from '$lib/components/toasts/ToastManager.svelte';
 
 	let loading = true;
-
+	
 	const OnAuthStateChanged = async function (user: User | null) {
 		loading = true;
 
@@ -40,14 +44,14 @@
 		userSession.update({ initialized: true });
 		loading = false;
 	};
-
+	
 	onMount(() => {
 		initializeAudioRecording();
 
 		// Subscribe on firebase auth state change
 		auth.onAuthStateChanged(OnAuthStateChanged);
 	});
-
+	
 	$: if (!$showChatbox) {
 		resetRecordingData();
 	}
@@ -67,6 +71,8 @@
 					<Chatbox />
 				</div>
 			{/if}
+
+			<ToastManager />
 
 			{#if !loading}
 				<slot />

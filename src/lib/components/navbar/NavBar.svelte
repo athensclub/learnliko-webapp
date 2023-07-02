@@ -29,8 +29,6 @@
 		$showChatbox = true;
 	};
 
-	$: console.log('profile', $profileImageLocal);
-
 	$: isInProfile = $page.url.pathname.startsWith('/profile');
 </script>
 

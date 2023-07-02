@@ -3,6 +3,8 @@
 	import { readingAnswers, selectedQuizChoices } from '$lib/global/reading';
 	import finishedImage from './reading_quiz_finished_image.png';
 	import type { ReadingViewType } from './ReadingContainer.svelte';
+	import AnswerCorrectToast from '../toasts/AnswerCorrectToast.svelte';
+	import { toast } from '../toasts/ToastManager.svelte';
 
 	let quiz = [
 		{
@@ -18,6 +20,9 @@
 	const submit = () => {
 		// TODO: query actual answer
 		$readingAnswers = [0];
+		
+		// TODO: display actual amount.
+		toast(AnswerCorrectToast, { exp: 25, coin: 100 });
 	};
 </script>
 

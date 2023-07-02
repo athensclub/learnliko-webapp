@@ -1,6 +1,4 @@
 <script lang="ts">
-	import ConversationCard from '$lib/components/ConversationCard.svelte';
-	import ReadingCard from '$lib/components/ReadingCard.svelte';
 	import NavBar from '$lib/components/navbar/NavBar.svelte';
 	import convTaskImage from './coversation_task_image.png';
 	import readingTaskImage from './reading_task_image.png';

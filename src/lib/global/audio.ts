@@ -15,3 +15,10 @@ export const playAudio = (audio: LearnlikoAudio) => {
     });
     sound.play();
 }
+
+export const playAudioURL = (src: string) => {
+    const sound = new Howl({
+        src
+    });
+    sound.play();
+}

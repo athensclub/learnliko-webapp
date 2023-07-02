@@ -1,8 +1,24 @@
 <script lang="ts">
+	import { synthesize } from '$api/tts';
+	import { playAudioURL } from '$lib/global/audio';
 	import type { WritingCardItem } from '$lib/types/writing_card';
+	import { blobToBase64 } from '$lib/utils/io';
+	import { onMount } from 'svelte';
 	import { fade } from 'svelte/transition';
 
 	export let item: WritingCardItem;
+
+	let speeches: string[] | null = null;
+	// TODO: use data from api instead.
+	const loadSpeeches = async () => {
+		const result = [];
+		for (let i = 0; i < item.choices.length; i++) {
+			const val = await synthesize(item.text.map(v => v === null ? item.choices[i] : v).join(' '), 'US', 'FEMALE', 0.7);
+			result.push(await blobToBase64(val));
+		}
+		speeches = result;
+	};
+	onMount(() => loadSpeeches());
 
 	let clazz = '';
 	export { clazz as class };
@@ -11,7 +27,13 @@
 	export let onWrong = () => {};
 
 	let selectedChoice: number | null = null;
-
+	const updateSelectedChoice = () => {
+		if (speeches !== null && selectedChoice !== null) {
+			playAudioURL(speeches[selectedChoice]);
+		}
+	};
+	$: selectedChoice, updateSelectedChoice();
+	
 	/**
 	 * Null -> user has not submitted.
 	 */

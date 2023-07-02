@@ -1,5 +1,8 @@
 <script lang="ts">
 	import WritingCard from '$lib/components/WritingCard.svelte';
+	import AnswerCorrectToast from '$lib/components/toasts/AnswerCorrectToast.svelte';
+	import { toast } from '$lib/components/toasts/ToastManager.svelte';
+	import { playAudio } from '$lib/global/audio';
 	import { fade } from 'svelte/transition';
 
 	export let addProgress: (val: number) => void;
@@ -19,11 +22,19 @@
 
 	const onCorrect = (index: number) => {
 		setTimeout(() => (items[index] = { ...items[index], hide: true }), 5000);
+
+		playAudio('Success');
+		
 		// TODO: add the actual amount.
 		addProgress(1 / 12);
+		
+		// TODO: display actual amount.
+		toast(AnswerCorrectToast, { exp: 25, coin: 100 });
 	};
 	const onWrong = (index: number) => {
 		setTimeout(() => (items[index] = { ...items[index], hide: true }), 5000);
+
+		playAudio('Fail');
 	};
 
 	// TODO: Check for actual finish.

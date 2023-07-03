@@ -2,6 +2,7 @@ import type { CEFRLevel } from "$lib/types/CEFRLevel";
 import type { FlipCardItem } from '$lib/types/flip_card';
 import type { WritingCardItem } from '$lib/types/writing_card';
 import type { ReadingItem } from '$lib/types/reading';
+import type { ConversationCarouselItem } from '$lib/types/conversationData';
 
 export interface LessonCardData {
     topic: string;
@@ -23,6 +24,7 @@ export interface LessonItem extends LessonCardData {
     vocabs: FlipCardItem[];
     writings: WritingCardItem[];
     reading: ReadingItem;
+    conversation: ConversationCarouselItem;
 }
 
 export interface LessonIntro {

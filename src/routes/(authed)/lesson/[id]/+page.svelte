@@ -18,6 +18,10 @@
 	let background: string | null = null;
 	onMount(async () => {
 		item = await getLessonById($page.params.id);
+		$chatContext = {
+			conversation: item.conversation,
+			bot: { emotion: 'neutral' }
+		};
 	});
 
 	let entering = true;
@@ -33,61 +37,6 @@
 
 	let progress = 0;
 	const addProgress = (val: number) => (progress = progress + val);
-
-	$chatContext = {
-		conversation: {
-			background: 'https://i.pinimg.com/originals/41/4a/12/414a12d7d3a3f50ee3c31f7606df0cf0.jpg',
-			image:
-				'https://cdn.discordapp.com/attachments/842737146321174558/1116747283132842105/avatar.png',
-			intro: 'Hi, I’m shopkeeper',
-			topic: 'Welcome to the shop how can I help you?',
-			CEFRlevel: 'A2',
-			details: {
-				intro: 'Welcome to the shop how can I help you?',
-				learner: {
-					mission:
-						'คุณกำลังอยู่ในร้านเครื่องเขียน และคุณต้องซื้อเครื่องเขียนจากพนักงานขายที่ชื่อ Lucy',
-					goal: [
-						'Asking for products available in the shop (สอบถามสินค้าที่ขาย)',
-						'Buy two pens (สั่งซื้อปากกา 2 ด้าม)',
-						'Asking for a product price (สอบถามราคาสินค้าที่ต้องการซื้อ)'
-					],
-					hint: ['Do you have any pens in your shop?', 'I would like to buy a pen', 'Here you are']
-				},
-				bot: {
-					avatar:
-						'https://cdn.discordapp.com/attachments/842737146321174558/1116747283132842105/avatar.png',
-					accent: 'US',
-					gender: 'FEMALE',
-					prompt:
-						'Your role: You are a female stationery shop keeper, you are kind, and friendly. Your name is Lucy. Your Goal: You have to give customer an information about the product available in you store, the sell them to the customer. Answer Format: You have to answer in the JSON format by using to following JSON schema {// your response"message": string,// "neutral", "joy", "trust", "fear", "surprise", "sadness", "disgust", "anger", "anticipation""emotion": string,// the enum value// “NORMAL” used when the situation is normal// “INAPPROPRIATE” used when the situation is out of context or say something inappropriate// “END-OF-CONVERSATION” used when the customer have left or finish purchased your product"status": string} Shop information: There are only pen and pencil available in your store. The pen and pencil is 5฿ and 10฿ each respectively. Your store have only 10 pens, 10 pencils stock in your storage.'
-				}
-			},
-			avatar: {
-				name: 'Lucy',
-				models: {
-					neutral:
-						'https://media.discordapp.net/attachments/1120787872379842711/1122773372732981258/vi_potrait_full_body_3d_avatar_girl_stylize_smile_b891a33b-0f46-4270-9ad8-ecca245d8e9e-removebg.png?width=298&height=655',
-					joy: 'https://media.discordapp.net/attachments/1120787872379842711/1122773372732981258/vi_potrait_full_body_3d_avatar_girl_stylize_smile_b891a33b-0f46-4270-9ad8-ecca245d8e9e-removebg.png?width=298&height=655',
-					trust:
-						'https://media.discordapp.net/attachments/1120787872379842711/1122773372732981258/vi_potrait_full_body_3d_avatar_girl_stylize_smile_b891a33b-0f46-4270-9ad8-ecca245d8e9e-removebg.png?width=298&height=655',
-					fear: 'https://media.discordapp.net/attachments/1120787872379842711/1122773372732981258/vi_potrait_full_body_3d_avatar_girl_stylize_smile_b891a33b-0f46-4270-9ad8-ecca245d8e9e-removebg.png?width=298&height=655',
-					surprise:
-						'https://media.discordapp.net/attachments/1120787872379842711/1122773372732981258/vi_potrait_full_body_3d_avatar_girl_stylize_smile_b891a33b-0f46-4270-9ad8-ecca245d8e9e-removebg.png?width=298&height=655',
-					sadness:
-						'https://media.discordapp.net/attachments/1120787872379842711/1122773372732981258/vi_potrait_full_body_3d_avatar_girl_stylize_smile_b891a33b-0f46-4270-9ad8-ecca245d8e9e-removebg.png?width=298&height=655',
-					disgust:
-						'https://media.discordapp.net/attachments/1120787872379842711/1122773372732981258/vi_potrait_full_body_3d_avatar_girl_stylize_smile_b891a33b-0f46-4270-9ad8-ecca245d8e9e-removebg.png?width=298&height=655',
-					anger:
-						'https://media.discordapp.net/attachments/1120787872379842711/1122773372732981258/vi_potrait_full_body_3d_avatar_girl_stylize_smile_b891a33b-0f46-4270-9ad8-ecca245d8e9e-removebg.png?width=298&height=655',
-					anticipation:
-						'https://media.discordapp.net/attachments/1120787872379842711/1122773372732981258/vi_potrait_full_body_3d_avatar_girl_stylize_smile_b891a33b-0f46-4270-9ad8-ecca245d8e9e-removebg.png?width=298&height=655'
-				}
-			},
-			id: '1'
-		},
-		bot: { emotion: 'neutral' }
-	};
 </script>
 
 <div

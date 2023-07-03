@@ -9,6 +9,16 @@
 	import ReadingView from './ReadingView.svelte';
 	import WritingCardView from './WritingCardView.svelte';
 	import LessonFinishedView from './LessonFinishedView.svelte';
+	import type { LessonItem } from '$lib/types/lesson';
+	import { onMount } from 'svelte';
+	import { page } from '$app/stores';
+	import { getLessonById } from '$api/lesson';
+
+	let item: LessonItem | null = null;
+	let background: string | null = null;
+	onMount(async () => {
+		item = await getLessonById($page.params.id);
+	});
 
 	let entering = true;
 	let playingMusic = true;
@@ -20,10 +30,6 @@
 		| 'READING'
 		| 'CONVERSATION'
 		| 'FINISHED' = 'INTRO';
-	let background =
-		'https://cdn.discordapp.com/attachments/842737146321174558/1123691473804738620/image.png';
-
-	let topic = 'ทำความรู้จักและทักทาย!';
 
 	let progress = 0;
 	const addProgress = (val: number) => (progress = progress + val);
@@ -86,14 +92,14 @@
 
 <div
 	style="background-image: url('{background}');"
-	class="w-[100vw] h-full min-h-[100vh] transition-[background-image] bg-cover bg-center font-line-seed relative flex flex-col"
+	class="relative flex h-full min-h-[100vh] w-[100vw] flex-col bg-cover bg-center font-line-seed transition-[background-image]"
 >
 	<div
-		class="flex flex-row justify-between p-[2vw] bg-gradient-to-t from-transparent via-black/60 to-black/80"
+		class="flex flex-row justify-between bg-gradient-to-t from-transparent via-black/60 to-black/80 p-[2vw]"
 	>
 		<button
 			on:click={() => window.history.back()}
-			class="px-[2vw] py-[1.5vh] flex flex-row bg-white rounded-full"
+			class="flex flex-row rounded-full bg-white px-[2vw] py-[1.5vh]"
 		>
 			<svg class="w-[4.5vw]" viewBox="0 0 78 23" fill="none" xmlns="http://www.w3.org/2000/svg">
 				<g clip-path="url(#clip0_1176_2335)">
@@ -112,15 +118,15 @@
 			</svg>
 		</button>
 
-		<div class="text-white text-[1.7vw] font-bold">{topic}</div>
+		<div class="text-[1.7vw] font-bold text-white">{item && item.topic}</div>
 
 		<button
 			on:click={() => (playingMusic = !playingMusic)}
-			class="px-[1.5vw] py-[1vh] text-[1.35vw] flex flex-row items-center justify-center font-bold bg-white rounded-full"
+			class="flex flex-row items-center justify-center rounded-full bg-white px-[1.5vw] py-[1vh] text-[1.35vw] font-bold"
 		>
 			{#if playingMusic}
 				<svg
-					class="w-[1.5vw] mr-[1vw]"
+					class="mr-[1vw] w-[1.5vw]"
 					viewBox="0 0 25 25"
 					fill="none"
 					xmlns="http://www.w3.org/2000/svg"
@@ -134,7 +140,7 @@
 				</svg>
 			{:else}
 				<svg
-					class="w-[2.05vw] mr-[0.7vw]"
+					class="mr-[0.7vw] w-[2.05vw]"
 					viewBox="0 0 38 38"
 					fill="none"
 					xmlns="http://www.w3.org/2000/svg"
@@ -157,51 +163,53 @@
 		<EnteringLesson onFinish={() => (entering = false)} />
 	{/if}
 
-	{#if currentView === 'INTRO'}
-		<LessonIntros
-			onFinish={() => (currentView = 'FLIP_CARD')}
-			setBackground={(image) => (background = image)}
-			items={[
-				{
-					background:
-						'https://cdn.discordapp.com/attachments/842737146321174558/1123693463087616030/image.png',
-					description:
-						'วันนี้เป็นวันแรกที่คุณเข้าห้องเรียนและรับการเรียนรู้ภาษาอังกฤษกับเพื่อนๆ ในห้องเรียนนี้ คุณพบกับหน้าต่างที่เปิดออกมองเห็นสวนสวย ดอกไม้สีสันสวยงามที่แสนอัศจรรย์ และเสียงนกน้อยที่ร้องเพลงอย่างสดใส'
-				},
-				{
-					background:
-						'https://cdn.discordapp.com/attachments/842737146321174558/1123693852172230666/image.png',
-					description:
-						'คุณนั่งรอในที่นั่งของคุณและเพื่อนๆ เริ่มกันทำความรู้จักใหม่กันอีกครั้ง มีเพื่อนคุณที่ชื่อเอมมี่ที่เป็นคนที่ขี้เล่นและตลกขบขัน ซามาที่เป็นคนที่อัศจรรย์และร่าเริง และมีแอนดี้ที่เป็นคนที่เชื่อใจได้และเป็นกำลังใจให้กับเพื่อนๆ ทุกคน'
-				},
-				{
-					background:
-						'https://cdn.discordapp.com/attachments/842737146321174558/1123691473804738620/image.png',
-					description:
-						'เวลาผ่านไปเร็วมาก เพื่อนๆ ของคุณและคุณต่างก็กำลังเริ่มเรียนรู้ภาษาอังกฤษอย่างเต็มที่ คุณและเพื่อนๆ ของคุณกำลังสนุกกับการเรียนรู้ภาษาอังกฤษด้วยกัน คุณจะได้เรียนรู้คำศัพท์จากสิ่งของในห้องเรียนและสนทนาภาษาอังกฤษกับเพื่อนๆของคุณ'
-				}
-			]}
-		/>
-	{:else if currentView === 'FLIP_CARD'}
-		<FlipCardView {addProgress} onFinish={() => (currentView = 'WRITING_CARD')} />
-	{:else if currentView === 'WRITING_CARD'}
-		<WritingCardView {addProgress} onFinish={() => (currentView = 'READING')} />
-	{:else if currentView === 'READING'}
-		<ReadingView onFinish={() => (currentView = 'CONVERSATION')} />
-	{:else if currentView === 'CONVERSATION'}
-		<LessonConversationView onFinish={() => (currentView = 'FINISHED')} />
-	{:else if currentView === 'FINISHED'}
-		<LessonFinishedView
-			avatar="https://cdn.discordapp.com/attachments/842737146321174558/1124658451738533959/image.png"
-		/>
+	{#if item}
+		{#if currentView === 'INTRO'}
+			<LessonIntros
+				onFinish={() => (currentView = 'FLIP_CARD')}
+				setBackground={(image) => (background = image)}
+				items={item.intro}
+			/>
+		{:else if currentView === 'FLIP_CARD'}
+			<FlipCardView
+				items={item.vocabs}
+				{addProgress}
+				onFinish={() => (currentView = 'WRITING_CARD')}
+			/>
+		{:else if currentView === 'WRITING_CARD'}
+			<WritingCardView
+				items={item.writings}
+				{addProgress}
+				onFinish={() => (currentView = 'READING')}
+			/>
+		{:else if currentView === 'READING'}
+			<ReadingView
+				item={item.reading}
+				onFinish={() => {
+					addProgress(1 / 4);
+					currentView = 'CONVERSATION';
+				}}
+			/>
+		{:else if currentView === 'CONVERSATION'}
+			<LessonConversationView
+				onFinish={() => {
+					addProgress(1 / 4);
+					currentView = 'FINISHED';
+				}}
+			/>
+		{:else if currentView === 'FINISHED'}
+			<LessonFinishedView
+				avatar="https://cdn.discordapp.com/attachments/842737146321174558/1124658451738533959/image.png"
+			/>
+		{/if}
 	{/if}
 
 	{#if currentView != 'INTRO'}
 		<div
 			transition:fade
-			class="absolute left-0 bottom-0 z-[100] w-full bg-[#FFFFFF1A] backdrop-blur-md px-[2vw] py-[2vh]"
+			class="absolute bottom-0 left-0 z-[100] w-full bg-[#FFFFFF1A] px-[2vw] py-[2vh] backdrop-blur-md"
 		>
-			<div class="flex flex-row justify-between text-white font-bold text-[1.3vw]">
+			<div class="flex flex-row justify-between text-[1.3vw] font-bold text-white">
 				<div>รู้จักคำศัพท์</div>
 				<div>รู้จักประโยค</div>
 				<div>อ่านเรื่องราว</div>
@@ -209,10 +217,10 @@
 				<div>จบ</div>
 			</div>
 
-			<div class="w-full h-[1.7vw] bg-white rounded-full mt-[2vh]">
+			<div class="mt-[2vh] h-[1.7vw] w-full rounded-full bg-white">
 				<div
 					style="width: {progress * 100}%;"
-					class="h-full transition-size bg-gradient-to-r rounded-full from-[#6C80E8] to-[#9BA1FD]"
+					class="h-full rounded-full bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] transition-size"
 				/>
 			</div>
 		</div>

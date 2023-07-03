@@ -1,28 +1,26 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
-	import type { ReadingViewType } from './ReadingView.svelte';
+	import type { ReadingViewType } from './ReadingContainer.svelte';
+	import type { ReadingItem } from '$lib/types/reading';
 
-	export let title = 'My family';
-	export let content =
-		"Hi! I'm Andy. I'm 9 years old and this is my family. We live in a small house in the beautiful garden. My father's name is Aaron. He's a teacher. He's 42 years old. My mother's name is Clare. She's a teacher. She's 40. My parents work in a school in the center of town. I have got 2 brother. their names are Sam and Max. Sam is the middle child and max is our little brother. We haven't got a pet.";
-	export let image =
-		'https://cdn.discordapp.com/attachments/842737146321174558/1124045015631528038/image.png';
+	export let item: ReadingItem;
+
 	export let setView: (view: ReadingViewType) => void;
 </script>
 
 <!-- https://github.com/sveltejs/svelte/issues/544#issuecomment-586417387 -->
-<div in:fade={{ delay: 500 }} out:fade class="w-full h-full flex flex-row gap-[2vw]">
-	<img class="max-w-[50%] max-h-full" src={image} alt={title} />
+<div in:fade={{ delay: 500 }} out:fade class="flex h-full w-full flex-row gap-[2vw]">
+	<img class="max-h-full max-w-[50%]" src={item.image} alt={item.blogName} />
 
-	<div class="flex-1 h-full overflow-y-auto flex flex-col font-bold relative">
-		<div class="text-[2vw]">{title}</div>
-		<div class="text-[1.2vw] mt-[2vw]">{content}</div>
+	<div class="relative flex h-full flex-1 flex-col overflow-y-auto font-bold">
+		<div class="text-[2vw]">{item.blogName}</div>
+		<div class="mt-[2vw] text-[1.2vw]">{item.content}</div>
 
 		<button
-			class="absolute top-0 right-0 px-[1vw] py-[0.5vw] border border-black flex flex-row items-center rounded-full text-[1.2vw]"
+			class="absolute right-0 top-0 flex flex-row items-center rounded-full border border-black px-[1vw] py-[0.5vw] text-[1.2vw]"
 		>
 			<svg
-				class="w-[1vw] mr-[0.6vw]"
+				class="mr-[0.6vw] w-[1vw]"
 				viewBox="0 0 9 9"
 				fill="none"
 				xmlns="http://www.w3.org/2000/svg"
@@ -46,7 +44,7 @@
 
 		<button
 			on:click={() => setView('QUIZ')}
-			class="absolute right-0 bottom-0 px-[1vw] py-[0.5vw] border border-black flex flex-row items-center rounded-full text-[1.2vw]"
+			class="absolute bottom-0 right-0 flex flex-row items-center rounded-full border border-black px-[1vw] py-[0.5vw] text-[1.2vw]"
 		>
 			? คำถาม
 		</button>

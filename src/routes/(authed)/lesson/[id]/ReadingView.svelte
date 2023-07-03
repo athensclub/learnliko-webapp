@@ -1,13 +1,16 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
 	import ReadingContainer from '$lib/components/reading/ReadingContainer.svelte';
+	import type { ReadingItem } from '$lib/types/reading';
+
+	export let item: ReadingItem;
 
 	export let onFinish: () => void;
 </script>
 
 <div
 	transition:fade
-	class="absolute w-full h-full flex items-center justify-center overflow-hidden pointer-events-none"
+	class="pointer-events-none absolute flex h-full w-full items-center justify-center overflow-hidden"
 >
-	<ReadingContainer class="w-[60vw] h-[30vw]" {onFinish} />
+	<ReadingContainer {item} class="h-[30vw] w-[60vw]" {onFinish} />
 </div>

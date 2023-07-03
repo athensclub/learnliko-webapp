@@ -3,34 +3,13 @@
 	import AnswerCorrectToast from '$lib/components/toasts/AnswerCorrectToast.svelte';
 	import { toast } from '$lib/components/toasts/ToastManager.svelte';
 	import { playAudio } from '$lib/global/audio';
+	import type { FlipCardItem } from '$lib/types/flip_card';
 	import { fade } from 'svelte/transition';
 
 	export let addProgress: (val: number) => void;
 	export let onFinish: () => void;
 
-	let items: { image: string; choices: string[]; coin: number; exp: number; hide?: boolean }[] = [
-		{
-			image:
-				'https://cdn.discordapp.com/attachments/842737146321174558/1123927173087109120/image.png',
-			choices: ['A dog', 'A cat', 'An ant', 'An elephant'],
-			coin: 100,
-			exp: 25
-		},
-		{
-			image:
-				'https://cdn.discordapp.com/attachments/842737146321174558/1123927173087109120/image.png',
-			choices: ['A dog', 'A cat', 'An ant', 'An elephant'],
-			coin: 100,
-			exp: 25
-		},
-		{
-			image:
-				'https://cdn.discordapp.com/attachments/842737146321174558/1123927173087109120/image.png',
-			choices: ['A dog', 'A cat', 'An ant', 'An elephant'],
-			coin: 100,
-			exp: 25
-		}
-	];
+	export let items: (FlipCardItem & {hide?: boolean})[];
 
 	const onCorrect = (index: number) => {
 		setTimeout(() => (items[index] = { ...items[index], hide: true }), 5000);
@@ -45,6 +24,9 @@
 	};
 	const onWrong = (index: number) => {
 		setTimeout(() => (items[index] = { ...items[index], hide: true }), 5000);
+
+		// TODO: add the actual amount.
+		addProgress(1 / 12);
 
 		playAudio('Fail');
 	};

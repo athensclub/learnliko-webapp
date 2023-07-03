@@ -5,21 +5,17 @@
 	import type { ReadingViewType } from './ReadingContainer.svelte';
 	import AnswerCorrectToast from '../toasts/AnswerCorrectToast.svelte';
 	import { toast } from '../toasts/ToastManager.svelte';
+	import type { MultipleChoicesQuestion } from '$lib/types/reading';
 
-	let quiz = [
-		{
-			question: 'พ่อของ Andy ทำงานอะไร?',
-			choices: ['Teacher', 'Doctor', 'Police', 'Soldier']
-		}
-	];
+	export let quiz: MultipleChoicesQuestion[];;
 
 	export let setView: (view: ReadingViewType) => void;
 	export let onFinish: () => void;
 
 	$: submittable = $selectedQuizChoices.every((val) => val !== null);
 	const submit = () => {
-		// TODO: query actual answer
-		$readingAnswers = [0];
+		// TODO: implement better way of showing answer (this is very cheese)
+		$readingAnswers = quiz.map(q => q.answer);
 		
 		// TODO: display actual amount.
 		toast(AnswerCorrectToast, { exp: 25, coin: 100 });

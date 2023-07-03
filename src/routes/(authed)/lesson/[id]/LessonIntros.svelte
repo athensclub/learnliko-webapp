@@ -1,10 +1,10 @@
 <script lang="ts">
-	import type { LessonIntroItem } from '$lib/types/lesson';
+	import type { LessonIntro } from '$lib/types/lesson';
 	import { fade } from 'svelte/transition';
 
 	export let setBackground: (image: string) => void;
 	export let onFinish: () => void;
-	export let items: LessonIntroItem[];
+	export let items: LessonIntro[];
 
 	let currentItem = 0;
 	const nextItem = () => {

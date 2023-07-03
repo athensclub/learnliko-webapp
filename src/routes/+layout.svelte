@@ -18,9 +18,11 @@
 	import failAudio from '$lib/audios/fail_audio.wav';
 	import AnswerCorrectToast from '$lib/components/toasts/AnswerCorrectToast.svelte';
 	import ToastManager, { toast } from '$lib/components/toasts/ToastManager.svelte';
+	import { setContextClient } from '@urql/svelte';
+	import { graphqlClient } from '$lib/graphql';
 
 	let loading = true;
-	
+
 	const OnAuthStateChanged = async function (user: User | null) {
 		loading = true;
 
@@ -44,28 +46,31 @@
 		userSession.update({ initialized: true });
 		loading = false;
 	};
-	
+
 	onMount(() => {
 		initializeAudioRecording();
+
+		// Setup urql client
+		setContextClient(graphqlClient);
 
 		// Subscribe on firebase auth state change
 		auth.onAuthStateChanged(OnAuthStateChanged);
 	});
-	
+
 	$: if (!$showChatbox) {
 		resetRecordingData();
 	}
 </script>
 
-<div class="w-full max-w-[100vw] h-full overflow-x-hidden">
+<div class="h-full w-full max-w-[100vw] overflow-x-hidden">
 	{#if browser}
 		<Modal>
 			{#if $showChatbox}
 				<div
 					class={`fixed ${
 						$isMobile
-							? `w-[100vw] h-[65vh] bottom-0`
-							: 'w-[37vw] h-[85vh] bottom-0 left-[50%] translate-x-[-50%]'
+							? `bottom-0 h-[65vh] w-[100vw]`
+							: 'bottom-0 left-[50%] h-[85vh] w-[37vw] translate-x-[-50%]'
 					} z-[600]`}
 				>
 					<Chatbox />

@@ -3,22 +3,13 @@
 	import AnswerCorrectToast from '$lib/components/toasts/AnswerCorrectToast.svelte';
 	import { toast } from '$lib/components/toasts/ToastManager.svelte';
 	import { playAudio } from '$lib/global/audio';
+	import type { WritingCardItem } from '$lib/types/writing_card';
 	import { fade } from 'svelte/transition';
 
 	export let addProgress: (val: number) => void;
 	export let onFinish: () => void;
 
-	let items: {
-		text: (string | null)[];
-		choices: string[];
-		coin: number;
-		exp: number;
-		hide?: boolean;
-	}[] = [
-		{ text: ['I', null, 'a student'], choices: ['is', 'am', 'are', '-'], coin: 100, exp: 25 },
-		{ text: ['I', null, 'a student'], choices: ['is', 'am', 'are', '-'], coin: 100, exp: 25 },
-		{ text: ['I', null, 'a student'], choices: ['is', 'am', 'are', '-'], coin: 100, exp: 25 }
-	];
+	export let items: (WritingCardItem & {hide?: boolean})[];
 
 	const onCorrect = (index: number) => {
 		setTimeout(() => (items[index] = { ...items[index], hide: true }), 5000);

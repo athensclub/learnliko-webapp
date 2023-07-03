@@ -18,7 +18,6 @@
 			result.push(await blobToBase64(val));
 		}
 		speeches = result;
-		console.log('speeches finished');
 	};
 	onMount(() => loadSpeeches());
 

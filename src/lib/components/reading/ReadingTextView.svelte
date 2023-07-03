@@ -2,8 +2,21 @@
 	import { fade } from 'svelte/transition';
 	import type { ReadingViewType } from './ReadingContainer.svelte';
 	import type { ReadingItem } from '$lib/types/reading';
+	import { synthesize } from '$api/tts';
+	import { blobToBase64 } from '$lib/utils/io';
+	import { onMount } from 'svelte';
+	import { playAudioURL } from '$lib/global/audio';
 
 	export let item: ReadingItem;
+
+	let speech: string | null = null;
+	// TODO: use data from api instead.
+	const loadSpeech = async () => {
+		const val = await synthesize(item.content, 'US', 'FEMALE', 0.7);
+		speech = await blobToBase64(val);
+		console.log("finish tts")
+	};
+	onMount(() => loadSpeech());
 
 	export let setView: (view: ReadingViewType) => void;
 </script>
@@ -17,6 +30,9 @@
 		<div class="mt-[2vw] text-[1.2vw]">{item.content}</div>
 
 		<button
+			on:click={() => {
+				speech && playAudioURL(speech);
+			}}
 			class="absolute right-0 top-0 flex flex-row items-center rounded-full border border-black px-[1vw] py-[0.5vw] text-[1.2vw]"
 		>
 			<svg

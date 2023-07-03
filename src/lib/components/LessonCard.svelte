@@ -1,10 +1,22 @@
 <script lang="ts">
+	import { synthesize } from '$api/tts';
+	import { playAudioURL } from '$lib/global/audio';
 	import { isMobile } from '$lib/global/breakpoints';
 	import type { LessonCardData } from '$lib/types/lesson';
+	import { blobToBase64 } from '$lib/utils/io';
+	import { onMount } from 'svelte';
 	import Typewriter from 'svelte-typewriter/Typewriter.svelte';
 
 	export let item: LessonCardData;
 	export let scale = 1;
+
+	let speech: string | null = null;
+	// TODO: use data from api instead.
+	const loadSpeech = async () => {
+		const val = await synthesize(item.avatarIntro, 'US', 'FEMALE', 0.7);
+		speech = await blobToBase64(val);
+	};
+	onMount(() => loadSpeech());
 
 	let clazz = '';
 	export { clazz as class };
@@ -13,17 +25,17 @@
 <!-- Specify the size(width, height) of the card in the user of the component, not in the component itself. -->
 <div
 	style="background-image: url('{item.background}');"
-	class={`relative overflow-hidden flex flex-col  justify-between shadow-2xl bg-center bg-cover ${
+	class={`relative flex flex-col justify-between  overflow-hidden bg-cover bg-center shadow-2xl ${
 		$isMobile ? 'rounded-[6vw]' : 'rounded-[2vw]'
 	} ${clazz}`}
 >
 	<a
 		href="/lesson/{item.id}"
 		style="padding: {scale * 2}vw;"
-		class="w-full bg-[#0000008C] backdrop-blur-sm flex flex-col texgt-white text-white font-bold relative"
+		class="texgt-white relative flex w-full flex-col bg-[#0000008C] font-bold text-white backdrop-blur-sm"
 	>
 		<svg
-			class="absolute top-[2vw] right-[2vw] w-[7%]"
+			class="absolute right-[2vw] top-[2vw] w-[7%]"
 			viewBox="0 0 39 32"
 			fill="none"
 			xmlns="http://www.w3.org/2000/svg"
@@ -47,13 +59,13 @@
 			{item.description}
 		</div>
 
-		<div style="font-size: {scale * 1}vw;" class="flex flex-row gap-[1vw] mt-[2vh]">
+		<div style="font-size: {scale * 1}vw;" class="mt-[2vh] flex flex-row gap-[1vw]">
 			<div
 				style="padding-left: {scale * 2}vw; 
 					padding-right: {scale * 2}vw;
 				 	padding-top: {scale * 1}vh;
 				  	padding-bottom: {scale * 1}vh;"
-				class="text-center rounded-full bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD]"
+				class="rounded-full bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] text-center"
 			>
 				{item.level}
 			</div>
@@ -63,10 +75,10 @@
 					padding-right: {scale * 1}vw;
 				 	padding-top: {scale * 1}vh;
 				  	padding-bottom: {scale * 1}vh;"
-				class="bg-white rounded-full"
+				class="rounded-full bg-white"
 			>
 				<div
-					class="flex flex-row text-transparent bg-clip-text bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD]"
+					class="flex flex-row bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] bg-clip-text text-transparent"
 				>
 					+{item.exp}
 					<svg
@@ -114,25 +126,30 @@
 
 		<div
 			style="height: {scale * 1.35}vw;"
-			class="mt-[2vh] w-full rounded-full bg-[#FFFFFF29] overflow-hidden"
+			class="mt-[2vh] w-full overflow-hidden rounded-full bg-[#FFFFFF29]"
 		>
 			<div
 				style="width: {item.progress * 100}%;"
-				class="h-full bg-gradient-to-r rounded-full from-[#6C80E8] to-[#9BA1FD]"
+				class="h-full rounded-full bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD]"
 			/>
 		</div>
 	</a>
 
-	<div class="flex flex-row items-center h-[50%]">
-		<div class="flex flex-col h-full justify-end ml-[5%] animate-slideInLeft">
+	<div class="flex h-[50%] flex-row items-center">
+		<div class="ml-[5%] flex h-full animate-slideInLeft flex-col justify-end">
 			<img class="max-h-full" src={item.avatar} alt="Avatar" />
 		</div>
 
 		<div
-		style="font-size: {scale*1}vw; padding: {scale*1}vw;"
-			class="relative right-[7%] bottom-[30%] h-fit rounded-[2vw] animate-wiggle rounded-bl-none bg-white font-bold"
+			style="font-size: {scale * 1}vw; padding: {scale * 1}vw;"
+			class="relative bottom-[30%] right-[7%] h-fit animate-wiggle rounded-[2vw] rounded-bl-none bg-white font-bold"
 		>
-			<div class="animate-pulse cursor-pointer"><Typewriter>{item.avatarIntro}🔉</Typewriter></div>
+			<button
+				on:click={() => {
+					speech && playAudioURL(speech);
+				}}
+				class="animate-pulse"><Typewriter>{item.avatarIntro}🔉</Typewriter></button
+			>
 		</div>
 	</div>
 </div>

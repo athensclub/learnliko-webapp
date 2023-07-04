@@ -6,6 +6,7 @@ export default {
 		extend: {
 			transitionProperty: {
 				size: 'width, height',
+				position: 'left, right, top, bottom',
 				font: 'font'
 			},
 			boxShadow: {
@@ -13,12 +14,18 @@ export default {
 			},
 			keyframes: {
 				wiggle: {
-				  '0%, 100%': { transform: 'rotate(-3deg)' },
-				  '50%': { transform: 'rotate(3deg)' },
-				}
+				  '0%, 100%': { transform: 'rotate(0deg)' },
+				  '50%': { transform: 'rotate(15deg)' },
+				},
+				slideInLeft: {
+					'0%': { transform: 'translateX(-100%)' },
+					'100%': { transform: 'translateX(0)' },
+				  }
 			  },
 			  animation: {
 				wiggle: 'wiggle 1s ease-in-out forwards',
+				slideInLeft: 'slideInLeft 1s ease-in-out forwards',
+				
 			  }
 		}
 	},

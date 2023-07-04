@@ -14,8 +14,11 @@
 	export let playColor = 'white';
 	export let pauseColor = 'white';
 
+	export let playbackRate = 1;
+
 	let clazz = '';
 	export { clazz as class };
+	export let style = '';
 
 	let player: HTMLAudioElement | null = null;
 	let currentTime: number;
@@ -103,7 +106,8 @@
 		}
 	};
 	$: if (!Number.isFinite(duration)) {
-		fixDuration();
+		// fix duration when player is bind
+		player, fixDuration();
 	}
 
 	// https://stackoverflow.com/a/1322771
@@ -112,7 +116,7 @@
 		: '00:00';
 </script>
 
-<div class={`flex flex-row items-center px-5 py-1 gap-3 ${clazz}`}>
+<div {style} class={`flex flex-row items-center px-5 py-1 gap-3 ${clazz}`}>
 	<button on:click={togglePlaying} class="h-[50%] flex">
 		{#if playing}
 			<svg
@@ -160,12 +164,12 @@
 			/>
 		{/each}
 
-		<div class=" bg-white rounded-full px-2 text-[0.8vw] ml-2">
+		<div class="bg-white text-black rounded-full px-2 text-[0.8vw] ml-2">
 			{timeText}
 		</div>
 	</div>
 
-	<audio bind:duration bind:currentTime bind:this={player}>
+	<audio bind:playbackRate bind:duration bind:currentTime bind:this={player}>
 		<source {src} {type} />
 		Your browser does not support the audio element.
 	</audio>

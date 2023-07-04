@@ -5,4 +5,5 @@ export type SynthesizeRequestBody = {
     languageCode: string;
     voiceName: string;
     ssmlGender: "SSML_VOICE_GENDER_UNSPECIFIED" | "MALE" | "FEMALE" | "NEUTRAL" | google.cloud.texttospeech.v1.SsmlVoiceGender;
+    speakingRate?: number;
 };

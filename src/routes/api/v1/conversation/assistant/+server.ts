@@ -1,4 +1,4 @@
-import { assistantChatCompletion } from '$lib/server/openai/langchain';
+import { assistantChatCompletion } from '$lib/server/openai';
 import type { RequestHandler } from './$types';
 import { error, json } from '@sveltejs/kit';
 

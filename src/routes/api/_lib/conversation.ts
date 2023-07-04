@@ -35,15 +35,48 @@ export const assistantChat = async function (
 		method: 'POST',
 		body: JSON.stringify({ messages })
 	});
-	if (!response.body) throw new Error('No response from chat bot');
+	if (!response.body) throw new Error('No response body from chat bot');
 
 	const reader = response.body.pipeThrough(new TextDecoderStream()).getReader();
+	let temp = '';
 	while (true) {
 		const { value, done } = await reader.read();
 		if (done) break;
-		callback(value);
+
+		let lines: string[];
+		if (temp.length === 0) {
+			lines = value.split("\n");
+		} else {
+			lines = (temp + value).split("\n");
+			temp = ''; // can reset now because if it fail again, old temp will be present in lines already.
+		}
+
+		let toBreak = false;
+		for (const line of lines) {
+			const str = line.substring(5).trim();
+			if (line.length === 0) continue;
+			if (str === '[DONE]') {
+				toBreak = true;
+				break;
+			}
+
+			try {
+				const obj = JSON.parse(str);
+				const content = obj.choices[0].delta.content;
+				if (content)
+					callback(obj.choices[0].delta.content);
+			} catch (e) {
+				// fail JSON parse, data has not be received fully, save in temp and wait for next iteration.
+				// use line variable so that in next iteration, the first 5 characters will be preserved
+				// and be substring-ed safely.
+				temp += line;
+			}
+		}
+
+		if (toBreak) break;
 	}
-};
+}
+
 
 export const analyzeDialog = async function (assistant: string, user: string) {
 	const prompt: ChatMessage[] = [];

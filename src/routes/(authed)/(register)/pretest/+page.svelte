@@ -25,9 +25,13 @@
 	import Typewriter from 'svelte-typewriter/Typewriter.svelte';
 	import { analyzeDialog, checkGoalProgress } from '$api/conversation';
 	import { nextLevel, nextPretestLevel, previousPretestLevel } from '$lib/utils/cefr';
-	import { createUserAccount, getCurrentUserProfile } from '$lib/temp/user';
+	import {
+		getCurrentUserProfile,
+		setupCurrentUserAccount
+	} from '$lib/temp/user';
 	import PretestFinishedModal from '$lib/components/modals/PretestFinishedModal.svelte';
 	import userSession from '$lib/stores/userSession';
+	import setupAccountInput from '../setupAccountInputStore';
 
 	const GROUP_COUNT = 4;
 	const QUESTIONS_PER_GROUP = 7;
@@ -67,15 +71,12 @@
 			// finish pretest
 			if (currentGroup + 1 >= GROUP_COUNT) {
 				if (currentScore < 80) currentLevel = previousPretestLevel(currentLevel);
-				await createUserAccount({
-					CEFRLevel: {
-						general: currentLevel,
-						communication: currentLevel,
-						grammar: currentLevel,
-						vocabulary: currentLevel
-					},
-					mode: 'Student'
-				});
+				await setupCurrentUserAccount(
+					currentLevel,
+					$setupAccountInput.firstname!,
+					$setupAccountInput.lastname!
+				);
+		
 				const profileData = await getCurrentUserProfile();
 				userSession.update({ profile: profileData });
 
@@ -143,25 +144,25 @@
 	$: $conversationFinished, updateConversationFinished();
 </script>
 
-<div class="w-full h-full min-h-[100vh] bg-[#F4F4F4] flex flex-col font-line-seed">
+<div class="flex h-full min-h-[100vh] w-full flex-col bg-[#F4F4F4] font-line-seed">
 	<div
-		class={`w-full flex flex-row gap-[4vw] justify-between items-center fixed top-0 left-0 bg-white px-[2vw] ${
+		class={`fixed left-0 top-0 flex w-full flex-row items-center justify-between gap-[4vw] bg-white px-[2vw] ${
 			$isMobile ? 'h-[13vw]' : ' h-[5.5vw]'
 		}`}
 	>
 		<div
-			class={`flex flex-row h-full font-extrabold items-center ${
+			class={`flex h-full flex-row items-center font-extrabold ${
 				$isMobile ? 'text-[4vw]' : 'text-[2vw]'
 			}`}
 		>
-			<img class="h-[60%] object-contain mr-[2vw]" src={icon} alt="Learnliko" />
+			<img class="mr-[2vw] h-[60%] object-contain" src={icon} alt="Learnliko" />
 			Pre-test
 		</div>
 
-		<div class="flex-1 h-[60%] rounded-full bg-[#F4F4F4] overflow-hidden">
+		<div class="h-[60%] flex-1 overflow-hidden rounded-full bg-[#F4F4F4]">
 			<div
 				style="width: {(currentItem / TOTAL_QUESTIONS) * 100}%;"
-				class="h-full bg-gradient-to-r from-[#C698FF] to-[#FFD281] rounded-full transition-size"
+				class="h-full rounded-full bg-gradient-to-r from-[#C698FF] to-[#FFD281] transition-size"
 			/>
 		</div>
 	</div>
@@ -170,22 +171,22 @@
 	<div class={`w-full ${$isMobile ? 'h-[9vh]' : 'h-[18vh]'}`} />
 
 	{#if item?.conversation}
-		<div class={`font-bold mx-auto ${$isMobile ? 'text-[6vw]' : 'text-[1.75vw]'}`}>
+		<div class={`mx-auto font-bold ${$isMobile ? 'text-[6vw]' : 'text-[1.75vw]'}`}>
 			ฟังสิ่งที่เพื่อนเอไอถามและตอบคำถาม
 		</div>
 
 		<div
-			class={`mx-auto relative ${
-				$isMobile ? 'w-[90vw] h-[80vh] mt-[2vh]' : 'w-[50vw] h-[60vh] mt-[6vh]'
+			class={`relative mx-auto ${
+				$isMobile ? 'mt-[2vh] h-[80vh] w-[90vw]' : 'mt-[6vh] h-[60vh] w-[50vw]'
 			}`}
 		>
 			<ConversationView
-				class="bg-white rounded-[2vw] px-[6vw]"
+				class="rounded-[2vw] bg-white px-[6vw]"
 				initializingClass="bg-white"
 				finishButtonClass="border-black"
 				recorderClass={`bg-[#6C80E8] ${$isMobile ? 'w-[90%]' : 'w-[60%]'}`}
 			>
-				<div slot="finished" class="w-full text-center flex flex-col mt-4 items-center font-bold">
+				<div slot="finished" class="mt-4 flex w-full flex-col items-center text-center font-bold">
 					{#if calculatingConversationScore}
 						<div class="flex flex-row">
 							Loading<Typewriter mode="loop">...</Typewriter>
@@ -195,7 +196,7 @@
 
 						<button
 							on:click={nextItem}
-							class={`mt-3 rounded-lg w-fit border font-normal text-base mr-4 px-4 py-1`}
+							class={`mr-4 mt-3 w-fit rounded-lg border px-4 py-1 text-base font-normal`}
 						>
 							Finish!
 						</button>
@@ -204,19 +205,19 @@
 			</ConversationView>
 		</div>
 	{:else if item?.imageMatching}
-		<div class={`font-bold mx-auto ${$isMobile ? 'text-[6vw]' : 'text-[1.75vw]'}`}>
+		<div class={`mx-auto font-bold ${$isMobile ? 'text-[6vw]' : 'text-[1.75vw]'}`}>
 			เลือกคำศัพท์ที่ตรงกับรูปภาพ
 		</div>
 
 		<ImageMatchingQuizView submit={submitAnswer} item={item.imageMatching} />
 	{:else if item?.fillInTheBlank}
-		<div class={`font-bold mx-auto ${$isMobile ? 'text-[6vw]' : 'text-[1.75vw]'}`}>
+		<div class={`mx-auto font-bold ${$isMobile ? 'text-[6vw]' : 'text-[1.75vw]'}`}>
 			เติมคำในช่องว่าง
 		</div>
 
 		<FillInTheBlankQuizView submit={submitAnswer} item={item.fillInTheBlank} />
 	{:else}
-		<div class="flex flex-row mx-auto text-[2.5vw]">
+		<div class="mx-auto flex flex-row text-[2.5vw]">
 			Loading. Please wait<Typewriter mode="loop">...</Typewriter>
 		</div>
 	{/if}

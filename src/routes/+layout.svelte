@@ -1,7 +1,7 @@
 <script lang="ts">
 	import '../app.scss';
 	import Chatbox from '$lib/components/chatbox/Chatbox.svelte';
-	import { currentChatboxView, showChatbox } from '$lib/global/chatbox';
+	import { showChatbox } from '$lib/global/chatbox';
 	import { onMount } from 'svelte';
 	import { initializeAudioRecording, resetRecordingData } from '$lib/global/recording';
 	import Modal from 'svelte-simple-modal';
@@ -10,16 +10,11 @@
 	import { auth } from '$lib/configs/firebase.config';
 	import type { User } from 'firebase/auth';
 	import userSession from '$lib/stores/userSession';
-	import { goto } from '$app/navigation';
 	import { getCurrentUserProfile } from '$lib/temp/user';
 	import { currentMode } from '$lib/global/mode';
-	import { page } from '$app/stores';
-	import successAudio from '$lib/audios/success_audio.wav';
-	import failAudio from '$lib/audios/fail_audio.wav';
-	import AnswerCorrectToast from '$lib/components/toasts/AnswerCorrectToast.svelte';
-	import ToastManager, { toast } from '$lib/components/toasts/ToastManager.svelte';
-	import { setContextClient } from '@urql/svelte';
+	import ToastManager from '$lib/components/toasts/ToastManager.svelte';
 	import { graphqlClient } from '$lib/graphql';
+	import { setContextClient } from '@urql/svelte';
 
 	let loading = true;
 
@@ -47,11 +42,11 @@
 		loading = false;
 	};
 
+	// Setup urql client
+	setContextClient(graphqlClient);
+
 	onMount(() => {
 		initializeAudioRecording();
-
-		// Setup urql client
-		setContextClient(graphqlClient);
 
 		// Subscribe on firebase auth state change
 		auth.onAuthStateChanged(OnAuthStateChanged);

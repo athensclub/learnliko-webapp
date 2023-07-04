@@ -193,7 +193,7 @@
 			}`}
 		>
 			{#each items as item (item.id)}
-				<LessonCard {item} class="mx-auto mt-[calc(50vh-19vw)] h-[38vw] w-[27vw] snap-center" />
+				<LessonCard {item} class="mx-auto mt-[calc(48vh-19vw)] h-[38vw] w-[27vw] snap-center" />
 			{/each}
 		</div>
 	</div>

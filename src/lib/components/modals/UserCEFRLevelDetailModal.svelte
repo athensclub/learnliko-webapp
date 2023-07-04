@@ -1,17 +1,27 @@
 <script lang="ts">
+	import { LanguageLevel } from '$gql/graphql';
 	import userSession from '$lib/stores/userSession';
 	import CEFRLevelItem from './CEFRLevelItem.svelte';
 </script>
 
-<div class="w-full bg-transparent px-[5vw] font-line-seed flex flex-col gap-[3vh]">
-	{#if $userSession.profile}
+<div class="flex w-full flex-col gap-[3vh] bg-transparent px-[5vw] font-line-seed">
+	{#if $userSession.accountData}
 		<CEFRLevelItem
 			title="General Level"
-			level={$userSession.profile.CEFRLevel.general}
+			level={$userSession.accountData.languageLevel?.overall.level ?? LanguageLevel.PreA1}
 			textScale={1.2}
 		/>
-		<CEFRLevelItem title="Grammar" level={$userSession.profile.CEFRLevel.grammar} />
-		<CEFRLevelItem title="Vocabulary" level={$userSession.profile.CEFRLevel.vocabulary} />
-		<CEFRLevelItem title="Communication" level={$userSession.profile.CEFRLevel.communication} />
+		<CEFRLevelItem
+			title="Grammar"
+			level={$userSession.accountData.languageLevel?.grammar.level ?? LanguageLevel.PreA1}
+		/>
+		<CEFRLevelItem
+			title="Vocabulary"
+			level={$userSession.accountData.languageLevel?.vocabulary.level ?? LanguageLevel.PreA1}
+		/>
+		<CEFRLevelItem
+			title="Communication"
+			level={$userSession.accountData.languageLevel?.communication.level ?? LanguageLevel.PreA1}
+		/>
 	{/if}
 </div>

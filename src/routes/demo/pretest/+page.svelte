@@ -25,7 +25,7 @@
 	import Typewriter from 'svelte-typewriter/Typewriter.svelte';
 	import { analyzeDialog, checkGoalProgress } from '$api/conversation';
 	import { nextLevel, nextPretestLevel, previousPretestLevel } from '$lib/utils/cefr';
-	import { createUserAccount, getCurrentUserProfile } from '$lib/temp/user';
+	import { createUserAccount, getCurrentUserData } from '$lib/temp/user';
 	import PretestFinishedModal from '$lib/components/modals/PretestFinishedModal.svelte';
 	import userSession from '$lib/stores/userSession';
 
@@ -76,8 +76,8 @@
 					},
 					mode: 'Student'
 				});
-				const profileData = await getCurrentUserProfile();
-				userSession.update({ profile: profileData });
+				const profileData = await getCurrentUserData();
+				userSession.update({ accountData: profileData });
 
 				open(
 					PretestFinishedModal,

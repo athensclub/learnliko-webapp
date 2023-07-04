@@ -1,3 +1,4 @@
+import type { User } from '$gql/graphql';
 import { auth, firestore } from '$lib/configs/firebase.config';
 import type { PretestCEFRLevel } from '$lib/types/pretest';
 import type { UserProfile } from '$lib/types/userProfile';
@@ -10,7 +11,7 @@ export const createUserAccount = async function (data: UserProfile) {
 	await setDoc(userDocRef, data);
 };
 
-export const getCurrentUserProfile = async function () {
+export const getCurrentUserData = async function () {
 	const uid = _safeGetUID();
 
 	const userDocRef = doc(firestore, `Users/${uid}`);
@@ -19,7 +20,7 @@ export const getCurrentUserProfile = async function () {
 	// return null if user doesn't exist/complete setup
 	if (!userDoc.exists() || !userDoc.data().profile) return;
 
-	return userDoc.data().profile as UserProfile;
+	return userDoc.data() as User;
 };
 
 // TODO: Implement GraphQL API instead

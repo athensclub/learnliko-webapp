@@ -15,7 +15,7 @@
 			}
 
 			// navigate to discover if user is logged in and has profile
-			if (session.isLoggedIn && session.profile) goto(`/discover`);
+			if (session.isLoggedIn && session.accountData?.profile) goto(`/discover`);
 
 			loading = false;
 		});

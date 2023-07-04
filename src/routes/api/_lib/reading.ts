@@ -6,34 +6,44 @@ import { currentMode } from '$lib/global/mode';
 import userSession from '$lib/stores/userSession';
 
 export const getReadingTopics = async (): Promise<string[]> => {
-	const profile = get(userSession).profile;
-	if (!profile)
-		throw Error("Please login and finish creaintg profile before querying reading items.")
-	const result = await fetch('/api/v1/reading/topics?' + new URLSearchParams({ mode: get(currentMode), level: profile.CEFRLevel.general }), { method: 'GET' });
+	const level = get(userSession).accountData?.languageLevel?.overall.level;
+	if (!level)
+		throw Error('Please login and finish creaintg profile before querying reading items.');
+	const result = await fetch(
+		'/api/v1/reading/topics?' + new URLSearchParams({ mode: get(currentMode), level: level }),
+		{ method: 'GET' }
+	);
 	const val = await result.json();
 	return val;
-}
+};
 
 export const getReadingItems = async (topic: string): Promise<ReadingItem[]> => {
-	const profile = get(userSession).profile;
-	if (!profile)
-		throw Error("Please login and finish creaintg profile before querying reading items.")
-	const response = await fetch('/api/v1/reading?' + new URLSearchParams({ topic, mode: get(currentMode), level: profile.CEFRLevel.general }));
+	const level = get(userSession).accountData?.languageLevel?.overall.level;
+	if (!level)
+		throw Error('Please login and finish creaintg profile before querying reading items.');
+	const response = await fetch(
+		'/api/v1/reading?' +
+			new URLSearchParams({ topic, mode: get(currentMode), level: level })
+	);
 	const val = await response.json();
 	return val;
 };
 
 export const getReadingItemById = async (id: string): Promise<ReadingItem> => {
-	const response = await fetch('/api/v1/reading?' + new URLSearchParams({ id, mode: get(currentMode) }));
+	const response = await fetch(
+		'/api/v1/reading?' + new URLSearchParams({ id, mode: get(currentMode) })
+	);
 	const val = await response.json();
 	return val;
 };
 
 export const getReadingAnswers = async (id: string): Promise<number[]> => {
-	const result = await fetch('/api/v1/reading/answers?' + new URLSearchParams({ id }), { method: 'GET' });
+	const result = await fetch('/api/v1/reading/answers?' + new URLSearchParams({ id }), {
+		method: 'GET'
+	});
 	const val = await result.json();
 	return val;
-}
+};
 
 export const generateReadingItem = async (topic: string) => {
 	let prompt: ChatMessage[] = [];

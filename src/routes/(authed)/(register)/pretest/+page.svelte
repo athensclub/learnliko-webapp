@@ -26,7 +26,7 @@
 	import { analyzeDialog, checkGoalProgress } from '$api/conversation';
 	import { nextLevel, nextPretestLevel, previousPretestLevel } from '$lib/utils/cefr';
 	import {
-		getCurrentUserProfile,
+		getCurrentUserData,
 		setupCurrentUserAccount
 	} from '$lib/temp/user';
 	import PretestFinishedModal from '$lib/components/modals/PretestFinishedModal.svelte';
@@ -77,8 +77,8 @@
 					$setupAccountInput.lastname!
 				);
 		
-				const profileData = await getCurrentUserProfile();
-				userSession.update({ profile: profileData });
+				const profileData = await getCurrentUserData();
+				userSession.update({ accountData: profileData });
 
 				open(
 					PretestFinishedModal,

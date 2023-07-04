@@ -3,7 +3,7 @@
 	import { currentMode } from '$lib/global/mode';
 	import { profileImageLocal, usernameLocal } from '$lib/localdb/profileLocal';
 	import userSession from '$lib/stores/userSession';
-	import { createUserAccount, getCurrentUserProfile } from '$lib/temp/user';
+	import { createUserAccount, getCurrentUserData } from '$lib/temp/user';
 	import type { CEFRLevel } from '$lib/types/CEFRLevel';
 	import { getContext } from 'svelte';
 	import type { Context } from 'svelte-simple-modal';
@@ -23,8 +23,8 @@
 		$usernameLocal = name;
 		$profileImageLocal = profileImage;
 
-		const profileData = await getCurrentUserProfile();
-		userSession.update({ profile: profileData });
+		const profileData = await getCurrentUserData();
+		userSession.update({ accountData: profileData });
 		currentMode.set('Student');
 		goto('/discover');
 	};

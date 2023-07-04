@@ -16,8 +16,8 @@
 			}
 
 			// navigate to homepage if user is already has account
-			if (session.profile) goto(`/discover`);
-			
+			if (session.accountData?.profile) goto(`/discover`);
+
 			// navigate to login page if user hasnt' sign in
 			if (!session.isLoggedIn) goto(`/login`);
 

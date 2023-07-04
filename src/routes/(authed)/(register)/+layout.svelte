@@ -15,7 +15,7 @@
 			}
 
 			// navigate to homepage if user is already completed setup
-			if (session.profile) goto(`/`);
+			if (session.accountData?.profile) goto(`/`);
 
 			loading = false;
 		});

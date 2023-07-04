@@ -1,7 +1,5 @@
-import { graphql } from '$gql';
-import type { LanguageLevel } from '$gql/graphql';
 import { auth, firestore } from '$lib/configs/firebase.config';
-import { graphqlClient } from '$lib/graphql';
+import type { PretestCEFRLevel } from '$lib/types/pretest';
 import type { UserProfile } from '$lib/types/userProfile';
 import { doc, getDoc, setDoc, updateDoc } from 'firebase/firestore/lite';
 
@@ -26,7 +24,7 @@ export const getCurrentUserProfile = async function () {
 
 // TODO: Implement GraphQL API instead
 export const setupCurrentUserAccount = async function (
-	level: LanguageLevel,
+	level: PretestCEFRLevel,
 	firstname: string,
 	lastname: string
 ) {

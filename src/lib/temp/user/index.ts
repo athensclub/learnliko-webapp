@@ -1,6 +1,9 @@
+import { graphql } from '$gql';
+import type { LanguageLevel } from '$gql/graphql';
 import { auth, firestore } from '$lib/configs/firebase.config';
+import { graphqlClient } from '$lib/graphql';
 import type { UserProfile } from '$lib/types/userProfile';
-import { doc, getDoc, setDoc } from 'firebase/firestore/lite';
+import { doc, getDoc, setDoc, updateDoc } from 'firebase/firestore/lite';
 
 export const createUserAccount = async function (data: UserProfile) {
 	const uid = _safeGetUID();
@@ -19,6 +22,31 @@ export const getCurrentUserProfile = async function () {
 	if (!userDoc.exists() || !userDoc.data().profile) return;
 
 	return userDoc.data().profile as UserProfile;
+};
+
+// TODO: Implement GraphQL API instead
+export const setupCurrentUserAccount = async function (
+	level: LanguageLevel,
+	firstname: string,
+	lastname: string
+) {
+	const uid = _safeGetUID();
+
+	if (firstname.length < 1 || lastname.length < 1)
+		throw new Error('No First name and lastname provided');
+
+	const userDocRef = doc(firestore, `Users/${uid}`);
+	await updateDoc(userDocRef, {
+		'languageLevel.overall.level': level,
+		'languageLevel.communication.level': level,
+		'languageLevel.grammar.level': level,
+		'languageLevel.vocabulary.level': level,
+		profile: {
+			firstname: firstname,
+			lastname: lastname,
+			fullname: `${firstname} ${lastname.at(0)}`
+		}
+	});
 };
 
 const _safeGetUID = function () {

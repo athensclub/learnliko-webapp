@@ -15,6 +15,7 @@
 	import ToastManager from '$lib/components/toasts/ToastManager.svelte';
 	import { graphqlClient } from '$lib/graphql';
 	import { setContextClient } from '@urql/svelte';
+	import { goto } from '$app/navigation';
 
 	let loading = true;
 
@@ -31,7 +32,7 @@
 		if ($userSession.isLoggedIn) {
 			const profileData = await getCurrentUserProfile();
 			if (!profileData) {
-				// goto('/get-started');
+				goto('/setup-profile');
 			} else {
 				userSession.update({ profile: profileData });
 				currentMode.set(profileData.mode);

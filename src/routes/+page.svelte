@@ -1,6 +1,5 @@
 <script lang="ts">
 	import icon from '$lib/images/learnliko_icon.png';
-	import { signInAnonymous } from '$lib/auth';
 	import { goto } from '$app/navigation';
 	import userSession from '$lib/stores/userSession';
 	import { onMount } from 'svelte';
@@ -18,13 +17,16 @@
 
 			// navigate to homepage if user is already has account
 			if (session.profile) goto(`/discover`);
+			
+			// navigate to login page if user hasnt' sign in
+			if (!session.isLoggedIn) goto(`/login`);
 
 			loading = false;
 		});
 	});
 
 	const getStarted = async () => {
-		await signInAnonymous();
+		goto(`/login`);
 	};
 </script>
 

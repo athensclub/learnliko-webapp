@@ -13,8 +13,7 @@ import type { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
-	'\n\t\tquery Query($title: String!) {\n\t\t\tbook(title: $title) {\n\t\t\t\ttitle\n\t\t\t\tauthor\n\t\t\t}\n\t\t}\n\t':
-		types.QueryDocument
+    "\n\t\tmutation Mutation($data: UserCreateDataInput!) {\n\t\t\tuserCreate(data: $data) {\n\t\t\t\tuid\n\t\t\t\tusername\n\t\t\t\tprofile {\n\t\t\t\t\timageUrl\n\t\t\t\t\tcoverUrl\n\t\t\t\t\tfullname\n\t\t\t\t\tfirstname\n\t\t\t\t\tlastname\n\t\t\t\t}\n\t\t\t\tlanguageLevel {\n\t\t\t\t\toverall {\n\t\t\t\t\t\tprogress\n\t\t\t\t\t\tlevel\n\t\t\t\t\t}\n\t\t\t\t\tvocabulary {\n\t\t\t\t\t\tprogress\n\t\t\t\t\t\tlevel\n\t\t\t\t\t}\n\t\t\t\t\tgrammar {\n\t\t\t\t\t\tprogress\n\t\t\t\t\t\tlevel\n\t\t\t\t\t}\n\t\t\t\t\tcommunication {\n\t\t\t\t\t\tprogress\n\t\t\t\t\t\tlevel\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t\tcoin\n\t\t\t\texp\n\t\t\t\tclassRoom {\n\t\t\t\t\tid\n\t\t\t\t\tname\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t": types.MutationDocument,
 };
 
 /**
@@ -34,13 +33,10 @@ export function graphql(source: string): unknown;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(
-	source: '\n\t\tquery Query($title: String!) {\n\t\t\tbook(title: $title) {\n\t\t\t\ttitle\n\t\t\t\tauthor\n\t\t\t}\n\t\t}\n\t'
-): (typeof documents)['\n\t\tquery Query($title: String!) {\n\t\t\tbook(title: $title) {\n\t\t\t\ttitle\n\t\t\t\tauthor\n\t\t\t}\n\t\t}\n\t'];
+export function graphql(source: "\n\t\tmutation Mutation($data: UserCreateDataInput!) {\n\t\t\tuserCreate(data: $data) {\n\t\t\t\tuid\n\t\t\t\tusername\n\t\t\t\tprofile {\n\t\t\t\t\timageUrl\n\t\t\t\t\tcoverUrl\n\t\t\t\t\tfullname\n\t\t\t\t\tfirstname\n\t\t\t\t\tlastname\n\t\t\t\t}\n\t\t\t\tlanguageLevel {\n\t\t\t\t\toverall {\n\t\t\t\t\t\tprogress\n\t\t\t\t\t\tlevel\n\t\t\t\t\t}\n\t\t\t\t\tvocabulary {\n\t\t\t\t\t\tprogress\n\t\t\t\t\t\tlevel\n\t\t\t\t\t}\n\t\t\t\t\tgrammar {\n\t\t\t\t\t\tprogress\n\t\t\t\t\t\tlevel\n\t\t\t\t\t}\n\t\t\t\t\tcommunication {\n\t\t\t\t\t\tprogress\n\t\t\t\t\t\tlevel\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t\tcoin\n\t\t\t\texp\n\t\t\t\tclassRoom {\n\t\t\t\t\tid\n\t\t\t\t\tname\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t"): (typeof documents)["\n\t\tmutation Mutation($data: UserCreateDataInput!) {\n\t\t\tuserCreate(data: $data) {\n\t\t\t\tuid\n\t\t\t\tusername\n\t\t\t\tprofile {\n\t\t\t\t\timageUrl\n\t\t\t\t\tcoverUrl\n\t\t\t\t\tfullname\n\t\t\t\t\tfirstname\n\t\t\t\t\tlastname\n\t\t\t\t}\n\t\t\t\tlanguageLevel {\n\t\t\t\t\toverall {\n\t\t\t\t\t\tprogress\n\t\t\t\t\t\tlevel\n\t\t\t\t\t}\n\t\t\t\t\tvocabulary {\n\t\t\t\t\t\tprogress\n\t\t\t\t\t\tlevel\n\t\t\t\t\t}\n\t\t\t\t\tgrammar {\n\t\t\t\t\t\tprogress\n\t\t\t\t\t\tlevel\n\t\t\t\t\t}\n\t\t\t\t\tcommunication {\n\t\t\t\t\t\tprogress\n\t\t\t\t\t\tlevel\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t\tcoin\n\t\t\t\texp\n\t\t\t\tclassRoom {\n\t\t\t\t\tid\n\t\t\t\t\tname\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t"];
 
 export function graphql(source: string) {
-	return (documents as any)[source] ?? {};
+  return (documents as any)[source] ?? {};
 }
 
-export type DocumentType<TDocumentNode extends DocumentNode<any, any>> =
-	TDocumentNode extends DocumentNode<infer TType, any> ? TType : never;
+export type DocumentType<TDocumentNode extends DocumentNode<any, any>> = TDocumentNode extends DocumentNode<  infer TType,  any>  ? TType  : never;

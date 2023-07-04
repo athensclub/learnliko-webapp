@@ -16,9 +16,9 @@ export const getCurrentUserProfile = async function () {
 	const userDoc = await getDoc(userDocRef);
 
 	// return null if user doesn't exist/complete setup
-	if (!userDoc.exists()) return;
+	if (!userDoc.exists() || !userDoc.data().profile) return;
 
-	return userDoc.data() as UserProfile;
+	return userDoc.data().profile as UserProfile;
 };
 
 const _safeGetUID = function () {

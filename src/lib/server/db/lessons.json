@@ -5,7 +5,7 @@
 		"avatar": "https://cdn.discordapp.com/attachments/842737146321174558/1124658451738533959/image.png",
 		"avatarIntro": "Hello, nice to meet you",
 		"background": "https://cdn.discordapp.com/attachments/842737146321174558/1123693463087616030/image.png",
-		"level": "Pre-A1",
+		"level": "PRE_A1",
 		"exp": 800,
 		"coin": 3200,
 		"intro": [
@@ -126,7 +126,7 @@
 		"avatar": "https://cdn.discordapp.com/attachments/1120787872379842711/1125280212578484254/vi_potrait_full_body_3d_avatar_girl_traveler_stylize_smile_0cfb7d3c-f27d-4c75-8f7f-47f729f11eee-removebg5.png",
 		"avatarIntro": "Hello, nice to meet you",
 		"background": "https://cdn.midjourney.com/8971ccd2-9863-4b40-9d88-2eea73dd3911/0_2.png",
-		"level": "Pre-A1",
+		"level": "PRE_A1",
 		"exp": 800,
 		"coin": 3200,
 		"intro": [

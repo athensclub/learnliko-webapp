@@ -1,12 +1,12 @@
 import { writable, get } from 'svelte/store';
 import type firebase from 'firebase/auth';
-import type { UserProfile } from '$lib/types/userProfile';
+import type { User } from '$gql/graphql';
 
 interface UserSessionData {
 	initialized?: boolean;
 	isLoggedIn?: boolean;
 	authUser?: firebase.User | null;
-	profile?: UserProfile | null;
+	accountData?: User | null;
 }
 
 const userSessionStore = writable<UserSessionData>({

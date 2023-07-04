@@ -7,7 +7,6 @@
 		recapResult,
 		showChatbox
 	} from '$lib/global/chatbox';
-	import userSession from '$lib/stores/userSession';
 	import type {
 		LearnedConversationItem,
 		LearnedReadingItem,

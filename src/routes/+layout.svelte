@@ -10,9 +10,9 @@
 	import { auth } from '$lib/configs/firebase.config';
 	import type { User } from 'firebase/auth';
 	import userSession from '$lib/stores/userSession';
-	import { getCurrentUserProfile } from '$lib/temp/user';
-	import { currentMode } from '$lib/global/mode';
 	import ToastManager from '$lib/components/toasts/ToastManager.svelte';
+	import { getCurrentUserData } from '$lib/temp/user';
+	import { currentMode } from '$lib/global/mode';
 	import { graphqlClient } from '$lib/graphql';
 	import { setContextClient } from '@urql/svelte';
 	import { goto } from '$app/navigation';
@@ -26,16 +26,16 @@
 			initialized: false,
 			isLoggedIn: user !== null,
 			authUser: user,
-			profile: null
+			accountData: null
 		});
 
 		if ($userSession.isLoggedIn) {
-			const profileData = await getCurrentUserProfile();
+			const profileData = await getCurrentUserData();
 			if (!profileData) {
 				goto('/setup-profile');
 			} else {
-				userSession.update({ profile: profileData });
-				currentMode.set(profileData.mode);
+				userSession.update({ accountData: profileData });
+				currentMode.set('Student');
 			}
 		}
 

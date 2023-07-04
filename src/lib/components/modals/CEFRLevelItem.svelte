@@ -1,9 +1,9 @@
 <script lang="ts">
-	import type { CEFRLevel } from '$lib/types/CEFRLevel';
+	import type { LanguageLevel } from '$gql/graphql';
 	import { orderedCEFR } from '$lib/utils/cefr';
 
 	export let title: string;
-	export let level: CEFRLevel;
+	export let level: LanguageLevel;
 	export let textScale = 1;
 </script>
 

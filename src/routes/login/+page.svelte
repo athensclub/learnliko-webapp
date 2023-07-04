@@ -1,18 +1,22 @@
 <script lang="ts">
-	import LoginModal from '$lib/components/modals/LoginModal.svelte';
-	import type { CEFRLevel } from '$lib/types/CEFRLevel';
-	import { getContext } from 'svelte';
-	import type { Context } from 'svelte-simple-modal';
+	import { signInWithUsername } from '$lib/auth';
 	import background from '$lib/images/bgvd.mp4';
 	import icon from '$lib/images/learnliko_icon.png';
 
-	const { open }: Context = getContext('simple-modal');
-	const promptLogin = (level: CEFRLevel, profileImage: string, name: string) =>
-		open(LoginModal, {
-			profileImage,
-			name,
-			level
-		});
+	let username: string, password: string;
+	let errorMessage: string;
+	let loading = false;
+
+	const signIn = async function () {
+		if (loading) return;
+
+		try {
+			// if finish signIn, [onAuthStateChanged] in root +layout will be triggered
+			await signInWithUsername(username, password);
+		} catch (error) {
+			errorMessage = (error as Error).message;
+		}
+	};
 </script>
 
 <div
@@ -30,107 +34,25 @@
 	<img src={icon} class="w-[10vw]" alt="Learnliko" />
 
 	<input
+		bind:value={username}
 		placeholder="ชื่อผู้ใช้"
 		style="box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.10) inset;"
 		class="mt-[4vw] w-[25vw] rounded-full px-[1vw] py-[0.5vw] text-center text-[1.5vw]"
 	/>
 	<input
+		bind:value={password}
 		placeholder="รหัสผ่าน"
 		style="box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.10) inset;"
 		class="mt-[1vw] w-[25vw] rounded-full px-[1vw] py-[0.5vw] text-center text-[1.5vw]"
 	/>
 
 	<button
-		class="mt-[4vw] w-[25vw] rounded-full bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] py-[0.5vw] text-[1.5vw] text-white"
+		on:click={signIn}
+		class="mt-[4vw] w-[25vw] rounded-full
+		py-[0.5vw] text-[1.5vw] text-white
+		{loading ? 'bg-gray-700' : 'bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD]'} "
 	>
 		เข้าสู่ระบบ
 	</button>
+	<h4 class="text-red-400">{errorMessage ?? ''}</h4>
 </div>
-
-<!-- <div
-	class="w-full h-full min-h-[100vh] bg-[#F4F4F4] flex flex-row gap-[8vw] items-center justify-center font-line-seed"
->
-	<div class="flex flex-col w-[45vw]">
-		<div class="text-[2.2vw]">Recent logins</div>
-
-		<div class="grid grid-cols-3 gap-[2vw] mt-[2vh]">
-			<button
-				on:click={() =>
-					promptLogin(
-						'pre-A1',
-						'https://cdn.discordapp.com/attachments/842737146321174558/1122773873964892191/profile-portrait-of-a-cute-latin-american-boy.png',
-						'Kawin R.'
-					)}
-				class="w-full h-[20vw] bg-white rounded-[1vw] flex flex-col overflow-hidden"
-			>
-				<div
-					style="background-image: url('https://cdn.discordapp.com/attachments/842737146321174558/1122773873964892191/profile-portrait-of-a-cute-latin-american-boy.png');"
-					class="w-full aspect-square bg-cover bg-center"
-				/>
-				<div
-					class="w-full flex-1 flex items-center justify-center font-medium text-center text-[1.5vw]"
-				>
-					Kawin R. (pre-A1)
-				</div>
-			</button>
-			<button
-				on:click={() =>
-					promptLogin(
-						'A1',
-						'https://cdn.discordapp.com/attachments/842737146321174558/1122776439566123048/photo-pretty-young-happy-boy-looking-away_186202-6515.png',
-						'Kittipob R.'
-					)}
-				class="w-full h-[20vw] bg-white rounded-[1vw] flex flex-col overflow-hidden"
-			>
-				<div
-					style="background-image: url('https://cdn.discordapp.com/attachments/842737146321174558/1122776439566123048/photo-pretty-young-happy-boy-looking-away_186202-6515.png');"
-					class="w-full aspect-square bg-cover bg-center"
-				/>
-				<div
-					class="w-full flex-1 flex items-center justify-center font-medium text-center text-[1.5vw]"
-				>
-					Kittipob R. (A1)
-				</div>
-			</button>
-			<button
-				on:click={() =>
-					promptLogin(
-						'A2',
-						'https://cdn.discordapp.com/attachments/842737146321174558/1122776594520490054/boy-face.png',
-						'Natsataporn M.'
-					)}
-				class="w-full h-[20vw] bg-white rounded-[1vw] flex flex-col overflow-hidden"
-			>
-				<div
-					style="background-image: url('https://cdn.discordapp.com/attachments/842737146321174558/1122776594520490054/boy-face.png');"
-					class="w-full aspect-square bg-cover bg-center"
-				/>
-				<div
-					class="w-full flex-1 flex items-center justify-center font-medium text-center text-[1.5vw]"
-				>
-					Natsataporn M. (A2)
-				</div>
-			</button>
-		</div>
-	</div>
-
-	<div class="bg-white flex flex-col w-[32vw] gap-[3vh] px-[2vw] py-[2vh] rounded-[1vw] shadow-md">
-		<input
-			class="w-full border border-[#DDDFE2] text-[1.7vw] px-[1vw] py-[1vh] rounded-[0.8vw]"
-			placeholder="Username"
-		/>
-		<input
-			class="w-full border border-[#DDDFE2] text-[1.7vw] px-[1vw] py-[1vh] rounded-[0.8vw]"
-			placeholder="Password"
-		/>
-		<button class="w-full py-[1vh] bg-[#1877F2] text-white text-[1.7vw] font-bold">Login</button>
-		<a href="#top" class="text-center text-[1.35vw] text-[#2E7DF2]">Forgotten password?</a>
-
-		<div class="w-full h-[0.15vh] bg-[#DADDE1]" />
-
-		<button
-			class="text-[1.7vw] bg-[#42B72A] text-white w-fit px-[2vw] py-[1vh] rounded-[0.5vw] mx-auto"
-			>Create new account</button
-		>
-	</div>
-</div> -->

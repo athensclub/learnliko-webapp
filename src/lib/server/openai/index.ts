@@ -6,6 +6,10 @@ import {
 	type ChatCompletionFunctions,
 	type CreateChatCompletionRequestFunctionCall
 } from 'openai';
+import {
+	OpenAIApi as OpenAIEdgeApi,
+	Configuration as EdgeConfiguration
+} from 'openai-edge';
 import { Readable } from 'stream';
 
 const _configuration = new Configuration({
@@ -13,6 +17,12 @@ const _configuration = new Configuration({
 	apiKey: SECRET_OPENAI_API_KEY
 });
 const _openai = new OpenAIApi(_configuration);
+
+const _configurationEdge = new EdgeConfiguration({
+	organization: 'org-zy9WP5Ms8eWs4ToQfjGStzlC',
+	apiKey: SECRET_OPENAI_API_KEY
+});
+const _openaiEdge = new OpenAIEdgeApi(_configurationEdge)
 
 export const chatCompletion = async function (messages: ChatMessage[]) {
 	const chatGPT = await _openai.createChatCompletion({

@@ -1,9 +1,9 @@
 import type { CEFRLevel } from "$lib/types/CEFRLevel";
 import type { PretestCEFRLevel } from "$lib/types/pretest";
 
-export const orderedCEFR: CEFRLevel[] = ['pre-A1', 'A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
+export const orderedCEFR: CEFRLevel[] = ['PRE_A1', 'A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
 
-const orderedPretestCEFR: PretestCEFRLevel[] = ['pre-A1', 'A1', 'A2', 'B1', 'B2']
+const orderedPretestCEFR: PretestCEFRLevel[] = ['PRE_A1', 'A1', 'A2', 'B1', 'B2']
 
 /**
  * 

@@ -1,21 +1,16 @@
-<script lang="ts" context="module">
-	export type ReadingViewType = 'READ' | 'QUIZ' | 'RECAP';
-</script>
-
 <script lang="ts">
 	import { fade } from 'svelte/transition';
-	import ReadingTextView from './ReadingTextView.svelte';
-	import ReadingQuizView from './ReadingQuizView.svelte';
+	import ReadingContainer from '$lib/components/reading/ReadingContainer.svelte';
+	import type { ReadingItem } from '$lib/types/reading';
 
-	let currentView: ReadingViewType = 'READ';
+	export let item: ReadingItem;
+
+	export let onFinish: () => void;
 </script>
 
-<div transition:fade class="w-full flex items-center justify-center overflow-hidden">
-	<div class="w-[60vw] h-[30vw] p-[2vw] bg-white rounded-[2vw] relative">
-		{#if currentView === 'READ'}
-			<ReadingTextView setView={(view) => (currentView = view)} />
-		{:else if currentView === 'QUIZ'}
-			<ReadingQuizView setView={(view) => (currentView = view)} />
-		{/if}
-	</div>
+<div
+	transition:fade
+	class="pointer-events-none absolute flex h-full w-full items-center justify-center overflow-hidden"
+>
+	<ReadingContainer {item} class="h-[30vw] w-[60vw]" {onFinish} />
 </div>

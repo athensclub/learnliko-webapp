@@ -1,6 +1,4 @@
 <script lang="ts">
-	import ConversationCard from '$lib/components/ConversationCard.svelte';
-	import ReadingCard from '$lib/components/ReadingCard.svelte';
 	import NavBar from '$lib/components/navbar/NavBar.svelte';
 	import convTaskImage from './coversation_task_image.png';
 	import readingTaskImage from './reading_task_image.png';
@@ -15,23 +13,26 @@
 	import { currentMode } from '$lib/global/mode';
 	import { browser } from '$app/environment';
 	import background from '$lib/images/bgvd.mp4';
+	import type { LessonCardData } from '$lib/types/lesson';
+	import { getLessonCards } from '$api/lesson';
 
-	let items: DiscoverItem[] = [];
+	let items: LessonCardData[] = [];
 	const loadData = async () => {
 		if (!browser) return;
-		items = await queryDiscoverItemsLocal();
+		items = await getLessonCards();
+		console.log(items)
 	};
 
 	onMount(loadData);
-	$: $currentMode, loadData();
+	// $: $currentMode, loadData();
 </script>
 
-<div class="w-[100vw] h-full min-h-[100vh] bg-[#F4F4F4] font-line-seed">
+<div class="h-full min-h-[100vh] w-[100vw] bg-[#F4F4F4] font-line-seed">
 	<video
 		autoplay
 		muted
 		loop
-		class="absolute left-0 top-0 w-full h-full object-cover brightness-105 blur-sm"
+		class="absolute left-0 top-0 h-full w-full object-cover blur-sm brightness-105"
 	>
 		<source src={background} type="video/mp4" />
 	</video>
@@ -41,18 +42,18 @@
 	<div
 		class={`${
 			$isMobile
-				? 'sticky top-0 w-[100vw] px-[5vw] py-[1vh] z-[1000] gap-[1.6vh]'
-				: 'fixed top-0 right-0 w-[23vw] h-[100vh] px-[2vw] py-[4vh] '
-		} flex flex-col bg-white/70 backdrop-blur-sm shadow-sm font-bold`}
+				? 'sticky top-0 z-[1000] w-[100vw] gap-[1.6vh] px-[5vw] py-[1vh]'
+				: 'fixed right-0 top-0 h-[100vh] w-[23vw] px-[2vw] py-[4vh] '
+		} flex flex-col bg-white/70 font-bold shadow-sm backdrop-blur-sm`}
 	>
 		{#if $isMobile}
-			<div class="flex flex-row justify-between w-full">
-				<img class="w-[8vw] h-[8vw]" src={icon} alt="Learnliko" />
+			<div class="flex w-full flex-row justify-between">
+				<img class="h-[8vw] w-[8vw]" src={icon} alt="Learnliko" />
 
 				<a href="/profile">
 					<div
 						style="background-image: url('{userProfileImage}');"
-						class="w-[8vw] h-[8vw] bg-cover bg-center rounded-full"
+						class="h-[8vw] w-[8vw] rounded-full bg-cover bg-center"
 					/>
 				</a>
 			</div>
@@ -66,7 +67,7 @@
 					<div class="flex flex-col">
 						Talk with 3 AI friends
 						<svg
-							class="w-[30vw] mt-[0.5vh]"
+							class="mt-[0.5vh] w-[30vw]"
 							viewBox="0 0 142 13"
 							fill="none"
 							xmlns="http://www.w3.org/2000/svg"
@@ -103,7 +104,7 @@
 					<div class="flex flex-col">
 						Read 5 Stories
 						<svg
-							class="w-[30vw] mt-[0.5vh]"
+							class="mt-[0.5vh] w-[30vw]"
 							viewBox="0 0 120 13"
 							fill="none"
 							xmlns="http://www.w3.org/2000/svg"
@@ -137,15 +138,15 @@
 		{:else}
 			<div class="text-[1.8vw]">เลือกเรื่องราวเพื่อเรียนรู้</div>
 
-			<div class="w-full flex flex-col mt-[2vw]">
+			<div class="mt-[1.2vw] flex w-full flex-col">
 				<div class="text-[1.5vw]">ความคืบหน้ารายวัน</div>
 
-				<div class="w-full bg-[#F8F8F8] p-[2vw] rounded-[1vw] flex flex-row">
+				<div class="flex w-full flex-row rounded-[1vw] bg-[#F8F8F8] p-[2vw]">
 					<img class="w-[40%]" src={vocabTaskImage} alt="Study Vocabularies" />
 
-					<div class="flex flex-col h-full ml-[1vw]">
+					<div class="ml-[1vw] flex h-full flex-col">
 						<div class="text-[1.5vw]">คำศัพท์วันนี้</div>
-						<div class="text-transparent bg-clip-text bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD]">
+						<div class="bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] bg-clip-text text-transparent">
 							<div class="inline-block text-[3vw]">15</div>
 							<div class="inline-block text-[1.35vw]">คำ</div>
 						</div>
@@ -153,61 +154,47 @@
 				</div>
 			</div>
 
-			
-			<div class="w-full flex flex-col mt-[2vw]">
+			<div class="mt-[1.2vw] flex w-full flex-col">
 				<div class="text-[1.5vw]">เล่นต่อเรื่องราวล่าสุด</div>
 
 				<LessonCard
-				item={{
-					avatar:
-						'https://cdn.discordapp.com/attachments/842737146321174558/1123670586732839082/image.png',
-					avatarIntro: 'Hello, nice to meet you',
-					background:
-						'https://cdn.discordapp.com/attachments/842737146321174558/1123672047084646450/Rectangle_4917.png',
-					exp: 1500,
-					id: '1',
-					description:
-						'เช้าวันนี้ คุณกำลังไปโรงเรียนวันแรกและได้พบเจอกับเพื่อนๆมากมายที่โรงเรียนแห่งใหม่ของคุณ',
-					level: 'pre-A1',
-					topic: 'ทำความรู้จักและทักทาย!',
-					progress: 0.5
-				}}
-				class="w-full h-[23vw]"
-			/>
+					scale={0.5}
+					item={{
+						avatar:
+							'https://cdn.discordapp.com/attachments/842737146321174558/1123670586732839082/image.png',
+						avatarIntro: 'Hello, nice to meet you',
+						background:
+							'https://cdn.discordapp.com/attachments/842737146321174558/1123672047084646450/Rectangle_4917.png',
+						exp: 1500,
+						id: '1',
+						description:
+							'เช้าวันนี้ คุณกำลังไปโรงเรียนวันแรกและได้พบเจอกับเพื่อนๆมากมายที่โรงเรียนแห่งใหม่ของคุณ',
+						level: 'PRE_A1',
+						topic: 'ทำความรู้จักและทักทาย!',
+						progress: 0.5
+					}}
+					class="h-[calc(56vh-3.5vw)] w-full"
+				/>
 			</div>
 		{/if}
 	</div>
 
 	{#if $isMobile}
 		<!-- Top spacing (because of topbar) -->
-		<div class="w-full h-[15vh]" />
+		<div class="h-[15vh] w-full" />
 	{/if}
 
 	<div
-		class={`fixed z-[100] top-0 left-0 w-[100vw] h-[100vh] overflow-y-auto snap-y snap-mandatory pointer-events-none`}
+		class={`pointer-events-none fixed left-0 top-0 z-[100] h-[100vh] w-[100vw] snap-y snap-mandatory overflow-y-auto`}
 	>
 		<div
 			class={`pointer-events-auto mx-auto ${
-				$isMobile ? 'w-full py-[15vh]' : 'w-[54vw] pt-0 pb-[10vh]'
+				$isMobile ? 'w-full py-[15vh]' : 'w-[54vw] pb-[10vh] pt-0'
 			}`}
 		>
-			<LessonCard
-				item={{
-					avatar:
-						'https://cdn.discordapp.com/attachments/842737146321174558/1123670586732839082/image.png',
-					avatarIntro: 'Hello, nice to meet you',
-					background:
-						'https://cdn.discordapp.com/attachments/842737146321174558/1123672047084646450/Rectangle_4917.png',
-					exp: 1500,
-					id: '1',
-					description:
-						'เช้าวันนี้ คุณกำลังไปโรงเรียนวันแรกและได้พบเจอกับเพื่อนๆมากมายที่โรงเรียนแห่งใหม่ของคุณ',
-					level: 'pre-A1',
-					topic: 'ทำความรู้จักและทักทาย!',
-					progress: 0.5
-				}}
-				class="snap-center mx-auto w-[27vw] h-[38vw] mt-[calc(50vh-19vw)]"
-			/>
+			{#each items as item (item.id)}
+				<LessonCard {item} class="mx-auto mt-[calc(48vh-19vw)] h-[38vw] w-[27vw] snap-center" />
+			{/each}
 		</div>
 	</div>
 </div>

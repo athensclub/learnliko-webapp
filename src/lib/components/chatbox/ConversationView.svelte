@@ -29,10 +29,7 @@
 	export let aiChatBackgroundColor = '#6C80E8';
 	export let userChatBackgroundColor = '#404040';
 
-	export let onFinishClicked: () => void = () => {
-		$currentChatboxView = 'RECAP';
-		$showChatbox = true;
-	};
+	export let onFinishClicked: () => void;
 
 	// initialization
 	onMount(() => {

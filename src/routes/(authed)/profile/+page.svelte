@@ -54,8 +54,8 @@
 </script>
 
 <div
-	class={`w-full h-full min-h-[100vh] flex font-line-seed ${
-		$isMobile ? 'bg-white flex-col' : 'bg-[#F4F4F4] flex-row'
+	class={`flex h-full min-h-[100vh] w-full font-line-seed ${
+		$isMobile ? 'flex-col bg-white' : 'flex-row bg-[#F4F4F4]'
 	}`}
 >
 	{#if !$isMobile}
@@ -65,9 +65,9 @@
 			style="box-shadow: 0px 2px 8px 0px #0000001A;"
 			class="sticky top-0 w-[100vw] px-[6vw] py-[2vh]"
 		>
-			<button on:click={goBack} class="flex flex-row items-center font-bold text-[6vw]">
+			<button on:click={goBack} class="flex flex-row items-center text-[6vw] font-bold">
 				<svg
-					class="w-[8vw] mr-[4vw]"
+					class="mr-[4vw] w-[8vw]"
 					viewBox="0 0 34 24"
 					fill="none"
 					xmlns="http://www.w3.org/2000/svg"
@@ -83,28 +83,28 @@
 		</nav>
 	{/if}
 
-	<div class="flex flex-col flex-1">
+	<div class="flex flex-1 flex-col">
 		<div
 			style="background-image: url('{background}');"
-			class="w-full h-[20vw] bg-cover bg-center relative"
+			class="relative h-[20vw] w-full bg-cover bg-center"
 		>
 			<a
 				href="/profile/shop"
-				class="absolute flex flex-row items-center rounded-full px-[1.5vw] py-[0.5vw] top-[2vw] right-[2vw] font-bold text-[1.35vw] bg-white"
+				class="absolute right-[2vw] top-[2vw] flex flex-row items-center rounded-full bg-white px-[1.5vw] py-[0.5vw] text-[1.35vw] font-bold"
 			>
-				<img class="w-[1vw] mr-[0.7vw]" src={shoppingBag} alt="Shopping Bag" />
+				<img class="mr-[0.7vw] w-[1vw]" src={shoppingBag} alt="Shopping Bag" />
 
 				Shop
 			</a>
 
 			<div
 				style="background-image: url('{$profileImageLocal}');"
-				class="absolute left-[5vw] bottom-[-6vw] w-[12vw] h-[12vw] border-[0.3vw] border-white bg-cover bg-center rounded-full"
+				class="absolute bottom-[-6vw] left-[5vw] h-[12vw] w-[12vw] rounded-full border-[0.3vw] border-white bg-cover bg-center"
 			/>
 		</div>
 
 		<div class={`flex flex-col px-[6vw] ${$isMobile ? 'mt-[2vh]' : 'mt-[12vh]'}`}>
-			<div class="mt-[2vw] mb-[3vw] font-bold text-[2vw]">{name}</div>
+			<div class="mb-[3vw] mt-[2vw] text-[2vw] font-bold">{name}</div>
 
 			<div
 				class={`flex w-full justify-between font-bold ${
@@ -114,26 +114,28 @@
 				<button
 					on:click={showCEFRLevel}
 					style="box-shadow: 0px 10px 30px 0px rgba(108, 128, 232, 0.25);"
-					class={`flex flex-row items-center justify-evenly bg-white rounded-3xl p-[2vw] ${
-						$isMobile ? 'w-full h-[20vh]' : 'w-[55%] h-[18vw]'
+					class={`flex flex-row items-center justify-evenly rounded-3xl bg-white p-[2vw] ${
+						$isMobile ? 'h-[20vh] w-full' : 'h-[18vw] w-[55%]'
 					}`}
 				>
-					<div class="flex flex-col h-full justify-between items-center">
-						<CircularProgressBar class="w-[9vw] h-[9vw]" value={50}>
-							<div class="flex flex-col items-center justify-center h-full">
+					<div class="flex h-full flex-col items-center justify-between">
+						<CircularProgressBar class="h-[9vw] w-[9vw]" value={50}>
+							<div class="flex h-full flex-col items-center justify-center">
 								<div class="text-[0.3vw]">CEFR</div>
-								<div class="text-[2vw]">{$userSession.profile?.CEFRLevel.general}</div>
+								<div class="text-[2vw]">
+									{$userSession.accountData?.languageLevel?.overall.level}
+								</div>
 							</div>
 						</CircularProgressBar>
 
 						<div
-							class="px-[2vw] py-[0.5vw] border border-black rounded-full text-[1.3vw] flex flex-row justify-center"
+							class="flex flex-row justify-center rounded-full border border-black px-[2vw] py-[0.5vw] text-[1.3vw]"
 						>
 							ดูรายละเอียด
 						</div>
 					</div>
 
-					<div class="flex flex-col h-full justify-between items-center">
+					<div class="flex h-full flex-col items-center justify-between">
 						<div class="flex flex-col">
 							<div class={`text-[#8A8A8A] ${$isMobile ? 'text-[4vw]' : 'text-[1.5vw]'}`}>
 								เวลาเรียนรู้เฉลี่ยต่อวัน
@@ -145,7 +147,7 @@
 						</div>
 
 						<div
-							class="px-[2vw] py-[0.5vw] border border-black rounded-full text-[1.3vw] flex flex-row justify-center"
+							class="flex flex-row justify-center rounded-full border border-black px-[2vw] py-[0.5vw] text-[1.3vw]"
 						>
 							ดูรายละเอียด
 						</div>
@@ -154,13 +156,13 @@
 
 				<div
 					style="box-shadow: 0px 10px 30px 0px rgba(108, 128, 232, 0.25);"
-					class={`flex items-start justify-center bg-white p-[2vw] rounded-3xl ${
-						$isMobile ? 'w-full h-[15vh] flex-row gap-[5vw]' : 'w-[35%] h-[18vw] flex-col gap-[2vh]'
+					class={`flex items-start justify-center rounded-3xl bg-white p-[2vw] ${
+						$isMobile ? 'h-[15vh] w-full flex-row gap-[5vw]' : 'h-[18vw] w-[35%] flex-col gap-[2vh]'
 					}`}
 				>
 					<div class="flex flex-row">
 						<div
-							class="text-[4vw] mr-[1vw] bg-clip-text text-transparent bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD]"
+							class="mr-[1vw] bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] bg-clip-text text-[4vw] text-transparent"
 						>
 							{exp}
 						</div>
@@ -207,7 +209,7 @@
 
 					<div class="flex flex-row">
 						<div
-							class="text-[4vw] mr-[1vw] bg-clip-text text-transparent bg-gradient-to-t from-[#FFE08F] via-[#E4AE24] to-[#FFE08F]"
+							class="mr-[1vw] bg-gradient-to-t from-[#FFE08F] via-[#E4AE24] to-[#FFE08F] bg-clip-text text-[4vw] text-transparent"
 						>
 							{coin}
 						</div>
@@ -267,21 +269,21 @@
 			{#if learningDiaries && learningDiaries.length > 0}
 				<div
 					class={`font-extrabold ${
-						$isMobile ? 'mx-auto text-[7vw] mt-[7vh]' : 'text-[2vw] mt-[10vh]'
+						$isMobile ? 'mx-auto mt-[7vh] text-[7vw]' : 'mt-[10vh] text-[2vw]'
 					}`}
 				>
 					Learning Diary
 				</div>
 
-				<div class="w-full grid grid-cols-2 gap-[2vw] mt-[2vh]">
+				<div class="mt-[2vh] grid w-full grid-cols-2 gap-[2vw]">
 					{#each learningDiaries as diary (diary.date)}
-						<div class="w-full bg-white h-fit flex flex-col rounded-2xl font-bold p-3">
+						<div class="flex h-fit w-full flex-col rounded-2xl bg-white p-3 font-bold">
 							<div class="flex flex-row items-center justify-between">
 								<div class="text-sm">{diary.date}</div>
 
 								<button
 									on:click={() => showDiary(diary)}
-									class="bg-black text-white text-sm flex flex-row px-2 py-1 items-center justify-center rounded-2xl"
+									class="flex flex-row items-center justify-center rounded-2xl bg-black px-2 py-1 text-sm text-white"
 								>
 									Read more
 
@@ -308,7 +310,7 @@
 			{/if}
 
 			<!-- bottom spacing -->
-			<div class="w-full h-[10vh]" />
+			<div class="h-[10vh] w-full" />
 		</div>
 	</div>
 </div>

@@ -4,7 +4,12 @@
 	import ConversationView from '$lib/components/chatbox/ConversationView.svelte';
 	import ConfirmModal from '$lib/components/modals/ConfirmModal.svelte';
 	import { isMobile } from '$lib/global/breakpoints';
-	import { chatContext, showChatbox } from '$lib/global/chatbox';
+	import {
+		chatContext,
+		currentChatboxView,
+		onRecapFinished,
+		showChatbox
+	} from '$lib/global/chatbox';
 	import {
 		checkConversationFinished,
 		conversationFinished,
@@ -20,7 +25,9 @@
 	import type { Context } from 'svelte-simple-modal';
 	import Typewriter from 'svelte-typewriter/Typewriter.svelte';
 	import { get } from 'svelte/store';
-	import { fly } from 'svelte/transition';
+	import { fade, fly } from 'svelte/transition';
+
+	export let onFinish: () => void;
 
 	let briefing = true;
 
@@ -43,6 +50,15 @@
 			}
 		});
 
+	const showRecap = () => {
+		$onRecapFinished = () => {
+			$showChatbox = false;
+			onFinish();
+		};
+		$currentChatboxView = 'RECAP';
+		$showChatbox = true;
+	};
+
 	const beforeUnload = (event: BeforeUnloadEvent) => {
 		// Chrome requires returnValue to be set.
 		event.returnValue = 'Are you sure you want to end conversation?';
@@ -59,6 +75,7 @@
 
 {#if $chatContext}
 	<div
+		transition:fade
 		class="absolute top-0 left-0 w-[100vw] h-[100vh] text-white bg-cover bg-center pointer-events-none"
 	>
 		<div
@@ -177,6 +194,7 @@
 						class={`overflow-hidden w-full h-full font-line-seed relative flex flex-col items-center shadow-2xl shadow-gray-700 border-[1px] border-black/10 border-b-0 backdrop-blur-sm backdrop-brightness-75 bg-transparent rounded-3xl`}
 					>
 						<ConversationView
+							onFinishClicked={showRecap}
 							class="text-white"
 							initializingClass="text-white"
 							recorderClass="text-black bg-black/[0.5] backdrop-blur-md w-[90%]"

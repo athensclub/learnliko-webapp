@@ -1,12 +1,18 @@
 <!-- Modified from https://github.com/aeonyxio/svelte-flip/blob/main/src/lib/Flippable.svelte -->
 <script lang="ts">
+	import type { FadeParams } from 'svelte-simple-modal/types/Modal.svelte';
+	import { fade } from 'svelte/transition';
+
 	export let flip = false;
+
+	export let fadeIn: FadeParams = { duration: 0 };
+	export let fadeOut: FadeParams = { duration: 0 };
 
 	let clazz = '';
 	export { clazz as class };
 </script>
 
-<div class="flip-card {clazz}">
+<div in:fade={fadeIn} out:fade={fadeOut} class="flip-card {clazz}">
 	<div class:flip class="flip-card-inner">
 		<div class="flip-card-front">
 			<slot name="front" />

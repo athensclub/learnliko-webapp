@@ -1,14 +1,56 @@
 <script lang="ts">
+	import { synthesize } from '$api/tts';
 	import Flippable from '$lib/components/Flippable.svelte';
+	import { playAudio, playAudioURL } from '$lib/global/audio';
 	import type { FlipCardItem } from '$lib/types/flip_card';
+	import { blobToBase64 } from '$lib/utils/io';
+	import { onMount } from 'svelte';
+	import { fade } from 'svelte/transition';
 
 	export let item: FlipCardItem;
 
-	let flipped = false;
-	let selectedChoice: number | null = null;
+	let speeches: string[] | null = null;
+	// TODO: use data from api instead.
+	const loadSpeeches = async () => {
+		const result = [];
+		for (let i = 0; i < item.choices.length; i++) {
+			const val = await synthesize(item.choices[i], 'US', 'FEMALE', 0.7);
+			result.push(await blobToBase64(val));
+		}
+		speeches = result;
+	};
+	onMount(() => loadSpeeches());
 
 	let clazz = '';
 	export { clazz as class };
+
+	export let onCorrect = () => {};
+	export let onWrong = () => {};
+
+	let flipped = false;
+
+	let selectedChoice: number | null = null;
+	const updateSelectedChoice = () => {
+		if (speeches !== null && selectedChoice !== null) {
+			playAudioURL(speeches[selectedChoice]);
+		}
+	};
+	$: selectedChoice, updateSelectedChoice();
+
+	/**
+	 * Null -> user has not submitted.
+	 */
+	let correctAnswer: number | null = null;
+	const submit = () => {
+		// TODO: implement actual submit.
+		correctAnswer = 0;
+
+		if (selectedChoice === correctAnswer) {
+			onCorrect();
+		} else {
+			onWrong();
+		}
+	};
 </script>
 
 <Flippable class={clazz} flip={flipped}>
@@ -16,18 +58,18 @@
 		on:click={() => (flipped = !flipped)}
 		slot="front"
 		style="background-image: url('{item.image}');"
-		class="w-full h-full rounded-[2vw] bg-cover bg-center overflow-hidden"
+		class="h-full w-full overflow-hidden rounded-[2vw] bg-cover bg-center"
 	>
-		<div class="w-full h-full backdrop-blur-[8px] flex flex-col items-center">
+		<div class="flex h-full w-full flex-col items-center bg-[#0000005E] backdrop-blur-[8px]">
 			<div
-				class="bg-white rounded-full w-fit px-[1vw] py-[0.5vw] text-[1vw] flex flex-row items-center ml-auto mt-[1vw] mr-[2vw]"
+				class="ml-auto mr-[2vw] mt-[1vw] flex w-fit flex-row items-center rounded-full bg-white px-[1vw] py-[0.5vw] text-[1vw]"
 			>
 				<div class="flex flex-row font-bold">
-					<div class="bg-clip-text text-transparent bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD]">
+					<div class="bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] bg-clip-text text-transparent">
 						+{item.exp}
 					</div>
 					<svg
-						class="w-[2.5vw] ml-[0.25vw]"
+						class="ml-[0.25vw] w-[2.5vw]"
 						viewBox="0 0 1650 792"
 						fill="none"
 						xmlns="http://www.w3.org/2000/svg"
@@ -67,14 +109,14 @@
 					</svg>
 				</div>
 
-				<div class="flex flex-row font-bold ml-[0.5vw]">
+				<div class="ml-[0.5vw] flex flex-row font-bold">
 					<div
-						class="bg-clip-text text-transparent bg-gradient-to-r from-[#FFE08F] via-[#E4AE24] to-[#FFE08F]"
+						class="bg-gradient-to-r from-[#FFE08F] via-[#E4AE24] to-[#FFE08F] bg-clip-text text-transparent"
 					>
 						+{item.coin}
 					</div>
 					<svg
-						class="w-[2.5vw] ml-[0.25vw]"
+						class="ml-[0.25vw] w-[2.5vw]"
 						viewBox="0 0 2017 792"
 						fill="none"
 						xmlns="http://www.w3.org/2000/svg"
@@ -125,11 +167,11 @@
 				</div>
 			</div>
 
-			<img src={item.image} class="max-w-[80%] mt-[2vw]" alt="Flip Card Content" />
+			<img src={item.image} class="mt-[2vw] max-w-[80%]" alt="Flip Card Content" />
 
-			<div class="mt-[2vw] flex flex-row items-center text-[1.3vw] text-white font-bold">
+			<div class="mt-[2vw] flex flex-row items-center text-[1.3vw] font-bold text-white">
 				<svg
-					class="w-[2.3vw] mr-[1vw]"
+					class="mr-[1vw] w-[2.3vw]"
 					viewBox="0 0 50 55"
 					fill="none"
 					xmlns="http://www.w3.org/2000/svg"
@@ -147,44 +189,71 @@
 	<div
 		slot="back"
 		style="background-image: url('{item.image}');"
-		class="w-full h-full rounded-[2vw] bg-cover bg-center overflow-hidden"
+		class="h-full w-full overflow-hidden rounded-[2vw] bg-cover bg-center"
 	>
 		<!-- Can't nest button inside button so the outside is absolute button and inside is another absolute buttons instead -->
 		<div
-			class="w-full h-full backdrop-blur-[8px] flex flex-col items-center justify-center relative font-bold"
+			class="relative flex h-full w-full flex-col items-center justify-center bg-[#0000005E] font-bold"
 		>
-			<button on:click={() => (flipped = !flipped)} class="absolute left-0 top-0 w-full h-full" />
+			<button
+				on:click={() => (flipped = !flipped)}
+				class="absolute left-0 top-0 h-full w-full backdrop-blur-[8px]"
+			/>
 
-			<div
-				class="absolute pointer-events-none top-0 left-0 p-[2vw] w-full h-full flex flex-col justify-between"
-			>
-				<div class="w-full flex flex-col gap-[1.5vw]">
-					{#each item.choices as choice, index (choice)}
-						<button
-							class="pointer-events-auto w-full text-[1.4vw] py-[0.7vw] rounded-full {selectedChoice ===
-							index
-								? 'bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] border-[0.2vw] border-white text-white'
-								: 'bg-white text-black'}"
-							on:click={() => (selectedChoice = index)}
-						>
-							{choice}
-						</button>
-					{/each}
-				</div>
-
-				<button
-					disabled={selectedChoice === null}
-					class="pointer-events-auto w-full bg-white text-[1.2vw] py-[0.7vw] rounded-[1vw]"
+			{#if correctAnswer === null}
+				<div
+					in:fade={{ delay: 500 }}
+					out:fade
+					class="pointer-events-none absolute left-0 top-0 flex h-full w-full flex-col justify-between p-[2vw]"
 				>
-					<div
-						class={selectedChoice === null
-							? 'text-[#B8B8B8]'
-							: 'bg-clip-text text-transparent bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD]'}
-					>
-						ตรวจคำตอบ
+					<div class="flex w-full flex-col gap-[1.5vw]">
+						{#each item.choices as choice, index (choice)}
+							<button
+								class="pointer-events-auto w-full rounded-full py-[0.7vw] text-[1.4vw] {selectedChoice ===
+								index
+									? 'border-[0.2vw] border-white bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] text-white'
+									: 'bg-white text-black'}"
+								on:click={() => (selectedChoice = index)}
+							>
+								{choice}
+							</button>
+						{/each}
 					</div>
-				</button>
-			</div>
+
+					<button
+						on:click={submit}
+						disabled={selectedChoice === null}
+						class="pointer-events-auto w-full rounded-[1vw] bg-white py-[0.7vw] text-[1.2vw]"
+					>
+						<div
+							class={selectedChoice === null
+								? 'text-[#B8B8B8]'
+								: 'bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] bg-clip-text text-transparent'}
+						>
+							ตรวจคำตอบ
+						</div>
+					</button>
+				</div>
+			{:else}
+				<div
+					in:fade={{ delay: 500 }}
+					out:fade
+					class="pointer-events-none absolute left-0 top-0 flex h-full w-full flex-col items-center justify-center p-[2vw] font-bold text-white"
+				>
+					<div class="text-[1.5vw]">
+						{correctAnswer === selectedChoice ? 'คุณตอบถูก!' : 'คุณตอบผิด!'}
+					</div>
+
+					<img src={item.image} class="mt-[2vw] max-w-[80%]" alt="Flip Card Content" />
+
+					<div class="mt-[1vw] text-[1.35vw]">คำตอบคือ</div>
+					<div
+						class="mt-[1vw] rounded-full border-[0.15vw] border-white px-[2vw] py-[0.5vw] text-[1.35vw]"
+					>
+						{item.choices[correctAnswer]}
+					</div>
+				</div>
+			{/if}
 		</div>
 	</div>
 </Flippable>

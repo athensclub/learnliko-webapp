@@ -3,8 +3,8 @@
 
 	import NavBar from '$lib/components/navbar/NavBar.svelte';
 	import { onMount } from 'svelte';
-	import convButtonImage from './conversation_button_image.png';
-	import locButtonImage from './location_button_image.png';
+	import infoImage from './info_image.png';
+	import infoBackground from './info_background.png';
 	import { queryConversationsLocal } from '$lib/localdb/conversationLocal';
 	import type { ConversationCarouselItem } from '$lib/types/conversationData';
 	import { currentMode } from '$lib/global/mode';
@@ -12,22 +12,109 @@
 
 	// TODO: probably switch back to querying in ssr when we switch the db to cloud.
 	// export let data: PageData;
-	let data: { conversationCorouselItems: ConversationCarouselItem[] } = {
-		conversationCorouselItems: []
-	};
-	const loadData = async () => {
-		if (!browser) return;
-		const result = await queryConversationsLocal();
-		data = {
-			conversationCorouselItems: result
-		};
-	};
+	// let data: { conversationCorouselItems: ConversationCarouselItem[] } = {
+	// 	conversationCorouselItems: []
+	// };
+	// const loadData = async () => {
+	// 	if (!browser) return;
+	// 	const result = await queryConversationsLocal();
+	// 	data = {
+	// 		conversationCorouselItems: result
+	// 	};
+	// };
 
-	onMount(loadData);
-	$: $currentMode, loadData();
+	// onMount(loadData);
+	// $: $currentMode, loadData();
+
+	let items = [
+		{
+			name: 'Ammy',
+			role: 'เพื่อนนักเรียน',
+			avatar:
+				'https://cdn.discordapp.com/attachments/842737146321174558/1124658451738533959/image.png',
+			background:
+				'https://cdn.discordapp.com/attachments/842737146321174558/1123691473804738620/image.png',
+			unlocked: true
+		},
+		{
+			name: 'Ammy',
+			role: 'เพื่อนนักเรียน',
+			avatar:
+				'https://cdn.discordapp.com/attachments/842737146321174558/1124658451738533959/image.png',
+			background:
+				'https://cdn.discordapp.com/attachments/842737146321174558/1123691473804738620/image.png',
+			unlocked: false
+		},
+		{
+			name: 'Ammy',
+			role: 'เพื่อนนักเรียน',
+			avatar:
+				'https://cdn.discordapp.com/attachments/842737146321174558/1124658451738533959/image.png',
+			background:
+				'https://cdn.discordapp.com/attachments/842737146321174558/1123691473804738620/image.png',
+			unlocked: true
+		},
+		{
+			name: 'Ammy',
+			role: 'เพื่อนนักเรียน',
+			avatar:
+				'https://cdn.discordapp.com/attachments/842737146321174558/1124658451738533959/image.png',
+			background:
+				'https://cdn.discordapp.com/attachments/842737146321174558/1123691473804738620/image.png',
+			unlocked: true
+		}
+	];
 </script>
 
 <div class="w-full h-full min-h-[100vh] bg-[#F4F4F4] flex flex-row font-line-seed">
+	<NavBar spaced />
+	<div class="flex flex-col flex-1 px-[3vw] py-[2vh]">
+		<div
+			style="background-image: url('{infoBackground}');"
+			class="w-full h-[15vw] px-[4vw] rounded-[1.5vw] bg-cover bg-center flex flex-row items-center justify-between text-white"
+		>
+			<div class="font-bold">
+				<div class="text-[1.6vw]">สะสมเพื่อนเอไอของคุณ</div>
+				<div class="text-[1.2vw]">
+					จากการทำภารกิจในการเรียนรู้ผ่าน <br /> เรื่องราวต่างๆ เพื่อพบเจอเพื่อนใหม่
+				</div>
+			</div>
+
+			<div class="h-full flex flex-col justify-end">
+				<img src={infoImage} class="h-[95%]" alt="AI Friends" />
+			</div>
+		</div>
+
+		<div class="grid grid-cols-2 gap-[2.5vw] mt-[3vw]">
+			{#each items as item, index (index)}
+				<div
+					style="background-image: url('{item.background}');"
+					class="w-full h-[18vw] rounded-[2vw] bg-cover bg-center flex flex-row justify-between overflow-hidden relative"
+				>
+					<div class="flex flex-col bg-gradient-to-r from-black/60 via-black/40 to-transparent items-start justify-center p-[2vw] text-white font-bold">
+						<div class="text-[2.5vw]">{item.name}</div>
+						<div class="text-[1.6vw]">{item.role}</div>
+
+						<button class="px-[2vw] py-[0.5vw] mt-[1vw] rounded-full text-[1.35vw] bg-white text-black">ดูประวัติการคุย</button>
+					</div>
+
+					<div class="h-full px-[2vw] flex flex-col justify-end bg-gradient-to-l from-black/60 via-black/40 to-transparent">
+						<img src={item.avatar} class="h-full" alt="Avatar"/>
+					</div>
+
+					{#if !item.unlocked}
+						<div class="w-full h-full absolute top-0 left-0 bg-[#0000004D] backdrop-blur-md flex flex-col items-center justify-center">
+							<img src={item.background} class="h-[50%] rounded-[1vw]" alt="Lesson Background"/>
+							<div class="mt-[1.5vw] text-[1.35vw] font-bold text-white">เข้าสู่เรื่องราวเพื่อปลดล๊อค</div>
+						</div>
+					{/if}
+				</div>
+			{/each}
+		</div>
+	</div>
+</div>
+
+<!-- <div class="w-full h-full min-h-[100vh] bg-[#F4F4F4] flex flex-row font-line-seed">
 	<NavBar spaced />
 	<div class="flex flex-col flex-1 px-[3vw] py-[2vh]">
 		<div class="flex flex-row justify-between font-extrabold">
@@ -98,9 +185,8 @@
 		<div class="mt-[5vh] text-[2vw] font-bold">Today Tasks</div>
 		<div class="grid gap-[2vw] grid-cols-3 mt-[5vh]">
 			{#each data.conversationCorouselItems as item, index (item.id)}
-				<!-- Use vw to set height to keep ratio when viewport width change -->
 				<ConversationCard scale={0.8} class="w-full h-[29vw]" conversation={item} />
 			{/each}
 		</div>
 	</div>
-</div>
+</div> -->

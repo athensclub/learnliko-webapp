@@ -1,7 +1,7 @@
 <script lang="ts">
 	import '../app.scss';
 	import Chatbox from '$lib/components/chatbox/Chatbox.svelte';
-	import { currentChatboxView, showChatbox } from '$lib/global/chatbox';
+	import { showChatbox } from '$lib/global/chatbox';
 	import { onMount } from 'svelte';
 	import { initializeAudioRecording, resetRecordingData } from '$lib/global/recording';
 	import Modal from 'svelte-simple-modal';
@@ -10,10 +10,12 @@
 	import { auth } from '$lib/configs/firebase.config';
 	import type { User } from 'firebase/auth';
 	import userSession from '$lib/stores/userSession';
-	import { goto } from '$app/navigation';
-	import { getCurrentUserProfile } from '$lib/temp/user';
+	import ToastManager from '$lib/components/toasts/ToastManager.svelte';
+	import { getCurrentUserData } from '$lib/temp/user';
 	import { currentMode } from '$lib/global/mode';
-	import { page } from '$app/stores';
+	import { graphqlClient } from '$lib/graphql';
+	import { setContextClient } from '@urql/svelte';
+	import { goto } from '$app/navigation';
 
 	let loading = true;
 
@@ -24,22 +26,25 @@
 			initialized: false,
 			isLoggedIn: user !== null,
 			authUser: user,
-			profile: null
+			accountData: null
 		});
 
 		if ($userSession.isLoggedIn) {
-			const profileData = await getCurrentUserProfile();
+			const profileData = await getCurrentUserData();
 			if (!profileData) {
-				// goto('/get-started');
+				goto('/setup-profile');
 			} else {
-				userSession.update({ profile: profileData });
-				currentMode.set(profileData.mode);
+				userSession.update({ accountData: profileData });
+				currentMode.set('Student');
 			}
 		}
 
 		userSession.update({ initialized: true });
 		loading = false;
 	};
+
+	// Setup urql client
+	setContextClient(graphqlClient);
 
 	onMount(() => {
 		initializeAudioRecording();
@@ -53,20 +58,22 @@
 	}
 </script>
 
-<div class="w-full max-w-[100vw] h-full overflow-x-hidden">
+<div class="h-full w-full max-w-[100vw] overflow-x-hidden">
 	{#if browser}
 		<Modal>
 			{#if $showChatbox}
 				<div
 					class={`fixed ${
 						$isMobile
-							? `w-[100vw] h-[65vh] bottom-0`
-							: 'w-[37vw] h-[85vh] bottom-0 left-[50%] translate-x-[-50%]'
+							? `bottom-0 h-[65vh] w-[100vw]`
+							: 'bottom-0 left-[50%] h-[85vh] w-[37vw] translate-x-[-50%]'
 					} z-[600]`}
 				>
 					<Chatbox />
 				</div>
 			{/if}
+
+			<ToastManager />
 
 			{#if !loading}
 				<slot />

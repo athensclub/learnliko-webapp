@@ -78,4 +78,9 @@ export const recapHistory = writable<RecapHistory | null>();
  */
 export const recapResult = writable<RecapResult | null>();
 
+/**
+ * Callback function to run after finish button has been confirmed in recap view.
+ */
+export const onRecapFinished = writable(() => {});
+
 export const isLoadingRecapHistory = writable(false);

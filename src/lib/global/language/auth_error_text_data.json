@@ -20,7 +20,7 @@
 		"en": "Login process was stopped by you."
 	},
 	"userDeleted": {
-		"th": "User does not exist.",
+		"th": "ไม่พบบัญชีดังกล่าว",
 		"en": "User does not exist."
 	},
 	"userDisabled": {

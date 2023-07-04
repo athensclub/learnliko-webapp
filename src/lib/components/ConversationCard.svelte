@@ -1,20 +1,101 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
+	import { isMobile } from '$lib/global/breakpoints';
 	import { chatContext, currentChatboxView, showChatbox } from '$lib/global/chatbox';
 	import type { ConversationCarouselItem, ConversationDetails } from '$lib/types/conversationData';
+	import Typewriter from 'svelte-typewriter/Typewriter.svelte';
 
-	export let small = false;
-	export let extraSmall = false;
 	export let conversation: ConversationCarouselItem;
 	export let disabled = false;
 
-	const openChatbox = () => {
-		$currentChatboxView = 'CONVERSATION';
-		$showChatbox = true;
-		$chatContext = { conversation };
+	/**
+	 * Scale to be multiplied to font size in this component.
+	 */
+	export let scale = 1;
+
+	/**
+	 * Whether the intro text has typewriter effect.
+	 */
+	export let typewriter = false;
+
+	let clazz = '';
+	export { clazz as class };
+
+	const openChatbox = async () => {
+		// navigate first, then set data (to avoid conversation chatbox appearing in other pages).
+		await goto('/conversation/play');
+
+		$chatContext = { conversation, bot: { emotion: 'neutral' } };
 	};
 </script>
 
+<!-- Specify the size(width, height) of the card in the user of the component, not in the component itself. -->
 <div
+	style="background-image: url('{conversation.background}');"
+	class={`relative overflow-hidden flex flex-col justify-between shadow-xl bg-center bg-cover ${
+		$isMobile ? 'rounded-[6vw]' : 'rounded-[2vw]'
+	} ${clazz}`}
+>
+	<div
+		class="w-full h-[17%] flex flex-row justify-between items-center backdrop-blur-sm bg-black/40 px-[1vw]"
+	>
+		<div class="flex flex-row h-full items-center gap-[1vw]">
+			<div
+				style="background-image: url('{conversation.avatar.models.neutral}')"
+				class="h-[70%] bg-[#FFD281] aspect-square rounded-full bg-cover bg-top"
+			/>
+			<div class="flex flex-col">
+				<div style="font-size: {scale * 1.3}vw;" class="text-white font-bold">
+					{conversation.avatar.name}
+				</div>
+				<!-- <div style="font-size: {scale*1}vw;" class="text-[#FFFFFF99]">employee</div> -->
+			</div>
+		</div>
+
+		<div
+			style="font-size: {scale * 1}vw;"
+			class="rounded-full bg-[#FFFFFF21] px-[1vw] py-[1vh] text-white"
+		>
+			🧿 300
+		</div>
+	</div>
+
+	<img
+		class="absolute bottom-5 left-[50%] translate-x-[-50%] h-[70%]"
+		src={conversation.avatar.models.neutral}
+		alt="Avatar"
+	/>
+
+	<div
+		class="w-full h-[30%] flex flex-col justify-between bg-black/40 backdrop-blur-sm px-[1.5vw] py-[2.5vh] text-white [text-1vw] font-bold"
+	>
+		<div style="font-size: {scale * ($isMobile ? 3.2 : 1.3)}vw;" class={`w-full text-center`}>
+			{#if typewriter}
+				<Typewriter mode="loopRandom">{conversation.topic}</Typewriter>
+			{:else}
+				{conversation.topic}
+			{/if}
+		</div>
+
+		<button
+			{disabled}
+			on:click={openChatbox}
+			style="font-size: {scale * 1.25}vw;"
+			class="flex flex-row items-center justify-center gap-[1vw] w-full h-[45%] bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] text-white rounded-full animate-pulse"
+		>
+			<svg class="h-[45%]" viewBox="0 0 19 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<path
+					d="M9.5 15.7895C8.36905 15.7895 7.40774 15.4057 6.61607 14.6382C5.8244 13.8706 5.42857 12.9386 5.42857 11.8421V3.94737C5.42857 2.85088 5.8244 1.91886 6.61607 1.15132C7.40774 0.383772 8.36905 0 9.5 0C10.631 0 11.5923 0.383772 12.3839 1.15132C13.1756 1.91886 13.5714 2.85088 13.5714 3.94737V11.8421C13.5714 12.9386 13.1756 13.8706 12.3839 14.6382C11.5923 15.4057 10.631 15.7895 9.5 15.7895ZM8.14286 25V20.9539C5.79048 20.6469 3.84524 19.6272 2.30714 17.8947C0.769047 16.1623 0 14.1447 0 11.8421H2.71429C2.71429 13.6623 3.37612 15.2136 4.69979 16.4961C6.02255 17.7794 7.62262 18.4211 9.5 18.4211C11.3774 18.4211 12.9779 17.7794 14.3016 16.4961C15.6243 15.2136 16.2857 13.6623 16.2857 11.8421H19C19 14.1447 18.231 16.1623 16.6929 17.8947C15.1548 19.6272 13.2095 20.6469 10.8571 20.9539V25H8.14286Z"
+					fill="white"
+				/>
+			</svg>
+
+			Start Conversation
+		</button>
+	</div>
+</div>
+
+<!-- <div
 	style="background-image: {conversation.background};"
 	class={`${
 		extraSmall
@@ -24,130 +105,6 @@
 			: 'lg:w-[20vw] lg:h-[24vw] w-[35vh] h-[45vh] lg:rounded-[3vw] rounded-[8vw] '
 	} w-full font-line-seed text-white shadow-lg transition-size flex flex-col items-center justify-around relative`}
 >
-	<!-- <svg
-			class="w-[65%] mt-4 transition-size"
-			viewBox="0 0 248 52"
-			fill="none"
-			xmlns="http://www.w3.org/2000/svg"
-		>
-			<path
-				d="M13.0477 10.8334C13.0477 9.6368 12.0741 8.66675 10.8731 8.66675C9.67209 8.66675 8.69849 9.6368 8.69849 10.8334V45.5001C8.69849 46.6967 9.67209 47.6667 10.8731 47.6667C12.0741 47.6667 13.0477 46.6967 13.0477 45.5001V10.8334Z"
-				fill="white"
-			/>
-			<path
-				d="M4.34921 23.8334C4.34921 22.6368 3.3756 21.6667 2.1746 21.6667C0.973603 21.6667 0 22.6368 0 23.8334V34.6667C0 35.8634 0.973603 36.8334 2.1746 36.8334C3.3756 36.8334 4.34921 35.8634 4.34921 34.6667V23.8334Z"
-				fill="white"
-			/>
-			<path
-				d="M21.7459 2.16667C21.7459 0.97005 20.7723 0 19.5713 0C18.3703 0 17.3967 0.97005 17.3967 2.16667V49.8333C17.3967 51.03 18.3703 52 19.5713 52C20.7723 52 21.7459 51.03 21.7459 49.8333V2.16667Z"
-				fill="white"
-			/>
-			<path
-				d="M30.4444 2.16667C30.4444 0.97005 29.4708 0 28.2698 0C27.0688 0 26.0952 0.97005 26.0952 2.16667V49.8333C26.0952 51.03 27.0688 52 28.2698 52C29.4708 52 30.4444 51.03 30.4444 49.8333V2.16667Z"
-				fill="white"
-			/>
-			<path
-				d="M39.1429 2.16667C39.1429 0.97005 38.1693 0 36.9683 0C35.7673 0 34.7937 0.97005 34.7937 2.16667V49.8333C34.7937 51.03 35.7673 52 36.9683 52C38.1693 52 39.1429 51.03 39.1429 49.8333V2.16667Z"
-				fill="white"
-			/>
-			<path
-				d="M47.8414 2.16667C47.8414 0.97005 46.8678 0 45.6668 0C44.4658 0 43.4922 0.97005 43.4922 2.16667V49.8333C43.4922 51.03 44.4658 52 45.6668 52C46.8678 52 47.8414 51.03 47.8414 49.8333V2.16667Z"
-				fill="white"
-			/>
-			<path
-				d="M56.5396 2.16667C56.5396 0.97005 55.566 0 54.365 0C53.164 0 52.1904 0.97005 52.1904 2.16667V49.8333C52.1904 51.03 53.164 52 54.365 52C55.566 52 56.5396 51.03 56.5396 49.8333V2.16667Z"
-				fill="white"
-			/>
-			<path
-				d="M73.9366 10.8334C73.9366 9.6368 72.963 8.66675 71.762 8.66675C70.561 8.66675 69.5874 9.6368 69.5874 10.8334V45.5001C69.5874 46.6967 70.561 47.6667 71.762 47.6667C72.963 47.6667 73.9366 46.6967 73.9366 45.5001V10.8334Z"
-				fill="white"
-			/>
-			<path
-				d="M65.2381 23.8334C65.2381 22.6368 64.2645 21.6667 63.0635 21.6667C61.8625 21.6667 60.8889 22.6368 60.8889 23.8334V34.6667C60.8889 35.8634 61.8625 36.8334 63.0635 36.8334C64.2645 36.8334 65.2381 35.8634 65.2381 34.6667V23.8334Z"
-				fill="white"
-			/>
-			<path
-				d="M82.6349 2.16667C82.6349 0.97005 81.6612 0 80.4602 0C79.2592 0 78.2856 0.97005 78.2856 2.16667V49.8333C78.2856 51.03 79.2592 52 80.4602 52C81.6612 52 82.6349 51.03 82.6349 49.8333V2.16667Z"
-				fill="white"
-			/>
-			<path
-				d="M91.3333 2.16667C91.3333 0.97005 90.3597 0 89.1587 0C87.9577 0 86.9841 0.97005 86.9841 2.16667V49.8333C86.9841 51.03 87.9577 52 89.1587 52C90.3597 52 91.3333 51.03 91.3333 49.8333V2.16667Z"
-				fill="white"
-			/>
-			<path
-				d="M100.032 2.16667C100.032 0.97005 99.0582 0 97.8572 0C96.6562 0 95.6826 0.97005 95.6826 2.16667V49.8333C95.6826 51.03 96.6562 52 97.8572 52C99.0582 52 100.032 51.03 100.032 49.8333V2.16667Z"
-				fill="white"
-			/>
-			<path
-				d="M108.73 2.16667C108.73 0.97005 107.756 0 106.555 0C105.354 0 104.381 0.97005 104.381 2.16667V49.8333C104.381 51.03 105.354 52 106.555 52C107.756 52 108.73 51.03 108.73 49.8333V2.16667Z"
-				fill="white"
-			/>
-			<path
-				d="M117.429 2.16667C117.429 0.97005 116.455 0 115.254 0C114.053 0 113.079 0.97005 113.079 2.16667V49.8333C113.079 51.03 114.053 52 115.254 52C116.455 52 117.429 51.03 117.429 49.8333V2.16667Z"
-				fill="white"
-			/>
-			<path
-				d="M134.825 10.8334C134.825 9.6368 133.852 8.66675 132.651 8.66675C131.45 8.66675 130.476 9.6368 130.476 10.8334V45.5001C130.476 46.6967 131.45 47.6667 132.651 47.6667C133.852 47.6667 134.825 46.6967 134.825 45.5001V10.8334Z"
-				fill="white"
-			/>
-			<path
-				d="M126.127 23.8334C126.127 22.6368 125.153 21.6667 123.952 21.6667C122.751 21.6667 121.778 22.6368 121.778 23.8334V34.6667C121.778 35.8634 122.751 36.8334 123.952 36.8334C125.153 36.8334 126.127 35.8634 126.127 34.6667V23.8334Z"
-				fill="white"
-			/>
-			<path
-				d="M143.524 2.16667C143.524 0.97005 142.55 0 141.349 0C140.148 0 139.175 0.97005 139.175 2.16667V49.8333C139.175 51.03 140.148 52 141.349 52C142.55 52 143.524 51.03 143.524 49.8333V2.16667Z"
-				fill="white"
-			/>
-			<path
-				d="M152.222 2.16667C152.222 0.97005 151.249 0 150.048 0C148.847 0 147.873 0.97005 147.873 2.16667V49.8333C147.873 51.03 148.847 52 150.048 52C151.249 52 152.222 51.03 152.222 49.8333V2.16667Z"
-				fill="white"
-			/>
-			<path
-				d="M160.921 2.16667C160.921 0.97005 159.947 0 158.746 0C157.545 0 156.572 0.97005 156.572 2.16667V49.8333C156.572 51.03 157.545 52 158.746 52C159.947 52 160.921 51.03 160.921 49.8333V2.16667Z"
-				fill="white"
-			/>
-			<path
-				d="M169.619 2.16667C169.619 0.97005 168.645 0 167.444 0C166.243 0 165.27 0.97005 165.27 2.16667V49.8333C165.27 51.03 166.243 52 167.444 52C168.645 52 169.619 51.03 169.619 49.8333V2.16667Z"
-				fill="white"
-			/>
-			<path
-				d="M178.317 2.16667C178.317 0.97005 177.344 0 176.143 0C174.942 0 173.968 0.97005 173.968 2.16667V49.8333C173.968 51.03 174.942 52 176.143 52C177.344 52 178.317 51.03 178.317 49.8333V2.16667Z"
-				fill="white"
-			/>
-			<path
-				d="M195.714 10.8334C195.714 9.6368 194.741 8.66675 193.54 8.66675C192.339 8.66675 191.365 9.6368 191.365 10.8334V45.5001C191.365 46.6967 192.339 47.6667 193.54 47.6667C194.741 47.6667 195.714 46.6967 195.714 45.5001V10.8334Z"
-				fill="white"
-			/>
-			<path
-				d="M187.016 23.8334C187.016 22.6368 186.042 21.6667 184.841 21.6667C183.64 21.6667 182.667 22.6368 182.667 23.8334V34.6667C182.667 35.8634 183.64 36.8334 184.841 36.8334C186.042 36.8334 187.016 35.8634 187.016 34.6667V23.8334Z"
-				fill="white"
-			/>
-			<path
-				d="M204.413 2.16667C204.413 0.97005 203.439 0 202.238 0C201.037 0 200.063 0.97005 200.063 2.16667V49.8333C200.063 51.03 201.037 52 202.238 52C203.439 52 204.413 51.03 204.413 49.8333V2.16667Z"
-				fill="white"
-			/>
-			<path
-				d="M213.111 2.16667C213.111 0.97005 212.138 0 210.937 0C209.736 0 208.762 0.97005 208.762 2.16667V49.8333C208.762 51.03 209.736 52 210.937 52C212.138 52 213.111 51.03 213.111 49.8333V2.16667Z"
-				fill="white"
-			/>
-			<path
-				d="M221.81 2.16667C221.81 0.97005 220.836 0 219.635 0C218.434 0 217.46 0.97005 217.46 2.16667V49.8333C217.46 51.03 218.434 52 219.635 52C220.836 52 221.81 51.03 221.81 49.8333V2.16667Z"
-				fill="white"
-			/>
-			<path
-				d="M230.508 2.16667C230.508 0.97005 229.534 0 228.333 0C227.132 0 226.159 0.97005 226.159 2.16667V49.8333C226.159 51.03 227.132 52 228.333 52C229.534 52 230.508 51.03 230.508 49.8333V2.16667Z"
-				fill="white"
-			/>
-			<path
-				d="M239.206 2.16667C239.206 0.97005 238.233 0 237.032 0C235.831 0 234.857 0.97005 234.857 2.16667V49.8333C234.857 51.03 235.831 52 237.032 52C238.233 52 239.206 51.03 239.206 49.8333V2.16667Z"
-				fill="white"
-			/>
-			<path
-				d="M247.905 23.8334C247.905 22.6368 246.931 21.6667 245.73 21.6667C244.529 21.6667 243.556 22.6368 243.556 23.8334V34.6667C243.556 35.8634 244.529 36.8334 245.73 36.8334C246.931 36.8334 247.905 35.8634 247.905 34.6667V23.8334Z"
-				fill="white"
-			/>
-		</svg> -->
-
 	<div
 		class={`lg:text-[1vw] ${
 			extraSmall ? 'text-[0.5vh]' : 'text-[2vh]'
@@ -215,4 +172,4 @@
 	>
 		<h3 class="font-bold text-white opacity-80">CEFR: {conversation.CEFRlevel}</h3>
 	</div>
-</div>
+</div> -->

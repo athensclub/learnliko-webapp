@@ -1,0 +1,22 @@
+/* Write your global styles here, in SCSS syntax. Variables and mixins from the src/variables.scss file are available here without importing */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+	font-family: 'LINE Seed Sans TH';
+	src: url('/fonts/LINESeedSansTH_W_Rg.woff2') format('woff2'),
+		url('/fonts/LINESeedSansTH_W_Rg.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+	font-display: fallback;
+}
+
+@font-face {
+	font-family: 'LINE Seed Sans TH';
+	src: url('/fonts/LINESeedSansTH_W_Th.woff2') format('woff2'),
+		url('/fonts/LINESeedSansTH_W_Rg.woff') format('woff');
+	font-weight: 300;
+	font-style: normal;
+	font-display: fallback;
+}

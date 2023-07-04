@@ -1,6 +1,12 @@
-import type { RecapHistory } from '$lib/global/chatbox';
+import type { RecapResult } from '$lib/global/chatbox';
+import type { RecapHistory, DialogueScore } from '$lib/global/chatbox';
+import { currentMode } from '$lib/global/mode';
+import type { CEFRLevel } from '$lib/types/CEFRLevel';
 import type { ConversationCarouselItem } from '$lib/types/conversationData';
+import type { Mode } from '$lib/types/mode';
 import type { ChatMessage } from '$lib/types/requests/chatCompletion';
+import { round } from '$lib/utils/math';
+import { get } from 'svelte/store';
 
 export const chat = async function (messages: ChatMessage[]) {
 	const response = await fetch('/api/v1/conversation/chat', {
@@ -15,26 +21,62 @@ export const chat = async function (messages: ChatMessage[]) {
 
 /**
  * The output is a stream. It finishes when this function finishes (await assistantChat(...) is finished).
- * 
+ *
  * @param messages the message history to query assistant.
  * @param callback the function that is called each time it receives token through stream.
  * @see https://stackoverflow.com/a/74336207
  */
-export const assistantChat = async function (messages: ChatMessage[], callback: (token: string) => void) {
+export const assistantChat = async function (
+	messages: ChatMessage[],
+	callback: (token: string) => void
+) {
 	// modified from https://stackoverflow.com/a/74336207
 	const response = await fetch('/api/v1/conversation/assistant', {
 		method: 'POST',
 		body: JSON.stringify({ messages })
 	});
-	if (!response.body) throw new Error('No response from chat bot');
+	if (!response.body) throw new Error('No response body from chat bot');
 
 	const reader = response.body.pipeThrough(new TextDecoderStream()).getReader();
+	let temp = '';
 	while (true) {
 		const { value, done } = await reader.read();
 		if (done) break;
-		callback(value);
+
+		let lines: string[];
+		if (temp.length === 0) {
+			lines = value.split("\n");
+		} else {
+			lines = (temp + value).split("\n");
+			temp = ''; // can reset now because if it fail again, old temp will be present in lines already.
+		}
+
+		let toBreak = false;
+		for (const line of lines) {
+			const str = line.substring(5).trim();
+			if (line.length === 0) continue;
+			if (str === '[DONE]') {
+				toBreak = true;
+				break;
+			}
+
+			try {
+				const obj = JSON.parse(str);
+				const content = obj.choices[0].delta.content;
+				if (content)
+					callback(obj.choices[0].delta.content);
+			} catch (e) {
+				// fail JSON parse, data has not be received fully, save in temp and wait for next iteration.
+				// use line variable so that in next iteration, the first 5 characters will be preserved
+				// and be substring-ed safely.
+				temp += line;
+			}
+		}
+
+		if (toBreak) break;
 	}
-};
+}
+
 
 export const analyzeDialog = async function (assistant: string, user: string) {
 	const prompt: ChatMessage[] = [];
@@ -95,121 +137,7 @@ export const analyzeDialog = async function (assistant: string, user: string) {
 	return { ...data, overallScore: (data.clarity + data.grammar + data.appropriateness) / 300 };
 };
 
-export const generateReadingItem = async (topic: string) => {
-	let prompt: ChatMessage[] = [];
-	prompt.push({
-		role: 'user',
-		content: `Write me a story to be used for teaching student's reading skill. Write the story so that primary student can understand.
-		The text must pass the following specifications:
-		-Topic: ${topic}
-		-Minimum length: 150 words
-		You will have to reply in the following JSON schema format:
-		{
-		// title of the generated story
-		"title": string,
-		// the content of the story
-		"content": string,
-		}`
-	});
-
-	let item: { title: string, content: string } | null = null;
-	let attempt = 0;
-	while (true) {
-		let response: any;
-		try {
-			response = await chat(prompt);
-
-			// gpt will response in JSON format, parse it to object
-			item = JSON.parse(response);
-			break;
-		} catch (error) {
-			// max attempt at 5
-			if (attempt++ >= 5) break;
-
-			console.error('error: generating reading item, retring...', response);
-		}
-	}
-
-	if (!item)
-		throw new Error("Failed to generate story topic: " + topic);
-
-	const quiz: { question: string, choices: string[], answer: number }[] = [];
-
-	const addQuiz = async (brief: string, amt: number) => {
-		const p: ChatMessage[] = [];
-		p.push({
-			role: 'user',
-			content: `${brief}
-
-			The story:
-			${item?.content}
-			
-			You will have to reply in the following JSON schema format:
-			{
-			// question about the provided story
-			"question": string,
-			// 4 choices of the question
-			"choices": string[],
-			// the correct choices index of the "choices" property
-			"answer": int
-			}
-			Do not provide any other text or explanation.`
-		});
-
-		for (let i = 0; i < amt; i++) {
-			let q: { question: string, choices: string[], answer: number } | null = null;
-			while (true) {
-				let response: string | null = null;
-				try {
-					response = await chat(p);
-
-					// gpt will response in JSON format, parse it to object
-					q = JSON.parse(response);
-
-					p.push({
-						role: 'assistant',
-						content: response
-					})
-					p.push({
-						role: 'user',
-						content: `give me another one`
-					})
-					break;
-				} catch (error) {
-					// max attempt at 5
-					if (attempt++ >= 5) break;
-
-					console.error('error: generating quiz, retring...', response);
-				}
-			}
-
-			if (!q)
-				throw new Error("Failed to generate quiz for story with topic: " + topic);
-
-			quiz.push(q);
-		}
-	};
-
-	prompt = [];
-	prompt.push({
-		role: 'user',
-		content: `analyze the provided story and give me all the useful vocabularies that you think the student would not have known in that said story. Answer each word separated by comma and do not provide any other explanation or information. Do not use any punctuation other than comma.
-		
-		The story:
-		${item.content}`
-	});
-	const response = await chat(prompt);
-	const vocabs = response.replace(".", "").split(",").map(s => s.trim().toLowerCase());
-
-	const promises = [addQuiz('Write a 4 choices question with one correct answer to test the reader knowledge from a story that will be given and provide the correct answer.', 2),
-	addQuiz('Write a 4 choices question with one correct answer to test the reader vocabulary knowledge from a story that will be given and provide the correct answer. Write a question asking the meaning of vocabularies found in the story.', 2),
-	addQuiz('Write a 4 choices question with one correct answer to test the reader knowledge from a story that will be given and provide the correct answer. Write the question about a tone of voice from parts of the story.', 1)]
-	await Promise.all(promises);
-
-	return { ...item, quiz, vocabs };
-}
-
-export const getVocabsFromConversation = async (history: RecapHistory) => {
+export const getVocabsFromConversation = async (recap: RecapResult) => {
 	const prompt: ChatMessage[] = [];
 	prompt.push({
 		role: 'user',
@@ -230,16 +158,97 @@ export const getVocabsFromConversation = async (history: RecapHistory) => {
 	});
 	prompt.push({
 		role: 'user',
-		content: history.map(
-			item => `A: ${item.assistant.transcription}\nB: ${item.user?.transcription}`
-		).join("\n")
-	})
+		content: recap.history
+			.map((item) => `A: ${item.assistant.transcription}\nB: ${item.user?.transcription}`)
+			.join('\n')
+	});
 	const response = await chat(prompt);
-	return response.replace(".", "").split(",").map(s => s.trim().toLowerCase());
-}
+	return response
+		.replace('.', '')
+		.split(',')
+		.map((s) => s.trim().toLowerCase());
+};
 
 export const getConversations = async () => {
-	const result = await fetch('/api/v1/conversation/queryAvailable', { method: 'GET' });
+	const result = await fetch(
+		'/api/v1/conversation/queryAvailable?' + new URLSearchParams({ mode: get(currentMode) }),
+		{ method: 'GET' }
+	);
 	const val: ConversationCarouselItem[] = await result.json();
 	return val;
-}
+};
+
+export const checkGoalProgress = async function (dialogue: string, goal: string) {
+	const response = await fetch('/api/v1/conversation/utils/goalProgress', {
+		method: 'POST',
+		body: JSON.stringify({ dialogue, goal })
+	});
+
+	const { result } = await response.json();
+	return result;
+};
+
+export const analyzeDialogueScore = async function (
+	assistant: string,
+	user: { message: string; CEFRLevel: CEFRLevel },
+	context: string
+) {
+	const response = await fetch('/api/v1/conversation/utils/analyzeDialogue', {
+		method: 'POST',
+		body: JSON.stringify({ assistant, user, context })
+	});
+
+	const data = (await response.json()) as DialogueScore;
+	data.advancement.score *= 10;
+	data.grammar.score *= 10;
+	return data;
+};
+
+export const analyzeGoalScore = async function (
+	hintUsed: boolean,
+	CEFRLevel: CEFRLevel,
+	context: string,
+	dialogues: { user: string; assistant: string }[]
+) {
+	const result = { overall: 0, coins: 0, scores: Array<DialogueScore>() };
+
+	if (hintUsed) {
+		result.coins = 40;
+		for (let index = 0; index < dialogues.length; index++) {
+			result.scores[index] = {
+				grammar: { examples: [], score: 0 },
+				appropriateness: true,
+				advancement: { examples: [], score: 0 }
+			};
+		}
+		return result;
+	}
+
+	const promises: Promise<any>[] = [];
+	for (let index = 0; index < dialogues.length; index++) {
+		const item = dialogues[index];
+		const _promise = analyzeDialogueScore(
+			item.assistant,
+			{ message: item.user, CEFRLevel },
+			context
+		).then((data) => {
+			result.scores[index] = data;
+		});
+		promises.push(_promise);
+	}
+	await Promise.all(promises);
+
+	result.overall =
+		result.scores
+			.map((e) => (e.appropriateness ? 50 + e.advancement.score * 0.3 + e.grammar.score * 0.2 : 0))
+			.reduce((x, y) => x + y, 0) / result.scores.length;
+	result.overall = round(result.overall, 2);
+
+	result.coins =
+		result.scores
+			.map((e) => (e.appropriateness ? 50 + e.advancement.score * 0.3 + e.grammar.score * 0.2 : 40))
+			.reduce((x, y) => x + y, 0) / result.scores.length;
+	result.coins = round(result.coins, 0);
+
+	return result;
+};

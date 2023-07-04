@@ -1,9 +1,13 @@
 import type { SynthesizeAccent, SynthesizeGender } from '$api/tts';
-import type { RecapHistory } from '$lib/global/chatbox';
+import type { RecapResult } from '$lib/global/chatbox';
+import type { CEFRLevel } from './CEFRLevel';
 
 interface LearnerDetails {
-	goal: string;
+	mission: string;
+	goal: string[];
+	hint: string[];
 }
+
 interface BotDetails {
 	avatar: string;
 	accent: SynthesizeAccent;
@@ -22,19 +26,62 @@ export interface ConversationCarouselItem {
 	image: string;
 	intro: string;
 	topic: string;
-	CEFRlevel: string;
+	CEFRlevel: CEFRLevel;
 	background: string;
 	details: ConversationDetails;
+	avatar: ConversationAvatar;
 	id: string;
 }
 
+export interface ConversationAvatar {
+	name: string;
+	models: AvatarModel;
+}
+
+export interface AvatarModel {
+	neutral: string;
+	joy: string;
+	trust: string;
+	fear: string;
+	surprise: string;
+	sadness: string;
+	disgust: string;
+	anger: string;
+	anticipation: string;
+}
+
 export interface FinishedConversation {
-	recap: RecapHistory;
+	recap: RecapResult;
 	finishedTime: Date;
 	conversationID: string;
 }
 
+export const BotEmotionValues = [
+	'neutral',
+	'joy',
+	'trust',
+	'fear',
+	'surprise',
+	'sadness',
+	'disgust',
+	'anger',
+	'anticipation'
+] as const;
+
+export type BotEmotion = (typeof BotEmotionValues)[number];
+
 export interface ChatBotMessage {
 	message: string;
+	emotion: BotEmotion;
 	status: 'NORMAL' | 'INAPPROPRIATE' | 'END-OF-CONVERSATION';
+}
+
+export interface ConversationHistoryItem {
+	chat?: {
+		role: 'user' | 'assistant';
+		audioURL: string;
+		transcription: string | null;
+	};
+	endOfGoal?: number;
+	hint?: string;
 }

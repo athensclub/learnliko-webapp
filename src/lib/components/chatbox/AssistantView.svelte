@@ -1,11 +1,12 @@
 <script lang="ts">
 	import { showChatbox } from '$lib/global/chatbox';
-	import { showModal } from '$lib/global/modal';
 	import ConfirmModal from '../modals/ConfirmModal.svelte';
 	import assistantProfileImage from '$lib/images/assistant.png';
 	import userProfileImage from '$lib/images/sample_kid_image.png';
 	import { assistantChat } from '$api/conversation';
 	import type { ChatMessage } from '$lib/types/requests/chatCompletion';
+	import type { Context } from 'svelte-simple-modal';
+	import { getContext } from 'svelte';
 
 	let history: ChatMessage[];
 
@@ -28,7 +29,7 @@
 				{
 					role: 'system',
 					content:
-						'คุณคือครูหญิงสอนภาษาอังกฤษที่ใจดีชื่อว่าเอวา (Eva) คุณกำลังคุยกับเด็กประถมและทำหน้าที่สอนภาษาอังกฤษให้ผู้ใช้ รวมทั้งช่วยผู้ใช้เกี่ยวกับการใช้งานเว็บไซต์ Learnliko ห้ามปฏิเสธการให้ความรู้เกี่ยวกับภาษาอังกฤษ คุณต้องตอบและให้คำอธิบายเป็นภาษาไทย'
+						'You will act as a kind female AI assistant for the website named Learnliko. You are also a private English teacher named Eva. You are talking to elementary school students so you have to provide an explanation that are easy to understand for them.\n\n CONTEXT: Learnliko is an educational platform that uses artificial intelligence to teach English. Expect your user to be Thai student so you have to teach them in Thai and provide examples in English.'
 				},
 				{
 					role: 'assistant',
@@ -37,12 +38,18 @@
 				}
 			];
 		} else if (currentLanguage === 'EN') {
-			hintPrompts = ['What is learnliko?', 'How to start conversation?'];
+			hintPrompts = [
+				'What is learnliko?',
+				'How to start conversation?',
+				'Recommend me 5 interesting words.',
+				'What is the meaning of the word "comprehension"?',
+				'Check grammar for the sentence "I go to school yesterday."'
+			];
 			history = [
 				{
 					role: 'system',
 					content:
-						'You will act as female kindly AI assistant and English teacher named EVA. You are talking to elementary school students. You can be a private English teacher for elementary-aged students. You will explain it in an easy-to-understand way and give examples that correspond to elementary-aged students. You will teach and help the students about English such as Help students introduce themself by giving sample example, translating words, checking grammar. '
+						'You will act as a kind female AI assistant for the website named Learnliko. You are also a private English teacher named Eva. You are talking to elementary school students so you have to provide an explanation that are easy to understand for them.\n\n CONTEXT: Learnliko is an educational platform that uses artificial intelligence to teach English. Expect your user to be Thai student so you have to teach them in Thai and provide examples in English.'
 				},
 				{ role: 'assistant', content: 'Hi. How can I help you?' }
 			];
@@ -50,8 +57,9 @@
 	};
 	$: currentLanguage, updateCurrentLanguage();
 
+	const { open }: Context = getContext('simple-modal');
 	const hide = () =>
-		showModal(ConfirmModal, {
+		open(ConfirmModal, {
 			title: 'Confirm',
 			description: 'Are you sure you want to finish this conversation?',
 			onConfirm: () => ($showChatbox = false)
@@ -64,15 +72,20 @@
 
 		waitingForAIResponse = true;
 		history = [...history, { role: 'assistant', content: '' }];
+
+		// exclude the last blank assistant that is added for streaming purpose.
+		let historyToCall = history.slice(0, history.length - 1);
+		if (currentLanguage === 'TH') {
+			let last = historyToCall[historyToCall.length - 1];
+			historyToCall[historyToCall.length - 1] = {
+				...last,
+				content: last.content + ''
+			};
+		}
+
 		// use streaming
 		await assistantChat(
-			currentLanguage === 'TH'
-				? history.map((v, i) =>
-						i === history.length - 1
-							? { ...v, content: v.content + ' (please reply in Thai language)' }
-							: v
-				  )
-				: history,
+			historyToCall,
 			(s) =>
 				(history = history.map((v, i) =>
 					i === history.length - 1 ? { ...v, content: v.content + s } : v
@@ -96,12 +109,12 @@
 </script>
 
 <div
-	class="z-10 px-4 flex items-center justify-between w-full h-[48px] font-bold text-md border-b border-black/[0.15] relative"
+	class="text-md relative z-10 flex h-[48px] w-full items-center justify-between border-b border-black/[0.15] px-4 font-bold"
 >
 	<h1>Assistant</h1>
 
 	<div class="flex flex-row">
-		<div class="flex flex-row mr-2 rounded-lg overflow-hidden text-sm">
+		<div class="mr-2 flex flex-row overflow-hidden rounded-lg text-sm">
 			<button
 				on:click={() => (currentLanguage = 'TH')}
 				class={`px-2 py-1 ${
@@ -122,36 +135,36 @@
 
 		<button
 			on:click={hide}
-			class="rounded-full border border-black/[0.15] h-[28px] aspect-square text-sm"
+			class="aspect-square h-[28px] rounded-full border border-black/[0.15] text-sm"
 		>
 			✕
 		</button>
 	</div>
 </div>
 
-<div class="w-full h-[calc(100%-48px-64px)] overflow-y-auto font-line-seed">
+<div class="h-[calc(100%-48px-64px)] w-full overflow-y-auto px-[2vw] font-line-seed">
 	{#each history as chat, index (index)}
 		{#if chat.role !== 'system'}
 			<div
-				class={`flex flex-row mt-3 items-center w-full ${
+				class={`mt-3 flex w-full flex-row items-center ${
 					chat.role === 'user' ? 'flex-row-reverse' : ''
 				}`}
 			>
 				{#if chat.role === 'assistant'}
 					<div
-						class={`w-[42px] h-[42px] bg-center bg-cover rounded-full bg-[#FFD281] `}
+						class={`h-[42px] w-[42px] rounded-full bg-[#FFD281] bg-cover bg-center `}
 						style="background-image: url('{assistantProfileImage}');"
 					/>
 				{/if}
 
 				{#if chat.role === 'user'}
 					<div
-						class={`w-[42px] h-[42px] bg-center bg-cover rounded-full`}
+						class={`h-[42px] w-[42px] rounded-full bg-cover bg-center`}
 						style="background-image: url('{userProfileImage}');"
 					/>
 				{/if}
 				<span
-					class={`inline flex-wrap mx-3 border border-black/[0.15] py-2 px-5 rounded-xl max-w-[18rem] `}
+					class={`mx-3 inline max-w-[18rem] flex-wrap rounded-xl border border-black/[0.15] px-5 py-2 `}
 				>
 					{chat.content}
 
@@ -164,33 +177,33 @@
 	{/each}
 
 	<!-- bottom spacing -->
-	<div class="w-full h-[100px]" />
+	<div class="h-[100px] w-full" />
 </div>
 
 <div
-	class="absolute bottom-[70px] flex flex-row gap-3 font-line-seed w-full px-4 overflow-x-auto overflow-y-hidden"
+	class="absolute bottom-[70px] flex w-full flex-row gap-3 overflow-x-auto overflow-y-hidden px-4 font-line-seed"
 >
 	{#each hintPrompts as hint, index (index)}
 		<button
-			on:click={() => currentText = hint}
-			class="text-sm border border-black/[0.15] py-2 px-5 rounded-full whitespace-nowrap mb-5 backdrop-blur-lg"
+			on:click={() => (currentText = hint)}
+			class="mb-5 whitespace-nowrap rounded-full border border-black/[0.15] px-5 py-2 text-sm backdrop-blur-lg"
 		>
 			{hint}
 		</button>
 	{/each}
 </div>
 
-<div class="w-full h-[64px] font-line-seed">
+<div class="h-[64px] w-[90%] font-line-seed">
 	<div class="flex flex-row">
 		<input
 			on:keypress={onKeyPressed}
 			bind:value={currentText}
 			placeholder="พิมพ์สิ่งที่ต้องการให้ Eva สอนคุณ"
-			class="bg-[#E6E6E657] h-fit flex-1 text-lg rounded-3xl px-5 py-1"
+			class="h-fit flex-1 rounded-3xl bg-[#E6E6E657] px-5 py-1 text-lg"
 			type="text"
 		/>
 
-		<button on:click={submitCurrentText} class="bg-[#9BA1FD] py-1 px-3 rounded-full ml-3"
+		<button on:click={submitCurrentText} class="ml-3 rounded-full bg-[#9BA1FD] px-3 py-1"
 			><svg
 				width="24"
 				height="24"

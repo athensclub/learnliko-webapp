@@ -1,8 +1,8 @@
-import type { RecapHistory } from "$lib/global/chatbox";
+import type {  RecapResult } from "$lib/global/chatbox";
 import type { ConversationCarouselItem } from "./conversationData";
 import type { ReadingItem } from "./reading";
 
-export interface LearningDiaryItem{
+export interface LearningDiaryItem {
     date: string;
     title: string;
     learnedConversations: LearnedConversationItem[];
@@ -17,7 +17,7 @@ export interface LearnedReadingItem {
 
 export interface LearnedConversationItem {
     conversation: ConversationCarouselItem;
-    recap: RecapHistory;
+    recap: RecapResult;
     vocabs: string[];
     finishedTime: Date;
 }

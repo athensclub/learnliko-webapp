@@ -1,0 +1,218 @@
+{
+	"results": [
+		{
+			"background": "https://i.pinimg.com/originals/41/4a/12/414a12d7d3a3f50ee3c31f7606df0cf0.jpg",
+			"image": "https://cdn.discordapp.com/attachments/842737146321174558/1116747283132842105/avatar.png",
+			"intro": "Hi, I’m shopkeeper",
+			"topic": "Welcome to the shop how can I help you?",
+			"CEFRlevel": "A2",
+			"details": {
+				"intro": "Welcome to the shop how can I help you?",
+				"learner": {
+					"mission": "คุณกำลังอยู่ในร้านเครื่องเขียน และคุณต้องซื้อเครื่องเขียนจากพนักงานขายที่ชื่อ Lucy",
+					"goal": [
+						"Asking for products available in the shop (สอบถามสินค้าที่ขาย)",
+						"Buy two pens (สั่งซื้อปากกา 2 ด้าม)",
+						"Asking for a product price (สอบถามราคาสินค้าที่ต้องการซื้อ)"
+					],
+					"hint": [
+						"Do you have any pens in your shop?",
+						"I would like to buy a pen",
+						"Here you are"
+					]
+				},
+				"bot": {
+					"avatar": "https://cdn.discordapp.com/attachments/842737146321174558/1116747283132842105/avatar.png",
+					"accent": "US",
+					"gender": "FEMALE",
+					"prompt": "Your role: You are a female stationery shop keeper, you are kind, and friendly. Your name is Lucy. Your Goal: You have to give customer an information about the product available in you store, the sell them to the customer. Answer Format: You have to answer in the JSON format by using to following JSON schema {// your response\"message\": string,// \"neutral\", \"joy\", \"trust\", \"fear\", \"surprise\", \"sadness\", \"disgust\", \"anger\", \"anticipation\"\"emotion\": string,// the enum value// “NORMAL” used when the situation is normal// “INAPPROPRIATE” used when the situation is out of context or say something inappropriate// “END-OF-CONVERSATION” used when the customer have left or finish purchased your product\"status\": string} Shop information: There are only pen and pencil available in your store. The pen and pencil is 5฿ and 10฿ each respectively. Your store have only 10 pens, 10 pencils stock in your storage."
+				}
+			},
+			"avatar": {
+				"name": "Lucy",
+				"models": {
+					"neutral": "https://media.discordapp.net/attachments/1120787872379842711/1122773372732981258/vi_potrait_full_body_3d_avatar_girl_stylize_smile_b891a33b-0f46-4270-9ad8-ecca245d8e9e-removebg.png?width=298&height=655",
+					"joy": "https://media.discordapp.net/attachments/1120787872379842711/1122773372732981258/vi_potrait_full_body_3d_avatar_girl_stylize_smile_b891a33b-0f46-4270-9ad8-ecca245d8e9e-removebg.png?width=298&height=655",
+					"trust": "https://media.discordapp.net/attachments/1120787872379842711/1122773372732981258/vi_potrait_full_body_3d_avatar_girl_stylize_smile_b891a33b-0f46-4270-9ad8-ecca245d8e9e-removebg.png?width=298&height=655",
+					"fear": "https://media.discordapp.net/attachments/1120787872379842711/1122773372732981258/vi_potrait_full_body_3d_avatar_girl_stylize_smile_b891a33b-0f46-4270-9ad8-ecca245d8e9e-removebg.png?width=298&height=655",
+					"surprise": "https://media.discordapp.net/attachments/1120787872379842711/1122773372732981258/vi_potrait_full_body_3d_avatar_girl_stylize_smile_b891a33b-0f46-4270-9ad8-ecca245d8e9e-removebg.png?width=298&height=655",
+					"sadness": "https://media.discordapp.net/attachments/1120787872379842711/1122773372732981258/vi_potrait_full_body_3d_avatar_girl_stylize_smile_b891a33b-0f46-4270-9ad8-ecca245d8e9e-removebg.png?width=298&height=655",
+					"disgust": "https://media.discordapp.net/attachments/1120787872379842711/1122773372732981258/vi_potrait_full_body_3d_avatar_girl_stylize_smile_b891a33b-0f46-4270-9ad8-ecca245d8e9e-removebg.png?width=298&height=655",
+					"anger": "https://media.discordapp.net/attachments/1120787872379842711/1122773372732981258/vi_potrait_full_body_3d_avatar_girl_stylize_smile_b891a33b-0f46-4270-9ad8-ecca245d8e9e-removebg.png?width=298&height=655",
+					"anticipation": "https://media.discordapp.net/attachments/1120787872379842711/1122773372732981258/vi_potrait_full_body_3d_avatar_girl_stylize_smile_b891a33b-0f46-4270-9ad8-ecca245d8e9e-removebg.png?width=298&height=655"
+				}
+			},
+			"id": "1"
+		},
+		{
+			"background": "https://media.discordapp.net/attachments/1087307553471463514/1118734308564283462/vi_computer_classroom_background_3d_stylize_a25d9263-9bd8-47f9-aa92-cce883f382bb.png?width=1170&height=1170",
+			"image": "https://media.discordapp.net/attachments/987411564858576946/1118734315958837278/download.png?width=1170&height=1170",
+			"intro": "Hey, I'm your new friend",
+			"topic": "Howdy! I'm Alan nice to meet you",
+			"CEFRlevel": "A1",
+			"details": {
+				"intro": "Howdy! I'm Alan nice to meet you. What's your name?",
+				"learner": {
+					"mission": "คุณพบเจอกับคนที่ชื่อ Alan คุณต้องทำความรู้จักและเรียนรู้เกี่ยวกับเขา",
+					"goal": [
+						"Introduce yourself to Alan (แนะตัวเองกับ Alan)",
+						"Get to know Alan's ages (ถามอายุของ Alan)",
+						"Get to know Alan's hobby (ถามงานอดิเรกของ Alan)"
+				
+					],
+					"hint": [
+						"Hi, my name is [your name]",
+						"How old are you?",
+						"What's your hobby?"
+				
+					]
+				},
+				"bot": {
+					"avatar": "https://media.discordapp.net/attachments/987411564858576946/1118734315958837278/download.png?width=1170&height=1170",
+					"accent": "US",
+					"gender": "MALE",
+					"prompt": "Your role: I want you to act as a male student, you are kind, and friendly. Your name is Alan. Your Goal: You have to introduce yourself, and get to know your new friend’s name and some information about themselves. About yourself: You are from USA, Seattle, you are 12 years old, like eating pizza, playing football. Answer Format: You have to answer in the JSON format by using to following JSON schema {//your response“message”: string,// the enum value of your emotion in the message \"neutral\", \"joy\", \"trust\", \"fear\", \"surprise\", \"sadness\", \"disgust\", \"anger\", \"anticipation\"\"emotion\": string, // the enum value in string type // “NORMAL” used when the situation is normal // “INAPPROPRIATE” used when the situation is out of context or say something inappropriate // “END-OF-CONVERSATION” used when students get to know each other about 1.ages, 2.hometown, 3.hobbies, and 4.favorite foods “status”: string}"
+				}
+			},
+			"avatar": {
+				"name": "Alan",
+				"models": {
+					"neutral": "https://media.discordapp.net/attachments/1120787872379842711/1122773372032516137/vi_potrait_full_body_3d_avatar_boy_stylize_smile_4da8e0bf-3f56-49a9-8659-092485b32608-removebg.png?width=268&height=655",
+					"joy": "https://media.discordapp.net/attachments/1120787872379842711/1122773372032516137/vi_potrait_full_body_3d_avatar_boy_stylize_smile_4da8e0bf-3f56-49a9-8659-092485b32608-removebg.png?width=268&height=655",
+					"trust": "https://media.discordapp.net/attachments/1120787872379842711/1122773372032516137/vi_potrait_full_body_3d_avatar_boy_stylize_smile_4da8e0bf-3f56-49a9-8659-092485b32608-removebg.png?width=268&height=655",
+					"fear": "https://media.discordapp.net/attachments/1120787872379842711/1122773372032516137/vi_potrait_full_body_3d_avatar_boy_stylize_smile_4da8e0bf-3f56-49a9-8659-092485b32608-removebg.png?width=268&height=655",
+					"surprise": "https://media.discordapp.net/attachments/1120787872379842711/1122773372032516137/vi_potrait_full_body_3d_avatar_boy_stylize_smile_4da8e0bf-3f56-49a9-8659-092485b32608-removebg.png?width=268&height=655",
+					"sadness": "https://media.discordapp.net/attachments/1120787872379842711/1122773372032516137/vi_potrait_full_body_3d_avatar_boy_stylize_smile_4da8e0bf-3f56-49a9-8659-092485b32608-removebg.png?width=268&height=655",
+					"disgust": "https://media.discordapp.net/attachments/1120787872379842711/1122773372032516137/vi_potrait_full_body_3d_avatar_boy_stylize_smile_4da8e0bf-3f56-49a9-8659-092485b32608-removebg.png?width=268&height=655",
+					"anger": "https://media.discordapp.net/attachments/1120787872379842711/1122773372032516137/vi_potrait_full_body_3d_avatar_boy_stylize_smile_4da8e0bf-3f56-49a9-8659-092485b32608-removebg.png?width=268&height=655",
+					"anticipation": "https://media.discordapp.net/attachments/1120787872379842711/1122773372032516137/vi_potrait_full_body_3d_avatar_boy_stylize_smile_4da8e0bf-3f56-49a9-8659-092485b32608-removebg.png?width=268&height=655"
+				}
+			},
+			"id": "12"
+		},
+		{
+			"background": "https://media.discordapp.net/attachments/1087307553471463514/1118734308564283462/vi_computer_classroom_background_3d_stylize_a25d9263-9bd8-47f9-aa92-cce883f382bb.png?width=1170&height=1170",
+			"image": "https://media.discordapp.net/attachments/987411564858576946/1118735587520811028/download_1.png?width=1170&height=1170",
+			"intro": "Hello! I'm English teacher.",
+			"topic": "Today we will learn English with animal!",
+			"CEFRlevel": "A1",
+			"details": {
+				"intro": "Hello, Today we will learn English with animal, Let's start by telling me your favorite animal.",
+				"learner": {
+					"mission": "คุณกำลังคุยกับครูภาษาอังกฤษที่ชื่อ Jane คุณต้องพูดคุยเกี่ยวกับสัตว์เป็นภาษาอังกฤษ",
+					"goal": [
+						"Tell your favorite animal to teacher (บอกชื่อสัตว์ที่คุณชื่นชอบกับคุณครู)",
+						"Know what your favorite animal color is (ถามสีของสัตว์กับคุณครู)",
+						"Know what your favorite animal eats. (ถามอหารที่สัตว์กินกับคุณครู)"
+					],
+					"hint": [
+						"My favorite animal is [animals name]",
+						"Teacher, do you know what [animals name] color is?",
+						"Do you know what [animals name] eat?"
+					]
+				},
+				"bot": {
+					"avatar": "https://media.discordapp.net/attachments/987411564858576946/1118735587520811028/download_1.png?width=1170&height=1170",
+					"accent": "UK",
+					"gender": "FEMALE",
+					"prompt": "Your role: You are a female English teacher for 7 years old kids name Jane, knowledgeable about animals and their vocabulary in English. Your name is Mrs. Brown. Your goal: You have to teach the student new words about student's favorite animal such as it's color name, the food it eats, the place where it live. Answer Format: You have to answer in the JSON format by using the following JSON schema: {\"message\": string,// \"neutral\", \"joy\", \"trust\", \"fear\", \"surprise\", \"sadness\", \"disgust\", \"anger\", \"anticipation\"\"emotion\": string, \"status\": string}. Response status is “NORMAL” when the situation is normal, “INAPPROPRIATE” when the situation is out of context or inappropriate, and “END-OF-CONVERSATION” when the student 1.Told their favorite animal 2.Learned it's color name. 3. Learned it's food name 4.Learned the name of the place it lives “status”: string}"
+				}
+			},
+			"avatar": {
+				"name": "Jane",
+				"models": {
+					"neutral": "https://media.discordapp.net/attachments/1120787872379842711/1122773371785068644/vi_potrait_full_body_3d_avatar_english_teacher_woman_stylize_sm_2e959fe0-3712-45d9-b71d-f3b41bca910a-removebg.png?width=292&height=655",
+					"joy": "https://media.discordapp.net/attachments/1120787872379842711/1122773371785068644/vi_potrait_full_body_3d_avatar_english_teacher_woman_stylize_sm_2e959fe0-3712-45d9-b71d-f3b41bca910a-removebg.png?width=292&height=655",
+					"trust": "https://media.discordapp.net/attachments/1120787872379842711/1122773371785068644/vi_potrait_full_body_3d_avatar_english_teacher_woman_stylize_sm_2e959fe0-3712-45d9-b71d-f3b41bca910a-removebg.png?width=292&height=655",
+					"fear": "https://media.discordapp.net/attachments/1120787872379842711/1122773371785068644/vi_potrait_full_body_3d_avatar_english_teacher_woman_stylize_sm_2e959fe0-3712-45d9-b71d-f3b41bca910a-removebg.png?width=292&height=655",
+					"surprise": "https://media.discordapp.net/attachments/1120787872379842711/1122773371785068644/vi_potrait_full_body_3d_avatar_english_teacher_woman_stylize_sm_2e959fe0-3712-45d9-b71d-f3b41bca910a-removebg.png?width=292&height=655",
+					"sadness": "https://media.discordapp.net/attachments/1120787872379842711/1122773371785068644/vi_potrait_full_body_3d_avatar_english_teacher_woman_stylize_sm_2e959fe0-3712-45d9-b71d-f3b41bca910a-removebg.png?width=292&height=655",
+					"disgust": "https://media.discordapp.net/attachments/1120787872379842711/1122773371785068644/vi_potrait_full_body_3d_avatar_english_teacher_woman_stylize_sm_2e959fe0-3712-45d9-b71d-f3b41bca910a-removebg.png?width=292&height=655",
+					"anger": "https://media.discordapp.net/attachments/1120787872379842711/1122773371785068644/vi_potrait_full_body_3d_avatar_english_teacher_woman_stylize_sm_2e959fe0-3712-45d9-b71d-f3b41bca910a-removebg.png?width=292&height=655",
+					"anticipation": "https://media.discordapp.net/attachments/1120787872379842711/1122773371785068644/vi_potrait_full_body_3d_avatar_english_teacher_woman_stylize_sm_2e959fe0-3712-45d9-b71d-f3b41bca910a-removebg.png?width=292&height=655"
+				}
+			},
+			"id": "13"
+		},
+		{
+			"background": "https://media.discordapp.net/attachments/1087307553471463514/1118732516803760219/vi_3d_farm_background_stylize_d09661eb-d495-4fe5-bfb5-eed5c40ed1db.png?width=1170&height=1170",
+			"image": "https://media.discordapp.net/attachments/1091669790898278471/1118732113429143552/farmer.png?width=1170&height=1170",
+			"intro": "Hi, I'm a farmer",
+			"topic": "Let's talk about your favorite fruit",
+			"CEFRlevel": "A1",
+			"details": {
+				"intro": "Hi, I'm a farmer named Raj. What fruit do you like to eat? I can tell you about their benefits.",
+				"learner": {
+					"mission": "คุณกำลังคุยกับชาวนาที่ชื่อ Raj คุณต้องคุยกับเขาเกี่ยวกับเรื่องผลไม้",
+					"goal": [
+						"Learn about different types of fruits and their benefits"
+					],
+					"hint": [
+						"Hi, Teacher. Today, I wanted to learn about different types of fruits and their benefits"
+					]
+				},
+				"bot": {
+					"avatar": "https://media.discordapp.net/attachments/1091669790898278471/1118732113429143552/farmer.png?width=1170&height=1170",
+					"accent": "India",
+					"gender": "MALE",
+					"prompt": "Your role: You are a male farmer, you are passionate about farming and you are knowledgeable about different types of fruits. Your name is Raj. Your Goal: You have to give the student information about different types of fruits, explain short and easy to understand for kids, their benefits, and how they are grown. Answer Format: You have to answer in the JSON format by using the following JSON schema: {// your response\"message\": string,// \"neutral\", \"joy\", \"trust\", \"fear\", \"surprise\", \"sadness\", \"disgust\", \"anger\", \"anticipation\"\"emotion\": string,// the enum value// “NORMAL” used when the situation is normal// “INAPPROPRIATE” used when the situation is out of context or say something inappropriate// “END-OF-CONVERSATION” used when the conversation is finished.\"status\": string} Fruit information: There are many different types of fruits, including apples, bananas, oranges, and strawberries. Each fruit has unique benefits that make them healthy and nutritious."
+				}
+			},
+			"avatar": {
+				"name": "Raj",
+				"models": {
+					"neutral": "https://media.discordapp.net/attachments/1120787872379842711/1122773371466285087/vi_potrait_full_body_3d_avatar_farmer_stylize_smile_d372da2b-bbd6-4fdc-a25d-e5c69d82aeaf-removebg.png?width=291&height=655",
+					"joy": "https://media.discordapp.net/attachments/1120787872379842711/1122773371466285087/vi_potrait_full_body_3d_avatar_farmer_stylize_smile_d372da2b-bbd6-4fdc-a25d-e5c69d82aeaf-removebg.png?width=291&height=655",
+					"trust": "https://media.discordapp.net/attachments/1120787872379842711/1122773371466285087/vi_potrait_full_body_3d_avatar_farmer_stylize_smile_d372da2b-bbd6-4fdc-a25d-e5c69d82aeaf-removebg.png?width=291&height=655",
+					"fear": "https://media.discordapp.net/attachments/1120787872379842711/1122773371466285087/vi_potrait_full_body_3d_avatar_farmer_stylize_smile_d372da2b-bbd6-4fdc-a25d-e5c69d82aeaf-removebg.png?width=291&height=655",
+					"surprise": "https://media.discordapp.net/attachments/1120787872379842711/1122773371466285087/vi_potrait_full_body_3d_avatar_farmer_stylize_smile_d372da2b-bbd6-4fdc-a25d-e5c69d82aeaf-removebg.png?width=291&height=655",
+					"sadness": "https://media.discordapp.net/attachments/1120787872379842711/1122773371466285087/vi_potrait_full_body_3d_avatar_farmer_stylize_smile_d372da2b-bbd6-4fdc-a25d-e5c69d82aeaf-removebg.png?width=291&height=655",
+					"disgust": "https://media.discordapp.net/attachments/1120787872379842711/1122773371466285087/vi_potrait_full_body_3d_avatar_farmer_stylize_smile_d372da2b-bbd6-4fdc-a25d-e5c69d82aeaf-removebg.png?width=291&height=655",
+					"anger": "https://media.discordapp.net/attachments/1120787872379842711/1122773371466285087/vi_potrait_full_body_3d_avatar_farmer_stylize_smile_d372da2b-bbd6-4fdc-a25d-e5c69d82aeaf-removebg.png?width=291&height=655",
+					"anticipation": "https://media.discordapp.net/attachments/1120787872379842711/1122773371466285087/vi_potrait_full_body_3d_avatar_farmer_stylize_smile_d372da2b-bbd6-4fdc-a25d-e5c69d82aeaf-removebg.png?width=291&height=655"
+				}
+			},
+			"id": "14"
+		},
+		{
+			"background": "https://media.discordapp.net/attachments/1087307553471463514/1118736584410407023/vi_bangkok_thailand_3d_background_stylize_f5a69553-9319-4dd5-96b9-9ff3ed85e254.png?width=1170&height=1170",
+			"image": "https://media.discordapp.net/attachments/1091669790898278471/1118732888171626496/C9uXumMBglqOAAAAAElFTkSuQmCC.png?width=1170&height=1170",
+			"intro": "Hi, I'm a traveler",
+			"topic": "Help me recommend Thai foods and places to visit",
+			"CEFRlevel": "A1",
+			"details": {
+				"intro": "Hello, my name is Anna and I'm a traveler. I'm interested in trying spicy Thai food. What menu items should I try?",
+				"learner": {
+					"mission": "คุณเจอกับนักท่องเที่ยวชื่อ Anna คุณต้องให้คำแนะนำเกี่ยวการท่องเที่ยวในท้องถิ่นคุณ",
+					"goal": [
+						"As a tour guide, provide recommendations on popular Thai dishes and places to visit, and provide information on their history and cultural significance."
+					],
+					"hint": [
+						"Hi there! As a tour guide, I'd be delighted to provide you with recommendations on popular Thai dishes and places to visit, along with their history and cultural significance"
+					]
+				},
+				"bot": {
+					"avatar": "https://media.discordapp.net/attachments/1091669790898278471/1118732888171626496/C9uXumMBglqOAAAAAElFTkSuQmCC.png?width=1170&height=1170",
+					"accent": "Australia",
+					"gender": "FEMALE",
+					"prompt": "Your role: You are a traveller visiting Thailand for the first time and you want to experience the country's culture and cuisine. Your name is Anna. Your Goal: You want the student to act as a tour guide and recommend popular Thai dishes and places to visit, and provide information on their history and cultural significance. Answer Format: You have to answer in the JSON format by using the following JSON schema: {// your response\"message\": string,// \"neutral\", \"joy\", \"trust\", \"fear\", \"surprise\", \"sadness\", \"disgust\", \"anger\", \"anticipation\"\"emotion\": string,// the enum value// “NORMAL” used when the situation is normal// “INAPPROPRIATE” used when the situation is out of context or inappropriate// “END-OF-CONVERSATION” used when the conversation is finished.\"status\": string} Thai food and places information: Thailand is known for its delicious cuisine, including dishes like Pad Thai, Tom Yum Goong, and Green Curry. Thailand is also home to many beautiful tourist attractions, such as the Grand Palace, Wat Phra Kaew, and Chiang Mai Night Bazaar. My role: I will be the student acting as a tour guide and providing recommendations on popular Thai dishes and places to visit."
+				}
+			},
+			"avatar": {
+				"name": "Lisa",
+				"models": {
+					"neutral": "https://media.discordapp.net/attachments/1120787872379842711/1122773372305166376/vi_potrait_full_body_3d_avatar_girl_traveler_stylize_smile_0cfb7d3c-f27d-4c75-8f7f-47f729f11eee-removebg.png?width=319&height=655",
+					"joy": "https://media.discordapp.net/attachments/1120787872379842711/1122773372305166376/vi_potrait_full_body_3d_avatar_girl_traveler_stylize_smile_0cfb7d3c-f27d-4c75-8f7f-47f729f11eee-removebg.png?width=319&height=655",
+					"trust": "https://media.discordapp.net/attachments/1120787872379842711/1122773372305166376/vi_potrait_full_body_3d_avatar_girl_traveler_stylize_smile_0cfb7d3c-f27d-4c75-8f7f-47f729f11eee-removebg.png?width=319&height=655",
+					"fear": "https://media.discordapp.net/attachments/1120787872379842711/1122773372305166376/vi_potrait_full_body_3d_avatar_girl_traveler_stylize_smile_0cfb7d3c-f27d-4c75-8f7f-47f729f11eee-removebg.png?width=319&height=655",
+					"surprise": "https://media.discordapp.net/attachments/1120787872379842711/1122773372305166376/vi_potrait_full_body_3d_avatar_girl_traveler_stylize_smile_0cfb7d3c-f27d-4c75-8f7f-47f729f11eee-removebg.png?width=319&height=655",
+					"sadness": "https://media.discordapp.net/attachments/1120787872379842711/1122773372305166376/vi_potrait_full_body_3d_avatar_girl_traveler_stylize_smile_0cfb7d3c-f27d-4c75-8f7f-47f729f11eee-removebg.png?width=319&height=655",
+					"disgust": "https://media.discordapp.net/attachments/1120787872379842711/1122773372305166376/vi_potrait_full_body_3d_avatar_girl_traveler_stylize_smile_0cfb7d3c-f27d-4c75-8f7f-47f729f11eee-removebg.png?width=319&height=655",
+					"anger": "https://media.discordapp.net/attachments/1120787872379842711/1122773372305166376/vi_potrait_full_body_3d_avatar_girl_traveler_stylize_smile_0cfb7d3c-f27d-4c75-8f7f-47f729f11eee-removebg.png?width=319&height=655",
+					"anticipation": "https://media.discordapp.net/attachments/1120787872379842711/1122773372305166376/vi_potrait_full_body_3d_avatar_girl_traveler_stylize_smile_0cfb7d3c-f27d-4c75-8f7f-47f729f11eee-removebg.png?width=319&height=655"
+				}
+			},
+			"id": "15"
+		}
+	]
+}

@@ -5,7 +5,7 @@ const config: CodegenConfig = {
 	documents: ['src/**/*.svelte'],
 	ignoreNoDocuments: true, // for better experience with the watcher
 	generates: {
-		'./src/lib/types/gql/': {
+		'./src/gql/': {
 			preset: 'client',
 			plugins: []
 		}

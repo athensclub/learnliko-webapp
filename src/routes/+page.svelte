@@ -29,7 +29,7 @@
 </script>
 
 <div
-	class="w-[100vw] h-full min-h-[100vh] bg-[#F4F4F4] font-line-seed flex flex-col items-center justify-center"
+	class="flex h-full min-h-[100vh] w-[100vw] flex-col items-center justify-center bg-[#F4F4F4] font-line-seed"
 >
 	{#if loading}
 		Loading...
@@ -40,10 +40,10 @@
 
 		<div class="mt-[1vh] text-[1.6vw] font-extrabold">Click Button Below to Get Started</div>
 
-		<div class="flex flex-row mt-[3vh] text-white font-extrabold">
+		<div class="mt-[3vh] flex flex-row font-extrabold text-white">
 			<button
 				on:click={getStarted}
-				class="bg-[#6C80E8] rounded-[2vw] flex flex-row justify-between px-3 py-2"
+				class="flex flex-row justify-between rounded-[2vw] bg-[#6C80E8] px-3 py-2"
 			>
 				<div>Get Started!</div>
 			</button>

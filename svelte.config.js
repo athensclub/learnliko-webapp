@@ -30,7 +30,10 @@ const config = {
 		}),
 		alias: {
 			// Access learnliko's api via SDK library
-			$api: path.resolve('./src/routes/api/_lib')
+			$api: path.resolve('./src/routes/api/_lib'),
+
+			// Generated type of GraphQL Schema
+			$gql: path.resolve('./src/gql')
 		}
 	}
 };

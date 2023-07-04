@@ -32,7 +32,7 @@
 		if ($userSession.isLoggedIn) {
 			const profileData = await getCurrentUserData();
 			if (!profileData) {
-				goto('/setup-profile');
+				// goto('/setup-profile');
 			} else {
 				userSession.update({ accountData: profileData });
 				currentMode.set('Student');

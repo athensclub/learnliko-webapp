@@ -41,7 +41,6 @@
 			{#each yTicks as tick}
 				<g class="tick tick-{tick}" transform="translate(0, {yScale(tick)})">
 					<line x2="100%" />
-					<text y="-4">{tick} {tick === 20 ? ' per 1,000 population' : ''}</text>
 				</g>
 			{/each}
 		</g>

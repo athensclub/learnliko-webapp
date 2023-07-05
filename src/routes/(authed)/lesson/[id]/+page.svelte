@@ -13,6 +13,7 @@
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
 	import { getLessonById } from '$api/lesson';
+	import { lastPlayedLessonIdLocal } from '$lib/localdb/profileLocal';
 
 	let item: LessonItem | null = null;
 	let background: string | null = null;
@@ -22,6 +23,7 @@
 			conversation: item.conversation,
 			bot: { emotion: 'neutral' }
 		};
+		$lastPlayedLessonIdLocal = item.id;
 	});
 
 	let entering = true;

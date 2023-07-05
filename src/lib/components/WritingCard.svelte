@@ -11,6 +11,7 @@
 
 	let clazz = '';
 	export { clazz as class };
+	export let scale = 1;
 
 	export let onCorrect = () => {};
 	export let onWrong = () => {};
@@ -71,7 +72,8 @@
 
 		<div class="flex h-full w-full flex-col">
 			<div
-				class="ml-auto flex w-fit flex-row items-center rounded-full bg-white px-[1vw] py-[0.5vw] text-[1vw]"
+				style="font-size: {scale * 1}vw;"
+				class="ml-auto flex w-fit flex-row items-center rounded-full bg-white px-[1vw] py-[0.5vw]"
 			>
 				<div class="flex flex-row font-bold">
 					<div class="bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] bg-clip-text text-transparent">
@@ -179,20 +181,20 @@
 			<div class="mt-[2vw] inline-flex w-full flex-wrap items-center justify-center gap-[0.6vw]">
 				{#each item.text as text, index (index)}
 					{#if text}
-						<div class="text-[1.65vw] font-bold text-white">{text}</div>
+						<div style="font-size: {scale * 1.65}vw;" class="font-bold text-white">{text}</div>
 					{:else}
 						<div class="h-[2vw] w-[3vw] rounded-full bg-white" />
 					{/if}
 				{/each}
 			</div>
 
-			<div class="mb-[1vw] mt-auto flex w-full flex-col px-[2vw]">
+			<div class="mb-[1vw] mt-auto flex w-full flex-col">
 				<div class="grid grid-cols-2 gap-[2vw]">
 					{#each item.choices as choice, index (choice)}
 						<button
 							on:click={() => (selectedChoice = index)}
-							class="min-h-[3vw] w-full rounded-full text-[1.4vw] font-bold {selectedChoice ===
-							index
+							style="font-size: {scale * 1.4}vw;"
+							class="min-h-[3vw] w-full rounded-full font-bold {selectedChoice === index
 								? 'bg-white'
 								: ' border-[0.2vw] border-white'}"
 						>
@@ -211,7 +213,8 @@
 					<button
 						on:click={submit}
 						disabled={selectedChoice === null}
-						class="mt-[3vw] w-full rounded-full bg-white py-[0.5vw] text-[1.3vw] font-bold {selectedChoice ===
+						style="font-size: {scale * 1.3}vw;"
+						class="mt-[3vw] w-full rounded-full bg-white py-[0.5vw] font-bold {selectedChoice ===
 						null
 							? 'text-[#B8B8B8]'
 							: 'text-black'}"
@@ -219,9 +222,13 @@
 						ตรวจ
 					</button>
 				{:else}
-					<div class="mt-[3vw] flex flex-row justify-center items-center text-[1.3vw] font-bold text-white">
+					<div
+						style="font-size: {scale * 1.3}vw;"
+						class="mt-[3vw] flex flex-row items-center justify-center font-bold text-white"
+					>
 						<svg
-							class="mr-[1vw] w-[2.3vw]"
+							style="width: {scale * 2.3}vw;"
+							class="mr-[1vw]"
 							viewBox="0 0 50 55"
 							fill="none"
 							xmlns="http://www.w3.org/2000/svg"
@@ -244,15 +251,16 @@
 		class="relative h-full w-full rounded-[2vw] bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] px-[2vw] py-[1vw]"
 	>
 		<div class="flex h-full w-full flex-col items-center justify-center font-bold text-white">
-			<div class="text-[2vw]">
+			<div style="font-size: {scale * 2}vw;">
 				{selectedChoice === correctAnswer ? 'คุณตอบถูก!' : 'คุณตอบผิด!'}
 			</div>
 
-			<div class="mt-[5vw] text-[1.5vw]">คำตอบคือ</div>
+			<div style="font-size: {scale * 1.5}vw;" class="mt-[5vw]">คำตอบคือ</div>
 			<div
-				class="mt-[1vw] rounded-full border-[0.2vw] border-white px-[2vw] py-[0.3vw] text-[1.5vw]"
+				style="font-size: {scale * 1.5}vw;"
+				class="mt-[1vw] rounded-full border-[0.2vw] border-white px-[2vw] py-[0.3vw]"
 			>
-				{correctAnswer && item.choices[correctAnswer]}
+				{correctAnswer !== null ? item.choices[correctAnswer] : ''}
 			</div>
 		</div>
 	</button>

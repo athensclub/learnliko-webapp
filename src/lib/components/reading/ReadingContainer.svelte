@@ -18,6 +18,7 @@
 
 	let clazz = '';
 	export { clazz as class };
+	export let scale = 1;
 
 	let currentView: ReadingViewType = 'READ';
 
@@ -29,10 +30,10 @@
 	});
 </script>
 
-<div class="pointer-events-auto relative overflow-hidden rounded-[2vw] bg-white p-[2vw] {clazz}">
+<div style="box-shadow: 0px 1px 10px 0px rgba(0, 0, 0, 0.25);" class="pointer-events-auto relative overflow-hidden rounded-[2vw] bg-white p-[2vw] {clazz}">
 	{#if currentView === 'READ'}
-		<ReadingTextView {item} setView={(view) => (currentView = view)} />
+		<ReadingTextView {scale} {item} setView={(view) => (currentView = view)} />
 	{:else if currentView === 'QUIZ'}
-		<ReadingQuizView quiz={item.quiz} {onFinish} setView={(view) => (currentView = view)} />
+		<ReadingQuizView {scale} quiz={item.quiz} {onFinish} setView={(view) => (currentView = view)} />
 	{/if}
 </div>

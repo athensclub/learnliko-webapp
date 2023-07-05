@@ -1,4 +1,5 @@
 <script lang="ts">
+	import type { SentenceCard } from '$gql/graphql';
 	import WritingCard from '$lib/components/WritingCard.svelte';
 	import AnswerCorrectToast from '$lib/components/toasts/AnswerCorrectToast.svelte';
 	import { toast } from '$lib/components/toasts/ToastManager.svelte';
@@ -9,7 +10,7 @@
 	export let addProgress: (val: number) => void;
 	export let onFinish: () => void;
 
-	export let items: (WritingCardItem & {hide?: boolean})[];
+	export let items: (SentenceCard & {hide?: boolean})[];
 
 	const onCorrect = (index: number) => {
 		setTimeout(() => (items[index] = { ...items[index], hide: true }), 5000);

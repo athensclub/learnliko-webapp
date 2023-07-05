@@ -76,26 +76,30 @@
 					}
 				],
 				"type": "VOCABULARY"
-			}
-		],
-		"writings": [
-			{
-				"text": ["I", null, "a student"],
-				"choices": ["is", "am", "are", "-"],
-				"coin": 100,
-				"exp": 25
 			},
 			{
-				"text": ["I", null, "a student"],
-				"choices": ["is", "am", "are", "-"],
-				"coin": 100,
-				"exp": 25
-			},
-			{
-				"text": ["I", null, "a student"],
-				"choices": ["is", "am", "are", "-"],
-				"coin": 100,
-				"exp": 25
+				"__typename": "QuizSection",
+				"cards": [
+					{
+						"choices": ["is", "am", "are", "-"],
+						"question": "I _ a student",
+						"totalCoin": 100,
+						"totalExp": 25
+					},
+					{
+						"choices": ["is", "am", "are", "-"],
+						"question": "I _ a student",
+						"totalCoin": 100,
+						"totalExp": 25
+					},
+					{
+						"choices": ["is", "am", "are", "-"],
+						"question": "I _ a student",
+						"totalCoin": 100,
+						"totalExp": 25
+					}
+				],
+				"type": "SENTENCE"
 			}
 		],
 		"reading": {

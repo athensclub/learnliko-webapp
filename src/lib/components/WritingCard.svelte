@@ -6,8 +6,10 @@
 	import { onMount } from 'svelte';
 	import { fade } from 'svelte/transition';
 	import Flippable from './Flippable.svelte';
+	import type { SentenceCard } from '$gql/graphql';
 
-	export let item: WritingCardItem;
+	export let item: SentenceCard;
+	$: parts = item.question.split('_');
 
 	let clazz = '';
 	export { clazz as class };
@@ -22,7 +24,7 @@
 		const result = [];
 		for (let i = 0; i < item.choices.length; i++) {
 			const val = await synthesize(
-				item.text.map((v) => (v === null ? item.choices[i] : v)).join(' '),
+				item.question.replace('_', item.choices[i]),
 				'US',
 				'FEMALE',
 				0.7
@@ -77,7 +79,7 @@
 			>
 				<div class="flex flex-row font-bold">
 					<div class="bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] bg-clip-text text-transparent">
-						+{item.exp}
+						+{item.totalExp}
 					</div>
 					<svg
 						class="ml-[0.25vw] w-[2.5vw]"
@@ -124,7 +126,7 @@
 					<div
 						class="bg-gradient-to-r from-[#FFE08F] via-[#E4AE24] to-[#FFE08F] bg-clip-text text-transparent"
 					>
-						+{item.coin}
+						+{item.totalCoin}
 					</div>
 					<svg
 						class="ml-[0.25vw] w-[2.5vw]"
@@ -179,10 +181,10 @@
 			</div>
 
 			<div class="mt-[2vw] inline-flex w-full flex-wrap items-center justify-center gap-[0.6vw]">
-				{#each item.text as text, index (index)}
-					{#if text}
-						<div style="font-size: {scale * 1.65}vw;" class="font-bold text-white">{text}</div>
-					{:else}
+				{#each parts as text, index (index)}
+					<div style="font-size: {scale * 1.65}vw;" class="font-bold text-white">{text}</div>
+					
+					{#if index !== parts.length - 1}
 						<div class="h-[2vw] w-[3vw] rounded-full bg-white" />
 					{/if}
 				{/each}

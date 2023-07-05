@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { synthesize } from '$api/tts';
+	import type { VocabularyCard } from '$gql/graphql';
 	import Flippable from '$lib/components/Flippable.svelte';
 	import { playAudio, playAudioURL } from '$lib/global/audio';
 	import type { FlipCardItem } from '$lib/types/flip_card';
@@ -7,14 +8,14 @@
 	import { onMount } from 'svelte';
 	import { fade } from 'svelte/transition';
 
-	export let item: FlipCardItem;
+	export let item: VocabularyCard;
 
 	let speeches: string[] | null = null;
 	// TODO: use data from api instead.
 	const loadSpeeches = async () => {
 		const result = [];
 		for (let i = 0; i < item.choices.length; i++) {
-			const val = await synthesize(item.choices[i], 'US', 'FEMALE', 0.7);
+			const val = await synthesize(item.choices[i].vocab, 'US', 'FEMALE', 0.7);
 			result.push(await blobToBase64(val));
 		}
 		speeches = result;
@@ -58,7 +59,7 @@
 	<button
 		on:click={() => (flipped = !flipped)}
 		slot="front"
-		style="background-image: url('{item.image}');"
+		style="background-image: url('{item.imageUrl}');"
 		class="h-full w-full overflow-hidden rounded-[2vw] bg-cover bg-center"
 	>
 		<div class="flex h-full w-full flex-col items-center bg-[#0000005E] backdrop-blur-[8px]">
@@ -67,7 +68,7 @@
 			>
 				<div class="flex flex-row font-bold">
 					<div class="bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] bg-clip-text text-transparent">
-						+{item.exp}
+						+{item.totalExp}
 					</div>
 					<svg
 						class="ml-[0.25vw] w-[2.5vw]"
@@ -114,7 +115,7 @@
 					<div
 						class="bg-gradient-to-r from-[#FFE08F] via-[#E4AE24] to-[#FFE08F] bg-clip-text text-transparent"
 					>
-						+{item.coin}
+						+{item.totalCoin}
 					</div>
 					<svg
 						class="ml-[0.25vw] w-[2.5vw]"
@@ -168,7 +169,7 @@
 				</div>
 			</div>
 
-			<img src={item.image} class="mt-[2vw] max-w-[80%]" alt="Flip Card Content" />
+			<img src={item.imageUrl} class="mt-[2vw] max-w-[80%]" alt="Flip Card Content" />
 
 			<div class="mt-[2vw] flex flex-row items-center text-[1.3vw] font-bold text-white">
 				<svg
@@ -189,7 +190,7 @@
 
 	<div
 		slot="back"
-		style="background-image: url('{item.image}');"
+		style="background-image: url('{item.imageUrl}');"
 		class="h-full w-full overflow-hidden rounded-[2vw] bg-cover bg-center"
 	>
 		<!-- Can't nest button inside button so the outside is absolute button and inside is another absolute buttons instead -->
@@ -216,7 +217,7 @@
 									: 'bg-white text-black'}"
 								on:click={() => (selectedChoice = index)}
 							>
-								{choice}
+								{choice.vocab}
 							</button>
 						{/each}
 					</div>
@@ -245,13 +246,13 @@
 						{correctAnswer === selectedChoice ? 'คุณตอบถูก!' : 'คุณตอบผิด!'}
 					</div>
 
-					<img src={item.image} class="mt-[2vw] max-w-[80%]" alt="Flip Card Content" />
+					<img src={item.imageUrl} class="mt-[2vw] max-w-[80%]" alt="Flip Card Content" />
 
 					<div class="mt-[1vw] text-[1.35vw]">คำตอบคือ</div>
 					<div
 						class="mt-[1vw] rounded-full border-[0.15vw] border-white px-[2vw] py-[0.5vw] text-[1.35vw]"
 					>
-						{item.choices[correctAnswer]}
+						{item.choices[correctAnswer].vocab}
 					</div>
 				</div>
 			{/if}

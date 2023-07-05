@@ -14,12 +14,19 @@
 	import { page } from '$app/stores';
 	import { getLessonById } from '$api/lesson';
 	import { lastPlayedLessonIdLocal } from '$lib/localdb/profileLocal';
-	import type { LessonCard } from '$gql/graphql';
+	import type { LessonCard, VocabularyCard } from '$gql/graphql';
+	import Typewriter from 'svelte-typewriter/Typewriter.svelte';
 
 	let item: LessonCard | null = null;
 	let background: string | null = null;
+	let vocabs: VocabularyCard[] | null = null;
 	onMount(async () => {
 		item = await getLessonById($page.params.id);
+		vocabs =
+			item.quizeSections
+				.find((section) => section.type === 'VOCABULARY')
+				?.cards.map((card) => card as VocabularyCard) ?? null;
+
 		$chatContext = {
 			conversation: item.conversation,
 			bot: { emotion: 'neutral' }
@@ -123,11 +130,17 @@
 				items={item.narratives}
 			/>
 		{:else if currentView === 'FLIP_CARD'}
-			<FlipCardView
-				items={item.vocabs}
-				{addProgress}
-				onFinish={() => (currentView = 'WRITING_CARD')}
-			/>
+			{#if vocabs}
+				<FlipCardView
+					items={vocabs}
+					{addProgress}
+					onFinish={() => (currentView = 'WRITING_CARD')}
+				/>
+			{:else}
+				<div class="bg-white text-[3vw] text-black">
+					Loading<Typewriter mode="loop">...</Typewriter>
+				</div>
+			{/if}
 		{:else if currentView === 'WRITING_CARD'}
 			<WritingCardView
 				items={item.writings}

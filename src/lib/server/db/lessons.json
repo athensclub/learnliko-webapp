@@ -37,24 +37,45 @@
 				"text": "เวลาผ่านไปเร็วมาก เพื่อนๆ ของคุณและคุณต่างก็กำลังเริ่มเรียนรู้ภาษาอังกฤษอย่างเต็มที่ คุณและเพื่อนๆ ของคุณกำลังสนุกกับการเรียนรู้ภาษาอังกฤษด้วยกัน คุณจะได้เรียนรู้คำศัพท์จากสิ่งของในห้องเรียนและสนทนาภาษาอังกฤษกับเพื่อนๆของคุณ"
 			}
 		],
-		"vocabs": [
+		"quizeSections": [
 			{
-				"image": "https://cdn.discordapp.com/attachments/842737146321174558/1123927173087109120/image.png",
-				"choices": ["A dog", "A cat", "An ant", "An elephant"],
-				"coin": 100,
-				"exp": 25
-			},
-			{
-				"image": "https://cdn.discordapp.com/attachments/842737146321174558/1123927173087109120/image.png",
-				"choices": ["A dog", "A cat", "An ant", "An elephant"],
-				"coin": 100,
-				"exp": 25
-			},
-			{
-				"image": "https://cdn.discordapp.com/attachments/842737146321174558/1123927173087109120/image.png",
-				"choices": ["A dog", "A cat", "An ant", "An elephant"],
-				"coin": 100,
-				"exp": 25
+				"__typename": "QuizSection",
+				"cards": [
+					{
+						"choices": [
+							{ "vocab": "A dog" },
+							{ "vocab": "A cat" },
+							{ "vocab": "An ant" },
+							{ "vocab": "An elephant" }
+						],
+						"imageUrl": "https://cdn.discordapp.com/attachments/842737146321174558/1123927173087109120/image.png",
+						"totalCoin": 100,
+						"totalExp": 25
+					},
+					{
+						"choices": [
+							{ "vocab": "A dog" },
+							{ "vocab": "A cat" },
+							{ "vocab": "An ant" },
+							{ "vocab": "An elephant" }
+						],
+						"imageUrl": "https://cdn.discordapp.com/attachments/842737146321174558/1123927173087109120/image.png",
+						"totalCoin": 100,
+						"totalExp": 25
+					},
+					{
+						"choices": [
+							{ "vocab": "A dog" },
+							{ "vocab": "A cat" },
+							{ "vocab": "An ant" },
+							{ "vocab": "An elephant" }
+						],
+						"imageUrl": "https://cdn.discordapp.com/attachments/842737146321174558/1123927173087109120/image.png",
+						"totalCoin": 100,
+						"totalExp": 25
+					}
+				],
+				"type": "VOCABULARY"
 			}
 		],
 		"writings": [

@@ -9,7 +9,7 @@ export const getLessonCards = async (): Promise<LessonCard[]> => {
     return await result.json();
 };
 
-export const getLessonById = async (id: string): Promise<LessonItem> => {
+export const getLessonById = async (id: string): Promise<LessonCard> => {
     const result = await fetch('/api/v1/lesson?' + new URLSearchParams({ id }), { method: 'GET' });
     const val = await result.json();
     return val;

@@ -14,8 +14,9 @@
 	import { page } from '$app/stores';
 	import { getLessonById } from '$api/lesson';
 	import { lastPlayedLessonIdLocal } from '$lib/localdb/profileLocal';
+	import type { LessonCard } from '$gql/graphql';
 
-	let item: LessonItem | null = null;
+	let item: LessonCard | null = null;
 	let background: string | null = null;
 	onMount(async () => {
 		item = await getLessonById($page.params.id);
@@ -69,7 +70,7 @@
 			</svg>
 		</button>
 
-		<div class="text-[1.7vw] font-bold text-white">{item && item.topic}</div>
+		<div class="text-[1.7vw] font-bold text-white">{item && item.title}</div>
 
 		<button
 			on:click={() => (playingMusic = !playingMusic)}
@@ -119,7 +120,7 @@
 			<LessonIntros
 				onFinish={() => (currentView = 'FLIP_CARD')}
 				setBackground={(image) => (background = image)}
-				items={item.intro}
+				items={item.narratives}
 			/>
 		{:else if currentView === 'FLIP_CARD'}
 			<FlipCardView

@@ -1,12 +1,12 @@
 <script lang="ts">
-	import { flyScale } from '$lib/utils/transition';
+	import { fly, scale, slide } from 'svelte/transition';
 
 	export let exp: number;
 	export let coin: number;
 </script>
 
 <div
-	transition:flyScale={{ y: -200 }}
+	transition:slide
 	class="fixed left-[50vw] top-[2vh] z-[9999] flex translate-x-[-50%] flex-row items-center rounded-full bg-white px-[2vw] py-[0.5vw] font-line-seed font-bold"
 >
 	<div class="text-[2vw]">🎉</div>

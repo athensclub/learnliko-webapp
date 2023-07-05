@@ -53,25 +53,25 @@
 
 <div class="flex w-full flex-row bg-[#F4F4F4] font-line-seed">
 	<NavBar spaced teacher />
-	<div class=" container w-[80vw] ml-[2vw]">
-		<div class="flex flex-1 justify-center p-[2vw]">
-			<div class=" mr-[2vw] h-[10vw] w-[20vw] rounded-[1.25vw] bg-white p-[1.5vw]">
+	<div class=" container w-[70vw] mx-auto">
+		<div class="flex flex-1 py-[2vw] text-white">
+			<div class=" mr-[2vw] h-[10vw] w-1/3 rounded-[1.25vw] bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] p-[1.5vw]">
 				<h1>Today Use</h1>
-				<h1 class=" text-[3.25vw]">{activeUse}</h1>
+				<h1 class=" text-[3.25vw] font-extrabold">{activeUse}</h1>
 			</div>
-			<div class=" mr-[2vw] h-[10vw] w-[20vw] rounded-[1.25vw] bg-white p-[1.5vw]">
+			<div class=" mr-[2vw] h-[10vw] w-1/3 rounded-[1.25vw] bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] p-[1.5vw]">
 				<h1>Average CEFR</h1>
-				<h1 class=" text-[3.25vw]">{averageCEFR}</h1>
+				<h1 class=" text-[3.25vw] font-extrabold">{averageCEFR}</h1>
 			</div>
-			<div class=" mr-[2vw] h-[10vw] w-[20vw] rounded-[1.25vw] bg-white p-[1.5vw]">
+			<div class=" mr-[2vw] h-[10vw] w-1/3 rounded-[1.25vw] bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] p-[1.5vw]">
 				<h1>Total Students</h1>
-				<h1 class=" text-[3.25vw]">{totalStudents}</h1>
+				<h1 class=" text-[3.25vw] font-extrabold">{totalStudents}</h1>
 			</div>
 		</div>
 
-		<div class="flex flex-1 justify-center">
-			<div class=" mr-[2vw] h-[28vw] pb-[3vw] w-[20vw] rounded-[1.25vw] bg-white overflow-scroll overflow-x-hidden">
-				<h1 class=" text-[1.5vw] px-[1vw] py-[1vw]">Leader board</h1>
+		<div class="flex flex-1 ">
+			<div class=" mr-[2vw] h-[28vw] pb-[3vw] w-1/3 rounded-[1.25vw] bg-white overflow-scroll overflow-x-hidden">
+				<h1 class=" text-[1.5vw] px-[1vw] py-[1vw] font-bold">Leader board</h1>
 
 				<div class="w-[100%] h-full bg-white rounded-[2vw] flex flex-col font-bold">
 				
@@ -123,7 +123,7 @@
 										</defs>
 									</svg>
 									<div
-										class="ml-[0.3vw] bg-clip-text text-transparent bg-gradient-to-r from-[#C698FF] to-[#6C80E8]"
+										class="ml-[0.3vw] text-[0.7vw] bg-clip-text text-transparent bg-gradient-to-r from-[#C698FF] to-[#6C80E8]"
 									>
 										{user.exp}
 									</div>
@@ -133,9 +133,9 @@
 					</div>
 				</div>
 			</div>
-			<div class=" mr-[2vw] h-[28vw] w-[42vw] rounded-[1.25vw] bg-white p-[1.5vw]  ">
-				<h1 class="text-[2vw]">Daily Learning Stats</h1>
-				<div class="mt-[5vw] w-full">
+			<div class=" mr-[2vw] h-[28vw] w-[44vw] rounded-[1.25vw] bg-white px-[1.5vw]  pt-[1vw] ">
+				<h1 class="text-[1.5vw]">Daily Learning Stats</h1>
+				<div class="w-full mt-[5vh]">
 				<Barchart></Barchart> </div>
 			</div>
 		</div>

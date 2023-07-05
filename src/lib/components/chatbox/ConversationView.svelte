@@ -63,13 +63,13 @@
 		{#if $conversationFinished}
 			<slot name="finished">
 				<div class="mt-4 flex w-full flex-col items-center text-center font-bold">
-					Conversation Finished
+					ภารกิจการสนทนาสำเร็จ!
 
 					<button
 						on:click={onFinishClicked}
 						class={`mr-4 mt-3 w-fit rounded-lg border px-4 py-1 text-base font-normal ${finishButtonClass}`}
 					>
-						Finish!
+						ดูคะแนนของคุณ
 					</button>
 				</div>
 			</slot>

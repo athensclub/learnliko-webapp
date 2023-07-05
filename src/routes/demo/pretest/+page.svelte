@@ -191,13 +191,13 @@
 							Loading<Typewriter mode="loop">...</Typewriter>
 						</div>
 					{:else}
-						Conversation Finished
+					ภารกิจการสนทนาสำเร็จ!
 
 						<button
 							on:click={nextItem}
 							class={`mt-3 rounded-lg w-fit border font-normal text-base mr-4 px-4 py-1`}
 						>
-							Finish!
+							ดูคะแนนของคุณ
 						</button>
 					{/if}
 				</div>

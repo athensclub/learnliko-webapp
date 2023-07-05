@@ -1,5 +1,9 @@
 <script lang="ts">
+	import { synthesize } from '$api/tts';
 	import ReadingContainer from '$lib/components/reading/ReadingContainer.svelte';
+	import { playAudioURL } from '$lib/global/audio';
+	import { blobToBase64 } from '$lib/utils/io';
+	import { onMount } from 'svelte';
 	import { fade } from 'svelte/transition';
 
 	let vocabs = [
@@ -15,6 +19,22 @@
 		'school',
 		'mother'
 	];
+
+	let speeches: string[] | null = null;
+	// TODO: use data from api instead.
+	const loadSpeeches = async () => {
+		const result = [];
+		for (let i = 0; i < vocabs.length; i++) {
+			const val = await synthesize(vocabs[i], 'US', 'FEMALE', 0.7);
+			result.push(await blobToBase64(val));
+		}
+		speeches = result;
+	};
+	onMount(() => loadSpeeches());
+
+	const playSpeech = (index: number) => {
+		if (speeches) playAudioURL(speeches[index]);
+	};
 
 	let items = [
 		{
@@ -52,11 +72,13 @@
 	<div class="mt-[2vw] text-[1.5vw]">สรุปคำศัพท์ที่ได้เรียนรู้จากการอ่าน</div>
 
 	<div class="mt-[2vw] flex max-w-full flex-row flex-wrap gap-[1vw] leading-[2vw]">
-		{#each vocabs as vocab}
+		{#each vocabs as vocab, index}
 			<button
+				on:click={() => playSpeech(index)}
 				class="inline-block rounded-full border-[0.15vw] border-black px-[1vw] py-[0.35vw] text-[1.35vw]"
-				>{vocab}</button
 			>
+				{vocab}
+			</button>
 		{/each}
 	</div>
 
@@ -165,7 +187,9 @@
 			</svg>
 		</div>
 
+		<!-- TODO: put correct answer/user answer here -->
 		<ReadingContainer
+			correctAnswers={[0]}
 			showFinishButton={false}
 			scale={0.9}
 			{item}

@@ -3,8 +3,6 @@
 	import VocabFlipCard from '$lib/components/VocabFlipCard.svelte';
 	import WritingCard from '$lib/components/WritingCard.svelte';
 	import ReadingContainer from '$lib/components/reading/ReadingContainer.svelte';
-	import { readingAnswers } from '$lib/global/reading';
-	import { onMount } from 'svelte';
 	import { fade } from 'svelte/transition';
 
 	let lessons = [
@@ -371,7 +369,9 @@
 		</div>
 
 		<div class="mt-[2vw] text-[1.35vw]">อ่าน</div>
+		<!-- TODO: put correct answer/user answer here -->
 		<ReadingContainer
+			correctAnswers={[0]}
 			showFinishButton={false}
 			scale={0.9}
 			item={lesson.reading}

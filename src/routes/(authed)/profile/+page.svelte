@@ -19,6 +19,7 @@
 	import UserCEFRLevelDetailModal from '$lib/components/modals/UserCEFRLevelDetailModal.svelte';
 	import CircularProgressBar from '$lib/components/CircularProgressBar.svelte';
 	import shoppingBag from '$lib/images/shopping_bag_icon.png';
+	import RecapCard from '$lib/components/RecapCard.svelte';
 
 	let name = 'Natsataporn M.';
 	let background =
@@ -266,7 +267,7 @@
 				</div>
 			</div>
 
-			{#if learningDiaries && learningDiaries.length > 0}
+			<!-- {#if learningDiaries && learningDiaries.length > 0} -->
 				<div
 					class={`font-extrabold ${
 						$isMobile ? 'mx-auto mt-[7vh] text-[7vw]' : 'mt-[10vh] text-[2vw]'
@@ -275,8 +276,9 @@
 					Learning Diary
 				</div>
 
-				<div class="mt-[2vh] grid w-full grid-cols-2 gap-[2vw]">
-					{#each learningDiaries as diary (diary.date)}
+				<div class="mt-[3vw] grid w-full grid-cols-2 gap-[2vw]">
+					<RecapCard class="w-full h-[38vw] "/>
+					<!-- {#each learningDiaries as diary (diary.date)}
 						<div class="flex h-fit w-full flex-col rounded-2xl bg-white p-3 font-bold">
 							<div class="flex flex-row items-center justify-between">
 								<div class="text-sm">{diary.date}</div>
@@ -305,9 +307,9 @@
 								{diary.title}
 							</div>
 						</div>
-					{/each}
+					{/each} -->
 				</div>
-			{/if}
+			<!-- {/if} -->
 
 			<!-- bottom spacing -->
 			<div class="h-[10vh] w-full" />

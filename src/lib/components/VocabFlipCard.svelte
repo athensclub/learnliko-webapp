@@ -38,7 +38,7 @@
 	$: selectedChoice, updateSelectedChoice();
 
 	/**
-	 * Null -> user has not submitted. Set to non-null value to render this  card as played
+	 * Null -> user has not submitted. Set to non-null value to render this card as played
 	 * flip card.
 	 */
 	export let correctAnswer: number | null = null;

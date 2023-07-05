@@ -42,6 +42,7 @@
 >
 	{#each items as item, index}
 		<WritingCard
+		correctAnswer={1}
 			onCorrect={() => onCorrect(index)}
 			onWrong={() => onWrong(index)}
 			class="w-[22vw] h-[30vw] pointer-events-auto {item.hide

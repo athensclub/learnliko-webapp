@@ -13,7 +13,7 @@
 			profileImage:
 				'https://cdn.discordapp.com/attachments/842737146321174558/1124349468247068764/image.png',
 			background:
-				'https://cdn.discordapp.com/attachments/842737146321174558/1124347122121195590/image.png'
+			'https://media.discordapp.net/attachments/1120787872379842711/1126187400943644712/image.png'
 		},
 		{
 			username: 'Natsataporn M.',
@@ -21,7 +21,7 @@
 			profileImage:
 				'https://cdn.discordapp.com/attachments/842737146321174558/1124349032685379605/image.png',
 			background:
-				'https://cdn.discordapp.com/attachments/842737146321174558/1124347056245452830/image.png'
+			'https://media.discordapp.net/attachments/1120787872379842711/1126187400943644712/image.png'
 		},
 		{
 			username: 'Natsataporn M.',
@@ -29,7 +29,7 @@
 			profileImage:
 				'https://cdn.discordapp.com/attachments/842737146321174558/1124349032685379605/image.png',
 			background:
-				'https://cdn.discordapp.com/attachments/842737146321174558/1124347056245452830/image.png'
+			'https://media.discordapp.net/attachments/1120787872379842711/1126187400943644712/image.png'
 		},
 		{
 			username: 'Natsataporn M.',
@@ -37,7 +37,7 @@
 			profileImage:
 				'https://cdn.discordapp.com/attachments/842737146321174558/1124349032685379605/image.png',
 			background:
-				'https://cdn.discordapp.com/attachments/842737146321174558/1124347056245452830/image.png'
+			'https://media.discordapp.net/attachments/1120787872379842711/1126187400943644712/image.png'
 		},
 		{
 			username: 'Natsataporn M.',
@@ -45,7 +45,7 @@
 			profileImage:
 				'https://cdn.discordapp.com/attachments/842737146321174558/1124349032685379605/image.png',
 			background:
-				'https://cdn.discordapp.com/attachments/842737146321174558/1124347056245452830/image.png'
+			'https://media.discordapp.net/attachments/1120787872379842711/1126187400943644712/image.png'
 		},
 	];
 </script>

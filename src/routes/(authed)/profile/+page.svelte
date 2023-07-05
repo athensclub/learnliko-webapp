@@ -9,7 +9,6 @@
 	import { getContext, onDestroy, onMount } from 'svelte';
 	import type { LearningDiaryItem } from '$lib/types/learningDiary';
 	import NavBar from '$lib/components/navbar/NavBar.svelte';
-	import LearningDiaryModal from '$lib/components/modals/LearningDiaryModal.svelte';
 	import { isMobile } from '$lib/global/breakpoints';
 	import type { Context } from 'svelte-simple-modal';
 	import userSession from '$lib/stores/userSession';
@@ -29,7 +28,7 @@
 	let learningDiaries: LearningDiaryItem[] | null = null;
 
 	const { open }: Context = getContext('simple-modal');
-	const showDiary = (item: LearningDiaryItem) => open(LearningDiaryModal, { item });
+	// const showDiary = (item: LearningDiaryItem) => open(LearningDiaryModal, { item });
 
 	const showCEFRLevel = () =>
 		open(

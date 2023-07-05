@@ -5,26 +5,33 @@
 	import { blobToBase64 } from '$lib/utils/io';
 	import { onMount } from 'svelte';
 	import { fade } from 'svelte/transition';
+	import Flippable from './Flippable.svelte';
 
 	export let item: WritingCardItem;
+
+	let clazz = '';
+	export { clazz as class };
+	export let scale = 1;
+
+	export let onCorrect = () => {};
+	export let onWrong = () => {};
 
 	let speeches: string[] | null = null;
 	// TODO: use data from api instead.
 	const loadSpeeches = async () => {
 		const result = [];
 		for (let i = 0; i < item.choices.length; i++) {
-			const val = await synthesize(item.text.map(v => v === null ? item.choices[i] : v).join(' '), 'US', 'FEMALE', 0.7);
+			const val = await synthesize(
+				item.text.map((v) => (v === null ? item.choices[i] : v)).join(' '),
+				'US',
+				'FEMALE',
+				0.7
+			);
 			result.push(await blobToBase64(val));
 		}
 		speeches = result;
 	};
 	onMount(() => loadSpeeches());
-
-	let clazz = '';
-	export { clazz as class };
-
-	export let onCorrect = () => {};
-	export let onWrong = () => {};
 
 	let selectedChoice: number | null = null;
 	const updateSelectedChoice = () => {
@@ -33,14 +40,18 @@
 		}
 	};
 	$: selectedChoice, updateSelectedChoice();
-	
+
+	let flipped = false;
+
 	/**
-	 * Null -> user has not submitted.
+	 * Null -> user has not submitted. Set to non-null value to render this card as played
+	 * writing card.
 	 */
-	let correctAnswer: number | null = null;
+	export let correctAnswer: number | null = null;
 	const submit = () => {
 		// TODO: implement actual submit.
 		correctAnswer = 1;
+		flipped = true;
 
 		if (selectedChoice === correctAnswer) {
 			onCorrect();
@@ -50,20 +61,26 @@
 	};
 </script>
 
-<div
-	class="rounded-[2vw] py-[1vw] px-[2vw] bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] relative {clazz}"
->
-	{#if correctAnswer === null}
-		<div in:fade={{ delay: 500 }} out:fade class="flex flex-col w-full h-full">
+<Flippable class={clazz} flip={flipped}>
+	<div
+		slot="front"
+		class="relative h-full w-full rounded-[2vw] bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] px-[2vw] py-[1vw]"
+	>
+		{#if correctAnswer !== null}
+			<button on:click={() => (flipped = !flipped)} class="absolute left-0 top-0 h-full w-full" />
+		{/if}
+
+		<div class="flex h-full w-full flex-col">
 			<div
-				class="bg-white rounded-full w-fit px-[1vw] py-[0.5vw] text-[1vw] flex flex-row items-center ml-auto"
+				style="font-size: {scale * 1}vw;"
+				class="ml-auto flex w-fit flex-row items-center rounded-full bg-white px-[1vw] py-[0.5vw]"
 			>
 				<div class="flex flex-row font-bold">
-					<div class="bg-clip-text text-transparent bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD]">
+					<div class="bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] bg-clip-text text-transparent">
 						+{item.exp}
 					</div>
 					<svg
-						class="w-[2.5vw] ml-[0.25vw]"
+						class="ml-[0.25vw] w-[2.5vw]"
 						viewBox="0 0 1650 792"
 						fill="none"
 						xmlns="http://www.w3.org/2000/svg"
@@ -103,14 +120,14 @@
 					</svg>
 				</div>
 
-				<div class="flex flex-row font-bold ml-[0.5vw]">
+				<div class="ml-[0.5vw] flex flex-row font-bold">
 					<div
-						class="bg-clip-text text-transparent bg-gradient-to-r from-[#FFE08F] via-[#E4AE24] to-[#FFE08F]"
+						class="bg-gradient-to-r from-[#FFE08F] via-[#E4AE24] to-[#FFE08F] bg-clip-text text-transparent"
 					>
 						+{item.coin}
 					</div>
 					<svg
-						class="w-[2.5vw] ml-[0.25vw]"
+						class="ml-[0.25vw] w-[2.5vw]"
 						viewBox="0 0 2017 792"
 						fill="none"
 						xmlns="http://www.w3.org/2000/svg"
@@ -161,29 +178,29 @@
 				</div>
 			</div>
 
-			<div class="w-full inline-flex flex-wrap gap-[0.6vw] items-center justify-center mt-[2vw]">
+			<div class="mt-[2vw] inline-flex w-full flex-wrap items-center justify-center gap-[0.6vw]">
 				{#each item.text as text, index (index)}
 					{#if text}
-						<div class="font-bold text-white text-[1.65vw]">{text}</div>
+						<div style="font-size: {scale * 1.65}vw;" class="font-bold text-white">{text}</div>
 					{:else}
-						<div class="w-[3vw] h-[2vw] bg-white rounded-full" />
+						<div class="h-[2vw] w-[3vw] rounded-full bg-white" />
 					{/if}
 				{/each}
 			</div>
 
-			<div class="w-full absolute left-0 bottom-[2vw] flex flex-col px-[2vw]">
+			<div class="mb-[1vw] mt-auto flex w-full flex-col">
 				<div class="grid grid-cols-2 gap-[2vw]">
 					{#each item.choices as choice, index (choice)}
 						<button
 							on:click={() => (selectedChoice = index)}
-							class="w-full min-h-[3vw] font-bold text-[1.4vw] rounded-full {selectedChoice ===
-							index
+							style="font-size: {scale * 1.4}vw;"
+							class="min-h-[3vw] w-full rounded-full font-bold {selectedChoice === index
 								? 'bg-white'
 								: ' border-[0.2vw] border-white'}"
 						>
 							<div
 								class={selectedChoice === index
-									? 'bg-clip-text text-transparent bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD]'
+									? 'bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] bg-clip-text text-transparent'
 									: 'text-white'}
 							>
 								{choice}
@@ -192,30 +209,59 @@
 					{/each}
 				</div>
 
-				<button
-					on:click={submit}
-					disabled={selectedChoice === null}
-					class="w-full py-[0.5vw] rounded-full mt-[3vw] bg-white font-bold text-[1.3vw] {selectedChoice ===
-					null
-						? 'text-[#B8B8B8]'
-						: 'text-black'}"
-				>
-					ตรวจ
-				</button>
+				{#if correctAnswer === null}
+					<button
+						on:click={submit}
+						disabled={selectedChoice === null}
+						style="font-size: {scale * 1.3}vw;"
+						class="mt-[3vw] w-full rounded-full bg-white py-[0.5vw] font-bold {selectedChoice ===
+						null
+							? 'text-[#B8B8B8]'
+							: 'text-black'}"
+					>
+						ตรวจ
+					</button>
+				{:else}
+					<div
+						style="font-size: {scale * 1.3}vw;"
+						class="mt-[3vw] flex flex-row items-center justify-center font-bold text-white"
+					>
+						<svg
+							style="width: {scale * 2.3}vw;"
+							class="mr-[1vw]"
+							viewBox="0 0 50 55"
+							fill="none"
+							xmlns="http://www.w3.org/2000/svg"
+						>
+							<path
+								d="M35.8952 29.4899C33.3704 24.4403 29.7099 22 24.75 22C19.7901 22 16.1296 24.4403 13.6048 29.4899C13.2652 30.1691 12.4393 30.4444 11.7601 30.1048C11.0809 29.7652 10.8056 28.9393 11.1452 28.2601C14.1204 22.3097 18.7099 19.25 24.75 19.25C30.7901 19.25 35.3796 22.3097 38.3548 28.2601C38.6944 28.9393 38.4191 29.7652 37.7399 30.1048C37.0607 30.4444 36.2348 30.1691 35.8952 29.4899ZM35.75 27.5V20.625C35.75 19.8656 36.3656 19.25 37.125 19.25C37.8844 19.25 38.5 19.8656 38.5 20.625V28.875C38.5 29.6344 37.8844 30.25 37.125 30.25H28.875C28.1156 30.25 27.5 29.6344 27.5 28.875C27.5 28.1156 28.1156 27.5 28.875 27.5H35.75ZM42.625 2.75C46.422 2.75 49.5 5.82804 49.5 9.625C49.5 10.3844 48.8844 11 48.125 11C47.3656 11 46.75 10.3844 46.75 9.625C46.75 7.34682 44.9032 5.5 42.625 5.5C41.8656 5.5 41.25 4.88439 41.25 4.125C41.25 3.36561 41.8656 2.75 42.625 2.75ZM37.125 5.5H31.625C30.8656 5.5 30.25 4.88439 30.25 4.125C30.25 3.36561 30.8656 2.75 31.625 2.75H37.125C37.8844 2.75 38.5 3.36561 38.5 4.125C38.5 4.88439 37.8844 5.5 37.125 5.5ZM49.5 17.875V23.375C49.5 24.1344 48.8844 24.75 48.125 24.75C47.3656 24.75 46.75 24.1344 46.75 23.375V17.875C46.75 17.1156 47.3656 16.5 48.125 16.5C48.8844 16.5 49.5 17.1156 49.5 17.875ZM49.5 31.625V37.125C49.5 37.8844 48.8844 38.5 48.125 38.5C47.3656 38.5 46.75 37.8844 46.75 37.125V31.625C46.75 30.8656 47.3656 30.25 48.125 30.25C48.8844 30.25 49.5 30.8656 49.5 31.625ZM49.5 45.375C49.5 49.172 46.422 52.25 42.625 52.25C41.8656 52.25 41.25 51.6344 41.25 50.875C41.25 50.1156 41.8656 49.5 42.625 49.5C44.9032 49.5 46.75 47.6532 46.75 45.375C46.75 44.6156 47.3656 44 48.125 44C48.8844 44 49.5 44.6156 49.5 45.375ZM37.125 52.25H31.625C30.8656 52.25 30.25 51.6344 30.25 50.875C30.25 50.1156 30.8656 49.5 31.625 49.5H37.125C37.8844 49.5 38.5 50.1156 38.5 50.875C38.5 51.6344 37.8844 52.25 37.125 52.25ZM24.75 1.375V12.375C24.75 13.1344 24.1344 13.75 23.375 13.75C22.6156 13.75 22 13.1344 22 12.375V1.375C22 0.615608 22.6156 0 23.375 0C24.1344 0 24.75 0.615608 24.75 1.375ZM24.75 34.375V53.625C24.75 54.3844 24.1344 55 23.375 55C22.6156 55 22 54.3844 22 53.625V34.375C22 33.6156 22.6156 33 23.375 33C24.1344 33 24.75 33.6156 24.75 34.375ZM15.125 5.5H6.875C4.59683 5.5 2.75 7.34682 2.75 9.625V45.375C2.75 47.6532 4.59683 49.5 6.875 49.5H15.125C15.8844 49.5 16.5 50.1156 16.5 50.875C16.5 51.6344 15.8844 52.25 15.125 52.25H6.875C3.07804 52.25 0 49.172 0 45.375V9.625C0 5.82804 3.07804 2.75 6.875 2.75H15.125C15.8844 2.75 16.5 3.36561 16.5 4.125C16.5 4.88439 15.8844 5.5 15.125 5.5Z"
+								fill="white"
+							/>
+						</svg>
+						Tap to flip
+					</div>
+				{/if}
 			</div>
 		</div>
-	{:else}
-		<div
-			in:fade={{ delay: 500 }}
-			out:fade
-			class="w-full h-full flex flex-col items-center justify-center text-white font-bold"
-		>
-			<div class="text-[2vw]">
+	</div>
+
+	<button
+		on:click={() => (flipped = !flipped)}
+		slot="back"
+		class="relative h-full w-full rounded-[2vw] bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] px-[2vw] py-[1vw]"
+	>
+		<div class="flex h-full w-full flex-col items-center justify-center font-bold text-white">
+			<div style="font-size: {scale * 2}vw;">
 				{selectedChoice === correctAnswer ? 'คุณตอบถูก!' : 'คุณตอบผิด!'}
 			</div>
 
-			<div class="text-[1.5vw] mt-[5vw]">คำตอบคือ</div>
-			<div class="px-[2vw] py-[0.3vw] text-[1.5vw] mt-[1vw] rounded-full border-[0.2vw] border-white">{item.choices[correctAnswer]}</div>
+			<div style="font-size: {scale * 1.5}vw;" class="mt-[5vw]">คำตอบคือ</div>
+			<div
+				style="font-size: {scale * 1.5}vw;"
+				class="mt-[1vw] rounded-full border-[0.2vw] border-white px-[2vw] py-[0.3vw]"
+			>
+				{correctAnswer !== null ? item.choices[correctAnswer] : ''}
+			</div>
 		</div>
-	{/if}
-</div>
+	</button>
+</Flippable>

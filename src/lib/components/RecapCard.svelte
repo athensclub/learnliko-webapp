@@ -1,4 +1,8 @@
 <script lang="ts">
+	import { getContext } from 'svelte';
+	import type { Context } from 'svelte-simple-modal';
+	import RecapModal from '$lib/components/modals/recap/RecapModal.svelte';
+
 	let clazz = '';
 	export { clazz as class };
 
@@ -6,6 +10,9 @@
 	let learnedVocabs = 30;
 	let learnedLessons = ['ทำความรู้จักและทักทาย', 'สัตว์โลกน่ารัก', 'สัตว์โลกน่ารัก'];
 	let learnedReading = ['World War 2', 'World War 2', 'World War 2'];
+
+	const { open }: Context = getContext('simple-modal');
+	const openDetails = () => open(RecapModal, { },{classContent:"p-0", classWindow: "w-[65vw]"});
 </script>
 
 <div
@@ -375,6 +382,7 @@
 	{/if}
 
 	<button
+		on:click={openDetails}
 		class="ml-auto mt-auto flex flex-row items-center rounded-full bg-black px-[2vw] py-[0.5vw] text-[1.2vw] text-white"
 	>
 		ดูรายละเอียด

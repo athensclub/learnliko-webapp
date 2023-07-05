@@ -25,6 +25,8 @@
 	let clazz = '';
 	export { clazz as class };
 
+	export let allowHint: boolean;
+
 	const submitCurrentRecording = () => {
 		submitUserReply($currentRecording);
 		$currentRecording = null;
@@ -37,19 +39,19 @@
 <div class={`flex items-center justify-center rounded-xl p-2 font-line-seed ${clazz}`}>
 	{#if $waitingForAIResponse || $transcribing}
 		<div
-			class="flex flex-row justify-between items-center gap-[7%] px-[5%] w-full h-full text-white"
+			class="flex h-full w-full flex-row items-center justify-between gap-[7%] px-[5%] text-white"
 		>
-			<div class="flex flex-row font-bold text-[1.3vw]">
+			<div class="flex flex-row text-[1.3vw] font-bold">
 				{$chatContext?.conversation.avatar.name} กำลังคิด<Typewriter mode="loop">...</Typewriter>
 			</div>
 		</div>
 	{:else if $currentRecording}
 		<div
-			class="flex flex-row item justify-between items-center gap-[7%] px-[5%] w-full h-full text-white"
+			class="item flex h-full w-full flex-row items-center justify-between gap-[7%] px-[5%] text-white"
 		>
-			<div class="flex-row flex-1 items-center justify-center">
+			<div class="flex-1 flex-row items-center justify-center">
 				<AudioPlayer
-					class={`w-full h-[7vh] rounded-full backdrop-blur-lg bg-white/20 shadow-lg`}
+					class={`h-[7vh] w-full rounded-full bg-white/20 shadow-lg backdrop-blur-lg`}
 					defaultBlockColor="white"
 					playedBlockColor="black"
 					src={$currentRecording.url}
@@ -57,7 +59,7 @@
 				/>
 			</div>
 
-			<div class="flex flex-row w-[30%] h-full items-center gap-[15%]">
+			<div class="flex h-full w-[30%] flex-row items-center gap-[15%]">
 				<button on:click={() => ($currentRecording = null)} class="flex-1">
 					<svg class="h-full" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<path
@@ -75,7 +77,7 @@
 
 				<button
 					on:click={submitCurrentRecording}
-					class="flex-1 h-full rounded-full flex items-center justify-center aspect-square bg-white"
+					class="flex aspect-square h-full flex-1 items-center justify-center rounded-full bg-white"
 				>
 					<svg class="h-[60%]" viewBox="0 0 66 66" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<path
@@ -87,15 +89,15 @@
 			</div>
 		</div>
 	{:else if $isRecording}
-		<div class="flex flex-row px-[5%] w-full h-full items-center justify-between text-white">
-			<div class="flex flex-row h-full items-center justify-center font-bold text-xl">
-				<div class="bg-red-600 rounded-full h-[25%] aspect-square mr-2 animate-pulse" />
+		<div class="flex h-full w-full flex-row items-center justify-between px-[5%] text-white">
+			<div class="flex h-full flex-row items-center justify-center text-xl font-bold">
+				<div class="mr-2 aspect-square h-[25%] animate-pulse rounded-full bg-red-600" />
 				Recording..
 			</div>
 
 			<button
 				on:click={stopRecording}
-				class="px-5 py-1 bg-[#fff] rounded-3xl font-bold text-black text-md">Done</button
+				class="text-md rounded-3xl bg-[#fff] px-5 py-1 font-bold text-black">Done</button
 			>
 		</div>
 	{:else}
@@ -105,9 +107,9 @@
 				$conversationFinished ||
 				!$initializedConversation}
 			on:click={startRecording}
-			class="font-bold bg-white w-[200px] h-[40px] shadow-all rounded-full flex items-center justify-center z-[1000]"
+			class="z-[1000] flex h-[40px] w-[200px] items-center justify-center rounded-full bg-white font-bold shadow-all"
 		>
-			<svg class="w-[8%] mr-2" viewBox="0 0 41 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+			<svg class="mr-2 w-[8%]" viewBox="0 0 41 56" fill="none" xmlns="http://www.w3.org/2000/svg">
 				<path
 					d="M20.5 35.25C18.1042 35.25 16.0677 34.4115 14.3906 32.7344C12.7135 31.0573 11.875 29.0208 11.875 26.625V9.375C11.875 6.97917 12.7135 4.94271 14.3906 3.26562C16.0677 1.58854 18.1042 0.75 20.5 0.75C22.8958 0.75 24.9323 1.58854 26.6094 3.26562C28.2865 4.94271 29.125 6.97917 29.125 9.375V26.625C29.125 29.0208 28.2865 31.0573 26.6094 32.7344C24.9323 34.4115 22.8958 35.25 20.5 35.25ZM17.625 55.375V46.5344C12.6417 45.8635 8.52083 43.6354 5.2625 39.85C2.00417 36.0646 0.375 31.6562 0.375 26.625H6.125C6.125 30.6021 7.52704 33.9917 10.3311 36.7939C13.1333 39.598 16.5229 41 20.5 41C24.4771 41 27.8677 39.598 30.6718 36.7939C33.4739 33.9917 34.875 30.6021 34.875 26.625H40.625C40.625 31.6562 38.9958 36.0646 35.7375 39.85C32.4792 43.6354 28.3583 45.8635 23.375 46.5344V55.375H17.625Z"
 					fill="black"
@@ -115,15 +117,18 @@
 			</svg>
 			Press to Talk
 		</button>
-		<button
-			disabled={$waitingForAIResponse ||
-				$transcribing ||
-				$conversationFinished ||
-				!$initializedConversation}
-			on:click={showHintModal}
-			class=" text-white font-bold bg-white bg-opacity-20 w-[6.7rem] h-[40px] shadow-all rounded-full flex items-center justify-center z-[1000] ml-3"
-		>
-			? Help
-		</button>
+
+		{#if allowHint}
+			<button
+				disabled={$waitingForAIResponse ||
+					$transcribing ||
+					$conversationFinished ||
+					!$initializedConversation}
+				on:click={showHintModal}
+				class=" z-[1000] ml-3 flex h-[40px] w-[6.7rem] items-center justify-center rounded-full bg-white bg-opacity-20 font-bold text-white shadow-all"
+			>
+				? Help
+			</button>
+		{/if}
 	{/if}
 </div>

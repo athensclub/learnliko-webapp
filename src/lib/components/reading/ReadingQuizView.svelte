@@ -12,6 +12,8 @@
 	export let setView: (view: ReadingViewType) => void;
 	export let onFinish: () => void;
 
+	export let showFinishButton: boolean;
+
 	export let scale = 1;
 
 	$: submittable = $selectedQuizChoices.every((val) => val !== null);
@@ -104,7 +106,7 @@
 				>
 					ตรวจ
 				</button>
-			{:else}
+			{:else if showFinishButton}
 				<button
 					on:click={onFinish}
 					style="font-size: {scale * 1.3}vw;"

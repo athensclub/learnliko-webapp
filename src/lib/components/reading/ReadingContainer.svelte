@@ -14,6 +14,8 @@
 	 */
 	export let onFinish = () => {};
 
+	export let showFinishButton = true;
+
 	export let item: ReadingItem;
 
 	let clazz = '';
@@ -34,6 +36,6 @@
 	{#if currentView === 'READ'}
 		<ReadingTextView {scale} {item} setView={(view) => (currentView = view)} />
 	{:else if currentView === 'QUIZ'}
-		<ReadingQuizView {scale} quiz={item.quiz} {onFinish} setView={(view) => (currentView = view)} />
+		<ReadingQuizView {scale} {showFinishButton} quiz={item.quiz} {onFinish} setView={(view) => (currentView = view)} />
 	{/if}
 </div>

@@ -121,7 +121,8 @@
 					}
 				}
 			}
-		},{
+		},
+		{
 			topic: 'ทำความรู้จักและทักทาย',
 			vocabs: [
 				{
@@ -376,6 +377,7 @@
 
 		<div class="mt-[2vw] text-[1.35vw]">อ่าน</div>
 		<ReadingContainer
+			showFinishButton={false}
 			scale={0.9}
 			item={lesson.reading}
 			class="mt-[1vw] aspect-[2/1.15] w-[calc(100%-2vw)]"

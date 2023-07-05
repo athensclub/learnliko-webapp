@@ -18,6 +18,7 @@
 	import { goto } from '$app/navigation';
 	import VocabFlipCard from '$lib/components/VocabFlipCard.svelte';
 	import LessonRecapView from './LessonRecapView.svelte';
+	import ReadingRecapView from './ReadingRecapView.svelte';
 
 	export let item: LearningDiaryItem;
 
@@ -82,6 +83,8 @@
 
 	{#if currentView === 'LESSON'}
 		<LessonRecapView />
+	{:else if currentView === 'READING'}
+		<ReadingRecapView />
 	{/if}
 
 	<!-- Bottom spacing -->

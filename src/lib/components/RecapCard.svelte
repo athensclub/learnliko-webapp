@@ -12,7 +12,7 @@
 	let learnedReading = ['World War 2', 'World War 2', 'World War 2'];
 
 	const { open }: Context = getContext('simple-modal');
-	const openDetails = () => open(RecapModal, { },{classContent:"p-0"});
+	const openDetails = () => open(RecapModal, { },{classContent:"p-0", classWindow: "w-[65vw]"});
 </script>
 
 <div

@@ -49,7 +49,7 @@
 </script>
 
 <div
-	class="relative flex h-[80vh] w-full flex-col overflow-y-auto rounded-3xl bg-white p-[2vw] font-line-seed font-bold"
+	class="relative flex h-[80vh] w-full flex-col overflow-y-auto rounded-3xl bg-white py-[2vw] pl-[2vw] font-line-seed font-bold"
 >
 	<div
 		style="box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.25);"
@@ -83,6 +83,9 @@
 	{#if currentView === 'LESSON'}
 		<LessonRecapView />
 	{/if}
+
+	<!-- Bottom spacing -->
+	<div class="min-h-[5vw]" />
 </div>
 
 <!-- <div

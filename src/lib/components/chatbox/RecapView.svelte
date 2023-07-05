@@ -34,7 +34,7 @@
 			on:click={hide}
 			class="ml-auto mr-4 h-[28px] rounded-lg bg-[#6C80E8] px-3 text-center text-base text-white"
 		>
-			Finish
+			เสร็จสิ้น
 		</button>
 	</div>
 

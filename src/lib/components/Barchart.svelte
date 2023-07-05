@@ -1,36 +1,36 @@
 <script>
-	import * as d3 from "d3";
-	import { fly } from "svelte/transition";
-  
+	import * as d3 from 'd3';
+	import { fly } from 'svelte/transition';
+
 	const alphabet = [
-	  { letter: "A", frequency: 0.08167 },
-	  { letter: "B", frequency: 0.01492 },
-	  { letter: "C", frequency: 0.02782 },
-	  { letter: "D", frequency: 0.04253 },
-	  { letter: "E", frequency: 0.12702 },
-	  { letter: "F", frequency: 0.02288 },
-	  { letter: "G", frequency: 0.02015 },
-	  { letter: "H", frequency: 0.06094 },
-	  { letter: "I", frequency: 0.06966 },
-	  { letter: "J", frequency: 0.00153 },
-	  { letter: "K", frequency: 0.00772 },
-	  { letter: "L", frequency: 0.04025 },
-	  { letter: "M", frequency: 0.02406 },
-	  { letter: "N", frequency: 0.06749 },
-	  { letter: "O", frequency: 0.07507 },
-	  { letter: "P", frequency: 0.01929 },
-	  { letter: "Q", frequency: 0.00095 },
-	  { letter: "R", frequency: 0.05987 },
-	  { letter: "S", frequency: 0.06327 },
-	  { letter: "T", frequency: 0.09056 },
-	  { letter: "U", frequency: 0.02758 },
-	  { letter: "V", frequency: 0.00978 },
-	  { letter: "W", frequency: 0.0236 },
-	  { letter: "X", frequency: 0.0015 },
-	  { letter: "Y", frequency: 0.01974 },
-	  { letter: "Z", frequency: 0.00074 },
+		{ letter: 'A', frequency: 0.08167 },
+		{ letter: 'B', frequency: 0.01492 },
+		{ letter: 'C', frequency: 0.02782 },
+		{ letter: 'D', frequency: 0.04253 },
+		{ letter: 'E', frequency: 0.12702 },
+		{ letter: 'F', frequency: 0.02288 },
+		{ letter: 'G', frequency: 0.02015 },
+		{ letter: 'H', frequency: 0.06094 },
+		{ letter: 'I', frequency: 0.06966 },
+		{ letter: 'J', frequency: 0.00153 },
+		{ letter: 'K', frequency: 0.00772 },
+		{ letter: 'L', frequency: 0.04025 },
+		{ letter: 'M', frequency: 0.02406 },
+		{ letter: 'N', frequency: 0.06749 },
+		{ letter: 'O', frequency: 0.07507 },
+		{ letter: 'P', frequency: 0.01929 },
+		{ letter: 'Q', frequency: 0.00095 },
+		{ letter: 'R', frequency: 0.05987 },
+		{ letter: 'S', frequency: 0.06327 },
+		{ letter: 'T', frequency: 0.09056 },
+		{ letter: 'U', frequency: 0.02758 },
+		{ letter: 'V', frequency: 0.00978 },
+		{ letter: 'W', frequency: 0.0236 },
+		{ letter: 'X', frequency: 0.0015 },
+		{ letter: 'Y', frequency: 0.01974 },
+		{ letter: 'Z', frequency: 0.00074 }
 	];
-  
+
 	let data = alphabet;
 	let marginTop = 20; // the top margin, in pixels
 	let marginRight = 0; // the right margin, in pixels
@@ -39,147 +39,150 @@
 	let width = 900; // the outer width of the chart, in pixels
 	let height = 400; // the outer height of the chart, in pixels
 	let xPadding = 0.2; // amount of x-range to reserve to separate bars
-	let yFormat = "%"; // a format specifier string for the y-axis
-	let yLabel = "↑ Frequency"; // a label for the y-axis
-	let color = "#6C80E8"; // bar fill color
+	let yFormat = '👤'; // a format specifier string for the y-axis
+	let yLabel = '↑ ปริมาณผู้เรียน'; // a label for the y-axis
+	let color = 'url(#paint0_linear_1218_8536)'; // bar fill color
 	let yScalefactor = 6; //y-axis number of values
-  
+
 	// Modify data based on default, ascending, descending sorts.  Input is based on selectedIndex
 	$: showSort = (input) => {
-	  if (input === 1) {
-		return (data = data.sort(
-		  (a, b) => a[x].charCodeAt(0) - b[x].charCodeAt(0)
-		));
-	  }
-	  if (input === 2) {
-		return (data = data.sort((a, b) => a[y] - b[y]));
-	  }
-	  if (input === 3) {
-		return (data = data.sort((a, b) => b[y] - a[y]));
-	  }
+		if (input === 1) {
+			return (data = data.sort((a, b) => a[x].charCodeAt(0) - b[x].charCodeAt(0)));
+		}
+		if (input === 2) {
+			return (data = data.sort((a, b) => a[y] - b[y]));
+		}
+		if (input === 3) {
+			return (data = data.sort((a, b) => b[y] - a[y]));
+		}
 	};
-  
+
 	// Compute values X and Y value of Arrays
 	let x = Object.keys(data[0])[0]; // given d in data, returns the (ordinal) x-value
 	let y = Object.keys(data[0])[1]; // given d in data, returns the (quantitative) y-value
 	$: X = data.map((el) => el[x]);
 	$: Y = data.map((el) => el[y]);
-  
+
 	// Compute default domains, and unique the x-domain.
 	$: xDomain = X; // an array of (ordinal) x-values // sort by descending frequency
 	$: yDomain = [0, d3.max(Y)]; // [ymin, ymax]
-  
+
 	// Construct scales, axes, and formats.
 	let xRange = [marginLeft, width - marginRight]; // [left, right]
 	let yRange = [height - marginBottom, marginTop * 2]; // [bottom, top]
 	let yType = d3.scaleLinear; // y-scale type
 	$: xScale = d3.scaleBand(xDomain, xRange).padding(xPadding);
 	$: yScale = yType(yDomain, yRange);
-  
+
 	// Create Y-Axis ticks based on yScalefactor spacing
 	let yTicks = [];
 	$: unit = (Math.max(...Y) - Math.min(...Y)) / yScalefactor;
 	$: for (let i = 1; i < yScalefactor + 1; i++) {
-	  yTicks = [...yTicks, Math.floor(i * unit * 100)];
+		yTicks = [...yTicks, Math.floor(i * unit * 100)];
 	}
-  </script>
-  
-  <div class="selector-main" dir="auto">
-	<select class="text-[0.7vw] border mb-[1vh]"
-	  on:change={showSort(this.selectedIndex)}
-	  onfocus={(this.selectedIndex = -1)}
+</script>
+
+<div class="selector-main" dir="auto">
+	<select
+		class="mb-[1vh] border text-[0.7vw]"
+		on:change={showSort(this.selectedIndex)}
+		onfocus={(this.selectedIndex = -1)}
 	>
-	  <option  disabled selected value> ---Sorting Method--- </option>
-	  <option value="1">เรียงตามวันที่</option>
-	  <option value="2">อัตราการเรียนน้อย-มาก</option>
-	  <option value="3">อัตราการเรียนมาก-น้อย</option>
+		<option disabled selected value> การจัดเรียง </option>
+		<option value="1">เรียงตามวันที่</option>
+		<option value="2">อัตราการเรียนน้อย-มาก</option>
+		<option value="3">อัตราการเรียนมาก-น้อย</option>
 	</select>
-  </div>
-  <svg {width} {height} viewBox="0 0 {width} {height}">
+</div>
+<svg {width} {height} viewBox="0 0 {width} {height}">
 	<g class="y-axis" transform="translate({marginLeft}, 0)">
-	  {#each yTicks as tick, i}
-		<g
-		  class="tick"
-		  opacity="1"
-		  transform="translate(0, {yScale(tick / 100)})"
-		>
-		  <line class="tick-start" stroke="black" stroke-opacity="1" x2="-6" />
-		  <line class="tick-grid" x2={width - marginLeft - marginRight} />
-		  <text x={-marginLeft} y="10">{tick + yFormat}</text>
-		</g>
-	  {/each}
-	  <text x="-{marginLeft}" y={marginTop}>{yLabel}</text>
-	</g>
-  
-	<g class="bars">
-	  {#key showSort}
-		{#each Y as point, i}
-		  <rect
-			x={xScale(X[i])}
-			y={yScale(Y[i])}
-			width={xScale.bandwidth()}
-			height={yScale(0) - yScale(Y[i])}
-			fill={color}
-			in:fly={{ x: -200, duration: 1000, delay: i * 50 }}
-		  />
+		{#each yTicks as tick, i}
+			<g class="tick" opacity="1" transform="translate(0, {yScale(tick / 100)})">
+				<line class="tick-start" stroke="black" stroke-opacity="1" x2="-6" />
+				<line class="tick-grid" x2={width - marginLeft - marginRight} />
+				<text x={-marginLeft} y="10">{tick + yFormat}</text>
+			</g>
 		{/each}
-	  {/key}
+		<text x="-{marginLeft}" y={marginTop}>{yLabel}</text>
 	</g>
-  
+
+	<g class="bars">
+		{#key showSort}
+			{#each Y as point, i}
+				<rect
+					x={xScale(X[i])}
+					y={yScale(Y[i])}
+					width={xScale.bandwidth()}
+					height={yScale(0) - yScale(Y[i])}
+					fill={color}
+					in:fly={{ x: -200, duration: 1000, delay: i * 50 }}
+				/>
+			{/each}
+		{/key}
+	</g>
+
 	<g class="x-axis" transform="translate(0,{height - marginBottom})">
-	  <path class="domain" stroke="black" d="M{marginLeft}, 0.5 H{width}" />
-	  {#each X as point, i}
-		<g class="tick" opacity="1" transform="translate({xScale(point)},0)">
-		  <line
-			x1={xScale.bandwidth() / 2}
-			x2={xScale.bandwidth() / 2}
-			stroke="black"
-			y2="6"
-		  />
-		  <text y={marginBottom} dx={xScale.bandwidth() / 4}>{X[i]}</text>
-		</g>
-	  {/each}
+		<path class="domain" stroke="black" d="M{marginLeft}, 0.5 H{width}" />
+		{#each X as point, i}
+			<g class="tick" opacity="1" transform="translate({xScale(point)},0)">
+				<line x1={xScale.bandwidth() / 2} x2={xScale.bandwidth() / 2} stroke="black" y2="6" />
+				<text y={marginBottom} dx={xScale.bandwidth() / 4}>{X[i]}</text>
+			</g>
+		{/each}
 	</g>
-  </svg>
-  
-  <style>
+
+	<defs>
+		<linearGradient
+			id="paint0_linear_1218_8536"
+			x1="0%"
+			y1="0%"
+			x2="0%"
+			y2="100%"
+			gradientUnits="userSpaceOnUse"
+		>
+			<stop stop-color="#9BA1FD" />
+			<stop offset="1" stop-color="#6C80E8" />
+		</linearGradient>
+	</defs>
+</svg>
+
+<style>
 	svg {
-	  max-width: 100%;
-	  height: auto;
-	  height: "intrinsic";
+		max-width: 100%;
+		height: auto;
+		height: 'intrinsic';
 	}
-  
+
 	.y-axis {
-	  font-size: "10px";
-	  font-family: sans-serif;
-	  text-anchor: "end";
+		font-size: '10px';
+		font-family: sans-serif;
+		text-anchor: 'end';
 	}
-  
+
 	.x-axis {
-	  font-size: "10px";
-	  font-family: sans-serif;
-	  text-anchor: "end";
+		font-size: '10px';
+		font-family: sans-serif;
+		text-anchor: 'end';
 	}
-  
+
 	.tick {
-	  opacity: 1;
+		opacity: 1;
 	}
-  
+
 	.tick-start {
-	  stroke: black;
-	  stroke-opacity: 1;
+		stroke: black;
+		stroke-opacity: 1;
 	}
-  
+
 	.tick-grid {
-	  stroke: black;
-	  stroke-opacity: 0.2;
-	  font-size: "11px";
-	  color: black;
+		stroke: black;
+		stroke-opacity: 0.2;
+		font-size: '11px';
+		color: black;
 	}
-  
+
 	.tick text {
-	  fill: black;
-	  text-anchor: start;
+		fill: black;
+		text-anchor: start;
 	}
-  </style>
-  
+</style>

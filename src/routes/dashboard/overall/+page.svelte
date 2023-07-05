@@ -56,7 +56,7 @@
 	<div class=" container w-[80vw] ml-[2vw]">
 		<div class="flex flex-1 justify-center p-[2vw]">
 			<div class=" mr-[2vw] h-[10vw] w-[20vw] rounded-[1.25vw] bg-white p-[1.5vw]">
-				<h1>Daily Active Use</h1>
+				<h1>Today Use</h1>
 				<h1 class=" text-[3.25vw]">{activeUse}</h1>
 			</div>
 			<div class=" mr-[2vw] h-[10vw] w-[20vw] rounded-[1.25vw] bg-white p-[1.5vw]">
@@ -70,12 +70,12 @@
 		</div>
 
 		<div class="flex flex-1 justify-center">
-			<div class=" mr-[2vw] h-[24vw] w-[20vw] rounded-[1.25vw] bg-white">
-				<h1 class=" text-[2vw] px-[1vw] py-[1vw]">Online</h1>
+			<div class=" mr-[2vw] h-[28vw] pb-[3vw] w-[20vw] rounded-[1.25vw] bg-white overflow-scroll overflow-x-hidden">
+				<h1 class=" text-[1.5vw] px-[1vw] py-[1vw]">Leader board</h1>
 
 				<div class="w-[100%] h-full bg-white rounded-[2vw] flex flex-col font-bold">
 				
-					<div class="flex flex-col p-[0.8vw] gap-[1vw] overflow-y-auto">
+					<div class="flex flex-col px-[0.8vw] gap-[1vw] overflow-y-auto">
 						{#each leaderboard as user, index (index)}
 							<!-- Somehow I have to specify the min height to fix the height -->
 							<div

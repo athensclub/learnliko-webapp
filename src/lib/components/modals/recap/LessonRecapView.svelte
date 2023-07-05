@@ -237,11 +237,6 @@
 			}
 		}
 	];
-
-	onMount(() => {
-		// TODO: put user answer here
-		$readingAnswers = [0];
-	});
 </script>
 
 <div in:fade={{ delay: 500 }} out:fade class="flex w-full flex-col">

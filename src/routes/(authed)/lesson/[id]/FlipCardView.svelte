@@ -20,8 +20,7 @@
 		// TODO: add the actual amount.
 		addProgress(1 / 12);
 
-		// TODO: display actual amount.
-		toast(AnswerCorrectToast, { exp: 25, coin: 100 });
+		toast(AnswerCorrectToast, { exp: items[index].totalExp, coin: items[index].totalCoin });
 	};
 	const onWrong = (index: number) => {
 		setTimeout(() => (items[index] = { ...items[index], hide: true }), 5000);

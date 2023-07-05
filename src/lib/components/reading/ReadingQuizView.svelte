@@ -4,9 +4,10 @@
 	import type { ReadingViewType } from './ReadingContainer.svelte';
 	import AnswerCorrectToast from '../toasts/AnswerCorrectToast.svelte';
 	import { toast } from '../toasts/ToastManager.svelte';
-	import type { ReadingQuestion } from '$gql/graphql';
+	import type { ReadingCard, ReadingQuestion } from '$gql/graphql';
 
-	export let quiz: ReadingQuestion[];
+	export let item: ReadingCard;
+	$: quiz = item.questions;
 
 	export let correctAnswers: number[] | null;
 
@@ -24,8 +25,7 @@
 		// TODO: implement get answer data
 		correctAnswers = quiz.map((q) => 0);
 
-		// TODO: display actual amount.
-		toast(AnswerCorrectToast, { exp: 25, coin: 100 });
+		toast(AnswerCorrectToast, { exp: item.totalExp, coin: item.totalCoin });
 	};
 </script>
 

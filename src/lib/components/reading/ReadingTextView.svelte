@@ -6,15 +6,16 @@
 	import { blobToBase64 } from '$lib/utils/io';
 	import { onMount } from 'svelte';
 	import { playAudioURL } from '$lib/global/audio';
+	import type { ReadingCard } from '$gql/graphql';
 
-	export let item: ReadingItem;
+	export let item: ReadingCard;
 
 	export let scale = 1;
 
 	let speech: string | null = null;
 	// TODO: use data from api instead.
 	const loadSpeech = async () => {
-		const val = await synthesize(item.content, 'US', 'FEMALE', 0.7);
+		const val = await synthesize(item.pages[0].text, 'US', 'FEMALE', 0.7);
 		speech = await blobToBase64(val);
 		console.log('finish tts');
 	};
@@ -25,11 +26,13 @@
 
 <!-- https://github.com/sveltejs/svelte/issues/544#issuecomment-586417387 -->
 <div in:fade={{ delay: 500 }} out:fade class="flex h-full w-full flex-row gap-[2vw]">
-	<img class="max-h-full max-w-[50%]" src={item.image} alt={item.blogName} />
+	<!-- TODO: support multiple pages -->
+	<img class="max-h-full max-w-[50%]" src={item.pages[0].illustrationUrl} alt={item.title} />
 
 	<div class="relative flex h-full flex-1 flex-col overflow-y-auto font-bold">
-		<div style="font-size: {scale*2}vw;">{item.blogName}</div>
-		<div style="font-size: {scale*1.2}vw;" class="mt-[2vw]">{item.content}</div>
+		<div style="font-size: {scale*2}vw;">{item.title}</div>
+		<!-- TODO: support multiple pages -->
+		<div style="font-size: {scale*1.2}vw;" class="mt-[2vw]">{item.pages[0].text}</div>
 
 		<button
 			on:click={() => {

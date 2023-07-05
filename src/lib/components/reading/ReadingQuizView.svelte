@@ -4,9 +4,9 @@
 	import type { ReadingViewType } from './ReadingContainer.svelte';
 	import AnswerCorrectToast from '../toasts/AnswerCorrectToast.svelte';
 	import { toast } from '../toasts/ToastManager.svelte';
-	import type { MultipleChoicesQuestion } from '$lib/types/reading';
+	import type { ReadingQuestion } from '$gql/graphql';
 
-	export let quiz: MultipleChoicesQuestion[];
+	export let quiz: ReadingQuestion[];
 
 	export let correctAnswers: number[] | null;
 
@@ -21,8 +21,8 @@
 
 	$: submittable = selected.every((val) => val !== null);
 	const submit = () => {
-		// TODO: implement better way of showing answer (this is very cheese)
-		correctAnswers = quiz.map((q) => q.answer);
+		// TODO: implement get answer data
+		correctAnswers = quiz.map((q) => 0);
 
 		// TODO: display actual amount.
 		toast(AnswerCorrectToast, { exp: 25, coin: 100 });

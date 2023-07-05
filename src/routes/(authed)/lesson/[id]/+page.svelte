@@ -14,7 +14,7 @@
 	import { page } from '$app/stores';
 	import { getLessonById } from '$api/lesson';
 	import { lastPlayedLessonIdLocal } from '$lib/localdb/profileLocal';
-	import type { LessonCard, SentenceCard, VocabularyCard } from '$gql/graphql';
+	import type { LessonCard, ReadingCard, SentenceCard, VocabularyCard } from '$gql/graphql';
 	import Typewriter from 'svelte-typewriter/Typewriter.svelte';
 
 	let item: LessonCard | null = null;
@@ -22,6 +22,8 @@
 
 	let vocabs: VocabularyCard[] | null = null;
 	let sentences: SentenceCard[] | null = null;
+	// TODO: support multiple reading items?
+	let reading: ReadingCard | null = null;
 
 	onMount(async () => {
 		item = await getLessonById($page.params.id);
@@ -35,6 +37,12 @@
 			item.quizeSections
 				.find((section) => section.type === 'SENTENCE')
 				?.cards.map((card) => card as SentenceCard) ?? null;
+
+		// TODO: support multiple reading item?
+		reading =
+			item.quizeSections
+				.find((section) => section.type === 'READING')
+				?.cards.map((card) => card as ReadingCard)[0] ?? null;
 
 		$chatContext = {
 			conversation: item.conversation,
@@ -163,13 +171,20 @@
 				</div>
 			{/if}
 		{:else if currentView === 'READING'}
-			<ReadingView
-				item={item.reading}
-				onFinish={() => {
-					addProgress(1 / 4);
-					currentView = 'CONVERSATION';
-				}}
-			/>
+			<!-- TODO: support multiple reading items? -->
+			{#if reading}
+				<ReadingView
+					item={reading}
+					onFinish={() => {
+						addProgress(1 / 4);
+						currentView = 'CONVERSATION';
+					}}
+				/>
+			{:else}
+				<div class="bg-white text-[3vw] text-black">
+					Loading<Typewriter mode="loop">...</Typewriter>
+				</div>
+			{/if}
 		{:else if currentView === 'CONVERSATION'}
 			<LessonConversationView
 				onFinish={() => {

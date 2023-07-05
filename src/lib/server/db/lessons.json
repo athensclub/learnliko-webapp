@@ -100,20 +100,36 @@
 					}
 				],
 				"type": "SENTENCE"
+			},
+			{
+				"__typename": "QuizSection",
+				"cards": [
+					{
+						"__typename": "ReadingCard",
+						"pages": [
+							{
+								"__typename": "ReadingPage",
+								"illustrationUrl": "https://cdn.discordapp.com/attachments/842737146321174558/1124045015631528038/image.png",
+								"text": "Hi! I'm Andy. I'm 9 years old and this is my family. We live in a small house in the beautiful garden. My father's name is Aaron. He's a teacher. He's 42 years old. My mother's name is Clare. She's a teacher. She's 40. My parents work in a school in the center of town. I have got 2 brother. their names are Sam and Max. Sam is the middle child and max is our little brother. We haven't got a pet."
+							}
+						],
+						"questions": [
+							{
+								"__typename": "ReadingQuestion",
+								"choices": ["Teacher", "Doctor", "Police", "Soldier"],
+								"coin": 25,
+								"exp": 100,
+								"question": "พ่อของ Andy ทำงานอะไร?"
+							}
+						],
+						"title": "My family",
+						"totalCoin": 100,
+						"totalExp": 25
+					}
+				],
+				"type": "READING"
 			}
 		],
-		"reading": {
-			"blogName": "My family",
-			"content": "Hi! I'm Andy. I'm 9 years old and this is my family. We live in a small house in the beautiful garden. My father's name is Aaron. He's a teacher. He's 42 years old. My mother's name is Clare. She's a teacher. She's 40. My parents work in a school in the center of town. I have got 2 brother. their names are Sam and Max. Sam is the middle child and max is our little brother. We haven't got a pet.",
-			"image": "https://cdn.discordapp.com/attachments/842737146321174558/1124045015631528038/image.png",
-			"quiz": [
-				{
-					"question": "พ่อของ Andy ทำงานอะไร?",
-					"choices": ["Teacher", "Doctor", "Police", "Soldier"],
-					"answer": 0
-				}
-			]
-		},
 		"conversation": {
 			"background": "https://i.pinimg.com/originals/41/4a/12/414a12d7d3a3f50ee3c31f7606df0cf0.jpg",
 			"image": "https://cdn.discordapp.com/attachments/842737146321174558/1116747283132842105/avatar.png",

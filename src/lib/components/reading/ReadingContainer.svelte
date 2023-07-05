@@ -6,6 +6,7 @@
 	import ReadingTextView from './ReadingTextView.svelte';
 	import ReadingQuizView from './ReadingQuizView.svelte';
 	import type { ReadingItem } from '$lib/types/reading';
+	import type { ReadingCard } from '$gql/graphql';
 
 	/**
 	 * Called when the user click 'continue' button after submitting answers.
@@ -14,9 +15,9 @@
 
 	export let showFinishButton = true;
 
-	export let item: ReadingItem;
+	export let item: ReadingCard;
 
-	let selected = Array(item.quiz.length).fill(null);
+	let selected = Array(item.questions.length).fill(null);
 
 	let clazz = '';
 	export { clazz as class };
@@ -50,7 +51,7 @@
 			bind:selected
 			{scale}
 			{showFinishButton}
-			quiz={item.quiz}
+			quiz={item.questions}
 			{onFinish}
 			setView={(view) => (currentView = view)}
 		/>

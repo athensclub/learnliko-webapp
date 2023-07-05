@@ -5,6 +5,7 @@
 	import vocabTaskImage from './vocab_task_image.png';
 	import icon from '$lib/images/learnliko_icon.png';
 	import LessonCard from '$lib/components/LessonCard.svelte';
+	import type { LessonCard as LessonCardData } from '$gql/graphql';
 	import userProfileImage from '$lib/images/sample_kid_image.png';
 	import { queryDiscoverItemsLocal } from '$lib/localdb/discoverLocal';
 	import type { DiscoverItem } from '$lib/types/discover';
@@ -13,7 +14,6 @@
 	import { currentMode } from '$lib/global/mode';
 	import { browser } from '$app/environment';
 	import background from '$lib/images/bgvd.mp4';
-	import type { LessonCardData } from '$lib/types/lesson';
 	import { getLessonById, getLessonCards } from '$api/lesson';
 	import { lastPlayedLessonIdLocal } from '$lib/localdb/profileLocal';
 
@@ -22,6 +22,7 @@
 	const loadData = async () => {
 		if (!browser) return;
 		items = await getLessonCards();
+		console.log(items)
 
 		if ($lastPlayedLessonIdLocal !== null)
 			lastPlayed = await getLessonById($lastPlayedLessonIdLocal);

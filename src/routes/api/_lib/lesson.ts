@@ -1,6 +1,7 @@
-import type { LessonCardData, LessonItem } from "$lib/types/lesson";
+import type { LessonCard } from "$gql/graphql";
+import type { LessonItem } from "$lib/types/lesson";
 
-export const getLessonCards = async (): Promise<LessonCardData[]> => {
+export const getLessonCards = async (): Promise<LessonCard[]> => {
     const result = await fetch(
         '/api/v1/lesson/cards',
         { method: 'GET' }

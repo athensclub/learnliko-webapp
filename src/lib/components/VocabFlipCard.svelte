@@ -38,9 +38,10 @@
 	$: selectedChoice, updateSelectedChoice();
 
 	/**
-	 * Null -> user has not submitted.
+	 * Null -> user has not submitted. Set to non-null value to render this  card as played
+	 * flip card.
 	 */
-	let correctAnswer: number | null = null;
+	export let correctAnswer: number | null = null;
 	const submit = () => {
 		// TODO: implement actual submit.
 		correctAnswer = 0;

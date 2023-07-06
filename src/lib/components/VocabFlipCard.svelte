@@ -237,7 +237,7 @@
 				<div
 					in:fade={{ delay: 500 }}
 					out:fade
-					class="pointer-events-none absolute z-20 flex h-full w-full flex-row items-center justify-center text-[1.5vw] text-white"
+					class="pointer-events-none absolute left-0 top-0 z-20 flex h-full w-full flex-row items-center justify-center text-[1.5vw] text-white"
 				>
 					กำลังตรวจคำตอบ<Typewriter mode="loop">...</Typewriter>
 				</div>

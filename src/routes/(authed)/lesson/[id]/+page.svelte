@@ -272,12 +272,13 @@
 		{:else if currentView === 'CONVERSATION'}
 			<LessonConversationView
 				onFinish={() => {
-					addProgress(1 / 4);
+					progress = 1;
 					onFinishedLesson();
 				}}
 			/>
 		{:else if currentView === 'FINISHED'}
 			<LessonFinishedView
+		
 				avatar="https://cdn.discordapp.com/attachments/842737146321174558/1124658451738533959/image.png"
 			/>
 		{/if}

@@ -1,6 +1,7 @@
 import { CREATE_USER_ACCOUNT } from '$gql/schema/mutations';
 import { auth } from '$lib/configs/firebase.config';
 import { graphqlClient } from '$lib/graphql';
+import { updateTotalLearner } from '$lib/temp/analytic';
 import { authErrorCodeMapping } from '$lib/utils/authError';
 import {
 	signInAnonymously,
@@ -41,7 +42,7 @@ export const _createAccount = async function (username: string) {
 		'123456'
 	);
 
-	const mutationResult = await graphqlClient
+	await graphqlClient
 		.mutation(CREATE_USER_ACCOUNT, {
 			data: {
 				classRoom: { id: 'classroom1', name: 'Classroom 1' },
@@ -50,6 +51,4 @@ export const _createAccount = async function (username: string) {
 			}
 		})
 		.toPromise();
-
-	console.log(mutationResult.data?.userCreate);
 };

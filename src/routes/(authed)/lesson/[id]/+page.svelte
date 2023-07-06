@@ -12,7 +12,7 @@
 	import { onDestroy, onMount } from 'svelte';
 	import { page } from '$app/stores';
 	import { getLessonById } from '$api/lesson';
-	import { lastPlayedLessonIdLocal, totalVocabLocal } from '$lib/localdb/profileLocal';
+	import { lastPlayedLessonIdLocal } from '$lib/localdb/profileLocal';
 	import {
 		QuizType,
 		type LessonCard,

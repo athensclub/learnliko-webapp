@@ -14,8 +14,9 @@
 	import { getLessonById, getLessonCards } from '$api/lesson';
 	import { lastPlayedLessonIdLocal, learnedVocabLocal } from '$lib/localdb/profileLocal';
 	import userSession from '$lib/stores/userSession';
+	import Typewriter from 'svelte-typewriter/Typewriter.svelte';
 
-	let items: PersonalizedLessonCard[] = [];
+	let items: PersonalizedLessonCard[] | null = null;
 	let lastPlayed: PersonalizedLessonCard | null = null;
 	const loadData = async () => {
 		if (!browser) return;
@@ -193,19 +194,27 @@
 	<div
 		class={`pointer-events-none fixed left-0 top-0 z-[100] h-[100vh] w-[100vw] snap-y snap-mandatory overflow-y-auto`}
 	>
-		<div
-			class={`pointer-events-auto mx-auto ${
-				$isMobile ? 'w-full py-[15vh]' : 'w-[54vw] pb-[10vh] pt-0'
-			}`}
-		>
-			{#each items as item (item)}
-				<LessonCard
-					item={item.card}
-					progress={item.progress}
-					difficulty={item.difficulty}
-					class="mx-auto mt-[calc(48vh-19vw)] h-[38vw] w-[27vw] snap-center"
-				/>
-			{/each}
-		</div>
+		{#if items}
+			<div
+				class={`pointer-events-auto mx-auto ${
+					$isMobile ? 'w-full py-[15vh]' : 'w-[54vw] pb-[10vh] pt-0'
+				}`}
+			>
+				{#each items as item (item)}
+					<LessonCard
+						item={item.card}
+						progress={item.progress}
+						difficulty={item.difficulty}
+						class="mx-auto mt-[calc(48vh-19vw)] h-[38vw] w-[27vw] snap-center"
+					/>
+				{/each}
+			</div>
+		{:else}
+			<div
+				class="pointer-events-none flex h-full w-full flex-row items-center justify-center text-[2.5vw]"
+			>
+				กำลังโหลด<Typewriter mode="loop">...</Typewriter>
+			</div>
+		{/if}
 	</div>
 </div>

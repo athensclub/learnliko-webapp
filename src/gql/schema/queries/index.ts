@@ -27,3 +27,29 @@ export const QUERY_LESSONS_FEED = graphql(`
 		}
 	}
 `);
+
+export const QUERY_LESSON = graphql(`
+	query LessonCard($lessonCardId: ID!, $baseLevel: LanguageLevel!, $includeProgressOf: ID) {
+		lessonCard(id: $lessonCardId, baseLevel: $baseLevel, includeProgressOf: $includeProgressOf) {
+			progress
+			difficulty
+			card {
+				id
+				title
+				description
+				intro {
+					bot {
+						avatarModels {
+							neutral
+						}
+						accent
+						gender
+					}
+					message
+				}
+				backgroundUrl
+				exp
+			}
+		}
+	}
+`);

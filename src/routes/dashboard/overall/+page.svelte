@@ -54,7 +54,7 @@
 					class=" mr-[2vw] h-[10vw] w-1/3 rounded-[1.25vw] bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] p-[1.5vw] shadow-lg"
 				>
 					<h1 class=" text-[1.25vw]">ค่าเฉลี่ย CEFR ของนักเรียน</h1>
-					<h1 class=" text-[3.25vw] font-extrabold">{averageCEFR}</h1>
+					<h1 class=" text-[3.25vw] font-extrabold">PRE-A1</h1>
 				</div>
 				<div
 					class=" mr-[2vw] h-[10vw] w-1/3 rounded-[1.25vw] bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] p-[1.5vw] shadow-lg"
@@ -75,12 +75,14 @@
 							{#each leaderboard as user, index (index)}
 								<!-- Somehow I have to specify the min height to fix the height -->
 								<div
-									style="background-image: url('{user.profile?.coverUrl}');"
+									style="background-image: url('{user.profile?.coverUrl ??
+										'https://cdn.discordapp.com/attachments/842737146321174558/1124288705864155216/image.png'}');"
 									class="flex h-[5.5vw] w-full flex-row items-center justify-between rounded-[1vw] bg-cover bg-center px-[1vw]"
 								>
 									<div class="flex h-full flex-row items-center gap-[0.5vw]">
 										<div
-											style="background-image: url('{user.profile?.imageUrl}');"
+											style="background-image: url('{user.profile?.imageUrl ??
+												'https://cdn.discordapp.com/attachments/842737146321174558/1122773960019423262/30-307416_profile-icon-png-image-free-download-searchpng-employee.png'}');"
 											class="aspect-square h-[50%] rounded-full border-[0.05vw] border-white bg-cover bg-center"
 										/>
 										<div

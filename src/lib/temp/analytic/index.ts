@@ -18,7 +18,7 @@ import {
 
 const _analyticCollection = 'Analytics';
 const _level = ['PRE_A1', 'A1', 'A2', 'B1', 'B2'];
-const _classroom = [{ id: 'classroom1', name: 'Classroom 1' }];
+const _classroom = [{ id: 'classroom1', name: 'Classroom 1', total: 10 }];
 
 // Data Query
 export const queryLearnerLesson = async function () {

@@ -1,25 +1,12 @@
 <script lang="ts">
 	import NavBar from '$lib/components/navbar/NavBar.svelte';
-	import Typewriter from 'svelte-typewriter/Typewriter.svelte';
+	import { queryClassroom } from '$lib/temp/analytic';
 
-	let activeUse = 64;
-	let averageCEFR = 'A1';
-	let totalStudents = 150;
+	let classroom: { id: string; name: string; total: number }[] = [];
 
-	let classroom = [
-		{
-			classroomID: '1',
-			totalStudents: '36'
-		},
-		{
-			classroomID: '2',
-			totalStudents: '38'
-		},
-		{
-			classroomID: '3',
-			totalStudents: '34'
-		}
-	];
+	queryClassroom().then((data) => {
+		classroom = data;
+	});
 </script>
 
 <div class="flex h-full min-h-[100vh] w-full flex-row bg-[#F4F4F4] font-line-seed">
@@ -27,19 +14,29 @@
 	<div class=" container mx-auto w-[70vw]">
 		<div class="flex flex-1 py-[2vw]">
 			{#each classroom as classroom, index (index)}
-				<a href="/dashboard/students/database"  class=" mr-[2vw] h-[10vw] w-1/3 rounded-[1.25vw] bg-white p-[1.5vw] shadow-lg">
+				<a
+					href="/dashboard/students/database"
+					class=" mr-[2vw] h-[10vw] w-1/3 rounded-[1.25vw] bg-white p-[1.5vw] shadow-lg"
+				>
 					<div class="flex justify-between">
-						<h1 class="font-extrabold text-black">Classroom {classroom.classroomID}</h1>
-						<svg class="w-[1.5vw]"  viewBox="0 0 34 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-							<path d="M2 10.5C1.17157 10.5 0.5 11.1716 0.5 12C0.5 12.8284 1.17157 13.5 2 13.5V10.5ZM33.0607 13.0607C33.6464 12.4749 33.6464 11.5251 33.0607 10.9393L23.5147 1.3934C22.9289 0.807612 21.9792 0.807612 21.3934 1.3934C20.8076 1.97918 20.8076 2.92893 21.3934 3.51472L29.8787 12L21.3934 20.4853C20.8076 21.0711 20.8076 22.0208 21.3934 22.6066C21.9792 23.1924 22.9289 23.1924 23.5147 22.6066L33.0607 13.0607ZM2 13.5H32V10.5H2V13.5Z" fill="black"/>
-							</svg>
-							
+						<h1 class="font-extrabold text-black">{classroom.name}</h1>
+						<svg
+							class="w-[1.5vw]"
+							viewBox="0 0 34 24"
+							fill="none"
+							xmlns="http://www.w3.org/2000/svg"
+						>
+							<path
+								d="M2 10.5C1.17157 10.5 0.5 11.1716 0.5 12C0.5 12.8284 1.17157 13.5 2 13.5V10.5ZM33.0607 13.0607C33.6464 12.4749 33.6464 11.5251 33.0607 10.9393L23.5147 1.3934C22.9289 0.807612 21.9792 0.807612 21.3934 1.3934C20.8076 1.97918 20.8076 2.92893 21.3934 3.51472L29.8787 12L21.3934 20.4853C20.8076 21.0711 20.8076 22.0208 21.3934 22.6066C21.9792 23.1924 22.9289 23.1924 23.5147 22.6066L33.0607 13.0607ZM2 13.5H32V10.5H2V13.5Z"
+								fill="black"
+							/>
+						</svg>
 					</div>
 					<div class=" flex">
 						<h1
 							class=" bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] bg-clip-text text-[3.25vw] font-extrabold text-transparent"
 						>
-							{classroom.totalStudents}
+							{classroom.total}
 						</h1>
 
 						<svg
@@ -68,7 +65,7 @@
 							</defs>
 						</svg>
 					</div>
-			 </a>
+				</a>
 			{/each}
 		</div>
 	</div>

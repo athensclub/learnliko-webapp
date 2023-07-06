@@ -20,6 +20,10 @@ const _level = ['PRE_A1', 'A1', 'A2', 'B1', 'B2'];
 const _classroom = [{ id: 'classroom1', name: 'Classroom 1' }];
 
 // Data Query
+export const queryClassroom = async function () {
+	return _classroom;
+};
+
 export const queryLearnersByExp = async function (classroomScope?: string) {
 	const usersRef = collection(firestore, `Users`);
 	const queryConst: QueryConstraint[] = [orderBy('exp', 'desc'), limit(30)];

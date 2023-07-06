@@ -51,7 +51,7 @@
 			bind:selected
 			{scale}
 			{showFinishButton}
-			quiz={item.questions}
+			{item}
 			{onFinish}
 			setView={(view) => (currentView = view)}
 		/>

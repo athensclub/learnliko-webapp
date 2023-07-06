@@ -29,8 +29,8 @@
 		if ($lastPlayedLessonIdLocal !== null)
 			lastPlayed = await getLessonById(
 				$lastPlayedLessonIdLocal,
-				$userSession.accountData?.uid!,
-				$userSession.accountData?.languageLevel?.overall.level!
+				$userSession.accountData?.languageLevel?.overall.level!,
+				$userSession.accountData?.uid!
 			);
 	};
 

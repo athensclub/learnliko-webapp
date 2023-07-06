@@ -14,8 +14,14 @@
 	import { page } from '$app/stores';
 	import { getLessonById } from '$api/lesson';
 	import { lastPlayedLessonIdLocal } from '$lib/localdb/profileLocal';
-	import type { LessonCard, ReadingCard, SentenceCard, VocabularyCard } from '$gql/generated/graphql';
+	import type {
+		LessonCard,
+		ReadingCard,
+		SentenceCard,
+		VocabularyCard
+	} from '$gql/generated/graphql';
 	import Typewriter from 'svelte-typewriter/Typewriter.svelte';
+	import userSession from '$lib/stores/userSession';
 
 	let item: LessonCard | null = null;
 	let background: string | null = null;
@@ -26,7 +32,14 @@
 	let reading: ReadingCard | null = null;
 
 	onMount(async () => {
-		item = await getLessonById($page.params.id);
+		let content = await getLessonById(
+			$page.params.id,
+			$userSession.accountData?.languageLevel?.overall.level!,
+			undefined,
+			true
+		);
+		if (!content.card) throw new Error('No Lesson Found');
+		item = content.card;
 
 		vocabs =
 			item.quizeSections

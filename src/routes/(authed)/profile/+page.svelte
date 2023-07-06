@@ -123,11 +123,6 @@
 							</div>
 						</CircularProgressBar>
 
-						<div
-							class="flex flex-row justify-center rounded-full border border-black px-[2vw] py-[0.5vw] text-[1.3vw]"
-						>
-							ดูรายละเอียด
-						</div>
 					</div>
 
 					<div class="flex h-full flex-col items-center justify-between">
@@ -142,13 +137,13 @@
 						</div>
 
 						<div
-							class="flex flex-row justify-center rounded-full border border-black px-[2vw] py-[0.5vw] text-[1.3vw]"
+							class="flex flex-row justify-center rounded-full border border-black px-[2vw] py-[0.5vw] text-[1vw]"
 						>
-							ดูรายละเอียด
+							ข้อมูลตัวอย่างสำหรับโหมดทดลองใช้ 
 						</div>
 					</div>
 				</button>
-
+			
 				<div
 					style="box-shadow: 0px 10px 30px 0px rgba(108, 128, 232, 0.25);"
 					class={`flex items-start justify-center rounded-3xl bg-white p-[2vw] ${
@@ -157,7 +152,7 @@
 				>
 					<div class="flex flex-row">
 						<div
-							class="mr-[1vw] bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] bg-clip-text text-[4vw] text-transparent"
+							class="mr-[2vw] bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] bg-clip-text text-[3vw] text-transparent"
 						>
 							{$userSession.accountData?.exp}
 						</div>
@@ -204,7 +199,7 @@
 
 					<div class="flex flex-row">
 						<div
-							class="mr-[1vw] bg-gradient-to-t from-[#FFE08F] via-[#E4AE24] to-[#FFE08F] bg-clip-text text-[4vw] text-transparent"
+							class="mr-[2vw] bg-gradient-to-t from-[#FFE08F] via-[#E4AE24] to-[#FFE08F] bg-clip-text text-[3vw] text-transparent"
 						>
 							{$userSession.accountData?.coin}
 						</div>

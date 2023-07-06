@@ -10,7 +10,7 @@
 	export let stage = 0;
 </script>
 
-<div class=" h-[15vw] relative">
+<div class=" h-[18vw] relative">
 	{#if stage >= 1}
 		<img
 			src={robot1}
@@ -62,4 +62,4 @@
 	{/if}
 </div>
 
-<div class="text-center text-white">Hanging of 🤖 at stage {stage} of 7.</div>
+<div class="text-center text-white font-line-seed">Hanging of 🤖  {stage} of 10</div>

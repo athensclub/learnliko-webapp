@@ -8,32 +8,34 @@
     ]
   </script>
   
-  <div class="keyboard">
+  <div class="keyboard  pt-[1vw]">
     {#each letters as letter}
       {#if lettersChosen.includes(letter)}
-        <button class="line-through" disabled>{letter}</button>
+        <button class="line-through hidden" disabled>{letter}</button>
       {:else}
-        <button on:click={() => onLetter(letter)}>{letter}</button>
+        <button class=" shadow-sm bg-gradient-to-br from-[#C698FF] to-[#6C80E8] text-white" on:click={() => onLetter(letter)}>{letter}</button>
       {/if}
     {/each}
   </div>
   
   <style>
     div {
-      font-size: 30px;
+      font-size: 2vw;
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       margin: auto;
       max-width: 80vw;
+   
+
     }
     div > * {
       font-size: inherit;
-      height: 50px;
-      width: 50px;
+      height: 4vw;
+      width: 4vw;
       text-align: center;
-      line-height: 30px;
-      margin: 10px;
+      margin: 5px;
+      border-radius: 0.5vw;
     }
   
   </style>

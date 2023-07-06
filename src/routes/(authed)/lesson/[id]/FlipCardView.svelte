@@ -4,37 +4,55 @@
 	import AnswerCorrectToast from '$lib/components/toasts/AnswerCorrectToast.svelte';
 	import { toast } from '$lib/components/toasts/ToastManager.svelte';
 	import { playAudio } from '$lib/global/audio';
-	import type { FlipCardItem } from '$lib/types/flip_card';
+	import { shuffle } from '$lib/utils/array';
+	import { onMount } from 'svelte';
 	import { fade } from 'svelte/transition';
 
 	export let addProgress: (val: number) => void;
 	export let onFinish: () => void;
 
-	export let items: (VocabularyCard & {hide?: boolean})[];
+	export let items: VocabularyCard[];
+
+	let count = 0;
+	let displayed: (VocabularyCard & { hide?: boolean })[] = [];
+
+	onMount(() => {
+		// save count in separate variable as items is going to be mutated.
+		count = items.length;
+		items = shuffle(items);
+		// pull out first 3 cards
+		for (let i = 0; i < 3; i++) {
+			let item = items[0];
+			items = items.slice(1);
+			displayed = [...displayed, item];
+		}
+	});
+
+	const finishItem = (index: number) => {
+		setTimeout(() => {
+			if (items.length > 0) {
+				let item = items[0];
+				items = items.slice(1);
+				displayed[index] = item;
+			} else {
+				displayed[index] = { ...displayed[index], hide: true };
+			}
+		}, 5000);
+		addProgress(1 / (4 * count));
+	};
 
 	const onCorrect = (index: number) => {
-		setTimeout(() => (items[index] = { ...items[index], hide: true }), 5000);
-
+		finishItem(index);
 		playAudio('Success');
-
-		// TODO: add the actual amount.
-		addProgress(1 / 12);
-
-		toast(AnswerCorrectToast, { exp: items[index].totalExp, coin: items[index].totalCoin });
+		toast(AnswerCorrectToast, { exp: displayed[index].totalExp, coin: displayed[index].totalCoin });
 	};
 	const onWrong = (index: number) => {
-		setTimeout(() => (items[index] = { ...items[index], hide: true }), 5000);
-
-		// TODO: add the actual amount.
-		addProgress(1 / 12);
-
+		finishItem(index);
 		playAudio('Fail');
 	};
 
-	console.log(items)
-
-	// TODO: Check for actual finish.
-	$: if (items.every((i) => i.hide)) {
+	// check for > 0 so that finish does not run before initialization
+	$: if (displayed.length > 0 && displayed.every((i) => i.hide)) {
 		setTimeout(() => {
 			onFinish();
 		}, 1000);
@@ -45,14 +63,21 @@
 	transition:fade
 	class="pointer-events-none absolute left-0 top-0 flex h-[100vh] w-full flex-row items-center justify-center gap-[5vw]"
 >
-	{#each items as item, index}
-		<VocabFlipCard
-			class="pointer-events-auto h-[30vw] w-[22vw] {item.hide
-				? 'opacity-0'
-				: 'opacity-100'} transition-[opacity] duration-1000"
-			onCorrect={() => onCorrect(index)}
-			onWrong={() => onWrong(index)}
-			{item}
-		/>
+	<!-- Multiple absolute position so that transition work without shifts  -->
+	{#each displayed as item, index (item.id)}
+		<div
+			style="left: {50 + 4 * (index - 1)}vw; transform: translate({-50 + 100 * (index - 1)}%,0);"
+			transition:fade
+			class="absolute h-[30vw] w-[22vw]"
+		>
+			<VocabFlipCard
+				class="pointer-events-auto h-full w-full translate-x-0 {item.hide
+					? 'opacity-0'
+					: 'opacity-100'} transition-[opacity] duration-1000"
+				onCorrect={() => onCorrect(index)}
+				onWrong={() => onWrong(index)}
+				{item}
+			/>
+		</div>
 	{/each}
 </div>

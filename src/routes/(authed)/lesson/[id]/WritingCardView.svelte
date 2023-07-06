@@ -11,6 +11,7 @@
 	export let onFinish: () => void;
 
 	export let items: (SentenceCard & { hide?: boolean })[];
+	
 
 	const onCorrect = (index: number) => {
 		setTimeout(() => (items[index] = { ...items[index], hide: true }), 5000);

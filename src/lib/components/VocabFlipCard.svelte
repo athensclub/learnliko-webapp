@@ -9,6 +9,7 @@
 	import type { FlipCardItem } from '$lib/types/flip_card';
 	import { blobToBase64 } from '$lib/utils/io';
 	import { onMount } from 'svelte';
+	import Typewriter from 'svelte-typewriter/Typewriter.svelte';
 	import { fade } from 'svelte/transition';
 
 	export let item: VocabularyCard;
@@ -45,12 +46,14 @@
 	};
 	$: selectedChoice, updateSelectedChoice();
 
+	let submitting = false;
 	/**
 	 * Null -> user has not submitted. Set to non-null value to render this card as played
 	 * flip card.
 	 */
 	export let correctAnswer: number | null = null;
 	const submit = async () => {
+		submitting = true;
 		const result = await graphqlClient
 			.mutation(RECAP_VOCAB_QUIZ, {
 				data: {
@@ -72,6 +75,7 @@
 				}
 			})
 			.toPromise();
+		submitting = false;
 
 		correctAnswer = result.data?.vocabularyRecapCreate.answerIndex ?? 0;
 		if (result.data?.vocabularyRecapCreate.correct) {
@@ -229,7 +233,15 @@
 				class="absolute left-0 top-0 h-full w-full backdrop-blur-[8px]"
 			/>
 
-			{#if correctAnswer === null}
+			{#if submitting}
+				<div
+					in:fade={{ delay: 500 }}
+					out:fade
+					class="pointer-events-none absolute z-20 flex h-full w-full flex-row items-center justify-center text-[1.5vw] text-white"
+				>
+					กำลังตรวจคำตอบ<Typewriter mode="loop">...</Typewriter>
+				</div>
+			{:else if correctAnswer === null}
 				<div
 					in:fade={{ delay: 500 }}
 					out:fade

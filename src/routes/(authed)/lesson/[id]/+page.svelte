@@ -48,8 +48,7 @@
 		if (!content.card) throw new Error('No Lesson Found');
 		item = content.card;
 
-		// TODO: set actual ambient data
-		music = new Howl({ src: audio, volume: 0.1, loop: true });
+		music = new Howl({ src: item.ambientAudio, volume: 0.06, loop: true });
 
 		vocabs =
 			item.quizeSections
@@ -121,9 +120,9 @@
 	let playingMusic = true;
 	$: if (!entering && playingMusic) {
 		music?.play();
-		music?.fade(0, 0.1, MUSIC_FADE_DURATION);
+		music?.fade(0, 0.06, MUSIC_FADE_DURATION);
 	} else {
-		music?.fade(0.1, 0, MUSIC_FADE_DURATION);
+		music?.fade(0.06, 0, MUSIC_FADE_DURATION);
 		setTimeout(() => {
 			music?.pause();
 		}, MUSIC_FADE_DURATION);

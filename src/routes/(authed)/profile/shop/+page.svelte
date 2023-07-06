@@ -58,16 +58,22 @@
 			  ];
 </script>
 
-<div class="w-full h-full min-h-[100vh] bg-[#F4F4F4] flex flex-row font-line-seed">
+<div class="flex h-full min-h-[100vh] w-full flex-row bg-[#F4F4F4] font-line-seed">
 	<NavBar spaced />
-	<div class="flex flex-col flex-1 px-[3vw] py-[2vh]">
-		<div class="font-bold text-[2.5vw]">Shop</div>
+	<div class="relative flex flex-1 flex-col px-[3vw] py-[2vh]">
+		<div
+			class="absolute left-0 top-0 flex h-[100vh] w-full items-center justify-center text-[3vw] font-bold text-white backdrop-blur-md backdrop-brightness-[.3]"
+		>
+			ไม่มีในเวอร์ชัน Trial.
+		</div>
 
-		<div class="flex flex-row gap-[2vw] mt-[2vw] font-bold">
+		<div class="text-[2.5vw] font-bold">Shop</div>
+
+		<div class="mt-[2vw] flex flex-row gap-[2vw] font-bold">
 			{#each filters as filter (filter.filter)}
 				<button
 					on:click={() => (currentFilter = filter.filter)}
-					class="text-[1.35vw] px-[1.5vw] py-[0.5vw] rounded-full {currentFilter === filter.filter
+					class="rounded-full px-[1.5vw] py-[0.5vw] text-[1.35vw] {currentFilter === filter.filter
 						? 'bg-black text-white'
 						: 'bg-white text-black'}"
 				>
@@ -77,30 +83,30 @@
 		</div>
 
 		<div
-			class="grid gap-[4vw] mt-[4vw] {currentFilter === 'ProfileImage'
+			class="mt-[4vw] grid gap-[4vw] {currentFilter === 'ProfileImage'
 				? 'grid-cols-3'
 				: 'grid-cols-2'}"
 		>
 			{#each items as item, index (index)}
-				<div class="w-full flex flex-col items-center font-bold">
+				<div class="flex w-full flex-col items-center font-bold">
 					<div
 						style="background-image: url('{item.image}');"
-						class="w-full bg-cover bg-center rounded-[2vw] {currentFilter === 'ProfileImage'
+						class="w-full rounded-[2vw] bg-cover bg-center {currentFilter === 'ProfileImage'
 							? 'aspect-square'
 							: 'aspect-[16/9]'}"
 					>
 						{#if item.using}
 							<div
-								class="text-[1.3vw] px-[1.5vw] py-[0.35vw] rounded-full w-fit mt-[1vw] ml-auto mr-[2vw] bg-black text-white"
+								class="ml-auto mr-[2vw] mt-[1vw] w-fit rounded-full bg-black px-[1.5vw] py-[0.35vw] text-[1.3vw] text-white"
 							>
 								กำลังใช้
 							</div>
 						{:else if !item.owned}
 							<div
-								class="flex flex-row items-center px-[1vw] py-[0.35vw] rounded-full w-fit mt-[1vw] ml-auto mr-[2vw] bg-white"
+								class="ml-auto mr-[2vw] mt-[1vw] flex w-fit flex-row items-center rounded-full bg-white px-[1vw] py-[0.35vw]"
 							>
 								<div
-									class="text-[1.3vw] text-transparent bg-clip-text bg-gradient-to-t from-[#FFE08F] via-[#E4AE24] to-[#FFE08F]"
+									class="bg-gradient-to-t from-[#FFE08F] via-[#E4AE24] to-[#FFE08F] bg-clip-text text-[1.3vw] text-transparent"
 								>
 									{item.price}
 								</div>
@@ -161,13 +167,13 @@
 					{#if !item.owned}
 						<button
 							on:click={() => promptPurchase(item.image, item.price)}
-							class="w-fit px-[2.5vw] py-[0.35vw] mt-[2vw] rounded-full text-[1.35vw] border border-black"
+							class="mt-[2vw] w-fit rounded-full border border-black px-[2.5vw] py-[0.35vw] text-[1.35vw]"
 						>
 							ซื้อ
 						</button>
 					{:else if item.owned && !item.using}
 						<button
-							class="w-fit px-[2.5vw] py-[0.35vw] mt-[2vw] rounded-full text-[1.35vw] border border-black"
+							class="mt-[2vw] w-fit rounded-full border border-black px-[2.5vw] py-[0.35vw] text-[1.35vw]"
 						>
 							ใช้งาน
 						</button>

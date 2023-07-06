@@ -15,7 +15,7 @@
 		<div class="flex flex-1 py-[2vw]">
 			{#each classroom as classroom, index (index)}
 				<a
-					href="/dashboard/students/database"
+					href={`/dashboard/students/database/${classroom.id}`}
 					class=" mr-[2vw] h-[10vw] w-1/3 rounded-[1.25vw] bg-white p-[1.5vw] shadow-lg"
 				>
 					<div class="flex justify-between">

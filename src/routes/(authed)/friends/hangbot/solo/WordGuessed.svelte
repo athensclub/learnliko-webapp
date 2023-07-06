@@ -7,7 +7,7 @@
 <div class="word">
 	{#each word as char}
 		{#if lettersChosen.includes(char.toUpperCase())}
-			<div class="letter guessed">{char}</div>
+			<div class="letter guessed bg-white ">{char}</div>
 		{:else}
 			<div class="letter todo">?</div>
 		{/if}
@@ -16,6 +16,7 @@
 
 <style>
 	.word {
+
 		font-size: 30px;
 		display: flex;
 		justify-content: center;
@@ -29,9 +30,8 @@
 		margin: 10px;
 		height: 50px;
 		width: 50px;
-		background-color: black;
 		color: white;
-		border: 1px solid grey;
+		border: 1px solid white;
 		text-align: center;
 		line-height: 50px;
 	}

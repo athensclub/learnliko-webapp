@@ -71,24 +71,27 @@
 	}
 </script>
 
-<div class=" bg-black">
-	<h1 class=" text-center text-white">Hangbot</h1>
+<div class=" bg-gradient-to-br from-[#C698FF] to-[#6C80E8] pb-[1vw] rounded-b-[2vw]">
+	<h1 class=" text-center text-white font-line-seed text-[4vw] pt-[1vw]">Hangbot</h1>
 
 	<RobotGallows {stage} />
 
-	<h2>Secret word:</h2>
+	<h2 class=" text-center">Secret word</h2>
 
 	<WordGuessed {word} {lettersChosen} />
 </div>
 
+
+
 <svelte:window on:keydown={handleKeydown} />
 
+
 {#if enabled}
-	<h2>Keyboard:</h2>
 	<Keyboard {lettersChosen} {onLetter} />
 {:else}
-	<button class="restart" on:click={restart}>RESTART GAME</button>
+	<button class="restart text-center" on:click={restart}>RESTART GAME</button>
 {/if}
+
 
 
 

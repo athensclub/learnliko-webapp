@@ -7,6 +7,9 @@
 	import { fade } from 'svelte/transition';
 	import Flippable from './Flippable.svelte';
 	import type { SentenceCard } from '$gql/generated/graphql';
+	import { graphqlClient } from '$lib/graphql';
+	import { RECAP_SENTENCE_QUIZ } from '$gql/schema/mutations';
+	import userSession from '$lib/stores/userSession';
 
 	export let item: SentenceCard;
 	$: parts = item.question.split('_');
@@ -50,12 +53,20 @@
 	 * writing card.
 	 */
 	export let correctAnswer: number | null = null;
-	const submit = () => {
-		// TODO: implement actual submit.
-		correctAnswer = 1;
+	const submit = async () => {
+		const result = await graphqlClient
+			.mutation(RECAP_SENTENCE_QUIZ, {
+				data: {
+					quizCard: item.id,
+					userAnswer: selectedChoice ?? 0
+				},
+				uid: $userSession.accountData?.uid!
+			})
+			.toPromise();
+
 		flipped = true;
 
-		if (selectedChoice === correctAnswer) {
+		if (result.data?.sentenceRecapCreate.correct) {
 			onCorrect();
 		} else {
 			onWrong();
@@ -183,7 +194,7 @@
 			<div class="mt-[2vw] inline-flex w-full flex-wrap items-center justify-center gap-[0.6vw]">
 				{#each parts as text, index (index)}
 					<div style="font-size: {scale * 1.65}vw;" class="font-bold text-white">{text}</div>
-					
+
 					{#if index !== parts.length - 1}
 						<div class="h-[2vw] w-[3vw] rounded-full bg-white" />
 					{/if}

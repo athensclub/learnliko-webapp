@@ -5,6 +5,7 @@
 	import Flippable from '$lib/components/Flippable.svelte';
 	import { playAudio, playAudioURL } from '$lib/global/audio';
 	import { graphqlClient } from '$lib/graphql';
+	import { learnedVocabLocal } from '$lib/localdb/profileLocal';
 	import userSession from '$lib/stores/userSession';
 	import type { FlipCardItem } from '$lib/types/flip_card';
 	import { blobToBase64 } from '$lib/utils/io';
@@ -83,6 +84,10 @@
 		} else {
 			onWrong();
 		}
+
+		$learnedVocabLocal = [
+			...new Set([...($learnedVocabLocal ?? []), ...choices.map((c) => c.vocab)])
+		];
 	};
 </script>
 

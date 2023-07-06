@@ -92,7 +92,7 @@
 				image: '',
 				topic: '',
 				background: '',
-				id: ''
+				id: conversation?.id ?? ''
 			},
 			bot: { emotion: 'neutral' }
 		};

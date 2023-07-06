@@ -105,6 +105,89 @@ export const GET_LESSON = graphql(`
 						type
 						level
 						fromLesson
+						... on VocabularyCard {
+							id
+							totalExp
+							totalCoin
+							type
+							level
+							fromLesson
+							imageUrl
+							vocab: choices {
+								vocab
+								transcriptionUrl
+							}
+						}
+						... on SentenceCard {
+							id
+							totalExp
+							totalCoin
+							type
+							level
+							fromLesson
+							question
+							choices
+						}
+						... on ReadingCard {
+							id
+							totalExp
+							totalCoin
+							type
+							level
+							fromLesson
+							title
+							topics
+							pages {
+								text
+								illustrationUrl
+							}
+							questions {
+								question
+								choices
+								exp
+								coin
+							}
+						}
+						... on ConversationCard {
+							id
+							totalExp
+							totalCoin
+							type
+							level
+							fromLesson
+							title
+							backgroundUrl
+							learner {
+								mission
+								goal {
+									goal
+									hint
+									exp
+									coin
+								}
+							}
+							bot {
+								intro
+								prompt
+								avatar {
+									id
+									name
+									avatarModels {
+										neutral
+										joy
+										trust
+										fear
+										surprise
+										sadness
+										disgust
+										anger
+										anticipation
+									}
+									accent
+									gender
+								}
+							}
+						}
 					}
 				}
 			}

@@ -5,14 +5,11 @@
 
 	export let flip = false;
 
-	export let fadeIn: FadeParams = { duration: 0 };
-	export let fadeOut: FadeParams = { duration: 0 };
-
 	let clazz = '';
 	export { clazz as class };
 </script>
 
-<div in:fade={fadeIn} out:fade={fadeOut} class="flip-card {clazz}">
+<div class="flip-card {clazz}">
 	<div class:flip class="flip-card-inner">
 		<div class="flip-card-front">
 			<slot name="front" />

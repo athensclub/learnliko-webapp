@@ -186,7 +186,7 @@
 						ให้ AI พูดช้าลง
 					</div>
 				{:else}
-					<div class="text-[1.7vw]">All goals are completed!</div>
+					<div class="text-[1.7vw]">🎉ภารกิจการสนทนาสำเร็จ!</div>
 				{/if}
 			</div>
 

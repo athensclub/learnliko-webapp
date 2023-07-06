@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
 	import ReadingContainer from '$lib/components/reading/ReadingContainer.svelte';
-	import type { ReadingItem } from '$lib/types/reading';
+	import type { ReadingCard } from '$gql/graphql';
 
-	export let item: ReadingItem;
+	export let item: ReadingCard;
 
 	export let onFinish: () => void;
 </script>

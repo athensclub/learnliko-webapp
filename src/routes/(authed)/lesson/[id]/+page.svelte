@@ -13,15 +13,42 @@
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
 	import { getLessonById } from '$api/lesson';
+	import { lastPlayedLessonIdLocal } from '$lib/localdb/profileLocal';
+	import type { LessonCard, ReadingCard, SentenceCard, VocabularyCard } from '$gql/graphql';
+	import Typewriter from 'svelte-typewriter/Typewriter.svelte';
 
-	let item: LessonItem | null = null;
+	let item: LessonCard | null = null;
 	let background: string | null = null;
+
+	let vocabs: VocabularyCard[] | null = null;
+	let sentences: SentenceCard[] | null = null;
+	// TODO: support multiple reading items?
+	let reading: ReadingCard | null = null;
+
 	onMount(async () => {
 		item = await getLessonById($page.params.id);
+
+		vocabs =
+			item.quizeSections
+				.find((section) => section.type === 'VOCABULARY')
+				?.cards.map((card) => card as VocabularyCard) ?? null;
+
+		sentences =
+			item.quizeSections
+				.find((section) => section.type === 'SENTENCE')
+				?.cards.map((card) => card as SentenceCard) ?? null;
+
+		// TODO: support multiple reading item?
+		reading =
+			item.quizeSections
+				.find((section) => section.type === 'READING')
+				?.cards.map((card) => card as ReadingCard)[0] ?? null;
+
 		$chatContext = {
 			conversation: item.conversation,
 			bot: { emotion: 'neutral' }
 		};
+		$lastPlayedLessonIdLocal = item.id;
 	});
 
 	let entering = true;
@@ -67,7 +94,7 @@
 			</svg>
 		</button>
 
-		<div class="text-[1.7vw] font-bold text-white">{item && item.topic}</div>
+		<div class="text-[1.7vw] font-bold text-white">{item && item.title}</div>
 
 		<button
 			on:click={() => (playingMusic = !playingMusic)}
@@ -117,28 +144,47 @@
 			<LessonIntros
 				onFinish={() => (currentView = 'FLIP_CARD')}
 				setBackground={(image) => (background = image)}
-				items={item.intro}
+				items={item.narratives}
 			/>
 		{:else if currentView === 'FLIP_CARD'}
-			<FlipCardView
-				items={item.vocabs}
-				{addProgress}
-				onFinish={() => (currentView = 'WRITING_CARD')}
-			/>
+			{#if vocabs}
+				<FlipCardView
+					items={vocabs}
+					{addProgress}
+					onFinish={() => (currentView = 'WRITING_CARD')}
+				/>
+			{:else}
+				<div class="bg-white text-[3vw] text-black">
+					Loading<Typewriter mode="loop">...</Typewriter>
+				</div>
+			{/if}
 		{:else if currentView === 'WRITING_CARD'}
-			<WritingCardView
-				items={item.writings}
-				{addProgress}
-				onFinish={() => (currentView = 'READING')}
-			/>
+			{#if sentences}
+				<WritingCardView
+					items={sentences}
+					{addProgress}
+					onFinish={() => (currentView = 'READING')}
+				/>
+			{:else}
+				<div class="bg-white text-[3vw] text-black">
+					Loading<Typewriter mode="loop">...</Typewriter>
+				</div>
+			{/if}
 		{:else if currentView === 'READING'}
-			<ReadingView
-				item={item.reading}
-				onFinish={() => {
-					addProgress(1 / 4);
-					currentView = 'CONVERSATION';
-				}}
-			/>
+			<!-- TODO: support multiple reading items? -->
+			{#if reading}
+				<ReadingView
+					item={reading}
+					onFinish={() => {
+						addProgress(1 / 4);
+						currentView = 'CONVERSATION';
+					}}
+				/>
+			{:else}
+				<div class="bg-white text-[3vw] text-black">
+					Loading<Typewriter mode="loop">...</Typewriter>
+				</div>
+			{/if}
 		{:else if currentView === 'CONVERSATION'}
 			<LessonConversationView
 				onFinish={() => {

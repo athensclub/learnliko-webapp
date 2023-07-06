@@ -1,79 +1,135 @@
 [
 	{
-		"topic": "ทำความรู้จักและทักทาย!",
+		"__typename": "LessonCard",
+		"title": "ทำความรู้จักและทักทาย!",
 		"description": "เช้าวันนี้ คุณกำลังไปโรงเรียนวันแรกและได้ พบเจอกับเพื่อนๆมากมายที่โรงเรียนแห่งใหม่ของคุณ",
 		"avatar": "https://cdn.discordapp.com/attachments/842737146321174558/1124658451738533959/image.png",
 		"avatarIntro": "Hello, nice to meet you",
-		"background": "https://cdn.discordapp.com/attachments/842737146321174558/1123693463087616030/image.png",
+		"backgroundUrl": "https://cdn.discordapp.com/attachments/842737146321174558/1123693463087616030/image.png",
 		"level": "PRE_A1",
 		"exp": 800,
 		"coin": 3200,
-		"intro": [
-			{
-				"background": "https://cdn.discordapp.com/attachments/842737146321174558/1123693463087616030/image.png",
-				"description": "วันนี้เป็นวันแรกที่คุณเข้าห้องเรียนและรับการเรียนรู้ภาษาอังกฤษกับเพื่อนๆ ในห้องเรียนนี้ คุณพบกับหน้าต่างที่เปิดออกมองเห็นสวนสวย ดอกไม้สีสันสวยงามที่แสนอัศจรรย์ และเสียงนกน้อยที่ร้องเพลงอย่างสดใส"
-			},
-			{
-				"background": "https://cdn.discordapp.com/attachments/842737146321174558/1123693852172230666/image.png",
-				"description": "คุณนั่งรอในที่นั่งของคุณและเพื่อนๆ เริ่มกันทำความรู้จักใหม่กันอีกครั้ง มีเพื่อนคุณที่ชื่อเอมมี่ที่เป็นคนที่ขี้เล่นและตลกขบขัน ซามาที่เป็นคนที่อัศจรรย์และร่าเริง และมีแอนดี้ที่เป็นคนที่เชื่อใจได้และเป็นกำลังใจให้กับเพื่อนๆ ทุกคน"
-			},
-			{
-				"background": "https://cdn.discordapp.com/attachments/842737146321174558/1123691473804738620/image.png",
-				"description": "เวลาผ่านไปเร็วมาก เพื่อนๆ ของคุณและคุณต่างก็กำลังเริ่มเรียนรู้ภาษาอังกฤษอย่างเต็มที่ คุณและเพื่อนๆ ของคุณกำลังสนุกกับการเรียนรู้ภาษาอังกฤษด้วยกัน คุณจะได้เรียนรู้คำศัพท์จากสิ่งของในห้องเรียนและสนทนาภาษาอังกฤษกับเพื่อนๆของคุณ"
-			}
-		],
-		"vocabs": [
-			{
-				"image": "https://cdn.discordapp.com/attachments/842737146321174558/1123927173087109120/image.png",
-				"choices": ["A dog", "A cat", "An ant", "An elephant"],
-				"coin": 100,
-				"exp": 25
-			},
-			{
-				"image": "https://cdn.discordapp.com/attachments/842737146321174558/1123927173087109120/image.png",
-				"choices": ["A dog", "A cat", "An ant", "An elephant"],
-				"coin": 100,
-				"exp": 25
-			},
-			{
-				"image": "https://cdn.discordapp.com/attachments/842737146321174558/1123927173087109120/image.png",
-				"choices": ["A dog", "A cat", "An ant", "An elephant"],
-				"coin": 100,
-				"exp": 25
-			}
-		],
-		"writings": [
-			{
-				"text": ["I", null, "a student"],
-				"choices": ["is", "am", "are", "-"],
-				"coin": 100,
-				"exp": 25
-			},
-			{
-				"text": ["I", null, "a student"],
-				"choices": ["is", "am", "are", "-"],
-				"coin": 100,
-				"exp": 25
-			},
-			{
-				"text": ["I", null, "a student"],
-				"choices": ["is", "am", "are", "-"],
-				"coin": 100,
-				"exp": 25
-			}
-		],
-		"reading": {
-			"blogName": "My family",
-			"content": "Hi! I'm Andy. I'm 9 years old and this is my family. We live in a small house in the beautiful garden. My father's name is Aaron. He's a teacher. He's 42 years old. My mother's name is Clare. She's a teacher. She's 40. My parents work in a school in the center of town. I have got 2 brother. their names are Sam and Max. Sam is the middle child and max is our little brother. We haven't got a pet.",
-			"image": "https://cdn.discordapp.com/attachments/842737146321174558/1124045015631528038/image.png",
-			"quiz": [
-				{
-					"question": "พ่อของ Andy ทำงานอะไร?",
-					"choices": ["Teacher", "Doctor", "Police", "Soldier"],
-					"answer": 0
+		"intro": {
+			"__typename": "LessonIntro",
+			"bot": {
+				"__typename": "BotAvatar",
+				"avatarModels": {
+					"__typename": "AvatarModels",
+					"neutral": "https://cdn.discordapp.com/attachments/842737146321174558/1124658451738533959/image.png"
 				}
-			]
+			},
+			"message": "Hello, nice to meet you"
 		},
+		"narratives": [
+			{
+				"__typename": "Narrative",
+				"illustrationUrl": "https://cdn.discordapp.com/attachments/842737146321174558/1123693463087616030/image.png",
+				"text": "วันนี้เป็นวันแรกที่คุณเข้าห้องเรียนและรับการเรียนรู้ภาษาอังกฤษกับเพื่อนๆ ในห้องเรียนนี้ คุณพบกับหน้าต่างที่เปิดออกมองเห็นสวนสวย ดอกไม้สีสันสวยงามที่แสนอัศจรรย์ และเสียงนกน้อยที่ร้องเพลงอย่างสดใส"
+			},
+			{
+				"__typename": "Narrative",
+				"illustrationUrl": "https://cdn.discordapp.com/attachments/842737146321174558/1123693852172230666/image.png",
+				"text": "คุณนั่งรอในที่นั่งของคุณและเพื่อนๆ เริ่มกันทำความรู้จักใหม่กันอีกครั้ง มีเพื่อนคุณที่ชื่อเอมมี่ที่เป็นคนที่ขี้เล่นและตลกขบขัน ซามาที่เป็นคนที่อัศจรรย์และร่าเริง และมีแอนดี้ที่เป็นคนที่เชื่อใจได้และเป็นกำลังใจให้กับเพื่อนๆ ทุกคน"
+			},
+			{
+				"__typename": "Narrative",
+				"illustrationUrl": "https://cdn.discordapp.com/attachments/842737146321174558/1123691473804738620/image.png",
+				"text": "เวลาผ่านไปเร็วมาก เพื่อนๆ ของคุณและคุณต่างก็กำลังเริ่มเรียนรู้ภาษาอังกฤษอย่างเต็มที่ คุณและเพื่อนๆ ของคุณกำลังสนุกกับการเรียนรู้ภาษาอังกฤษด้วยกัน คุณจะได้เรียนรู้คำศัพท์จากสิ่งของในห้องเรียนและสนทนาภาษาอังกฤษกับเพื่อนๆของคุณ"
+			}
+		],
+		"quizeSections": [
+			{
+				"__typename": "QuizSection",
+				"cards": [
+					{
+						"choices": [
+							{ "vocab": "A dog" },
+							{ "vocab": "A cat" },
+							{ "vocab": "An ant" },
+							{ "vocab": "An elephant" }
+						],
+						"imageUrl": "https://cdn.discordapp.com/attachments/842737146321174558/1123927173087109120/image.png",
+						"totalCoin": 100,
+						"totalExp": 25
+					},
+					{
+						"choices": [
+							{ "vocab": "A dog" },
+							{ "vocab": "A cat" },
+							{ "vocab": "An ant" },
+							{ "vocab": "An elephant" }
+						],
+						"imageUrl": "https://cdn.discordapp.com/attachments/842737146321174558/1123927173087109120/image.png",
+						"totalCoin": 100,
+						"totalExp": 25
+					},
+					{
+						"choices": [
+							{ "vocab": "A dog" },
+							{ "vocab": "A cat" },
+							{ "vocab": "An ant" },
+							{ "vocab": "An elephant" }
+						],
+						"imageUrl": "https://cdn.discordapp.com/attachments/842737146321174558/1123927173087109120/image.png",
+						"totalCoin": 100,
+						"totalExp": 25
+					}
+				],
+				"type": "VOCABULARY"
+			},
+			{
+				"__typename": "QuizSection",
+				"cards": [
+					{
+						"choices": ["is", "am", "are", "-"],
+						"question": "I _ a student",
+						"totalCoin": 100,
+						"totalExp": 25
+					},
+					{
+						"choices": ["is", "am", "are", "-"],
+						"question": "I _ a student",
+						"totalCoin": 100,
+						"totalExp": 25
+					},
+					{
+						"choices": ["is", "am", "are", "-"],
+						"question": "I _ a student",
+						"totalCoin": 100,
+						"totalExp": 25
+					}
+				],
+				"type": "SENTENCE"
+			},
+			{
+				"__typename": "QuizSection",
+				"cards": [
+					{
+						"__typename": "ReadingCard",
+						"pages": [
+							{
+								"__typename": "ReadingPage",
+								"illustrationUrl": "https://cdn.discordapp.com/attachments/842737146321174558/1124045015631528038/image.png",
+								"text": "Hi! I'm Andy. I'm 9 years old and this is my family. We live in a small house in the beautiful garden. My father's name is Aaron. He's a teacher. He's 42 years old. My mother's name is Clare. She's a teacher. She's 40. My parents work in a school in the center of town. I have got 2 brother. their names are Sam and Max. Sam is the middle child and max is our little brother. We haven't got a pet."
+							}
+						],
+						"questions": [
+							{
+								"__typename": "ReadingQuestion",
+								"choices": ["Teacher", "Doctor", "Police", "Soldier"],
+								"coin": 25,
+								"exp": 100,
+								"question": "พ่อของ Andy ทำงานอะไร?"
+							}
+						],
+						"title": "My family",
+						"totalCoin": 100,
+						"totalExp": 25
+					}
+				],
+				"type": "READING"
+			}
+		],
 		"conversation": {
 			"background": "https://i.pinimg.com/originals/41/4a/12/414a12d7d3a3f50ee3c31f7606df0cf0.jpg",
 			"image": "https://cdn.discordapp.com/attachments/842737146321174558/1116747283132842105/avatar.png",
@@ -125,22 +181,36 @@
 		"description": "วันนี้เป็นวันที่สวยงามและอบอุ่น คุณได้รับมอบหมายให้ไปเที่ยวสวนสัตว์เพื่อเรียนรู้ภาษาอังกฤษ",
 		"avatar": "https://cdn.discordapp.com/attachments/1120787872379842711/1125280212578484254/vi_potrait_full_body_3d_avatar_girl_traveler_stylize_smile_0cfb7d3c-f27d-4c75-8f7f-47f729f11eee-removebg5.png",
 		"avatarIntro": "Hello, nice to meet you",
-		"background": "https://cdn.midjourney.com/8971ccd2-9863-4b40-9d88-2eea73dd3911/0_2.png",
+		"backgroundUrl": "https://cdn.midjourney.com/8971ccd2-9863-4b40-9d88-2eea73dd3911/0_2.png",
 		"level": "PRE_A1",
 		"exp": 800,
 		"coin": 3200,
-		"intro": [
+		"intro": {
+			"__typename": "LessonIntro",
+			"bot": {
+				"__typename": "BotAvatar",
+				"avatarModels": {
+					"__typename": "AvatarModels",
+					"neutral": "https://cdn.discordapp.com/attachments/1120787872379842711/1125280212578484254/vi_potrait_full_body_3d_avatar_girl_traveler_stylize_smile_0cfb7d3c-f27d-4c75-8f7f-47f729f11eee-removebg5.png"
+				}
+			},
+			"message": "Hello, nice to meet you"
+		},
+		"narratives": [
 			{
-				"background": "https://cdn.discordapp.com/attachments/842737146321174558/1123693463087616030/image.png",
-				"description": "วันนี้เป็นวันแรกที่คุณเข้าห้องเรียนและรับการเรียนรู้ภาษาอังกฤษกับเพื่อนๆ ในห้องเรียนนี้ คุณพบกับหน้าต่างที่เปิดออกมองเห็นสวนสวย ดอกไม้สีสันสวยงามที่แสนอัศจรรย์ และเสียงนกน้อยที่ร้องเพลงอย่างสดใส"
+				"__typename": "Narrative",
+				"illustrationUrl": "https://cdn.discordapp.com/attachments/842737146321174558/1123693463087616030/image.png",
+				"text": "วันนี้เป็นวันแรกที่คุณเข้าห้องเรียนและรับการเรียนรู้ภาษาอังกฤษกับเพื่อนๆ ในห้องเรียนนี้ คุณพบกับหน้าต่างที่เปิดออกมองเห็นสวนสวย ดอกไม้สีสันสวยงามที่แสนอัศจรรย์ และเสียงนกน้อยที่ร้องเพลงอย่างสดใส"
 			},
 			{
-				"background": "https://cdn.discordapp.com/attachments/842737146321174558/1123693852172230666/image.png",
-				"description": "คุณนั่งรอในที่นั่งของคุณและเพื่อนๆ เริ่มกันทำความรู้จักใหม่กันอีกครั้ง มีเพื่อนคุณที่ชื่อเอมมี่ที่เป็นคนที่ขี้เล่นและตลกขบขัน ซามาที่เป็นคนที่อัศจรรย์และร่าเริง และมีแอนดี้ที่เป็นคนที่เชื่อใจได้และเป็นกำลังใจให้กับเพื่อนๆ ทุกคน"
+				"__typename": "Narrative",
+				"illustrationUrl": "https://cdn.discordapp.com/attachments/842737146321174558/1123693852172230666/image.png",
+				"text": "คุณนั่งรอในที่นั่งของคุณและเพื่อนๆ เริ่มกันทำความรู้จักใหม่กันอีกครั้ง มีเพื่อนคุณที่ชื่อเอมมี่ที่เป็นคนที่ขี้เล่นและตลกขบขัน ซามาที่เป็นคนที่อัศจรรย์และร่าเริง และมีแอนดี้ที่เป็นคนที่เชื่อใจได้และเป็นกำลังใจให้กับเพื่อนๆ ทุกคน"
 			},
 			{
-				"background": "https://cdn.discordapp.com/attachments/842737146321174558/1123691473804738620/image.png",
-				"description": "เวลาผ่านไปเร็วมาก เพื่อนๆ ของคุณและคุณต่างก็กำลังเริ่มเรียนรู้ภาษาอังกฤษอย่างเต็มที่ คุณและเพื่อนๆ ของคุณกำลังสนุกกับการเรียนรู้ภาษาอังกฤษด้วยกัน คุณจะได้เรียนรู้คำศัพท์จากสิ่งของในห้องเรียนและสนทนาภาษาอังกฤษกับเพื่อนๆของคุณ"
+				"__typename": "Narrative",
+				"illustrationUrl": "https://cdn.discordapp.com/attachments/842737146321174558/1123691473804738620/image.png",
+				"text": "เวลาผ่านไปเร็วมาก เพื่อนๆ ของคุณและคุณต่างก็กำลังเริ่มเรียนรู้ภาษาอังกฤษอย่างเต็มที่ คุณและเพื่อนๆ ของคุณกำลังสนุกกับการเรียนรู้ภาษาอังกฤษด้วยกัน คุณจะได้เรียนรู้คำศัพท์จากสิ่งของในห้องเรียนและสนทนาภาษาอังกฤษกับเพื่อนๆของคุณ"
 			}
 		],
 		"vocabs": [

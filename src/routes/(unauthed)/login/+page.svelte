@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { signInWithUsername } from '$lib/auth';
+	import { _createAccount, signInWithUsername } from '$lib/auth';
 	import background from '$lib/images/bgvd.mp4';
 	import icon from '$lib/images/learnliko_icon.png';
 

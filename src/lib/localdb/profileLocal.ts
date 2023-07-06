@@ -21,11 +21,15 @@ const CEFRLevelLocal = browser
 
 export const usernameLocal = browser
 	? persist(writable<string>('Guest'), createIndexedDBStorage(), 'username')
-	: null
+	: null;
 
 export const profileImageLocal = browser
 	? persist(writable<string>('https://cdn.discordapp.com/attachments/842737146321174558/1122773960019423262/30-307416_profile-icon-png-image-free-download-searchpng-employee.png'), createIndexedDBStorage(), 'profileImage')
-	: null
+	: null;
+
+export const lastPlayedLessonIdLocal = browser
+	? persist(writable<string | null>(null), createIndexedDBStorage(), 'lastPlayedLessonId')
+	: null;
 
 export const queryLearningDiariesLocal = async (): Promise<LearningDiaryItem[]> => {
 	if (!completedConversations || !completedReadings)

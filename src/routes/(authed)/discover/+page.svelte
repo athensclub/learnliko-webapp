@@ -5,6 +5,7 @@
 	import vocabTaskImage from './vocab_task_image.png';
 	import icon from '$lib/images/learnliko_icon.png';
 	import LessonCard from '$lib/components/LessonCard.svelte';
+	import type { LessonCard as LessonCardData } from '$gql/graphql';
 	import userProfileImage from '$lib/images/sample_kid_image.png';
 	import { queryDiscoverItemsLocal } from '$lib/localdb/discoverLocal';
 	import type { DiscoverItem } from '$lib/types/discover';
@@ -13,14 +14,18 @@
 	import { currentMode } from '$lib/global/mode';
 	import { browser } from '$app/environment';
 	import background from '$lib/images/bgvd.mp4';
-	import type { LessonCardData } from '$lib/types/lesson';
-	import { getLessonCards } from '$api/lesson';
+	import { getLessonById, getLessonCards } from '$api/lesson';
+	import { lastPlayedLessonIdLocal } from '$lib/localdb/profileLocal';
 
 	let items: LessonCardData[] = [];
+	let lastPlayed: LessonCardData | null = null;
 	const loadData = async () => {
 		if (!browser) return;
 		items = await getLessonCards();
 		console.log(items)
+
+		if ($lastPlayedLessonIdLocal !== null)
+			lastPlayed = await getLessonById($lastPlayedLessonIdLocal);
 	};
 
 	onMount(loadData);
@@ -154,28 +159,13 @@
 				</div>
 			</div>
 
-			<div class="mt-[1.2vw] flex w-full flex-col">
-				<div class="text-[1.5vw]">เล่นต่อเรื่องราวล่าสุด</div>
+			{#if lastPlayed}
+				<div class="mt-[1.2vw] flex w-full flex-col">
+					<div class="text-[1.5vw]">เล่นต่อเรื่องราวล่าสุด</div>
 
-				<LessonCard
-					scale={0.5}
-					item={{
-						avatar:
-							'https://cdn.discordapp.com/attachments/842737146321174558/1123670586732839082/image.png',
-						avatarIntro: 'Hello, nice to meet you',
-						background:
-							'https://cdn.discordapp.com/attachments/842737146321174558/1123672047084646450/Rectangle_4917.png',
-						exp: 1500,
-						id: '1',
-						description:
-							'เช้าวันนี้ คุณกำลังไปโรงเรียนวันแรกและได้พบเจอกับเพื่อนๆมากมายที่โรงเรียนแห่งใหม่ของคุณ',
-						level: 'PRE_A1',
-						topic: 'ทำความรู้จักและทักทาย!',
-						progress: 0.5
-					}}
-					class="h-[calc(56vh-3.5vw)] w-full"
-				/>
-			</div>
+					<LessonCard scale={0.5} item={lastPlayed} class="h-[calc(56vh-3.5vw)] w-full" />
+				</div>
+			{/if}
 		{/if}
 	</div>
 

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import type { VocabularyCard } from '$gql/graphql';
 	import VocabFlipCard from '$lib/components/VocabFlipCard.svelte';
 	import AnswerCorrectToast from '$lib/components/toasts/AnswerCorrectToast.svelte';
 	import { toast } from '$lib/components/toasts/ToastManager.svelte';
@@ -9,7 +10,7 @@
 	export let addProgress: (val: number) => void;
 	export let onFinish: () => void;
 
-	export let items: (FlipCardItem & {hide?: boolean})[];
+	export let items: (VocabularyCard & {hide?: boolean})[];
 
 	const onCorrect = (index: number) => {
 		setTimeout(() => (items[index] = { ...items[index], hide: true }), 5000);
@@ -19,8 +20,7 @@
 		// TODO: add the actual amount.
 		addProgress(1 / 12);
 
-		// TODO: display actual amount.
-		toast(AnswerCorrectToast, { exp: 25, coin: 100 });
+		toast(AnswerCorrectToast, { exp: items[index].totalExp, coin: items[index].totalCoin });
 	};
 	const onWrong = (index: number) => {
 		setTimeout(() => (items[index] = { ...items[index], hide: true }), 5000);
@@ -30,6 +30,8 @@
 
 		playAudio('Fail');
 	};
+
+	console.log(items)
 
 	// TODO: Check for actual finish.
 	$: if (items.every((i) => i.hide)) {

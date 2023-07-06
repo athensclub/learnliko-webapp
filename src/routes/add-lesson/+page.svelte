@@ -122,6 +122,11 @@
 			)
 		);
 
+		console.log(
+			'narratives',
+			narrativesGetter.map((g) => g())
+		);
+
 		const result = await graphqlClient
 			.mutation(CREATE_LESSON_CARD, {
 				data: {
@@ -171,7 +176,7 @@
 				}
 			})
 			.toPromise();
-		console.log(result)
+		console.log(result);
 
 		alert('Upload Finished');
 	};
@@ -225,7 +230,7 @@
 
 	<div class="flex flex-row gap-[2vw] overflow-x-auto py-[2vw]">
 		{#each narrativeIDs as id, index (id)}
-			<AddNarrativeCard {index} bind:upload={narrativesGetter[index]} />
+			<AddNarrativeCard {index} bind:getValue={narrativesGetter[index]} />
 		{/each}
 	</div>
 

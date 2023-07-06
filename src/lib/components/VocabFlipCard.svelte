@@ -14,11 +14,15 @@
 	export let item: VocabularyCard;
 
 	let speeches: string[] | null = null;
+	
+	// TODO: Maybe stop using vocab field later?
+	let choices = item.choices ?? item.vocab;
+	
 	// TODO: use data from api instead.
 	const loadSpeeches = async () => {
 		const result = [];
-		for (let i = 0; i < item.choices.length; i++) {
-			const val = await synthesize(item.choices[i].vocab, 'US', 'FEMALE', 0.7);
+		for (let i = 0; i < choices.length; i++) {
+			const val = await synthesize(choices[i].vocab, 'US', 'FEMALE', 0.7);
 			result.push(await blobToBase64(val));
 		}
 		speeches = result;
@@ -179,7 +183,7 @@
 				</div>
 			</div>
 
-			<img src={item.imageUrl} class="mt-[2vw] max-w-[80%]" alt="Flip Card Content" />
+			<img src={item.imageUrl} class="mt-[2vw] max-w-[80%] rounded-[1vw]" alt="Flip Card Content" />
 
 			<div class="mt-[2vw] flex flex-row items-center text-[1.3vw] font-bold text-white">
 				<svg
@@ -219,7 +223,7 @@
 					class="pointer-events-none absolute left-0 top-0 flex h-full w-full flex-col justify-between p-[2vw]"
 				>
 					<div class="flex w-full flex-col gap-[1.5vw]">
-						{#each item.choices as choice, index (choice)}
+						{#each choices as choice, index (choice)}
 							<button
 								class="pointer-events-auto w-full rounded-full py-[0.7vw] text-[1.4vw] {selectedChoice ===
 								index
@@ -262,7 +266,7 @@
 					<div
 						class="mt-[1vw] rounded-full border-[0.15vw] border-white px-[2vw] py-[0.5vw] text-[1.35vw]"
 					>
-						{item.choices[correctAnswer].vocab}
+						{choices[correctAnswer].vocab}
 					</div>
 				</div>
 			{/if}

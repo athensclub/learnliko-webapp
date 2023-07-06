@@ -27,7 +27,7 @@
 <!-- https://github.com/sveltejs/svelte/issues/544#issuecomment-586417387 -->
 <div in:fade={{ delay: 500 }} out:fade class="flex h-full w-full flex-row gap-[2vw]">
 	<!-- TODO: support multiple pages -->
-	<img class="max-h-full max-w-[50%]" src={item.pages[0].illustrationUrl} alt={item.title} />
+	<img class="max-h-full max-w-[50%] object-contain" src={item.pages[0].illustrationUrl} alt={item.title} />
 
 	<div class="relative flex h-full flex-1 flex-col overflow-y-auto font-bold">
 		<div style="font-size: {scale*2}vw;">{item.title}</div>

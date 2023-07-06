@@ -4,7 +4,7 @@
 	import type { ReadingViewType } from './ReadingContainer.svelte';
 	import AnswerCorrectToast from '../toasts/AnswerCorrectToast.svelte';
 	import { toast } from '../toasts/ToastManager.svelte';
-	import type { ReadingCard, ReadingQuestion } from '$gql/generated/graphql';
+	import type { ReadingCard } from '$gql/generated/graphql';
 	import { graphqlClient } from '$lib/graphql';
 	import userSession from '$lib/stores/userSession';
 	import { RECAP_READING_QUIZ } from '$gql/schema/mutations';
@@ -39,7 +39,10 @@
 		correctAnswers = result.data?.readingRecapCreate.answer.map((a) => a.answerIndex) ?? [];
 		totalCorrect = result.data?.readingRecapCreate.totalCorrect ?? 0;
 
-		toast(AnswerCorrectToast, { exp: item.totalExp, coin: item.totalCoin });
+		toast(AnswerCorrectToast, {
+			exp: (item.totalExp * totalCorrect) / quiz.length,
+			coin: (item.totalCoin * totalCorrect) / quiz.length
+		});
 	};
 </script>
 

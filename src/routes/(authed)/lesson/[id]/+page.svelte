@@ -9,7 +9,7 @@
 	import ReadingView from './ReadingView.svelte';
 	import WritingCardView from './WritingCardView.svelte';
 	import LessonFinishedView from './LessonFinishedView.svelte';
-	import { onMount } from 'svelte';
+	import { onDestroy, onMount } from 'svelte';
 	import { page } from '$app/stores';
 	import { getLessonById } from '$api/lesson';
 	import { lastPlayedLessonIdLocal, totalVocabLocal } from '$lib/localdb/profileLocal';
@@ -24,9 +24,13 @@
 	import Typewriter from 'svelte-typewriter/Typewriter.svelte';
 	import userSession from '$lib/stores/userSession';
 	import type { SynthesizeAccent, SynthesizeGender } from '$api/tts';
+	import audio from '$lib/audios/entering_lesson_transition_sound.wav';
+	import { Howl } from 'howler';
 
 	let item: LessonCard | null = null;
 	let background: string | null = null;
+
+	let music: Howl | null = null;
 
 	let vocabs: VocabularyCard[] | null = null;
 	let sentences: SentenceCard[] | null = null;
@@ -43,6 +47,9 @@
 		);
 		if (!content.card) throw new Error('No Lesson Found');
 		item = content.card;
+
+		// TODO: set actual ambient data
+		music = new Howl({ src: audio, volume: 0.1, loop: true });
 
 		vocabs =
 			item.quizeSections
@@ -100,7 +107,18 @@
 	});
 
 	let entering = true;
+
+	const MUSIC_FADE_DURATION = 1000; // ms
 	let playingMusic = true;
+	$: if (!entering && playingMusic) {
+		music?.play();
+		music?.fade(0, 0.1, MUSIC_FADE_DURATION);
+	} else {
+		music?.fade(0.1, 0, MUSIC_FADE_DURATION);
+		setTimeout(() => {
+			music?.pause();
+		}, MUSIC_FADE_DURATION);
+	}
 
 	let currentView:
 		| 'INTRO'
@@ -114,6 +132,10 @@
 		$totalVocabLocal = ($totalVocabLocal ?? 0) + 15;
 		currentView = 'FINISHED';
 	};
+
+	onDestroy(() => {
+		music?.stop();
+	});
 
 	let progress = 0;
 	const addProgress = (val: number) => (progress = progress + val);

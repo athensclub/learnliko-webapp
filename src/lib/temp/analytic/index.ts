@@ -1,9 +1,10 @@
-import type { User } from '$gql/generated/graphql';
+import type { LessonProgress, ProfileData, User } from '$gql/generated/graphql';
 import { firestore } from '$lib/configs/firebase.config';
 import type { PretestCEFRLevel } from '$lib/types/pretest';
 import {
 	QueryConstraint,
 	collection,
+	collectionGroup,
 	doc,
 	getDoc,
 	getDocs,
@@ -20,6 +21,30 @@ const _level = ['PRE_A1', 'A1', 'A2', 'B1', 'B2'];
 const _classroom = [{ id: 'classroom1', name: 'Classroom 1' }];
 
 // Data Query
+export const queryLearnerLesson = async function () {
+	const usersRef = collectionGroup(firestore, `LessonRecaps`);
+	const queryConst: QueryConstraint[] = [
+		orderBy('latestUpdate', 'desc'),
+		where('status', '==', 'COMPLETED')
+	];
+	const snapshot = await getDocs(query(usersRef, ...queryConst));
+	const recaps = snapshot.docs.map(
+		(doc) => doc.data() as LessonProgress & { profile: ProfileData }
+	);
+
+	const promises: Promise<any>[] = [];
+	for (let index = 0; index < recaps.length; index++) {
+		const element = recaps[index];
+		const userDocRef = doc(firestore, `Users/${element.ownerUid}`);
+		promises.push(
+			getDoc(userDocRef).then((doc) => (recaps[index].profile = doc.data() as ProfileData))
+		);
+	}
+	await Promise.all(promises);
+
+	return recaps;
+};
+
 export const queryClassroom = async function () {
 	return _classroom;
 };

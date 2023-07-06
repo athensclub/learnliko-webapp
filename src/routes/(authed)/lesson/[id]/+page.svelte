@@ -140,6 +140,7 @@
 	const onFinishedLesson = () => {
 		$totalVocabLocal = ($totalVocabLocal ?? 0) + 15;
 		currentView = 'FINISHED';
+		$lastPlayedLessonIdLocal = null;
 	};
 
 	onDestroy(() => {

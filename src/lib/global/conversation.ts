@@ -334,13 +334,13 @@ const computeRecap = async () => {
 				const _result = result.scores[i];
 				const advancementSuggestion =
 					_result.advancement.score < 80
-						? 'The enhance your dialogue advancement try use the following examples\n' +
-						  _result.advancement.examples.join('\n')
+						? 'เพื่อยกระดับภาษาในการสนทนาของคุณ ลองใช้ตัวอย่างต่อไปนี้\n' +
+						  _result.advancement.examples.map((d) => `"${d}"`).join('\n')
 						: '';
 				const grammarSuggestion =
 					_result.grammar.score < 80
-						? 'Here are the exmaple of the correct grammar dialogue\n' +
-						  _result.grammar.examples.join('\n')
+						? 'นี่คือตัวอย่างของการสนทนาที่ถูกต้องตามไวยากรณ์\n' +
+						  _result.grammar.examples.map((d) => `"${d}"`).join('\n')
 						: '';
 				dialoguesResult.push({
 					assistant: {

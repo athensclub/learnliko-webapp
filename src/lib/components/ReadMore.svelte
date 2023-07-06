@@ -27,7 +27,12 @@ and https://github.com/saideepesh000/svelte-read-more/blob/master/src/utils.js -
 		);
 	};
 
-	const getMaxWords = (maxWords: number | undefined, isOpen: boolean, children: string, text: string) => {
+	const getMaxWords = (
+		maxWords: number | undefined,
+		isOpen: boolean,
+		children: string,
+		text: string
+	) => {
 		if (maxWords) {
 			if (isOpen) {
 				text = children;
@@ -60,7 +65,7 @@ and https://github.com/saideepesh000/svelte-read-more/blob/master/src/utils.js -
 	};
 </script>
 
-<div data-testid="wrapper">
+<div data-testid="wrapper" style="white-space: pre-line">
 	{finalText}
 	<span data-testid="button-wrapper" data-visible={`${showButton}`} class="button-wrapper">
 		{!isOpen ? finalSymbol : ''}

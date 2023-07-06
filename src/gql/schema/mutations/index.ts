@@ -76,3 +76,11 @@ export const RECAP_CONVERSATION_QUIZ = graphql(`
 		}
 	}
 `);
+
+export const UPDATE_LESSON_PROGRESS = graphql(`
+	mutation LessonProgressUpdate($data: LessonProgressUpdateDataInput!, $uid: ID!) {
+		lessonProgressUpdate(data: $data, uid: $uid) {
+			id
+		}
+	}
+`);

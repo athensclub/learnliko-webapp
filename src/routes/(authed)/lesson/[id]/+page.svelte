@@ -9,11 +9,10 @@
 	import ReadingView from './ReadingView.svelte';
 	import WritingCardView from './WritingCardView.svelte';
 	import LessonFinishedView from './LessonFinishedView.svelte';
-	import type { LessonItem } from '$lib/types/lesson';
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
 	import { getLessonById } from '$api/lesson';
-	import { lastPlayedLessonIdLocal } from '$lib/localdb/profileLocal';
+	import { lastPlayedLessonIdLocal, totalVocabLocal } from '$lib/localdb/profileLocal';
 	import type {
 		LessonCard,
 		ReadingCard,
@@ -74,6 +73,11 @@
 		| 'READING'
 		| 'CONVERSATION'
 		| 'FINISHED' = 'INTRO';
+
+	const onFinishedLesson = () => {
+		$totalVocabLocal = ($totalVocabLocal ?? 0) + 15;
+		currentView = 'FINISHED';
+	};
 
 	let progress = 0;
 	const addProgress = (val: number) => (progress = progress + val);
@@ -202,7 +206,7 @@
 			<LessonConversationView
 				onFinish={() => {
 					addProgress(1 / 4);
-					currentView = 'FINISHED';
+					onFinishedLesson();
 				}}
 			/>
 		{:else if currentView === 'FINISHED'}

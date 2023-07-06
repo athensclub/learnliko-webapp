@@ -98,13 +98,16 @@
 			</a>
 
 			<div
-				style="background-image: url('{$profileImageLocal}');"
+				style="background-image: url('{$userSession.accountData?.profile?.imageUrl ??
+					$profileImageLocal}');"
 				class="absolute bottom-[-6vw] left-[5vw] h-[12vw] w-[12vw] rounded-full border-[0.3vw] border-white bg-cover bg-center"
 			/>
 		</div>
 
 		<div class={`flex flex-col px-[6vw] ${$isMobile ? 'mt-[2vh]' : 'mt-[12vh]'}`}>
-			<div class="mb-[3vw] mt-[2vw] text-[2vw] font-bold">{name}</div>
+			<div class="mb-[3vw] mt-[2vw] text-[2vw] font-bold">
+				{$userSession.accountData?.profile?.fullname}
+			</div>
 
 			<div
 				class={`flex w-full justify-between font-bold ${
@@ -164,7 +167,7 @@
 						<div
 							class="mr-[1vw] bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] bg-clip-text text-[4vw] text-transparent"
 						>
-							{exp}
+							{$userSession.accountData?.exp}
 						</div>
 						<svg
 							class="w-[6vw]"
@@ -211,7 +214,7 @@
 						<div
 							class="mr-[1vw] bg-gradient-to-t from-[#FFE08F] via-[#E4AE24] to-[#FFE08F] bg-clip-text text-[4vw] text-transparent"
 						>
-							{coin}
+							{$userSession.accountData?.coin}
 						</div>
 						<svg
 							class="w-[7vw]"
@@ -267,17 +270,17 @@
 			</div>
 
 			<!-- {#if learningDiaries && learningDiaries.length > 0} -->
-				<div
-					class={`font-extrabold ${
-						$isMobile ? 'mx-auto mt-[7vh] text-[7vw]' : 'mt-[10vh] text-[2vw]'
-					}`}
-				>
-					Learning Diary
-				</div>
+			<div
+				class={`font-extrabold ${
+					$isMobile ? 'mx-auto mt-[7vh] text-[7vw]' : 'mt-[10vh] text-[2vw]'
+				}`}
+			>
+				Learning Diary
+			</div>
 
-				<div class="mt-[3vw] grid w-full grid-cols-2 gap-[2vw]">
-					<RecapCard class="w-full h-[38vw] "/>
-					<!-- {#each learningDiaries as diary (diary.date)}
+			<div class="mt-[3vw] grid w-full grid-cols-2 gap-[2vw]">
+				<RecapCard class="h-[38vw] w-full " />
+				<!-- {#each learningDiaries as diary (diary.date)}
 						<div class="flex h-fit w-full flex-col rounded-2xl bg-white p-3 font-bold">
 							<div class="flex flex-row items-center justify-between">
 								<div class="text-sm">{diary.date}</div>
@@ -307,7 +310,7 @@
 							</div>
 						</div>
 					{/each} -->
-				</div>
+			</div>
 			<!-- {/if} -->
 
 			<!-- bottom spacing -->

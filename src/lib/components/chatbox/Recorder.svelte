@@ -47,11 +47,11 @@
 		</div>
 	{:else if $currentRecording}
 		<div
-			class="item flex h-full w-full flex-row items-center justify-between gap-[7%] px-[5%] text-white"
+			class="item flex h-full w-full flex-row items-center justify-between px-[2%] text-white"
 		>
 			<div class="flex-1 flex-row items-center justify-center">
 				<AudioPlayer
-					class={`h-[7vh] w-full rounded-full bg-white/20 shadow-lg backdrop-blur-lg`}
+					class={`h-[7vh] rounded-full bg-white/20 shadow-lg backdrop-blur-lg`}
 					defaultBlockColor="white"
 					playedBlockColor="black"
 					src={$currentRecording.url}
@@ -59,9 +59,9 @@
 				/>
 			</div>
 
-			<div class="flex h-full w-[30%] flex-row items-center gap-[15%]">
-				<button on:click={() => ($currentRecording = null)} class="flex-1">
-					<svg class="h-full" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+			<div class="flex flex-row items-center justify-between w-[9vw] pl-[2vw]">
+				<button on:click={() => ($currentRecording = null)} class="min-w-[3vw] max-w-[3vw]">
+					<svg class="w-full" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<path
 							fill-rule="evenodd"
 							clip-rule="evenodd"
@@ -77,9 +77,9 @@
 
 				<button
 					on:click={submitCurrentRecording}
-					class="flex aspect-square h-full flex-1 items-center justify-center rounded-full bg-white"
+					class="flex aspect-square min-w-[3vw] max-w-[3vw] flex-1 items-center justify-center rounded-full bg-white"
 				>
-					<svg class="h-[60%]" viewBox="0 0 66 66" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<svg class="w-[50%]" viewBox="0 0 66 66" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<path
 							d="M47.468 1.38637L15.9101 11.8742C-5.30336 18.9709 -5.30336 30.5425 15.9101 37.6043L25.2761 40.7157L28.3864 50.0848C35.4459 71.3051 47.0486 71.3051 54.1081 50.0848L64.6275 18.5514C69.3105 4.39287 61.6219 -3.33314 47.468 1.38637ZM48.5863 20.1945L35.3061 33.549C34.7819 34.0734 34.1179 34.3181 33.4538 34.3181C32.7898 34.3181 32.1258 34.0734 31.6016 33.549C30.5881 32.5352 30.5881 30.8572 31.6016 29.8433L44.8818 16.4888C45.8953 15.475 47.5728 15.475 48.5863 16.4888C49.5998 17.5026 49.5998 19.1807 48.5863 20.1945Z"
 							fill="#6C80E8"

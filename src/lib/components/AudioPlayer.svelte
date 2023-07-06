@@ -116,7 +116,7 @@
 		: '00:00';
 </script>
 
-<div {style} class={`flex flex-row items-center px-5 py-1 gap-3 ${clazz}`}>
+<div {style} class={`flex flex-row items-center px-[1.5vw] py-[0.5vw] gap-3 ${clazz}`}>
 	<button on:click={togglePlaying} class="h-[50%] flex">
 		{#if playing}
 			<svg

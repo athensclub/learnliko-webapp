@@ -65,6 +65,7 @@
 			.toPromise();
 
 		flipped = true;
+		correctAnswer = result.data?.sentenceRecapCreate.answerIndex ?? 0;
 
 		if (result.data?.sentenceRecapCreate.correct) {
 			onCorrect();

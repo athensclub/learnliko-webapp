@@ -14,10 +14,10 @@
 	export let item: VocabularyCard;
 
 	let speeches: string[] | null = null;
-	
+
 	// TODO: Maybe stop using vocab field later?
 	let choices = item.choices ?? item.vocab;
-	
+
 	// TODO: use data from api instead.
 	const loadSpeeches = async () => {
 		const result = [];
@@ -61,6 +61,7 @@
 			})
 			.toPromise();
 
+		correctAnswer = result.data?.vocabularyRecapCreate.answerIndex ?? 0;
 		if (result.data?.vocabularyRecapCreate.correct) {
 			onCorrect();
 		} else {

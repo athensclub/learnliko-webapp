@@ -44,6 +44,7 @@ export const RECAP_VOCAB_QUIZ = graphql(`
 	mutation RecapVocabQuiz($data: VocabularyRecapCreateDataInput!, $uid: ID!) {
 		vocabularyRecapCreate(data: $data, uid: $uid) {
 			correct
+			answerIndex
 		}
 	}
 `);
@@ -52,6 +53,7 @@ export const RECAP_SENTENCE_QUIZ = graphql(`
 	mutation RecapSentenceQuiz($uid: ID!, $data: SentenceRecapCreateDataInput!) {
 		sentenceRecapCreate(uid: $uid, data: $data) {
 			correct
+			answerIndex
 		}
 	}
 `);

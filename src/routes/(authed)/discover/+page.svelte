@@ -154,7 +154,7 @@
 			<div class="text-[1.8vw]">เลือกเรื่องราวเพื่อเรียนรู้</div>
 
 			<div class="mt-[1.2vw] flex w-full flex-col">
-				<div class="text-[1.5vw]">ความคืบหน้ารายวัน</div>
+				<div class="text-[1.2vw]">ความคืบหน้ารายวัน</div>
 
 				<div class="flex w-full flex-row rounded-[1vw] bg-[#F8F8F8] p-[2vw]">
 					<img class="w-[40%]" src={vocabTaskImage} alt="Study Vocabularies" />
@@ -169,9 +169,9 @@
 				</div>
 			</div>
 
-			{#if lastPlayed}
+			<!-- {#if lastPlayed}
 				<div class="mt-[1.2vw] flex w-full flex-col">
-					<div class="text-[1.5vw]">เล่นต่อเรื่องราวล่าสุด</div>
+					<div class="text-[1.2vw]">เล่นต่อเรื่องราวล่าสุด</div>
 
 					<LessonCard
 						scale={0.5}
@@ -181,7 +181,7 @@
 						class="h-[calc(56vh-3.5vw)] w-full"
 					/>
 				</div>
-			{/if}
+			{/if} -->
 		{/if}
 	</div>
 

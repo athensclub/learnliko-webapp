@@ -1,12 +1,6 @@
 <script lang="ts">
-	import userProfileImage from '$lib/images/sample_kid_image.png';
-	import {
-		getCurrentCEFRLevel,
-		profileImageLocal,
-		queryLearningDiariesLocal,
-		usernameLocal
-	} from '$lib/localdb/profileLocal';
-	import { getContext, onDestroy, onMount } from 'svelte';
+	import { profileImageLocal, queryLearningDiariesLocal } from '$lib/localdb/profileLocal';
+	import { getContext, onMount } from 'svelte';
 	import type { LearningDiaryItem } from '$lib/types/learningDiary';
 	import NavBar from '$lib/components/navbar/NavBar.svelte';
 	import { isMobile } from '$lib/global/breakpoints';
@@ -19,13 +13,12 @@
 	import CircularProgressBar from '$lib/components/CircularProgressBar.svelte';
 	import shoppingBag from '$lib/images/shopping_bag_icon.png';
 	import RecapCard from '$lib/components/RecapCard.svelte';
+	import type { LessonProgress } from '$gql/generated/graphql';
+	import { queryCurrentUserLessonRecap } from '$lib/temp/user';
 
-	let name = 'Natsataporn M.';
 	let background =
 		'https://cdn.discordapp.com/attachments/842737146321174558/1124288705864155216/image.png';
-	let exp = 25;
-	let coin = 100;
-	let learningDiaries: LearningDiaryItem[] | null = null;
+	let lessonRecaps: LessonProgress[] = [];
 
 	const { open }: Context = getContext('simple-modal');
 	// const showDiary = (item: LearningDiaryItem) => open(LearningDiaryModal, { item });
@@ -45,8 +38,7 @@
 	};
 
 	onMount(async () => {
-		// TODO: implement db using actual database (cloud) and probably move this to ssr.
-		learningDiaries = await queryLearningDiariesLocal();
+		lessonRecaps = await queryCurrentUserLessonRecap();
 	});
 
 	// hide chatbox on exit in case it is showing recap.
@@ -279,7 +271,10 @@
 			</div>
 
 			<div class="mt-[3vw] grid w-full grid-cols-2 gap-[2vw]">
-				<RecapCard class="h-[38vw] w-full " />
+				{#each lessonRecaps as recap}
+					<RecapCard {recap} class="h-[38vw] w-full " />
+				{/each}
+
 				<!-- {#each learningDiaries as diary (diary.date)}
 						<div class="flex h-fit w-full flex-col rounded-2xl bg-white p-3 font-bold">
 							<div class="flex flex-row items-center justify-between">

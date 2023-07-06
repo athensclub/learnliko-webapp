@@ -131,6 +131,55 @@ export type ConversationCardCreateDataInput = {
   totalExp: Scalars['Int']['input'];
 };
 
+export type ConversationRecap = QuizRecap & {
+  __typename?: 'ConversationRecap';
+  coinEarned: Scalars['Int']['output'];
+  correctPercentage: Scalars['Float']['output'];
+  expEarned: Scalars['Int']['output'];
+  fromLesson: Scalars['String']['output'];
+  history: Array<ConversationRecapHistory>;
+  id: Scalars['ID']['output'];
+  level: LanguageLevel;
+  quizCard: QuizCard;
+  type: QuizType;
+};
+
+export type ConversationRecapCreateDataInput = {
+  correctPercentage: Scalars['Float']['input'];
+  history: Array<ConversationRecapHistoryCreateDataInput>;
+  quizCard: Scalars['ID']['input'];
+};
+
+export type ConversationRecapDialouge = {
+  __typename?: 'ConversationRecapDialouge';
+  assistant: Scalars['String']['output'];
+  score: RecapDialogueScore;
+  user: Scalars['String']['output'];
+};
+
+export type ConversationRecapDialougeCreateDataInput = {
+  assistant: Scalars['String']['input'];
+  score: RecapDialogueScoreCreateDataInput;
+  user: Scalars['String']['input'];
+};
+
+export type ConversationRecapHistory = {
+  __typename?: 'ConversationRecapHistory';
+  coin: Scalars['Int']['output'];
+  dialogues: Array<ConversationRecapDialouge>;
+  exp: Scalars['Int']['output'];
+  goal: Scalars['String']['output'];
+  hint: Scalars['String']['output'];
+};
+
+export type ConversationRecapHistoryCreateDataInput = {
+  coin: Scalars['Int']['input'];
+  dialogues: Array<ConversationRecapDialougeCreateDataInput>;
+  exp: Scalars['Int']['input'];
+  goal: Scalars['String']['input'];
+  hint: Scalars['String']['input'];
+};
+
 export enum LanguageLevel {
   A1 = 'A1',
   A2 = 'A2',
@@ -196,6 +245,9 @@ export type LessonCardCreateDataInput = {
 };
 
 export type LessonCardsQueryInput = {
+  baseLevel?: InputMaybe<LanguageLevel>;
+  excludeCompleted?: InputMaybe<Scalars['Boolean']['input']>;
+  includeProgressOf?: InputMaybe<Scalars['ID']['input']>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
   targetLevel?: InputMaybe<LanguageLevel>;
@@ -203,7 +255,7 @@ export type LessonCardsQueryInput = {
 
 export type LessonCardsQueryResult = {
   __typename?: 'LessonCardsQueryResult';
-  cards: Array<LessonCard>;
+  cards: Array<PersonalizedLessonCard>;
   offset?: Maybe<Scalars['Int']['output']>;
 };
 
@@ -220,17 +272,49 @@ export type LessonIntroDataInput = {
   transcription: Scalars['String']['input'];
 };
 
+export type LessonProgress = {
+  __typename?: 'LessonProgress';
+  currentQuiz: Scalars['Int']['output'];
+  currentSection: Scalars['Int']['output'];
+  id: Scalars['ID']['output'];
+  latestUpdate: Scalars['Float']['output'];
+  lessonId: Scalars['ID']['output'];
+  ownerUid: Scalars['ID']['output'];
+  progress: Scalars['Float']['output'];
+  recapSection: Array<RecapSection>;
+  status: LessonProgressStatus;
+  totalCoin: Scalars['Int']['output'];
+  totalExp: Scalars['Int']['output'];
+};
+
+export enum LessonProgressStatus {
+  Completed = 'COMPLETED',
+  Inprogress = 'INPROGRESS'
+}
+
+export type LessonProgressUpdateDataInput = {
+  lessonId: Scalars['ID']['input'];
+  quizCardId: Scalars['ID']['input'];
+  quizRecapId: Scalars['ID']['input'];
+  sectionIndex: Scalars['Int']['input'];
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   bookCreate?: Maybe<Book>;
   botAvatarCreate: BotAvatar;
   conversationCardCreate: ConversationCard;
+  conversationRecapCreate: ConversationRecap;
   lessonCardCreate: LessonCard;
+  lessonProgressUpdate?: Maybe<LessonProgress>;
   readingCardCreate: ReadingCard;
+  readingRecapCreate: ReadingRecap;
   sentenceCardCreate: SentenceCard;
+  sentenceRecapCreate: SentenceRecap;
   userCreate: User;
   userProfileUpdate: ProfileData;
   vocabularyCardCreate: VocabularyCard;
+  vocabularyRecapCreate: VocabularyRecap;
 };
 
 
@@ -249,8 +333,20 @@ export type MutationConversationCardCreateArgs = {
 };
 
 
+export type MutationConversationRecapCreateArgs = {
+  data: ConversationRecapCreateDataInput;
+  uid: Scalars['ID']['input'];
+};
+
+
 export type MutationLessonCardCreateArgs = {
   data: LessonCardCreateDataInput;
+};
+
+
+export type MutationLessonProgressUpdateArgs = {
+  data: LessonProgressUpdateDataInput;
+  uid: Scalars['ID']['input'];
 };
 
 
@@ -259,8 +355,20 @@ export type MutationReadingCardCreateArgs = {
 };
 
 
+export type MutationReadingRecapCreateArgs = {
+  data: ReadingRecapCreateDataInput;
+  uid: Scalars['ID']['input'];
+};
+
+
 export type MutationSentenceCardCreateArgs = {
   data: SentenceCardCreateDataInput;
+};
+
+
+export type MutationSentenceRecapCreateArgs = {
+  data: SentenceRecapCreateDataInput;
+  uid: Scalars['ID']['input'];
 };
 
 
@@ -279,6 +387,12 @@ export type MutationVocabularyCardCreateArgs = {
   data: VocabularyCardCreateDataInput;
 };
 
+
+export type MutationVocabularyRecapCreateArgs = {
+  data: VocabularyRecapCreateDataInput;
+  uid: Scalars['ID']['input'];
+};
+
 export type Narrative = {
   __typename?: 'Narrative';
   illustrationUrl: Scalars['String']['output'];
@@ -288,6 +402,14 @@ export type Narrative = {
 export type NarrativeDataInput = {
   illustrationUrl: Scalars['String']['input'];
   text: Scalars['String']['input'];
+};
+
+export type PersonalizedLessonCard = {
+  __typename?: 'PersonalizedLessonCard';
+  card: LessonCard;
+  difficulty: Scalars['String']['output'];
+  progress: Scalars['Int']['output'];
+  status: LessonProgressStatus;
 };
 
 export type ProfileData = {
@@ -304,9 +426,11 @@ export type Query = {
   book?: Maybe<Book>;
   books?: Maybe<Array<Maybe<Book>>>;
   botAvatar?: Maybe<BotAvatar>;
-  lessonCard?: Maybe<LessonCard>;
+  lessonCard?: Maybe<PersonalizedLessonCard>;
   lessonCards: LessonCardsQueryResult;
+  lessonProgress?: Maybe<LessonProgress>;
   quizCard?: Maybe<QuizCard>;
+  quizRecap?: Maybe<QuizRecap>;
   user?: Maybe<User>;
   users: UsersQueryResult;
 };
@@ -323,7 +447,9 @@ export type QueryBotAvatarArgs = {
 
 
 export type QueryLessonCardArgs = {
+  baseLevel: LanguageLevel;
   id: Scalars['ID']['input'];
+  includeProgressOf?: InputMaybe<Scalars['ID']['input']>;
 };
 
 
@@ -332,8 +458,20 @@ export type QueryLessonCardsArgs = {
 };
 
 
+export type QueryLessonProgressArgs = {
+  lessonId: Scalars['ID']['input'];
+  uid: Scalars['ID']['input'];
+};
+
+
 export type QueryQuizCardArgs = {
   id: Scalars['ID']['input'];
+};
+
+
+export type QueryQuizRecapArgs = {
+  id: Scalars['ID']['input'];
+  uid: Scalars['ID']['input'];
 };
 
 
@@ -352,6 +490,16 @@ export type QuizCard = {
   level: LanguageLevel;
   totalCoin: Scalars['Int']['output'];
   totalExp: Scalars['Int']['output'];
+  type: QuizType;
+};
+
+export type QuizRecap = {
+  coinEarned: Scalars['Int']['output'];
+  expEarned: Scalars['Int']['output'];
+  fromLesson: Scalars['String']['output'];
+  id: Scalars['ID']['output'];
+  level: LanguageLevel;
+  quizCard: QuizCard;
   type: QuizType;
 };
 
@@ -374,6 +522,13 @@ export enum QuizType {
   Sentence = 'SENTENCE',
   Vocabulary = 'VOCABULARY'
 }
+
+export type ReadingAnswer = {
+  __typename?: 'ReadingAnswer';
+  answerIndex: Scalars['Int']['output'];
+  correct: Scalars['Boolean']['output'];
+  userAnswer: Scalars['Int']['output'];
+};
 
 export type ReadingCard = QuizCard & {
   __typename?: 'ReadingCard';
@@ -427,6 +582,55 @@ export type ReadingQuestionDataInput = {
   question: Scalars['String']['input'];
 };
 
+export type ReadingRecap = QuizRecap & {
+  __typename?: 'ReadingRecap';
+  answer: Array<ReadingAnswer>;
+  coinEarned: Scalars['Int']['output'];
+  expEarned: Scalars['Int']['output'];
+  fromLesson: Scalars['String']['output'];
+  id: Scalars['ID']['output'];
+  level: LanguageLevel;
+  quizCard: QuizCard;
+  totalCorrect: Scalars['Int']['output'];
+  type: QuizType;
+};
+
+export type ReadingRecapCreateDataInput = {
+  quizCard: Scalars['ID']['input'];
+  userAnswer: Array<Scalars['Int']['input']>;
+};
+
+export type RecapDialogueScore = {
+  __typename?: 'RecapDialogueScore';
+  advancement?: Maybe<RecapDialogueScoreData>;
+  appropriateness: Scalars['Boolean']['output'];
+  grammar?: Maybe<RecapDialogueScoreData>;
+};
+
+export type RecapDialogueScoreCreateDataInput = {
+  advancement?: InputMaybe<RecapDialogueScoreDataCreateDataInput>;
+  appropriateness: Scalars['Boolean']['input'];
+  grammar?: InputMaybe<RecapDialogueScoreDataCreateDataInput>;
+};
+
+export type RecapDialogueScoreData = {
+  __typename?: 'RecapDialogueScoreData';
+  examples?: Maybe<Array<Scalars['String']['output']>>;
+  score: Scalars['Int']['output'];
+};
+
+export type RecapDialogueScoreDataCreateDataInput = {
+  examples?: InputMaybe<Array<Scalars['String']['input']>>;
+  score: Scalars['Int']['input'];
+};
+
+export type RecapSection = {
+  __typename?: 'RecapSection';
+  recaps: Array<QuizRecap>;
+  title: Scalars['String']['output'];
+  type: QuizType;
+};
+
 export type SentenceCard = QuizCard & {
   __typename?: 'SentenceCard';
   choices: Array<Scalars['String']['output']>;
@@ -447,6 +651,25 @@ export type SentenceCardCreateDataInput = {
   question: Scalars['String']['input'];
   totalCoin: Scalars['Int']['input'];
   totalExp: Scalars['Int']['input'];
+};
+
+export type SentenceRecap = QuizRecap & {
+  __typename?: 'SentenceRecap';
+  answerIndex: Scalars['Int']['output'];
+  coinEarned: Scalars['Int']['output'];
+  correct: Scalars['Boolean']['output'];
+  expEarned: Scalars['Int']['output'];
+  fromLesson: Scalars['String']['output'];
+  id: Scalars['ID']['output'];
+  level: LanguageLevel;
+  quizCard: QuizCard;
+  type: QuizType;
+  userAnswer: Scalars['Int']['output'];
+};
+
+export type SentenceRecapCreateDataInput = {
+  quizCard: Scalars['ID']['input'];
+  userAnswer: Scalars['Int']['input'];
 };
 
 export type User = {
@@ -522,6 +745,25 @@ export type VocabularyChoiceDataInput = {
   vocab: Scalars['String']['input'];
 };
 
+export type VocabularyRecap = QuizRecap & {
+  __typename?: 'VocabularyRecap';
+  answerIndex: Scalars['Int']['output'];
+  coinEarned: Scalars['Int']['output'];
+  correct: Scalars['Boolean']['output'];
+  expEarned: Scalars['Int']['output'];
+  fromLesson: Scalars['String']['output'];
+  id: Scalars['ID']['output'];
+  level: LanguageLevel;
+  quizCard: QuizCard;
+  type: QuizType;
+  userAnswer: Scalars['Int']['output'];
+};
+
+export type VocabularyRecapCreateDataInput = {
+  quizCard: Scalars['ID']['input'];
+  userAnswer: Scalars['Int']['input'];
+};
+
 export type MutationMutationVariables = Exact<{
   data: UserCreateDataInput;
 }>;
@@ -529,5 +771,13 @@ export type MutationMutationVariables = Exact<{
 
 export type MutationMutation = { __typename?: 'Mutation', userCreate: { __typename?: 'User', uid: string, username: string, coin: number, exp: number, profile?: { __typename?: 'ProfileData', imageUrl?: string | null, coverUrl?: string | null, fullname: string, firstname: string, lastname: string } | null, languageLevel?: { __typename?: 'CEFRLevel', overall: { __typename?: 'CEFRLevelProgress', progress: number, level: LanguageLevel }, vocabulary: { __typename?: 'CEFRLevelProgress', progress: number, level: LanguageLevel }, grammar: { __typename?: 'CEFRLevelProgress', progress: number, level: LanguageLevel }, communication: { __typename?: 'CEFRLevelProgress', progress: number, level: LanguageLevel } } | null, classRoom: { __typename?: 'ClassRoom', id: string, name: string } } };
 
+export type LessonCardsQueryVariables = Exact<{
+  query?: InputMaybe<LessonCardsQueryInput>;
+}>;
+
+
+export type LessonCardsQuery = { __typename?: 'Query', lessonCards: { __typename?: 'LessonCardsQueryResult', cards: Array<{ __typename?: 'PersonalizedLessonCard', progress: number, difficulty: string, card: { __typename?: 'LessonCard', id: string, title: string, description: string, backgroundUrl: string, exp: number, intro: { __typename?: 'LessonIntro', message: string, bot: { __typename?: 'BotAvatar', accent: string, gender: string, avatarModels: { __typename?: 'AvatarModels', neutral: string } } } } }> } };
+
 
 export const MutationDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"Mutation"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"data"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"UserCreateDataInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"userCreate"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"data"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"uid"}},{"kind":"Field","name":{"kind":"Name","value":"username"}},{"kind":"Field","name":{"kind":"Name","value":"profile"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"imageUrl"}},{"kind":"Field","name":{"kind":"Name","value":"coverUrl"}},{"kind":"Field","name":{"kind":"Name","value":"fullname"}},{"kind":"Field","name":{"kind":"Name","value":"firstname"}},{"kind":"Field","name":{"kind":"Name","value":"lastname"}}]}},{"kind":"Field","name":{"kind":"Name","value":"languageLevel"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"overall"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"progress"}},{"kind":"Field","name":{"kind":"Name","value":"level"}}]}},{"kind":"Field","name":{"kind":"Name","value":"vocabulary"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"progress"}},{"kind":"Field","name":{"kind":"Name","value":"level"}}]}},{"kind":"Field","name":{"kind":"Name","value":"grammar"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"progress"}},{"kind":"Field","name":{"kind":"Name","value":"level"}}]}},{"kind":"Field","name":{"kind":"Name","value":"communication"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"progress"}},{"kind":"Field","name":{"kind":"Name","value":"level"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"coin"}},{"kind":"Field","name":{"kind":"Name","value":"exp"}},{"kind":"Field","name":{"kind":"Name","value":"classRoom"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]}}]} as unknown as DocumentNode<MutationMutation, MutationMutationVariables>;
+export const LessonCardsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"LessonCards"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"query"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"LessonCardsQueryInput"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"lessonCards"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"query"},"value":{"kind":"Variable","name":{"kind":"Name","value":"query"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"cards"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"progress"}},{"kind":"Field","name":{"kind":"Name","value":"difficulty"}},{"kind":"Field","name":{"kind":"Name","value":"card"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"backgroundUrl"}},{"kind":"Field","name":{"kind":"Name","value":"exp"}},{"kind":"Field","name":{"kind":"Name","value":"intro"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"message"}},{"kind":"Field","name":{"kind":"Name","value":"bot"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"avatarModels"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"neutral"}}]}},{"kind":"Field","name":{"kind":"Name","value":"accent"}},{"kind":"Field","name":{"kind":"Name","value":"gender"}}]}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<LessonCardsQuery, LessonCardsQueryVariables>;

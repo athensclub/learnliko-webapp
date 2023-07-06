@@ -39,3 +39,53 @@ export const CREATE_USER_ACCOUNT = graphql(`
 		}
 	}
 `);
+
+export const CREATE_VOCAB_CARD = graphql(`
+	mutation VocabularyCardCreate($data: VocabularyCardCreateDataInput!) {
+		vocabularyCardCreate(data: $data) {
+			id
+		}
+	}
+`);
+
+export const CREATE_SENTENCE_CARD = graphql(`
+	mutation SentenceCardCreate($data: SentenceCardCreateDataInput!) {
+		sentenceCardCreate(data: $data) {
+			id
+		}
+  	}
+`);
+
+export const CREATE_READING_CARD = graphql(`
+	mutation ReadingCardCreate($data: ReadingCardCreateDataInput!) {
+		readingCardCreate(data: $data) {
+			id
+		}
+	}
+`);
+
+export const CREATE_CONVERSATION_CARD = graphql(`
+	mutation ConversationCardCreate($data: ConversationCardCreateDataInput!) {
+		conversationCardCreate(data: $data) {
+			id
+		}
+	}
+`);
+
+export const CREATE_LESSON_CARD = graphql(`
+	mutation LessonCardCreate($data: LessonCardCreateDataInput!) {
+		lessonCardCreate(data: $data) {
+			id
+		}
+	}
+`);
+
+export const CREATE_BOT_AVATAR = graphql(`
+	mutation BotAvatarCreate($data: BotAvatarDataInput!) {
+		botAvatarCreate(data: $data) {
+			id
+		}
+	}
+`);
+
+

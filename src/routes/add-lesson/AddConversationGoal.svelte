@@ -1,6 +1,19 @@
 <script lang="ts">
+	import type { LearnerGoalDataInput } from '$gql/generated/graphql';
+
+	export let exp: number;
+	export let coin: number;
+
 	export let index: number;
-	export let getValue = () => {};
+
+	export const getValue = (): LearnerGoalDataInput => {
+		return {
+			coin,
+			exp,
+			goal,
+			hint
+		};
+	};
 
 	let goal = '';
 	let hint = '';

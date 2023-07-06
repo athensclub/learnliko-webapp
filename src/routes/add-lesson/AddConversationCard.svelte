@@ -3,9 +3,65 @@
 	import Select from 'svelte-select/Select.svelte';
 	import AddReadingQuiz from './AddReadingQuiz.svelte';
 	import AddConversationGoal from './AddConversationGoal.svelte';
+	import { CREATE_BOT_AVATAR, CREATE_CONVERSATION_CARD } from '$gql/schema/mutations';
+	import { graphqlClient } from '$lib/graphql';
+	import type { LanguageLevel, LearnerGoalDataInput } from '$gql/generated/graphql';
+
+	export let coin: number;
+	export let exp: number;
+	export let level: LanguageLevel;
 
 	export let index: number;
-	export let upload = () => {};
+
+	export const upload = async () => {
+		const botResult = await graphqlClient
+			.mutation(CREATE_BOT_AVATAR, {
+				data: {
+					accent,
+					gender,
+					avatarModels: {
+						anger: avatarImage,
+						anticipation: avatarImage,
+						disgust: avatarImage,
+						fear: avatarImage,
+						joy: avatarImage,
+						neutral: avatarImage,
+						sadness: avatarImage,
+						surprise: avatarImage,
+						trust: avatarImage
+					},
+					name: avatarName
+				}
+			})
+			.toPromise();
+
+		const result = await graphqlClient
+			.mutation(CREATE_CONVERSATION_CARD, {
+				data: {
+					backgroundUrl: 'unknown',
+					bot: {
+						avatar: botResult.data?.botAvatarCreate.id ?? 'unknown',
+						intro: introduction,
+						prompt
+					},
+					fromLesson: 'unknown',
+					learner: { mission, goal: goalGetters.map((g) => g()) },
+					level,
+					title: 'unknown',
+					totalCoin: goalGetters.length * coin,
+					totalExp: goalGetters.length * exp
+				}
+			})
+			.toPromise();
+		return {
+			accent,
+			gender,
+			id: result.data?.conversationCardCreate.id,
+			botId: botResult.data?.botAvatarCreate.id,
+			totalCoin: goalGetters.length * coin,
+			totalExp: goalGetters.length * exp
+		};
+	};
 
 	let mission = '';
 	let prompt = '';
@@ -21,7 +77,7 @@
 	let gender: SynthesizeGender = 'FEMALE';
 
 	let goalIDs: number[] = [];
-	let goalGetters: (() => void)[] = [];
+	let goalGetters: (() => LearnerGoalDataInput)[] = [];
 </script>
 
 <div class="flex w-[30vw] flex-col gap-[2vw] border border-[#00000033] p-[2vw]">
@@ -32,7 +88,7 @@
 	/>
 
 	{#each goalIDs as id, index (id)}
-		<AddConversationGoal {index} bind:getValue={goalGetters[index]} />
+		<AddConversationGoal {coin} {exp} {index} bind:getValue={goalGetters[index]} />
 	{/each}
 
 	<button

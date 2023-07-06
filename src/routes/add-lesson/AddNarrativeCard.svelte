@@ -1,15 +1,23 @@
 <script lang="ts">
+	import type { NarrativeDataInput } from '$gql/generated/graphql';
+
 	export let index: number;
-	export let upload = () => {};
+	
+	export const getValue = (): NarrativeDataInput => {
+		return {
+			illustrationUrl: imageURL,
+			text: content
+		};
+	};
 
 	let content = '';
 	let imageURL = '';
 </script>
 
-<div class="flex w-fit flex-col border border-[#00000033] p-[2vw] gap-[2vw]">
+<div class="flex w-fit flex-col gap-[2vw] border border-[#00000033] p-[2vw]">
 	<textarea
 		bind:value={content}
-		class="border border-[#00000033] px-[1vw] py-[0.3vw] w-[22vw] h-[20vw]"
+		class="h-[20vw] w-[22vw] border border-[#00000033] px-[1vw] py-[0.3vw]"
 		placeholder="Text paragraph {index + 1}"
 	/>
 	<input

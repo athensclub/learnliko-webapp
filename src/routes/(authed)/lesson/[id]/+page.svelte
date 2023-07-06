@@ -12,7 +12,7 @@
 	import { onDestroy, onMount } from 'svelte';
 	import { page } from '$app/stores';
 	import { getLessonById } from '$api/lesson';
-	import { lastPlayedLessonIdLocal, totalVocabLocal } from '$lib/localdb/profileLocal';
+	import { lastPlayedLessonIdLocal } from '$lib/localdb/profileLocal';
 	import {
 		QuizType,
 		type LessonCard,
@@ -137,7 +137,6 @@
 		| 'FINISHED' = 'INTRO';
 
 	const onFinishedLesson = () => {
-		$totalVocabLocal = ($totalVocabLocal ?? 0) + 15;
 		currentView = 'FINISHED';
 		$lastPlayedLessonIdLocal = null;
 	};
@@ -278,7 +277,6 @@
 			/>
 		{:else if currentView === 'FINISHED'}
 			<LessonFinishedView
-		
 				avatar="https://cdn.discordapp.com/attachments/842737146321174558/1124658451738533959/image.png"
 			/>
 		{/if}

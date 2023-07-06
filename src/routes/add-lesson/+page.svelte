@@ -131,7 +131,7 @@
 			.mutation(CREATE_LESSON_CARD, {
 				data: {
 					ambientAudio: ambient,
-					backgroundUrl: 'unknown',
+					backgroundUrl: imageURL,
 					coin:
 						sum(vocabs, 'totalCoin') +
 						sum(writings, 'totalCoin') +

@@ -54,24 +54,32 @@
 		vocabs =
 			item.quizeSections
 				.find((section) => section.type === QuizType.Vocabulary)
-				?.cards.map((card) => card as VocabularyCard) ?? null;
+				?.cards.map((card) => {
+					return { ...card, fromLesson: item?.id! } as VocabularyCard;
+				}) ?? null;
 
 		sentences =
 			item.quizeSections
 				.find((section) => section.type === QuizType.Sentence)
-				?.cards.map((card) => card as SentenceCard) ?? null;
+				?.cards.map((card) => {
+					return { ...card, fromLesson: item?.id! } as SentenceCard;
+				}) ?? null;
 
 		// TODO: support multiple reading item?
 		reading =
 			item.quizeSections
 				.find((section) => section.type === QuizType.Reading)
-				?.cards.map((card) => card as ReadingCard)[0] ?? null;
+				?.cards.map((card) => {
+					return { ...card, fromLesson: item?.id! } as ReadingCard;
+				})[0] ?? null;
 
 		// TODO: support multiple conversation item?
 		conversation =
 			item.quizeSections
 				.find((section) => section.type === QuizType.Conversation)
-				?.cards.map((card) => card as ConversationCard)[0] ?? null;
+				?.cards.map((card) => {
+					return { ...card, fromLesson: item?.id! } as ConversationCard;
+				})[0] ?? null;
 
 		$chatContext = {
 			conversation: {
@@ -99,6 +107,7 @@
 				image: '',
 				topic: '',
 				background: '',
+				fromLesson: conversation?.fromLesson ?? '',
 				id: conversation?.id ?? ''
 			},
 			bot: { emotion: 'neutral' }

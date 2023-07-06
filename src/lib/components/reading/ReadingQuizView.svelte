@@ -7,7 +7,7 @@
 	import type { ReadingCard } from '$gql/generated/graphql';
 	import { graphqlClient } from '$lib/graphql';
 	import userSession from '$lib/stores/userSession';
-	import { RECAP_READING_QUIZ } from '$gql/schema/mutations';
+	import { RECAP_READING_QUIZ, UPDATE_LESSON_PROGRESS } from '$gql/schema/mutations';
 
 	export let item: ReadingCard;
 	$: quiz = item.questions;
@@ -33,6 +33,18 @@
 					userAnswer: selected.map((i) => i ?? 0)
 				},
 				uid: $userSession.accountData?.uid!
+			})
+			.toPromise();
+
+		await graphqlClient
+			.mutation(UPDATE_LESSON_PROGRESS, {
+				uid: $userSession.accountData?.uid!,
+				data: {
+					lessonId: item.fromLesson,
+					quizCardId: item.id,
+					quizRecapId: result.data?.readingRecapCreate.id!,
+					sectionIndex: 2
+				}
 			})
 			.toPromise();
 

@@ -27,6 +27,7 @@ export interface ConversationCarouselItem {
 	image: string;
 	intro: string;
 	topic: string;
+	fromLesson?: string;
 	CEFRlevel: CEFRLevel;
 	background: string;
 	details: ConversationDetails;

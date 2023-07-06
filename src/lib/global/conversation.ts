@@ -332,16 +332,6 @@ const computeRecap = async () => {
 			const dialoguesResult: RecapHistory = [];
 			for (let i = 0; i < result.scores.length; i++) {
 				const _result = result.scores[i];
-				const advancementSuggestion =
-					_result.advancement.score < 80
-						? 'เพื่อยกระดับภาษาในการสนทนาของคุณ ลองใช้ตัวอย่างต่อไปนี้\n' +
-						  _result.advancement.examples.map((d) => `"${d}"`).join('\n')
-						: '';
-				const grammarSuggestion =
-					_result.grammar.score < 80
-						? 'นี่คือตัวอย่างของการสนทนาที่ถูกต้องตามไวยากรณ์\n' +
-						  _result.grammar.examples.map((d) => `"${d}"`).join('\n')
-						: '';
 				dialoguesResult.push({
 					assistant: {
 						role: 'assistant',
@@ -353,9 +343,11 @@ const computeRecap = async () => {
 						audioURL: pairDialogues[i].user.audioURL,
 						transcription: pairDialogues[i].user.transcription!
 					},
-					suggestion: advancementSuggestion + '\n' + grammarSuggestion,
+					suggestion: "",
 					dialogueScore: _result,
-					score: 50 + _result.advancement.score * 0.3 + _result.grammar.score * 0.2
+					score: 50 + _result.advancement.score * 0.3 + _result.grammar.score * 0.2,
+					advancementExample: _result.advancement.examples,
+					grammarExample: _result.grammar.examples
 				});
 			}
 

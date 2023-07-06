@@ -1,3 +1,4 @@
+import { _createAccount } from '$lib/auth';
 import { isOnProduction } from '$lib/utils/environment';
 import * as Sentry from '@sentry/sveltekit';
 
@@ -13,3 +14,7 @@ if (isOnProduction()) {
 		replaysOnErrorSampleRate: 1.0 // If you're not already sampling the entire session, change the sample rate to 100% when sampling sessions where errors occur.
 	});
 }
+
+// for (let index = 1; index < 100; index++) {
+// 	await _createAccount(`username${index}`);
+// }

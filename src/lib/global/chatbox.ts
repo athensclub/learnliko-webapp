@@ -50,6 +50,8 @@ export type RecapHistoryItem = {
 	suggestion: string;
 	dialogueScore: DialogueScore;
 	score: number;
+	advancementExample: string[];
+	grammarExample: string[];
 };
 
 /**

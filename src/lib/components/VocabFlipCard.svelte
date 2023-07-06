@@ -1,8 +1,11 @@
 <script lang="ts">
 	import { synthesize } from '$api/tts';
 	import type { VocabularyCard } from '$gql/generated/graphql';
+	import { RECAP_VOCAB_QUIZ } from '$gql/schema/mutations';
 	import Flippable from '$lib/components/Flippable.svelte';
 	import { playAudio, playAudioURL } from '$lib/global/audio';
+	import { graphqlClient } from '$lib/graphql';
+	import userSession from '$lib/stores/userSession';
 	import type { FlipCardItem } from '$lib/types/flip_card';
 	import { blobToBase64 } from '$lib/utils/io';
 	import { onMount } from 'svelte';
@@ -47,11 +50,18 @@
 	 * flip card.
 	 */
 	export let correctAnswer: number | null = null;
-	const submit = () => {
-		// TODO: implement actual submit.
-		correctAnswer = 0;
+	const submit = async () => {
+		const result = await graphqlClient
+			.mutation(RECAP_VOCAB_QUIZ, {
+				data: {
+					quizCard: item.id,
+					userAnswer: selectedChoice ?? 0
+				},
+				uid: $userSession.accountData?.uid!
+			})
+			.toPromise();
 
-		if (selectedChoice === correctAnswer) {
+		if (result.data?.vocabularyRecapCreate.correct) {
 			onCorrect();
 		} else {
 			onWrong();

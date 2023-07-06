@@ -4,12 +4,16 @@
 	import type { ReadingViewType } from './ReadingContainer.svelte';
 	import AnswerCorrectToast from '../toasts/AnswerCorrectToast.svelte';
 	import { toast } from '../toasts/ToastManager.svelte';
-	import type { ReadingCard, ReadingQuestion } from '$gql/generated/graphql';
+	import type { ReadingCard } from '$gql/generated/graphql';
+	import { graphqlClient } from '$lib/graphql';
+	import userSession from '$lib/stores/userSession';
+	import { RECAP_READING_QUIZ } from '$gql/schema/mutations';
 
 	export let item: ReadingCard;
 	$: quiz = item.questions;
 
 	export let correctAnswers: number[] | null;
+	let totalCorrect = 0;
 
 	export let setView: (view: ReadingViewType) => void;
 	export let onFinish: () => void;
@@ -20,17 +24,24 @@
 
 	export let selected: (number | null)[];
 
-	let correctCount = 0;
-
 	$: submittable = selected.every((val) => val !== null);
-	const submit = () => {
-		// TODO: implement get answer data
-		correctAnswers = quiz.map((q) => q.answer);
+	const submit = async () => {
+		const result = await graphqlClient
+			.mutation(RECAP_READING_QUIZ, {
+				data: {
+					quizCard: item.id,
+					userAnswer: selected.map((i) => i ?? 0)
+				},
+				uid: $userSession.accountData?.uid!
+			})
+			.toPromise();
 
-		correctCount = selected.filter((c, i) => c === correctAnswers[i]).length;
+		correctAnswers = result.data?.readingRecapCreate.answer.map((a) => a.answerIndex) ?? [];
+		totalCorrect = result.data?.readingRecapCreate.totalCorrect ?? 0;
+
 		toast(AnswerCorrectToast, {
-			exp: (item.totalExp * correctCount) / quiz.length,
-			coin: (item.totalCoin * correctCount) / quiz.length
+			exp: (item.totalExp * totalCorrect) / quiz.length,
+			coin: (item.totalCoin * totalCorrect) / quiz.length
 		});
 	};
 </script>
@@ -48,7 +59,7 @@
 					<img src={finishedImage} class="mt-auto h-[90%]" alt="Happy Kid" />
 
 					<div style="font-size: {scale * 2.2}vw;" class="my-auto text-white">
-						คุณตอบถูก {correctCount}/{quiz.length} ข้อ
+						คุณตอบถูก {totalCorrect}/{quiz.length} ข้อ
 					</div>
 				</div>
 			{/if}

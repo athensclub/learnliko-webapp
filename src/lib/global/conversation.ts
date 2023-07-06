@@ -21,6 +21,10 @@ import { completeConversationLocal } from '$lib/localdb/conversationLocal';
 import { audioRecording } from './recording';
 import { textAdaptor } from '$api/textProcessor';
 import type { CEFRLevel } from '$lib/types/CEFRLevel';
+import { graphqlClient } from '$lib/graphql';
+import { RECAP_CONVERSATION_QUIZ } from '$gql/schema/mutations';
+import userSession from '$lib/stores/userSession';
+import type { ConversationRecapHistoryCreateDataInput } from '$gql/generated/graphql';
 
 interface HistoryItem {
 	role: 'user' | 'assistant';
@@ -377,15 +381,47 @@ const computeRecap = async () => {
 	});
 	overallScore = overallScore / goalTracking.length;
 
-	recapResult.set({ score: overallScore, coins: totalCoins, history: recapDialogues });
-
 	// TODO: find a better approach to promote/demote user's CEFR level
 	// if (totalScore > 90) setCurrentCEFRLevel(ct!.conversation.CEFRlevel);
 
-	// TODO: use actual db (cloud).
-	completeConversationLocal({
-		recap: { score: overallScore, coins: totalCoins, history: recapDialogues },
-		finishedTime,
-		conversationID: ct.conversation.id
-	});
+	const _recapHistory: ConversationRecapHistoryCreateDataInput[] = [];
+	for (let index = 0; index < goalsResult.length; index++) {
+		const e = goalsResult[index];
+		_recapHistory[index] = {
+			coin: e.coins,
+			exp: e.score,
+			goal: ct.conversation.details.learner.goal[index],
+			hint: ct.conversation.details.learner.hint[index],
+			dialogues: e.history.map((d) => {
+				return {
+					assistant: d.assistant.transcription,
+					user: d.user?.transcription ?? '',
+					score: {
+						advancement: d.dialogueScore.advancement,
+						appropriateness: d.dialogueScore.appropriateness,
+						grammar: d.dialogueScore.grammar
+					}
+				};
+			})
+		};
+	}
+
+	await graphqlClient
+		.mutation(RECAP_CONVERSATION_QUIZ, {
+			data: {
+				quizCard: ct.conversation.id,
+				correctPercentage: overallScore,
+				history: _recapHistory
+			},
+			uid: userSession.value().accountData?.uid!
+		})
+		.toPromise();
+
+	// completeConversationLocal({
+	// 	recap: { score: overallScore, coins: totalCoins, history: recapDialogues },
+	// 	finishedTime,
+	// 	conversationID: ct.conversation.id
+	// });
+
+	recapResult.set({ score: overallScore, coins: totalCoins, history: recapDialogues });
 };

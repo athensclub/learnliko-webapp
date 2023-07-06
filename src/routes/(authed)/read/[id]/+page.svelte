@@ -1,18 +1,9 @@
 <script lang="ts">
-	import ReadingQuizModal from '$lib/components/modals/ReadingQuizModal.svelte';
+	import type { ReadingCard } from '$gql/generated/graphql';
 	import ReadingContainer from '$lib/components/reading/ReadingContainer.svelte';
-	import {
-		initializeReadingData,
-		readingAnswers,
-		resetReadingData,
-		selectedQuizChoices
-	} from '$lib/global/reading';
-	import type { ReadingItem } from '$lib/types/reading';
-	import { getContext, onMount } from 'svelte';
-	import type { Context } from 'svelte-simple-modal';
 
-	// export let data: PageData;
-	// let item: ReadingItem = data.item;
+	export let data: PageData;
+	let item: ReadingCard = data.item;
 
 	const goBack = () => window.history.back();
 
@@ -179,7 +170,7 @@
 		</div>
 	</div>
 
-	<ReadingContainer class="mx-auto h-[75vh] w-[75vw]" />
+	<ReadingContainer {item} class="mx-auto h-[75vh] w-[75vw]" />
 	<!-- <div
 		style="background-image: url('{item.image}');"
 		class="relative bg-cover bg-center w-[100vw] h-[100vh] font-line-seed"

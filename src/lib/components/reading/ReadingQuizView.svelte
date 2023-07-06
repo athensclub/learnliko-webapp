@@ -20,12 +20,18 @@
 
 	export let selected: (number | null)[];
 
+	let correctCount = 0;
+
 	$: submittable = selected.every((val) => val !== null);
 	const submit = () => {
 		// TODO: implement get answer data
 		correctAnswers = quiz.map((q) => q.answer);
 
-		toast(AnswerCorrectToast, { exp: item.totalExp, coin: item.totalCoin });
+		correctCount = selected.filter((c, i) => c === correctAnswers[i]).length;
+		toast(AnswerCorrectToast, {
+			exp: (item.totalExp * correctCount) / quiz.length,
+			coin: (item.totalCoin * correctCount) / quiz.length
+		});
 	};
 </script>
 
@@ -42,7 +48,7 @@
 					<img src={finishedImage} class="mt-auto h-[90%]" alt="Happy Kid" />
 
 					<div style="font-size: {scale * 2.2}vw;" class="my-auto text-white">
-						คุณตอบถูก {selected.filter((c, i) => c === correctAnswers[i]).length}/{quiz.length} ข้อ
+						คุณตอบถูก {correctCount}/{quiz.length} ข้อ
 					</div>
 				</div>
 			{/if}

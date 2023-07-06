@@ -37,8 +37,8 @@ export const lastPlayedLessonIdLocal = browser
 	? persist(writable<string | null>(null), createIndexedDBStorage(), 'lastPlayedLessonId')
 	: null;
 
-export const totalVocabLocal = browser
-	? persist(writable<number>(0), createIndexedDBStorage(), 'totalVocabLocal')
+export const learnedVocabLocal = browser
+	? persist(writable<string[]>([]), createIndexedDBStorage(), 'learnedVocabLocal')
 	: null;
 
 export const queryLearningDiariesLocal = async (): Promise<LearningDiaryItem[]> => {

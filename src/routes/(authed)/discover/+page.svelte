@@ -12,7 +12,7 @@
 	import { browser } from '$app/environment';
 	import background from '$lib/images/bgvd.mp4';
 	import { getLessonById, getLessonCards } from '$api/lesson';
-	import { lastPlayedLessonIdLocal, totalVocabLocal } from '$lib/localdb/profileLocal';
+	import { lastPlayedLessonIdLocal, learnedVocabLocal } from '$lib/localdb/profileLocal';
 	import userSession from '$lib/stores/userSession';
 
 	let items: PersonalizedLessonCard[] = [];
@@ -162,7 +162,7 @@
 					<div class="ml-[1vw] flex h-full flex-col">
 						<div class="text-[1.5vw]">คำศัพท์วันนี้</div>
 						<div class="bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] bg-clip-text text-transparent">
-							<div class="inline-block text-[3vw]">{$totalVocabLocal}</div>
+							<div class="inline-block text-[3vw]">{$learnedVocabLocal?.length}</div>
 							<div class="inline-block text-[1.35vw]">คำ</div>
 						</div>
 					</div>

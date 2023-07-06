@@ -6,7 +6,7 @@
 	import { blobToBase64 } from '$lib/utils/io';
 	import { onMount } from 'svelte';
 	import { playAudioURL } from '$lib/global/audio';
-	import type { ReadingCard } from '$gql/graphql';
+	import type { ReadingCard } from '$gql/generated/graphqll';
 
 	export let item: ReadingCard;
 

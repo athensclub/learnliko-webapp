@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Narrative } from '$gql/graphql';
+	import type { Narrative } from '$gql/generated/graphqll';
 	import type { LessonIntro } from '$lib/types/lesson';
 	import { fade } from 'svelte/transition';
 

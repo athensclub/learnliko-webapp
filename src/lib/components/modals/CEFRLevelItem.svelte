@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { LanguageLevel } from '$gql/graphql';
+	import type { LanguageLevel } from '$gql/generated/graphqll';
 	import { orderedCEFR } from '$lib/utils/cefr';
 
 	export let title: string;

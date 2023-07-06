@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { synthesize } from '$api/tts';
-	import type { LessonCard } from '$gql/graphql';
+	import type { LessonCard } from '$gql/generated/graphql';
 	import { playAudioURL } from '$lib/global/audio';
 	import { isMobile } from '$lib/global/breakpoints';
 	import { blobToBase64 } from '$lib/utils/io';

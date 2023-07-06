@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
 	import ReadingContainer from '$lib/components/reading/ReadingContainer.svelte';
-	import type { ReadingCard } from '$gql/graphql';
+	import type { ReadingCard } from '$gql/generated/graphqll';
 
 	export let item: ReadingCard;
 

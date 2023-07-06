@@ -1,4 +1,4 @@
-import type { LessonCard } from '$gql/graphql';
+import type { LessonCard } from '$gql/generated/graphqll';
 import type { LessonItem } from '$lib/types/lesson';
 
 export const queryLessonCards = async (): Promise<LessonCard[]> => {

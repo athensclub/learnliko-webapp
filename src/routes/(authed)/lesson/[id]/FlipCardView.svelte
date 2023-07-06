@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { VocabularyCard } from '$gql/graphql';
+	import type { VocabularyCard } from '$gql/generated/graphqll';
 	import VocabFlipCard from '$lib/components/VocabFlipCard.svelte';
 	import AnswerCorrectToast from '$lib/components/toasts/AnswerCorrectToast.svelte';
 	import { toast } from '$lib/components/toasts/ToastManager.svelte';

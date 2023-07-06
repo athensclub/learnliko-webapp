@@ -86,8 +86,13 @@
 						goal: conversation?.learner.goal.map((g) => g.goal) ?? [],
 						hint: conversation?.learner.goal.map((g) => g.hint) ?? []
 					},
+					image: ''
 				},
 				intro: conversation?.bot.intro ?? 'unknown',
+				image: '',
+				topic: '',
+				background: '',
+				id: ''
 			},
 			bot: { emotion: 'neutral' }
 		};

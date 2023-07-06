@@ -1,13 +1,13 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
 	import background from '$lib/images/bgvd.mp4';
 	import icon from '$lib/images/learnliko_icon.png';
-	import setupAccountInput from '../setupAccountInputStore';
+	import userSession from '$lib/stores/userSession';
+	import { getCurrentUserData, setupCurrentUserAccount } from '$lib/temp/user';
 
 	let firstname: string, lastname: string;
 	let error: string;
 
-	const onContinue = function () {
+	const onContinue = async function () {
 		if (firstname.length < 1) {
 			error = 'ใส่ชื่อจริง';
 			return;
@@ -17,8 +17,9 @@
 			return;
 		}
 
-		setupAccountInput.update({ firstname, lastname });
-		goto('/pretest');
+		await setupCurrentUserAccount('PRE_A1', firstname, lastname);
+		const profileData = await getCurrentUserData();
+		userSession.update({ accountData: profileData });
 	};
 </script>
 

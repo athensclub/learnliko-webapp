@@ -76,7 +76,6 @@ export const setupCurrentUserAccount = async function (
 			}
 		}),
 		increaseActiveUser(),
-		updateTotalLearner(level)
 	]);
 };
 

@@ -9,6 +9,8 @@
 
 	export let item: LessonCard;
 	export let scale = 1;
+	export let progress = 0;
+	export let difficulty = '';
 
 	let speech: string | null = null;
 	// TODO: use data from api instead.
@@ -67,7 +69,7 @@
 				  	padding-bottom: {scale * 1}vh;"
 				class="rounded-full bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] text-center"
 			>
-				{item.level}
+				{difficulty}
 			</div>
 
 			<div
@@ -130,7 +132,7 @@
 		>
 			<!-- TODO: show actual progress here -->
 			<div
-				style="width: {0 * 100}%;"
+				style="width: {progress}%;"
 				class="h-full rounded-full bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD]"
 			/>
 		</div>

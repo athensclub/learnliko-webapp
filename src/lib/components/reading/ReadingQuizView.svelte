@@ -23,7 +23,7 @@
 	$: submittable = selected.every((val) => val !== null);
 	const submit = () => {
 		// TODO: implement get answer data
-		correctAnswers = quiz.map((q) => 0);
+		correctAnswers = quiz.map((q) => q.answer);
 
 		toast(AnswerCorrectToast, { exp: item.totalExp, coin: item.totalCoin });
 	};

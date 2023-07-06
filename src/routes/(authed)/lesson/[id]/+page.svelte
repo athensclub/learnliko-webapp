@@ -9,13 +9,21 @@
 	import ReadingView from './ReadingView.svelte';
 	import WritingCardView from './WritingCardView.svelte';
 	import LessonFinishedView from './LessonFinishedView.svelte';
-	import type { LessonItem } from '$lib/types/lesson';
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
 	import { getLessonById } from '$api/lesson';
-	import { lastPlayedLessonIdLocal } from '$lib/localdb/profileLocal';
-	import type { LessonCard, ReadingCard, SentenceCard, VocabularyCard } from '$gql/generated/graphql';
+	import { lastPlayedLessonIdLocal, totalVocabLocal } from '$lib/localdb/profileLocal';
+	import {
+		QuizType,
+		type LessonCard,
+		type ReadingCard,
+		type SentenceCard,
+		type VocabularyCard,
+		type ConversationCard
+	} from '$gql/generated/graphql';
 	import Typewriter from 'svelte-typewriter/Typewriter.svelte';
+	import userSession from '$lib/stores/userSession';
+	import type { SynthesizeAccent, SynthesizeGender } from '$api/tts';
 
 	let item: LessonCard | null = null;
 	let background: string | null = null;
@@ -24,28 +32,63 @@
 	let sentences: SentenceCard[] | null = null;
 	// TODO: support multiple reading items?
 	let reading: ReadingCard | null = null;
+	let conversation: ConversationCard | null = null;
 
 	onMount(async () => {
-		item = await getLessonById($page.params.id);
+		let content = await getLessonById(
+			$page.params.id,
+			$userSession.accountData?.languageLevel?.overall.level!,
+			undefined,
+			true
+		);
+		if (!content.card) throw new Error('No Lesson Found');
+		item = content.card;
 
 		vocabs =
 			item.quizeSections
-				.find((section) => section.type === 'VOCABULARY')
+				.find((section) => section.type === QuizType.Vocabulary)
 				?.cards.map((card) => card as VocabularyCard) ?? null;
 
 		sentences =
 			item.quizeSections
-				.find((section) => section.type === 'SENTENCE')
+				.find((section) => section.type === QuizType.Sentence)
 				?.cards.map((card) => card as SentenceCard) ?? null;
 
 		// TODO: support multiple reading item?
 		reading =
 			item.quizeSections
-				.find((section) => section.type === 'READING')
+				.find((section) => section.type === QuizType.Reading)
 				?.cards.map((card) => card as ReadingCard)[0] ?? null;
 
+		// TODO: support multiple conversation item?
+		conversation =
+			item.quizeSections
+				.find((section) => section.type === QuizType.Conversation)
+				?.cards.map((card) => card as ConversationCard)[0] ?? null;
+
 		$chatContext = {
-			conversation: item.conversation,
+			conversation: {
+				avatar: {
+					name: conversation?.bot.avatar.name ?? 'unknown',
+					models: conversation?.bot.avatar.avatarModels!
+				},
+				CEFRlevel: item.level,
+				details: {
+					bot: {
+						accent: conversation?.bot.avatar.accent as SynthesizeAccent,
+						avatar: conversation?.bot.avatar.avatarModels.neutral ?? 'unknown',
+						gender: conversation?.bot.avatar.gender as SynthesizeGender,
+						prompt: conversation?.bot.prompt ?? 'unknown'
+					},
+					intro: conversation?.bot.intro ?? 'unknown',
+					learner: {
+						mission: conversation?.learner.mission ?? 'unknown',
+						goal: conversation?.learner.goal.map((g) => g.goal) ?? [],
+						hint: conversation?.learner.goal.map((g) => g.hint) ?? []
+					},
+				},
+				intro: conversation?.bot.intro ?? 'unknown',
+			},
 			bot: { emotion: 'neutral' }
 		};
 		$lastPlayedLessonIdLocal = item.id;
@@ -61,6 +104,11 @@
 		| 'READING'
 		| 'CONVERSATION'
 		| 'FINISHED' = 'INTRO';
+
+	const onFinishedLesson = () => {
+		$totalVocabLocal = ($totalVocabLocal ?? 0) + 15;
+		currentView = 'FINISHED';
+	};
 
 	let progress = 0;
 	const addProgress = (val: number) => (progress = progress + val);
@@ -189,7 +237,7 @@
 			<LessonConversationView
 				onFinish={() => {
 					addProgress(1 / 4);
-					currentView = 'FINISHED';
+					onFinishedLesson();
 				}}
 			/>
 		{:else if currentView === 'FINISHED'}

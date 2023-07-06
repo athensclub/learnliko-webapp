@@ -3,6 +3,7 @@ import { auth, firestore } from '$lib/configs/firebase.config';
 import type { PretestCEFRLevel } from '$lib/types/pretest';
 import type { UserProfile } from '$lib/types/userProfile';
 import { doc, getDoc, setDoc, updateDoc } from 'firebase/firestore/lite';
+import { increaseActiveUser, updateTotalLearner } from '../analytic';
 
 export const createUserAccount = async function (data: UserProfile) {
 	const uid = _safeGetUID();
@@ -35,17 +36,21 @@ export const setupCurrentUserAccount = async function (
 		throw new Error('No First name and lastname provided');
 
 	const userDocRef = doc(firestore, `Users/${uid}`);
-	await updateDoc(userDocRef, {
-		'languageLevel.overall.level': level,
-		'languageLevel.communication.level': level,
-		'languageLevel.grammar.level': level,
-		'languageLevel.vocabulary.level': level,
-		profile: {
-			firstname: firstname,
-			lastname: lastname,
-			fullname: `${firstname} ${lastname.at(0)}`
-		}
-	});
+	await Promise.all([
+		updateDoc(userDocRef, {
+			'languageLevel.overall.level': level,
+			'languageLevel.communication.level': level,
+			'languageLevel.grammar.level': level,
+			'languageLevel.vocabulary.level': level,
+			profile: {
+				firstname: firstname,
+				lastname: lastname,
+				fullname: `${firstname} ${lastname.at(0)}`
+			}
+		}),
+		increaseActiveUser(),
+		updateTotalLearner(level)
+	]);
 };
 
 const _safeGetUID = function () {

@@ -5,27 +5,33 @@
 	import vocabTaskImage from './vocab_task_image.png';
 	import icon from '$lib/images/learnliko_icon.png';
 	import LessonCard from '$lib/components/LessonCard.svelte';
-	import type { LessonCard as LessonCardData } from '$gql/generated/graphql';
+	import type { PersonalizedLessonCard } from '$gql/generated/graphql';
 	import userProfileImage from '$lib/images/sample_kid_image.png';
-	import { queryDiscoverItemsLocal } from '$lib/localdb/discoverLocal';
-	import type { DiscoverItem } from '$lib/types/discover';
 	import { onMount } from 'svelte';
 	import { isMobile } from '$lib/global/breakpoints';
-	import { currentMode } from '$lib/global/mode';
 	import { browser } from '$app/environment';
 	import background from '$lib/images/bgvd.mp4';
 	import { getLessonById, getLessonCards } from '$api/lesson';
-	import { lastPlayedLessonIdLocal } from '$lib/localdb/profileLocal';
+	import { lastPlayedLessonIdLocal, totalVocabLocal } from '$lib/localdb/profileLocal';
+	import userSession from '$lib/stores/userSession';
 
-	let items: LessonCardData[] = [];
-	let lastPlayed: LessonCardData | null = null;
+	let items: PersonalizedLessonCard[] = [];
+	let lastPlayed: PersonalizedLessonCard | null = null;
 	const loadData = async () => {
 		if (!browser) return;
-		items = await getLessonCards();
-		console.log(items)
+
+		items = await getLessonCards({
+			baseLevel: $userSession.accountData?.languageLevel?.overall.level!,
+			excludeCompleted: true,
+			includeProgressOf: $userSession.accountData?.uid!
+		});
 
 		if ($lastPlayedLessonIdLocal !== null)
-			lastPlayed = await getLessonById($lastPlayedLessonIdLocal);
+			lastPlayed = await getLessonById(
+				$lastPlayedLessonIdLocal,
+				$userSession.accountData?.languageLevel?.overall.level!,
+				$userSession.accountData?.uid!
+			);
 	};
 
 	onMount(loadData);
@@ -152,7 +158,7 @@
 					<div class="ml-[1vw] flex h-full flex-col">
 						<div class="text-[1.5vw]">คำศัพท์วันนี้</div>
 						<div class="bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] bg-clip-text text-transparent">
-							<div class="inline-block text-[3vw]">15</div>
+							<div class="inline-block text-[3vw]">{$totalVocabLocal}</div>
 							<div class="inline-block text-[1.35vw]">คำ</div>
 						</div>
 					</div>
@@ -163,7 +169,13 @@
 				<div class="mt-[1.2vw] flex w-full flex-col">
 					<div class="text-[1.5vw]">เล่นต่อเรื่องราวล่าสุด</div>
 
-					<LessonCard scale={0.5} item={lastPlayed} class="h-[calc(56vh-3.5vw)] w-full" />
+					<LessonCard
+						scale={0.5}
+						progress={lastPlayed.progress}
+						difficulty={lastPlayed.difficulty}
+						item={lastPlayed.card}
+						class="h-[calc(56vh-3.5vw)] w-full"
+					/>
 				</div>
 			{/if}
 		{/if}
@@ -182,8 +194,13 @@
 				$isMobile ? 'w-full py-[15vh]' : 'w-[54vw] pb-[10vh] pt-0'
 			}`}
 		>
-			{#each items as item (item.id)}
-				<LessonCard {item} class="mx-auto mt-[calc(48vh-19vw)] h-[38vw] w-[27vw] snap-center" />
+			{#each items as item (item)}
+				<LessonCard
+					item={item.card}
+					progress={item.progress}
+					difficulty={item.difficulty}
+					class="mx-auto mt-[calc(48vh-19vw)] h-[38vw] w-[27vw] snap-center"
+				/>
 			{/each}
 		</div>
 	</div>

@@ -12,8 +12,10 @@
 	} from '$lib/global/friends';
 	import type { User } from '$gql/generated/graphql';
 	import { queryLearnersByExp } from '$lib/temp/analytic';
+	import Typewriter from 'svelte-typewriter/Typewriter.svelte';
 
-	let leaderboard: User[] = [];
+	let leaderboard: User[] | null = null;
+
 	queryLearnersByExp('classroom1').then((data) => {
 		leaderboard = data.filter((e) => e.profile !== undefined);
 	});
@@ -25,7 +27,7 @@
 	<div
 		class="flex h-[100vh] flex-1 flex-row gap-[4vw] bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] p-[3vw]"
 	>
-		<div class="flex h-full w-[40%] flex-col rounded-[2vw] bg-white font-bold">
+		<div class="relative flex h-full w-[40%] flex-col rounded-[2vw] bg-white font-bold">
 			<div
 				style="box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.25);"
 				class="w-full py-[2vw] text-center text-[1.35vw]"
@@ -34,62 +36,72 @@
 			</div>
 
 			<div class="flex flex-col gap-[2vw] overflow-y-auto p-[2vw]">
-				{#each leaderboard as user, index (index)}
-					<!-- Somehow I have to specify the min height to fix the height -->
-					<div
-						style="background-image: url('{user.profile?.coverUrl ??
-							'https://cdn.discordapp.com/attachments/842737146321174558/1124288705864155216/image.png'}');"
-						class="flex h-[6vw] min-h-[6vw] w-full flex-row items-center justify-between rounded-[2vw] bg-cover bg-center p-[1vw]"
-					>
-						<div class="flex h-full flex-row items-center gap-[1vw]">
+				{#if leaderboard}
+					{#each leaderboard as user, index (index)}
+						<!-- Somehow I have to specify the min height to fix the height -->
+						<div
+							style="background-image: url('{user.profile?.coverUrl ??
+								'https://cdn.discordapp.com/attachments/842737146321174558/1124288705864155216/image.png'}');"
+							class="flex h-[6vw] min-h-[6vw] w-full flex-row items-center justify-between rounded-[2vw] bg-cover bg-center p-[1vw]"
+						>
+							<div class="flex h-full flex-row items-center gap-[1vw]">
+								<div
+									style="background-image: url('{user.profile?.imageUrl ??
+										'https://cdn.discordapp.com/attachments/842737146321174558/1122773960019423262/30-307416_profile-icon-png-image-free-download-searchpng-employee.png'}');"
+									class="aspect-square h-[80%] rounded-full border-[0.15vw] border-white bg-cover bg-center"
+								/>
+								<div
+									class="flex h-fit max-w-[10vw] items-center rounded-full bg-white px-[1vw] py-[0.3vw]"
+								>
+									<!-- Somehow putting text inside another layer of div make ellipsis works -->
+									<div class="w-fit truncate whitespace-nowrap text-[1.1vw]">
+										{user.profile?.fullname}
+									</div>
+								</div>
+							</div>
+
 							<div
-								style="background-image: url('{user.profile?.imageUrl ??
-									'https://cdn.discordapp.com/attachments/842737146321174558/1122773960019423262/30-307416_profile-icon-png-image-free-download-searchpng-employee.png'}');"
-								class="aspect-square h-[80%] rounded-full border-[0.15vw] border-white bg-cover bg-center"
-							/>
-							<div
-								class="flex h-fit max-w-[10vw] items-center rounded-full bg-white px-[1vw] py-[0.3vw]"
+								class="flex h-fit flex-row rounded-full bg-white px-[0.5vw] py-[0.3vw] text-[1vw]"
 							>
-								<!-- Somehow putting text inside another layer of div make ellipsis works -->
-								<div class="w-fit truncate whitespace-nowrap text-[1.1vw]">
-									{user.profile?.fullname}
+								<svg
+									class="w-[1vw]"
+									viewBox="0 0 17 17"
+									fill="none"
+									xmlns="http://www.w3.org/2000/svg"
+								>
+									<path
+										d="M8.5 0L0 8.5L8.5 17L17 8.5L8.5 0ZM4.25 8.5L8.5 4.25L12.75 8.5L8.5 12.75L4.25 8.5Z"
+										fill="url(#paint0_linear_1194_8403)"
+									/>
+									<defs>
+										<linearGradient
+											id="paint0_linear_1194_8403"
+											x1="-0.159014"
+											y1="0.160377"
+											x2="11.0702"
+											y2="20.3054"
+											gradientUnits="userSpaceOnUse"
+										>
+											<stop stop-color="#C698FF" />
+											<stop offset="1" stop-color="#6C80E8" />
+										</linearGradient>
+									</defs>
+								</svg>
+								<div
+									class="ml-[0.3vw] bg-gradient-to-r from-[#C698FF] to-[#6C80E8] bg-clip-text text-transparent"
+								>
+									{user.exp}
 								</div>
 							</div>
 						</div>
-
-						<div class="flex h-fit flex-row rounded-full bg-white px-[0.5vw] py-[0.3vw] text-[1vw]">
-							<svg
-								class="w-[1vw]"
-								viewBox="0 0 17 17"
-								fill="none"
-								xmlns="http://www.w3.org/2000/svg"
-							>
-								<path
-									d="M8.5 0L0 8.5L8.5 17L17 8.5L8.5 0ZM4.25 8.5L8.5 4.25L12.75 8.5L8.5 12.75L4.25 8.5Z"
-									fill="url(#paint0_linear_1194_8403)"
-								/>
-								<defs>
-									<linearGradient
-										id="paint0_linear_1194_8403"
-										x1="-0.159014"
-										y1="0.160377"
-										x2="11.0702"
-										y2="20.3054"
-										gradientUnits="userSpaceOnUse"
-									>
-										<stop stop-color="#C698FF" />
-										<stop offset="1" stop-color="#6C80E8" />
-									</linearGradient>
-								</defs>
-							</svg>
-							<div
-								class="ml-[0.3vw] bg-gradient-to-r from-[#C698FF] to-[#6C80E8] bg-clip-text text-transparent"
-							>
-								{user.exp}
-							</div>
-						</div>
+					{/each}
+				{:else}
+					<div
+						class="absolute left-[50%] top-[50%] flex translate-x-[-50%] translate-y-[-50%] flex-row items-center text-[1.5vw]"
+					>
+						กำลังโหลด<Typewriter mode="loop">...</Typewriter>
 					</div>
-				{/each}
+				{/if}
 			</div>
 		</div>
 

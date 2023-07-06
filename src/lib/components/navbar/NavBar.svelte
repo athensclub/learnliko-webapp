@@ -65,8 +65,11 @@
 		class="fixed left-0 top-0 flex h-[100vh] w-[23vw] flex-col justify-around bg-white/70 py-[3vh] font-line-seed shadow-sm backdrop-blur-sm"
 	>
 		<div class="flex flex-col px-[2vw]">
-			<div class="flex w-full flex-row justify-between">
+			<div class="flex w-full flex-row items-center gap-[2vw]">
 				<img class="w-[25%]" src={icon} alt="Learnliko" />
+				<div class="h-fit rounded-[1vw] bg-black px-[1vw] py-[0.5vw] text-[1.5vw] text-white">
+					ทดลองใช้
+				</div>
 			</div>
 
 			<a

@@ -69,7 +69,13 @@
 
 <div class="w-full h-full min-h-[100vh] bg-[#F4F4F4] flex flex-row font-line-seed">
 	<NavBar spaced />
-	<div class="flex flex-col flex-1 px-[3vw] py-[2vh]">
+	<div class="flex flex-col flex-1 px-[3vw] py-[2vh] relative">
+		<div
+			class="absolute z-20 left-0 top-0 flex h-[100vh] w-full items-center justify-center text-[3vw] font-bold text-white backdrop-blur-md backdrop-brightness-[.3]"
+		>
+			ไม่มีในเวอร์ชัน Trial.
+		</div>
+
 		<div
 			style="background-image: url('{infoBackground}');"
 			class="w-full h-[15vw] px-[4vw] rounded-[1.5vw] bg-cover bg-center flex flex-row items-center justify-between text-white"

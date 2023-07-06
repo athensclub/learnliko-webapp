@@ -24,7 +24,6 @@
 	import Typewriter from 'svelte-typewriter/Typewriter.svelte';
 	import userSession from '$lib/stores/userSession';
 	import type { SynthesizeAccent, SynthesizeGender } from '$api/tts';
-	import audio from '$lib/audios/entering_lesson_transition_sound.wav';
 	import { Howl } from 'howler';
 
 	let item: LessonCard | null = null;
@@ -270,6 +269,10 @@
 			{/if}
 		{:else if currentView === 'CONVERSATION'}
 			<LessonConversationView
+				expPerGoal={conversation?.learner.goal[0].exp ?? 0}
+				coinPerGoal={conversation?.learner.goal[0].coin ?? 0}
+				totalCoin={conversation?.totalCoin ?? 0}
+				totalExp={conversation?.totalExp ?? 0}
 				onFinish={() => {
 					progress = 1;
 					onFinishedLesson();

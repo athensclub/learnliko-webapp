@@ -24,11 +24,21 @@ export const usernameLocal = browser
 	: null;
 
 export const profileImageLocal = browser
-	? persist(writable<string>('https://cdn.discordapp.com/attachments/842737146321174558/1122773960019423262/30-307416_profile-icon-png-image-free-download-searchpng-employee.png'), createIndexedDBStorage(), 'profileImage')
+	? persist(
+			writable<string>(
+				'https://cdn.discordapp.com/attachments/842737146321174558/1122773960019423262/30-307416_profile-icon-png-image-free-download-searchpng-employee.png'
+			),
+			createIndexedDBStorage(),
+			'profileImage'
+	  )
 	: null;
 
 export const lastPlayedLessonIdLocal = browser
 	? persist(writable<string | null>(null), createIndexedDBStorage(), 'lastPlayedLessonId')
+	: null;
+
+export const totalVocabLocal = browser
+	? persist(writable<number>(0), createIndexedDBStorage(), 'totalVocabLocal')
 	: null;
 
 export const queryLearningDiariesLocal = async (): Promise<LearningDiaryItem[]> => {
@@ -41,8 +51,9 @@ export const queryLearningDiariesLocal = async (): Promise<LearningDiaryItem[]> 
 	const completedConv = get(completedConversations);
 	const dateToConversations = new Map<string, UserFinishedConversationItem[]>();
 	for (const item of completedConv) {
-		const date = `${item.conversation.finishedTime.getDate()}.${item.conversation.finishedTime.getMonth() + 1
-			}.${item.conversation.finishedTime.getFullYear()}`;
+		const date = `${item.conversation.finishedTime.getDate()}.${
+			item.conversation.finishedTime.getMonth() + 1
+		}.${item.conversation.finishedTime.getFullYear()}`;
 		if (!dateToConversations.has(date)) dateToConversations.set(date, []);
 		dateToConversations.get(date)?.push(item);
 	}
@@ -50,8 +61,9 @@ export const queryLearningDiariesLocal = async (): Promise<LearningDiaryItem[]> 
 	const completedRs = get(completedReadings);
 	const dateToReadingItems = new Map<string, FinishedReading[]>();
 	for (const item of completedRs) {
-		const date = `${item.finishedTime.getDate()}.${item.finishedTime.getMonth() + 1
-			}.${item.finishedTime.getFullYear()}`;
+		const date = `${item.finishedTime.getDate()}.${
+			item.finishedTime.getMonth() + 1
+		}.${item.finishedTime.getFullYear()}`;
 		if (!dateToReadingItems.has(date)) dateToReadingItems.set(date, []);
 		dateToReadingItems.get(date)?.push(item);
 	}

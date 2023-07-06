@@ -8,7 +8,7 @@
 	import Flippable from './Flippable.svelte';
 	import type { SentenceCard } from '$gql/generated/graphql';
 	import { graphqlClient } from '$lib/graphql';
-	import { RECAP_SENTENCE_QUIZ } from '$gql/schema/mutations';
+	import { RECAP_SENTENCE_QUIZ, UPDATE_LESSON_PROGRESS } from '$gql/schema/mutations';
 	import userSession from '$lib/stores/userSession';
 
 	export let item: SentenceCard;
@@ -64,7 +64,20 @@
 			})
 			.toPromise();
 
+		await graphqlClient
+			.mutation(UPDATE_LESSON_PROGRESS, {
+				uid: $userSession.accountData?.uid!,
+				data: {
+					lessonId: item.fromLesson,
+					quizCardId: item.id,
+					quizRecapId: result.data?.sentenceRecapCreate.id!,
+					sectionIndex: 1
+				}
+			})
+			.toPromise();
+
 		flipped = true;
+		correctAnswer = result.data?.sentenceRecapCreate.answerIndex ?? 0;
 
 		if (result.data?.sentenceRecapCreate.correct) {
 			onCorrect();

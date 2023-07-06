@@ -32,6 +32,10 @@
 				$userSession.accountData?.languageLevel?.overall.level!,
 				$userSession.accountData?.uid!
 			);
+		if (lastPlayed?.status === 'COMPLETED') {
+			lastPlayed = null;
+			$lastPlayedLessonIdLocal = null;
+		}
 	};
 
 	onMount(loadData);

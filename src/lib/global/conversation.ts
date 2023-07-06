@@ -22,7 +22,7 @@ import { audioRecording } from './recording';
 import { textAdaptor } from '$api/textProcessor';
 import type { CEFRLevel } from '$lib/types/CEFRLevel';
 import { graphqlClient } from '$lib/graphql';
-import { RECAP_CONVERSATION_QUIZ } from '$gql/schema/mutations';
+import { RECAP_CONVERSATION_QUIZ, UPDATE_LESSON_PROGRESS } from '$gql/schema/mutations';
 import userSession from '$lib/stores/userSession';
 import type { ConversationRecapHistoryCreateDataInput } from '$gql/generated/graphql';
 
@@ -406,14 +406,27 @@ const computeRecap = async () => {
 		};
 	}
 
-	await graphqlClient
+	const uid = userSession.value().accountData?.uid!;
+	const reacpR = await graphqlClient
 		.mutation(RECAP_CONVERSATION_QUIZ, {
 			data: {
 				quizCard: ct.conversation.id,
 				correctPercentage: overallScore,
 				history: _recapHistory
 			},
-			uid: userSession.value().accountData?.uid!
+			uid: uid
+		})
+		.toPromise();
+
+	await graphqlClient
+		.mutation(UPDATE_LESSON_PROGRESS, {
+			uid: uid,
+			data: {
+				lessonId: ct.conversation.fromLesson!,
+				quizCardId: ct.conversation.id,
+				quizRecapId: reacpR.data?.conversationRecapCreate.id!,
+				sectionIndex: 1
+			}
 		})
 		.toPromise();
 

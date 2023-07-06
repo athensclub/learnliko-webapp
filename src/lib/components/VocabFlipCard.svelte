@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { synthesize } from '$api/tts';
 	import type { VocabularyCard } from '$gql/generated/graphql';
-	import { RECAP_VOCAB_QUIZ } from '$gql/schema/mutations';
+	import { RECAP_VOCAB_QUIZ, UPDATE_LESSON_PROGRESS } from '$gql/schema/mutations';
 	import Flippable from '$lib/components/Flippable.svelte';
 	import { playAudio, playAudioURL } from '$lib/global/audio';
 	import { graphqlClient } from '$lib/graphql';
@@ -14,10 +14,10 @@
 	export let item: VocabularyCard;
 
 	let speeches: string[] | null = null;
-	
+
 	// TODO: Maybe stop using vocab field later?
 	let choices = item.choices ?? item.vocab;
-	
+
 	// TODO: use data from api instead.
 	const loadSpeeches = async () => {
 		const result = [];
@@ -61,6 +61,19 @@
 			})
 			.toPromise();
 
+		await graphqlClient
+			.mutation(UPDATE_LESSON_PROGRESS, {
+				uid: $userSession.accountData?.uid!,
+				data: {
+					lessonId: item.fromLesson,
+					quizCardId: item.id,
+					quizRecapId: result.data?.vocabularyRecapCreate.id!,
+					sectionIndex: 0
+				}
+			})
+			.toPromise();
+
+		correctAnswer = result.data?.vocabularyRecapCreate.answerIndex ?? 0;
 		if (result.data?.vocabularyRecapCreate.correct) {
 			onCorrect();
 		} else {

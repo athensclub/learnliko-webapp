@@ -43,7 +43,9 @@ export const CREATE_USER_ACCOUNT = graphql(`
 export const RECAP_VOCAB_QUIZ = graphql(`
 	mutation RecapVocabQuiz($data: VocabularyRecapCreateDataInput!, $uid: ID!) {
 		vocabularyRecapCreate(data: $data, uid: $uid) {
+			id
 			correct
+			answerIndex
 		}
 	}
 `);
@@ -51,7 +53,9 @@ export const RECAP_VOCAB_QUIZ = graphql(`
 export const RECAP_SENTENCE_QUIZ = graphql(`
 	mutation RecapSentenceQuiz($uid: ID!, $data: SentenceRecapCreateDataInput!) {
 		sentenceRecapCreate(uid: $uid, data: $data) {
+			id
 			correct
+			answerIndex
 		}
 	}
 `);
@@ -59,6 +63,7 @@ export const RECAP_SENTENCE_QUIZ = graphql(`
 export const RECAP_READING_QUIZ = graphql(`
 	mutation RecapReadingQuiz($data: ReadingRecapCreateDataInput!, $uid: ID!) {
 		readingRecapCreate(data: $data, uid: $uid) {
+			id
 			totalCorrect
 			answer {
 				userAnswer
@@ -72,7 +77,16 @@ export const RECAP_READING_QUIZ = graphql(`
 export const RECAP_CONVERSATION_QUIZ = graphql(`
 	mutation RecapConversationQuiz($data: ConversationRecapCreateDataInput!, $uid: ID!) {
 		conversationRecapCreate(data: $data, uid: $uid) {
+			id
 			correctPercentage
+		}
+	}
+`);
+
+export const UPDATE_LESSON_PROGRESS = graphql(`
+	mutation LessonProgressUpdate($data: LessonProgressUpdateDataInput!, $uid: ID!) {
+		lessonProgressUpdate(data: $data, uid: $uid) {
+			id
 		}
 	}
 `);

@@ -425,7 +425,7 @@ const computeRecap = async () => {
 				lessonId: ct.conversation.fromLesson!,
 				quizCardId: ct.conversation.id,
 				quizRecapId: reacpR.data?.conversationRecapCreate.id!,
-				sectionIndex: 1
+				sectionIndex: 3
 			}
 		})
 		.toPromise();

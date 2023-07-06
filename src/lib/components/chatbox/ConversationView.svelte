@@ -29,21 +29,26 @@
 	export let aiChatBackgroundColor = '#6C80E8';
 	export let userChatBackgroundColor = '#404040';
 
-	export let onFinishClicked: () => void;
+	/**
+	 * Whether to show help (click for hint) button.
+	 */
+	export let allowHint = true;
+
+	export let onFinishClicked = () => {};
 
 	// initialization
 	onMount(() => {
 		resetConversationData();
 		initializeConversationBot();
 	});
-	
+
 	onDestroy(() => {
 		resetRecordingData();
 	});
 </script>
 
 {#if $initializedConversation && conversationDetails}
-	<div class={`w-full h-full overflow-y-auto ${clazz}`}>
+	<div class={`h-full w-full overflow-y-auto ${clazz}`}>
 		<!-- TODO: use profile image from cloud db. -->
 		<VoiceChatHistory
 			allowFriendSpeakSlower
@@ -57,28 +62,28 @@
 
 		{#if $conversationFinished}
 			<slot name="finished">
-				<div class="w-full text-center flex flex-col mt-4 items-center font-bold">
-					Conversation Finished
+				<div class="mt-4 flex w-full flex-col items-center text-center font-bold">
+					ภารกิจการสนทนาสำเร็จ!
 
 					<button
 						on:click={onFinishClicked}
-						class={`mt-3 rounded-lg w-fit border font-normal text-base mr-4 px-4 py-1 ${finishButtonClass}`}
+						class={`mr-4 mt-3 w-fit rounded-lg border px-4 py-1 text-base font-normal ${finishButtonClass}`}
 					>
-						Finish!
+						ดูคะแนนของคุณ
 					</button>
 				</div>
 			</slot>
 		{/if}
 
 		<!-- Just a bottom space -->
-		<div class="w-full h-[120px]" />
+		<div class="h-[120px] w-full" />
 	</div>
 {:else}
-	<div class={`w-full h-full flex flex-row items-center justify-center ${initializingClass}`}>
+	<div class={`flex h-full w-full flex-row items-center justify-center ${initializingClass}`}>
 		Initializing Conversation<Typewriter mode="loop">...</Typewriter>
 	</div>
 {/if}
 
 {#if !$conversationFinished}
-	<Recorder class={`absolute bottom-[3vh] left-[50%] translate-x-[-50%] ${recorderClass}`} />
+	<Recorder {allowHint} class={`absolute bottom-[3vh] left-[50%] translate-x-[-50%] ${recorderClass}`} />
 {/if}

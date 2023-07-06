@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { LanguageLevel } from '$gql/graphql';
+	import type { LanguageLevel } from '$gql/generated/graphql';
 	import { orderedCEFR } from '$lib/utils/cefr';
 
 	export let title: string;
@@ -7,7 +7,7 @@
 	export let textScale = 1;
 </script>
 
-<div class="w-full bg-white flex flex-col rounded-[2vw] px-[2vw] py-[1.5vh] font-bold">
+<div class="w-full bg-white flex flex-col rounded-[1vw] px-[2vw] py-[1.5vh] font-bold">
 	<div class="flex flex-row items-start justify-between">
 		<div style="font-size: {textScale * 1.35}vw;">{title}</div>
 		<div style="font-size: {textScale * 1.8}vw;">{level}</div>

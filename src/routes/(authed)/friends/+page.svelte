@@ -10,136 +10,114 @@
 		sendFriendsMessage,
 		waitingForFriendResponse
 	} from '$lib/global/friends';
+	import type { User } from '$gql/generated/graphql';
+	import { queryLearnersByExp } from '$lib/temp/analytic';
+	import Typewriter from 'svelte-typewriter/Typewriter.svelte';
 
-	let leaderboard = [
-		{
-			username: 'Natsataporn M.',
-			exp: 30,
-			profileImage:
-				'https://cdn.discordapp.com/attachments/842737146321174558/1124349468247068764/image.png',
-			background:
-				'https://cdn.discordapp.com/attachments/842737146321174558/1124347122121195590/image.png'
-		},
-		{
-			username: 'Natsataporn M.',
-			exp: 25,
-			profileImage:
-				'https://cdn.discordapp.com/attachments/842737146321174558/1124349032685379605/image.png',
-			background:
-				'https://cdn.discordapp.com/attachments/842737146321174558/1124347056245452830/image.png'
-		},
-		{
-			username: 'Natsataporn M.',
-			exp: 25,
-			profileImage:
-				'https://cdn.discordapp.com/attachments/842737146321174558/1124349032685379605/image.png',
-			background:
-				'https://cdn.discordapp.com/attachments/842737146321174558/1124347056245452830/image.png'
-		},
-		{
-			username: 'Natsataporn M.',
-			exp: 25,
-			profileImage:
-				'https://cdn.discordapp.com/attachments/842737146321174558/1124349032685379605/image.png',
-			background:
-				'https://cdn.discordapp.com/attachments/842737146321174558/1124347056245452830/image.png'
-		},
-		{
-			username: 'Natsataporn M.',
-			exp: 25,
-			profileImage:
-				'https://cdn.discordapp.com/attachments/842737146321174558/1124349032685379605/image.png',
-			background:
-				'https://cdn.discordapp.com/attachments/842737146321174558/1124347056245452830/image.png'
-		},
-	];
+	let leaderboard: User[] | null = null;
+
+	queryLearnersByExp('classroom1').then((data) => {
+		leaderboard = data.filter((e) => e.profile !== undefined);
+	});
 </script>
 
-<div class="w-[100vw] h-full flex flex-row min-h-[100vh] bg-[#F4F4F4] font-line-seed">
+<div class="flex h-full min-h-[100vh] w-[100vw] flex-row bg-[#F4F4F4] font-line-seed">
 	<NavBar spaced />
 
 	<div
-		class="flex-1 h-[100vh] p-[3vw] flex flex-row gap-[4vw] bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD]"
+		class="flex h-[100vh] flex-1 flex-row gap-[4vw] bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] p-[3vw]"
 	>
-		<div class="w-[40%] h-full bg-white rounded-[2vw] flex flex-col font-bold">
+		<div class="relative flex h-full w-[40%] flex-col rounded-[2vw] bg-white font-bold">
 			<div
 				style="box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.25);"
-				class="text-[1.35vw] w-full text-center py-[2vw]"
+				class="w-full py-[2vw] text-center text-[1.35vw]"
 			>
 				🏆 จัดอันดับผู้เรียนดีเด่นรายสัปดาห์
 			</div>
 
-			<div class="flex flex-col p-[2vw] gap-[2vw] overflow-y-auto">
-				{#each leaderboard as user, index (index)}
-					<!-- Somehow I have to specify the min height to fix the height -->
-					<div
-						style="background-image: url('{user.background}');"
-						class="w-full h-[6vw] min-h-[6vw] p-[1vw] bg-cover bg-center rounded-[2vw] flex flex-row items-center justify-between"
-					>
-						<div class="flex flex-row items-center gap-[1vw] h-full">
+			<div class="flex flex-col gap-[2vw] overflow-y-auto p-[2vw]">
+				{#if leaderboard}
+					{#each leaderboard as user, index (index)}
+						<!-- Somehow I have to specify the min height to fix the height -->
+						<div
+							style="background-image: url('{user.profile?.coverUrl ??
+								'https://cdn.discordapp.com/attachments/842737146321174558/1124288705864155216/image.png'}');"
+							class="flex h-[6vw] min-h-[6vw] w-full flex-row items-center justify-between rounded-[2vw] bg-cover bg-center p-[1vw]"
+						>
+							<div class="flex h-full flex-row items-center gap-[1vw]">
+								<div
+									style="background-image: url('{user.profile?.imageUrl ??
+										'https://cdn.discordapp.com/attachments/842737146321174558/1122773960019423262/30-307416_profile-icon-png-image-free-download-searchpng-employee.png'}');"
+									class="aspect-square h-[80%] rounded-full border-[0.15vw] border-white bg-cover bg-center"
+								/>
+								<div
+									class="flex h-fit max-w-[10vw] items-center rounded-full bg-white px-[1vw] py-[0.3vw]"
+								>
+									<!-- Somehow putting text inside another layer of div make ellipsis works -->
+									<div class="w-fit truncate whitespace-nowrap text-[1.1vw]">
+										{user.profile?.fullname}
+									</div>
+								</div>
+							</div>
+
 							<div
-								style="background-image: url('{user.profileImage}');"
-								class="h-[80%] aspect-square bg-cover bg-center rounded-full border-[0.15vw] border-white"
-							/>
-							<div
-								class="h-fit max-w-[10vw] px-[1vw] py-[0.3vw] bg-white flex items-center rounded-full"
+								class="flex h-fit flex-row rounded-full bg-white px-[0.5vw] py-[0.3vw] text-[1vw]"
 							>
-								<!-- Somehow putting text inside another layer of div make ellipsis works -->
-								<div class="w-fit truncate text-[1.1vw] whitespace-nowrap">
-									{user.username}
+								<svg
+									class="w-[1vw]"
+									viewBox="0 0 17 17"
+									fill="none"
+									xmlns="http://www.w3.org/2000/svg"
+								>
+									<path
+										d="M8.5 0L0 8.5L8.5 17L17 8.5L8.5 0ZM4.25 8.5L8.5 4.25L12.75 8.5L8.5 12.75L4.25 8.5Z"
+										fill="url(#paint0_linear_1194_8403)"
+									/>
+									<defs>
+										<linearGradient
+											id="paint0_linear_1194_8403"
+											x1="-0.159014"
+											y1="0.160377"
+											x2="11.0702"
+											y2="20.3054"
+											gradientUnits="userSpaceOnUse"
+										>
+											<stop stop-color="#C698FF" />
+											<stop offset="1" stop-color="#6C80E8" />
+										</linearGradient>
+									</defs>
+								</svg>
+								<div
+									class="ml-[0.3vw] bg-gradient-to-r from-[#C698FF] to-[#6C80E8] bg-clip-text text-transparent"
+								>
+									{user.exp}
 								</div>
 							</div>
 						</div>
-
-						<div class="flex flex-row h-fit bg-white rounded-full text-[1vw] px-[0.5vw] py-[0.3vw]">
-							<svg
-								class="w-[1vw]"
-								viewBox="0 0 17 17"
-								fill="none"
-								xmlns="http://www.w3.org/2000/svg"
-							>
-								<path
-									d="M8.5 0L0 8.5L8.5 17L17 8.5L8.5 0ZM4.25 8.5L8.5 4.25L12.75 8.5L8.5 12.75L4.25 8.5Z"
-									fill="url(#paint0_linear_1194_8403)"
-								/>
-								<defs>
-									<linearGradient
-										id="paint0_linear_1194_8403"
-										x1="-0.159014"
-										y1="0.160377"
-										x2="11.0702"
-										y2="20.3054"
-										gradientUnits="userSpaceOnUse"
-									>
-										<stop stop-color="#C698FF" />
-										<stop offset="1" stop-color="#6C80E8" />
-									</linearGradient>
-								</defs>
-							</svg>
-							<div
-								class="ml-[0.3vw] bg-clip-text text-transparent bg-gradient-to-r from-[#C698FF] to-[#6C80E8]"
-							>
-								{user.exp}
-							</div>
-						</div>
+					{/each}
+				{:else}
+					<div
+						class="absolute left-[50%] top-[50%] flex translate-x-[-50%] translate-y-[-50%] flex-row items-center text-[1.5vw]"
+					>
+						กำลังโหลด<Typewriter mode="loop">...</Typewriter>
 					</div>
-				{/each}
+				{/if}
 			</div>
 		</div>
 
-		<div class="flex-1 h-full flex flex-col gap-[1vw] bg-white rounded-[2vw] p-[1vw] font-bold">
+		<div class="flex h-full flex-1 flex-col gap-[1vw] rounded-[2vw] bg-white p-[1vw] font-bold">
 			<div
 				style="box-shadow: 0px 1px 8px 0px rgba(0, 0, 0, 0.25);"
-				class="w-full p-[1vw] rounded-[1vw] flex flex-row items-center justify-between"
+				class="flex w-full flex-row items-center justify-between rounded-[1vw] p-[1vw]"
 			>
 				<div class="text-[1.5vw]">Let's Talk!</div>
 
 				<a
 					href="/friends/hangbot"
-					class="p-[1.5vw] rounded-[1vw] bg-gradient-to-br from-[#C698FF] to-[#6C80E8] flex flex-row items-center relative"
+					class="relative flex flex-row items-center rounded-[1vw] bg-gradient-to-br from-[#C698FF] to-[#6C80E8] p-[1.5vw]"
 				>
 					<svg
-						class="w-[1vw] absolute top-[1vw] right-[1vw]"
+						class="absolute right-[1vw] top-[1vw] w-[1vw]"
 						viewBox="0 0 22 14"
 						fill="none"
 						xmlns="http://www.w3.org/2000/svg"
@@ -159,17 +137,17 @@
 				</a>
 			</div>
 
-			<div class="w-full flex-1 flex flex-col p-[1vw] rounded-[2vw] relative overflow-hidden">
+			<div class="relative flex w-full flex-1 flex-col overflow-hidden rounded-[2vw] p-[1vw]">
 				<div class="flex flex-row items-center gap-[2vw]">
 					<div
 						style="background-image: url('https://cdn.discordapp.com/attachments/842737146321174558/1124349080521420820/image.png');"
-						class="w-[3vw] h-[3vw] bg-cover bg-center rounded-full"
+						class="h-[3vw] w-[3vw] rounded-full bg-cover bg-center"
 					/>
-					<div class="px-[1.5vw] py-[0.5vw] text-[1.2vw] bg-gray-200 rounded-[1vw]">Hello</div>
+					<div class="rounded-[1vw] bg-gray-200 px-[1.5vw] py-[0.5vw] text-[1.2vw]">Hello</div>
 				</div>
 
 				<div
-					class="absolute left-0 top-0 w-full h-full p-[4vw] text-white bg-[#000000C7] flex flex-col justify-center"
+					class="absolute left-0 top-0 flex h-full w-full flex-col justify-center bg-[#000000C7] p-[4vw] text-white"
 				>
 					<div class="text-[3vw]">ไม่มีในเวอร์ชัน Trial</div>
 					<div class="text-[2vw]">พูดคุยและ เล่นเกมกับเพื่อนๆ</div>

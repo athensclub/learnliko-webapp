@@ -5,6 +5,7 @@
 		conversationFinished,
 		history,
 		isCheckConversationGoal,
+		isConversationFriendSpeakSlower,
 		maxDialogueCount,
 		saveCurrentConversation
 	} from '$lib/global/conversation';
@@ -25,13 +26,11 @@
 	import Typewriter from 'svelte-typewriter/Typewriter.svelte';
 	import { analyzeDialog, checkGoalProgress } from '$api/conversation';
 	import { nextLevel, nextPretestLevel, previousPretestLevel } from '$lib/utils/cefr';
-	import {
-		getCurrentUserData,
-		setupCurrentUserAccount
-	} from '$lib/temp/user';
+	import { getCurrentUserData, setupCurrentUserAccount } from '$lib/temp/user';
 	import PretestFinishedModal from '$lib/components/modals/PretestFinishedModal.svelte';
 	import userSession from '$lib/stores/userSession';
 	import setupAccountInput from '../setupAccountInputStore';
+	import Checkbox from '$lib/components/Checkbox.svelte';
 
 	const GROUP_COUNT = 4;
 	const QUESTIONS_PER_GROUP = 7;
@@ -76,7 +75,7 @@
 					$setupAccountInput.firstname!,
 					$setupAccountInput.lastname!
 				);
-		
+
 				const profileData = await getCurrentUserData();
 				userSession.update({ accountData: profileData });
 
@@ -181,6 +180,7 @@
 			}`}
 		>
 			<ConversationView
+				allowHint={false}
 				class="rounded-[2vw] bg-white px-[6vw]"
 				initializingClass="bg-white"
 				finishButtonClass="border-black"
@@ -192,17 +192,24 @@
 							Loading<Typewriter mode="loop">...</Typewriter>
 						</div>
 					{:else}
-						Conversation Finished
+					ภารกิจการสนทนาสำเร็จ!
 
 						<button
 							on:click={nextItem}
 							class={`mr-4 mt-3 w-fit rounded-lg border px-4 py-1 text-base font-normal`}
 						>
-							Finish!
+							ดูคะแนนของคุณ
 						</button>
 					{/if}
 				</div>
 			</ConversationView>
+
+			<div
+				class="mt-[2vh] flex flex-row items-center justify-center gap-[1vw] text-[1.5vw] font-bold"
+			>
+				<Checkbox class="w-[2vw] rounded-[0.5vw]" bind:checked={$isConversationFriendSpeakSlower} />
+				ให้ AI พูดช้าลง
+			</div>
 		</div>
 	{:else if item?.imageMatching}
 		<div class={`mx-auto font-bold ${$isMobile ? 'text-[6vw]' : 'text-[1.75vw]'}`}>

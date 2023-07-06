@@ -11,6 +11,7 @@
 	import { currentMode } from '$lib/global/mode';
 	import TeacherNavBarLinkList from './TeacherNavBarLinkList.svelte';
 	import { profileImageLocal, usernameLocal } from '$lib/localdb/profileLocal';
+	import userSession from '$lib/stores/userSession';
 
 	const modes: Mode[] = ['Professional', 'Student'];
 
@@ -35,16 +36,16 @@
 {#if $isMobile}
 	<nav
 		style="box-shadow: 0px -3px 10px 0px #00000040;"
-		class="fixed z-[500] bg-white bottom-0 w-[100vw] py-[2vh] flex flex-row justify-around"
+		class="fixed bottom-0 z-[500] flex w-[100vw] flex-row justify-around bg-white py-[2vh]"
 	>
 		{#if teacher}
 			<TeacherNavBarLinkList />
 		{:else}
 			<NavBarLinkList noText eachIconStyle="width: 10vw;">
-				<div slot="center" class="w-[15vw] h-[15vw]">
+				<div slot="center" class="h-[15vw] w-[15vw]">
 					<button
 						on:click={openAssistantChat}
-						class="flex items-center justify-center rounded-xl w-full h-full"
+						class="flex h-full w-full items-center justify-center rounded-xl"
 						style="box-shadow: 0px 1px 4px 0px #00000040;"
 					>
 						<img class="w-[75%]" src={assistantIcon} alt="Assistant" />
@@ -56,38 +57,41 @@
 {:else}
 	{#if spaced}
 		<!-- "empty" space to help with layout -->
-		<div class="w-[23vw] h-[100vh]" />
+		<div class="h-[100vh] w-[23vw]" />
 	{/if}
 
 	<nav
 		style="box-shadow: 4px 1px 20px 0px #0000000D;"
-		class="fixed top-0 left-0 flex flex-col bg-white/70 backdrop-blur-sm shadow-sm justify-around w-[23vw] h-[100vh] py-[3vh] font-line-seed"
+		class="fixed left-0 top-0 flex h-[100vh] w-[23vw] flex-col justify-around bg-white/70 py-[3vh] font-line-seed shadow-sm backdrop-blur-sm"
 	>
 		<div class="flex flex-col px-[2vw]">
-			<div class="flex flex-row justify-between w-full">
+			<div class="flex w-full flex-row items-center gap-[2vw]">
 				<img class="w-[25%]" src={icon} alt="Learnliko" />
+				<div class="h-fit rounded-[1vw] bg-black px-[1vw] py-[0.5vw] text-[1.5vw] text-white">
+					ทดลองใช้
+				</div>
 			</div>
 
 			<a
 				href="/profile"
-				class={`w-full flex flex-row items-center rounded-[1.5vw] p-[5%] mt-[6vh] ${
-					isInProfile ? 'outline outline-[0.3vw] outline-[#6C80E8] bg-[#F5F5F5]' : 'bg-[#F5F5F5]'
+				class={`mt-[6vh] flex w-full flex-row items-center rounded-[1.5vw] p-[5%] ${
+					isInProfile ? 'bg-[#F5F5F5] outline outline-[0.3vw] outline-[#6C80E8]' : 'bg-[#F5F5F5]'
 				}`}
 			>
 				<!-- TODO: use actual profile image from cloud -->
 				<div
-					class={`w-[3.5vw] h-[3.5vw] bg-center bg-cover rounded-full border-[0.15vw] border-white`}
+					class={`h-[3.5vw] w-[3.5vw] rounded-full border-[0.15vw] border-white bg-cover bg-center`}
 					style="background-image: url('{teacher
 						? 'https://cdn.discordapp.com/attachments/842737146321174558/1122752653764595712/image.png'
-						: $profileImageLocal}');"
+						: $userSession.accountData?.profile?.imageUrl ?? $profileImageLocal}');"
 				/>
-				<div class={`flex flex-col ml-[1vw] font-bold`}>
+				<div class={`ml-[1vw] flex flex-col font-bold`}>
 					<div
 						class="text-[1.4vw] {isInProfile
-							? 'bg-clip-text text-transparent bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD]'
+							? 'bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] bg-clip-text text-transparent'
 							: 'text-black'}"
 					>
-						{$usernameLocal}
+						{$userSession.accountData?.profile?.fullname}
 					</div>
 					<div class="flex flex-row text-[1vw]">
 						<svg
@@ -116,9 +120,9 @@
 						</svg>
 
 						<div
-							class="ml-[0.3vw] text-[1.1vw] bg-clip-text text-transparent bg-gradient-to-r from-[#C698FF] to-[#6C80E8]"
+							class="ml-[0.3vw] bg-gradient-to-r from-[#C698FF] to-[#6C80E8] bg-clip-text text-[1.1vw] text-transparent"
 						>
-							3300
+							{$userSession.accountData?.exp}
 						</div>
 
 						<svg
@@ -154,16 +158,16 @@
 						</svg>
 
 						<div
-							class="ml-[0.3vw] text-[1.1vw] bg-clip-text text-transparent bg-gradient-to-t from-[#FFE08F] via-[#E4AE24] to-[#FFE08F]"
+							class="ml-[0.3vw] bg-gradient-to-t from-[#FFE08F] via-[#E4AE24] to-[#FFE08F] bg-clip-text text-[1.1vw] text-transparent"
 						>
-							100
+							{$userSession.accountData?.coin}
 						</div>
 					</div>
 				</div>
 			</a>
 		</div>
 
-		<div class="flex flex-col w-full font-bold gap-[4vh] text-[1.6vw]">
+		<div class="flex w-full flex-col gap-[4vh] text-[1.6vw] font-bold">
 			{#if teacher}
 				<TeacherNavBarLinkList />
 			{:else}
@@ -175,7 +179,7 @@
 			<button
 				on:click={openAssistantChat}
 				style="box-shadow: 0px 2px 15px 0px #9BA1FD82; "
-				class="w-[60%] py-[1.5vh] rounded-full mx-auto flex flex-row text-[1.2vw] text-white items-center justify-center font-bold bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD]"
+				class="mx-auto flex w-[60%] flex-row items-center justify-center rounded-full bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] py-[1.5vh] text-[1.2vw] font-bold text-white"
 			>
 				<img class="w-[22%]" src={assistantIcon} alt="Assistant" />
 

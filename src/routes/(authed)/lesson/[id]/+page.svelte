@@ -9,23 +9,123 @@
 	import ReadingView from './ReadingView.svelte';
 	import WritingCardView from './WritingCardView.svelte';
 	import LessonFinishedView from './LessonFinishedView.svelte';
-	import type { LessonItem } from '$lib/types/lesson';
-	import { onMount } from 'svelte';
+	import { onDestroy, onMount } from 'svelte';
 	import { page } from '$app/stores';
 	import { getLessonById } from '$api/lesson';
+	import { lastPlayedLessonIdLocal } from '$lib/localdb/profileLocal';
+	import {
+		QuizType,
+		type LessonCard,
+		type ReadingCard,
+		type SentenceCard,
+		type VocabularyCard,
+		type ConversationCard
+	} from '$gql/generated/graphql';
+	import Typewriter from 'svelte-typewriter/Typewriter.svelte';
+	import userSession from '$lib/stores/userSession';
+	import type { SynthesizeAccent, SynthesizeGender } from '$api/tts';
+	import { Howl } from 'howler';
 
-	let item: LessonItem | null = null;
+	let item: LessonCard | null = null;
 	let background: string | null = null;
+
+	let music: Howl | null = null;
+
+	let vocabs: VocabularyCard[] | null = null;
+	let sentences: SentenceCard[] | null = null;
+	// TODO: support multiple reading items?
+	let reading: ReadingCard | null = null;
+	let conversation: ConversationCard | null = null;
+
 	onMount(async () => {
-		item = await getLessonById($page.params.id);
+		let content = await getLessonById(
+			$page.params.id,
+			$userSession.accountData?.languageLevel?.overall.level!,
+			undefined,
+			true
+		);
+		if (!content.card) throw new Error('No Lesson Found');
+		item = content.card;
+
+		music = new Howl({ src: item.ambientAudio, volume: 0.06, loop: true });
+
+		vocabs =
+			item.quizeSections
+				.find((section) => section.type === QuizType.Vocabulary)
+				?.cards.map((card) => {
+					return { ...card, fromLesson: item?.id! } as VocabularyCard;
+				}) ?? null;
+
+		sentences =
+			item.quizeSections
+				.find((section) => section.type === QuizType.Sentence)
+				?.cards.map((card) => {
+					return { ...card, fromLesson: item?.id! } as SentenceCard;
+				}) ?? null;
+
+		// TODO: support multiple reading item?
+		reading =
+			item.quizeSections
+				.find((section) => section.type === QuizType.Reading)
+				?.cards.map((card) => {
+					return { ...card, fromLesson: item?.id! } as ReadingCard;
+				})[0] ?? null;
+
+		// TODO: support multiple conversation item?
+		conversation =
+			item.quizeSections
+				.find((section) => section.type === QuizType.Conversation)
+				?.cards.map((card) => {
+					return { ...card, fromLesson: item?.id! } as ConversationCard;
+				})[0] ?? null;
+
 		$chatContext = {
-			conversation: item.conversation,
+			conversation: {
+				avatar: {
+					name: conversation?.bot.avatar.name ?? 'unknown',
+					models: conversation?.bot.avatar.avatarModels!
+				},
+				CEFRlevel: item.level,
+				details: {
+					bot: {
+						accent: conversation?.bot.avatar.accent as SynthesizeAccent,
+						avatar: conversation?.bot.avatar.avatarModels.neutral ?? 'unknown',
+						gender: conversation?.bot.avatar.gender as SynthesizeGender,
+						prompt: conversation?.bot.prompt ?? 'unknown'
+					},
+					intro: conversation?.bot.intro ?? 'unknown',
+					learner: {
+						mission: conversation?.learner.mission ?? 'unknown',
+						goal: conversation?.learner.goal.map((g) => g.goal) ?? [],
+						hint: conversation?.learner.goal.map((g) => g.hint) ?? []
+					},
+					image: ''
+				},
+				intro: conversation?.bot.intro ?? 'unknown',
+				image: '',
+				topic: '',
+				background: '',
+				fromLesson: conversation?.fromLesson ?? '',
+				id: conversation?.id ?? ''
+			},
 			bot: { emotion: 'neutral' }
 		};
+		$lastPlayedLessonIdLocal = item.id;
 	});
 
 	let entering = true;
+
+	const MUSIC_FADE_DURATION = 1000; // ms
 	let playingMusic = true;
+	$: if (!entering && playingMusic) {
+		music?.play();
+		music?.fade(0, 0.06, MUSIC_FADE_DURATION);
+	} else {
+		music?.fade(0.06, 0, MUSIC_FADE_DURATION);
+		setTimeout(() => {
+			music?.pause();
+		}, MUSIC_FADE_DURATION);
+	}
 
 	let currentView:
 		| 'INTRO'
@@ -34,6 +134,15 @@
 		| 'READING'
 		| 'CONVERSATION'
 		| 'FINISHED' = 'INTRO';
+
+	const onFinishedLesson = () => {
+		currentView = 'FINISHED';
+		$lastPlayedLessonIdLocal = null;
+	};
+
+	onDestroy(() => {
+		music?.stop();
+	});
 
 	let progress = 0;
 	const addProgress = (val: number) => (progress = progress + val);
@@ -67,7 +176,7 @@
 			</svg>
 		</button>
 
-		<div class="text-[1.7vw] font-bold text-white">{item && item.topic}</div>
+		<div class="text-[1.7vw] font-bold text-white">{item && item.title}</div>
 
 		<button
 			on:click={() => (playingMusic = !playingMusic)}
@@ -117,33 +226,56 @@
 			<LessonIntros
 				onFinish={() => (currentView = 'FLIP_CARD')}
 				setBackground={(image) => (background = image)}
-				items={item.intro}
+				items={item.narratives}
 			/>
 		{:else if currentView === 'FLIP_CARD'}
-			<FlipCardView
-				items={item.vocabs}
-				{addProgress}
-				onFinish={() => (currentView = 'WRITING_CARD')}
-			/>
+			{#if vocabs}
+				<FlipCardView
+					items={vocabs}
+					{addProgress}
+					onFinish={() => (currentView = 'WRITING_CARD')}
+				/>
+			{:else}
+				<div class="bg-white text-[3vw] text-black">
+					Loading<Typewriter mode="loop">...</Typewriter>
+				</div>
+			{/if}
 		{:else if currentView === 'WRITING_CARD'}
-			<WritingCardView
-				items={item.writings}
-				{addProgress}
-				onFinish={() => (currentView = 'READING')}
-			/>
+			{#if sentences}
+				<WritingCardView
+					items={sentences}
+					{addProgress}
+					onFinish={() => (currentView = 'READING')}
+				/>
+			{:else}
+				<div class="bg-white text-[3vw] text-black">
+					Loading<Typewriter mode="loop">...</Typewriter>
+				</div>
+			{/if}
 		{:else if currentView === 'READING'}
-			<ReadingView
-				item={item.reading}
-				onFinish={() => {
-					addProgress(1 / 4);
-					currentView = 'CONVERSATION';
-				}}
-			/>
+			<!-- TODO: support multiple reading items? -->
+			{#if reading}
+				<ReadingView
+					item={reading}
+					onFinish={() => {
+						addProgress(1 / 4);
+						currentView = 'CONVERSATION';
+					}}
+				/>
+			{:else}
+				<div class="bg-white text-[3vw] text-black">
+					Loading<Typewriter mode="loop">...</Typewriter>
+				</div>
+			{/if}
 		{:else if currentView === 'CONVERSATION'}
 			<LessonConversationView
+				expPerGoal={conversation?.learner.goal[0].exp ?? 0}
+				coinPerGoal={conversation?.learner.goal[0].coin ?? 0}
+				totalCoin={conversation?.totalCoin ?? 0}
+				totalExp={conversation?.totalExp ?? 0}
 				onFinish={() => {
-					addProgress(1 / 4);
-					currentView = 'FINISHED';
+					progress = 1;
+					onFinishedLesson();
 				}}
 			/>
 		{:else if currentView === 'FINISHED'}

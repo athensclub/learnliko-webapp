@@ -1,61 +1,96 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
-	import { readingAnswers, selectedQuizChoices } from '$lib/global/reading';
 	import finishedImage from './reading_quiz_finished_image.png';
 	import type { ReadingViewType } from './ReadingContainer.svelte';
 	import AnswerCorrectToast from '../toasts/AnswerCorrectToast.svelte';
 	import { toast } from '../toasts/ToastManager.svelte';
-	import type { MultipleChoicesQuestion } from '$lib/types/reading';
+	import type { ReadingCard } from '$gql/generated/graphql';
+	import { graphqlClient } from '$lib/graphql';
+	import userSession from '$lib/stores/userSession';
+	import { RECAP_READING_QUIZ, UPDATE_LESSON_PROGRESS } from '$gql/schema/mutations';
 
-	export let quiz: MultipleChoicesQuestion[];;
+	export let item: ReadingCard;
+	$: quiz = item.questions;
+
+	export let correctAnswers: number[] | null;
+	let totalCorrect = 0;
 
 	export let setView: (view: ReadingViewType) => void;
 	export let onFinish: () => void;
 
-	$: submittable = $selectedQuizChoices.every((val) => val !== null);
-	const submit = () => {
-		// TODO: implement better way of showing answer (this is very cheese)
-		$readingAnswers = quiz.map(q => q.answer);
-		
-		// TODO: display actual amount.
-		toast(AnswerCorrectToast, { exp: 25, coin: 100 });
+	export let showFinishButton: boolean;
+
+	export let scale = 1;
+
+	export let selected: (number | null)[];
+
+	$: submittable = selected.every((val) => val !== null);
+	const submit = async () => {
+		const result = await graphqlClient
+			.mutation(RECAP_READING_QUIZ, {
+				data: {
+					quizCard: item.id,
+					userAnswer: selected.map((i) => i ?? 0)
+				},
+				uid: $userSession.accountData?.uid!
+			})
+			.toPromise();
+
+		await graphqlClient
+			.mutation(UPDATE_LESSON_PROGRESS, {
+				uid: $userSession.accountData?.uid!,
+				data: {
+					lessonId: item.fromLesson,
+					quizCardId: item.id,
+					quizRecapId: result.data?.readingRecapCreate.id!,
+					sectionIndex: 2
+				}
+			})
+			.toPromise();
+
+		correctAnswers = result.data?.readingRecapCreate.answer.map((a) => a.answerIndex) ?? [];
+		totalCorrect = result.data?.readingRecapCreate.totalCorrect ?? 0;
+
+		toast(AnswerCorrectToast, {
+			exp: (item.totalExp * totalCorrect) / quiz.length,
+			coin: (item.totalCoin * totalCorrect) / quiz.length
+		});
 	};
 </script>
 
 <!-- https://github.com/sveltejs/svelte/issues/544#issuecomment-586417387 -->
-{#key $readingAnswers}
-	<div in:fade={{ delay: 500 }} out:fade class="w-full h-full font-bold">
-		<div class="flex flex-col w-full h-full overflow-y-auto">
-			{#if $readingAnswers === null}
-				<div class="text-[2.25vw]">คำถาม</div>
+{#key correctAnswers}
+	<div in:fade={{ delay: 500 }} out:fade class="h-full w-full font-bold">
+		<div class="flex h-full w-full flex-col overflow-y-auto">
+			{#if correctAnswers === null}
+				<div style="font-size: {scale * 2.25}vw;">คำถาม</div>
 			{:else}
 				<div
-					class="w-[90%] min-h-[13vw] px-[4vw] rounded-[2vw] mx-auto bg-gradient-to-br from-[#C698FF] to-[#6C80E8] flex flex-row justify-between"
+					class="mx-auto flex min-h-[13vw] w-[90%] flex-row justify-between rounded-[2vw] bg-gradient-to-br from-[#C698FF] to-[#6C80E8] px-[4vw]"
 				>
-					<img src={finishedImage} class="h-[90%] mt-auto" alt="Happy Kid" />
+					<img src={finishedImage} class="mt-auto h-[90%]" alt="Happy Kid" />
 
-					<div class="text-[2.2vw] text-white my-auto">
-						คุณตอบถูก {$selectedQuizChoices.filter((c, i) => c === $readingAnswers[i])
-							.length}/{quiz.length} ข้อ
+					<div style="font-size: {scale * 2.2}vw;" class="my-auto text-white">
+						คุณตอบถูก {totalCorrect}/{quiz.length} ข้อ
 					</div>
 				</div>
 			{/if}
 
 			<div class="flex flex-col px-[4vw]">
 				{#each quiz as q, index (index)}
-					<div class="text-[1.5vw] mt-[2vw]">{index + 1}. {q.question}</div>
+					<div style="font-size: {scale * 1.5}vw;" class="mt-[2vw]">{index + 1}. {q.question}</div>
 
-					<div class="grid grid-cols-2 gap-[2vw] mt-[2vw]">
+					<div class="mt-[2vw] grid grid-cols-2 gap-[2vw]">
 						{#each q.choices as choice, i (choice)}
 							<button
-								disabled={$readingAnswers !== null}
-								on:click={() => ($selectedQuizChoices[index] = i)}
-								class="w-full py-[0.7vw] text-[1.35vw] rounded-full {$readingAnswers &&
-								$readingAnswers[index] === i
+								disabled={correctAnswers !== null}
+								on:click={() => (selected[index] = i)}
+								style="font-size: {scale * 1.35}vw;"
+								class="w-full rounded-full py-[0.7vw] {correctAnswers && correctAnswers[index] === i
 									? 'bg-[#14AE5C] text-white'
-									: $selectedQuizChoices[index] === i
-									? 'text-white bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD]'
-									: 'text-black border-[0.2vw] border-[#6C80E8]'}"
+									: selected[index] === i
+									? 'bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] text-white'
+									: 'border-[0.2vw] border-[#6C80E8] text-black'}"
 							>
 								{choice}
 							</button>
@@ -64,19 +99,20 @@
 				{/each}
 			</div>
 			<!-- Bottom spacing -->
-			<div class="w-full min-h-[20vh] bg-white" />
+			<div class="min-h-[20vh] w-full bg-white" />
 		</div>
 
 		<div
 			style="box-shadow: 0 4px 10px #454545;"
-			class="absolute z-10 bg-white w-full bottom-0 left-0 px-[4vw] py-[2vw] flex flex-row justify-between items-center"
+			class="absolute bottom-0 left-0 z-10 flex w-full flex-row items-center justify-between bg-white px-[4vw] py-[2vw]"
 		>
 			<button
 				on:click={() => setView('READ')}
-				class="text-[1.3vw] px-[1vw] py-[0.5vw] border border-black flex flex-row items-center rounded-full"
+				style="font-size: {scale * 1.3}vw;"
+				class="flex flex-row items-center rounded-full border border-black px-[1vw] py-[0.5vw]"
 			>
 				<svg
-					class="w-[1.3vw] mr-[0.5vw]"
+					class="mr-[0.5vw] w-[1.3vw]"
 					viewBox="0 0 24 16"
 					fill="none"
 					xmlns="http://www.w3.org/2000/svg"
@@ -89,20 +125,22 @@
 				อ่านใหม่
 			</button>
 
-			{#if $readingAnswers === null}
+			{#if correctAnswers === null}
 				<button
 					on:click={submit}
 					disabled={!submittable}
-					class="text-[1.3vw] px-[2vw] py-[0.5vw] rounded-full {submittable
+					style="font-size: {scale * 1.3}vw;"
+					class="rounded-full px-[2vw] py-[0.5vw] {submittable
 						? 'bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] text-white'
 						: 'bg-[#D9D9D9] text-[#454545]'}"
 				>
 					ตรวจ
 				</button>
-			{:else}
+			{:else if showFinishButton}
 				<button
 					on:click={onFinish}
-					class="text-[1.3vw] px-[2vw] py-[0.5vw] rounded-full bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] text-white"
+					style="font-size: {scale * 1.3}vw;"
+					class="rounded-full bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] px-[2vw] py-[0.5vw] text-white"
 				>
 					ต่อไป
 				</button>

@@ -14,12 +14,16 @@
 	} from '$lib/types/learningDiary';
 	import { formatAMPM } from '$lib/utils/time';
 	import type { Context } from 'svelte-simple-modal';
-	import ConversationCard from '../ConversationCard.svelte';
-	import ReadMore from '../ReadMore.svelte';
 	import { getContext } from 'svelte';
 	import { goto } from '$app/navigation';
+	import VocabFlipCard from '$lib/components/VocabFlipCard.svelte';
+	import LessonRecapView from './LessonRecapView.svelte';
+	import ReadingRecapView from './ReadingRecapView.svelte';
 
 	export let item: LearningDiaryItem;
+
+	let date = '5/7/2023';
+	let currentView: 'LESSON' | 'READING' = 'LESSON';
 
 	const { close }: Context = getContext('simple-modal');
 	const showItemRecap = (item: LearnedConversationItem) => {
@@ -37,17 +41,57 @@
 		close();
 	};
 
-	// combined vocabs from the selected diary item.
-	$: vocabs = [
-		// only unique items
-		...new Set([
-			...(item.learnedConversations.flatMap((it) => it.vocabs) ?? []),
-			...(item.learnedReadings.flatMap((it) => it.vocabs) ?? [])
-		])
-	];
+	// $: vocabs = [
+	// 	...new Set([
+	// 		...(item.learnedConversations.flatMap((it) => it.vocabs) ?? []),
+	// 		...(item.learnedReadings.flatMap((it) => it.vocabs) ?? [])
+	// 	])
+	// ];
 </script>
 
 <div
+	class="relative flex h-[80vh] w-full flex-col overflow-y-auto rounded-3xl bg-white py-[2vw] pl-[2vw] font-line-seed font-bold"
+>
+	<div
+		style="box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.25);"
+		class="absolute left-0 top-0 flex w-full flex-col items-center bg-white py-[2vh] font-bold"
+	>
+		<div class="text-[1.15vw]">{date}</div>
+
+		<div class="mt-[2vh] flex flex-row rounded-full bg-[#EEEEEE]">
+			<button
+				on:click={() => (currentView = 'LESSON')}
+				class="rounded-full px-[2vw] py-[0.3vw] text-[1.15vw] {currentView === 'LESSON'
+					? 'bg-black text-white'
+					: 'bg-transparent text-black'}"
+			>
+				บทเรียน
+			</button>
+			<button
+				on:click={() => (currentView = 'READING')}
+				class="rounded-full px-[2vw] py-[0.3vw] text-[1.15vw] {currentView === 'READING'
+					? 'bg-black text-white'
+					: 'bg-transparent text-black'}"
+			>
+				เรื่องราว
+			</button>
+		</div>
+	</div>
+
+	<!-- Top spacing -->
+	<div class="min-h-[calc(2.5vw+6vh)] w-full" />
+
+	{#if currentView === 'LESSON'}
+		<LessonRecapView />
+	{:else if currentView === 'READING'}
+		<ReadingRecapView />
+	{/if}
+
+	<!-- Bottom spacing -->
+	<div class="min-h-[5vw]" />
+</div>
+
+<!-- <div
 	class="w-full h-[70vh] overflow-y-auto bg-white flex flex-col rounded-3xl font-bold font-line-seed p-3"
 >
 	<div class="text-[1.5vw] mt-[4vh]">
@@ -60,7 +104,6 @@
 
 	<div class="text-[1.7vw] mt-[5vh]">Learned Vocabularies:</div>
 
-	<!-- To make linter happy, vocabs should always exists in this scope -->
 	{#if vocabs}
 		<ul>
 			{#each vocabs as word, index (word)}
@@ -133,4 +176,4 @@
 			</div>
 		{/each}
 	{/if}
-</div>
+</div> -->

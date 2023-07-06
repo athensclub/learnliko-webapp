@@ -1,20 +1,30 @@
 <script lang="ts">
 	import { synthesize } from '$api/tts';
+	import type { VocabularyCard } from '$gql/generated/graphql';
+	import { RECAP_VOCAB_QUIZ, UPDATE_LESSON_PROGRESS } from '$gql/schema/mutations';
 	import Flippable from '$lib/components/Flippable.svelte';
 	import { playAudio, playAudioURL } from '$lib/global/audio';
+	import { graphqlClient } from '$lib/graphql';
+	import { learnedVocabLocal } from '$lib/localdb/profileLocal';
+	import userSession from '$lib/stores/userSession';
 	import type { FlipCardItem } from '$lib/types/flip_card';
 	import { blobToBase64 } from '$lib/utils/io';
 	import { onMount } from 'svelte';
+	import Typewriter from 'svelte-typewriter/Typewriter.svelte';
 	import { fade } from 'svelte/transition';
 
-	export let item: FlipCardItem;
+	export let item: VocabularyCard;
 
 	let speeches: string[] | null = null;
+
+	// TODO: Maybe stop using vocab field later?
+	let choices = item.choices ?? item.vocab;
+
 	// TODO: use data from api instead.
 	const loadSpeeches = async () => {
 		const result = [];
-		for (let i = 0; i < item.choices.length; i++) {
-			const val = await synthesize(item.choices[i], 'US', 'FEMALE', 0.7);
+		for (let i = 0; i < choices.length; i++) {
+			const val = await synthesize(choices[i].vocab, 'US', 'FEMALE', 0.7);
 			result.push(await blobToBase64(val));
 		}
 		speeches = result;
@@ -37,19 +47,47 @@
 	};
 	$: selectedChoice, updateSelectedChoice();
 
+	let submitting = false;
 	/**
-	 * Null -> user has not submitted.
+	 * Null -> user has not submitted. Set to non-null value to render this card as played
+	 * flip card.
 	 */
-	let correctAnswer: number | null = null;
-	const submit = () => {
-		// TODO: implement actual submit.
-		correctAnswer = 0;
+	export let correctAnswer: number | null = null;
+	const submit = async () => {
+		submitting = true;
+		const result = await graphqlClient
+			.mutation(RECAP_VOCAB_QUIZ, {
+				data: {
+					quizCard: item.id,
+					userAnswer: selectedChoice ?? 0
+				},
+				uid: $userSession.accountData?.uid!
+			})
+			.toPromise();
 
-		if (selectedChoice === correctAnswer) {
+		await graphqlClient
+			.mutation(UPDATE_LESSON_PROGRESS, {
+				uid: $userSession.accountData?.uid!,
+				data: {
+					lessonId: item.fromLesson,
+					quizCardId: item.id,
+					quizRecapId: result.data?.vocabularyRecapCreate.id!,
+					sectionIndex: 0
+				}
+			})
+			.toPromise();
+		submitting = false;
+
+		correctAnswer = result.data?.vocabularyRecapCreate.answerIndex ?? 0;
+		if (result.data?.vocabularyRecapCreate.correct) {
 			onCorrect();
 		} else {
 			onWrong();
 		}
+
+		$learnedVocabLocal = [
+			...new Set([...($learnedVocabLocal ?? []), ...choices.map((c) => c.vocab)])
+		];
 	};
 </script>
 
@@ -57,7 +95,7 @@
 	<button
 		on:click={() => (flipped = !flipped)}
 		slot="front"
-		style="background-image: url('{item.image}');"
+		style="background-image: url('{item.imageUrl}');"
 		class="h-full w-full overflow-hidden rounded-[2vw] bg-cover bg-center"
 	>
 		<div class="flex h-full w-full flex-col items-center bg-[#0000005E] backdrop-blur-[8px]">
@@ -66,7 +104,7 @@
 			>
 				<div class="flex flex-row font-bold">
 					<div class="bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] bg-clip-text text-transparent">
-						+{item.exp}
+						+{item.totalExp}
 					</div>
 					<svg
 						class="ml-[0.25vw] w-[2.5vw]"
@@ -113,7 +151,7 @@
 					<div
 						class="bg-gradient-to-r from-[#FFE08F] via-[#E4AE24] to-[#FFE08F] bg-clip-text text-transparent"
 					>
-						+{item.coin}
+						+{item.totalCoin}
 					</div>
 					<svg
 						class="ml-[0.25vw] w-[2.5vw]"
@@ -167,7 +205,7 @@
 				</div>
 			</div>
 
-			<img src={item.image} class="mt-[2vw] max-w-[80%]" alt="Flip Card Content" />
+			<img src={item.imageUrl} class="mt-[2vw] max-w-[80%] rounded-[1vw]" alt="Flip Card Content" />
 
 			<div class="mt-[2vw] flex flex-row items-center text-[1.3vw] font-bold text-white">
 				<svg
@@ -188,7 +226,7 @@
 
 	<div
 		slot="back"
-		style="background-image: url('{item.image}');"
+		style="background-image: url('{item.imageUrl}');"
 		class="h-full w-full overflow-hidden rounded-[2vw] bg-cover bg-center"
 	>
 		<!-- Can't nest button inside button so the outside is absolute button and inside is another absolute buttons instead -->
@@ -200,14 +238,22 @@
 				class="absolute left-0 top-0 h-full w-full backdrop-blur-[8px]"
 			/>
 
-			{#if correctAnswer === null}
+			{#if submitting}
+				<div
+					in:fade={{ delay: 500 }}
+					out:fade
+					class="pointer-events-none absolute left-0 top-0 z-20 flex h-full w-full flex-row items-center justify-center text-[1.5vw] text-white"
+				>
+					กำลังตรวจคำตอบ<Typewriter mode="loop">...</Typewriter>
+				</div>
+			{:else if correctAnswer === null}
 				<div
 					in:fade={{ delay: 500 }}
 					out:fade
 					class="pointer-events-none absolute left-0 top-0 flex h-full w-full flex-col justify-between p-[2vw]"
 				>
 					<div class="flex w-full flex-col gap-[1.5vw]">
-						{#each item.choices as choice, index (choice)}
+						{#each choices as choice, index (choice)}
 							<button
 								class="pointer-events-auto w-full rounded-full py-[0.7vw] text-[1.4vw] {selectedChoice ===
 								index
@@ -215,7 +261,7 @@
 									: 'bg-white text-black'}"
 								on:click={() => (selectedChoice = index)}
 							>
-								{choice}
+								{choice.vocab}
 							</button>
 						{/each}
 					</div>
@@ -244,13 +290,13 @@
 						{correctAnswer === selectedChoice ? 'คุณตอบถูก!' : 'คุณตอบผิด!'}
 					</div>
 
-					<img src={item.image} class="mt-[2vw] max-w-[80%]" alt="Flip Card Content" />
+					<img src={item.imageUrl} class="mt-[2vw] max-w-[80%]" alt="Flip Card Content" />
 
 					<div class="mt-[1vw] text-[1.35vw]">คำตอบคือ</div>
 					<div
 						class="mt-[1vw] rounded-full border-[0.15vw] border-white px-[2vw] py-[0.5vw] text-[1.35vw]"
 					>
-						{item.choices[correctAnswer]}
+						{choices[correctAnswer].vocab}
 					</div>
 				</div>
 			{/if}

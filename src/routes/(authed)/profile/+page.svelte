@@ -1,15 +1,8 @@
 <script lang="ts">
-	import userProfileImage from '$lib/images/sample_kid_image.png';
-	import {
-		getCurrentCEFRLevel,
-		profileImageLocal,
-		queryLearningDiariesLocal,
-		usernameLocal
-	} from '$lib/localdb/profileLocal';
-	import { getContext, onDestroy, onMount } from 'svelte';
+	import { profileImageLocal, queryLearningDiariesLocal } from '$lib/localdb/profileLocal';
+	import { getContext, onMount } from 'svelte';
 	import type { LearningDiaryItem } from '$lib/types/learningDiary';
 	import NavBar from '$lib/components/navbar/NavBar.svelte';
-	import LearningDiaryModal from '$lib/components/modals/LearningDiaryModal.svelte';
 	import { isMobile } from '$lib/global/breakpoints';
 	import type { Context } from 'svelte-simple-modal';
 	import userSession from '$lib/stores/userSession';
@@ -19,16 +12,16 @@
 	import UserCEFRLevelDetailModal from '$lib/components/modals/UserCEFRLevelDetailModal.svelte';
 	import CircularProgressBar from '$lib/components/CircularProgressBar.svelte';
 	import shoppingBag from '$lib/images/shopping_bag_icon.png';
+	import RecapCard from '$lib/components/RecapCard.svelte';
+	import type { LessonProgress } from '$gql/generated/graphql';
+	import { queryCurrentUserLessonRecap } from '$lib/temp/user';
 
-	let name = 'Natsataporn M.';
 	let background =
 		'https://cdn.discordapp.com/attachments/842737146321174558/1124288705864155216/image.png';
-	let exp = 25;
-	let coin = 100;
-	let learningDiaries: LearningDiaryItem[] | null = null;
+	let lessonRecaps: LessonProgress[] = [];
 
 	const { open }: Context = getContext('simple-modal');
-	const showDiary = (item: LearningDiaryItem) => open(LearningDiaryModal, { item });
+	// const showDiary = (item: LearningDiaryItem) => open(LearningDiaryModal, { item });
 
 	const showCEFRLevel = () =>
 		open(
@@ -45,8 +38,7 @@
 	};
 
 	onMount(async () => {
-		// TODO: implement db using actual database (cloud) and probably move this to ssr.
-		learningDiaries = await queryLearningDiariesLocal();
+		lessonRecaps = await queryCurrentUserLessonRecap();
 	});
 
 	// hide chatbox on exit in case it is showing recap.
@@ -98,13 +90,16 @@
 			</a>
 
 			<div
-				style="background-image: url('{$profileImageLocal}');"
+				style="background-image: url('{$userSession.accountData?.profile?.imageUrl ??
+					$profileImageLocal}');"
 				class="absolute bottom-[-6vw] left-[5vw] h-[12vw] w-[12vw] rounded-full border-[0.3vw] border-white bg-cover bg-center"
 			/>
 		</div>
 
 		<div class={`flex flex-col px-[6vw] ${$isMobile ? 'mt-[2vh]' : 'mt-[12vh]'}`}>
-			<div class="mb-[3vw] mt-[2vw] text-[2vw] font-bold">{name}</div>
+			<div class="mb-[3vw] mt-[2vw] text-[2vw] font-bold">
+				{$userSession.accountData?.profile?.fullname}
+			</div>
 
 			<div
 				class={`flex w-full justify-between font-bold ${
@@ -128,11 +123,6 @@
 							</div>
 						</CircularProgressBar>
 
-						<div
-							class="flex flex-row justify-center rounded-full border border-black px-[2vw] py-[0.5vw] text-[1.3vw]"
-						>
-							ดูรายละเอียด
-						</div>
 					</div>
 
 					<div class="flex h-full flex-col items-center justify-between">
@@ -147,13 +137,13 @@
 						</div>
 
 						<div
-							class="flex flex-row justify-center rounded-full border border-black px-[2vw] py-[0.5vw] text-[1.3vw]"
+							class="flex flex-row justify-center rounded-full border border-black px-[2vw] py-[0.5vw] text-[1vw]"
 						>
-							ดูรายละเอียด
+							ข้อมูลตัวอย่างสำหรับโหมดทดลองใช้ 
 						</div>
 					</div>
 				</button>
-
+			
 				<div
 					style="box-shadow: 0px 10px 30px 0px rgba(108, 128, 232, 0.25);"
 					class={`flex items-start justify-center rounded-3xl bg-white p-[2vw] ${
@@ -162,9 +152,9 @@
 				>
 					<div class="flex flex-row">
 						<div
-							class="mr-[1vw] bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] bg-clip-text text-[4vw] text-transparent"
+							class="mr-[2vw] bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] bg-clip-text text-[3vw] text-transparent"
 						>
-							{exp}
+							{$userSession.accountData?.exp}
 						</div>
 						<svg
 							class="w-[6vw]"
@@ -209,9 +199,9 @@
 
 					<div class="flex flex-row">
 						<div
-							class="mr-[1vw] bg-gradient-to-t from-[#FFE08F] via-[#E4AE24] to-[#FFE08F] bg-clip-text text-[4vw] text-transparent"
+							class="mr-[2vw] bg-gradient-to-t from-[#FFE08F] via-[#E4AE24] to-[#FFE08F] bg-clip-text text-[3vw] text-transparent"
 						>
-							{coin}
+							{$userSession.accountData?.coin}
 						</div>
 						<svg
 							class="w-[7vw]"
@@ -266,17 +256,21 @@
 				</div>
 			</div>
 
-			{#if learningDiaries && learningDiaries.length > 0}
-				<div
-					class={`font-extrabold ${
-						$isMobile ? 'mx-auto mt-[7vh] text-[7vw]' : 'mt-[10vh] text-[2vw]'
-					}`}
-				>
-					Learning Diary
-				</div>
+			<!-- {#if learningDiaries && learningDiaries.length > 0} -->
+			<div
+				class={`font-extrabold ${
+					$isMobile ? 'mx-auto mt-[7vh] text-[7vw]' : 'mt-[10vh] text-[2vw]'
+				}`}
+			>
+				Learning Diary
+			</div>
 
-				<div class="mt-[2vh] grid w-full grid-cols-2 gap-[2vw]">
-					{#each learningDiaries as diary (diary.date)}
+			<div class="mt-[3vw] grid w-full grid-cols-2 gap-[2vw]">
+				{#each lessonRecaps as recap}
+					<RecapCard {recap} class="h-[38vw] w-full " />
+				{/each}
+
+				<!-- {#each learningDiaries as diary (diary.date)}
 						<div class="flex h-fit w-full flex-col rounded-2xl bg-white p-3 font-bold">
 							<div class="flex flex-row items-center justify-between">
 								<div class="text-sm">{diary.date}</div>
@@ -305,9 +299,9 @@
 								{diary.title}
 							</div>
 						</div>
-					{/each}
-				</div>
-			{/if}
+					{/each} -->
+			</div>
+			<!-- {/if} -->
 
 			<!-- bottom spacing -->
 			<div class="h-[10vh] w-full" />

@@ -9,6 +9,7 @@
 	import type { ConversationCarouselItem } from '$lib/types/conversationData';
 	import { currentMode } from '$lib/global/mode';
 	import { browser } from '$app/environment';
+	import AiFriendCard from '$lib/components/AIFriendCard.svelte';
 
 	// TODO: probably switch back to querying in ssr when we switch the db to cloud.
 	// export let data: PageData;
@@ -68,7 +69,13 @@
 
 <div class="w-full h-full min-h-[100vh] bg-[#F4F4F4] flex flex-row font-line-seed">
 	<NavBar spaced />
-	<div class="flex flex-col flex-1 px-[3vw] py-[2vh]">
+	<div class="flex flex-col flex-1 px-[3vw] py-[2vh] relative">
+		<div
+			class="absolute z-20 left-0 top-0 flex h-[100vh] w-full items-center justify-center text-[3vw] font-bold text-white backdrop-blur-md backdrop-brightness-[.3]"
+		>
+			ไม่มีในเวอร์ชัน Trial.
+		</div>
+
 		<div
 			style="background-image: url('{infoBackground}');"
 			class="w-full h-[15vw] px-[4vw] rounded-[1.5vw] bg-cover bg-center flex flex-row items-center justify-between text-white"
@@ -87,28 +94,7 @@
 
 		<div class="grid grid-cols-2 gap-[2.5vw] mt-[3vw]">
 			{#each items as item, index (index)}
-				<div
-					style="background-image: url('{item.background}');"
-					class="w-full h-[18vw] rounded-[2vw] bg-cover bg-center flex flex-row justify-between overflow-hidden relative"
-				>
-					<div class="flex flex-col bg-gradient-to-r from-black/60 via-black/40 to-transparent items-start justify-center p-[2vw] text-white font-bold">
-						<div class="text-[2.5vw]">{item.name}</div>
-						<div class="text-[1.6vw]">{item.role}</div>
-
-						<button class="px-[2vw] py-[0.5vw] mt-[1vw] rounded-full text-[1.35vw] bg-white text-black">ดูประวัติการคุย</button>
-					</div>
-
-					<div class="h-full px-[2vw] flex flex-col justify-end bg-gradient-to-l from-black/60 via-black/40 to-transparent">
-						<img src={item.avatar} class="h-full" alt="Avatar"/>
-					</div>
-
-					{#if !item.unlocked}
-						<div class="w-full h-full absolute top-0 left-0 bg-[#0000004D] backdrop-blur-md flex flex-col items-center justify-center">
-							<img src={item.background} class="h-[50%] rounded-[1vw]" alt="Lesson Background"/>
-							<div class="mt-[1.5vw] text-[1.35vw] font-bold text-white">เข้าสู่เรื่องราวเพื่อปลดล๊อค</div>
-						</div>
-					{/if}
-				</div>
+				<AiFriendCard class="w-full h-[18vw]" {item} />
 			{/each}
 		</div>
 	</div>

@@ -1,3 +1,4 @@
+import { LanguageLevel, QuizType, type ReadingCard } from '$gql/generated/graphql';
 import type { CEFRLevel } from '$lib/types/CEFRLevel';
 import type { Mode } from '$lib/types/mode';
 import type { ReadingItem } from '$lib/types/reading';
@@ -52,18 +53,31 @@ export const queryReadingItems = async (
 		.filter((item) => topic === 'All' || item.topic === topic);
 };
 
-export const queryReadingItemById = async (id: string): Promise<ReadingItem> => {
+export const queryReadingItemById = async (id: string): Promise<ReadingCard> => {
 	const data = await allItems();
 
 	const result = data
-		.map((item) => ({
-			...item,
-			quiz: item.quiz.map((q) => ({ ...q, answer: undefined }))
-		}))
 		.find((item) => item.id === id);
 	if (!result) throw new Error('No reading item with id: ' + id);
 
-	return result;
+	return {
+		fromLesson: 'unknown',
+		id,
+		level: LanguageLevel.A1,
+		// TODO: support multiple pargraph
+		pages: [{ text: result.content, illustrationUrl: result.image }],
+		questions: result.quiz.map(q => ({
+			choices: q.choices,
+			coin: 100,
+			exp: 25,
+			question: q.question,
+			answer: q.answer
+		})),
+		title: result.blogName,
+		totalCoin: 100 * result.quiz.length,
+		totalExp: 25 * result.quiz.length,
+		type: QuizType.Reading,
+	}
 };
 
 export const queryReadingAnswers = async (id: string) => {

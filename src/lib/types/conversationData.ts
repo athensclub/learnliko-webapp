@@ -1,4 +1,5 @@
 import type { SynthesizeAccent, SynthesizeGender } from '$api/tts';
+import type { AvatarModels } from '$gql/generated/graphql';
 import type { RecapResult } from '$lib/global/chatbox';
 import type { CEFRLevel } from './CEFRLevel';
 
@@ -26,6 +27,7 @@ export interface ConversationCarouselItem {
 	image: string;
 	intro: string;
 	topic: string;
+	fromLesson?: string;
 	CEFRlevel: CEFRLevel;
 	background: string;
 	details: ConversationDetails;
@@ -35,7 +37,7 @@ export interface ConversationCarouselItem {
 
 export interface ConversationAvatar {
 	name: string;
-	models: AvatarModel;
+	models: AvatarModels;
 }
 
 export interface AvatarModel {

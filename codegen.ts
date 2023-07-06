@@ -2,12 +2,15 @@ import type { CodegenConfig } from '@graphql-codegen/cli';
 
 const config: CodegenConfig = {
 	schema: 'https://learnliko-api-develop-ruagc2uqxa-uc.a.run.app/v1/graphql',
-	documents: ['src/**/*.svelte', 'src/**/*.ts', '!src/gql/*.ts'],
-	ignoreNoDocuments: true, // for better experience with the watcher
+	documents: ['src/gql/schema/**/*.ts'],
+	// ignoreNoDocuments: true, // for better experience with the watcher
 	generates: {
-		'./src/gql/': {
+		'./src/gql/generated/': {
 			preset: 'client',
-			plugins: []
+			plugins: [],
+			config: {
+				useTypeImports: true
+			}
 		}
 	}
 };

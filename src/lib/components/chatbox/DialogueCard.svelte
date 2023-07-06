@@ -6,6 +6,7 @@
 	import { round } from '$lib/utils/math';
 	import type { ConversationHistoryItem } from '$lib/types/conversationData';
 	import { profileImageLocal } from '$lib/localdb/profileLocal';
+	import { each } from 'svelte/internal';
 
 	export let dialogueNumber: number;
 	export let assistantProfileImage: string;
@@ -21,11 +22,11 @@
 	];
 </script>
 
-<div class="w-[100%] mb-5 mt-5 mx-auto rounded-xl flex flex-col bg-[#F8F8F8] border-2 pb-4">
-	<div class="flex flex-row justify-between text-xl font-bold items-center px-3 mt-3">
+<div class="mx-auto mb-5 mt-5 flex w-[100%] flex-col rounded-xl border-2 bg-[#F8F8F8] pb-4">
+	<div class="mt-3 flex flex-row items-center justify-between px-3 text-xl font-bold">
 		Dialogue {dialogueNumber}
 
-		<div class="rounded-lg bg-black text-base text-center text-white px-2">
+		<div class="rounded-lg bg-black px-2 text-center text-base text-white">
 			<!-- round to 2 decimal places https://stackoverflow.com/a/11832950 -->
 			{round(dialogue.score, 2).toLocaleString()}%
 		</div>
@@ -43,8 +44,23 @@
 		/>
 	</div>
 
-	<div class="w-full font-bold text-base mt-3 px-5">Suggestion</div>
-	<div class="px-5 mt-2">
-		<ReadMore textContent={dialogue.suggestion} maxChars={80} />
+	<div class="mt-3 w-full px-5 text-base font-bold">Suggestion</div>
+	<div class="mt-2 px-5">
+		{#if dialogue.advancementExample.length > 0}
+			<p class=" font-bold text-gray-700">
+				เพื่อยกระดับภาษาในการสนทนาของคุณ ลองใช้ตัวอย่างต่อไปนี้:
+			</p>
+			{#each dialogue.advancementExample as example}
+				"{example}"<br />
+			{/each}
+			<br />
+		{/if}
+		{#if dialogue.grammarExample.length > 0}
+			<p class=" font-bold text-gray-700">นี่คือตัวอย่างของการสนทนาที่ถูกต้องตามไวยากรณ์:</p>
+			{#each dialogue.grammarExample as example}
+				"{example}"<br />
+			{/each}
+		{/if}
+		<!-- <ReadMore textContent={dialogue.suggestion} maxChars={80} /> -->
 	</div>
 </div>

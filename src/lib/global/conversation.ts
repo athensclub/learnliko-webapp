@@ -21,6 +21,10 @@ import { completeConversationLocal } from '$lib/localdb/conversationLocal';
 import { audioRecording } from './recording';
 import { textAdaptor } from '$api/textProcessor';
 import type { CEFRLevel } from '$lib/types/CEFRLevel';
+import { graphqlClient } from '$lib/graphql';
+import { RECAP_CONVERSATION_QUIZ, UPDATE_LESSON_PROGRESS } from '$gql/schema/mutations';
+import userSession from '$lib/stores/userSession';
+import type { ConversationRecapHistoryCreateDataInput } from '$gql/generated/graphql';
 
 interface HistoryItem {
 	role: 'user' | 'assistant';
@@ -328,16 +332,6 @@ const computeRecap = async () => {
 			const dialoguesResult: RecapHistory = [];
 			for (let i = 0; i < result.scores.length; i++) {
 				const _result = result.scores[i];
-				const advancementSuggestion =
-					_result.advancement.score < 80
-						? 'The enhance your dialogue advancement try use the following examples\n' +
-						  _result.advancement.examples.join('\n')
-						: '';
-				const grammarSuggestion =
-					_result.grammar.score < 80
-						? 'Here are the exmaple of the correct grammar dialogue\n' +
-						  _result.grammar.examples.join('\n')
-						: '';
 				dialoguesResult.push({
 					assistant: {
 						role: 'assistant',
@@ -349,9 +343,11 @@ const computeRecap = async () => {
 						audioURL: pairDialogues[i].user.audioURL,
 						transcription: pairDialogues[i].user.transcription!
 					},
-					suggestion: advancementSuggestion + '\n' + grammarSuggestion,
+					suggestion: "",
 					dialogueScore: _result,
-					score: 50 + _result.advancement.score * 0.3 + _result.grammar.score * 0.2
+					score: 50 + _result.advancement.score * 0.3 + _result.grammar.score * 0.2,
+					advancementExample: _result.advancement.examples,
+					grammarExample: _result.grammar.examples
 				});
 			}
 
@@ -377,15 +373,60 @@ const computeRecap = async () => {
 	});
 	overallScore = overallScore / goalTracking.length;
 
-	recapResult.set({ score: overallScore, coins: totalCoins, history: recapDialogues });
-
 	// TODO: find a better approach to promote/demote user's CEFR level
 	// if (totalScore > 90) setCurrentCEFRLevel(ct!.conversation.CEFRlevel);
 
-	// TODO: use actual db (cloud).
-	completeConversationLocal({
-		recap: { score: overallScore, coins: totalCoins, history: recapDialogues },
-		finishedTime,
-		conversationID: ct.conversation.id
-	});
+	const _recapHistory: ConversationRecapHistoryCreateDataInput[] = [];
+	for (let index = 0; index < goalsResult.length; index++) {
+		const e = goalsResult[index];
+		_recapHistory[index] = {
+			coin: e.coins,
+			exp: e.score,
+			goal: ct.conversation.details.learner.goal[index],
+			hint: ct.conversation.details.learner.hint[index],
+			dialogues: e.history.map((d) => {
+				return {
+					assistant: d.assistant.transcription,
+					user: d.user?.transcription ?? '',
+					score: {
+						advancement: d.dialogueScore.advancement,
+						appropriateness: d.dialogueScore.appropriateness,
+						grammar: d.dialogueScore.grammar
+					}
+				};
+			})
+		};
+	}
+
+	const uid = userSession.value().accountData?.uid!;
+	const reacpR = await graphqlClient
+		.mutation(RECAP_CONVERSATION_QUIZ, {
+			data: {
+				quizCard: ct.conversation.id,
+				correctPercentage: overallScore,
+				history: _recapHistory
+			},
+			uid: uid
+		})
+		.toPromise();
+
+	await graphqlClient
+		.mutation(UPDATE_LESSON_PROGRESS, {
+			uid: uid,
+			data: {
+				lessonId: ct.conversation.fromLesson!,
+				quizCardId: ct.conversation.id,
+				quizRecapId: reacpR.data?.conversationRecapCreate.id!,
+				sectionIndex: 3
+			}
+		})
+		.toPromise();
+
+	// completeConversationLocal({
+	// 	recap: { score: overallScore, coins: totalCoins, history: recapDialogues },
+	// 	finishedTime,
+	// 	conversationID: ct.conversation.id
+	// });
+
+	recapResult.set({ score: overallScore, coins: totalCoins, history: recapDialogues });
 };

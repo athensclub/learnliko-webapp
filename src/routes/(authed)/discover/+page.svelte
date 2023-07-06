@@ -5,22 +5,38 @@
 	import vocabTaskImage from './vocab_task_image.png';
 	import icon from '$lib/images/learnliko_icon.png';
 	import LessonCard from '$lib/components/LessonCard.svelte';
+	import type { PersonalizedLessonCard } from '$gql/generated/graphql';
 	import userProfileImage from '$lib/images/sample_kid_image.png';
-	import { queryDiscoverItemsLocal } from '$lib/localdb/discoverLocal';
-	import type { DiscoverItem } from '$lib/types/discover';
 	import { onMount } from 'svelte';
 	import { isMobile } from '$lib/global/breakpoints';
-	import { currentMode } from '$lib/global/mode';
 	import { browser } from '$app/environment';
 	import background from '$lib/images/bgvd.mp4';
-	import type { LessonCardData } from '$lib/types/lesson';
-	import { getLessonCards } from '$api/lesson';
+	import { getLessonById, getLessonCards } from '$api/lesson';
+	import { lastPlayedLessonIdLocal, learnedVocabLocal } from '$lib/localdb/profileLocal';
+	import userSession from '$lib/stores/userSession';
+	import Typewriter from 'svelte-typewriter/Typewriter.svelte';
 
-	let items: LessonCardData[] = [];
+	let items: PersonalizedLessonCard[] | null = null;
+	let lastPlayed: PersonalizedLessonCard | null = null;
 	const loadData = async () => {
 		if (!browser) return;
-		items = await getLessonCards();
-		console.log(items)
+
+		items = await getLessonCards({
+			baseLevel: $userSession.accountData?.languageLevel?.overall.level!,
+			excludeCompleted: true,
+			includeProgressOf: $userSession.accountData?.uid!
+		});
+
+		if ($lastPlayedLessonIdLocal !== null)
+			lastPlayed = await getLessonById(
+				$lastPlayedLessonIdLocal,
+				$userSession.accountData?.languageLevel?.overall.level!,
+				$userSession.accountData?.uid!
+			);
+		if (lastPlayed?.status === 'COMPLETED') {
+			lastPlayed = null;
+			$lastPlayedLessonIdLocal = null;
+		}
 	};
 
 	onMount(loadData);
@@ -139,7 +155,7 @@
 			<div class="text-[1.8vw]">เลือกเรื่องราวเพื่อเรียนรู้</div>
 
 			<div class="mt-[1.2vw] flex w-full flex-col">
-				<div class="text-[1.5vw]">ความคืบหน้ารายวัน</div>
+				<div class="text-[1.2vw]">ความคืบหน้ารายวัน</div>
 
 				<div class="flex w-full flex-row rounded-[1vw] bg-[#F8F8F8] p-[2vw]">
 					<img class="w-[40%]" src={vocabTaskImage} alt="Study Vocabularies" />
@@ -147,35 +163,26 @@
 					<div class="ml-[1vw] flex h-full flex-col">
 						<div class="text-[1.5vw]">คำศัพท์วันนี้</div>
 						<div class="bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] bg-clip-text text-transparent">
-							<div class="inline-block text-[3vw]">15</div>
+							<div class="inline-block text-[3vw]">{$learnedVocabLocal?.length}</div>
 							<div class="inline-block text-[1.35vw]">คำ</div>
 						</div>
 					</div>
 				</div>
 			</div>
 
-			<div class="mt-[1.2vw] flex w-full flex-col">
-				<div class="text-[1.5vw]">เล่นต่อเรื่องราวล่าสุด</div>
+			<!-- {#if lastPlayed}
+				<div class="mt-[1.2vw] flex w-full flex-col">
+					<div class="text-[1.2vw]">เล่นต่อเรื่องราวล่าสุด</div>
 
-				<LessonCard
-					scale={0.5}
-					item={{
-						avatar:
-							'https://cdn.discordapp.com/attachments/842737146321174558/1123670586732839082/image.png',
-						avatarIntro: 'Hello, nice to meet you',
-						background:
-							'https://cdn.discordapp.com/attachments/842737146321174558/1123672047084646450/Rectangle_4917.png',
-						exp: 1500,
-						id: '1',
-						description:
-							'เช้าวันนี้ คุณกำลังไปโรงเรียนวันแรกและได้พบเจอกับเพื่อนๆมากมายที่โรงเรียนแห่งใหม่ของคุณ',
-						level: 'PRE_A1',
-						topic: 'ทำความรู้จักและทักทาย!',
-						progress: 0.5
-					}}
-					class="h-[calc(56vh-3.5vw)] w-full"
-				/>
-			</div>
+					<LessonCard
+						scale={0.5}
+						progress={lastPlayed.progress}
+						difficulty={lastPlayed.difficulty}
+						item={lastPlayed.card}
+						class="h-[calc(56vh-3.5vw)] w-full"
+					/>
+				</div>
+			{/if} -->
 		{/if}
 	</div>
 
@@ -187,14 +194,27 @@
 	<div
 		class={`pointer-events-none fixed left-0 top-0 z-[100] h-[100vh] w-[100vw] snap-y snap-mandatory overflow-y-auto`}
 	>
-		<div
-			class={`pointer-events-auto mx-auto ${
-				$isMobile ? 'w-full py-[15vh]' : 'w-[54vw] pb-[10vh] pt-0'
-			}`}
-		>
-			{#each items as item (item.id)}
-				<LessonCard {item} class="mx-auto mt-[calc(48vh-19vw)] h-[38vw] w-[27vw] snap-center" />
-			{/each}
-		</div>
+		{#if items}
+			<div
+				class={`pointer-events-auto mx-auto ${
+					$isMobile ? 'w-full py-[15vh]' : 'w-[54vw] pb-[10vh] pt-0'
+				}`}
+			>
+				{#each items as item (item)}
+					<LessonCard
+						item={item.card}
+						progress={item.progress}
+						difficulty={item.difficulty}
+						class="mx-auto mt-[calc(48vh-19vw)] h-[38vw] w-[27vw] snap-center"
+					/>
+				{/each}
+			</div>
+		{:else}
+			<div
+				class="pointer-events-none flex h-full w-full flex-row items-center justify-center text-[2.5vw]"
+			>
+				กำลังโหลด<Typewriter mode="loop">...</Typewriter>
+			</div>
+		{/if}
 	</div>
 </div>

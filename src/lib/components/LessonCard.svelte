@@ -1,19 +1,21 @@
 <script lang="ts">
 	import { synthesize } from '$api/tts';
+	import type { LessonCard } from '$gql/generated/graphql';
 	import { playAudioURL } from '$lib/global/audio';
 	import { isMobile } from '$lib/global/breakpoints';
-	import type { LessonCardData } from '$lib/types/lesson';
 	import { blobToBase64 } from '$lib/utils/io';
 	import { onMount } from 'svelte';
 	import Typewriter from 'svelte-typewriter/Typewriter.svelte';
 
-	export let item: LessonCardData;
+	export let item: LessonCard;
 	export let scale = 1;
+	export let progress = 0;
+	export let difficulty = '';
 
 	let speech: string | null = null;
 	// TODO: use data from api instead.
 	const loadSpeech = async () => {
-		const val = await synthesize(item.avatarIntro, 'US', 'FEMALE', 0.7);
+		const val = await synthesize(item.intro.message, 'US', 'FEMALE', 0.7);
 		speech = await blobToBase64(val);
 	};
 	onMount(() => loadSpeech());
@@ -24,7 +26,7 @@
 
 <!-- Specify the size(width, height) of the card in the user of the component, not in the component itself. -->
 <div
-	style="background-image: url('{item.background}');"
+	style="background-image: url('{item.backgroundUrl}');"
 	class={`relative flex flex-col justify-between  overflow-hidden bg-cover bg-center shadow-2xl ${
 		$isMobile ? 'rounded-[6vw]' : 'rounded-[2vw]'
 	} ${clazz}`}
@@ -54,7 +56,7 @@
 			</defs>
 		</svg>
 
-		<div style="font-size: {scale * 1.5}vw;">{item.topic}</div>
+		<div style="font-size: {scale * 1.5}vw;">{item.title}</div>
 		<div style="font-size: {scale * 1.05}vw;" class="mt-[1.2vh] max-w-[90%]">
 			{item.description}
 		</div>
@@ -67,7 +69,7 @@
 				  	padding-bottom: {scale * 1}vh;"
 				class="rounded-full bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] text-center"
 			>
-				{item.level}
+				{difficulty}
 			</div>
 
 			<div
@@ -128,8 +130,9 @@
 			style="height: {scale * 1.35}vw;"
 			class="mt-[2vh] w-full overflow-hidden rounded-full bg-[#FFFFFF29]"
 		>
+			<!-- TODO: show actual progress here -->
 			<div
-				style="width: {item.progress * 100}%;"
+				style="width: {progress}%;"
 				class="h-full rounded-full bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD]"
 			/>
 		</div>
@@ -137,7 +140,7 @@
 
 	<div class="flex h-[50%] flex-row items-center">
 		<div class="ml-[5%] flex h-full animate-slideInLeft flex-col justify-end">
-			<img class="max-h-full" src={item.avatar} alt="Avatar" />
+			<img class="max-h-full" src={item.intro.bot.avatarModels.neutral} alt="Avatar" />
 		</div>
 
 		<div
@@ -148,7 +151,7 @@
 				on:click={() => {
 					speech && playAudioURL(speech);
 				}}
-				class="animate-pulse"><Typewriter>{item.avatarIntro}🔉</Typewriter></button
+				class="animate-pulse"><Typewriter>{item.intro.message}🔉</Typewriter></button
 			>
 		</div>
 	</div>

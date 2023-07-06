@@ -1,35 +1,59 @@
 <script lang="ts">
+	import type { SentenceCard } from '$gql/generated/graphql';
 	import WritingCard from '$lib/components/WritingCard.svelte';
 	import AnswerCorrectToast from '$lib/components/toasts/AnswerCorrectToast.svelte';
 	import { toast } from '$lib/components/toasts/ToastManager.svelte';
 	import { playAudio } from '$lib/global/audio';
 	import type { WritingCardItem } from '$lib/types/writing_card';
+	import { shuffle } from '$lib/utils/array';
+	import { onMount } from 'svelte';
 	import { fade } from 'svelte/transition';
 
 	export let addProgress: (val: number) => void;
 	export let onFinish: () => void;
 
-	export let items: (WritingCardItem & {hide?: boolean})[];
+	export let items: SentenceCard[];
+
+	let count = 0;
+	let displayed: (SentenceCard & { hide?: boolean })[] = [];
+
+	onMount(() => {
+		// save count in separate variable as items is going to be mutated.
+		count = items.length;
+		items = shuffle(items);
+		// pull out first 3 cards
+		for (let i = 0; i < 3; i++) {
+			let item = items[0];
+			items = items.slice(1);
+			displayed = [...displayed, item];
+		}
+	});
+
+	const finishItem = (index: number) => {
+		setTimeout(() => {
+			if (items.length > 0) {
+				let item = items[0];
+				items = items.slice(1);
+				displayed[index] = item;
+			} else {
+				displayed[index] = { ...displayed[index], hide: true };
+			}
+		}, 5000);
+		addProgress(1 / (4 * count));
+	};
 
 	const onCorrect = (index: number) => {
-		setTimeout(() => (items[index] = { ...items[index], hide: true }), 5000);
-
+		finishItem(index);
 		playAudio('Success');
-		
-		// TODO: add the actual amount.
-		addProgress(1 / 12);
-		
-		// TODO: display actual amount.
-		toast(AnswerCorrectToast, { exp: 25, coin: 100 });
+		toast(AnswerCorrectToast, { exp: displayed[index].totalExp, coin: displayed[index].totalCoin });
 	};
 	const onWrong = (index: number) => {
-		setTimeout(() => (items[index] = { ...items[index], hide: true }), 5000);
-
+		finishItem(index);
 		playAudio('Fail');
 	};
 
-	// TODO: Check for actual finish.
-	$: if (items.every((i) => i.hide)) {
+	// check for > 0 so that finish does not run before initialization
+	$: if (displayed.length > 0 && displayed.every((i) => i.hide)) {
 		setTimeout(() => {
 			onFinish();
 		}, 1000);
@@ -38,16 +62,23 @@
 
 <div
 	transition:fade
-	class="absolute top-0 left-0 w-full h-[100vh] flex flex-row gap-[5vw] items-center justify-center pointer-events-none"
+	class="pointer-events-none absolute left-0 top-0 flex h-[100vh] w-full flex-row items-center justify-center gap-[5vw]"
 >
-	{#each items as item, index}
-		<WritingCard
-			onCorrect={() => onCorrect(index)}
-			onWrong={() => onWrong(index)}
-			class="w-[22vw] h-[30vw] pointer-events-auto {item.hide
-				? 'opacity-0'
-				: 'opacity-100'} transition-[opacity] duration-1000"
-			{item}
-		/>
+	<!-- Multiple absolute position so that transition work without shifts  -->
+	{#each displayed as item, index (item.id)}
+		<div
+			style="left: {50 + 4 * (index - 1)}vw; transform: translate({-50 + 100 * (index - 1)}%,0);"
+			transition:fade
+			class="absolute h-[30vw] w-[22vw]"
+		>
+			<WritingCard
+				onCorrect={() => onCorrect(index)}
+				onWrong={() => onWrong(index)}
+				class="pointer-events-auto h-full w-full {item.hide
+					? 'opacity-0'
+					: 'opacity-100'} transition-[opacity] duration-1000"
+				{item}
+			/>
+		</div>
 	{/each}
 </div>

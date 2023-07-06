@@ -4,11 +4,13 @@
 	import Keyboard from './Keyboard.svelte';
 	import WordGuessed from './WordGuessed.svelte';
 	import { dictionary } from './dictionary';
+	import Typewriter from 'svelte-typewriter/Typewriter.svelte';
 
 	let lettersChosen: string[] = [];
 	let word = randomDictionaryWord();
 	let stage = 0;
 	let enabled = true;
+	let gamestat = true;
 
 	function restart() {
 		lettersChosen = [];
@@ -49,12 +51,12 @@
 		// alert is blocking so we need to put it in setTimeout 0
 		// so the page can update what's displayed
 		if (isGameWon()) {
-			setTimeout(() => alert('YOU WON!'), 0);
 			enabled = false;
+			gamestat = true;
 		}
-		if (stage == 7) {
-			setTimeout(() => alert(`GAME LOST! Word was ${word}`), 0);
+		if (stage == 10) {
 			enabled = false;
+			gamestat = false;
 		}
 		console.log('letter', stage, lettersChosen);
 	}
@@ -71,12 +73,10 @@
 	}
 </script>
 
-<div class=" bg-black">
-	<h1 class=" text-center text-white">Hangbot</h1>
+<div class=" rounded-b-[2vw] bg-gradient-to-br from-[#C698FF] to-[#6C80E8] pb-[2vw]">
+	<h1 class=" pt-[1vw] text-center font-line-seed text-[3.5vw] text-white">Hangbot</h1>
 
 	<RobotGallows {stage} />
-
-	<h2>Secret word:</h2>
 
 	<WordGuessed {word} {lettersChosen} />
 </div>
@@ -84,14 +84,22 @@
 <svelte:window on:keydown={handleKeydown} />
 
 {#if enabled}
-	<h2>Keyboard:</h2>
 	<Keyboard {lettersChosen} {onLetter} />
 {:else}
-	<button class="restart" on:click={restart}>RESTART GAME</button>
+	<div class=" mt-[3vw] text-center">
+		{#if gamestat}
+			<div class="font-line-seed text-[2vw] text-[#6C80E8]">
+				<Typewriter>🎉GAME WON!</Typewriter>
+			</div>
+		{:else}
+			<div class="font-line-seed text-[2vw]">
+				<Typewriter>🥲GAME LOST! Word was "{word}"</Typewriter>
+			</div>
+		{/if}
+
+		<button class="restart mt-[1.5vw] bg-gradient-to-br from-[#C698FF] to-[#6C80E8] text-center px-[1vw] rounded-md" on:click={restart}>🔄️ Play Again</button>
+	</div>
 {/if}
-
-
-
 
 <style>
 	h1 {
@@ -115,7 +123,6 @@
 		justify-content: center;
 		align-items: center;
 		text-align: center;
-		background-color: green;
 		color: white;
 		margin: auto;
 		padding: 5px;

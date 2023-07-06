@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { LanguageLevel } from '$gql/generated/graphqll';
+	import { LanguageLevel } from '$gql/generated/graphql';
 	import userSession from '$lib/stores/userSession';
 	import CEFRLevelItem from './CEFRLevelItem.svelte';
 </script>

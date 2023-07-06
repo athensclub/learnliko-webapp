@@ -4,7 +4,7 @@
 	import type { ReadingViewType } from './ReadingContainer.svelte';
 	import AnswerCorrectToast from '../toasts/AnswerCorrectToast.svelte';
 	import { toast } from '../toasts/ToastManager.svelte';
-	import type { ReadingCard, ReadingQuestion } from '$gql/generated/graphqll';
+	import type { ReadingCard, ReadingQuestion } from '$gql/generated/graphql';
 
 	export let item: ReadingCard;
 	$: quiz = item.questions;

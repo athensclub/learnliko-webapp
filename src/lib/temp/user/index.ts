@@ -1,4 +1,4 @@
-import type { User } from '$gql/generated/graphqll';
+import type { User } from '$gql/generated/graphql';
 import { auth, firestore } from '$lib/configs/firebase.config';
 import type { PretestCEFRLevel } from '$lib/types/pretest';
 import type { UserProfile } from '$lib/types/userProfile';

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { synthesize } from '$api/tts';
-	import type { VocabularyCard } from '$gql/generated/graphqll';
+	import type { VocabularyCard } from '$gql/generated/graphql';
 	import Flippable from '$lib/components/Flippable.svelte';
 	import { playAudio, playAudioURL } from '$lib/global/audio';
 	import type { FlipCardItem } from '$lib/types/flip_card';

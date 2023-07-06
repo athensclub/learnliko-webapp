@@ -6,7 +6,7 @@
 	import ReadingTextView from './ReadingTextView.svelte';
 	import ReadingQuizView from './ReadingQuizView.svelte';
 	import type { ReadingItem } from '$lib/types/reading';
-	import type { ReadingCard } from '$gql/generated/graphqll';
+	import type { ReadingCard } from '$gql/generated/graphql';
 
 	/**
 	 * Called when the user click 'continue' button after submitting answers.

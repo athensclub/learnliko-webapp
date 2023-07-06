@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { SentenceCard } from '$gql/generated/graphqll';
+	import type { SentenceCard } from '$gql/generated/graphql';
 	import WritingCard from '$lib/components/WritingCard.svelte';
 	import AnswerCorrectToast from '$lib/components/toasts/AnswerCorrectToast.svelte';
 	import { toast } from '$lib/components/toasts/ToastManager.svelte';

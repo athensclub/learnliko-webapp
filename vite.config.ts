@@ -16,7 +16,6 @@ export default defineConfig({
 			}
 		}
 	},
-
 	optimizeDeps: {
 		exclude: ['@urql/svelte']
 	}

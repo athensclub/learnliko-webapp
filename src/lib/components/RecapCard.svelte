@@ -284,7 +284,8 @@
 		</div>
 	{/if}
 
-	<button
+	<!-- TODO: Implement recap data from db -->
+	<!-- <button
 		on:click={openDetails}
 		class="ml-auto mt-auto flex flex-row items-center rounded-full bg-black px-[2vw] py-[0.5vw] text-[1.2vw] text-white"
 	>
@@ -300,5 +301,5 @@
 				fill="white"
 			/>
 		</svg>
-	</button>
+	</button> -->
 </div>

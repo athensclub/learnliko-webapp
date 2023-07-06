@@ -138,7 +138,7 @@
 				>
 					<h1 class="text-[1.5vw]">Daily Learning Stats</h1>
 					<div class="mt-[5vh] w-full">
-						<Barchart activeUseToday={20} />
+						<Barchart activeUseToday={activeUse} />
 					</div>
 				</div>
 			</div>

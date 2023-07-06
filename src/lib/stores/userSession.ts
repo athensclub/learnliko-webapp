@@ -1,6 +1,6 @@
 import { writable, get } from 'svelte/store';
 import type firebase from 'firebase/auth';
-import type { User } from '$gql/graphql';
+import type { User } from '$gql/generated/graphql';
 
 interface UserSessionData {
 	initialized?: boolean;

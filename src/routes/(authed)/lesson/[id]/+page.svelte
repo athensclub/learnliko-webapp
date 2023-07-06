@@ -14,7 +14,7 @@
 	import { page } from '$app/stores';
 	import { getLessonById } from '$api/lesson';
 	import { lastPlayedLessonIdLocal } from '$lib/localdb/profileLocal';
-	import type { LessonCard, ReadingCard, SentenceCard, VocabularyCard } from '$gql/graphql';
+	import type { LessonCard, ReadingCard, SentenceCard, VocabularyCard } from '$gql/generated/graphql';
 	import Typewriter from 'svelte-typewriter/Typewriter.svelte';
 
 	let item: LessonCard | null = null;

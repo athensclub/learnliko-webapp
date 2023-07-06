@@ -6,7 +6,7 @@
 	import { onMount } from 'svelte';
 	import { fade } from 'svelte/transition';
 	import Flippable from './Flippable.svelte';
-	import type { SentenceCard } from '$gql/graphql';
+	import type { SentenceCard } from '$gql/generated/graphql';
 
 	export let item: SentenceCard;
 	$: parts = item.question.split('_');

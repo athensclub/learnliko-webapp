@@ -5,7 +5,7 @@
 	import vocabTaskImage from './vocab_task_image.png';
 	import icon from '$lib/images/learnliko_icon.png';
 	import LessonCard from '$lib/components/LessonCard.svelte';
-	import type { LessonCard as LessonCardData } from '$gql/graphql';
+	import type { LessonCard as LessonCardData } from '$gql/generated/graphql';
 	import userProfileImage from '$lib/images/sample_kid_image.png';
 	import { queryDiscoverItemsLocal } from '$lib/localdb/discoverLocal';
 	import type { DiscoverItem } from '$lib/types/discover';

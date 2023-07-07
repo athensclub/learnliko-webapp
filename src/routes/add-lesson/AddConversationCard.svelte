@@ -17,8 +17,8 @@
 		const botResult = await graphqlClient
 			.mutation(CREATE_BOT_AVATAR, {
 				data: {
-					accent,
-					gender,
+					accent: accent.value,
+					gender: gender.value,
 					avatarModels: {
 						anger: avatarImage,
 						anticipation: avatarImage,
@@ -54,8 +54,8 @@
 			})
 			.toPromise();
 		return {
-			accent,
-			gender,
+			accent: accent.value,
+			gender: gender.value,
 			id: result.data?.conversationCardCreate.id,
 			botId: botResult.data?.botAvatarCreate.id,
 			totalCoin: goalGetters.length * coin,
@@ -118,6 +118,6 @@
 		placeholder="Add prompt"
 	/>
 
-	<Select items={genders} value={gender} />
-	<Select items={accents} value={accent} />
+	<Select items={genders} bind:value={gender} />
+	<Select items={accents} bind:value={accent} />
 </div>

@@ -7,6 +7,9 @@
 	import ReadingQuizView from './ReadingQuizView.svelte';
 	import type { ReadingItem } from '$lib/types/reading';
 	import type { ReadingCard } from '$gql/generated/graphql';
+	import { graphqlClient } from '$lib/graphql';
+	import { RECAP_READING_QUIZ, UPDATE_LESSON_PROGRESS } from '$gql/schema/mutations';
+	import userSession from '$lib/stores/userSession';
 
 	/**
 	 * Called when the user click 'continue' button after submitting answers.
@@ -16,6 +19,39 @@
 	export let showFinishButton = true;
 
 	export let item: ReadingCard;
+
+	/**
+	 * function that is called to get answer index array from reading card item.
+	 */
+	export let answerGetter = async (
+		item: ReadingCard, selected: number[]
+	): Promise<{ answers: number[]; correct: number }> => {
+		const result = await graphqlClient
+			.mutation(RECAP_READING_QUIZ, {
+				data: {
+					quizCard: item.id,
+					userAnswer: selected.map((i) => i ?? 0)
+				},
+				uid: $userSession.accountData?.uid!
+			})
+			.toPromise();
+
+		await graphqlClient
+			.mutation(UPDATE_LESSON_PROGRESS, {
+				uid: $userSession.accountData?.uid!,
+				data: {
+					lessonId: item.fromLesson,
+					quizCardId: item.id,
+					quizRecapId: result.data?.readingRecapCreate.id!,
+					sectionIndex: 2
+				}
+			})
+			.toPromise();
+		return {
+			answers: result.data?.readingRecapCreate.answer.map((a) => a.answerIndex) ?? [],
+			correct: result.data?.readingRecapCreate.totalCorrect ?? 0
+		};
+	};
 
 	let selected = Array(item.questions.length).fill(null);
 
@@ -52,6 +88,7 @@
 			{scale}
 			{showFinishButton}
 			{item}
+			{answerGetter}
 			{onFinish}
 			setView={(view) => (currentView = view)}
 		/>

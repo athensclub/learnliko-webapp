@@ -133,7 +133,7 @@
 		| 'WRITING_CARD'
 		| 'READING'
 		| 'CONVERSATION'
-		| 'FINISHED' = 'INTRO';
+		| 'FINISHED' = 'CONVERSATION';
 
 	const onFinishedLesson = () => {
 		currentView = 'FINISHED';

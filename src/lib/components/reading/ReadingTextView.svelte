@@ -4,22 +4,35 @@
 	import type { ReadingItem } from '$lib/types/reading';
 	import { synthesize } from '$api/tts';
 	import { blobToBase64 } from '$lib/utils/io';
-	import { onMount } from 'svelte';
+	import { onDestroy, onMount } from 'svelte';
 	import { playAudioURL } from '$lib/global/audio';
 	import type { ReadingCard } from '$gql/generated/graphql';
+	import type { Howl } from 'howler';
 
 	export let item: ReadingCard;
 
 	export let scale = 1;
 
 	let speech: string | null = null;
+
+	let currentSpeechAudio: Howl | null = null;
+
 	// TODO: use data from api instead.
 	const loadSpeech = async () => {
 		const val = await synthesize(item.pages[0].text, 'US', 'FEMALE', 0.7);
 		speech = await blobToBase64(val);
-		console.log('finish tts');
 	};
 	onMount(() => loadSpeech());
+
+	const playSpeechAudio = () => {
+		if (currentSpeechAudio !== null || speech === null) return;
+		currentSpeechAudio = playAudioURL(speech);
+		currentSpeechAudio.once('end', () => (currentSpeechAudio = null));
+	};
+
+	onDestroy(() => {
+		currentSpeechAudio?.stop();
+	});
 
 	export let setView: (view: ReadingViewType) => void;
 </script>
@@ -27,18 +40,20 @@
 <!-- https://github.com/sveltejs/svelte/issues/544#issuecomment-586417387 -->
 <div in:fade={{ delay: 500 }} out:fade class="flex h-full w-full flex-row gap-[2vw]">
 	<!-- TODO: support multiple pages -->
-	<img class="max-h-full max-w-[50%] object-contain" src={item.pages[0].illustrationUrl} alt={item.title} />
+	<img
+		class="max-h-full max-w-[50%] object-contain"
+		src={item.pages[0].illustrationUrl}
+		alt={item.title}
+	/>
 
 	<div class="relative flex h-full flex-1 flex-col overflow-y-auto font-bold">
-		<div style="font-size: {scale*2}vw;">{item.title}</div>
+		<div style="font-size: {scale * 2}vw;">{item.title}</div>
 		<!-- TODO: support multiple pages -->
-		<div style="font-size: {scale*1.2}vw;" class="mt-[2vw]">{item.pages[0].text}</div>
+		<div style="font-size: {scale * 1.2}vw;" class="mt-[2vw]">{item.pages[0].text}</div>
 
 		<button
-			on:click={() => {
-				speech && playAudioURL(speech);
-			}}
-			style="font-size: {scale*1.2}vw;"
+			on:click={playSpeechAudio}
+			style="font-size: {scale * 1.2}vw;"
 			class="absolute right-0 top-0 flex flex-row items-center rounded-full border border-black px-[1vw] py-[0.5vw]"
 		>
 			<svg
@@ -66,7 +81,7 @@
 
 		<button
 			on:click={() => setView('QUIZ')}
-			style="font-size: {scale*1.2}vw;"
+			style="font-size: {scale * 1.2}vw;"
 			class="ml-auto mt-auto flex flex-row items-center rounded-full border border-black px-[1vw] py-[0.5vw]"
 		>
 			? คำถาม

@@ -208,13 +208,17 @@ const botReply = async function (message?: string, targetLevel: CEFRLevel = 'A1'
 
 	// prevent checking for the first time (user has not chat yet, only assistant)
 	if (!hasMessage && get(isCheckConversationGoal)) {
+		const _history = get(history);
 		const passed = await checkGoalProgress(
-			get(history)
-				.map(
-					(item) =>
-						`${item.role === 'user' ? 'User' : ct.conversation.avatar.name}: ${item.transcription}`
-				)
+			_history.slice(Math.max(0, _history.length - 2)).map(
+				(item) =>
+					`${item.role === 'user' ? 'User' : ct.conversation.avatar.name}: ${item.transcription}`
+			)
 				.join('\n'),
+			_history.length > 2 ? _history.slice(0, _history.length - 2).map(
+				(item) =>
+					`${item.role === 'user' ? 'User' : ct.conversation.avatar.name}: ${item.transcription}`
+			).join('\n') : null,
 			ct.conversation.details.learner.goal[get(currentGoal)]
 		);
 		console.log(passed);

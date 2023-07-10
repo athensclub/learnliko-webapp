@@ -22,7 +22,7 @@ export const isDialogueAchieveGoal = async function (dialogue: string, goal: str
 
 	const _function: ChatCompletionFunctions = {
 		name: 'is_dialogue_achieve_goal',
-		description: `Check whether the User in the provided dialogue has achieved the goal which is "${goal}"`,
+		description: `Check whether the User in the provided dialogue has achieved the provided goal.`,
 		parameters: {
 			type: 'object',
 			properties: {
@@ -39,14 +39,19 @@ export const isDialogueAchieveGoal = async function (dialogue: string, goal: str
 			{
 				role: 'system',
 				content:
-					'You are a dialogue evaluator tasked with assessing whether a given dialogue has achieved its goal. Your task is to read the provided dialogue and determine if the participants in the conversation have successfully accomplished what they set out to do. Evaluate the dialogue and provide your analysis, stating whether the goal has been achieved or not'
+					'You are a dialogue evaluator tasked with assessing whether a given dialogue has achieved its goal. Your task is to read the provided dialogue and determine if the participants in the conversation have successfully accomplished what they set out to do. Evaluate the dialogue and provide your analysis, stating whether the goal has been achieved or not. Give your answer by calling is_dialogue_achieve_goal function, passing your answer as argument in result parameter.'
 			},
-			{ role: 'user', content: `dialogue: "${dialogue}"` }
+			{ role: 'user', 'content': "Goal: ถามเพื่อนของคุณว่าเขาชอบทำอะไรหลังเลิกเรียน\n\nDialogue:\nAlex: Hello I’m Alex,I'm a new student.\nUser: Hello. What do you like to do in the morning?\nAlex: In the morning, I typically get up and clean my teeth. Then I eat breakfast. It's necessary to begin the day with a nutritious meal.\nUser: Nice. what about after school?\nAlex: After school, I like to play soccer. It's a great way to stay active and have fun with my friends. Playing sports helps me relax and unwind after a long day of studying." },
+			{ role: 'assistant', 'content': '', function_call: { 'name': 'is_dialogue_achieve_goal', arguments: '{\n  "result": true\n}' } },
+			{ role: 'user', 'content': "Goal: ถามเจนว่าชอบทำอะไรในวันหยุด\n\nDialogue:\nJane: Hello,I’m Jane\nUser: What do you like to do on holidays?\nJane: Oh, I love going sailing or fishing on holidays! There\'s something so peaceful and enjoyable about being out on the water. How about you? What do you like to do on your holidays?" },
+			{ role: 'assistant', 'content': '', function_call: { 'name': 'is_dialogue_achieve_goal', arguments: '{\n  "result": true\n}' } },
+			{ role: 'user', content: `Goal: ${goal}\n\nDialogue:\n ${dialogue}` }
 		],
 		[_function],
 		{
 			name: _function.name
-		}
+		},
+		0.1
 	);
 
 	if (!response) throw new Error('No output from checker');

@@ -1,7 +1,7 @@
 import type { ConversationCarouselItem } from '$lib/types/conversationData';
 import type { Mode } from '$lib/types/mode';
 import type { ChatCompletionFunctions } from 'openai';
-import { gptFunctionCalling } from '../openai';
+import { chatCompletion, gptFunctionCalling } from '../openai';
 import type { CEFRLevel } from '$lib/types/CEFRLevel';
 
 export const queryConversations = async function (mode: Mode) {
@@ -65,7 +65,7 @@ export const analyzeDialogue = async function (
 
 	const _function: ChatCompletionFunctions = {
 		name: 'analyze_dialogue',
-		description: `Analyze the provided User's dialogue in terms of grammar, appropriateness, and advancement of vocabulary and sentence structure based on the context of "${context}". Assess each aspect separately, providing specific examples to support your analysis`,
+		description: `Analyze the provided User's dialogue in terms of grammar, appropriateness, and advancement of vocabulary and sentence structure based on the provided context. Assess each aspect separately, providing specific examples to support your analysis`,
 		parameters: {
 			type: 'object',
 			properties: {
@@ -138,6 +138,101 @@ export const analyzeDialogue = async function (
 	if (!response) throw new Error('No output from function');
 
 	return JSON.parse(response);
+};
+
+export const evaluateDialogueAppropriateness = async function (
+	assistant: string,
+	learner: string,
+	context: string
+) {
+	if (!assistant) throw new Error('No assistant dialogue provided');
+	if (!learner) throw new Error('No learner dialogue provided');
+	if (!context) throw new Error('No context provided');
+	const systemPrompt = `
+	You are english tutor, you have to evaluate learner's dialogue in term of appropriateness of 
+	the language used in the learner's dialogue based on the context and the relationship between the participants.
+
+	You will be provided a pair of dialogue between assistant and learner, 
+	and context (delimited with XML tags).
+
+	Use the following step-by-step instructions to respond to inputs.
+
+	Step 1 - First work out your own preferable dialogue in the given context. 
+	Don't rely on the learner's dialogue since it may be inappropriate. 
+	Put all your evaluation for this step within 'preferable' field in JSON schema.
+
+	Step 2 - Compare your preferable dialogue to the learner's dialogue, 
+	then evaluate learner's dialogue regarding formality, politeness, and cultural sensitivity. 
+	The learner will read you suggestion so make sure to refer to the learner by using 'You' and 'Your', instead of 'The learner'. 
+	Put all your evaluation for this step within 'suggestion' field in JSON schema.
+
+	Step 3 - Compare your preferable dialogue with learner's dialogue, 
+	examine only whether the learner's dialogue is in the given context or not. 
+	Do not consider about formality, politeness, and cultural sensitivity. 
+	Put all your examination for this step within 'isInContext' field in JSON schema.
+
+	Step 4 - Provide the output in the provided JSON schema:
+	{
+		type: "object",
+		properties: {
+			preferable: {
+				type: "array",
+						items: {
+							type: "string"
+						},
+						maxItems: 3,
+				description: "Evaluate the given context, then come up with the examples of appropriate dialogues as you will reply as if you were a learner"
+			},
+			suggestion: {
+				type: "string",
+				description: "The briefly explanation of how could learner improve their language in dialogue regarding formality, politeness, and cultural sensitivity, if the learner's dialogue is perfect offer them an encouraging comment."
+			},
+			isInContext: {
+				type: "boolean",
+				description: "Whether learner's dialogue is in the given context, true if learner's dialogue is in the given context, false otherwise"
+			}
+		},
+		required: ["preferable", "suggestion", "isInContext"]
+	}`;
+
+	// Attempting to pares gpt's output to object
+	let data: { preferable: string[]; suggestion: string; isInContext: boolean } | undefined;
+	let attempt = 0;
+	while (true) {
+		try {
+			const response = await chatCompletion([
+				{
+					role: 'system',
+					content: systemPrompt
+				},
+				{
+					role: 'user',
+					content: `
+					<context>${context}</context>
+					<assistant>${assistant}</assistant>
+					<learner>${learner}</learner>`
+				}
+			]);
+
+			// skip if no response from gpt
+			if (!response) continue;
+
+			// gpt will response in JSON format, parse it to object
+			data = JSON.parse(response);
+
+			// ensure `data` is available
+			if (!data) continue;
+			break;
+		} catch (error) {
+			// max attempt at 5
+			if (attempt++ >= 5) break;
+
+			console.error('error: parsing appropriateness object, retring...');
+		}
+	}
+
+	if (!data) throw new Error("Error: Failed to evaluate dialogue's appropriateness");
+	return data;
 };
 
 /**

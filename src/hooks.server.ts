@@ -2,7 +2,7 @@ import { isOnProduction } from '$lib/utils/environment';
 import type { Handle } from '@sveltejs/kit';
 import * as Sentry from '@sentry/sveltekit';
 
-const _whitelist = isOnProduction()
+const _whitelist: string[] = isOnProduction()
 	? ['https://learnliko.pages.dev', 'https://learnliko.netlify.app', 'https://app.learnliko.com']
 	: [
 			'http://localhost:5173',

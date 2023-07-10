@@ -3,6 +3,12 @@ import type { Mode } from '$lib/types/mode';
 import type { ChatCompletionFunctions } from 'openai';
 import { chatCompletion, gptFunctionCalling } from '../openai';
 import type { CEFRLevel } from '$lib/types/CEFRLevel';
+import {
+	evaluate_dialogue_advancement_prompt,
+	evaluate_dialogue_appropriateness_prompt,
+	evaluate_dialogue_grammar_prompt
+} from './prompt';
+import type { ChatMessage } from '$lib/types/requests/chatCompletion';
 
 export const queryConversations = async function (mode: Mode) {
 	let data; // = await import(mapping[mode]);
@@ -159,71 +165,27 @@ export const evaluateDialogueAppropriateness = async function (
 	if (!assistant) throw new Error('No assistant dialogue provided');
 	if (!learner) throw new Error('No learner dialogue provided');
 	if (!context) throw new Error('No context provided');
-	const systemPrompt = `
-	You are english tutor, you have to evaluate learner's dialogue in term of appropriateness of 
-	the language used in the learner's dialogue based on the context and the relationship between the participants.
 
-	You will be provided a pair of dialogue between assistant and learner, 
-	and context (delimited with XML tags).
-
-	Use the following step-by-step instructions to respond to inputs.
-
-	Step 1 - First work out your own preferable dialogue in the given context. 
-	Don't rely on the learner's dialogue since it may be inappropriate. 
-	Put all your evaluation for this step within 'preferable' field in JSON schema.
-
-	Step 2 - Compare your preferable dialogue to the learner's dialogue, 
-	then evaluate learner's dialogue regarding formality, politeness, and cultural sensitivity. 
-	The learner will read you suggestion so make sure to refer to the learner by using 'You' and 'Your', instead of 'The learner'. 
-	Put all your evaluation for this step within 'suggestion' field in JSON schema.
-
-	Step 3 - Compare your preferable dialogue with learner's dialogue, 
-	examine only whether the learner's dialogue is in the given context or not. 
-	Do not consider about formality, politeness, and cultural sensitivity. 
-	Put all your examination for this step within 'isInContext' field in JSON schema.
-
-	Step 4 - Provide the output in the provided JSON schema:
-	{
-		type: "object",
-		properties: {
-			preferable: {
-				type: "array",
-						items: {
-							type: "string"
-						},
-						maxItems: 3,
-				description: "Evaluate the given context, then come up with the examples of appropriate dialogues as you will reply as if you were a learner"
-			},
-			suggestion: {
-				type: "string",
-				description: "The briefly explanation of how could learner improve their language in dialogue regarding formality, politeness, and cultural sensitivity, if the learner's dialogue is perfect offer them an encouraging comment."
-			},
-			isInContext: {
-				type: "boolean",
-				description: "Whether learner's dialogue is in the given context, true if learner's dialogue is in the given context, false otherwise"
-			}
+	const messages: ChatMessage[] = [
+		{
+			role: 'system',
+			content: evaluate_dialogue_appropriateness_prompt
 		},
-		required: ["preferable", "suggestion", "isInContext"]
-	}`;
+		{
+			role: 'user',
+			content: `
+			<context>${context}</context>
+			<assistant>${assistant}</assistant>
+			<learner>${learner}</learner>`
+		}
+	];
 
-	// Attempting to pares gpt's output to object
+	// Attempting to parse gpt's output to object
 	let data: { preferable: string[]; suggestion: string; isInContext: boolean } | undefined;
 	let attempt = 0;
 	while (true) {
 		try {
-			const response = await chatCompletion([
-				{
-					role: 'system',
-					content: systemPrompt
-				},
-				{
-					role: 'user',
-					content: `
-					<context>${context}</context>
-					<assistant>${assistant}</assistant>
-					<learner>${learner}</learner>`
-				}
-			]);
+			const response = await chatCompletion(messages);
 
 			// skip if no response from gpt
 			if (!response) continue;
@@ -238,6 +200,7 @@ export const evaluateDialogueAppropriateness = async function (
 			// max attempt at 5
 			if (attempt++ >= 5) break;
 
+			messages.push({ role: 'user', content: 'Reply with provided JSON scheme' });
 			console.error('error: parsing appropriateness object, retring...');
 		}
 	}
@@ -246,39 +209,104 @@ export const evaluateDialogueAppropriateness = async function (
 	return data;
 };
 
-/**
-{
-	intro: 'Welcome to the shop how can I help you?',
-	bot: {
-		accent: 'Australia' as SynthesizeAccent,
-		gender: 'FEMALE' as SynthesizeGender,
-		prompt: `Your role:
-You are a female stationery shop keeper, you are kind, and friendly. Your name is Lucy.
+export const evaluateDialogueGrammar = async function (learner: string, context: string) {
+	if (!learner) throw new Error('No learner dialogue provided');
+	if (!context) throw new Error('No context provided');
 
-Your Goal: 
-You have to give customer an information about the product available in you store, the sell them to the customer. 
+	const messages: ChatMessage[] = [
+		{
+			role: 'system',
+			content: evaluate_dialogue_grammar_prompt
+		},
+		{
+			role: 'user',
+			content: `
+			<context>${context}</context>
+			<learner>${learner}</learner>`
+		}
+	];
 
-Answer Format:
-You have to answer in the JSON format by using to following JSON schema
+	// Attempting to parse gpt's output to object
+	let data:
+		| { preferable: string[]; suggestion: string; accuracy: 'LOW' | 'MEDIUM' | 'HIGH' }
+		| undefined;
+	let attempt = 0;
+	while (true) {
+		try {
+			const response = await chatCompletion(messages);
 
-{
-// your response
-"message": string,
-// the enum value
-// “NORMAL” used when the situation is normal
-// “INAPPROPRIATE” used when the situation is out of context or say something inappropriate
-// “END-OF-CONVERSATION” used when the customer have left or finish purchased your product
-"status": string
-}
+			// skip if no response from gpt
+			if (!response) continue;
 
-Shop information:
-There are only pen and pencil available in your store.
-The pen and pencil is 5฿ and 10฿ each respectively.
-Your store have only 10 pens, 10 pencils stock in your storage.
+			// gpt will response in JSON format, parse it to object
+			data = JSON.parse(response);
 
-My role:
-I will be your customer who is an kid and have English proficiency at level A1.`
+			// ensure `data` is available
+			if (!data) continue;
+			break;
+		} catch (error) {
+			// max attempt at 5
+			if (attempt++ >= 5) break;
+
+			messages.push({ role: 'user', content: 'Reply with provided JSON scheme' });
+			console.error('error: parsing evaluated grammar object, retring...');
+		}
 	}
+
+	if (!data) throw new Error("Error: Failed to evaluate dialogue's grammar");
+	return data;
 };
 
-*/
+export const evaluateDialogueAdvancement = async function (
+	learner: string,
+	targetLevel: CEFRLevel,
+	context: string
+) {
+	if (!learner) throw new Error('No learner dialogue provided');
+	if (!targetLevel) throw new Error('No targetLevel provided');
+	if (!context) throw new Error('No context provided');
+
+	const messages: ChatMessage[] = [
+		{
+			role: 'system',
+			content: evaluate_dialogue_advancement_prompt
+		},
+		{
+			role: 'user',
+			content: `
+			<context>${context}</context>
+			<targetLevel>${targetLevel}</targetLevel>
+			<learner>${learner}</learner>`
+		}
+	];
+
+	// Attempting to pares gpt's output to object
+	let data:
+		| { preferable: string[]; suggestion: string; accuracy: 'LOW' | 'MEDIUM' | 'HIGH' }
+		| undefined;
+	let attempt = 0;
+	while (true) {
+		try {
+			const response = await chatCompletion(messages);
+
+			// skip if no response from gpt
+			if (!response) continue;
+
+			// gpt will response in JSON format, parse it to object
+			data = JSON.parse(response);
+
+			// ensure `data` is available
+			if (!data) continue;
+			break;
+		} catch (error) {
+			// max attempt at 5
+			if (attempt++ >= 5) break;
+
+			messages.push({ role: 'user', content: 'Reply with provided JSON scheme' });
+			console.error('error: parsing evaluated advancement object, retring...');
+		}
+	}
+
+	if (!data) throw new Error("Error: Failed to evaluate dialogue's advancement");
+	return data;
+};

@@ -12,6 +12,20 @@
 	let background =
 		'https://cdn.discordapp.com/attachments/842737146321174558/1124045015631528038/image.png';
 
+	const answerGetter = async (
+		item: ReadingCard, selected: number[]
+	): Promise<{
+		answers: number[];
+		correct: number;
+	}> => {
+		const answers: number[] = item.questions.map(q => q.answer);
+		const correct = item.questions.filter((q, index) => q.answer === selected[index]).length;
+
+		return {
+			answers,
+			correct
+		};
+	};
 	// const { open }: Context = getContext('simple-modal');
 	// const showQuiz = () => open(ReadingQuizModal, { item });
 
@@ -38,7 +52,10 @@
 		</div>
 	</div>
 
-	<button on:click={goBack} class="absolute left-[2vw] top-[2vw] rounded-full bg-white px-[1.5vw] py-[0.7vw]">
+	<button
+		on:click={goBack}
+		class="absolute left-[2vw] top-[2vw] rounded-full bg-white px-[1.5vw] py-[0.7vw]"
+	>
 		<svg class="w-[5vw]" viewBox="0 0 78 23" fill="none" xmlns="http://www.w3.org/2000/svg">
 			<g clip-path="url(#clip0_1192_5485)">
 				<path
@@ -170,7 +187,7 @@
 		</div>
 	</div>
 
-	<ReadingContainer {item} class="mx-auto h-[75vh] w-[75vw]" />
+	<ReadingContainer {answerGetter} {item} class="mx-auto h-[75vh] w-[75vw]" />
 	<!-- <div
 		style="background-image: url('{item.image}');"
 		class="relative bg-cover bg-center w-[100vw] h-[100vh] font-line-seed"

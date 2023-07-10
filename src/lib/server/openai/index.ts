@@ -8,7 +8,8 @@ import {
 } from 'openai';
 import {
 	OpenAIApi as OpenAIEdgeApi,
-	Configuration as EdgeConfiguration
+	Configuration as EdgeConfiguration,
+	type ChatCompletionRequestMessage
 } from 'openai-edge';
 import { Readable } from 'stream';
 
@@ -34,7 +35,7 @@ export const chatCompletion = async function (messages: ChatMessage[]) {
 };
 
 export const gptFunctionCalling = async function (
-	messages: ChatMessage[],
+	messages: ChatCompletionRequestMessage[],
 	functions: ChatCompletionFunctions[],
 	function_call: CreateChatCompletionRequestFunctionCall,
 	temperature = 0.5
@@ -46,7 +47,6 @@ export const gptFunctionCalling = async function (
 		functions,
 		function_call
 	});
-
 	return chatGPT.data.choices[0].message?.function_call?.arguments;
 };
 
@@ -92,7 +92,7 @@ export const assistantChatCompletion = async (message: ChatMessage[]) => {
 
 	// 		if (!completion.body)
 	// 			throw Error('No response body from OpenAI chat completion api.');
-				
+
 	// 		const reader = completion.body.pipeThrough(new TextDecoderStream()).getReader();
 	// 		while (true) {
 	// 			const { value, done } = await reader.read();

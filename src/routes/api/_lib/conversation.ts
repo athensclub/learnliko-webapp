@@ -179,10 +179,10 @@ export const getConversations = async () => {
 	return val;
 };
 
-export const checkGoalProgress = async function (dialogue: string, goal: string) {
+export const checkGoalProgress = async function (latest: string, history: string | null, goal: string) {
 	const response = await fetch('/api/v1/conversation/utils/goalProgress', {
 		method: 'POST',
-		body: JSON.stringify({ dialogue, goal })
+		body: JSON.stringify({ latest, history, goal })
 	});
 
 	const { result } = await response.json();

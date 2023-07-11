@@ -106,6 +106,7 @@
 				topic: '',
 				background: '',
 				fromLesson: conversation?.fromLesson ?? '',
+				context: conversation?.context ?? '',
 				id: conversation?.id ?? ''
 			},
 			bot: { emotion: 'neutral' }

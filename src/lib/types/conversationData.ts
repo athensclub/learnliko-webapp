@@ -32,6 +32,7 @@ export interface ConversationCarouselItem {
 	background: string;
 	details: ConversationDetails;
 	avatar: ConversationAvatar;
+	context: string;
 	id: string;
 }
 

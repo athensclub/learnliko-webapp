@@ -150,6 +150,7 @@ export const GET_LESSON = graphql(`
 						}
 						... on ConversationCard {
 							id
+							context
 							totalExp
 							totalCoin
 							type

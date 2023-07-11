@@ -62,6 +62,7 @@ export type RecapResult = {
 	history: RecapHistory;
 	coins: number;
 	score: number;
+	exp: number;
 };
 
 /**

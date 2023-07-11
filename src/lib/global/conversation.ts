@@ -210,15 +210,24 @@ const botReply = async function (message?: string, targetLevel: CEFRLevel = 'A1'
 	if (!hasMessage && get(isCheckConversationGoal)) {
 		const _history = get(history);
 		const passed = await checkGoalProgress(
-			_history.slice(Math.max(0, _history.length - 2)).map(
-				(item) =>
-					`${item.role === 'user' ? 'User' : ct.conversation.avatar.name}: ${item.transcription}`
-			)
+			_history
+				.slice(Math.max(0, _history.length - 2))
+				.map(
+					(item) =>
+						`${item.role === 'user' ? 'User' : ct.conversation.avatar.name}: ${item.transcription}`
+				)
 				.join('\n'),
-			_history.length > 2 ? _history.slice(0, _history.length - 2).map(
-				(item) =>
-					`${item.role === 'user' ? 'User' : ct.conversation.avatar.name}: ${item.transcription}`
-			).join('\n') : null,
+			_history.length > 2
+				? _history
+						.slice(0, _history.length - 2)
+						.map(
+							(item) =>
+								`${item.role === 'user' ? 'User' : ct.conversation.avatar.name}: ${
+									item.transcription
+								}`
+						)
+						.join('\n')
+				: null,
 			ct.conversation.details.learner.goal[get(currentGoal)]
 		);
 		console.log(passed);
@@ -328,7 +337,7 @@ const computeRecap = async () => {
 		const task = analyzeGoalScore(
 			details.hintUsed,
 			ct.conversation.CEFRlevel,
-			ct.conversation.details.learner.mission,
+			ct.conversation.context,
 			pairDialogues.map((d) => {
 				return { assistant: d.assistant.transcription!, user: d.user.transcription! };
 			})
@@ -355,6 +364,7 @@ const computeRecap = async () => {
 			goalsResult[goalIndex] = {
 				coins: result.coins,
 				score: result.overall,
+				exp: result.overall,
 				history: dialoguesResult
 			};
 		});
@@ -365,6 +375,7 @@ const computeRecap = async () => {
 	await Promise.all(promises);
 
 	let overallScore = 0,
+		totalExp = 0,
 		totalCoins = 0,
 		recapDialogues: RecapHistory = [];
 	goalsResult.forEach((e) => {
@@ -394,6 +405,7 @@ const computeRecap = async () => {
 				};
 			})
 		};
+		totalExp += e.score;
 	}
 
 	const uid = userSession.value().accountData?.uid!;
@@ -426,5 +438,10 @@ const computeRecap = async () => {
 	// 	conversationID: ct.conversation.id
 	// });
 
-	recapResult.set({ score: overallScore, coins: totalCoins, history: recapDialogues });
+	recapResult.set({
+		score: overallScore,
+		exp: totalExp,
+		coins: totalCoins,
+		history: recapDialogues
+	});
 };

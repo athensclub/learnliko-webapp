@@ -12,10 +12,6 @@
 	export let assistantProfileImage: string;
 	export let dialogue: RecapHistoryItem;
 
-	dialogue.suggestion = dialogue.suggestion
-		? dialogue.suggestion
-		: "There's no suggestion for this dialogue.";
-
 	const mockHistory: ConversationHistoryItem[] = [
 		{ chat: dialogue.assistant },
 		{ chat: dialogue.user! }
@@ -45,19 +41,24 @@
 	</div>
 
 	<div class="mt-3 w-full px-5 text-base font-bold">Suggestion</div>
+
 	<div class="mt-2 px-5">
-		{#if dialogue.advancementExample.length > 0}
+		{#if dialogue.dialogueScore.advancement.examples.length > 0}
 			<p class=" font-bold text-gray-700">
 				เพื่อยกระดับภาษาในการสนทนาของคุณ ลองใช้ตัวอย่างต่อไปนี้:
+				{dialogue.dialogueScore.advancement.suggestion}
 			</p>
-			{#each dialogue.advancementExample as example}
+			{#each dialogue.dialogueScore.advancement.examples as example}
 				"{example}"<br />
 			{/each}
 			<br />
 		{/if}
-		{#if dialogue.grammarExample.length > 0}
-			<p class=" font-bold text-gray-700">นี่คือตัวอย่างของการสนทนาที่ถูกต้องตามไวยากรณ์:</p>
-			{#each dialogue.grammarExample as example}
+		{#if dialogue.dialogueScore.grammar.examples.length > 0}
+			<p class=" font-bold text-gray-700">
+				นี่คือตัวอย่างของการสนทนาที่ถูกต้องตามไวยากรณ์:
+				{dialogue.dialogueScore.grammar.suggestion}
+			</p>
+			{#each dialogue.dialogueScore.grammar.examples as example}
 				"{example}"<br />
 			{/each}
 		{/if}

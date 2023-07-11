@@ -6,40 +6,42 @@
 	import { fade } from 'svelte/transition';
 
 	export let avatar: string;
+	export let exp: number;
+	export let coin: number;
 
 	let displayExp = tweened(0);
 	let displayCoin = tweened(0);
 
 	// TODO: use actual data
 	onMount(() => {
-		$displayExp = 25;
-		$displayCoin = 100;
+		$displayExp = exp;
+		$displayCoin = coin;
 	});
 </script>
 
 <div
 	transition:fade
-	class="absolute w-full h-full flex items-center justify-center overflow-hidden pointer-events-none"
+	class="pointer-events-none absolute flex h-full w-full items-center justify-center overflow-hidden"
 >
 	<div
-		class="w-[60vw] h-[30vw] px-[4vw] bg-white rounded-[2vw] flex flex-row justify-between pointer-events-auto overflow-hidden"
+		class="pointer-events-auto flex h-[30vw] w-[60vw] flex-row justify-between overflow-hidden rounded-[2vw] bg-white px-[4vw]"
 	>
 		<div class="flex flex-col py-[3vw] font-bold">
 			<div class="text-[2.5vw]">Congratulation 🎉</div>
 
-			<div class="flex flex-row items-center mt-[3vw]">
-				<CircularProgressBar class="w-[12vw] h-[12vw]" value={50}>
-					<div class="flex flex-col items-center justify-center h-full">
+			<div class="mt-[3vw] flex flex-row items-center">
+				<CircularProgressBar class="h-[12vw] w-[12vw]" value={50}>
+					<div class="flex h-full flex-col items-center justify-center">
 						<div class="text-[0.3vw]">CEFR</div>
 						<div class="text-[2vw]">pre-A1</div>
 					</div>
 				</CircularProgressBar>
 
-				<div class="flex flex-col ml-[4vw]">
+				<div class="ml-[4vw] flex flex-col">
 					<div class="text-[2vw]">คุณได้รับ</div>
-					<div class="flex flex-row items-center mt-[1vw]">
+					<div class="mt-[1vw] flex flex-row items-center">
 						<div
-							class="text-[3vw] text-transparent bg-clip-text bg-gradient-to-r from-[#C698FF] to-[#6C80E8]"
+							class="bg-gradient-to-r from-[#C698FF] to-[#6C80E8] bg-clip-text text-[3vw] text-transparent"
 						>
 							+{Math.floor($displayExp)}
 						</div>
@@ -84,9 +86,9 @@
 						</svg>
 					</div>
 
-					<div class="flex flex-row items-center mt-[1vw]">
+					<div class="mt-[1vw] flex flex-row items-center">
 						<div
-							class="text-[3vw] text-transparent bg-clip-text bg-gradient-to-t from-[#FFE08F] via-[#E4AE24] to-[#FFE08F]"
+							class="bg-gradient-to-t from-[#FFE08F] via-[#E4AE24] to-[#FFE08F] bg-clip-text text-[3vw] text-transparent"
 						>
 							+{Math.floor($displayCoin)}
 						</div>

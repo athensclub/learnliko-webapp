@@ -35,14 +35,14 @@
 			>
 				{#if item.chat.role === 'assistant'}
 					<div
-						class={`h-[42px] w-[42px]  rounded-full border border-white bg-cover bg-top`}
+						class={`h-[3.4vw] w-[3.4vw] rounded-full border border-white bg-cover bg-top`}
 						style="background-color: #766A78; background-image: url('{assistantProfileImage}');"
 					/>
 				{/if}
 
 				{#if item.chat.role === 'user'}
 					<div
-						class={`h-[42px] w-[42px] rounded-full border  border-white bg-cover bg-center`}
+						class={`h-[3.4vw] w-[3.4vw] rounded-full border  border-white bg-cover bg-center`}
 						style="background-image: url('{userProfileImage}');"
 					/>
 				{/if}
@@ -52,7 +52,7 @@
 					style="background-color: {item.chat.role === 'user'
 						? userBackgroundColor
 						: aiBackgroundColor};"
-					class={`mx-3 h-[44px] w-[70%] rounded-full ${
+					class={`mx-[1vw] h-[3vw] w-[70%] rounded-full ${
 						item.chat.role === 'user' ? 'shadow-lg backdrop-blur-lg' : ' shadow-lg backdrop-blur-lg'
 					}`}
 					defaultBlockColor={item.chat.role === 'user' ? 'white' : 'black'}

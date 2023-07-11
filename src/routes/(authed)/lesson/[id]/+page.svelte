@@ -25,9 +25,13 @@
 	import userSession from '$lib/stores/userSession';
 	import type { SynthesizeAccent, SynthesizeGender } from '$api/tts';
 	import { Howl } from 'howler';
+	import { graphqlClient } from '$lib/graphql';
+	import { GET_RECAP_LESSON_CURRENCIES } from '$gql/schema/queries';
 
 	let item: LessonCard | null = null;
 	let background: string | null = null;
+	let totalCoin = 0,
+		totalExp = 0;
 
 	let music: Howl | null = null;
 
@@ -104,8 +108,9 @@
 				intro: conversation?.bot.intro ?? 'unknown',
 				image: '',
 				topic: '',
-				background: '',
+				background: item.narratives[item.narratives.length-1].illustrationUrl,
 				fromLesson: conversation?.fromLesson ?? '',
+				context: conversation?.context ?? '',
 				id: conversation?.id ?? ''
 			},
 			bot: { emotion: 'neutral' }
@@ -135,9 +140,18 @@
 		| 'CONVERSATION'
 		| 'FINISHED' = 'INTRO';
 
-	const onFinishedLesson = () => {
+	const onFinishedLesson = async () => {
 		currentView = 'FINISHED';
 		$lastPlayedLessonIdLocal = null;
+		const query = await graphqlClient
+			.query(GET_RECAP_LESSON_CURRENCIES, {
+				lessonId: item?.id ?? '',
+				uid: $userSession.accountData?.uid ?? ''
+			})
+			.toPromise();
+
+		totalCoin = query.data?.lessonProgress?.totalCoin ?? 0;
+		totalExp = query.data?.lessonProgress?.totalExp ?? 0;
 	};
 
 	onDestroy(() => {
@@ -281,6 +295,8 @@
 		{:else if currentView === 'FINISHED'}
 			<LessonFinishedView
 				avatar="https://cdn.discordapp.com/attachments/842737146321174558/1124658451738533959/image.png"
+				coin={totalCoin}
+				exp={totalExp}
 			/>
 		{/if}
 	{/if}

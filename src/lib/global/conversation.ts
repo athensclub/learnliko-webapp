@@ -208,13 +208,26 @@ const botReply = async function (message?: string, targetLevel: CEFRLevel = 'A1'
 
 	// prevent checking for the first time (user has not chat yet, only assistant)
 	if (!hasMessage && get(isCheckConversationGoal)) {
+		const _history = get(history);
 		const passed = await checkGoalProgress(
-			get(history)
+			_history
+				.slice(Math.max(0, _history.length - 2))
 				.map(
 					(item) =>
 						`${item.role === 'user' ? 'User' : ct.conversation.avatar.name}: ${item.transcription}`
 				)
 				.join('\n'),
+			_history.length > 2
+				? _history
+						.slice(0, _history.length - 2)
+						.map(
+							(item) =>
+								`${item.role === 'user' ? 'User' : ct.conversation.avatar.name}: ${
+									item.transcription
+								}`
+						)
+						.join('\n')
+				: null,
 			ct.conversation.details.learner.goal[get(currentGoal)]
 		);
 		console.log(passed);
@@ -324,7 +337,7 @@ const computeRecap = async () => {
 		const task = analyzeGoalScore(
 			details.hintUsed,
 			ct.conversation.CEFRlevel,
-			ct.conversation.details.learner.mission,
+			ct.conversation.context,
 			pairDialogues.map((d) => {
 				return { assistant: d.assistant.transcription!, user: d.user.transcription! };
 			})
@@ -343,17 +356,15 @@ const computeRecap = async () => {
 						audioURL: pairDialogues[i].user.audioURL,
 						transcription: pairDialogues[i].user.transcription!
 					},
-					suggestion: "",
 					dialogueScore: _result,
-					score: 50 + _result.advancement.score * 0.3 + _result.grammar.score * 0.2,
-					advancementExample: _result.advancement.examples,
-					grammarExample: _result.grammar.examples
+					score: _result.overall
 				});
 			}
 
 			goalsResult[goalIndex] = {
 				coins: result.coins,
 				score: result.overall,
+				exp: result.overall,
 				history: dialoguesResult
 			};
 		});
@@ -364,14 +375,15 @@ const computeRecap = async () => {
 	await Promise.all(promises);
 
 	let overallScore = 0,
+		totalExp = 0,
 		totalCoins = 0,
 		recapDialogues: RecapHistory = [];
 	goalsResult.forEach((e) => {
-		totalCoins += e.coins;
 		overallScore += e.score;
 		recapDialogues.push(...e.history);
 	});
 	overallScore = overallScore / goalTracking.length;
+	totalCoins = goalTracking.map((e) => (e.hintUsed ? 40 : 100)).reduce((x, y) => x + y, 0);
 
 	// TODO: find a better approach to promote/demote user's CEFR level
 	// if (totalScore > 90) setCurrentCEFRLevel(ct!.conversation.CEFRlevel);
@@ -382,20 +394,18 @@ const computeRecap = async () => {
 		_recapHistory[index] = {
 			coin: e.coins,
 			exp: e.score,
+			hintUsed: goalTracking[index].hintUsed,
 			goal: ct.conversation.details.learner.goal[index],
 			hint: ct.conversation.details.learner.hint[index],
 			dialogues: e.history.map((d) => {
 				return {
 					assistant: d.assistant.transcription,
 					user: d.user?.transcription ?? '',
-					score: {
-						advancement: d.dialogueScore.advancement,
-						appropriateness: d.dialogueScore.appropriateness,
-						grammar: d.dialogueScore.grammar
-					}
+					score: d.dialogueScore
 				};
 			})
 		};
+		totalExp += e.score;
 	}
 
 	const uid = userSession.value().accountData?.uid!;
@@ -428,5 +438,10 @@ const computeRecap = async () => {
 	// 	conversationID: ct.conversation.id
 	// });
 
-	recapResult.set({ score: overallScore, coins: totalCoins, history: recapDialogues });
+	recapResult.set({
+		score: overallScore,
+		exp: totalExp,
+		coins: totalCoins,
+		history: recapDialogues
+	});
 };

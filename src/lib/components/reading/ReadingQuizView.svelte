@@ -18,6 +18,8 @@
 	export let setView: (view: ReadingViewType) => void;
 	export let onFinish: () => void;
 
+	export let answerGetter: (item: ReadingCard, selected: number[]) => Promise<{ answers: number[]; correct: number }>;
+
 	export let showFinishButton: boolean;
 
 	export let scale = 1;
@@ -26,30 +28,9 @@
 
 	$: submittable = selected.every((val) => val !== null);
 	const submit = async () => {
-		const result = await graphqlClient
-			.mutation(RECAP_READING_QUIZ, {
-				data: {
-					quizCard: item.id,
-					userAnswer: selected.map((i) => i ?? 0)
-				},
-				uid: $userSession.accountData?.uid!
-			})
-			.toPromise();
-
-		await graphqlClient
-			.mutation(UPDATE_LESSON_PROGRESS, {
-				uid: $userSession.accountData?.uid!,
-				data: {
-					lessonId: item.fromLesson,
-					quizCardId: item.id,
-					quizRecapId: result.data?.readingRecapCreate.id!,
-					sectionIndex: 2
-				}
-			})
-			.toPromise();
-
-		correctAnswers = result.data?.readingRecapCreate.answer.map((a) => a.answerIndex) ?? [];
-		totalCorrect = result.data?.readingRecapCreate.totalCorrect ?? 0;
+		const result = await answerGetter(item, selected.map(v => v ?? 0));
+		correctAnswers = result.answers;
+		totalCorrect = result.correct;
 
 		toast(AnswerCorrectToast, {
 			exp: (item.totalExp * totalCorrect) / quiz.length,

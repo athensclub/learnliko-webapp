@@ -150,6 +150,7 @@ export const GET_LESSON = graphql(`
 						}
 						... on ConversationCard {
 							id
+							context
 							totalExp
 							totalCoin
 							type
@@ -194,6 +195,15 @@ export const GET_LESSON = graphql(`
 			progress
 			status
 			difficulty
+		}
+	}
+`);
+
+export const GET_RECAP_LESSON_CURRENCIES = graphql(`
+	query LessonProgressCurrencies($lessonId: ID!, $uid: ID!) {
+		lessonProgress(lessonId: $lessonId, uid: $uid) {
+			totalExp
+			totalCoin
 		}
 	}
 `);

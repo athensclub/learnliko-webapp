@@ -10,6 +10,13 @@ export const POST: RequestHandler = async ({ request }) => {
 		const result = await transcribe(audioBlob);
 		return json({ text: result });
 	} catch (e) {
-		throw error(500, `Error: ${e}`);
+		// TODO: Find a better way of handling this.
+		// Current Idea: Invalid file format probably happen when audio is too short?
+		// we treat really short audio as no text for now.
+		if (e.response.data.error.type === 'invalid_request_error') {
+			return json({ text: '' });
+		} else {
+			throw error(500, `Error: ${e}`);
+		}
 	}
 };

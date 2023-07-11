@@ -28,9 +28,10 @@ type ChatboxContext = {
 export const chatContext = writable<ChatboxContext | null>();
 
 export interface DialogueScore {
-	appropriateness: boolean;
-	grammar: { score: number; examples: string[] };
-	advancement: { score: number; examples: string[] };
+	overall: number;
+	appropriateness: { score: number; examples: string[]; suggestion: string };
+	grammar: { score: number; examples: string[]; suggestion: string };
+	advancement: { score: number; examples: string[]; suggestion: string };
 }
 
 /**
@@ -47,11 +48,8 @@ export type RecapHistoryItem = {
 		audioURL: string;
 		transcription: string;
 	} | null;
-	suggestion: string;
 	dialogueScore: DialogueScore;
 	score: number;
-	advancementExample: string[];
-	grammarExample: string[];
 };
 
 /**
@@ -64,6 +62,7 @@ export type RecapResult = {
 	history: RecapHistory;
 	coins: number;
 	score: number;
+	exp: number;
 };
 
 /**

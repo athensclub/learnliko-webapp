@@ -90,7 +90,7 @@
 		>
 			<!-- Mission Details container -->
 			<div
-				class={`pointer-events-auto flex rounded-xl border p-[1.5vw] font-line-seed shadow-sm backdrop-blur-lg backdrop-brightness-75 transition-transform ${
+				class={`pointer-events-auto flex rounded-[1vw] border p-[1.5vw] font-line-seed shadow-sm backdrop-blur-lg backdrop-brightness-75 transition-transform ${
 					$isMobile
 						? `absolute w-full text-[1.3vw] ${
 								briefing
@@ -379,9 +379,7 @@
 			<div class={`flex h-full flex-col justify-end ${$isMobile ? 'w-full' : 'w-fit'}`}>
 				<img
 					class={`${
-						$isMobile
-							? 'mx-auto max-h-full max-w-full'
-							: `${briefing ? 'h-[90%]' : 'max-h-[90%] w-full'} bottom-0 transition-transform`
+						$isMobile ? 'mx-auto max-h-full max-w-full' : `bottom-0 h-[90%] transition-transform`
 					}`}
 					src={$chatContext.conversation.avatar.models[$chatContext.bot.emotion]}
 					alt="Avatar"
@@ -398,7 +396,7 @@
 				>
 					<div
 						transition:fly={{ y: 800, duration: 800 }}
-						class={`relative flex h-full w-full flex-col items-center overflow-hidden rounded-3xl border-[1px] border-b-0 border-black/10 bg-transparent font-line-seed shadow-2xl shadow-gray-700 backdrop-blur-sm backdrop-brightness-75`}
+						class={`relative flex h-full w-full flex-col items-center overflow-hidden rounded-[1.6vw] border-[1px] border-b-0 border-black/10 bg-transparent font-line-seed shadow-2xl shadow-gray-700 backdrop-blur-sm backdrop-brightness-75`}
 					>
 						<ConversationView
 							onFinishClicked={showRecap}

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { synthesize } from '$api/tts';
+	import { synthesize, type SynthesizeAccent, type SynthesizeGender } from '$api/tts';
 	import type { LessonCard } from '$gql/generated/graphql';
 	import { playAudioURL } from '$lib/global/audio';
 	import { isMobile } from '$lib/global/breakpoints';
@@ -15,7 +15,12 @@
 	let speech: string | null = null;
 	// TODO: use data from api instead.
 	const loadSpeech = async () => {
-		const val = await synthesize(item.intro.message, 'US', 'FEMALE', 0.7);
+		const val = await synthesize(
+			item.intro.message,
+			item.intro.bot.accent as SynthesizeAccent,
+			item.intro.bot.gender as SynthesizeGender,
+			0.7
+		);
 		speech = await blobToBase64(val);
 	};
 	onMount(() => loadSpeech());

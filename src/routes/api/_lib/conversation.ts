@@ -2,7 +2,10 @@ import type { RecapResult } from '$lib/global/chatbox';
 import type { RecapHistory, DialogueScore } from '$lib/global/chatbox';
 import { currentMode } from '$lib/global/mode';
 import type { CEFRLevel } from '$lib/types/CEFRLevel';
-import type { ConversationCarouselItem } from '$lib/types/conversationData';
+import type {
+	ConversationCarouselItem,
+	DialogueEvaluationResult
+} from '$lib/types/conversationData';
 import type { Mode } from '$lib/types/mode';
 import type { ChatMessage } from '$lib/types/requests/chatCompletion';
 import { round } from '$lib/utils/math';
@@ -45,9 +48,9 @@ export const assistantChat = async function (
 
 		let lines: string[];
 		if (temp.length === 0) {
-			lines = value.split("\n");
+			lines = value.split('\n');
 		} else {
-			lines = (temp + value).split("\n");
+			lines = (temp + value).split('\n');
 			temp = ''; // can reset now because if it fail again, old temp will be present in lines already.
 		}
 
@@ -63,8 +66,7 @@ export const assistantChat = async function (
 			try {
 				const obj = JSON.parse(str);
 				const content = obj.choices[0].delta.content;
-				if (content)
-					callback(obj.choices[0].delta.content);
+				if (content) callback(obj.choices[0].delta.content);
 			} catch (e) {
 				// fail JSON parse, data has not be received fully, save in temp and wait for next iteration.
 				// use line variable so that in next iteration, the first 5 characters will be preserved
@@ -75,8 +77,7 @@ export const assistantChat = async function (
 
 		if (toBreak) break;
 	}
-}
-
+};
 
 export const analyzeDialog = async function (assistant: string, user: string) {
 	const prompt: ChatMessage[] = [];
@@ -178,10 +179,14 @@ export const getConversations = async () => {
 	return val;
 };
 
-export const checkGoalProgress = async function (dialogue: string, goal: string) {
+export const checkGoalProgress = async function (
+	latest: string,
+	history: string | null,
+	goal: string
+) {
 	const response = await fetch('/api/v1/conversation/utils/goalProgress', {
 		method: 'POST',
-		body: JSON.stringify({ dialogue, goal })
+		body: JSON.stringify({ latest, history, goal })
 	});
 
 	const { result } = await response.json();
@@ -192,16 +197,59 @@ export const analyzeDialogueScore = async function (
 	assistant: string,
 	user: { message: string; CEFRLevel: CEFRLevel },
 	context: string
-) {
+): Promise<DialogueScore> {
 	const response = await fetch('/api/v1/conversation/utils/analyzeDialogue', {
 		method: 'POST',
 		body: JSON.stringify({ assistant, user, context })
 	});
+	const returnedData: DialogueScore = {
+		overall: 0,
+		appropriateness: { score: 0, examples: [], suggestion: '' },
+		grammar: { score: 0, examples: [], suggestion: '' },
+		advancement: { score: 0, examples: [], suggestion: '' }
+	};
 
-	const data = (await response.json()) as DialogueScore;
-	data.advancement.score *= 10;
-	data.grammar.score *= 10;
-	return data;
+	const data = (await response.json()) as DialogueEvaluationResult;
+
+	returnedData.appropriateness = {
+		score: data.appropriateness?.isInContext ? 100 : 0,
+		examples: data.appropriateness?.preferable ?? [],
+		suggestion: data.appropriateness?.suggestion ?? ''
+	};
+
+	if (returnedData.appropriateness.score > 0) {
+		returnedData.grammar = {
+			score:
+				data.grammar?.accuracy === 'HIGH'
+					? 100
+					: data.grammar?.accuracy === 'MEDIUM'
+					? 70
+					: data.grammar?.accuracy === 'LOW'
+					? 50
+					: 0,
+			examples: data.grammar?.preferable ?? [],
+			suggestion: data.grammar?.suggestion ?? ''
+		};
+		returnedData.advancement = {
+			score:
+				data.advancement?.accuracy === 'HIGH'
+					? 100
+					: data.advancement?.accuracy === 'MEDIUM'
+					? 70
+					: data.advancement?.accuracy === 'LOW'
+					? 50
+					: 0,
+			examples: data.advancement?.preferable ?? [],
+			suggestion: data.advancement?.suggestion ?? ''
+		};
+	}
+
+	returnedData.overall =
+		returnedData.appropriateness.score === 100
+			? 50 + returnedData.advancement.score * 0.3 + returnedData.grammar.score * 0.2
+			: 0;
+
+	return returnedData;
 };
 
 export const analyzeGoalScore = async function (
@@ -214,11 +262,13 @@ export const analyzeGoalScore = async function (
 
 	if (hintUsed) {
 		result.coins = 40;
+		result.overall = 40;
 		for (let index = 0; index < dialogues.length; index++) {
 			result.scores[index] = {
-				grammar: { examples: [], score: 0 },
-				appropriateness: true,
-				advancement: { examples: [], score: 0 }
+				overall: 0,
+				appropriateness: { score: 0, examples: [], suggestion: '' },
+				grammar: { score: 0, examples: [], suggestion: '' },
+				advancement: { score: 0, examples: [], suggestion: '' }
 			};
 		}
 		return result;
@@ -238,17 +288,10 @@ export const analyzeGoalScore = async function (
 	}
 	await Promise.all(promises);
 
-	result.overall =
-		result.scores
-			.map((e) => (e.appropriateness ? 50 + e.advancement.score * 0.3 + e.grammar.score * 0.2 : 0))
-			.reduce((x, y) => x + y, 0) / result.scores.length;
+	result.overall = result.scores.reduce((x, y) => x + y.overall, 0) / result.scores.length;
 	result.overall = round(result.overall, 2);
 
-	result.coins =
-		result.scores
-			.map((e) => (e.appropriateness ? 50 + e.advancement.score * 0.3 + e.grammar.score * 0.2 : 40))
-			.reduce((x, y) => x + y, 0) / result.scores.length;
-	result.coins = round(result.coins, 0);
+	result.coins = 100;
 
 	return result;
 };

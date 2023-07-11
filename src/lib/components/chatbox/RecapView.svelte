@@ -29,7 +29,7 @@
 
 {#if $recapResult && $chatContext}
 	<div class="relative flex h-[48px] w-full items-center justify-between text-lg font-bold">
-		<div class="text-[1.8vw] ml-[2vw]">ดูย้อนหลัง</div>
+		<div class="ml-[2vw] text-[1.8vw]">ดูย้อนหลัง</div>
 		<button
 			on:click={hide}
 			class="ml-auto mr-4 h-[28px] rounded-lg bg-[#6C80E8] px-3 text-center text-base text-white"
@@ -53,8 +53,7 @@
 					<div
 						class="bg-gradient-to-br from-[#C698FF] to-[#6C80E8] bg-clip-text text-[1.5vw] text-transparent"
 					>
-						<!-- TODO: display actual data -->
-						+25
+						+{$recapResult.exp}
 					</div>
 					<svg
 						class="ml-[0.5vw] w-[3.5vw]"
@@ -99,7 +98,6 @@
 					<div
 						class="ml-[2vw] bg-gradient-to-t from-[#FFE08F] via-[#E4AE24] to-[#FFE08F] bg-clip-text text-[1.5vw] text-transparent"
 					>
-						<!-- TODO: display actual data -->
 						+{$recapResult.coins}
 					</div>
 					<svg

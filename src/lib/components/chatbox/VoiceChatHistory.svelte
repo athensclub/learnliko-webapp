@@ -3,6 +3,7 @@
 	import type { ConversationHistoryItem } from '$lib/types/conversationData';
 	import AudioPlayer from '../AudioPlayer.svelte';
 	import Typewriter from 'svelte-typewriter';
+	import ChatHint from './ChatHint.svelte';
 
 	export let aiBackgroundColor = '#FFFFFF3D';
 	export let userBackgroundColor = '#FFFFFF3D';
@@ -23,25 +24,25 @@
 {#each history as item, index (index)}
 	{#if item.chat}
 		<div
-			class={`flex flex-col px-4 w-full ${
+			class={`flex w-full flex-col px-4 ${
 				item.chat.role === 'user' ? 'items-end' : 'items-start'
 			} ${clazz}`}
 		>
 			<div
-				class={`flex pt-[2vh] flex-row items-center  w-full ${
+				class={`flex w-full flex-row items-center  pt-[2vh] ${
 					item.chat.role === 'user' ? 'flex-row-reverse' : ''
 				}`}
 			>
 				{#if item.chat.role === 'assistant'}
 					<div
-						class={`w-[42px] h-[42px]  bg-top bg-cover rounded-full border border-white`}
+						class={`h-[3.4vw] w-[3.4vw] rounded-full border border-white bg-cover bg-top`}
 						style="background-color: #766A78; background-image: url('{assistantProfileImage}');"
 					/>
 				{/if}
 
 				{#if item.chat.role === 'user'}
 					<div
-						class={`w-[42px] h-[42px] bg-center bg-cover  rounded-full border border-white`}
+						class={`h-[3.4vw] w-[3.4vw] rounded-full border  border-white bg-cover bg-center`}
 						style="background-image: url('{userProfileImage}');"
 					/>
 				{/if}
@@ -51,8 +52,8 @@
 					style="background-color: {item.chat.role === 'user'
 						? userBackgroundColor
 						: aiBackgroundColor};"
-					class={`mx-3 w-[70%] h-[44px] rounded-full ${
-						item.chat.role === 'user' ? 'backdrop-blur-lg shadow-lg' : ' backdrop-blur-lg shadow-lg'
+					class={`mx-[1vw] h-[3vw] w-[70%] rounded-full ${
+						item.chat.role === 'user' ? 'shadow-lg backdrop-blur-lg' : ' shadow-lg backdrop-blur-lg'
 					}`}
 					defaultBlockColor={item.chat.role === 'user' ? 'white' : 'black'}
 					playedBlockColor={item.chat.role === 'user' ? 'black' : 'white'}
@@ -62,7 +63,7 @@
 			</div>
 			{#if item.chat.role === 'user' || (item.chat.role === 'assistant' && showAssistantTranscription)}
 				<div
-					class={`mt-3 flex flex-row w-[100%] ${
+					class={`mt-3 flex w-[100%] flex-row ${
 						item.chat.role === 'assistant' ? ' justify-start' : 'justify-end'
 					}`}
 				>
@@ -75,23 +76,16 @@
 			{/if}
 		</div>
 	{:else if item.endOfGoal !== undefined}
-		<div class="text-[1.5vw] flex flex-row items-center w-full px-[2vw] gap-[1vw] mt-[2vh]">
+		<div class="mt-[2vh] flex w-full flex-row items-center gap-[1vw] px-[2vw] text-[1.5vw]">
 			<!-- Divider -->
-			<div class="flex-1 h-[0.15vh] bg-white" />
+			<div class="h-[0.15vh] flex-1 bg-white" />
 
 			เสร็จสิ้นเป้าหมายที่ {item.endOfGoal}
 
 			<!-- Divider -->
-			<div class="flex-1 h-[0.15vh] bg-white" />
+			<div class="h-[0.15vh] flex-1 bg-white" />
 		</div>
 	{:else if item.hint !== undefined}
-		<div class=" flex flex-col items-end px-4">
-			<h4 class=" font-bold text-xs mb-1">Help</h4>
-			<div
-				class="border border-white rounded-full h-[44px] text-white opacity-50 text-xs flex flex-row items-center justify-center px-2"
-			>
-				{item.hint}
-			</div>
-		</div>
+		<ChatHint text={item.hint} />
 	{/if}
 {/each}

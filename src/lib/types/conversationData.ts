@@ -32,6 +32,7 @@ export interface ConversationCarouselItem {
 	background: string;
 	details: ConversationDetails;
 	avatar: ConversationAvatar;
+	context: string;
 	id: string;
 }
 
@@ -87,3 +88,17 @@ export interface ConversationHistoryItem {
 	endOfGoal?: number;
 	hint?: string;
 }
+
+export type DialogueEvaluationResult = {
+	appropriateness?: { preferable: string[]; suggestion: string; isInContext: boolean };
+	grammar?: {
+		preferable: string[];
+		suggestion: string;
+		accuracy: 'LOW' | 'MEDIUM' | 'HIGH';
+	};
+	advancement?: {
+		preferable: string[];
+		suggestion: string;
+		accuracy: 'LOW' | 'MEDIUM' | 'HIGH';
+	};
+};

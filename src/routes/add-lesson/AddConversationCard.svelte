@@ -47,6 +47,7 @@
 					fromLesson: 'unknown',
 					learner: { mission, goal: goalGetters.map((g) => g()) },
 					level,
+					context,
 					title: 'unknown',
 					totalCoin: goalGetters.length * coin,
 					totalExp: goalGetters.length * exp
@@ -64,6 +65,7 @@
 	};
 
 	let mission = '';
+	let context = '';
 	let prompt = '';
 
 	let avatarName = '';
@@ -112,6 +114,11 @@
 		placeholder="Add introduction sentence"
 	/>
 
+	<textarea
+		bind:value={context}
+		class="h-[25vw] w-full border border-[#00000033] px-[1vw] py-[0.3vw]"
+		placeholder="Add context prompt"
+	/>
 	<textarea
 		bind:value={prompt}
 		class="h-[25vw] w-full border border-[#00000033] px-[1vw] py-[0.3vw]"

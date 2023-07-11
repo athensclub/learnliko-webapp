@@ -179,7 +179,11 @@ export const getConversations = async () => {
 	return val;
 };
 
-export const checkGoalProgress = async function (latest: string, history: string | null, goal: string) {
+export const checkGoalProgress = async function (
+	latest: string,
+	history: string | null,
+	goal: string
+) {
 	const response = await fetch('/api/v1/conversation/utils/goalProgress', {
 		method: 'POST',
 		body: JSON.stringify({ latest, history, goal })
@@ -286,10 +290,7 @@ export const analyzeGoalScore = async function (
 	result.overall = result.scores.reduce((x, y) => x + y.overall, 0) / result.scores.length;
 	result.overall = round(result.overall, 2);
 
-	result.coins =
-		result.scores.map((e) => (e.overall === 100 ? e.overall : 40)).reduce((x, y) => x + y, 0) /
-		result.scores.length;
-	result.coins = round(result.coins, 0);
+	result.coins = 100;
 
 	return result;
 };

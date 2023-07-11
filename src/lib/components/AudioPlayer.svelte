@@ -2,12 +2,12 @@
 	export let src: string;
 	export let type = 'audio/mpeg';
 
-	export let blockWidth = 10;
-	export let blockSpacing = 2;
+	// export let blockWidth = 10;
+	// export let blockSpacing = 2;
 
-	export let smallBlockHeightPercentage = 30;
-	export let mediumBlockHeightPercentage = 70;
-	export let largeBlockHeightPercentage = 100;
+	// export let smallBlockHeightPercentage = 30;
+	// export let mediumBlockHeightPercentage = 70;
+	// export let largeBlockHeightPercentage = 100;
 
 	export let defaultBlockColor = 'black';
 	export let playedBlockColor = 'white';
@@ -26,46 +26,46 @@
 
 	let width = 0;
 
-	type Block = { heightPercentage: number; played: boolean };
-	let blocks: Block[] = [];
-	let blocksParent: HTMLDivElement;
+	// type Block = { heightPercentage: number; played: boolean };
+	// let blocks: Block[] = [];
+	let progressBar: HTMLDivElement;
 
-	const updateBlocksLength = (targetLength: number) => {
-		if (targetLength > blocks.length) {
-			let toAdd: Block[] = [];
-			for (let i = blocks.length; i < targetLength; i++) {
-				toAdd.push({
-					heightPercentage:
-						i % 7 === 0
-							? smallBlockHeightPercentage
-							: i % 7 === 1
-							? mediumBlockHeightPercentage
-							: largeBlockHeightPercentage,
-					played: false
-				});
-			}
-			blocks = [...blocks, ...toAdd];
-		} else if (targetLength < blocks.length) {
-			blocks = blocks.filter((_, index) => index < targetLength);
-		}
-	};
+	// const updateBlocksLength = (targetLength: number) => {
+	// 	if (targetLength > blocks.length) {
+	// 		let toAdd: Block[] = [];
+	// 		for (let i = blocks.length; i < targetLength; i++) {
+	// 			toAdd.push({
+	// 				heightPercentage:
+	// 					i % 7 === 0
+	// 						? smallBlockHeightPercentage
+	// 						: i % 7 === 1
+	// 						? mediumBlockHeightPercentage
+	// 						: largeBlockHeightPercentage,
+	// 				played: false
+	// 			});
+	// 		}
+	// 		blocks = [...blocks, ...toAdd];
+	// 	} else if (targetLength < blocks.length) {
+	// 		blocks = blocks.filter((_, index) => index < targetLength);
+	// 	}
+	// };
 
 	// derivation of the formula
 	// n*bw + (n-1)*bs <= width
 	// n*bw + n*bs - bs <= width
 	// n*(bw+bs) <= width+bs
 	// n <= (width+bs) / (bw+bs)
-	$: updateBlocksLength(Math.floor((width + blockSpacing) / (blockWidth + blockSpacing)));
+	// $: updateBlocksLength(Math.floor((width + blockSpacing) / (blockWidth + blockSpacing)));
 
 	// a more efficient version will be easy to cause bugs, so imma just use this version.
-	const updatePlayed = () => {
-		const playedIndex = (currentTime / duration) * blocks.length;
-		blocks = blocks.map((block, index) => ({
-			...block,
-			played: index < playedIndex
-		}));
-	};
-	$: currentTime, updatePlayed();
+	// const updatePlayed = () => {
+		// const playedIndex = (currentTime / duration) * blocks.length;
+		// blocks = blocks.map((block, index) => ({
+		// 	...block,
+		// 	played: index < playedIndex
+		// }));
+	// };
+	// $: currentTime, updatePlayed();
 
 	let playing = false;
 	const togglePlaying = async () => {
@@ -78,7 +78,7 @@
 	};
 
 	const onClicked = (e: MouseEvent & { currentTarget: EventTarget & HTMLDivElement }) => {
-		currentTime = ((e.clientX - blocksParent.getBoundingClientRect().left) / width) * duration;
+		currentTime = ((e.clientX - progressBar.getBoundingClientRect().left) / width) * duration;
 	};
 
 	// somehow duration is infinity for ogg format and is set when audio is played.
@@ -116,8 +116,8 @@
 		: '00:00';
 </script>
 
-<div {style} class={`flex flex-row items-center px-[1.5vw] py-[0.5vw] gap-3 ${clazz}`}>
-	<button on:click={togglePlaying} class="h-[50%] flex">
+<div {style} class={`flex flex-row items-center gap-[1vw] px-[1.5vw] py-[0.5vw] ${clazz}`}>
+	<button on:click={togglePlaying} class="flex h-[50%]">
 		{#if playing}
 			<svg
 				class="h-full"
@@ -149,24 +149,21 @@
 
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
 	<div
-		bind:this={blocksParent}
+		bind:this={progressBar}
 		on:click={onClicked}
 		bind:clientWidth={width}
-		class="flex flex-row items-center flex-1 h-[80%]"
-		style="gap: 0px;"
+		style="background-color: {defaultBlockColor};"
+		class="flex h-[22%] flex-1 flex-row items-center gap-[1vw]"
 	>
-		{#each blocks as block, index}
-			<div
-				class="bg-white w-2"
-				style="width: {blockWidth}%; height: 5px; background-color: {block.played
-					? playedBlockColor
-					: defaultBlockColor};"
-			/>
-		{/each}
+		<div
+			style="background-color: {playedBlockColor}; width: {(currentTime / duration) * 100}%;"
+			class="h-full"
+		/>
+	</div>
 
-		<div class="bg-white text-black rounded-full px-2 text-[0.8vw] ml-2">
-			{timeText}
-		</div>
+	
+	<div class="rounded-full bg-white px-[1vw] text-[0.8vw] text-black">
+		{timeText}
 	</div>
 
 	<audio bind:playbackRate bind:duration bind:currentTime bind:this={player}>

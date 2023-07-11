@@ -1,4 +1,3 @@
-import type { ConversationRecap } from '$gql/generated/graphql';
 import type { BotEmotion, ConversationCarouselItem } from '$lib/types/conversationData';
 import { writable } from 'svelte/store';
 
@@ -35,7 +34,10 @@ export interface DialogueScore {
 	advancement: { score: number; examples: string[]; suggestion: string };
 }
 
-export type RecapHistoryItemDialogue = {
+/**
+ * pair of assistant message, then user message.
+ */
+export type RecapHistoryItem = {
 	assistant: {
 		role: 'assistant';
 		audioURL: string;
@@ -48,15 +50,6 @@ export type RecapHistoryItemDialogue = {
 	} | null;
 	dialogueScore: DialogueScore;
 	score: number;
-	usedHint: boolean,
-}
-
-/**
- * pair of assistant message, then user message.
- */
-export type RecapHistoryItem = {
-	goal: string;
-	dialogues: RecapHistoryItemDialogue[];
 };
 
 /**
@@ -84,11 +77,11 @@ export const recapHistory = writable<RecapHistory | null>();
  * Fill this store's data before showing recap view.
  * If the history is not loaded yet, it will be null.
  */
-export const recapResult = writable<ConversationRecap | null>();
+export const recapResult = writable<RecapResult | null>();
 
 /**
  * Callback function to run after finish button has been confirmed in recap view.
  */
-export const onRecapFinished = writable(() => { });
+export const onRecapFinished = writable(() => {});
 
 export const isLoadingRecapHistory = writable(false);

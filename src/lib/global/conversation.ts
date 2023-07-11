@@ -219,13 +219,14 @@ const botReply = async function (message?: string, targetLevel: CEFRLevel = 'A1'
 				.join('\n'),
 			_history.length > 2
 				? _history
-					.slice(0, _history.length - 2)
-					.map(
-						(item) =>
-							`${item.role === 'user' ? 'User' : ct.conversation.avatar.name}: ${item.transcription
-							}`
-					)
-					.join('\n')
+						.slice(0, _history.length - 2)
+						.map(
+							(item) =>
+								`${item.role === 'user' ? 'User' : ct.conversation.avatar.name}: ${
+									item.transcription
+								}`
+						)
+						.join('\n')
 				: null,
 			ct.conversation.details.learner.goal[get(currentGoal)]
 		);
@@ -375,8 +376,8 @@ const computeRecap = async () => {
 
 	let overallScore = 0,
 		totalExp = 0,
-		totalCoins = 0;
-	const recapDialogues: RecapHistory = [];
+		totalCoins = 0,
+		recapDialogues: RecapHistory = [];
 	goalsResult.forEach((e) => {
 		overallScore += e.score;
 		recapDialogues.push(...e.history);
@@ -438,9 +439,9 @@ const computeRecap = async () => {
 	// });
 
 	recapResult.set({
-		coinEarned: totalCoins,
-		expEarned: totalExp,
-		correctPercentage: overallScore,
-		history: _recapHistory
+		score: overallScore,
+		exp: totalExp,
+		coins: totalCoins,
+		history: recapDialogues
 	});
 };

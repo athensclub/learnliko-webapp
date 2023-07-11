@@ -108,7 +108,7 @@
 				intro: conversation?.bot.intro ?? 'unknown',
 				image: '',
 				topic: '',
-				background: '',
+				background: item.narratives[item.narratives.length-1].illustrationUrl,
 				fromLesson: conversation?.fromLesson ?? '',
 				context: conversation?.context ?? '',
 				id: conversation?.id ?? ''
@@ -138,7 +138,7 @@
 		| 'WRITING_CARD'
 		| 'READING'
 		| 'CONVERSATION'
-		| 'FINISHED' = 'CONVERSATION';
+		| 'FINISHED' = 'INTRO';
 
 	const onFinishedLesson = async () => {
 		currentView = 'FINISHED';

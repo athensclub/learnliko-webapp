@@ -45,8 +45,7 @@
 	<div class="mt-2 px-5">
 		{#if dialogue.dialogueScore.appropriateness.score < 100}
 			<p class=" font-bold text-gray-700">
-				การตอบของคุณไม่อยู่ในบริบท ลองนำคำแนะนำเหล่านี้ไปปรับใช้:
-				{dialogue.dialogueScore.appropriateness.suggestion}
+				การตอบของคุณไม่อยู่ในบริบท ลองนำตัวอย่างที่แนะนำเหล่านี้ไปปรับใช้:
 			</p>
 			{#each dialogue.dialogueScore.appropriateness.examples as example}
 				"{example}"<br />
@@ -56,7 +55,6 @@
 			{#if dialogue.dialogueScore.advancement.examples.length > 0}
 				<p class=" font-bold text-gray-700">
 					เพื่อยกระดับภาษาในการสนทนาของคุณ ลองใช้ตัวอย่างต่อไปนี้:
-					{dialogue.dialogueScore.advancement.suggestion}
 				</p>
 				{#each dialogue.dialogueScore.advancement.examples as example}
 					"{example}"<br />
@@ -64,10 +62,7 @@
 				<br />
 			{/if}
 			{#if dialogue.dialogueScore.grammar.examples.length > 0}
-				<p class=" font-bold text-gray-700">
-					นี่คือตัวอย่างของการสนทนาที่ถูกต้องตามไวยากรณ์:
-					{dialogue.dialogueScore.grammar.suggestion}
-				</p>
+				<p class=" font-bold text-gray-700">นี่คือตัวอย่างของการสนทนาที่ถูกต้องตามไวยากรณ์:</p>
 				{#each dialogue.dialogueScore.grammar.examples as example}
 					"{example}"<br />
 				{/each}

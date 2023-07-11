@@ -262,6 +262,7 @@ export const analyzeGoalScore = async function (
 
 	if (hintUsed) {
 		result.coins = 40;
+		result.overall = 40;
 		for (let index = 0; index < dialogues.length; index++) {
 			result.scores[index] = {
 				overall: 0,

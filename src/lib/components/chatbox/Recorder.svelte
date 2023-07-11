@@ -36,7 +36,7 @@
 	const showHintModal = () => open(DialogueHintModal, {});
 </script>
 
-<div class={`flex items-center justify-center rounded-xl p-[0.8vw] font-line-seed ${clazz}`}>
+<div class={`flex items-center justify-center rounded-[1vw] p-[0.8vw] font-line-seed ${clazz}`}>
 	{#if $waitingForAIResponse || $transcribing}
 		<div
 			class="flex h-full w-full flex-row items-center justify-between gap-[7%] px-[5%] text-white"
@@ -95,7 +95,7 @@
 
 			<button
 				on:click={stopRecording}
-				class="rounded-3xl bg-[#fff] px-[1.5vw] py-[0.35vw] text-[1.3vw] font-bold text-black">Done</button
+				class="rounded-[1.6vw] bg-[#fff] px-[1.5vw] py-[0.35vw] text-[1.3vw] font-bold text-black">Done</button
 			>
 		</div>
 	{:else}

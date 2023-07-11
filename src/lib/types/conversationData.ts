@@ -87,3 +87,17 @@ export interface ConversationHistoryItem {
 	endOfGoal?: number;
 	hint?: string;
 }
+
+export type DialogueEvaluationResult = {
+	appropriateness?: { preferable: string[]; suggestion: string; isInContext: boolean };
+	grammar?: {
+		preferable: string[];
+		suggestion: string;
+		accuracy: 'LOW' | 'MEDIUM' | 'HIGH';
+	};
+	advancement?: {
+		preferable: string[];
+		suggestion: string;
+		accuracy: 'LOW' | 'MEDIUM' | 'HIGH';
+	};
+};

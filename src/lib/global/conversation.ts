@@ -343,11 +343,8 @@ const computeRecap = async () => {
 						audioURL: pairDialogues[i].user.audioURL,
 						transcription: pairDialogues[i].user.transcription!
 					},
-					suggestion: "",
 					dialogueScore: _result,
-					score: 50 + _result.advancement.score * 0.3 + _result.grammar.score * 0.2,
-					advancementExample: _result.advancement.examples,
-					grammarExample: _result.grammar.examples
+					score: _result.overall
 				});
 			}
 
@@ -367,11 +364,11 @@ const computeRecap = async () => {
 		totalCoins = 0,
 		recapDialogues: RecapHistory = [];
 	goalsResult.forEach((e) => {
-		totalCoins += e.coins;
 		overallScore += e.score;
 		recapDialogues.push(...e.history);
 	});
 	overallScore = overallScore / goalTracking.length;
+	totalCoins = goalTracking.map((e) => (e.hintUsed ? 40 : 100)).reduce((x, y) => x + y, 0);
 
 	// TODO: find a better approach to promote/demote user's CEFR level
 	// if (totalScore > 90) setCurrentCEFRLevel(ct!.conversation.CEFRlevel);
@@ -382,17 +379,14 @@ const computeRecap = async () => {
 		_recapHistory[index] = {
 			coin: e.coins,
 			exp: e.score,
+			hintUsed: goalTracking[index].hintUsed,
 			goal: ct.conversation.details.learner.goal[index],
 			hint: ct.conversation.details.learner.hint[index],
 			dialogues: e.history.map((d) => {
 				return {
 					assistant: d.assistant.transcription,
 					user: d.user?.transcription ?? '',
-					score: {
-						advancement: d.dialogueScore.advancement,
-						appropriateness: d.dialogueScore.appropriateness,
-						grammar: d.dialogueScore.grammar
-					}
+					score: d.dialogueScore
 				};
 			})
 		};

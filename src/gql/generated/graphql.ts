@@ -170,6 +170,7 @@ export type ConversationRecapHistory = {
   exp: Scalars['Int']['output'];
   goal: Scalars['String']['output'];
   hint: Scalars['String']['output'];
+  hintUsed: Scalars['Boolean']['output'];
 };
 
 export type ConversationRecapHistoryCreateDataInput = {
@@ -178,6 +179,7 @@ export type ConversationRecapHistoryCreateDataInput = {
   exp: Scalars['Int']['input'];
   goal: Scalars['String']['input'];
   hint: Scalars['String']['input'];
+  hintUsed: Scalars['Boolean']['input'];
 };
 
 export enum LanguageLevel {
@@ -603,25 +605,29 @@ export type ReadingRecapCreateDataInput = {
 export type RecapDialogueScore = {
   __typename?: 'RecapDialogueScore';
   advancement?: Maybe<RecapDialogueScoreData>;
-  appropriateness: Scalars['Boolean']['output'];
+  appropriateness: RecapDialogueScoreData;
   grammar?: Maybe<RecapDialogueScoreData>;
+  overall: Scalars['Int']['output'];
 };
 
 export type RecapDialogueScoreCreateDataInput = {
   advancement?: InputMaybe<RecapDialogueScoreDataCreateDataInput>;
-  appropriateness: Scalars['Boolean']['input'];
+  appropriateness: RecapDialogueScoreDataCreateDataInput;
   grammar?: InputMaybe<RecapDialogueScoreDataCreateDataInput>;
+  overall: Scalars['Int']['input'];
 };
 
 export type RecapDialogueScoreData = {
   __typename?: 'RecapDialogueScoreData';
   examples?: Maybe<Array<Scalars['String']['output']>>;
   score: Scalars['Int']['output'];
+  suggestion: Scalars['String']['output'];
 };
 
 export type RecapDialogueScoreDataCreateDataInput = {
   examples?: InputMaybe<Array<Scalars['String']['input']>>;
   score: Scalars['Int']['input'];
+  suggestion: Scalars['String']['input'];
 };
 
 export type RecapSection = {

@@ -1,4 +1,7 @@
-import type { ConversationCarouselItem } from '$lib/types/conversationData';
+import type {
+	ConversationCarouselItem,
+	DialogueEvaluationResult
+} from '$lib/types/conversationData';
 import type { Mode } from '$lib/types/mode';
 import type { ChatCompletionFunctions } from 'openai';
 import { chatCompletion, gptFunctionCalling } from '../openai';
@@ -90,19 +93,7 @@ export const analyzeDialogue = async function (
 	if (!user) throw new Error('No user details provided');
 	if (!context) throw new Error('No context provided');
 
-	const returnedData: {
-		appropriateness?: { preferable: string[]; suggestion: string; isInContext: boolean };
-		grammar?: {
-			preferable: string[];
-			suggestion: string;
-			accuracy: 'LOW' | 'MEDIUM' | 'HIGH';
-		};
-		advancement?: {
-			preferable: string[];
-			suggestion: string;
-			accuracy: 'LOW' | 'MEDIUM' | 'HIGH';
-		};
-	} = {};
+	const returnedData: DialogueEvaluationResult = {};
 
 	returnedData.appropriateness = await _evaluateDialogueAppropriateness(
 		assistant,

@@ -381,7 +381,7 @@
 					class={`${
 						$isMobile
 							? 'mx-auto max-h-full max-w-full'
-							: `${briefing ? 'h-[90%]' : 'max-h-[90%] w-full'} bottom-0 transition-transform`
+							: `h-[90%] bottom-0 transition-transform`
 					}`}
 					src={$chatContext.conversation.avatar.models[$chatContext.bot.emotion]}
 					alt="Avatar"

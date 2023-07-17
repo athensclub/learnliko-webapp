@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { Narrative } from '$gql/generated/graphql';
+	import { isMobile } from '$lib/global/breakpoints';
 	import type { LessonIntro } from '$lib/types/lesson';
 	import { fade } from 'svelte/transition';
 
@@ -27,15 +28,23 @@
 
 <div
 	transition:fade
-	class="absolute bottom-0 left-0 flex flex-col items-center gap-[5vh] w-full py-[10vh] bg-gradient-to-b from-transparent via-black/60 to-black/80"
+	class="absolute bottom-0 left-0 flex w-full flex-col items-center bg-gradient-to-b from-transparent via-black/60 to-black/80 {$isMobile
+		? 'gap-[3.5vh] py-[8vh]'
+		: 'gap-[5vh] py-[10vh]'}"
 >
-	<div class="text-white text-[1.5vw] max-w-[60%] text-center font-bold">
+	<div
+		class="text-center font-bold text-white {$isMobile
+			? 'max-w-[80%] text-[4.5vw]'
+			: 'max-w-[60%] text-[1.5vw]'}"
+	>
 		{items[currentItem].text}
 	</div>
 
 	<button
 		on:click={nextItem}
-		class="text-white text-[1.3vw] font-bold border border-white rounded-full px-[3vw] py-[1vh]"
+		class="rounded-full border border-white font-bold text-white {$isMobile
+			? 'px-[8vw] py-[0.6vh] text-[4.5vw]'
+			: 'px-[3vw] py-[1vh] text-[1.3vw]'}"
 	>
 		{currentItem === items.length - 1 ? 'เริ่ม' : 'ต่อไป'}
 	</button>

@@ -4,6 +4,7 @@
 	import AudioPlayer from '../AudioPlayer.svelte';
 	import Typewriter from 'svelte-typewriter';
 	import ChatHint from './ChatHint.svelte';
+	import { isMobile } from '$lib/global/breakpoints';
 
 	export let aiBackgroundColor = '#FFFFFF3D';
 	export let userBackgroundColor = '#FFFFFF3D';
@@ -17,7 +18,7 @@
 
 	export let showAssistantTranscription = false;
 
-	export let assistantProfileImage: string;
+	export let assistantProfileImage: string; 
 	export let userProfileImage: string;
 </script>
 
@@ -29,20 +30,20 @@
 			} ${clazz}`}
 		>
 			<div
-				class={`flex w-full flex-row items-center  pt-[2vh] ${
+				class={`flex w-full flex-row items-center pt-[2vh] ${
 					item.chat.role === 'user' ? 'flex-row-reverse' : ''
 				}`}
 			>
 				{#if item.chat.role === 'assistant'}
 					<div
-						class={`h-[3.4vw] w-[3.4vw] rounded-full border border-white bg-cover bg-top`}
+						class={`rounded-full border border-white bg-cover bg-top ${$isMobile?'w-[10vw] h-[10vw]':'h-[3.4vw] w-[3.4vw]'}`}
 						style="background-color: #766A78; background-image: url('{assistantProfileImage}');"
 					/>
 				{/if}
 
 				{#if item.chat.role === 'user'}
 					<div
-						class={`h-[3.4vw] w-[3.4vw] rounded-full border  border-white bg-cover bg-center`}
+						class={`rounded-full border border-white bg-cover bg-center ${$isMobile?'w-[10vw] h-[10vw]':'h-[3.4vw] w-[3.4vw]'}`}
 						style="background-image: url('{userProfileImage}');"
 					/>
 				{/if}
@@ -52,7 +53,9 @@
 					style="background-color: {item.chat.role === 'user'
 						? userBackgroundColor
 						: aiBackgroundColor};"
-					class={`mx-[1vw] h-[3vw] w-[70%] rounded-full ${
+					class={`mx-[1vw] rounded-full  w-[70%]
+					${$isMobile?'h-[10vw]':'h-[3vw]'} 
+					${
 						item.chat.role === 'user' ? 'shadow-lg backdrop-blur-lg' : ' shadow-lg backdrop-blur-lg'
 					}`}
 					defaultBlockColor={item.chat.role === 'user' ? 'white' : 'black'}
@@ -63,7 +66,7 @@
 			</div>
 			{#if item.chat.role === 'user' || (item.chat.role === 'assistant' && showAssistantTranscription)}
 				<div
-					class={`mt-3 flex w-[100%] flex-row ${
+					class={`mt-3 flex w-[100%] flex-row ${$isMobile?'text-[4.2vw]':'text-[1.3vw]'} ${
 						item.chat.role === 'assistant' ? ' justify-start' : 'justify-end'
 					}`}
 				>
@@ -76,7 +79,7 @@
 			{/if}
 		</div>
 	{:else if item.endOfGoal !== undefined}
-		<div class="mt-[2vh] flex w-full flex-row items-center gap-[1vw] px-[2vw] text-[1.5vw]">
+		<div class="mt-[2vh] flex w-full flex-row items-center gap-[1vw] {$isMobile?'text-[4vw] px-[6vw]':'text-[1.5vw] px-[2vw] '}">
 			<!-- Divider -->
 			<div class="h-[0.15vh] flex-1 bg-white" />
 

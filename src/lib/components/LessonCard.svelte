@@ -38,11 +38,11 @@
 >
 	<a
 		href="/lesson/{item.id}"
-		style="padding: {scale * 2}vw;"
-		class="texgt-white relative flex w-full flex-col bg-[#0000008C] font-bold text-white backdrop-blur-sm"
+		style="padding: {scale * ($isMobile ? 6 : 2)}vw;"
+		class="relative flex w-full flex-col bg-[#0000008C] font-bold text-white backdrop-blur-sm"
 	>
 		<svg
-			class="absolute right-[2vw] top-[2vw] w-[7%]"
+			class="absolute w-[7%] {$isMobile ? 'right-[6vw] top-[6vw]' : 'right-[2vw] top-[2vw]'}"
 			viewBox="0 0 39 32"
 			fill="none"
 			xmlns="http://www.w3.org/2000/svg"
@@ -61,27 +61,32 @@
 			</defs>
 		</svg>
 
-		<div style="font-size: {scale * 1.5}vw;">{item.title}</div>
-		<div style="font-size: {scale * 1.05}vw;" class="mt-[1.2vh] max-w-[90%]">
+		<div style="font-size: {scale * ($isMobile ? 4.2 : 1.5)}vw;" class="max-w-[90%]">
+			{item.title}
+		</div>
+		<div style="font-size: {scale * ($isMobile ? 3 : 1.05)}vw;" class="mt-[1.2vh] max-w-[90%]">
 			{item.description}
 		</div>
 
-		<div style="font-size: {scale * 1}vw;" class="mt-[2vh] flex flex-row gap-[1vw]">
+		<div
+			style="font-size: {scale * ($isMobile ? 3.2 : 1)}vw;"
+			class="mt-[2vh] flex flex-row {$isMobile ? 'gap-[3vw]' : 'gap-[1vw]'}"
+		>
 			<div
-				style="padding-left: {scale * 2}vw; 
-					padding-right: {scale * 2}vw;
-				 	padding-top: {scale * 1}vh;
-				  	padding-bottom: {scale * 1}vh;"
-				class="rounded-full bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] text-center"
+				style="padding-left: {scale * ($isMobile ? 5 : 2)}vw; 
+					padding-right: {scale * ($isMobile ? 5 : 2)}vw;
+				 	padding-top: {scale * ($isMobile ? 0.5 : 1)}vh;
+				  	padding-bottom: {scale * ($isMobile ? 0.5 : 1)}vh;"
+				class="flex items-center justify-center rounded-full bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD]"
 			>
 				{difficulty}
 			</div>
 
 			<div
-				style="padding-left: {scale * 1}vw; 
-					padding-right: {scale * 1}vw;
-				 	padding-top: {scale * 1}vh;
-				  	padding-bottom: {scale * 1}vh;"
+				style="padding-left: {scale * ($isMobile ? 3 : 1)}vw; 
+					padding-right: {scale * ($isMobile ? 3 : 1)}vw;
+				 	padding-top: {scale * ($isMobile ? 0.5 : 1)}vh;
+				  	padding-bottom: {scale * ($isMobile ? 0.5 : 1)}vh;"
 				class="rounded-full bg-white"
 			>
 				<div
@@ -89,7 +94,7 @@
 				>
 					+{item.exp}
 					<svg
-						class="ml-[0.6vw] w-[2.5vw]"
+						class={$isMobile ? 'ml-[1.3vw] w-[7vw]' : 'ml-[0.6vw] w-[2.5vw]'}
 						viewBox="0 0 1650 792"
 						fill="none"
 						xmlns="http://www.w3.org/2000/svg"
@@ -132,10 +137,9 @@
 		</div>
 
 		<div
-			style="height: {scale * 1.35}vw;"
+			style="height: {scale * ($isMobile ? 3.6 : 1.35)}vw;"
 			class="mt-[2vh] w-full overflow-hidden rounded-full bg-[#FFFFFF29]"
 		>
-			<!-- TODO: show actual progress here -->
 			<div
 				style="width: {progress}%;"
 				class="h-full rounded-full bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD]"
@@ -149,8 +153,8 @@
 		</div>
 
 		<div
-			style="font-size: {scale * 1}vw; padding: {scale * 1}vw;"
-			class="relative bottom-[30%] right-[7%] h-fit animate-wiggle rounded-[2vw] rounded-bl-none bg-white font-bold"
+			style="font-size: {scale * ($isMobile ? 3 : 1)}vw; padding: {scale * ($isMobile ? 1.5 : 1)}vw;"
+			class="relative bottom-[30%] right-[3%] h-fit animate-wiggle rounded-bl-none bg-white font-bold {$isMobile ? 'rounded-[6vw]':'rounded-[2vw]'}"
 		>
 			<button
 				on:click={() => {

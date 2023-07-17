@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { isMobile } from '$lib/global/breakpoints';
 	import { fly, scale, slide } from 'svelte/transition';
 
 	export let exp: number;
@@ -7,18 +8,18 @@
 
 <div
 	transition:slide
-	class="fixed left-[50vw] top-[2vh] z-[9999] flex translate-x-[-50%] flex-row items-center rounded-full bg-white px-[2vw] py-[0.5vw] font-line-seed font-bold"
+	class="fixed left-[50vw] top-[2vh] z-[9999] flex translate-x-[-50%] flex-row items-center rounded-full bg-white font-line-seed font-bold {$isMobile
+		? 'px-[5vw] py-[1.5vw] text-[5vw]'
+		: 'px-[2vw] py-[0.5vw] text-[2vw]'}"
 >
-	<div class="text-[2vw]">🎉</div>
+	🎉
 
-	<div
-		class="ml-[2vw] bg-gradient-to-br from-[#C698FF] to-[#6C80E8] bg-clip-text text-[2vw] text-transparent"
-	>
+	<div class="ml-[2vw] bg-gradient-to-br from-[#C698FF] to-[#6C80E8] bg-clip-text text-transparent">
 		+{exp}
 	</div>
 
 	<svg
-		class="ml-[0.5vw] w-[4.5vw]"
+		class={$isMobile ? 'ml-[1.5vw] w-[9vw]' : 'ml-[0.5vw] w-[4.5vw]'}
 		viewBox="0 0 1650 792"
 		fill="none"
 		xmlns="http://www.w3.org/2000/svg"
@@ -58,13 +59,13 @@
 	</svg>
 
 	<div
-		class="ml-[1vw] bg-gradient-to-t from-[#FFE08F] via-[#E4AE24] to-[#FFE08F] bg-clip-text text-[2vw] text-transparent"
+		class="ml-[1vw] bg-gradient-to-t from-[#FFE08F] via-[#E4AE24] to-[#FFE08F] bg-clip-text text-transparent"
 	>
 		+{coin}
 	</div>
 
 	<svg
-		class="ml-[0.5vw] w-[5vw]"
+		class={$isMobile ? 'ml-[1.5vw] w-[10vw]' : 'ml-[0.5vw] w-[5vw]'}
 		viewBox="0 0 2017 792"
 		fill="none"
 		xmlns="http://www.w3.org/2000/svg"

@@ -27,6 +27,7 @@
 	import { Howl } from 'howler';
 	import { graphqlClient } from '$lib/graphql';
 	import { GET_RECAP_LESSON_CURRENCIES } from '$gql/schema/queries';
+	import { isMobile } from '$lib/global/breakpoints';
 
 	let item: LessonCard | null = null;
 	let background: string | null = null;
@@ -50,6 +51,10 @@
 		);
 		if (!content.card) throw new Error('No Lesson Found');
 		item = content.card;
+
+		// the background is set in narrative anyway, but when we test by setting currentView
+		// to something else, this will become helpful.
+		background = item.narratives[0].illustrationUrl;
 
 		music = new Howl({ src: item.ambientAudio, volume: 0.06, loop: true });
 
@@ -108,7 +113,7 @@
 				intro: conversation?.bot.intro ?? 'unknown',
 				image: '',
 				topic: '',
-				background: item.narratives[item.narratives.length-1].illustrationUrl,
+				background: item.narratives[item.narratives.length - 1].illustrationUrl,
 				fromLesson: conversation?.fromLesson ?? '',
 				context: conversation?.context ?? '',
 				id: conversation?.id ?? ''
@@ -167,13 +172,22 @@
 	class="relative flex h-full min-h-[100vh] w-[100vw] flex-col bg-cover bg-center font-line-seed transition-[background-image]"
 >
 	<div
-		class="flex flex-row justify-between bg-gradient-to-t from-transparent via-black/60 to-black/80 p-[2vw]"
+		class="absolute left-0 top-0 z-50 flex w-full flex-row justify-between
+		{$isMobile && currentView === 'CONVERSATION'
+			? 'bg-transparent'
+			: 'bg-gradient-to-t from-transparent via-black/60 to-black/80 '} 
+			{$isMobile ? 'px-[6vw] pb-[20vw] pt-[4vw]' : 'p-[2vw]'}"
 	>
 		<button
 			on:click={() => window.history.back()}
-			class="flex flex-row rounded-full bg-white px-[2vw] py-[1.5vh]"
+			class="flex h-fit flex-row rounded-full bg-white px-[2vw] py-[1.5vh]"
 		>
-			<svg class="w-[4.5vw]" viewBox="0 0 78 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+			<svg
+				class={$isMobile ? 'w-[13vw]' : 'w-[4.5vw]'}
+				viewBox="0 0 78 23"
+				fill="none"
+				xmlns="http://www.w3.org/2000/svg"
+			>
 				<g clip-path="url(#clip0_1176_2335)">
 					<path
 						d="M36.3671 19.1666C36.1692 19.1666 36.0703 19.067 36.0703 18.8676V2.58365C36.0703 2.38431 36.1692 2.28465 36.3671 2.28465H46.9599C47.1577 2.28465 47.2567 2.38431 47.2567 2.58365V4.90665C47.2567 5.10598 47.1577 5.20565 46.9599 5.20565H39.1523V9.04665H46.2065C46.4044 9.04665 46.5033 9.14631 46.5033 9.34565V11.6226C46.5033 11.822 46.4044 11.9216 46.2065 11.9216H39.1523V16.2456H47.2338C47.4317 16.2456 47.5306 16.3453 47.5306 16.5446V18.8676C47.5306 19.067 47.4317 19.1666 47.2338 19.1666H36.3671ZM49.1998 19.1666C49.0324 19.1666 48.9487 19.1053 48.9487 18.9826C48.9487 18.9213 48.9715 18.86 49.0172 18.7986L53.0123 13.0486L49.2455 7.62065C49.1998 7.54398 49.177 7.48265 49.177 7.43665C49.177 7.31398 49.2607 7.25265 49.4281 7.25265H52.1448C52.297 7.25265 52.4187 7.31398 52.5101 7.43665L54.8843 10.9786L57.2814 7.43665C57.3727 7.31398 57.4944 7.25265 57.6466 7.25265H60.1807C60.3481 7.25265 60.4318 7.31398 60.4318 7.43665C60.4318 7.48265 60.409 7.54398 60.3633 7.62065L56.5965 13.0486L60.5916 18.7986C60.6373 18.86 60.6601 18.9213 60.6601 18.9826C60.6601 19.1053 60.5764 19.1666 60.409 19.1666H57.6923C57.5401 19.1666 57.4183 19.1053 57.327 18.9826L54.7245 15.0956L52.0991 18.9826C52.0078 19.1053 51.8861 19.1666 51.7339 19.1666H49.1998ZM64.234 5.13665C63.7318 5.13665 63.3132 4.98331 62.9784 4.67665C62.6588 4.36998 62.499 3.97131 62.499 3.48065C62.499 2.98998 62.6588 2.59131 62.9784 2.28465C63.3132 1.97798 63.7318 1.82465 64.234 1.82465C64.7363 1.82465 65.1472 1.97798 65.4668 2.28465C65.8016 2.59131 65.969 2.98998 65.969 3.48065C65.969 3.97131 65.8016 4.36998 65.4668 4.67665C65.1472 4.98331 64.7363 5.13665 64.234 5.13665ZM63.0469 19.1666C62.849 19.1666 62.7501 19.067 62.7501 18.8676V7.55165C62.7501 7.35231 62.849 7.25265 63.0469 7.25265H65.4211C65.619 7.25265 65.7179 7.35231 65.7179 7.55165V18.8676C65.7179 19.067 65.619 19.1666 65.4211 19.1666H63.0469ZM73.4257 19.3966C72.132 19.3966 71.1427 18.9903 70.4579 18.1776C69.7882 17.365 69.4534 16.1613 69.4534 14.5666V9.92065H67.7183C67.5205 9.92065 67.4216 9.82098 67.4216 9.62165V7.55165C67.4216 7.35231 67.5205 7.25265 67.7183 7.25265H69.4534V4.05565C69.4534 3.85631 69.5523 3.75665 69.7501 3.75665H72.1244C72.3222 3.75665 72.4212 3.85631 72.4212 4.05565V7.25265H75.2292C75.427 7.25265 75.526 7.35231 75.526 7.55165V9.62165C75.526 9.82098 75.427 9.92065 75.2292 9.92065H72.4212V14.7506C72.4212 15.3946 72.5277 15.8776 72.7408 16.1996C72.9539 16.5216 73.2887 16.6826 73.7453 16.6826C74.1258 16.6826 74.4225 16.491 74.6356 16.1076C74.7421 15.9236 74.8791 15.8776 75.0465 15.9696L76.8272 16.7746C76.9338 16.8206 76.987 16.905 76.987 17.0276C76.987 17.089 76.9642 17.1656 76.9185 17.2576C76.5228 17.9936 76.0206 18.538 75.4118 18.8906C74.803 19.228 74.141 19.3966 73.4257 19.3966Z"
@@ -190,15 +204,23 @@
 			</svg>
 		</button>
 
-		<div class="text-[1.7vw] font-bold text-white">{item && item.title}</div>
+		<div
+			class="text-center font-bold text-white {$isMobile
+				? 'absolute bottom-[10vw] left-[50%] w-[90%] translate-x-[-50%] text-[5vw]'
+				: 'text-[1.7vw]'}"
+		>
+			{item && item.title}
+		</div>
 
 		<button
 			on:click={() => (playingMusic = !playingMusic)}
-			class="flex flex-row items-center justify-center rounded-full bg-white px-[1.5vw] py-[1vh] text-[1.35vw] font-bold"
+			class="flex h-fit flex-row items-center justify-center rounded-full bg-white px-[1.5vw] py-[1vh] font-bold {$isMobile
+				? 'text-[4vw]'
+				: 'text-[1.35vw]'}"
 		>
 			{#if playingMusic}
 				<svg
-					class="mr-[1vw] w-[1.5vw]"
+					class={$isMobile ? 'mr-[2vw] w-[4.5vw]' : 'mr-[1vw] w-[1.5vw]'}
 					viewBox="0 0 25 25"
 					fill="none"
 					xmlns="http://www.w3.org/2000/svg"
@@ -212,7 +234,7 @@
 				</svg>
 			{:else}
 				<svg
-					class="mr-[0.7vw] w-[2.05vw]"
+					class={$isMobile ? 'mr-[1.3vw] w-[6vw]' : 'mr-[0.7vw] w-[2.05vw]'}
 					viewBox="0 0 38 38"
 					fill="none"
 					xmlns="http://www.w3.org/2000/svg"
@@ -301,12 +323,16 @@
 		{/if}
 	{/if}
 
-	{#if currentView != 'INTRO'}
+	{#if currentView !== 'INTRO' && !(currentView === 'CONVERSATION' && $isMobile)}
 		<div
 			transition:fade
 			class="absolute bottom-0 left-0 z-[100] w-full bg-[#FFFFFF1A] px-[2vw] py-[2vh] backdrop-blur-md"
 		>
-			<div class="flex flex-row justify-between text-[1.3vw] font-bold text-white">
+			<div
+				class="flex flex-row justify-between font-bold text-white {$isMobile
+					? 'text-[4vw]'
+					: 'text-[1.3vw]'}"
+			>
 				<div>รู้จักคำศัพท์</div>
 				<div>รู้จักประโยค</div>
 				<div>อ่านเรื่องราว</div>
@@ -314,7 +340,7 @@
 				<div>จบ</div>
 			</div>
 
-			<div class="mt-[2vh] h-[1.7vw] w-full rounded-full bg-white">
+			<div class="mt-[2vh] w-full rounded-full bg-white {$isMobile ? 'h-[5vw]' : 'h-[1.7vw]'}">
 				<div
 					style="width: {progress * 100}%;"
 					class="h-full rounded-full bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] transition-size"

@@ -240,7 +240,9 @@
 	<div
 		slot="back"
 		style="background-image: url('{item.imageUrl}');"
-		class="h-full w-full overflow-hidden rounded-[2vw] bg-cover bg-center"
+		class="h-full w-full overflow-hidden bg-cover bg-center {$isMobile
+			? 'rounded-[5vw]'
+			: 'rounded-[2vw]'}"
 	>
 		<!-- Can't nest button inside button so the outside is absolute button and inside is another absolute buttons instead -->
 		<div

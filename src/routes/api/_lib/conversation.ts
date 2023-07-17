@@ -198,10 +198,14 @@ export const analyzeDialogueScore = async function (
 	user: { message: string; CEFRLevel: CEFRLevel },
 	context: string
 ): Promise<DialogueScore> {
-	const response = await fetch('/api/v1/conversation/utils/analyzeDialogue', {
-		method: 'POST',
-		body: JSON.stringify({ assistant, user, context })
-	});
+	const response = await fetch(
+		'https://learnliko-api-develop-ruagc2uqxa-uc.a.run.app/v1/rest/conversation/utils/analyzeDialogue',
+		{
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({ assistant, user, context })
+		}
+	);
 	const returnedData: DialogueScore = {
 		overall: 0,
 		appropriateness: { score: 0, examples: [], suggestion: '' },

@@ -168,13 +168,13 @@
 	class="relative flex h-full min-h-[100vh] w-[100vw] flex-col bg-cover bg-center font-line-seed transition-[background-image]"
 >
 	<div
-		class="flex flex-row justify-between bg-gradient-to-t from-transparent via-black/60 to-black/80 relative {$isMobile
+		class="relative flex flex-row justify-between bg-gradient-to-t from-transparent via-black/60 to-black/80 {$isMobile
 			? 'px-[6vw] pb-[20vw] pt-[4vw]'
 			: 'p-[2vw]'}"
 	>
 		<button
 			on:click={() => window.history.back()}
-			class="flex flex-row rounded-full bg-white px-[2vw] py-[1.5vh] h-fit"
+			class="flex h-fit flex-row rounded-full bg-white px-[2vw] py-[1.5vh]"
 		>
 			<svg
 				class={$isMobile ? 'w-[13vw]' : 'w-[4.5vw]'}
@@ -199,8 +199,8 @@
 		</button>
 
 		<div
-			class="font-bold text-white text-center {$isMobile
-				? 'absolute bottom-[10vw] left-[50%] translate-x-[-50%] text-[5vw] w-[90%]'
+			class="text-center font-bold text-white {$isMobile
+				? 'absolute bottom-[10vw] left-[50%] w-[90%] translate-x-[-50%] text-[5vw]'
 				: 'text-[1.7vw]'}"
 		>
 			{item && item.title}
@@ -208,7 +208,7 @@
 
 		<button
 			on:click={() => (playingMusic = !playingMusic)}
-			class="flex flex-row items-center justify-center rounded-full h-fit bg-white px-[1.5vw] py-[1vh] font-bold {$isMobile
+			class="flex h-fit flex-row items-center justify-center rounded-full bg-white px-[1.5vw] py-[1vh] font-bold {$isMobile
 				? 'text-[4vw]'
 				: 'text-[1.35vw]'}"
 		>
@@ -322,7 +322,11 @@
 			transition:fade
 			class="absolute bottom-0 left-0 z-[100] w-full bg-[#FFFFFF1A] px-[2vw] py-[2vh] backdrop-blur-md"
 		>
-			<div class="flex flex-row justify-between text-[1.3vw] font-bold text-white">
+			<div
+				class="flex flex-row justify-between font-bold text-white {$isMobile
+					? 'text-[4vw]'
+					: 'text-[1.3vw]'}"
+			>
 				<div>รู้จักคำศัพท์</div>
 				<div>รู้จักประโยค</div>
 				<div>อ่านเรื่องราว</div>
@@ -330,7 +334,7 @@
 				<div>จบ</div>
 			</div>
 
-			<div class="mt-[2vh] h-[1.7vw] w-full rounded-full bg-white">
+			<div class="mt-[2vh] w-full rounded-full bg-white {$isMobile ? 'h-[5vw]' : 'h-[1.7vw]'}">
 				<div
 					style="width: {progress * 100}%;"
 					class="h-full rounded-full bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] transition-size"

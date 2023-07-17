@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { isMobile } from '$lib/global/breakpoints';
+
 	export let src: string;
 	export let type = 'audio/mpeg';
 
@@ -59,11 +61,11 @@
 
 	// a more efficient version will be easy to cause bugs, so imma just use this version.
 	// const updatePlayed = () => {
-		// const playedIndex = (currentTime / duration) * blocks.length;
-		// blocks = blocks.map((block, index) => ({
-		// 	...block,
-		// 	played: index < playedIndex
-		// }));
+	// const playedIndex = (currentTime / duration) * blocks.length;
+	// blocks = blocks.map((block, index) => ({
+	// 	...block,
+	// 	played: index < playedIndex
+	// }));
 	// };
 	// $: currentTime, updatePlayed();
 
@@ -116,7 +118,12 @@
 		: '00:00';
 </script>
 
-<div {style} class={`flex flex-row items-center gap-[1vw] px-[1.5vw] py-[0.5vw] ${clazz}`}>
+<div
+	{style}
+	class={`flex flex-row items-center gap-[1vw] ${
+		$isMobile ? 'px-[4vw] py-[1.5vw]' : 'px-[1.5vw] py-[0.5vw]'
+	} ${clazz}`}
+>
 	<button on:click={togglePlaying} class="flex h-[50%]">
 		{#if playing}
 			<svg
@@ -161,7 +168,6 @@
 		/>
 	</div>
 
-	
 	<div class="rounded-full bg-white px-[1vw] text-[0.8vw] text-black">
 		{timeText}
 	</div>

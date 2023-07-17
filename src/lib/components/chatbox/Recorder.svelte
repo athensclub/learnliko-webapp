@@ -21,6 +21,7 @@
 	import { getContext } from 'svelte';
 	import type { Context } from 'svelte-simple-modal';
 	import DialogueHintModal from '../modals/DialogueHintModal.svelte';
+	import { isMobile } from '$lib/global/breakpoints';
 
 	let clazz = '';
 	export { clazz as class };
@@ -36,12 +37,15 @@
 	const showHintModal = () => open(DialogueHintModal, {});
 </script>
 
-<div class={`flex items-center justify-center rounded-[1vw] p-[0.8vw] font-line-seed ${clazz}`}>
+<div
+	class={`flex items-center justify-center font-line-seed 
+	${$isMobile ? 'rounded-[3vw] p-[2vw]' : 'rounded-[1vw] p-[0.8vw] '} ${clazz}`}
+>
 	{#if $waitingForAIResponse || $transcribing}
 		<div
 			class="flex h-full w-full flex-row items-center justify-between gap-[7%] px-[5%] text-white"
 		>
-			<div class="flex flex-row text-[1.3vw] font-bold">
+			<div class="flex flex-row font-bold {$isMobile ? 'text-[4vw]' : 'text-[1.3vw] '}">
 				{$chatContext?.conversation.avatar.name} กำลังคิด<Typewriter mode="loop">...</Typewriter>
 			</div>
 		</div>
@@ -49,7 +53,9 @@
 		<div class="item flex h-full w-full flex-row items-center justify-between px-[2%] text-white">
 			<div class="flex-1 flex-row items-center justify-center">
 				<AudioPlayer
-					class={`h-[7vh] rounded-full bg-white/20 shadow-lg backdrop-blur-lg`}
+					class={`rounded-full bg-white/20 shadow-lg backdrop-blur-lg ${
+						$isMobile ? 'h-[5.6vh]' : 'h-[7vh] '
+					}`}
 					defaultBlockColor="white"
 					playedBlockColor="black"
 					src={$currentRecording.url}
@@ -57,8 +63,15 @@
 				/>
 			</div>
 
-			<div class="flex w-[9vw] flex-row items-center justify-between pl-[2vw]">
-				<button on:click={() => ($currentRecording = null)} class="min-w-[3vw] max-w-[3vw]">
+			<div
+				class="flex flex-row items-center justify-between pl-[2vw] {$isMobile
+					? 'w-[16vw] gap-[1.5vw]'
+					: 'w-[9vw] '}"
+			>
+				<button
+					on:click={() => ($currentRecording = null)}
+					class={$isMobile ? 'min-w-[7vw] max-w-[7vw]' : 'min-w-[3vw] max-w-[3vw]'}
+				>
 					<svg class="w-full" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<path
 							fill-rule="evenodd"
@@ -75,7 +88,9 @@
 
 				<button
 					on:click={submitCurrentRecording}
-					class="flex aspect-square min-w-[3vw] max-w-[3vw] flex-1 items-center justify-center rounded-full bg-white"
+					class="flex aspect-square flex-1 items-center justify-center rounded-full bg-white {$isMobile
+						? 'min-w-[7vw] max-w-[7vw]'
+						: 'min-w-[3vw] max-w-[3vw]'}"
 				>
 					<svg class="w-[50%]" viewBox="0 0 66 66" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<path
@@ -88,15 +103,23 @@
 		</div>
 	{:else if $isRecording}
 		<div class="flex h-full w-full flex-row items-center justify-between px-[5%] text-white">
-			<div class="flex h-full flex-row items-center justify-center text-[1.5vw] font-bold">
+			<div
+				class="flex h-full flex-row items-center justify-center font-bold {$isMobile
+					? 'text-[4.5vw]'
+					: 'text-[1.5vw]'}"
+			>
 				<div class="mr-[1vw] aspect-square h-[25%] animate-pulse rounded-full bg-red-600" />
 				Recording..
 			</div>
 
 			<button
 				on:click={stopRecording}
-				class="rounded-[1.6vw] bg-[#fff] px-[1.5vw] py-[0.35vw] text-[1.3vw] font-bold text-black">Done</button
+				class="bg-[#fff] font-bold text-black {$isMobile
+					? 'rounded-[4vw] px-[4vw] pt-[1vw] text-[4vw]'
+					: 'rounded-[1.6vw] px-[1.5vw] py-[0.35vw] text-[1.3vw] '}"
 			>
+				Done
+			</button>
 		</div>
 	{:else}
 		<button
@@ -105,10 +128,12 @@
 				$conversationFinished ||
 				!$initializedConversation}
 			on:click={startRecording}
-			class="flex h-fit w-fit flex-1 items-center justify-center rounded-full bg-white py-[0.5vw] text-[1.3vw] font-bold shadow-all"
+			class="flex h-fit w-fit flex-1 items-center justify-center rounded-full bg-white font-bold shadow-all {$isMobile
+				? 'py-[1.5vw] text-[4vw]'
+				: 'py-[0.5vw] text-[1.3vw]'}"
 		>
 			<svg
-				class="mr-2 w-[1.2vw]"
+				class={$isMobile ? 'mr-[2vw] w-[3vw]' : 'mr-[0.5vw] w-[1.2vw]'}
 				viewBox="0 0 41 56"
 				fill="none"
 				xmlns="http://www.w3.org/2000/svg"
@@ -128,7 +153,9 @@
 					$conversationFinished ||
 					!$initializedConversation}
 				on:click={showHintModal}
-				class="ml-[1vw] flex h-fit w-fit items-center justify-center rounded-full bg-white bg-opacity-20 px-[1.5vw] py-[0.5vw] text-[1.3vw] font-bold text-white shadow-all"
+				class="flex h-fit w-fit items-center justify-center rounded-full bg-white bg-opacity-20 font-bold text-white shadow-all {$isMobile
+					? 'ml-[3vw] px-[4vw] py-[1.5vw] text-[4vw]'
+					: 'ml-[1vw] px-[1.5vw] py-[0.5vw] text-[1.3vw]'}"
 			>
 				? Help
 			</button>

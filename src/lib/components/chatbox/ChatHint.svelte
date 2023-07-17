@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { synthesize } from '$api/tts';
 	import { playAudioURL } from '$lib/global/audio';
+	import { isMobile } from '$lib/global/breakpoints';
 	import { blobToBase64 } from '$lib/utils/io';
 	import { onMount } from 'svelte';
 
@@ -22,10 +23,12 @@
 </script>
 
 <div class=" flex flex-col items-end px-4">
-	<h4 class=" mb-1 text-xs font-bold">Help</h4>
+	<h4 class="mb-1 font-bold {$isMobile ? 'text-[4vw]' : 'text-[1.4vw]'}">Help</h4>
 	<button
 		on:click={playSpeechAudio}
-		class="flex h-[44px] flex-row items-center justify-center rounded-full border border-white px-2 text-xs text-white opacity-50"
+		class="flex flex-row items-center justify-center rounded-full border border-white px-2 text-white opacity-50 {$isMobile
+			? 'py-[2vw] text-[3vw]'
+			: 'py-[0.8vw] text-[1vw]'}"
 	>
 		{text}🔉
 	</button>

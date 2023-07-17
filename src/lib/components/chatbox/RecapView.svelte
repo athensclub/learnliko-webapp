@@ -13,6 +13,7 @@
 	import type { Context } from 'svelte-simple-modal';
 	import { getContext } from 'svelte';
 	import summaryImage from './recap_summary_image.png';
+	import { isMobile } from '$lib/global/breakpoints';
 
 	// we have to wait for recapHistory to finish loading.
 	// $: totalScore = $recapHistory ? $recapHistory.map((x) => x.score).reduce((x, y) => x + y, 0) : 0;
@@ -29,10 +30,12 @@
 
 {#if $recapResult && $chatContext}
 	<div class="relative flex h-[48px] w-full items-center justify-between text-lg font-bold">
-		<div class="ml-[2vw] text-[1.8vw]">ดูย้อนหลัง</div>
+		<div class="ml-[2vw] {$isMobile ? 'text-[4vw]' : 'text-[1.8vw]'}">ดูย้อนหลัง</div>
 		<button
 			on:click={hide}
-			class="ml-auto mr-4 h-[28px] rounded-lg bg-[#6C80E8] px-3 text-center text-base text-white"
+			class="ml-auto mr-4 h-[28px] rounded-lg bg-[#6C80E8] px-3 text-center text-base text-white {$isMobile
+				? 'text-[4vw]'
+				: 'text-[1.8vw]'}"
 		>
 			เสร็จสิ้น
 		</button>
@@ -41,22 +44,26 @@
 	<div class="h-[calc(100%-48px)] w-full overflow-y-auto px-[2vw]">
 		<div
 			style="background-image: url('{$chatContext.conversation.background}');"
-			class="flex h-[18vw] w-full flex-row items-center justify-between overflow-hidden rounded-[2vw] bg-cover bg-center"
+			class="flex w-full flex-row items-center justify-between overflow-hidden rounded-[2vw] bg-cover bg-center {$isMobile
+				? 'h-[32vw]'
+				: 'h-[18vw] '}"
 		>
 			<div
-				class="flex h-full flex-col justify-center bg-gradient-to-r from-black/80 via-black/60 to-transparent px-[2vw] font-bold text-white"
+				class="ont-bold flex h-full flex-col justify-center bg-gradient-to-r from-black/80 via-black/60 to-transparent text-white {$isMobile
+					? 'px-[6vw]'
+					: 'px-[2vw] '}"
 			>
-				<div class="text-[1.7vw]">Your score</div>
-				<div class="text-[4vw]">{round($recapResult.score, 2).toLocaleString()}%</div>
+				<div class={$isMobile ? 'text-[4vw]' : 'text-[1.7vw]'}>Your score</div>
+				<div class={$isMobile ? 'text-[8vw]' : 'text-[4vw]'}>
+					{round($recapResult.score, 2).toLocaleString()}%
+				</div>
 
-				<div class="flex w-full flex-row justify-end">
-					<div
-						class="bg-gradient-to-br from-[#C698FF] to-[#6C80E8] bg-clip-text text-[1.5vw] text-transparent"
-					>
+				<div class="flex w-full flex-row justify-end {$isMobile ? 'text-[4.5vw]' : 'text-[1.5vw]'}">
+					<div class="bg-gradient-to-br from-[#C698FF] to-[#6C80E8] bg-clip-text text-transparent">
 						+{$recapResult.exp}
 					</div>
 					<svg
-						class="ml-[0.5vw] w-[3.5vw]"
+						class={$isMobile ? 'ml-[1.5vw] w-[11vw]' : 'ml-[0.5vw] w-[3.5vw]'}
 						viewBox="0 0 1650 792"
 						fill="none"
 						xmlns="http://www.w3.org/2000/svg"
@@ -96,12 +103,12 @@
 					</svg>
 
 					<div
-						class="ml-[2vw] bg-gradient-to-t from-[#FFE08F] via-[#E4AE24] to-[#FFE08F] bg-clip-text text-[1.5vw] text-transparent"
+						class="ml-[2vw] bg-gradient-to-t from-[#FFE08F] via-[#E4AE24] to-[#FFE08F] bg-clip-text text-transparent"
 					>
 						+{$recapResult.coins}
 					</div>
 					<svg
-						class="ml-[0.5vw] w-[4vw]"
+						class={$isMobile ? 'ml-[1.5vw] w-[10vw]' : 'ml-[0.5vw] w-[4vw]'}
 						viewBox="0 0 2017 792"
 						fill="none"
 						xmlns="http://www.w3.org/2000/svg"
@@ -156,7 +163,7 @@
 				class="flex h-full flex-col justify-end bg-gradient-to-l from-black/80 via-black/60 to-transparent"
 			>
 				<img
-					class="relative top-[5vw] w-[10vw]"
+					class="relative top-[5vw] {$isMobile ? 'w-[17vw]' : 'w-[10vw]'}"
 					src={$chatContext.conversation.avatar.models.neutral}
 					alt="Congratulations"
 				/>
@@ -181,7 +188,7 @@
 			style="border: none"
 			src="https://rive.app/community/4896-9912-rig-demo/embed"
 		/>
-		<div class="flex flex-row text-[1.35vw] font-bold">
+		<div class="flex flex-row font-bold {$isMobile ? 'text-[5vw]' : 'text-[1.35vw]'}">
 			ระบบกำลังให้คะแนน<Typewriter mode="loop">...</Typewriter>
 		</div>
 	</div>

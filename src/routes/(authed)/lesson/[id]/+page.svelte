@@ -52,6 +52,10 @@
 		if (!content.card) throw new Error('No Lesson Found');
 		item = content.card;
 
+		// the background is set in narrative anyway, but when we test by setting currentView
+		// to something else, this will become helpful.
+		background = item.narratives[0].illustrationUrl;
+
 		music = new Howl({ src: item.ambientAudio, volume: 0.06, loop: true });
 
 		vocabs =
@@ -168,9 +172,11 @@
 	class="relative flex h-full min-h-[100vh] w-[100vw] flex-col bg-cover bg-center font-line-seed transition-[background-image]"
 >
 	<div
-		class="relative flex flex-row justify-between bg-gradient-to-t from-transparent via-black/60 to-black/80 {$isMobile
-			? 'px-[6vw] pb-[20vw] pt-[4vw]'
-			: 'p-[2vw]'}"
+		class="absolute left-0 top-0 z-50 flex w-full flex-row justify-between
+		{$isMobile && currentView === 'CONVERSATION'
+			? 'bg-transparent'
+			: 'bg-gradient-to-t from-transparent via-black/60 to-black/80 '} 
+			{$isMobile ? 'px-[6vw] pb-[20vw] pt-[4vw]' : 'p-[2vw]'}"
 	>
 		<button
 			on:click={() => window.history.back()}
@@ -317,7 +323,7 @@
 		{/if}
 	{/if}
 
-	{#if currentView != 'INTRO'}
+	{#if currentView !== 'INTRO' && !(currentView === 'CONVERSATION' && $isMobile)}
 		<div
 			transition:fade
 			class="absolute bottom-0 left-0 z-[100] w-full bg-[#FFFFFF1A] px-[2vw] py-[2vh] backdrop-blur-md"

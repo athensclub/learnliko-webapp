@@ -37,7 +37,6 @@
 	};
 	// use $: instead of store.subscribe so svelte can handle cleanup stuff.
 	$: $isMobile, updateIsMobile();
-	$: console.log(displayed);
 
 	onMount(() => {
 		// save count in separate variable as items is going to be mutated.

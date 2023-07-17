@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { ReadingItem } from '$lib/types/reading';
 	import ReadMore from '$lib/components/ReadMore.svelte';
+	import { isMobile } from '$lib/global/breakpoints';
 
 	export let item: ReadingItem;
 
@@ -12,25 +13,29 @@
 <a
 	href="/read/{item.id}"
 	style="background-image: url('{item.image}');"
-	class={`flex flex-col justify-end overflow-hidden rounded-[2vw] bg-cover bg-center ${clazz}`}
+	class={`flex flex-col justify-end overflow-hidden bg-cover bg-center ${
+		$isMobile ? 'rounded-[5vw]' : 'rounded-[2vw]'
+	} ${clazz}`}
 >
 	<div
 		class="flex h-[70%] flex-col justify-end bg-gradient-to-t from-black via-black/70 to-transparent px-[3vw] py-[2vw] text-white"
 	>
-		<div class="text-[1.8vw] font-bold">{item.blogName}</div>
-		<div class="mt-[1vw] text-[1.35vw] text-[#B4B3B3]">
+		<div class="font-bold {$isMobile ? 'text-[5vw]' : 'text-[1.8vw]'}">{item.blogName}</div>
+		<div class="mt-[1vw] text-[#B4B3B3] {$isMobile ? 'text-[4vw]' : 'text-[1.35vw]'}">
 			<ReadMore textContent={item.content} maxChars={135} />
 		</div>
 
-		<div class="mt-[2vw] flex w-full flex-row justify-end">
-			<div
-				class="bg-gradient-to-br from-[#C698FF] to-[#6C80E8] bg-clip-text text-[1.5vw] text-transparent"
-			>
+		<div
+			class="flex w-full flex-row justify-end {$isMobile
+				? 'mb-[2vw] mt-[6vw] text-[4.5vw]'
+				: 'mt-[2vw] text-[1.5vw]'}"
+		>
+			<div class="bg-gradient-to-br from-[#C698FF] to-[#6C80E8] bg-clip-text text-transparent">
 				<!-- TODO: display actual data -->
 				+25
 			</div>
 			<svg
-				class="ml-[0.5vw] w-[3.5vw]"
+				class={$isMobile ? 'ml-[1.5vw] w-[10vw]' : 'ml-[0.5vw] w-[3.5vw]'}
 				viewBox="0 0 1650 792"
 				fill="none"
 				xmlns="http://www.w3.org/2000/svg"
@@ -70,13 +75,13 @@
 			</svg>
 
 			<div
-				class="ml-[2vw] bg-gradient-to-t from-[#FFE08F] via-[#E4AE24] to-[#FFE08F] bg-clip-text text-[1.5vw] text-transparent"
+				class="ml-[2vw] bg-gradient-to-t from-[#FFE08F] via-[#E4AE24] to-[#FFE08F] bg-clip-text text-[4.5vw] text-transparent"
 			>
 				<!-- TODO: display actual data -->
 				+100
 			</div>
 			<svg
-				class="ml-[0.5vw] w-[4vw]"
+				class={$isMobile ? 'ml-[1.5vw] w-[11vw]' : 'ml-[0.5vw] w-[4vw]'}
 				viewBox="0 0 2017 792"
 				fill="none"
 				xmlns="http://www.w3.org/2000/svg"

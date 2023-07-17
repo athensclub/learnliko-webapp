@@ -14,7 +14,7 @@
 	let items: ReadingItem[] = [];
 
 	const loadData = async () => {
-		if(!browser) return; 
+		if (!browser) return;
 		data = { topics: await getReadingTopics() };
 		let changed = selectedTopic !== 0;
 		selectedTopic = 0;
@@ -33,28 +33,26 @@
 	$: $currentMode, loadData();
 </script>
 
-<div class="w-full h-full min-h-[100vh] bg-[#F4F4F4] flex flex-row font-line-seed">
+<div class="flex h-full min-h-[100vh] w-full flex-row bg-[#F4F4F4] font-line-seed">
 	<NavBar spaced />
 
-	<div class="flex flex-col flex-1 px-[3vw] py-[2vh]">
-		<div class="flex flex-row overflow-x-auto gap-[1.5vw]">
+	<div class="flex flex-col {$isMobile ? 'px-[7vw] py-[4vh] w-full' : 'px-[3vw] py-[2vh] flex-1'}">
+		<div class="flex w-full flex-row overflow-x-auto {$isMobile ? 'gap-[4vw]' : 'gap-[1.5vw]'}">
 			{#each data.topics as topic, index (topic)}
 				<button
 					on:click={() => (selectedTopic = index)}
-					class={`rounded-full py-[1vh] px-[2vw] font-bold border 
-					${$isMobile? 'text-[4vw]':'text-[1.3vw]'} 
-					${
-						selectedTopic === index ? 'bg-black text-white border-none' : 'bg-white text-black'
-					}`}
+					class={`h-fit whitespace-nowrap rounded-full border py-[1vh] font-bold 
+					${$isMobile ? 'px-[5vw] text-[4vw]' : 'px-[2vw] text-[1.3vw]'} 
+					${selectedTopic === index ? 'border-none bg-black text-white' : 'bg-white text-black'}`}
 				>
 					{topic}
 				</button>
 			{/each}
 		</div>
 
-		<div class="grid grid-cols-2 gap-[2.5vw] mt-[5vh]">
+		<div class="mt-[5vh] grid {$isMobile ? 'grid-cols-1 gap-[10vw]' : 'grid-cols-2 gap-[2.5vw] '}">
 			{#each items as item (item.id)}
-				<ReadingCard class="w-full h-[40vw]" {item} />
+				<ReadingCard class="w-full {$isMobile?'h-[110vw]':'h-[40vw]'}" {item} />
 			{/each}
 		</div>
 	</div>

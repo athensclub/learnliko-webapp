@@ -7,6 +7,7 @@
 	import NavBar from '$lib/components/navbar/NavBar.svelte';
 	import { currentMode } from '$lib/global/mode';
 	import ReadingCard from '$lib/components/reading/ReadingCard.svelte';
+	import { isMobile } from '$lib/global/breakpoints';
 
 	export let data: PageData;
 	let selectedTopic = 0;
@@ -40,7 +41,9 @@
 			{#each data.topics as topic, index (topic)}
 				<button
 					on:click={() => (selectedTopic = index)}
-					class={`rounded-full py-[1vh] text-[1.3vw] px-[2vw] font-bold border ${
+					class={`rounded-full py-[1vh] px-[2vw] font-bold border 
+					${$isMobile? 'text-[4vw]':'text-[1.3vw]'} 
+					${
 						selectedTopic === index ? 'bg-black text-white border-none' : 'bg-white text-black'
 					}`}
 				>

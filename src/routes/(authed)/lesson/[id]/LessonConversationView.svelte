@@ -398,7 +398,7 @@
 			<div class={`flex h-full flex-col justify-end ${$isMobile ? 'w-full' : 'w-fit'}`}>
 				<img
 					class={`${
-						$isMobile ? 'mx-auto max-h-[80%] max-w-full' : `bottom-0 h-[90%] transition-transform`
+						$isMobile ? `mx-auto max-w-full ${briefing ?'max-h-[90%]':'max-h-[80%]'}` : `bottom-0 h-[90%] transition-transform`
 					}`}
 					src={$chatContext.conversation.avatar.models[$chatContext.bot.emotion]}
 					alt="Avatar"

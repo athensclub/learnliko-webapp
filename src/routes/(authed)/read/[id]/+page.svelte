@@ -14,12 +14,13 @@
 		'https://cdn.discordapp.com/attachments/842737146321174558/1124045015631528038/image.png';
 
 	const answerGetter = async (
-		item: ReadingCard, selected: number[]
+		item: ReadingCard,
+		selected: number[]
 	): Promise<{
 		answers: number[];
 		correct: number;
 	}> => {
-		const answers: number[] = item.questions.map(q => q.answer);
+		const answers: number[] = item.questions.map((q) => q.answer);
 		const correct = item.questions.filter((q, index) => q.answer === selected[index]).length;
 
 		return {
@@ -55,9 +56,16 @@
 
 	<button
 		on:click={goBack}
-		class="absolute rounded-full bg-white {$isMobile?'left-[4vw] top-[4vw] px-[4vw] py-[2vw]':'left-[2vw] top-[2vw] px-[1.5vw] py-[0.7vw] '}"
+		class="absolute rounded-full bg-white {$isMobile
+			? 'left-[4vw] top-[4vw] px-[4vw] py-[2vw]'
+			: 'left-[2vw] top-[2vw] px-[1.5vw] py-[0.7vw] '}"
 	>
-		<svg class="{$isMobile?'w-[13vw]':'w-[5vw]'}" viewBox="0 0 78 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+		<svg
+			class={$isMobile ? 'w-[13vw]' : 'w-[5vw]'}
+			viewBox="0 0 78 23"
+			fill="none"
+			xmlns="http://www.w3.org/2000/svg"
+		>
 			<g clip-path="url(#clip0_1192_5485)">
 				<path
 					d="M36.3671 19.1667C36.1692 19.1667 36.0703 19.067 36.0703 18.8677V2.58371C36.0703 2.38437 36.1692 2.28471 36.3671 2.28471H46.9599C47.1577 2.28471 47.2567 2.38437 47.2567 2.58371V4.90671C47.2567 5.10604 47.1577 5.20571 46.9599 5.20571H39.1523V9.04671H46.2065C46.4044 9.04671 46.5033 9.14637 46.5033 9.34571V11.6227C46.5033 11.822 46.4044 11.9217 46.2065 11.9217H39.1523V16.2457H47.2338C47.4317 16.2457 47.5306 16.3454 47.5306 16.5447V18.8677C47.5306 19.067 47.4317 19.1667 47.2338 19.1667H36.3671ZM49.1998 19.1667C49.0324 19.1667 48.9487 19.1054 48.9487 18.9827C48.9487 18.9214 48.9715 18.86 49.0172 18.7987L53.0123 13.0487L49.2455 7.62071C49.1998 7.54404 49.177 7.48271 49.177 7.43671C49.177 7.31404 49.2607 7.25271 49.4281 7.25271H52.1448C52.297 7.25271 52.4187 7.31404 52.5101 7.43671L54.8843 10.9787L57.2814 7.43671C57.3727 7.31404 57.4944 7.25271 57.6466 7.25271H60.1807C60.3481 7.25271 60.4318 7.31404 60.4318 7.43671C60.4318 7.48271 60.409 7.54404 60.3633 7.62071L56.5965 13.0487L60.5916 18.7987C60.6373 18.86 60.6601 18.9214 60.6601 18.9827C60.6601 19.1054 60.5764 19.1667 60.409 19.1667H57.6923C57.5401 19.1667 57.4183 19.1054 57.327 18.9827L54.7245 15.0957L52.0991 18.9827C52.0078 19.1054 51.8861 19.1667 51.7339 19.1667H49.1998ZM64.234 5.13671C63.7318 5.13671 63.3132 4.98337 62.9784 4.67671C62.6588 4.37004 62.499 3.97137 62.499 3.48071C62.499 2.99004 62.6588 2.59137 62.9784 2.28471C63.3132 1.97804 63.7318 1.82471 64.234 1.82471C64.7363 1.82471 65.1472 1.97804 65.4668 2.28471C65.8016 2.59137 65.969 2.99004 65.969 3.48071C65.969 3.97137 65.8016 4.37004 65.4668 4.67671C65.1472 4.98337 64.7363 5.13671 64.234 5.13671ZM63.0469 19.1667C62.849 19.1667 62.7501 19.067 62.7501 18.8677V7.55171C62.7501 7.35237 62.849 7.25271 63.0469 7.25271H65.4211C65.619 7.25271 65.7179 7.35237 65.7179 7.55171V18.8677C65.7179 19.067 65.619 19.1667 65.4211 19.1667H63.0469ZM73.4257 19.3967C72.132 19.3967 71.1427 18.9904 70.4579 18.1777C69.7882 17.365 69.4534 16.1614 69.4534 14.5667V9.92071H67.7183C67.5205 9.92071 67.4216 9.82104 67.4216 9.62171V7.55171C67.4216 7.35237 67.5205 7.25271 67.7183 7.25271H69.4534V4.05571C69.4534 3.85637 69.5523 3.75671 69.7501 3.75671H72.1244C72.3222 3.75671 72.4212 3.85637 72.4212 4.05571V7.25271H75.2292C75.427 7.25271 75.526 7.35237 75.526 7.55171V9.62171C75.526 9.82104 75.427 9.92071 75.2292 9.92071H72.4212V14.7507C72.4212 15.3947 72.5277 15.8777 72.7408 16.1997C72.9539 16.5217 73.2887 16.6827 73.7453 16.6827C74.1258 16.6827 74.4225 16.491 74.6356 16.1077C74.7421 15.9237 74.8791 15.8777 75.0465 15.9697L76.8272 16.7747C76.9338 16.8207 76.987 16.905 76.987 17.0277C76.987 17.089 76.9642 17.1657 76.9185 17.2577C76.5228 17.9937 76.0206 18.538 75.4118 18.8907C74.803 19.228 74.141 19.3967 73.4257 19.3967Z"
@@ -75,19 +83,19 @@
 	</button>
 
 	<div
-		class="absolute bottom-0 left-[50%] flex w-[75vw] translate-x-[-50%] flex-row gap-[4vw] items-center justify-between py-[4vh] font-bold text-white"
+		class="absolute bottom-0 left-[50%] flex w-[75vw] translate-x-[-50%] flex-row items-center justify-between gap-[4vw] py-[4vh] font-bold text-white"
 	>
-		<div class="{$isMobile?'text-[3vw] text-center':'text-[1.35vw]'}">หากตอบคำถามถูกครบทุกข้อคุณจะได้รับรางวัล</div>
+		<div class={$isMobile ? 'text-center text-[3vw]' : 'text-[1.35vw]'}>
+			หากตอบคำถามถูกครบทุกข้อคุณจะได้รับรางวัล
+		</div>
 
-		<div class="flex flex-row {$isMobile?'text-[3.5vw]':'text-[1.5vw]'}">
-			<div class="flex flex-row items-center rounded-full bg-[#FFFFFFE5] h-fit px-[1vw] py-[0.3vw]">
-				<div
-					class="bg-gradient-to-br from-[#C698FF] to-[#6C80E8] bg-clip-text text-transparent"
-				>
+		<div class="flex flex-row {$isMobile ? 'text-[3.5vw]' : 'text-[1.5vw]'}">
+			<div class="flex h-fit flex-row items-center rounded-full bg-[#FFFFFFE5] px-[1vw] py-[0.3vw]">
+				<div class="bg-gradient-to-br from-[#C698FF] to-[#6C80E8] bg-clip-text text-transparent">
 					+{exp}
 				</div>
 				<svg
-				class="{$isMobile?'ml-[1.5vw] w-[7vw]':'ml-[0.5vw] w-[3.5vw]'}"
+					class={$isMobile ? 'ml-[1.5vw] w-[7vw]' : 'ml-[0.5vw] w-[3.5vw]'}
 					viewBox="0 0 1650 792"
 					fill="none"
 					xmlns="http://www.w3.org/2000/svg"
@@ -128,7 +136,7 @@
 			</div>
 
 			<div
-				class="ml-[2vw] flex flex-row items-center rounded-full bg-[#FFFFFFE5] h-fit px-[1vw] py-[0.3vw]"
+				class="ml-[2vw] flex h-fit flex-row items-center rounded-full bg-[#FFFFFFE5] px-[1vw] py-[0.3vw]"
 			>
 				<div
 					class="bg-gradient-to-t from-[#FFE08F] via-[#E4AE24] to-[#FFE08F] bg-clip-text text-transparent"
@@ -136,7 +144,7 @@
 					+{coin}
 				</div>
 				<svg
-					class="{$isMobile?'ml-[1.5vw] w-[8vw]':'ml-[0.5vw] w-[4vw]'}"
+					class={$isMobile ? 'ml-[1.5vw] w-[8vw]' : 'ml-[0.5vw] w-[4vw]'}
 					viewBox="0 0 2017 792"
 					fill="none"
 					xmlns="http://www.w3.org/2000/svg"

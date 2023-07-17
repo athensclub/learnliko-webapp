@@ -75,7 +75,7 @@
 			</svg>
 
 			<div
-				class="ml-[2vw] bg-gradient-to-t from-[#FFE08F] via-[#E4AE24] to-[#FFE08F] bg-clip-text text-[4.5vw] text-transparent"
+				class="ml-[2vw] bg-gradient-to-t from-[#FFE08F] via-[#E4AE24] to-[#FFE08F] bg-clip-text text-transparent"
 			>
 				<!-- TODO: display actual data -->
 				+100

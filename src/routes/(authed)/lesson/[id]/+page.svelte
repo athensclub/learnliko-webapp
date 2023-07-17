@@ -146,14 +146,14 @@
 		| 'FINISHED' = 'INTRO';
 
 	const onFinishedLesson = async () => {
-		currentView = 'FINISHED';
-		$lastPlayedLessonIdLocal = null;
 		const query = await graphqlClient
 			.query(GET_RECAP_LESSON_CURRENCIES, {
 				lessonId: item?.id ?? '',
 				uid: $userSession.accountData?.uid ?? ''
 			})
 			.toPromise();
+		currentView = 'FINISHED';
+		$lastPlayedLessonIdLocal = null;
 
 		totalCoin = query.data?.lessonProgress?.totalCoin ?? 0;
 		totalExp = query.data?.lessonProgress?.totalExp ?? 0;

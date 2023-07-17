@@ -10,6 +10,7 @@
 	import { graphqlClient } from '$lib/graphql';
 	import { RECAP_READING_QUIZ, UPDATE_LESSON_PROGRESS } from '$gql/schema/mutations';
 	import userSession from '$lib/stores/userSession';
+	import { isMobile } from '$lib/global/breakpoints';
 
 	/**
 	 * Called when the user click 'continue' button after submitting answers.
@@ -24,7 +25,8 @@
 	 * function that is called to get answer index array from reading card item.
 	 */
 	export let answerGetter = async (
-		item: ReadingCard, selected: number[]
+		item: ReadingCard,
+		selected: number[]
 	): Promise<{ answers: number[]; correct: number }> => {
 		const result = await graphqlClient
 			.mutation(RECAP_READING_QUIZ, {
@@ -76,7 +78,9 @@
 
 <div
 	style="box-shadow: 0px 1px 10px 0px rgba(0, 0, 0, 0.25);"
-	class="pointer-events-auto relative overflow-hidden rounded-[2vw] bg-white p-[2vw] {clazz}"
+	class="pointer-events-auto relative overflow-hidden bg-white {$isMobile
+		? 'rounded-[5vw] p-[5vw]'
+		: 'rounded-[2vw] p-[2vw]'} {clazz}"
 >
 	{#if currentView === 'READ'}
 		<ReadingTextView {scale} {item} setView={(view) => (currentView = view)} />

@@ -8,6 +8,7 @@
 	import { graphqlClient } from '$lib/graphql';
 	import userSession from '$lib/stores/userSession';
 	import { RECAP_READING_QUIZ, UPDATE_LESSON_PROGRESS } from '$gql/schema/mutations';
+	import { isMobile } from '$lib/global/breakpoints';
 
 	export let item: ReadingCard;
 	$: quiz = item.questions;
@@ -18,7 +19,10 @@
 	export let setView: (view: ReadingViewType) => void;
 	export let onFinish: () => void;
 
-	export let answerGetter: (item: ReadingCard, selected: number[]) => Promise<{ answers: number[]; correct: number }>;
+	export let answerGetter: (
+		item: ReadingCard,
+		selected: number[]
+	) => Promise<{ answers: number[]; correct: number }>;
 
 	export let showFinishButton: boolean;
 
@@ -28,7 +32,10 @@
 
 	$: submittable = selected.every((val) => val !== null);
 	const submit = async () => {
-		const result = await answerGetter(item, selected.map(v => v ?? 0));
+		const result = await answerGetter(
+			item,
+			selected.map((v) => v ?? 0)
+		);
 		correctAnswers = result.answers;
 		totalCorrect = result.correct;
 
@@ -44,14 +51,14 @@
 	<div in:fade={{ delay: 500 }} out:fade class="h-full w-full font-bold">
 		<div class="flex h-full w-full flex-col overflow-y-auto">
 			{#if correctAnswers === null}
-				<div style="font-size: {scale * 2.25}vw;">คำถาม</div>
+				<div style="font-size: {scale * ($isMobile ? 6 : 2.25)}vw;">คำถาม</div>
 			{:else}
 				<div
-					class="mx-auto flex min-h-[13vw] w-[90%] flex-row justify-between rounded-[2vw] bg-gradient-to-br from-[#C698FF] to-[#6C80E8] px-[4vw]"
+					class="mx-auto flex w-[90%] flex-row justify-between rounded-[2vw] bg-gradient-to-br from-[#C698FF] to-[#6C80E8] {$isMobile?'px-[7vw] min-h-[25vw]':'px-[4vw] min-h-[13vw] '}"
 				>
 					<img src={finishedImage} class="mt-auto h-[90%]" alt="Happy Kid" />
 
-					<div style="font-size: {scale * 2.2}vw;" class="my-auto text-white">
+					<div style="font-size: {scale * ($isMobile ? 5 : 2.2)}vw;" class="my-auto text-white">
 						คุณตอบถูก {totalCorrect}/{quiz.length} ข้อ
 					</div>
 				</div>
@@ -59,15 +66,22 @@
 
 			<div class="flex flex-col px-[4vw]">
 				{#each quiz as q, index (index)}
-					<div style="font-size: {scale * 1.5}vw;" class="mt-[2vw]">{index + 1}. {q.question}</div>
+					<div
+						style="font-size: {scale * ($isMobile ? 4.5 : 1.5)}vw;"
+						class={$isMobile ? 'mt-[5vw]' : 'mt-[2vw]'}
+					>
+						{index + 1}. {q.question}
+					</div>
 
-					<div class="mt-[2vw] grid grid-cols-2 gap-[2vw]">
+					<div class="grid grid-cols-2 gap-[2vw] {$isMobile ? 'mt-[5vw]' : 'mt-[2vw]'}">
 						{#each q.choices as choice, i (choice)}
 							<button
 								disabled={correctAnswers !== null}
 								on:click={() => (selected[index] = i)}
-								style="font-size: {scale * 1.35}vw;"
-								class="w-full rounded-full py-[0.7vw] {correctAnswers && correctAnswers[index] === i
+								style="font-size: {scale * ($isMobile ? 4 : 1.35)}vw;"
+								class="w-full rounded-full
+								{$isMobile ? 'py-[1.5vw]' : 'py-[0.7vw]'} 
+								{correctAnswers && correctAnswers[index] === i
 									? 'bg-[#14AE5C] text-white'
 									: selected[index] === i
 									? 'bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] text-white'
@@ -85,15 +99,19 @@
 
 		<div
 			style="box-shadow: 0 4px 10px #454545;"
-			class="absolute bottom-0 left-0 z-10 flex w-full flex-row items-center justify-between bg-white px-[4vw] py-[2vw]"
+			class="absolute bottom-0 left-0 z-10 flex w-full flex-row items-center justify-between bg-white {$isMobile
+				? 'px-[8vw] py-[5vw]'
+				: 'px-[4vw] py-[2vw]'}"
 		>
 			<button
 				on:click={() => setView('READ')}
-				style="font-size: {scale * 1.3}vw;"
-				class="flex flex-row items-center rounded-full border border-black px-[1vw] py-[0.5vw]"
+				style="font-size: {scale * ($isMobile ? 4 : 1.3)}vw;"
+				class="flex flex-row items-center rounded-full border border-black {$isMobile
+					? 'px-[3vw] py-[1.5vw]'
+					: 'px-[1vw] py-[0.5vw]'}"
 			>
 				<svg
-					class="mr-[0.5vw] w-[1.3vw]"
+					class={$isMobile ? 'mr-[1.5vw] w-[4vw]' : 'mr-[0.5vw] w-[1.3vw]'}
 					viewBox="0 0 24 16"
 					fill="none"
 					xmlns="http://www.w3.org/2000/svg"
@@ -110,8 +128,10 @@
 				<button
 					on:click={submit}
 					disabled={!submittable}
-					style="font-size: {scale * 1.3}vw;"
-					class="rounded-full px-[2vw] py-[0.5vw] {submittable
+					style="font-size: {scale * ($isMobile ? 4 : 1.3)}vw;"
+					class="rounded-full
+					{$isMobile ? 'px-[5vw] py-[1.5vw]' : 'px-[2vw] py-[0.5vw]'}
+					{submittable
 						? 'bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] text-white'
 						: 'bg-[#D9D9D9] text-[#454545]'}"
 				>
@@ -120,8 +140,9 @@
 			{:else if showFinishButton}
 				<button
 					on:click={onFinish}
-					style="font-size: {scale * 1.3}vw;"
-					class="rounded-full bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] px-[2vw] py-[0.5vw] text-white"
+					style="font-size: {scale * ($isMobile ? 4 : 1.3)}vw;"
+					class="rounded-full bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] text-white
+					{$isMobile ? 'px-[5vw] py-[1.5vw]' : 'px-[2vw] py-[0.5vw]'}"
 				>
 					ต่อไป
 				</button>

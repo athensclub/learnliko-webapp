@@ -8,6 +8,7 @@
 	import { playAudioURL } from '$lib/global/audio';
 	import type { ReadingCard } from '$gql/generated/graphql';
 	import type { Howl } from 'howler';
+	import { isMobile } from '$lib/global/breakpoints';
 
 	export let item: ReadingCard;
 
@@ -38,26 +39,45 @@
 </script>
 
 <!-- https://github.com/sveltejs/svelte/issues/544#issuecomment-586417387 -->
-<div in:fade={{ delay: 500 }} out:fade class="flex h-full w-full flex-row gap-[2vw]">
+<div
+	in:fade={{ delay: 500 }}
+	out:fade
+	class="relative flex h-full w-full {$isMobile
+		? 'flex-col gap-[5vw] overflow-y-auto'
+		: 'flex-row gap-[2vw] overflow-hidden'}"
+>
 	<!-- TODO: support multiple pages -->
 	<img
-		class="max-h-full max-w-[50%] object-contain"
+		class="object-contain {$isMobile
+			? 'w-full rounded-[5vw]'
+			: 'm-auto h-auto w-auto max-w-[50%] rounded-[2vw]'}"
 		src={item.pages[0].illustrationUrl}
 		alt={item.title}
 	/>
 
-	<div class="relative flex h-full flex-1 flex-col overflow-y-auto font-bold">
-		<div style="font-size: {scale * 2}vw;">{item.title}</div>
+	<div
+		class="relative flex h-full flex-1 flex-col font-bold {$isMobile
+			? 'overflow-y-visible'
+			: 'overflow-y-auto'}"
+	>
+		<div style="font-size: {scale * ($isMobile ? 5 : 2)}vw;">{item.title}</div>
 		<!-- TODO: support multiple pages -->
-		<div style="font-size: {scale * 1.2}vw;" class="mt-[2vw]">{item.pages[0].text}</div>
+		<div
+			style="font-size: {scale * ($isMobile ? 4 : 1.2)}vw;"
+			class={$isMobile ? 'mt-[8vw]' : 'mt-[2vw]'}
+		>
+			{item.pages[0].text}
+		</div>
 
 		<button
 			on:click={playSpeechAudio}
-			style="font-size: {scale * 1.2}vw;"
-			class="absolute right-0 top-0 flex flex-row items-center rounded-full border border-black px-[1vw] py-[0.5vw]"
+			style="font-size: {scale * ($isMobile ? 4 : 1.2)}vw;"
+			class="absolute right-0 top-0 flex flex-row items-center rounded-full border border-black {$isMobile
+				? 'px-[3vw] py-[1.5vw]'
+				: 'px-[1vw] py-[0.5vw]'}"
 		>
 			<svg
-				class="mr-[0.6vw] w-[1vw]"
+				class={$isMobile ? 'mr-[1.5vw] w-[3vw]' : 'mr-[0.6vw] w-[1vw]'}
 				viewBox="0 0 9 9"
 				fill="none"
 				xmlns="http://www.w3.org/2000/svg"
@@ -81,8 +101,10 @@
 
 		<button
 			on:click={() => setView('QUIZ')}
-			style="font-size: {scale * 1.2}vw;"
-			class="ml-auto mt-auto flex flex-row items-center rounded-full border border-black px-[1vw] py-[0.5vw]"
+			style="font-size: {scale * ($isMobile ? 4 : 1.2)}vw;"
+			class="ml-auto mt-auto flex flex-row items-center rounded-full border border-black {$isMobile
+				? 'px-[3vw] py-[1.5vw]'
+				: 'px-[1vw] py-[0.5vw]'}"
 		>
 			? คำถาม
 		</button>

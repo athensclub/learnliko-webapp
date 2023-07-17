@@ -1,5 +1,6 @@
 <script lang="ts">
 	import CircularProgressBar from '$lib/components/CircularProgressBar.svelte';
+	import { isMobile } from '$lib/global/breakpoints';
 	import { round } from '$lib/utils/math';
 	import { onMount } from 'svelte';
 	import { tweened } from 'svelte/motion';
@@ -24,29 +25,32 @@
 	class="pointer-events-none absolute flex h-full w-full items-center justify-center overflow-hidden"
 >
 	<div
-		class="pointer-events-auto flex h-[30vw] w-[60vw] flex-row justify-between overflow-hidden rounded-[2vw] bg-white px-[4vw]"
+		class="pointer-events-auto flex flex-row justify-between overflow-hidden bg-white px-[4vw] {$isMobile
+			? 'h-[80vw] w-[85vw] rounded-[5vw]'
+			: 'h-[30vw] w-[60vw] rounded-[2vw]'}"
 	>
-		<div class="flex flex-col py-[3vw] font-bold">
-			<div class="text-[2.5vw]">Congratulation 🎉</div>
+		<div class="flex h-full flex-col justify-center font-bold">
+			<div class={$isMobile ? 'text-[5vw]' : 'text-[2.5vw]'}>Congratulation 🎉</div>
 
-			<div class="mt-[3vw] flex flex-row items-center">
-				<CircularProgressBar class="h-[12vw] w-[12vw]" value={50}>
+			<div class="mt-[3vw] flex items-center {$isMobile ? 'flex-col' : 'flex-row'}">
+				<CircularProgressBar
+					class={$isMobile ? 'h-[25vw] w-[25vw]' : 'h-[12vw] w-[12vw]'}
+					value={50}
+				>
 					<div class="flex h-full flex-col items-center justify-center">
-						<div class="text-[0.3vw]">CEFR</div>
-						<div class="text-[2vw]">pre-A1</div>
+						<div class={$isMobile ? 'text-[1vw]' : 'text-[0.3vw]'}>CEFR</div>
+						<div class={$isMobile ? 'text-[4.5vw]' : 'text-[2vw]'}>pre-A1</div>
 					</div>
 				</CircularProgressBar>
 
-				<div class="ml-[4vw] flex flex-col">
-					<div class="text-[2vw]">คุณได้รับ</div>
+				<div class="flex flex-col {$isMobile ? 'mt-[6vw] text-[6vw]' : 'ml-[4vw] text-[3vw]'}">
+					<div class={$isMobile ? 'text-[5vw]' : 'text-[2vw]'}>คุณได้รับ</div>
 					<div class="mt-[1vw] flex flex-row items-center">
-						<div
-							class="bg-gradient-to-r from-[#C698FF] to-[#6C80E8] bg-clip-text text-[3vw] text-transparent"
-						>
+						<div class="bg-gradient-to-r from-[#C698FF] to-[#6C80E8] bg-clip-text text-transparent">
 							+{Math.floor($displayExp)}
 						</div>
 						<svg
-							class="ml-[1vw] w-[6vw]"
+							class={$isMobile ? 'ml-[2vw] w-[12vw]' : 'ml-[1vw] w-[6vw]'}
 							viewBox="0 0 1650 792"
 							fill="none"
 							xmlns="http://www.w3.org/2000/svg"
@@ -88,13 +92,13 @@
 
 					<div class="mt-[1vw] flex flex-row items-center">
 						<div
-							class="bg-gradient-to-t from-[#FFE08F] via-[#E4AE24] to-[#FFE08F] bg-clip-text text-[3vw] text-transparent"
+							class="bg-gradient-to-t from-[#FFE08F] via-[#E4AE24] to-[#FFE08F] bg-clip-text text-transparent"
 						>
 							+{Math.floor($displayCoin)}
 						</div>
 
 						<svg
-							class="ml-[1vw] w-[7.5vw]"
+							class={$isMobile ? 'ml-[2vw] w-[14vw]' : 'ml-[1vw] w-[7.5vw]'}
 							viewBox="0 0 2017 792"
 							fill="none"
 							xmlns="http://www.w3.org/2000/svg"
@@ -147,6 +151,10 @@
 			</div>
 		</div>
 
-		<img src={avatar} class="h-full" alt="Avatar" />
+		<img
+			src={avatar}
+			class={$isMobile ? 'mt-auto max-h-full max-w-[40%] object-contain' : 'h-full'}
+			alt="Avatar"
+		/>
 	</div>
 </div>

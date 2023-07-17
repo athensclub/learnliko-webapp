@@ -168,7 +168,7 @@
 		/>
 	</div>
 
-	<div class="rounded-full bg-white px-[1vw] text-[0.8vw] text-black">
+	<div class="rounded-full bg-white px-[1vw] text-black {$isMobile?'text-[2vw]':'text-[0.8vw]'}">
 		{timeText}
 	</div>
 

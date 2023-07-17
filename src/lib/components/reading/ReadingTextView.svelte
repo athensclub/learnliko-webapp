@@ -60,7 +60,7 @@
 			? 'overflow-y-visible'
 			: 'overflow-y-auto'}"
 	>
-		<div style="font-size: {scale * ($isMobile ? 5 : 2)}vw;">{item.title}</div>
+		<div style="font-size: {scale * ($isMobile ? 5 : 2)}vw;" class="max-w-[70%]">{item.title}</div>
 		<!-- TODO: support multiple pages -->
 		<div
 			style="font-size: {scale * ($isMobile ? 4 : 1.2)}vw;"

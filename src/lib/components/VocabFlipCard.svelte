@@ -4,6 +4,7 @@
 	import { RECAP_VOCAB_QUIZ, UPDATE_LESSON_PROGRESS } from '$gql/schema/mutations';
 	import Flippable from '$lib/components/Flippable.svelte';
 	import { playAudio, playAudioURL } from '$lib/global/audio';
+	import { isMobile } from '$lib/global/breakpoints';
 	import { graphqlClient } from '$lib/graphql';
 	import { learnedVocabLocal } from '$lib/localdb/profileLocal';
 	import userSession from '$lib/stores/userSession';
@@ -96,18 +97,22 @@
 		on:click={() => (flipped = !flipped)}
 		slot="front"
 		style="background-image: url('{item.imageUrl}');"
-		class="h-full w-full overflow-hidden rounded-[2vw] bg-cover bg-center"
+		class="h-full w-full overflow-hidden bg-cover bg-center {$isMobile
+			? 'rounded-[5vw]'
+			: 'rounded-[2vw]'}"
 	>
 		<div class="flex h-full w-full flex-col items-center bg-[#0000005E] backdrop-blur-[8px]">
 			<div
-				class="ml-auto mr-[2vw] mt-[1vw] flex w-fit flex-row items-center rounded-full bg-white px-[1vw] py-[0.5vw] text-[1vw]"
+				class="ml-auto flex w-fit flex-row items-center rounded-full bg-white {$isMobile
+					? 'mr-[6vw] mt-[3vw] px-[3vw] py-[1.5vw] text-[3vw]'
+					: 'mr-[2vw] mt-[1vw] px-[1vw] py-[0.5vw] text-[1vw]'}"
 			>
 				<div class="flex flex-row font-bold">
 					<div class="bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] bg-clip-text text-transparent">
 						+{item.totalExp}
 					</div>
 					<svg
-						class="ml-[0.25vw] w-[2.5vw]"
+						class={$isMobile ? 'ml-[1vw] w-[7vw]' : 'ml-[0.25vw] w-[2.5vw]'}
 						viewBox="0 0 1650 792"
 						fill="none"
 						xmlns="http://www.w3.org/2000/svg"
@@ -147,14 +152,14 @@
 					</svg>
 				</div>
 
-				<div class="ml-[0.5vw] flex flex-row font-bold">
+				<div class="flex flex-row font-bold {$isMobile ? 'ml-[2vw]' : 'ml-[0.5vw]'}">
 					<div
 						class="bg-gradient-to-r from-[#FFE08F] via-[#E4AE24] to-[#FFE08F] bg-clip-text text-transparent"
 					>
 						+{item.totalCoin}
 					</div>
 					<svg
-						class="ml-[0.25vw] w-[2.5vw]"
+						class={$isMobile ? 'ml-[1vw] w-[7vw]' : 'ml-[0.25vw] w-[2.5vw]'}
 						viewBox="0 0 2017 792"
 						fill="none"
 						xmlns="http://www.w3.org/2000/svg"
@@ -205,11 +210,19 @@
 				</div>
 			</div>
 
-			<img src={item.imageUrl} class="mt-[2vw] max-w-[80%] rounded-[1vw]" alt="Flip Card Content" />
+			<img
+				src={item.imageUrl}
+				class="max-w-[80%] {$isMobile ? 'mt-[6vw] rounded-[2.5vw]' : 'mt-[2vw] rounded-[1vw]'}"
+				alt="Flip Card Content"
+			/>
 
-			<div class="mt-[2vw] flex flex-row items-center text-[1.3vw] font-bold text-white">
+			<div
+				class="flex flex-row items-center font-bold text-white {$isMobile
+					? 'mt-[6vw] text-[5vw]'
+					: 'mt-[2vw] text-[1.3vw]'}"
+			>
 				<svg
-					class="mr-[1vw] w-[2.3vw]"
+					class={$isMobile ? 'mr-[2.5vw] w-[6.5vw]' : 'mr-[1vw] w-[2.3vw]'}
 					viewBox="0 0 50 55"
 					fill="none"
 					xmlns="http://www.w3.org/2000/svg"
@@ -242,7 +255,9 @@
 				<div
 					in:fade={{ delay: 500 }}
 					out:fade
-					class="pointer-events-none absolute left-0 top-0 z-20 flex h-full w-full flex-row items-center justify-center text-[1.5vw] text-white"
+					class="pointer-events-none absolute left-0 top-0 z-20 flex h-full w-full flex-row items-center justify-center text-white {$isMobile
+						? 'text-[5vw]'
+						: 'text-[1.5vw]'}"
 				>
 					กำลังตรวจคำตอบ<Typewriter mode="loop">...</Typewriter>
 				</div>
@@ -250,13 +265,16 @@
 				<div
 					in:fade={{ delay: 500 }}
 					out:fade
-					class="pointer-events-none absolute left-0 top-0 flex h-full w-full flex-col justify-between p-[2vw]"
+					class="pointer-events-none absolute left-0 top-0 flex h-full w-full flex-col justify-between {$isMobile
+						? 'p-[6vw]'
+						: 'p-[2vw]'}"
 				>
-					<div class="flex w-full flex-col gap-[1.5vw]">
+					<div class="flex w-full flex-col {$isMobile ? 'gap-[4vw]' : 'gap-[1.5vw]'}">
 						{#each choices as choice, index (choice)}
 							<button
-								class="pointer-events-auto w-full rounded-full py-[0.7vw] text-[1.4vw] {selectedChoice ===
-								index
+								class="pointer-events-auto w-full rounded-full
+								{$isMobile ? 'py-[1.5vw] text-[5.5vw]' : 'py-[0.7vw] text-[1.4vw]'} 
+									{selectedChoice === index
 									? 'border-[0.2vw] border-white bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] text-white'
 									: 'bg-white text-black'}"
 								on:click={() => (selectedChoice = index)}
@@ -269,7 +287,9 @@
 					<button
 						on:click={submit}
 						disabled={selectedChoice === null}
-						class="pointer-events-auto w-full rounded-[1vw] bg-white py-[0.7vw] text-[1.2vw]"
+						class="pointer-events-auto w-full bg-white {$isMobile
+							? 'rounded-[3vw] py-[1.5vw] text-[5.5vw]'
+							: 'rounded-[1vw] py-[0.7vw] text-[1.4vw]'}"
 					>
 						<div
 							class={selectedChoice === null
@@ -284,17 +304,27 @@
 				<div
 					in:fade={{ delay: 500 }}
 					out:fade
-					class="pointer-events-none absolute left-0 top-0 flex h-full w-full flex-col items-center justify-center p-[2vw] font-bold text-white"
+					class="pointer-events-none absolute left-0 top-0 flex h-full w-full flex-col items-center justify-center font-bold text-white {$isMobile
+						? 'p-[6vw]'
+						: 'p-[2vw]'}"
 				>
-					<div class="text-[1.5vw]">
+					<div class={$isMobile ? 'text-[5vw]' : 'text-[1.5vw]'}>
 						{correctAnswer === selectedChoice ? 'คุณตอบถูก!' : 'คุณตอบผิด!'}
 					</div>
 
-					<img src={item.imageUrl} class="mt-[2vw] max-w-[80%]" alt="Flip Card Content" />
+					<img
+						src={item.imageUrl}
+						class="max-w-[80%] {$isMobile ? 'mt-[5vw]' : 'mt-[2vw]'}"
+						alt="Flip Card Content"
+					/>
 
-					<div class="mt-[1vw] text-[1.35vw]">คำตอบคือ</div>
+					<div class={$isMobile ? 'mt-[3vw] text-[4.5vw]' : 'mt-[1vw] text-[1.35vw] '}>
+						คำตอบคือ
+					</div>
 					<div
-						class="mt-[1vw] rounded-full border-[0.15vw] border-white px-[2vw] py-[0.5vw] text-[1.35vw]"
+						class="rounded-full border-[0.15vw] border-white {$isMobile
+							? 'mt-[3vw] px-[5vw] py-[1vw] text-[4.5vw]'
+							: 'mt-[1vw] px-[2vw] py-[0.5vw] text-[1.35vw]'}"
 					>
 						{choices[correctAnswer].vocab}
 					</div>

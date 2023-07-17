@@ -11,6 +11,7 @@
 	import { RECAP_SENTENCE_QUIZ, UPDATE_LESSON_PROGRESS } from '$gql/schema/mutations';
 	import userSession from '$lib/stores/userSession';
 	import Typewriter from 'svelte-typewriter/Typewriter.svelte';
+	import { isMobile } from '$lib/global/breakpoints';
 
 	export let item: SentenceCard;
 	$: parts = item.question.split('_');
@@ -95,7 +96,9 @@
 <Flippable class={clazz} flip={flipped}>
 	<div
 		slot="front"
-		class="relative h-full w-full rounded-[2vw] bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] px-[2vw] py-[1vw]"
+		class="relative h-full w-full bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] {$isMobile
+			? 'rounded-[5vw] px-[6vw] py-[3vw]'
+			: 'rounded-[2vw] px-[2vw] py-[1vw]'}"
 	>
 		{#if correctAnswer !== null}
 			<button on:click={() => (flipped = !flipped)} class="absolute left-0 top-0 h-full w-full" />
@@ -105,22 +108,26 @@
 			<div
 				in:fade={{ delay: 500 }}
 				out:fade
-				class="pointer-events-none absolute left-0 top-0 z-20 flex h-full w-full flex-row items-center justify-center text-[1.5vw] text-white"
+				class="pointer-events-none absolute left-0 top-0 z-20 flex h-full w-full flex-row items-center justify-center font-bold text-white {$isMobile
+					? 'text-[5vw]'
+					: 'text-[1.5vw]'}"
 			>
 				กำลังตรวจคำตอบ<Typewriter mode="loop">...</Typewriter>
 			</div>
 		{:else}
 			<div in:fade={{ delay: 500 }} out:fade class="flex h-full w-full flex-col">
 				<div
-					style="font-size: {scale * 1}vw;"
-					class="ml-auto flex w-fit flex-row items-center rounded-full bg-white px-[1vw] py-[0.5vw]"
+					style="font-size: {scale * ($isMobile ? 3 : 1)}vw;"
+					class="ml-auto flex w-fit flex-row items-center rounded-full bg-white {$isMobile
+						? 'px-[3vw] py-[1.5vw]'
+						: 'px-[1vw] py-[0.5vw]'}"
 				>
 					<div class="flex flex-row font-bold">
 						<div class="bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] bg-clip-text text-transparent">
 							+{item.totalExp}
 						</div>
 						<svg
-							class="ml-[0.25vw] w-[2.5vw]"
+							class={$isMobile ? 'ml-[1vw] w-[7vw]' : 'ml-[0.25vw] w-[2.5vw]'}
 							viewBox="0 0 1650 792"
 							fill="none"
 							xmlns="http://www.w3.org/2000/svg"
@@ -160,14 +167,14 @@
 						</svg>
 					</div>
 
-					<div class="ml-[0.5vw] flex flex-row font-bold">
+					<div class="flex flex-row font-bold {$isMobile ? 'ml-[2vw]' : 'ml-[0.5vw]'}">
 						<div
 							class="bg-gradient-to-r from-[#FFE08F] via-[#E4AE24] to-[#FFE08F] bg-clip-text text-transparent"
 						>
 							+{item.totalCoin}
 						</div>
 						<svg
-							class="ml-[0.25vw] w-[2.5vw]"
+							class={$isMobile ? 'ml-[1vw] w-[7vw]' : 'ml-[0.25vw] w-[2.5vw]'}
 							viewBox="0 0 2017 792"
 							fill="none"
 							xmlns="http://www.w3.org/2000/svg"
@@ -218,23 +225,37 @@
 					</div>
 				</div>
 
-				<div class="mt-[2vw] inline-flex w-full flex-wrap items-center justify-center gap-[0.6vw]">
+				<div
+					class="inline-flex w-full flex-wrap items-center justify-center {$isMobile
+						? 'mt-[5vw] gap-[1.5vw]'
+						: 'mt-[2vw] gap-[0.6vw]'}"
+				>
 					{#each parts as text, index (index)}
-						<div style="font-size: {scale * 1.65}vw;" class="font-bold text-white">{text}</div>
+						<div
+							style="font-size: {scale * ($isMobile ? 6 : 1.65)}vw;"
+							class="font-bold text-white"
+						>
+							{text}
+						</div>
 
 						{#if index !== parts.length - 1}
-							<div class="h-[2vw] w-[3vw] rounded-full bg-white" />
+							<div
+								class="rounded-full bg-white {$isMobile ? 'h-[5vw] w-[8vw]' : 'h-[2vw] w-[3vw] '}"
+							/>
 						{/if}
 					{/each}
 				</div>
 
-				<div class="mb-[1vw] mt-auto flex w-full flex-col">
-					<div class="grid grid-cols-2 gap-[2vw]">
+				<!-- Somehow tailwind doesn't add margin bottom -->
+				<div style="margin-bottom: {$isMobile ? 5 : 1}vw;" class="mt-auto flex w-full flex-col">
+					<div class="grid grid-cols-2 {$isMobile ? 'gap-[5vw]' : 'gap-[2vw]'}">
 						{#each item.choices as choice, index (choice)}
 							<button
 								on:click={() => (selectedChoice = index)}
-								style="font-size: {scale * 1.4}vw;"
-								class="min-h-[3vw] w-full rounded-full font-bold {selectedChoice === index
+								style="font-size: {scale * ($isMobile ? 5 : 1.4)}vw;"
+								class="w-full rounded-full font-bold {$isMobile
+									? 'min-h-[10vw]'
+									: 'min-h-[3vw]'} {selectedChoice === index
 									? 'bg-white'
 									: 'outline outline-[0.2vw] outline-white'}"
 							>
@@ -253,9 +274,10 @@
 						<button
 							on:click={submit}
 							disabled={selectedChoice === null}
-							style="font-size: {scale * 1.3}vw;"
-							class="mt-[3vw] w-full rounded-full bg-white py-[0.5vw] font-bold {selectedChoice ===
-							null
+							style="font-size: {scale * ($isMobile ? 5.5 : 1.3)}vw;"
+							class="w-full rounded-full bg-white font-bold {$isMobile
+								? 'mt-[8vw] py-[1vw]'
+								: 'mt-[3vw] py-[0.5vw]'} {selectedChoice === null
 								? 'text-[#B8B8B8]'
 								: 'text-black'}"
 						>
@@ -263,12 +285,14 @@
 						</button>
 					{:else}
 						<div
-							style="font-size: {scale * 1.3}vw;"
-							class="mt-[3vw] flex flex-row items-center justify-center font-bold text-white"
+							style="font-size: {scale * ($isMobile ? 4.5 : 1.3)}vw;"
+							class="flex flex-row items-center justify-center font-bold text-white {$isMobile
+								? 'mt-[8vw]'
+								: 'mt-[3vw]'}"
 						>
 							<svg
-								style="width: {scale * 2.3}vw;"
-								class="mr-[1vw]"
+								style="width: {scale * ($isMobile ? 7 : 2.3)}vw;"
+								class={$isMobile ? 'mr-[3vw]' : 'mr-[1vw]'}
 								viewBox="0 0 50 55"
 								fill="none"
 								xmlns="http://www.w3.org/2000/svg"
@@ -289,17 +313,26 @@
 	<button
 		on:click={() => (flipped = !flipped)}
 		slot="back"
-		class="relative h-full w-full rounded-[2vw] bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] px-[2vw] py-[1vw]"
+		class="relative h-full w-full bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] {$isMobile
+			? 'rounded-[5vw] px-[6vw] py-[3vw]'
+			: 'rounded-[2vw] px-[2vw] py-[1vw]'}"
 	>
 		<div class="flex h-full w-full flex-col items-center justify-center font-bold text-white">
-			<div style="font-size: {scale * 2}vw;">
+			<div style="font-size: {scale * ($isMobile ? 6 : 2)}vw;">
 				{selectedChoice === correctAnswer ? 'คุณตอบถูก!' : 'คุณตอบผิด!'}
 			</div>
 
-			<div style="font-size: {scale * 1.5}vw;" class="mt-[5vw]">คำตอบคือ</div>
 			<div
-				style="font-size: {scale * 1.5}vw;"
-				class="mt-[1vw] rounded-full border-[0.2vw] border-white px-[2vw] py-[0.3vw]"
+				style="font-size: {scale * ($isMobile ? 5 : 1.5)}vw;"
+				class={$isMobile ? 'mt-[10vw]' : 'mt-[5vw]'}
+			>
+				คำตอบคือ
+			</div>
+			<div
+				style="font-size: {scale * ($isMobile ? 5 : 1.5)}vw;"
+				class="rounded-full border-[0.2vw] border-white {$isMobile
+					? 'mt-[10vw] px-[5vw] py-[1vw]'
+					: 'mt-[5vw] px-[2vw] py-[0.3vw]'}"
 			>
 				{correctAnswer !== null ? item.choices[correctAnswer] : ''}
 			</div>

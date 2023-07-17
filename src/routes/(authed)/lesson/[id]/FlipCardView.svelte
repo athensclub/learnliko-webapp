@@ -4,6 +4,7 @@
 	import AnswerCorrectToast from '$lib/components/toasts/AnswerCorrectToast.svelte';
 	import { toast } from '$lib/components/toasts/ToastManager.svelte';
 	import { playAudio } from '$lib/global/audio';
+	import { isMobile } from '$lib/global/breakpoints';
 	import { shuffle } from '$lib/utils/array';
 	import { onMount } from 'svelte';
 	import { fade } from 'svelte/transition';
@@ -16,16 +17,34 @@
 	let count = 0;
 	let displayed: (VocabularyCard & { hide?: boolean })[] = [];
 
+	const updateIsMobile = () => {
+		const targetCount = $isMobile ? 1 : 3;
+		// pretty inefficient lol, but items < 100 anyway.
+		if (displayed.length < targetCount) {
+			while (items.length > 0 && displayed.length < targetCount) {
+				let item = items[0];
+				items = items.slice(1);
+				displayed = [...displayed, item];
+			}
+		} else {
+			while (displayed.length > targetCount) {
+				let item = displayed[0];
+				displayed = displayed.slice(1);
+				items = [...items, item];
+			}
+			items = shuffle(items);
+		}
+	};
+	// use $: instead of store.subscribe so svelte can handle cleanup stuff.
+	$: $isMobile, updateIsMobile();
+	$: console.log(displayed);
+
 	onMount(() => {
 		// save count in separate variable as items is going to be mutated.
 		count = items.length;
 		items = shuffle(items);
-		// pull out first 3 cards
-		for (let i = 0; i < 3; i++) {
-			let item = items[0];
-			items = items.slice(1);
-			displayed = [...displayed, item];
-		}
+		// add item to displayed array for the first time
+		updateIsMobile();
 	});
 
 	const finishItem = (index: number) => {
@@ -66,9 +85,10 @@
 	<!-- Multiple absolute position so that transition work without shifts  -->
 	{#each displayed as item, index (item.id)}
 		<div
-			style="left: {50 + 4 * (index - 1)}vw; transform: translate({-50 + 100 * (index - 1)}%,0);"
+			style="left: {$isMobile ? 50 : 50 + 4 * (index - 1)}vw; 
+			transform: translate({$isMobile ? -50 : -50 + 100 * (index - 1)}%,0);"
 			transition:fade
-			class="absolute h-[30vw] w-[22vw]"
+			class="absolute {$isMobile ?'h-[110vw] w-[75vw]':'h-[30vw] w-[22vw]'}"
 		>
 			<VocabFlipCard
 				class="pointer-events-auto h-full w-full translate-x-0 {item.hide

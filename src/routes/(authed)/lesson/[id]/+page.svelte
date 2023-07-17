@@ -174,7 +174,7 @@
 	>
 		<button
 			on:click={() => window.history.back()}
-			class="flex flex-row rounded-full bg-white px-[2vw] py-[1.5vh]"
+			class="flex flex-row rounded-full bg-white px-[2vw] py-[1.5vh] h-fit"
 		>
 			<svg
 				class={$isMobile ? 'w-[13vw]' : 'w-[4.5vw]'}
@@ -199,8 +199,8 @@
 		</button>
 
 		<div
-			class=" w-[90%] font-bold text-white text-center {$isMobile
-				? 'absolute bottom-[10vw] left-[50%] translate-x-[-50%] text-[5vw]'
+			class="font-bold text-white text-center {$isMobile
+				? 'absolute bottom-[10vw] left-[50%] translate-x-[-50%] text-[5vw] w-[90%]'
 				: 'text-[1.7vw]'}"
 		>
 			{item && item.title}
@@ -208,7 +208,7 @@
 
 		<button
 			on:click={() => (playingMusic = !playingMusic)}
-			class="flex flex-row items-center justify-center rounded-full bg-white px-[1.5vw] py-[1vh] font-bold {$isMobile
+			class="flex flex-row items-center justify-center rounded-full h-fit bg-white px-[1.5vw] py-[1vh] font-bold {$isMobile
 				? 'text-[4vw]'
 				: 'text-[1.35vw]'}"
 		>

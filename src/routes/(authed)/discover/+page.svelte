@@ -60,10 +60,10 @@
 			$isMobile
 				? 'sticky top-0 z-[1000] w-[100vw] gap-[1.6vh] px-[5vw] py-[1vh]'
 				: 'fixed right-0 top-0 h-[100vh] w-[23vw] px-[2vw] py-[4vh] '
-		} flex flex-col bg-white/70 font-bold shadow-sm backdrop-blur-sm`}
+		} flex flex-col bg-white/70 font-bold shadow-sm backdrop-blur-xl`}
 	>
 		{#if $isMobile}
-			<div class="flex w-full flex-row justify-between">
+			<div class="flex w-full flex-row justify-between pt-[2vw]">
 				<img class="h-[8vw] w-[8vw]" src={icon} alt="Learnliko" />
 
 				<a href="/profile">
@@ -78,13 +78,13 @@
 
 			<div class="flex flex-row justify-between">
 				<div class="flex flex-row gap-[2vw]">
-					<img class="w-[12vw]" src={vocabTaskImage} alt="Conversation" />
+					<img class="w-[12vw] h-[12vw]" src={vocabTaskImage} alt="Conversation" />
 
 					<div class="flex flex-col">
-						<div class="text-[4.5vw]">คำศัพท์วันนี้</div>
+						<div class="text-[3.5vw]">คำศัพท์วันนี้</div>
 						
 						<div class="bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] bg-clip-text text-transparent">
-							<div class="inline-block text-[4.5vw]">{$learnedVocabLocal?.length}</div>
+							<div class="inline-block text-[6.5vw]">{$learnedVocabLocal?.length}</div>
 							<div class="inline-block text-[3vw]">คำ</div>
 						</div>
 					</div>
@@ -144,9 +144,9 @@
 						item={item.card}
 						progress={item.progress}
 						difficulty={item.difficulty}
-						class="mx-auto mt-[calc(48vh-19vw)] snap-center {$isMobile
-							? 'h-[115vw] w-[75vw]'
-							: 'h-[38vw] w-[27vw]'}"
+						class="mx-auto  snap-center {$isMobile
+							? 'h-[115vw] w-[80vw] mt-[calc(18vh-19vw)] mb-[10vw]'
+							: 'h-[38vw] w-[27vw] mt-[calc(48vh-19vw)]'}"
 					/>
 				{/each}
 			</div>

@@ -36,19 +36,19 @@
 {#if $isMobile}
 	<nav
 		style="box-shadow: 0px -3px 10px 0px #00000040;"
-		class="fixed bottom-0 z-[500] flex w-[100vw] flex-row justify-around bg-white py-[2vh]"
+		class="fixed bottom-0 z-[500] flex w-[100vw] flex-row justify-around bg-white py-[1vh]"
 	>
 		{#if teacher}
 			<TeacherNavBarLinkList />
 		{:else}
-			<NavBarLinkList noText eachIconStyle="width: 10vw;">
-				<div slot="center" class="h-[15vw] w-[15vw]">
+			<NavBarLinkList noText eachIconStyle="width: 7.5vw;">
+				<div slot="center" class="h-[14vw] w-[15vw] ">
 					<button
 						on:click={openAssistantChat}
-						class="flex h-full w-full items-center justify-center rounded-xl"
+						class="flex h-full w-full items-center justify-center rounded-full"
 						style="box-shadow: 0px 1px 4px 0px #00000040;"
 					>
-						<img class="w-[75%]" src={assistantIcon} alt="Assistant" />
+						<img class="w-[65%]" src={assistantIcon} alt="Assistant" />
 					</button>
 				</div>
 			</NavBarLinkList>

@@ -17,7 +17,7 @@
 	import { setContextClient } from '@urql/svelte';
 	import { goto } from '$app/navigation';
 
-	let loading = true;
+	let loading = false;
 
 	const OnAuthStateChanged = async function (user: User | null) {
 		loading = true;
@@ -50,7 +50,7 @@
 		initializeAudioRecording();
 
 		// Subscribe on firebase auth state change
-		auth.onAuthStateChanged(OnAuthStateChanged);
+		// auth.onAuthStateChanged(OnAuthStateChanged);
 	});
 
 	$: if (!$showChatbox) {

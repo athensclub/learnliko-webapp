@@ -4,29 +4,26 @@
 	import userSession from '$lib/stores/userSession';
 	import { onMount } from 'svelte';
 
-	let loading = true;
+	let loading = false;
 
 	onMount(() => {
 		// Subscribe on user's session
-		userSession.subscribe((session) => {
-			// ensure the initialization is completed
-			if (!session.initialized) {
-				loading = true;
-				return;
-			}
-
-			// navigate to homepage if user is already has account
-			if (session.accountData?.profile) goto(`/discover`);
-
-			// navigate to login page if user hasnt' sign in
-			if (!session.isLoggedIn) goto(`/login`);
-
-			loading = false;
-		});
+		// userSession.subscribe((session) => {
+		// 	// ensure the initialization is completed
+		// 	if (!session.initialized) {
+		// 		loading = true;
+		// 		return;
+		// 	}
+		// 	// navigate to homepage if user is already has account
+		// 	if (session.accountData?.profile) goto(`/discover`);
+		// 	// navigate to login page if user hasnt' sign in
+		// 	if (!session.isLoggedIn) goto(`/login`);
+		// 	loading = false;
+		// });
 	});
 
 	const getStarted = async () => {
-		goto(`/login`);
+		goto(`/feed`);
 	};
 </script>
 
@@ -36,19 +33,15 @@
 	{#if loading}
 		Loading...
 	{:else}
-		<img class="mt-[4vh] w-[5vw]" src={icon} alt="Learnliko" />
+		<img class="h-[6.5rem] w-[6.5rem]" src={icon} alt="Learnliko" />
 
-		<div class="mt-[2vh] text-[2.7vw] font-bold">Welcome to Learnliko Trial</div>
+		<div class="mt-3 text-5xl font-bold">Learnliko</div>
 
-		<div class="mt-[1vh] text-[1.6vw] font-extrabold">Click Button Below to Get Started</div>
-
-		<div class="mt-[3vh] flex flex-row font-extrabold text-white">
-			<button
-				on:click={getStarted}
-				class="flex flex-row justify-between rounded-[2vw] bg-[#6C80E8] px-3 py-2"
-			>
-				<div>Get Started!</div>
-			</button>
-		</div>
+		<button
+			on:click={getStarted}
+			class="mt-16 flex flex-row justify-between rounded-[2.4rem] bg-[#6C80E8] px-12 py-4"
+		>
+			<div class="font-extrabold text-white text-2xl">Start Demo</div>
+		</button>
 	{/if}
 </div>

@@ -33,7 +33,10 @@ const config = {
 			$api: path.resolve('./src/routes/api/_lib'),
 
 			// Generated type of GraphQL Schema
-			$gql: path.resolve('./src/gql')
+			$gql: path.resolve('./src/gql'),
+
+			// Assets used in the project
+			$asset: path.resolve('./src/asset')
 		}
 	}
 };

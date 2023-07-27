@@ -9,7 +9,10 @@
 	<slot class="h-[100%]" />
 
 	<!-- Bottom navigator bar -->
-	<nav class="flex min-h-[8vh] w-[100dvw] flex-row items-center justify-center bg-white py-2">
+	<nav
+		class="flex min-h-[8vh] w-[100dvw] flex-row items-center justify-center
+        bg-white py-2 shadow-[0_4px_15px_0_rgba(0,0,0,0.25)]"
+	>
 		<NavBarLink href="/feed">
 			<svg
 				class="w-8"
@@ -73,8 +76,12 @@
 		<div class="w-[18vw]" />
 
 		<NavBarLink href="/profile-details">
-			<img slot="normalIcon" class="h-8 w-8 rounded-full" src={kidImage} alt="profile" />
-			<img slot="focusedIcon" class="h-8 w-8 rounded-full" src={kidImage} alt="profile" />
+			<div slot="normalIcon" class="rounded-full p-1">
+				<img class="h-8 w-8 rounded-full" src={kidImage} alt="profile" />
+			</div>
+			<div slot="focusedIcon" class="rounded-full bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] p-1">
+				<img class="h-8 w-8 rounded-full" src={kidImage} alt="profile" />
+			</div>
 		</NavBarLink>
 	</nav>
 </div>

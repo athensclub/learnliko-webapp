@@ -1,0 +1,146 @@
+type Subject{
+	id: ID!
+	displayName: String!
+}
+
+type Course{
+	id: ID!
+	displayName: String!
+	subject: Subject!
+}
+
+type Lesson{
+	id: ID!
+	course: Course!
+	subject: Subject!
+	title: String!
+	description: String!
+	intro: LessonIntro!
+	backgroundUrl: String!
+	narratives: [Narrative!]!
+	ambientAudio: String!
+	activities: [Activity!]!
+
+	view: Int!
+	like: Int!
+}
+
+type LessonIntro{
+	bot: String!
+	message: String!
+	transcription: String!
+}
+
+type Narrative{
+	illustrationUrl: String!
+	text: String!
+}
+
+type Activity{
+	title: String!
+	type: ActivityType!
+	cards: [ActivityCard!]!
+}
+
+enum ActivityType{
+	SELECTION
+	READING
+	LISTENING
+	CLOZE
+	DIALOGUE
+	DISCUSSION
+}
+
+interface ActivityCard{
+	id: ID!
+	type: ActivityType!
+}
+
+type SelectionCard implements ActivityCard{
+	id: ID!
+	type: ActivityType!
+	text: String!
+	image: String
+	choices: [String!]!
+	coin: Int!
+	exp: Int!
+	answerIndex: Int!
+}
+
+type ReadingCard implements ActivityCard{
+	id: ID!
+	type: ActivityType!
+	title: String!
+	pages: [ReadingPage!]!
+	questions: [SelectionCard!]!
+}
+
+type ReadingPage{
+	text: String!
+	illustrationUrl: String!
+}
+
+type ListeningCard implements ActivityCard{
+	id: ID!
+	type: ActivityType!
+	title: String!
+	illustrationUrl: String!
+	audioUrl: String!
+	questions: [SelectionCard!]!
+}
+
+type ClozeCard implements ActivityCard{
+	id: ID!
+	type: ActivityType!
+
+	title: String!
+	text: String!
+	choices: [String!]! 
+	coin: Int!
+	exp: Int!
+	answerIndexes: [Int!]!
+}
+
+type DialogueCard implements ActivityCard{
+	id: ID!
+	type: ActivityType!
+
+	title: String!
+	coin: Int!
+	exp: Int!
+	bot: BotDetails!
+	learner: LearnerDetails!
+
+	contextPrompt: String!
+}
+
+type BotDetails{
+	intro: String!
+    prompt: String!
+	avatar: String!
+	role: String!
+	name: String!
+    accent: String!
+    gender: String!
+}
+
+type LearnerDetails{
+	mission: String!
+	goal: [LearnerGoal!]!
+}
+
+type LearnerGoal {
+    description: String!
+    hint: String!
+	prompt: String!
+}
+
+type DiscussionCard implements ActivityCard{
+	id: ID!
+	type: ActivityType!
+
+	title: String!
+	bot: BotDetails!
+
+	contextPrompt: String!
+}

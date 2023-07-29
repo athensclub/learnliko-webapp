@@ -13,6 +13,8 @@
 	import { onMount } from 'svelte';
 	import Typewriter from 'svelte-typewriter/Typewriter.svelte';
 	import { fade } from 'svelte/transition';
+	import { toast } from './toasts/ToastManager.svelte';
+	import AnswerCorrectToast from './toasts/AnswerCorrectToast.svelte';
 
 	export let data: SelectionCard;
 
@@ -84,8 +86,13 @@
 		// TODO: implement actual validation.
 		correctAnswer = data.answerIndex;
 		if (correctAnswer === selectedChoice) {
+			playAudio('Success');
+			toast(AnswerCorrectToast, { exp: data.exp, coin: data.coin });
+
 			onCorrect();
 		} else {
+			playAudio('Fail');
+            
 			onWrong();
 		}
 

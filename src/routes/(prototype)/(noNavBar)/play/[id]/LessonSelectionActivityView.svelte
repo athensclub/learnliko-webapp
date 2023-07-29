@@ -63,14 +63,9 @@
 
 	const onCorrect = (index: number) => {
 		finishItem(index);
-		playAudio('Success');
-
-		const val = displayed[index] as SelectionCard;
-		toast(AnswerCorrectToast, { exp: val.exp, coin: val.coin });
 	};
 	const onWrong = (index: number) => {
 		finishItem(index);
-		playAudio('Fail');
 	};
 
 	// check for > 0 so that finish does not run before initialization
@@ -101,6 +96,8 @@
 				onCorrect={() => onCorrect(index)}
 				onWrong={() => onWrong(index)}
 			/>
+
+			<slot name="bottom"/>
 		</div>
 	{/each}
 </div>

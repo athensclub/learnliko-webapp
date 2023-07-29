@@ -10,6 +10,7 @@
 	import LessonNarrativeView from './LessonNarrativeView.svelte';
 	import LessonSelectionActivityView from './LessonSelectionActivityView.svelte';
 	import LessonReadingActivityView from './LessonReadingActivityView.svelte';
+	import LessonClozeActivityView from './LessonClozeActivityView.svelte';
 
 	let data: Lesson | null = null;
 	let music: Howl | null = null;
@@ -138,6 +139,8 @@
 					<LessonSelectionActivityView items={currentActivity.cards} onFinish={nextView} />
 				{:else if currentActivity.type === ActivityType.Reading}
 					<LessonReadingActivityView data={currentActivity} onFinish={nextView} />
+				{:else if currentActivity.type === ActivityType.Cloze}
+					<LessonClozeActivityView data={currentActivity} onFinish={nextView} />
 				{/if}
 			{:else}
 				<h1 class="mx-auto font-bold text-white">Error:Activity data not found</h1>

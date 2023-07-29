@@ -6,6 +6,31 @@
 		"backgroundUrl": "https://cdn.midjourney.com/1a7dd329-bd7b-466f-be54-1fe893630a10/0_3.png",
 		"like": 329,
 		"view": 83214,
+		"activities": [
+			{
+				"title": "Quiz",
+				"cards": [
+					{
+						"text": "“What is this called?”",
+						"image": "https://cdn.discordapp.com/attachments/1120787872379842711/1121124468538998835/vi_leopard_cartoon_realistic_in_the_savanna_325b24af-9414-40b4-80fc-e705c1e04fd1.png",
+						"choices": ["tiger", "lion", "monkey", "elephant"],
+						"answerIndex": 0,
+						"coin": 100,
+						"exp": 25,
+						"type": "SELECTION"
+					},
+					{
+						"text": "“Sorry, now I ... working.” จงเติมคำในช่องว่าง",
+						"choices": ["is", "am", "are", "-"],
+						"answerIndex": 1,
+						"coin": 100,
+						"exp": 25,
+						"type": "SELECTION"
+					}
+				],
+				"type": "SELECTION"
+			}
+		],
 		"narratives": [
 			{
 				"text": "เช้านี้เป็นเช้าแสนวุ่นวาย มีกิจวัตรประจำวันให้ทำมากมายเป็นประจำเหมือนทุกวัน แต่เราไม่เคยหงุดหงิดหรือกลัว แต่เรากลับเตรียมตัวให้พร้อมที่จะเผชิญกับทุกสิ่งที่ต้องทำในเช้านี้",

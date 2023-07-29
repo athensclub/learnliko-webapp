@@ -2,11 +2,13 @@
 	import { getLessonById } from '$api/lesson';
 	import { page } from '$app/stores';
 	import type { Lesson } from '$gql/generated/graphql';
+	import { onDestroy, onMount } from 'svelte';
+
+	// used component
+	import LessonNarrativeView from './LessonNarrativeView.svelte';
 
 	// ts-ignore
 	import { Howl } from 'howler';
-	import { onDestroy, onMount } from 'svelte';
-	import LessonNarrativeView from './LessonNarrativeView.svelte';
 
 	let data: Lesson | null = null;
 	let music: Howl | null = null;
@@ -108,7 +110,9 @@
 			<div class="mt-[2vh] text-center text-[5vw] font-bold text-white">{data.title}</div>
 
 			<!-- Activity name -->
-			<div class="mt-[2vh] text-center text-[4.1vw] font-bold text-white">Activity</div>
+			{#if currentView !== 'NARRATIVE'}
+				<div class="mt-[2vh] text-center text-[4.1vw] font-bold text-white">Activity</div>
+			{/if}
 		</section>
 
 		{#if currentView === 'NARRATIVE'}

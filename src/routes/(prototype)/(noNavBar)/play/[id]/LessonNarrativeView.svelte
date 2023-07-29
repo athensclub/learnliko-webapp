@@ -1,7 +1,6 @@
 <script lang="ts">
 	import type { Narrative } from '$gql/generated/graphql';
 	import { isMobile } from '$lib/global/breakpoints';
-	import type { LessonIntro } from '$lib/types/lesson';
 	import { fade } from 'svelte/transition';
 
 	export let onFinish: () => void;

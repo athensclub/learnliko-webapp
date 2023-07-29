@@ -122,8 +122,8 @@
 			<div class="mt-[2vh] text-center text-[5vw] font-bold text-white">{data.title}</div>
 
 			<!-- Activity name -->
-			{#if currentView !== 'NARRATIVE'}
-				<div class="mt-[2vh] text-center text-[4.1vw] font-bold text-white">Activity</div>
+			{#if currentView !== 'NARRATIVE' && currentActivity}
+				<div class="mt-[2vh] text-center text-[4.1vw] font-bold text-white">{currentActivity.title}</div>
 			{/if}
 		</section>
 
@@ -135,7 +135,7 @@
 					<LessonSelectionActivityView data={currentActivity} onFinish={nextView} />
 				{/if}
 			{:else}
-				<h1>Error:Activity data not found</h1>
+				<h1 class="font-bold text-white mx-auto">Error:Activity data not found</h1>
 			{/if}
 		{/if}
 	</div>

@@ -2,7 +2,6 @@
 node_modules
 test-results
 .netlify
-.vscode
 /build
 /.svelte-kit
 /package

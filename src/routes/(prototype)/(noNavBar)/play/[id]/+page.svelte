@@ -3,12 +3,12 @@
 	import { page } from '$app/stores';
 	import type { Lesson } from '$gql/generated/graphql';
 	import { onDestroy, onMount } from 'svelte';
+	// ts-ignore
+	import { Howl } from 'howler';
 
 	// used component
 	import LessonNarrativeView from './LessonNarrativeView.svelte';
 
-	// ts-ignore
-	import { Howl } from 'howler';
 
 	let data: Lesson | null = null;
 	let music: Howl | null = null;

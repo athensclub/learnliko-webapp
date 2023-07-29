@@ -1,23 +1,36 @@
 <script lang="ts">
 	import { getLessonById } from '$api/lesson';
 	import { page } from '$app/stores';
-	import type { Lesson } from '$gql/generated/graphql';
+	import { ActivityType, type Lesson, type SelectionCard } from '$gql/generated/graphql';
 	import { onDestroy, onMount } from 'svelte';
 	// ts-ignore
 	import { Howl } from 'howler';
 
 	// used component
 	import LessonNarrativeView from './LessonNarrativeView.svelte';
-
+	import LessonSelectionActivityView from './LessonSelectionActivityView.svelte';
+	import LessonReadingActivityView from './LessonReadingActivityView.svelte';
 
 	let data: Lesson | null = null;
 	let music: Howl | null = null;
+
 	onMount(async () => {
 		data = await getLessonById($page.params.id);
 		music = new Howl({ src: data.ambientAudio, volume: 0.06, loop: true });
 	});
 
 	let currentView: 'NARRATIVE' | 'ACTIVITY' = 'NARRATIVE';
+
+	let activityIndex = 0;
+	$: currentActivity = data?.activities[activityIndex];
+
+	const nextView = () => {
+		if (currentView === 'NARRATIVE') {
+			currentView = 'ACTIVITY';
+		} else {
+			activityIndex = activityIndex + 1;
+		}
+	};
 
 	let playingMusic = true;
 	const MUSIC_FADE_DURATION = 1000; // ms
@@ -110,13 +123,25 @@
 			<div class="mt-[2vh] text-center text-[5vw] font-bold text-white">{data.title}</div>
 
 			<!-- Activity name -->
-			{#if currentView !== 'NARRATIVE'}
-				<div class="mt-[2vh] text-center text-[4.1vw] font-bold text-white">Activity</div>
+			{#if currentView !== 'NARRATIVE' && currentActivity}
+				<div class="mt-[2vh] text-center text-[4.1vw] font-bold text-white">
+					{currentActivity.title}
+				</div>
 			{/if}
 		</section>
 
 		{#if currentView === 'NARRATIVE'}
-			<LessonNarrativeView items={data.narratives} onFinish={() => (currentView = 'ACTIVITY')} />
+			<LessonNarrativeView items={data.narratives} onFinish={nextView} />
+		{:else if currentView === 'ACTIVITY'}
+			{#if currentActivity}
+				{#if currentActivity.type === ActivityType.Selection}
+					<LessonSelectionActivityView items={currentActivity.cards} onFinish={nextView} />
+				{:else if currentActivity.type === ActivityType.Reading}
+					<LessonReadingActivityView data={currentActivity} onFinish={nextView} />
+				{/if}
+			{:else}
+				<h1 class="mx-auto font-bold text-white">Error:Activity data not found</h1>
+			{/if}
 		{/if}
 	</div>
 {/if}

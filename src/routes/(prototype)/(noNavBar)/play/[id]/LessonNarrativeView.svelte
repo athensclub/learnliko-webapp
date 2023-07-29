@@ -10,9 +10,9 @@
 	const nextItem = () => {
 		if (currentItem + 1 >= items.length) {
 			onFinish();
-			return;
+		} else {
+			currentItem = currentItem + 1;
 		}
-		currentItem = currentItem + 1;
 	};
 </script>
 

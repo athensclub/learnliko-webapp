@@ -1,5 +1,6 @@
 import type {
 	LanguageLevel,
+	Lesson,
 	LessonCard,
 	LessonCardsQueryInput,
 	PersonalizedLessonCard
@@ -14,16 +15,18 @@ export const getLessonCards = async (query?: LessonCardsQueryInput) => {
 
 export const getLessonById = async (
 	id: string,
-	currentLevel: LanguageLevel,
-	uid?: string,
-	includeContent = false
-) => {
-	const result = await graphqlClient
-		.query(includeContent ? GET_LESSON : GET_LESSON_WITHOUT_CONTENT, {
-			baseLevel: currentLevel,
-			includeProgressOf: uid,
-			lessonCardId: id
-		})
-		.toPromise();
-	return result.data?.lessonCard as PersonalizedLessonCard;
+	// currentLevel: LanguageLevel,
+	// uid?: string,
+	// includeContent = false
+): Promise<Lesson> => {
+	const response = await fetch('/api/v1/lesson?' + new URLSearchParams({ id }));
+	return await response.json();
+	// const result = await graphqlClient
+	// 	.query(includeContent ? GET_LESSON : GET_LESSON_WITHOUT_CONTENT, {
+	// 		baseLevel: currentLevel,
+	// 		includeProgressOf: uid,
+	// 		lessonCardId: id
+	// 	})
+	// 	.toPromise();
+	// return result.data?.lessonCard as PersonalizedLessonCard;
 };

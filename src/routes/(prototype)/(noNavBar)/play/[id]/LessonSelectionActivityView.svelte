@@ -6,15 +6,23 @@
 	import { toast } from '$lib/components/toasts/ToastManager.svelte';
 	import { playAudio } from '$lib/global/audio';
 	import { isMobile } from '$lib/global/breakpoints';
-	import { shuffle } from '$lib/utils/array';
 	import { onMount } from 'svelte';
 	import { fade } from 'svelte/transition';
 
 	export let addProgress: (val: number) => void;
 	export let onFinish: () => void;
 
-	export let data: Activity;
-	let items = data.cards;
+	/**
+	 * (Optional) This function will get called when a list of selection cards
+	 * in this option has changed (because user has played a card). Useful in
+	 * section that uses selection quiz and want to keep track of remaining items.
+	 */
+	export let updateItems: (items: SelectionCard[]) => void = () => {};
+
+	export let items: SelectionCard[];
+
+	// use queue hold undisplayed data (I do not want to update exported items variable directly)
+	let queue = [...items];
 
 	let count = 0;
 	let displayed: (SelectionCard & { hide?: boolean })[] = [];
@@ -23,40 +31,40 @@
 		const targetCount = $isMobile ? 1 : 3;
 		// pretty inefficient lol, but items < 100 anyway.
 		if (displayed.length < targetCount) {
-			while (items.length > 0 && displayed.length < targetCount) {
-				let item = items[0];
-				items = items.slice(1);
-				displayed = [...displayed, item as SelectionCard];
+			while (queue.length > 0 && displayed.length < targetCount) {
+				let item = queue[0];
+				queue = queue.slice(1);
+				displayed = [...displayed, item];
 			}
 		} else {
 			while (displayed.length > targetCount) {
-				let item = displayed[0];
-				displayed = displayed.slice(1);
-				items = [...items, item];
+				let item = displayed[displayed.length-1];
+				displayed = displayed.slice(0, displayed.length-1);
+				queue = [item, ...queue];
 			}
-			items = shuffle(items);
 		}
 	};
 	// use $: instead of store.subscribe so svelte can handle cleanup stuff.
 	$: $isMobile, updateIsMobile();
 
 	onMount(() => {
-		// save count in separate variable as items is going to be mutated.
-		count = items.length;
-		items = shuffle(items);
+		// save count in separate variable as queue is going to be mutated.
+		count = queue.length;
 		// add item to displayed array for the first time
 		updateIsMobile();
 	});
 
 	const finishItem = (index: number) => {
 		setTimeout(() => {
-			if (items.length > 0) {
-				let item = items[0];
-				items = items.slice(1);
-				displayed[index] = item as SelectionCard;
+			if (queue.length > 0) {
+				let item = queue[0];
+				queue = queue.slice(1);
+				displayed[index] = item;
 			} else {
 				displayed[index] = { ...displayed[index], hide: true };
 			}
+
+			updateItems([...displayed.filter(d => !d.hide), ...queue]);
 		}, 5000);
 		addProgress(1 / (4 * count));
 	};
@@ -86,7 +94,7 @@
 			style="left: {$isMobile ? 50 : 50 + 4 * (index - 1)}vw; 
 			transform: translate({$isMobile ? -50 : -50 + 100 * (index - 1)}%,0);"
 			transition:fade
-			class="absolute top-[45vw] {$isMobile ? 'h-[110vw] w-[75vw]' : 'h-[30vw] w-[22vw]'}"
+			class="absolute flex flex-col mt-[10vw] {$isMobile ? 'h-[110vw] w-[75vw]' : 'h-[30vw] w-[22vw]'}"
 		>
 			<SelectionFlipCard
 				class="pointer-events-auto h-full w-full translate-x-0 transition-[opacity] duration-1000 {item.hide

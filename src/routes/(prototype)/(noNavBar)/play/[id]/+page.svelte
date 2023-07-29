@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { getLessonById } from '$api/lesson';
 	import { page } from '$app/stores';
-	import { ActivityType, type Lesson } from '$gql/generated/graphql';
+	import { ActivityType, type Lesson, type SelectionCard } from '$gql/generated/graphql';
 	import { onDestroy, onMount } from 'svelte';
 	// ts-ignore
 	import { Howl } from 'howler';
@@ -9,6 +9,7 @@
 	// used component
 	import LessonNarrativeView from './LessonNarrativeView.svelte';
 	import LessonSelectionActivityView from './LessonSelectionActivityView.svelte';
+	import LessonReadingActivityView from './LessonReadingActivityView.svelte';
 
 	let data: Lesson | null = null;
 	let music: Howl | null = null;
@@ -123,7 +124,9 @@
 
 			<!-- Activity name -->
 			{#if currentView !== 'NARRATIVE' && currentActivity}
-				<div class="mt-[2vh] text-center text-[4.1vw] font-bold text-white">{currentActivity.title}</div>
+				<div class="mt-[2vh] text-center text-[4.1vw] font-bold text-white">
+					{currentActivity.title}
+				</div>
 			{/if}
 		</section>
 
@@ -132,10 +135,12 @@
 		{:else if currentView === 'ACTIVITY'}
 			{#if currentActivity}
 				{#if currentActivity.type === ActivityType.Selection}
-					<LessonSelectionActivityView data={currentActivity} onFinish={nextView} />
+					<LessonSelectionActivityView items={currentActivity.cards} onFinish={nextView} />
+				{:else if currentActivity.type === ActivityType.Reading}
+					<LessonReadingActivityView data={currentActivity} onFinish={nextView} />
 				{/if}
 			{:else}
-				<h1 class="font-bold text-white mx-auto">Error:Activity data not found</h1>
+				<h1 class="mx-auto font-bold text-white">Error:Activity data not found</h1>
 			{/if}
 		{/if}
 	</div>

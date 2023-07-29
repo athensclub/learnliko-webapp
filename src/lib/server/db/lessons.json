@@ -29,6 +29,36 @@
 					}
 				],
 				"type": "SELECTION"
+			},
+			{
+				"title": "Reading",
+				"cards": [
+					{
+						"title": "A Busy Day",
+						"pages": [
+							{
+								"text": "Today is a busy day for you. In the morning, you wake up early, go to the bathroom to clean your body, and eat a good breakfast. Then you go to school and have fun. play toy cars with your friends at the playground. In the evening, you come back home and enjoy yourself. Finally, you have dinner with your family before going to bed. and you complete the day with a nice sleep.",
+								"illustrationUrl": "https://cdn.midjourney.com/4bb21813-1c93-44ed-8781-d9c3483e7575/0_2.png"
+							},
+							{
+								"text": "Test second page.",
+								"illustrationUrl": "https://cdn.midjourney.com/4bb21813-1c93-44ed-8781-d9c3483e7575/0_2.png"
+							}
+						],
+						"questions": [
+							{
+								"text": "คุณทำะไรหลังจากตื่นนอน",
+								"choices": ["clean your body", "go to bed", "eat breakfast", "play toy cars"],
+								"answerIndex": 0,
+								"coin": 100,
+								"exp": 25,
+								"type": "SELECTION"
+							}
+						],
+						"type": "READING"
+					}
+				],
+				"type": "READING"
 			}
 		],
 		"narratives": [

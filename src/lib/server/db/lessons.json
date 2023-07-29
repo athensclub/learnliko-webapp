@@ -59,6 +59,28 @@
 					}
 				],
 				"type": "READING"
+			},
+			{
+				"title": "Podcast",
+				"cards": [
+					{
+						"title": "Exciting Song",
+						"audioUrl": "https://www.learningcontainer.com/wp-content/uploads/2020/02/Kalimba.mp3",
+						"illustrationUrl": "https://cdn.discordapp.com/attachments/1120787872379842711/1121124787784274040/vi_capital_city_new_York_7b1ddf5c-2cb0-46a9-9ea8-2184bc4e58de.png",
+						"questions": [
+							{
+								"text": "เพลงสนุกไหม",
+								"choices": ["ไม่รู้", "ไม่รู้ ", "ไม่รู้  ", "ไม่รู้   "],
+								"answerIndex": 2,
+								"coin": 100,
+								"exp": 25,
+								"type": "SELECTION"
+							}
+						],
+						"type": "LISTENING"
+					}
+				],
+				"type": "LISTENING"
 			}
 		],
 		"narratives": [

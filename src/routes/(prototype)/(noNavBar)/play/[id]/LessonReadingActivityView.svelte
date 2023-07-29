@@ -35,11 +35,7 @@
 			>
 				{#key pageIndex}
 					<!-- absolute positioning to do proper transition -->
-					<div
-						in:fade={{ delay: 500 }}
-						out:fade
-						class="absolute left-0 top-0 flex h-full w-full flex-col p-[6vw]"
-					>
+					<div transition:fade class="absolute left-0 top-0 flex h-full w-full flex-col p-[6vw]">
 						<div class="flex-1 flex-col overflow-y-auto">
 							<img
 								class="max-w-full rounded-[4vw]"
@@ -79,7 +75,7 @@
 		</div>
 	</div>
 {:else if currentView === 'QUIZ'}
-	<!-- Use this view's onFinish trigger instead -->
+	<!-- Use this view's onFinish trigger, so no op for selection activity onFinish -->
 	<LessonSelectionActivityView
 		onFinish={() => {}}
 		items={quiz}

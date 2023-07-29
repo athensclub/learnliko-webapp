@@ -10,6 +10,7 @@
 	import LessonNarrativeView from './LessonNarrativeView.svelte';
 	import LessonSelectionActivityView from './LessonSelectionActivityView.svelte';
 	import LessonReadingActivityView from './LessonReadingActivityView.svelte';
+	import LessonListeningActivityView from './LessonListeningActivityView.svelte';
 
 	let data: Lesson | null = null;
 	let music: Howl | null = null;
@@ -45,7 +46,7 @@
 	}
 
 	onDestroy(() => {
-		music?.stop();
+		music?.unload();
 	});
 </script>
 
@@ -135,12 +136,15 @@
 		{:else if currentView === 'ACTIVITY'}
 			{#if currentActivity}
 				{#if currentActivity.type === ActivityType.Selection}
+					<!-- Can't do type casting in template :( -->
 					<LessonSelectionActivityView items={currentActivity.cards} onFinish={nextView} />
 				{:else if currentActivity.type === ActivityType.Reading}
 					<LessonReadingActivityView data={currentActivity} onFinish={nextView} />
+				{:else if currentActivity.type === ActivityType.Listening}
+					<LessonListeningActivityView data={currentActivity} onFinish={nextView} />
 				{/if}
 			{:else}
-				<h1 class="mx-auto font-bold text-white">Error:Activity data not found</h1>
+				<h1 class="mx-auto text-[8vw] font-bold text-white">Error:Activity data not found</h1>
 			{/if}
 		{/if}
 	</div>

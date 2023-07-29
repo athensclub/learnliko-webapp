@@ -6,6 +6,7 @@
 	// ts-ignore
 	import { Howl } from 'howler';
 	import { onDestroy, onMount } from 'svelte';
+	import LessonNarrativeView from './LessonNarrativeView.svelte';
 
 	let data: Lesson | null = null;
 	let music: Howl | null = null;
@@ -14,7 +15,9 @@
 		music = new Howl({ src: data.ambientAudio, volume: 0.06, loop: true });
 	});
 
-	let playingMusic = false;
+	let currentView: 'NARRATIVE' | 'ACTIVITY' = 'NARRATIVE';
+
+	let playingMusic = true;
 	const MUSIC_FADE_DURATION = 1000; // ms
 	$: if (playingMusic) {
 		music?.play();
@@ -107,5 +110,9 @@
 			<!-- Activity name -->
 			<div class="mt-[2vh] text-center text-[4.1vw] font-bold text-white">Activity</div>
 		</section>
+
+		{#if currentView === 'NARRATIVE'}
+			<LessonNarrativeView items={data.narratives} onFinish={() => (currentView = 'ACTIVITY')} />
+		{/if}
 	</div>
 {/if}

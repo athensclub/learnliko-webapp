@@ -14,6 +14,6 @@
 	$: currentCard = cards[currentIndex];
 </script>
 
-<div transition:fade class="relative">
-	<ClozeFlipCard data={currentCard} />
+<div transition:fade class="flex justify-center mt-[3.8vh] items-center w-full">
+	<ClozeFlipCard data={currentCard} class="h-[65.4vh] w-[88.46vw]" />
 </div>

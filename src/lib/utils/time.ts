@@ -14,3 +14,12 @@ export const formatAMPM = (date: Date) => {
     const strTime = hours + ':' + minutes + ' ' + ampm;
     return strTime;
 }
+
+/**
+ * 
+ * @see https://stackoverflow.com/a/1322771
+ * @param seconds 
+ */
+export const secondsToHHMM = (seconds: number) => {
+    return new Date(seconds * 1000).toISOString().slice(14, 19);
+}

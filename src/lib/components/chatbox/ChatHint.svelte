@@ -26,7 +26,7 @@
 	<h4 class="mb-1 font-bold {$isMobile ? 'text-[4vw]' : 'text-[1.4vw]'}">Help</h4>
 	<button
 		on:click={playSpeechAudio}
-		class="flex flex-row items-center justify-center rounded-full border border-white px-2 text-white opacity-50 {$isMobile
+		class="flex flex-row items-center justify-center rounded-full border bg-[#EFEFEF] px-[4vw] py-[1vw] text-black opacity-50 {$isMobile
 			? 'py-[2vw] text-[3vw]'
 			: 'py-[0.8vw] text-[1vw]'}"
 	>

@@ -86,7 +86,7 @@
 
 	{#if displayedLessons}
 		<div
-			class={`flex snap-x snap-mandatory flex-row gap-[5vw] overflow-x-auto px-[10vw] ${
+			class={`flex snap-x snap-mandatory flex-row gap-[5vw] my-auto overflow-x-auto px-[10vw] ${
 				$isMobile ? 'w-full' : 'w-[54vw] pb-[10vh] pt-0'
 			}`}
 		>
@@ -95,7 +95,7 @@
 					{item}
 					progress={0}
 					class="snap-center {$isMobile
-						? 'mt-[5vw] max-h-[115vw] min-h-[115vw] min-w-[80vw]'
+						? 'max-h-[115vw] min-h-[115vw] min-w-[80vw]'
 						: 'mt-[calc(48vh-19vw)] h-[38vw] w-[27vw]'}"
 				/>
 			{/each}

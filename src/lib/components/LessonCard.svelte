@@ -109,7 +109,7 @@
 
 	<div class="flex h-[50%] flex-row items-center">
 		<div class="ml-[5%] flex h-full animate-slideInLeft flex-col justify-end">
-			<img class="max-h-full" src={item.intro.bot} alt="Avatar" />
+			<img class="max-h-full max-w-[33vw] object-contain" src={item.intro.bot} alt="Avatar" />
 		</div>
 
 		<div

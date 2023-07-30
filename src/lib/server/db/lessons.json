@@ -13,7 +13,12 @@
 					{
 						"text": "“What is this called?”",
 						"image": "https://cdn.discordapp.com/attachments/1120787872379842711/1121124468538998835/vi_leopard_cartoon_realistic_in_the_savanna_325b24af-9414-40b4-80fc-e705c1e04fd1.png",
-						"choices": ["tiger", "lion", "monkey", "elephant"],
+						"choices": [
+							"tiger",
+							"lion",
+							"monkey",
+							"elephant"
+						],
 						"answerIndex": 0,
 						"coin": 100,
 						"exp": 25,
@@ -21,7 +26,12 @@
 					},
 					{
 						"text": "“Sorry, now I ... working.” จงเติมคำในช่องว่าง",
-						"choices": ["is", "am", "are", "-"],
+						"choices": [
+							"is",
+							"am",
+							"are",
+							"-"
+						],
 						"answerIndex": 1,
 						"coin": 100,
 						"exp": 25,
@@ -48,7 +58,12 @@
 						"questions": [
 							{
 								"text": "คุณทำะไรหลังจากตื่นนอน",
-								"choices": ["clean your body", "go to bed", "eat breakfast", "play toy cars"],
+								"choices": [
+									"clean your body",
+									"go to bed",
+									"eat breakfast",
+									"play toy cars"
+								],
 								"answerIndex": 0,
 								"coin": 100,
 								"exp": 25,
@@ -59,6 +74,42 @@
 					}
 				],
 				"type": "READING"
+			},
+			{
+				"title": "Fill in the Blank",
+				"cards": [
+					{
+						"title": "Cloze title",
+						"text": "Fill in the _\nthis should be on new line,\nsecond blank _ ",
+						"coin": 10,
+						"exp": 10,
+						"choices": [
+							"here",
+							"blank"
+						],
+						"answerIndexes": [
+							1,
+							0
+						],
+						"type": "CLOZE"
+					},
+					{
+						"title": "Cloze title2",
+						"text": "Fill in the _\nthis should be on new line,\nsecond blank _ ",
+						"coin": 10,
+						"exp": 10,
+						"choices": [
+							"here",
+							"blank"
+						],
+						"answerIndexes": [
+							1,
+							0
+						],
+						"type": "CLOZE"
+					}
+				],
+				"type": "CLOZE"
 			}
 		],
 		"narratives": [

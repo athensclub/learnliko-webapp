@@ -4,13 +4,19 @@
 	import ConversationView from '$lib/components/chatbox/ConversationView.svelte';
 	import { isMobile } from '$lib/global/breakpoints';
 	import { chatContext } from '$lib/global/chatbox';
+	import { conversationFinished } from '$lib/global/conversation';
 	import { onMount } from 'svelte';
 	import { fade, fly } from 'svelte/transition';
 
 	export let data: Activity;
 	let item = data.cards[0] as DialogueCard;
 
+	export let addProgress: (val: number) => void;
 	export let onFinish: () => void;
+
+	$: if ($conversationFinished) {
+		addProgress(1);
+	}
 
 	onMount(() => {
 		$chatContext = {

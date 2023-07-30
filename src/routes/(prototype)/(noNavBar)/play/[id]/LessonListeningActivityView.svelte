@@ -7,6 +7,7 @@
 	import { secondsToHHMM } from '$lib/utils/time';
 	import { onDestroy } from 'svelte';
 
+	export let addProgress: (val: number) => void;
 	export let onFinish: () => void;
 
 	export let data: Activity;
@@ -37,7 +38,9 @@
 	});
 
 	let progressBar: HTMLDivElement;
-	const onProgressBarClicked = (e: MouseEvent & { currentTarget: EventTarget & HTMLDivElement }) => {
+	const onProgressBarClicked = (
+		e: MouseEvent & { currentTarget: EventTarget & HTMLDivElement }
+	) => {
 		const rect = progressBar.getBoundingClientRect();
 		audio.seek(((e.clientX - rect.left) / rect.width) * duration);
 	};
@@ -50,6 +53,7 @@
 	}
 
 	let quiz = item.questions;
+	let initialQuizLength = quiz.length;
 
 	let currentView: 'LISTENING' | 'QUIZ' = 'LISTENING';
 
@@ -84,7 +88,11 @@
 
 				<div class="flex w-full flex-col">
 					<!-- svelte-ignore a11y-click-events-have-key-events -->
-					<div bind:this={progressBar} on:click={onProgressBarClicked} class="h-[4vw] w-full rounded-full bg-[#F0F0F0]">
+					<div
+						bind:this={progressBar}
+						on:click={onProgressBarClicked}
+						class="h-[4vw] w-full rounded-full bg-[#F0F0F0]"
+					>
 						<div
 							style="width: {duration === 0 ? 0 : (currentTime / duration) * 100}%;"
 							class="h-full rounded-full bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] transition-size"
@@ -140,8 +148,10 @@
 		</div>
 	</div>
 {:else if currentView === 'QUIZ'}
-	<!-- Use this view's onFinish trigger, so no op for selection activity onFinish -->
+	<!-- Use this view's onFinish trigger, so no op for selection activity onFinish.
+		 Also use this view's addProgress, ignore the argument in addProgresss -->
 	<LessonSelectionActivityView
+		addProgress={(_) => addProgress(1 / initialQuizLength)}
 		onFinish={() => {}}
 		items={quiz}
 		updateItems={(items) => (quiz = items)}

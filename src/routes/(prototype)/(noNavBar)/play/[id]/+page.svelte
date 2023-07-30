@@ -14,6 +14,7 @@
 	import LessonListeningActivityView from './LessonListeningActivityView.svelte';
 	import LessonDialogueActivityView from './LessonDialogueActivityView.svelte';
 	import LessonFinishedView from './LessonFinishedView.svelte';
+	import { fade } from 'svelte/transition';
 
 	let data: Lesson | null = null;
 	let music: Howl | null = null;
@@ -34,6 +35,16 @@
 		} else {
 			activityIndex = activityIndex + 1;
 		}
+	};
+
+	let progress = 0;
+	/**
+	 * Add progress to the progress bar.
+	 * @param p value to be added, between 0 and 1, where 1 means an activity has been fully completed.
+	 */
+	const addProgress = (p: number) => {
+		if (!data) throw Error('Add progress while data is not defined');
+		progress = progress + p / data.activities.length;
 	};
 
 	let playingMusic = true;
@@ -140,9 +151,13 @@
 			{#if currentActivity}
 				{#if currentActivity.type === ActivityType.Selection}
 					<!-- Can't do type casting in template :( -->
-					<LessonSelectionActivityView items={currentActivity.cards} onFinish={nextView} />
+					<LessonSelectionActivityView
+						items={currentActivity.cards}
+						{addProgress}
+						onFinish={nextView}
+					/>
 				{:else if currentActivity.type === ActivityType.Reading}
-					<LessonReadingActivityView data={currentActivity} onFinish={nextView} />
+					<LessonReadingActivityView data={currentActivity} {addProgress} onFinish={nextView} />
 				{:else if currentActivity.type === ActivityType.Cloze}
 					<LessonClozeActivityView data={currentActivity} onFinish={nextView} />
 				{:else if currentActivity.type === ActivityType.Listening}
@@ -155,6 +170,30 @@
 			{/if}
 		{:else if currentView === 'FINISHED'}
 			<LessonFinishedView />
+		{/if}
+
+		{#if currentView === 'ACTIVITY'}
+			<div
+				transition:fade
+				class="absolute bottom-0 left-0 flex w-full flex-col items-center bg-black/10 p-[4vw] backdrop-blur-md"
+			>
+				<button class="flex flex-col items-center text-[4.5vw] font-bold text-white">
+					<svg class="w-[4vw]" viewBox="0 0 16 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<path
+							d="M8.70711 0.292893C8.31658 -0.097631 7.68342 -0.097631 7.29289 0.292893L0.928932 6.65685C0.538408 7.04738 0.538408 7.68054 0.928932 8.07107C1.31946 8.46159 1.95262 8.46159 2.34315 8.07107L8 2.41421L13.6569 8.07107C14.0474 8.46159 14.6805 8.46159 15.0711 8.07107C15.4616 7.68054 15.4616 7.04738 15.0711 6.65685L8.70711 0.292893ZM9 2V1H7V2H9Z"
+							fill="white"
+						/>
+					</svg>
+					Progress
+				</button>
+
+				<div class="mt-[4vw] h-[3vw] w-full rounded-full bg-white">
+					<div
+						style="width: {progress * 100}%;"
+						class="h-full rounded-full bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] transition-size"
+					/>
+				</div>
+			</div>
 		{/if}
 	</div>
 {/if}

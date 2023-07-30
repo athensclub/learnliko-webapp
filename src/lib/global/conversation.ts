@@ -24,7 +24,7 @@ import type { CEFRLevel } from '$lib/types/CEFRLevel';
 import { graphqlClient } from '$lib/graphql';
 import { RECAP_CONVERSATION_QUIZ, UPDATE_LESSON_PROGRESS } from '$gql/schema/mutations';
 import userSession from '$lib/stores/userSession';
-import type { ConversationRecapHistoryCreateDataInput } from '$gql/generated/graphql';
+// import type { ConversationRecapHistoryCreateDataInput } from '$gql/generated/graphql';
 
 interface HistoryItem {
 	role: 'user' | 'assistant';
@@ -388,7 +388,7 @@ const computeRecap = async () => {
 	// TODO: find a better approach to promote/demote user's CEFR level
 	// if (totalScore > 90) setCurrentCEFRLevel(ct!.conversation.CEFRlevel);
 
-	const _recapHistory: ConversationRecapHistoryCreateDataInput[] = [];
+	const _recapHistory: any[] = [];
 	for (let index = 0; index < goalsResult.length; index++) {
 		const e = goalsResult[index];
 		_recapHistory[index] = {
@@ -408,29 +408,29 @@ const computeRecap = async () => {
 		totalExp += e.score;
 	}
 
-	const uid = userSession.value().accountData?.uid!;
-	const reacpR = await graphqlClient
-		.mutation(RECAP_CONVERSATION_QUIZ, {
-			data: {
-				quizCard: ct.conversation.id,
-				correctPercentage: overallScore,
-				history: _recapHistory
-			},
-			uid: uid
-		})
-		.toPromise();
+	// const uid = userSession.value().accountData?.uid!;
+	// const reacpR = await graphqlClient
+	// 	.mutation(RECAP_CONVERSATION_QUIZ, {
+	// 		data: {
+	// 			quizCard: ct.conversation.id,
+	// 			correctPercentage: overallScore,
+	// 			history: _recapHistory
+	// 		},
+	// 		uid: uid
+	// 	})
+	// 	.toPromise();
 
-	await graphqlClient
-		.mutation(UPDATE_LESSON_PROGRESS, {
-			uid: uid,
-			data: {
-				lessonId: ct.conversation.fromLesson!,
-				quizCardId: ct.conversation.id,
-				quizRecapId: reacpR.data?.conversationRecapCreate.id!,
-				sectionIndex: 3
-			}
-		})
-		.toPromise();
+	// await graphqlClient
+	// 	.mutation(UPDATE_LESSON_PROGRESS, {
+	// 		uid: uid,
+	// 		data: {
+	// 			lessonId: ct.conversation.fromLesson!,
+	// 			quizCardId: ct.conversation.id,
+	// 			quizRecapId: reacpR.data?.conversationRecapCreate.id!,
+	// 			sectionIndex: 3
+	// 		}
+	// 	})
+	// 	.toPromise();
 
 	// completeConversationLocal({
 	// 	recap: { score: overallScore, coins: totalCoins, history: recapDialogues },

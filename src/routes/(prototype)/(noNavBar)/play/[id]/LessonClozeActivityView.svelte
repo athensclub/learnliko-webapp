@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { Activity, ClozeCard } from '$gql/generated/graphql';
 	import { fade } from 'svelte/transition';
+	import restartIcon from '$asset/icons/restart.png';
 
 	export let data: Activity;
 	export let onFinish: () => void;
@@ -64,9 +65,15 @@
 		{/each}
 	</div>
 
-	<button
-		on:click={() => {
-			currentIndex = 1;
-		}}>Click Me</button
+	<div
+		class="flex h-[8.77vh] flex-row items-center justify-between px-[5.38vw] pb-[2.13vh] pt-[1.3vh]"
 	>
+		<button class="h-fit rounded-full bg-[#EAEAEA] p-[2.56vw]" on:click={() => {}}>
+			<img class="h-[6.41vw] w-[6.41vw]" src={restartIcon} alt="restart icon" />
+		</button>
+		<button
+			class="rounded-[5.77vw] bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] px-[8.97vw] py-[1.18vh] text-[4.1vw] font-bold text-white"
+			on:click={() => {}}>ตรวจ</button
+		>
+	</div>
 </div>

@@ -12,12 +12,18 @@
 
 	// keep track of current card
 	$: currentCard = cards[currentIndex];
+
+	const nextCard = function () {
+		if (currentIndex + 1 === cards.length) {
+			onFinish.call(undefined);
+			return;
+		}
+		currentIndex = currentIndex + 1;
+	};
 </script>
 
-<div transition:fade class="mt-[3.8vh] flex w-full items-center justify-center">
-	<ClozeFlipCard
-		data={currentCard}
-		onContinue={() => console.log('go go go')}
-		class="h-[65.4vh] w-[88.46vw]"
-	/>
-</div>
+{#key currentIndex}
+	<div in:fade={{ delay: 400 }} out:fade class="mt-[3.8vh] flex w-full items-center justify-center">
+		<ClozeFlipCard data={currentCard} onContinue={nextCard} class="h-[65.4vh] w-[88.46vw]" />
+	</div>
+{/key}

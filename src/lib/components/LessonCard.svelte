@@ -1,24 +1,23 @@
 <script lang="ts">
 	import { synthesize, type SynthesizeAccent, type SynthesizeGender } from '$api/tts';
-	import type { LessonCard } from '$gql/generated/graphql';
+	import type { Lesson } from '$gql/generated/graphql';
 	import { playAudioURL } from '$lib/global/audio';
 	import { isMobile } from '$lib/global/breakpoints';
 	import { blobToBase64 } from '$lib/utils/io';
 	import { onMount } from 'svelte';
 	import Typewriter from 'svelte-typewriter/Typewriter.svelte';
 
-	export let item: LessonCard;
+	export let item: Lesson;
 	export let scale = 1;
 	export let progress = 0;
-	export let difficulty = '';
 
 	let speech: string | null = null;
 	// TODO: use data from api instead.
 	const loadSpeech = async () => {
 		const val = await synthesize(
 			item.intro.message,
-			item.intro.bot.accent as SynthesizeAccent,
-			item.intro.bot.gender as SynthesizeGender,
+			item.intro.accent as SynthesizeAccent,
+			item.intro.gender as SynthesizeGender,
 			0.7
 		);
 		speech = await blobToBase64(val);
@@ -37,7 +36,7 @@
 	} ${clazz}`}
 >
 	<a
-		href="/lesson/{item.id}"
+		href="/play/{item.id}"
 		style="padding: {scale * ($isMobile ? 6 : 2)}vw;"
 		class="relative flex w-full flex-col bg-[#0000008C] font-bold text-white backdrop-blur-sm"
 	>
@@ -79,7 +78,7 @@
 				  	padding-bottom: {scale * ($isMobile ? 0.5 : 1)}vh;"
 				class="flex items-center justify-center rounded-full bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD]"
 			>
-				{difficulty}
+				{item.course.displayName}
 			</div>
 
 			<div
@@ -92,46 +91,7 @@
 				<div
 					class="flex flex-row bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] bg-clip-text text-transparent"
 				>
-					+{item.exp}
-					<svg
-						class={$isMobile ? 'ml-[1.3vw] w-[7vw]' : 'ml-[0.6vw] w-[2.5vw]'}
-						viewBox="0 0 1650 792"
-						fill="none"
-						xmlns="http://www.w3.org/2000/svg"
-					>
-						<path
-							d="M720.35 572C716.016 572 713.85 569.833 713.85 565.5V211.5C713.85 207.167 716.016 205 720.35 205H952.35C956.683 205 958.85 207.167 958.85 211.5V262C958.85 266.333 956.683 268.5 952.35 268.5H781.35V352H935.85C940.183 352 942.35 354.167 942.35 358.5V408C942.35 412.333 940.183 414.5 935.85 414.5H781.35V508.5H958.35C962.683 508.5 964.85 510.667 964.85 515V565.5C964.85 569.833 962.683 572 958.35 572H720.35ZM1000.41 572C997.742 572 995.908 571.333 994.908 570C994.242 568.333 994.575 566.333 995.908 564L1111.91 382.5L1003.91 213C1003.24 211 1002.91 209.833 1002.91 209.5C1002.91 208.167 1003.41 207.167 1004.41 206.5C1005.41 205.5 1006.74 205 1008.41 205H1069.91C1072.91 205 1075.41 206.5 1077.41 209.5L1154.91 336L1231.41 209.5C1233.07 206.5 1235.57 205 1238.91 205H1299.91C1302.57 205 1304.24 205.833 1304.91 207.5C1305.91 208.833 1305.74 210.667 1304.41 213L1196.41 382L1312.41 564C1313.07 566 1313.41 567.167 1313.41 567.5C1313.41 568.833 1312.91 570 1311.91 571C1310.91 571.667 1309.57 572 1307.91 572H1246.41C1243.41 572 1240.91 570.5 1238.91 567.5L1153.41 428L1068.91 567.5C1067.57 570.5 1065.07 572 1061.41 572H1000.41ZM1370.74 572C1366.41 572 1364.24 569.833 1364.24 565.5V211.5C1364.24 207.167 1366.41 205 1370.74 205H1481.74C1529.41 205 1565.57 216.167 1590.24 238.5C1614.91 260.5 1627.24 292 1627.24 333C1627.24 374 1614.91 405.667 1590.24 428C1565.57 450 1529.41 461 1481.74 461H1431.74V565.5C1431.74 569.833 1429.57 572 1425.24 572H1370.74ZM1431.74 267.5V398.5H1479.24C1531.24 398.5 1557.24 376.167 1557.24 331.5C1557.24 310.167 1550.57 294.167 1537.24 283.5C1523.91 272.833 1504.57 267.5 1479.24 267.5H1431.74Z"
-							fill="url(#paint0_linear_1176_3107)"
-						/>
-						<path
-							d="M282.85 113.15L0 396L282.85 678.85L565.7 396L282.85 113.15ZM141.425 396L282.85 254.575L424.275 396L282.85 537.425L141.425 396Z"
-							fill="url(#paint1_linear_1176_3107)"
-						/>
-						<defs>
-							<linearGradient
-								id="paint0_linear_1176_3107"
-								x1="664.72"
-								y1="7.4717"
-								x2="1126.64"
-								y2="1028.66"
-								gradientUnits="userSpaceOnUse"
-							>
-								<stop stop-color="#C698FF" />
-								<stop offset="1" stop-color="#6C80E8" />
-							</linearGradient>
-							<linearGradient
-								id="paint1_linear_1176_3107"
-								x1="-5.29141"
-								y1="118.487"
-								x2="368.376"
-								y2="788.842"
-								gradientUnits="userSpaceOnUse"
-							>
-								<stop stop-color="#C698FF" />
-								<stop offset="1" stop-color="#6C80E8" />
-							</linearGradient>
-						</defs>
-					</svg>
+					{item.subject.displayName}
 				</div>
 			</div>
 		</div>
@@ -149,7 +109,7 @@
 
 	<div class="flex h-[50%] flex-row items-center">
 		<div class="ml-[5%] flex h-full animate-slideInLeft flex-col justify-end">
-			<img class="max-h-full" src={item.intro.bot.avatarModels.neutral} alt="Avatar" />
+			<img class="max-h-full" src={item.intro.bot} alt="Avatar" />
 		</div>
 
 		<div

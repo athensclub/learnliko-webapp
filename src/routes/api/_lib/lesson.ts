@@ -9,8 +9,10 @@ import { GET_LESSON, GET_LESSON_WITHOUT_CONTENT, QUERY_LESSONS_FEED } from '$gql
 import { graphqlClient } from '$lib/graphql';
 
 export const getLessonCards = async (query?: LessonCardsQueryInput) => {
-	const result = await graphqlClient.query(QUERY_LESSONS_FEED, { query }).toPromise();
-	return result.data?.lessonCards.cards as PersonalizedLessonCard[];
+	const response = await fetch('/api/v1/lesson/cards');
+	return await response.json();
+	// const result = await graphqlClient.query(QUERY_LESSONS_FEED, { query }).toPromise();
+	// return result.data?.lessonCards.cards as PersonalizedLessonCard[];
 };
 
 export const getLessonById = async (

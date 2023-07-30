@@ -56,6 +56,16 @@
 		userAnswers[targetIndex] = undefined;
 		userAnswers = userAnswers;
 	};
+
+	/**
+	 * Reset selected answer
+	 */
+	const resetAnswer = function () {
+		userAnswers.forEach((choiceIndex) => {
+			if (choiceIndex !== undefined) choices[choiceIndex].selected = false;
+		});
+		userAnswers = Array(choices.length);
+	};
 </script>
 
 <div transition:fade class="rounded-[8.21vw] bg-white">
@@ -128,7 +138,7 @@
 	<div
 		class="flex h-[8.77vh] flex-row items-center justify-between px-[5.38vw] pb-[2.13vh] pt-[1.3vh]"
 	>
-		<button class="h-fit rounded-full bg-[#EAEAEA] p-[2.56vw]" on:click={() => {}}>
+		<button class="h-fit rounded-full bg-[#EAEAEA] p-[2.56vw]" on:click={resetAnswer}>
 			<img class="h-[6.41vw] w-[6.41vw]" src={restartIcon} alt="restart icon" />
 		</button>
 		<button

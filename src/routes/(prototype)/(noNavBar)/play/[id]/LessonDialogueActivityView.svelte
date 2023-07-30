@@ -230,7 +230,7 @@
 				</div>
 
 				<!-- Bottom spacing -->
-				<div class="h-[10vw] w-full" />
+				<div class="h-[27vw] w-full" />
 			</div>
 		{:else if currentView === 'DIALOGUE'}
 			<div class={`flex h-full flex-col justify-end ${$isMobile ? 'w-full' : 'w-fit'}`}>
@@ -251,9 +251,11 @@
 					onFinishClicked={onFinish}
 					class="text-black"
 					initializingClass="text-black"
-					recorderClass="text-black bg-white w-[90%]"
+					recorderClass="text-black bg-white w-[90%] bottom-[27vw]"
 					finishButtonClass="border-white/[0.15]"
 				/>
+
+
 			</div>
 		{/if}
 	</div>

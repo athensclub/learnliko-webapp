@@ -160,7 +160,7 @@
 				{:else if currentActivity.type === ActivityType.Reading}
 					<LessonReadingActivityView data={currentActivity} {addProgress} onFinish={nextView} />
 				{:else if currentActivity.type === ActivityType.Cloze}
-					<LessonClozeActivityView data={currentActivity} onFinish={nextView} />
+					<LessonClozeActivityView data={currentActivity} {addProgress} onFinish={nextView} />
 				{:else if currentActivity.type === ActivityType.Listening}
 					<LessonListeningActivityView data={currentActivity} {addProgress} onFinish={nextView} />
 				{:else if currentActivity.type === ActivityType.Dialogue}

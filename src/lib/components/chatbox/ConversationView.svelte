@@ -81,7 +81,7 @@
 		{/if}
 
 		<!-- Just a bottom space -->
-		<div class="h-[120px] w-full" />
+		<div class="h-[50vw] w-full" />
 	</div>
 {:else}
 	<div class={`flex h-full w-full flex-row items-center justify-center ${initializingClass}`}>

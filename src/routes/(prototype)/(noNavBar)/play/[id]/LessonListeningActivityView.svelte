@@ -72,10 +72,10 @@
 		transition:fade
 		class="pointer-events-none absolute left-0 top-0 flex h-full w-full items-center justify-center overflow-hidden"
 	>
-		<div class="pointer-events-auto mt-[20vw] flex flex-col">
+		<div class="pointer-events-auto mt-[16vw] flex flex-col">
 			<div
 				class="flex flex-col justify-between overflow-hidden bg-white p-[6vw] {$isMobile
-					? 'h-[62vh] w-[85vw] rounded-[4vw]'
+					? 'h-[57vh] w-[85vw] rounded-[4vw]'
 					: 'h-[30vw] w-[60vw]'}"
 			>
 				<div class="mx-auto text-[5.5vw] font-bold">{item.title}</div>

@@ -66,6 +66,33 @@
 		});
 		userAnswers = Array(choices.length);
 	};
+
+	const checkAnswer = function () {
+		/**
+		 * check result
+		 * -1 not finished
+		 *  0 not correct all
+		 *  1 correct all
+		 */
+		let result = 1;
+
+		for (let index = 0; index < userAnswers.length; index++) {
+			const choiceIndex = userAnswers[index];
+
+			// not fisnished yet
+			if (choiceIndex === undefined) {
+				result = -1;
+				break;
+			}
+
+			if (choices[choiceIndex].originalIndex !== currentCard.answerIndexes[index]) {
+				result = 0;
+				break;
+			}
+		}
+
+		console.log(result);
+	};
 </script>
 
 <div transition:fade class="rounded-[8.21vw] bg-white">
@@ -143,7 +170,7 @@
 		</button>
 		<button
 			class="rounded-[5.77vw] bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] px-[8.97vw] py-[1.18vh] text-[4.1vw] font-bold text-white"
-			on:click={() => {}}>ตรวจ</button
+			on:click={checkAnswer}>ตรวจ</button
 		>
 	</div>
 </div>

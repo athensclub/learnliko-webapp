@@ -140,7 +140,8 @@ export const checkConversationFinished = () => {
 		conversationFinished.set(true);
 		if (get(saveCurrentConversation)) {
 			finishedTime = new Date();
-			computeRecap();
+			// TODO: implement recap in the future
+			// computeRecap();
 		}
 	}
 };

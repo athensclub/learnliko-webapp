@@ -10,7 +10,7 @@
 
 	let currentIndex = 0;
 	// store user's answer(choice's index)
-	let userAnswers: (number | undefined)[] = [];
+	let userAnswers: (number | null)[] = [];
 
 	// keep track of current card
 	$: currentCard = cards[currentIndex];
@@ -23,18 +23,21 @@
 		Object.create({ choice, originalIndex, selected: false })
 	);
 
+	// track of user's progress
+	$: isFinished = userAnswers.length > 0 && userAnswers.every((e) => e !== null);
+
 	/**
-	 * find the first `undefined` element then append the selected choice to the answer array
+	 * find the first `null` element then append the selected choice to the answer array
 	 * if the userAnswers array isn't initialize yet, init it by length of `choices`
 	 * @param choiceIndex
 	 */
 	const selectChoice = function (choiceIndex: number) {
 		if (userAnswers.length === 0) {
-			userAnswers = Array(choices.length);
+			userAnswers = Array(choices.length).fill(null);
 			userAnswers[0] = choiceIndex;
 			choices[choiceIndex].selected = true;
 		} else {
-			const index = userAnswers.findIndex((val) => val === undefined);
+			const index = userAnswers.findIndex((val) => val === null);
 			if (index > -1) {
 				userAnswers[index] = choiceIndex;
 				choices[choiceIndex].selected = true;
@@ -50,10 +53,10 @@
 	 */
 	const deselectChoice = function (targetIndex: number) {
 		const choiceIndex = userAnswers[targetIndex];
-		if (choiceIndex === undefined) return;
+		if (choiceIndex === null) return;
 
 		choices[choiceIndex].selected = false;
-		userAnswers[targetIndex] = undefined;
+		userAnswers[targetIndex] = null;
 		userAnswers = userAnswers;
 	};
 
@@ -62,9 +65,9 @@
 	 */
 	const resetAnswer = function () {
 		userAnswers.forEach((choiceIndex) => {
-			if (choiceIndex !== undefined) choices[choiceIndex].selected = false;
+			if (choiceIndex !== null) choices[choiceIndex].selected = false;
 		});
-		userAnswers = Array(choices.length);
+		userAnswers = Array(choices.length).fill(null);
 	};
 
 	const checkAnswer = function () {
@@ -79,8 +82,8 @@
 		for (let index = 0; index < userAnswers.length; index++) {
 			const choiceIndex = userAnswers[index];
 
-			// not fisnished yet
-			if (choiceIndex === undefined) {
+			// not fisnished fill the blank yet
+			if (choiceIndex === null) {
 				result = -1;
 				break;
 			}
@@ -125,7 +128,7 @@
 
 				{#if index !== textParts.length - 1}
 					{@const answerIndex = userAnswers[index]}
-					{#if answerIndex !== undefined}
+					{#if answerIndex != null}
 						<button
 							transition:scale
 							on:click={() => deselectChoice(index)}
@@ -169,7 +172,9 @@
 			<img class="h-[6.41vw] w-[6.41vw]" src={restartIcon} alt="restart icon" />
 		</button>
 		<button
-			class="rounded-[5.77vw] bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] px-[8.97vw] py-[1.18vh] text-[4.1vw] font-bold text-white"
+			disabled={!isFinished}
+			class="rounded-[5.77vw] px-[8.97vw] py-[1.18vh] text-[4.1vw] font-bold text-white
+			{isFinished ? `bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] ` : `bg-gray-300`}"
 			on:click={checkAnswer}>ตรวจ</button
 		>
 	</div>

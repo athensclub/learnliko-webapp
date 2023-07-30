@@ -92,6 +92,6 @@
 {#if !$conversationFinished}
 	<Recorder
 		{allowHint}
-		class={`absolute bottom-[3vh] left-[50%] translate-x-[-50%] ${recorderClass}`}
+		class={`absolute bottom-[20vw] left-[50%] translate-x-[-50%] ${recorderClass}`}
 	/>
 {/if}

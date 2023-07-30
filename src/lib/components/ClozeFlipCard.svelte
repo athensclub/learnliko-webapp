@@ -4,12 +4,16 @@
 	import restartIcon from '$asset/icons/restart.png';
 	import { isMobile } from '$lib/global/breakpoints';
 	import Flippable from './Flippable.svelte';
+	import { playAudio } from '$lib/global/audio';
+	import { toast } from './toasts/ToastManager.svelte';
+	import AnswerCorrectToast from './toasts/AnswerCorrectToast.svelte';
 
 	let clazz = '';
 
 	export let data: ClozeCard;
 	export { clazz as class };
 	export let onContinue = () => {};
+	export let onCorrect = () => {};
 
 	// create an array of blank, then split each line by '\n' for text's line.
 	const textParts = data.text.split('_').map((line) => line.split('\n'));
@@ -87,6 +91,15 @@
 
 		isCorrect = correctAll;
 		flipped = true;
+
+		if (isCorrect) {
+			playAudio('Success');
+			toast(AnswerCorrectToast, { exp: data.exp, coin: data.coin });
+
+			onCorrect();
+		} else {
+			playAudio('Fail');
+		}
 	};
 
 	const restartCloze = function () {

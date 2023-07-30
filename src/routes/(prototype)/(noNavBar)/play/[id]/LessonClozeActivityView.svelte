@@ -3,9 +3,10 @@
 	import { fade } from 'svelte/transition';
 	import ClozeFlipCard from '$lib/components/ClozeFlipCard.svelte';
 
-	export let data: Activity;
+	export let addProgress: (val: number) => void;
 	export let onFinish: () => void;
 
+	export let data: Activity;
 	const cards = data.cards as ClozeCard[];
 
 	let currentIndex = 0;
@@ -24,6 +25,11 @@
 
 {#key currentIndex}
 	<div in:fade={{ delay: 400 }} out:fade class="mt-[3.8vh] flex w-full items-center justify-center">
-		<ClozeFlipCard data={currentCard} onContinue={nextCard} class="h-[65.4vh] w-[88.46vw]" />
+		<ClozeFlipCard
+			onCorrect={() => addProgress(1 / cards.length)}
+			data={currentCard}
+			onContinue={nextCard}
+			class="h-[65.4vh] w-[88.46vw]"
+		/>
 	</div>
 {/key}

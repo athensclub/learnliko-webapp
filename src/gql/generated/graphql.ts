@@ -118,7 +118,9 @@ export type Lesson = {
 
 export type LessonIntro = {
   __typename?: 'LessonIntro';
+  accent: Scalars['String']['output'];
   bot: Scalars['String']['output'];
+  gender: Scalars['String']['output'];
   message: Scalars['String']['output'];
   transcription: Scalars['String']['output'];
 };

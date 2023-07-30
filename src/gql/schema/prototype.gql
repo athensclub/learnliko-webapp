@@ -1,15 +1,15 @@
-type Subject{
+type Subject {
 	id: ID!
 	displayName: String!
 }
 
-type Course{
+type Course {
 	id: ID!
 	displayName: String!
 	subject: Subject!
 }
 
-type Lesson{
+type Lesson {
 	id: ID!
 	course: Course!
 	subject: Subject!
@@ -25,24 +25,26 @@ type Lesson{
 	like: Int!
 }
 
-type LessonIntro{
+type LessonIntro {
 	bot: String!
+	accent: String!
+	gender: String!
 	message: String!
 	transcription: String!
 }
 
-type Narrative{
+type Narrative {
 	illustrationUrl: String!
 	text: String!
 }
 
-type Activity{
+type Activity {
 	title: String!
 	type: ActivityType!
 	cards: [ActivityCard!]!
 }
 
-enum ActivityType{
+enum ActivityType {
 	SELECTION
 	READING
 	LISTENING
@@ -51,12 +53,12 @@ enum ActivityType{
 	DISCUSSION
 }
 
-interface ActivityCard{
+interface ActivityCard {
 	id: ID!
 	type: ActivityType!
 }
 
-type SelectionCard implements ActivityCard{
+type SelectionCard implements ActivityCard {
 	id: ID!
 	type: ActivityType!
 	text: String!
@@ -67,7 +69,7 @@ type SelectionCard implements ActivityCard{
 	answerIndex: Int!
 }
 
-type ReadingCard implements ActivityCard{
+type ReadingCard implements ActivityCard {
 	id: ID!
 	type: ActivityType!
 	title: String!
@@ -75,12 +77,12 @@ type ReadingCard implements ActivityCard{
 	questions: [SelectionCard!]!
 }
 
-type ReadingPage{
+type ReadingPage {
 	text: String!
 	illustrationUrl: String!
 }
 
-type ListeningCard implements ActivityCard{
+type ListeningCard implements ActivityCard {
 	id: ID!
 	type: ActivityType!
 	title: String!
@@ -89,19 +91,19 @@ type ListeningCard implements ActivityCard{
 	questions: [SelectionCard!]!
 }
 
-type ClozeCard implements ActivityCard{
+type ClozeCard implements ActivityCard {
 	id: ID!
 	type: ActivityType!
 
 	title: String!
 	text: String!
-	choices: [String!]! 
+	choices: [String!]!
 	coin: Int!
 	exp: Int!
 	answerIndexes: [Int!]!
 }
 
-type DialogueCard implements ActivityCard{
+type DialogueCard implements ActivityCard {
 	id: ID!
 	type: ActivityType!
 
@@ -114,28 +116,28 @@ type DialogueCard implements ActivityCard{
 	contextPrompt: String!
 }
 
-type BotDetails{
+type BotDetails {
 	intro: String!
-    prompt: String!
+	prompt: String!
 	avatar: String!
 	role: String!
 	name: String!
-    accent: String!
-    gender: String!
+	accent: String!
+	gender: String!
 }
 
-type LearnerDetails{
+type LearnerDetails {
 	mission: String!
 	goal: [LearnerGoal!]!
 }
 
 type LearnerGoal {
-    description: String!
-    hint: String!
+	description: String!
+	hint: String!
 	prompt: String!
 }
 
-type DiscussionCard implements ActivityCard{
+type DiscussionCard implements ActivityCard {
 	id: ID!
 	type: ActivityType!
 

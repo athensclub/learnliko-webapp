@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { ClozeCard } from '$gql/generated/graphql';
-	import { fade, scale } from 'svelte/transition';
+	import { scale } from 'svelte/transition';
 	import restartIcon from '$asset/icons/restart.png';
 	import { isMobile } from '$lib/global/breakpoints';
 	import Flippable from './Flippable.svelte';
@@ -9,8 +9,7 @@
 
 	export let data: ClozeCard;
 	export { clazz as class };
-	export let onCorrect = () => {};
-	export let onWrong = () => {};
+	export let onContinue = () => {};
 
 	// create an array of blank, then split each line by '\n' for text's line.
 	const textParts = data.text.split('_').map((line) => line.split('\n'));
@@ -68,30 +67,31 @@
 	};
 
 	const checkAnswer = function () {
-		/**
-		 * check result
-		 * -1 not finished
-		 *  0 not correct all
-		 *  1 correct all
-		 */
-		let result = 1;
+		if (!isFinished) return;
+
+		let correctAll = true;
 
 		for (let index = 0; index < userAnswers.length; index++) {
 			const choiceIndex = userAnswers[index];
 
 			// not fisnished fill the blank yet
 			if (choiceIndex === null) {
-				result = -1;
-				break;
+				throw new Error('Complete fill in the blank');
 			}
 
 			if (choices[choiceIndex].originalIndex !== data.answerIndexes[index]) {
-				result = 0;
+				correctAll = false;
 				break;
 			}
 		}
 
-		console.log(result);
+		isCorrect = correctAll;
+		flipped = true;
+	};
+
+	const restartCloze = function () {
+		resetAnswer();
+		flipped = false;
 	};
 </script>
 
@@ -292,7 +292,7 @@
 
 	<div
 		slot="back"
-		class="flex h-full w-full flex-col items-center justify-between rounded-[8.21vw] bg-white font-bold"
+		class="flex h-full w-full flex-col items-center justify-between rounded-[8.21vw] bg-white pb-[7.58vh] pt-[4.74vh] font-bold"
 	>
 		<h3 class="text-[4.1vw]">คำตอบของคุณ</h3>
 		<h3
@@ -302,8 +302,13 @@
 		>
 			{isCorrect ? 'ถูกต้อง' : 'ไม่ถูกต้อง'}
 		</h3>
-		<h3 class="rounded-[6.54vw] border border-black px-[9.74vw] py-[0.83vh] text-[4.1vw]">
+		<button
+			on:click={() => {
+				isCorrect ? onContinue?.call(undefined) : restartCloze();
+			}}
+			class="rounded-[6.54vw] border border-black px-[9.74vw] py-[0.83vh] text-[4.1vw]"
+		>
 			{isCorrect ? 'ต่อไป →' : 'ลองใหม่'}
-		</h3>
+		</button>
 	</div>
 </Flippable>

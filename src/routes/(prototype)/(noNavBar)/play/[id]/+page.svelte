@@ -33,6 +33,8 @@
 	const nextView = () => {
 		if (currentView === 'NARRATIVE') {
 			currentView = 'ACTIVITY';
+		} else if (activityIndex + 1 >= (data?.activities.length ?? 0)) {
+			currentView = 'FINISHED';
 		} else {
 			activityIndex = activityIndex + 1;
 		}

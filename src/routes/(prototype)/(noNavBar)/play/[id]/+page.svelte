@@ -13,6 +13,7 @@
 	import LessonClozeActivityView from './LessonClozeActivityView.svelte';
 	import LessonListeningActivityView from './LessonListeningActivityView.svelte';
 	import LessonDialogueActivityView from './LessonDialogueActivityView.svelte';
+	import LessonFinishedView from './LessonFinishedView.svelte';
 
 	let data: Lesson | null = null;
 	let music: Howl | null = null;
@@ -22,7 +23,7 @@
 		music = new Howl({ src: data.ambientAudio, volume: 0.06, loop: true });
 	});
 
-	let currentView: 'NARRATIVE' | 'ACTIVITY' = 'NARRATIVE';
+	let currentView: 'NARRATIVE' | 'ACTIVITY' | 'FINISHED' = 'NARRATIVE';
 
 	let activityIndex = 0;
 	$: currentActivity = data?.activities[activityIndex];
@@ -126,7 +127,7 @@
 			<div class="mt-[2vh] text-center text-[5vw] font-bold text-white">{data.title}</div>
 
 			<!-- Activity name -->
-			{#if currentView !== 'NARRATIVE' && currentActivity}
+			{#if currentView === 'ACTIVITY' && currentActivity}
 				<div class="mt-[2vh] text-center text-[4.1vw] font-bold text-white">
 					{currentActivity.title}
 				</div>
@@ -152,6 +153,8 @@
 			{:else}
 				<h1 class="mx-auto text-[8vw] font-bold text-white">Error:Activity data not found</h1>
 			{/if}
+		{:else if currentView === 'FINISHED'}
+			<LessonFinishedView />
 		{/if}
 	</div>
 {/if}

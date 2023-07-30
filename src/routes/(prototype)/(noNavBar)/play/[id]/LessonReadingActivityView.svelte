@@ -1,16 +1,17 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
-	import ReadingContainer from '$lib/components/reading/ReadingContainer.svelte';
 	import type { Activity, ReadingCard } from '$gql/generated/graphql';
 	import { isMobile } from '$lib/global/breakpoints';
 	import LessonSelectionActivityView from './LessonSelectionActivityView.svelte';
 
+	export let addProgress: (val: number) => void;
 	export let onFinish: () => void;
 
 	export let data: Activity;
 	let item: ReadingCard = data.cards[0] as ReadingCard;
 
 	let quiz = item.questions;
+	let initialQuizLength = quiz.length;
 
 	let currentView: 'READING' | 'QUIZ' = 'READING';
 
@@ -27,10 +28,10 @@
 		transition:fade
 		class="pointer-events-none absolute left-0 top-0 flex h-full w-full items-center justify-center overflow-hidden"
 	>
-		<div class="pointer-events-auto mt-[20vw] flex flex-col">
+		<div class="pointer-events-auto mt-[16vw] flex flex-col">
 			<div
 				class="relative overflow-hidden bg-white {$isMobile
-					? 'h-[62vh] w-[85vw] rounded-[4vw]'
+					? 'h-[57vh] w-[85vw] rounded-[4vw]'
 					: 'h-[30vw] w-[60vw]'}"
 			>
 				{#key pageIndex}
@@ -75,8 +76,10 @@
 		</div>
 	</div>
 {:else if currentView === 'QUIZ'}
-	<!-- Use this view's onFinish trigger, so no op for selection activity onFinish -->
+	<!-- Use this view's onFinish trigger, so no op for selection activity onFinish.
+		 Also use this view's addProgress, ignore the argument in addProgresss -->
 	<LessonSelectionActivityView
+		addProgress={(_) => addProgress(1 / initialQuizLength)}
 		onFinish={() => {}}
 		items={quiz}
 		updateItems={(items) => (quiz = items)}

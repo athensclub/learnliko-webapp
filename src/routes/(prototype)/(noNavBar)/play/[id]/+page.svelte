@@ -14,6 +14,8 @@
 	import LessonListeningActivityView from './LessonListeningActivityView.svelte';
 	import LessonDialogueActivityView from './LessonDialogueActivityView.svelte';
 	import LessonFinishedView from './LessonFinishedView.svelte';
+	import { fade } from 'svelte/transition';
+	import LessonBottomProgressBar from './LessonBottomProgressBar.svelte';
 
 	let data: Lesson | null = null;
 	let music: Howl | null = null;
@@ -34,6 +36,16 @@
 		} else {
 			activityIndex = activityIndex + 1;
 		}
+	};
+
+	let progress = 0;
+	/**
+	 * Add progress to the progress bar.
+	 * @param p value to be added, between 0 and 1, where 1 means an activity has been fully completed.
+	 */
+	const addProgress = (p: number) => {
+		if (!data) throw Error('Add progress while data is not defined');
+		progress = progress + p / data.activities.length;
 	};
 
 	let playingMusic = true;
@@ -140,21 +152,29 @@
 			{#if currentActivity}
 				{#if currentActivity.type === ActivityType.Selection}
 					<!-- Can't do type casting in template :( -->
-					<LessonSelectionActivityView items={currentActivity.cards} onFinish={nextView} />
+					<LessonSelectionActivityView
+						items={currentActivity.cards}
+						{addProgress}
+						onFinish={nextView}
+					/>
 				{:else if currentActivity.type === ActivityType.Reading}
-					<LessonReadingActivityView data={currentActivity} onFinish={nextView} />
+					<LessonReadingActivityView data={currentActivity} {addProgress} onFinish={nextView} />
 				{:else if currentActivity.type === ActivityType.Cloze}
 					<LessonClozeActivityView data={currentActivity} onFinish={nextView} />
 				{:else if currentActivity.type === ActivityType.Listening}
-					<LessonListeningActivityView data={currentActivity} onFinish={nextView} />
+					<LessonListeningActivityView data={currentActivity} {addProgress} onFinish={nextView} />
 				{:else if currentActivity.type === ActivityType.Dialogue}
-					<LessonDialogueActivityView data={currentActivity} onFinish={nextView} />
+					<LessonDialogueActivityView data={currentActivity} {addProgress} onFinish={nextView} />
 				{/if}
 			{:else}
 				<h1 class="mx-auto text-[8vw] font-bold text-white">Error:Activity data not found</h1>
 			{/if}
 		{:else if currentView === 'FINISHED'}
 			<LessonFinishedView />
+		{/if}
+
+		{#if currentView === 'ACTIVITY'}
+			<LessonBottomProgressBar {progress} activityNames={data.activities.map((a) => a.title)} />
 		{/if}
 	</div>
 {/if}

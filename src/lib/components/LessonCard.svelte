@@ -113,15 +113,20 @@
 		</div>
 
 		<div
-			style="font-size: {scale * ($isMobile ? 3 : 1)}vw; padding: {scale * ($isMobile ? 1.5 : 1)}vw;"
-			class="relative bottom-[30%] right-[3%] h-fit animate-wiggle rounded-bl-none bg-white font-bold {$isMobile ? 'rounded-[6vw]':'rounded-[2vw]'}"
+			style="font-size: {scale * ($isMobile ? 3 : 1)}vw; padding: {scale *
+				($isMobile ? 1.5 : 1)}vw;"
+			class="relative bottom-[30%] right-[3%] h-fit animate-wiggle rounded-bl-none bg-white font-bold {$isMobile
+				? 'rounded-[6vw]'
+				: 'rounded-[2vw]'}"
 		>
 			<button
 				on:click={() => {
 					speech && playAudioURL(speech);
 				}}
-				class="animate-pulse"><Typewriter>{item.intro.message}🔉</Typewriter></button
+				class="animate-pulse"
 			>
+				{item.intro.message}🔉
+			</button>
 		</div>
 	</div>
 </div>

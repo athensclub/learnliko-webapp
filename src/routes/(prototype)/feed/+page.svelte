@@ -14,9 +14,21 @@
 		lessons = await getLessonCards();
 	});
 
+	let displayedLessons: Lesson[] | null = null;
+
 	let tags = ['ทั้งหมด', 'ภาษาอังกฤษ', 'เขียนโปรแกรม'];
 	let selectedTagIndex = 0;
-	$: selectedTag = tags[selectedTagIndex];
+	const updateTagFilter = () => {
+		// TODO: implement more general version of this
+		if (selectedTagIndex === 0) {
+			displayedLessons = lessons;
+		} else if (selectedTagIndex === 1) {
+			displayedLessons = lessons?.filter((l) => l.subject.id === 'english') ?? null;
+		} else if (selectedTagIndex === 2) {
+			displayedLessons = lessons?.filter((l) => l.subject.id === 'programming') ?? null;
+		}
+	};
+	$: selectedTagIndex, lessons, updateTagFilter();
 </script>
 
 <!-- Top Navbar -->
@@ -72,18 +84,18 @@
 		{/each}
 	</div>
 
-	{#if lessons}
+	{#if displayedLessons}
 		<div
-			class={`flex snap-x gap-[5vw] px-[10vw] snap-mandatory flex-row overflow-x-auto ${
+			class={`flex snap-x snap-mandatory flex-row gap-[5vw] overflow-x-auto px-[10vw] ${
 				$isMobile ? 'w-full' : 'w-[54vw] pb-[10vh] pt-0'
 			}`}
 		>
-			{#each lessons as item (item)}
+			{#each displayedLessons as item (item.id)}
 				<LessonCard
 					{item}
 					progress={0}
 					class="snap-center {$isMobile
-						? 'mt-[5vw] min-h-[115vw] min-w-[80vw] max-h-[115vw]'
+						? 'mt-[5vw] max-h-[115vw] min-h-[115vw] min-w-[80vw]'
 						: 'mt-[calc(48vh-19vw)] h-[38vw] w-[27vw]'}"
 				/>
 			{/each}

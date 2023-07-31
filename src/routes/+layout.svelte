@@ -11,7 +11,7 @@
 	import type { User } from 'firebase/auth';
 	import userSession from '$lib/stores/userSession';
 	import ToastManager from '$lib/components/toasts/ToastManager.svelte';
-	import { getCurrentUserData } from '$lib/temp/user';
+	import { createGuestProfile, getCurrentUserData } from '$lib/temp/user';
 	import { currentMode } from '$lib/global/mode';
 	import { graphqlClient } from '$lib/graphql';
 	import { setContextClient } from '@urql/svelte';
@@ -32,10 +32,10 @@
 		if ($userSession.isLoggedIn) {
 			const profileData = await getCurrentUserData();
 			if (!profileData) {
-				goto('/setup-profile');
+				const data = await createGuestProfile();
+				userSession.update({ accountData: data });
 			} else {
 				userSession.update({ accountData: profileData });
-				currentMode.set('Student');
 			}
 		}
 
@@ -50,7 +50,7 @@
 		initializeAudioRecording();
 
 		// Subscribe on firebase auth state change
-		// auth.onAuthStateChanged(OnAuthStateChanged);
+		auth.onAuthStateChanged(OnAuthStateChanged);
 	});
 
 	$: if (!$showChatbox) {

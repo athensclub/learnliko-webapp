@@ -66,6 +66,12 @@ export type Course = {
   subject: Subject;
 };
 
+export type CourseProgress = {
+  __typename?: 'CourseProgress';
+  course: Course;
+  progress: Scalars['Float']['output'];
+};
+
 export type DialogueCard = ActivityCard & {
   __typename?: 'DialogueCard';
   bot: BotDetails;
@@ -172,4 +178,18 @@ export type Subject = {
   __typename?: 'Subject';
   displayName: Scalars['String']['output'];
   id: Scalars['ID']['output'];
+};
+
+export type SubjectProgress = {
+  __typename?: 'SubjectProgress';
+  courseProgress: Array<CourseProgress>;
+  subject: Subject;
+};
+
+export type User = {
+  __typename?: 'User';
+  coin: Scalars['Int']['output'];
+  exp: Scalars['Int']['output'];
+  subjectProgress: Array<SubjectProgress>;
+  uid: Scalars['ID']['output'];
 };

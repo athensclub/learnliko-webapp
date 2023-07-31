@@ -1,4 +1,4 @@
-import type { LessonProgress, User } from '$gql/generated/graphql';
+import type { User } from '$gql/generated/graphql';
 import { auth, firestore } from '$lib/configs/firebase.config';
 import type { PretestCEFRLevel } from '$lib/types/pretest';
 import type { UserProfile } from '$lib/types/userProfile';
@@ -27,7 +27,7 @@ export const queryCurrentUserLessonRecap = async function () {
 
 	const snapshot = await getDocs(query(userRef, ...queryConst));
 	const recaps = snapshot.docs.map((doc) => {
-		return { ...doc.data(), latestUpdate: doc.data().latestUpdate.toDate() } as LessonProgress;
+		return { ...doc.data(), latestUpdate: doc.data().latestUpdate.toDate() };
 	});
 	return recaps;
 };
@@ -49,6 +49,16 @@ export const getCurrentUserData = async function () {
 	if (!userDoc.exists() || !userDoc.data().profile) return;
 
 	return userDoc.data() as User;
+};
+
+export const createGuestProfile = async function () {
+	const uid = _safeGetUID();
+
+	const userDocRef = doc(firestore, `Users/${uid}`);
+	const data = { uid, coin: 0, exp: 0, subjectProgress: [] };
+	await setDoc(userDocRef, data);
+
+	return data;
 };
 
 // TODO: Implement GraphQL API instead
@@ -75,7 +85,7 @@ export const setupCurrentUserAccount = async function (
 				fullname: `${firstname} ${lastname.at(0)}`
 			}
 		}),
-		increaseActiveUser(),
+		increaseActiveUser()
 	]);
 };
 

@@ -1,3 +1,21 @@
+type User {
+	uid: ID!
+	coin: Int!
+	exp: Int!
+	subjectProgress: [SubjectProgress!]!
+}
+
+type SubjectProgress {
+	subject: Subject!
+	courseProgress: [CourseProgress!]!
+}
+
+type CourseProgress {
+	course: Course!
+	# 0 - 1
+	progress: Float! 
+}
+
 type Subject {
 	id: ID!
 	displayName: String!

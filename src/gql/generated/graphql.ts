@@ -178,6 +178,7 @@ export type Subject = {
   __typename?: 'Subject';
   displayName: Scalars['String']['output'];
   id: Scalars['ID']['output'];
+  indicatorLabel: Scalars['String']['output'];
 };
 
 export type SubjectProgress = {

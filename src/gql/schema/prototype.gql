@@ -13,11 +13,12 @@ type SubjectProgress {
 type CourseProgress {
 	course: Course!
 	# 0 - 1
-	progress: Float! 
+	progress: Float!
 }
 
 type Subject {
 	id: ID!
+	indicatorLabel: String!
 	displayName: String!
 }
 

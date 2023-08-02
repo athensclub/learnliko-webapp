@@ -165,3 +165,12 @@ type DiscussionCard implements ActivityCard {
 
 	contextPrompt: String!
 }
+
+type AIFriend {
+	role: String!
+	name: String!
+	subject: String!
+	interest: String!
+	ability: [String!]!
+	prompt: String!
+}

@@ -15,6 +15,16 @@ export type Scalars = {
   Float: { input: number; output: number; }
 };
 
+export type AiFriend = {
+  __typename?: 'AIFriend';
+  ability: Array<Scalars['String']['output']>;
+  interest: Scalars['String']['output'];
+  name: Scalars['String']['output'];
+  prompt: Scalars['String']['output'];
+  role: Scalars['String']['output'];
+  subject: Scalars['String']['output'];
+};
+
 export type Activity = {
   __typename?: 'Activity';
   cards: Array<ActivityCard>;

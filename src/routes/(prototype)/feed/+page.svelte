@@ -23,9 +23,9 @@
 		if (selectedTagIndex === 0) {
 			displayedLessons = lessons;
 		} else if (selectedTagIndex === 1) {
-			displayedLessons = lessons?.filter((l) => l.subject.id === 'english') ?? null;
+			displayedLessons = lessons?.filter((l) => l.course.subject.id === 'english') ?? null;
 		} else if (selectedTagIndex === 2) {
-			displayedLessons = lessons?.filter((l) => l.subject.id === 'programming') ?? null;
+			displayedLessons = lessons?.filter((l) => l.course.subject.id === 'programming') ?? null;
 		}
 	};
 	$: selectedTagIndex, lessons, updateTagFilter();

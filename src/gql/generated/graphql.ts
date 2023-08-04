@@ -127,7 +127,6 @@ export type Lesson = {
   intro: LessonIntro;
   like: Scalars['Int']['output'];
   narratives: Array<Narrative>;
-  subject: Subject;
   title: Scalars['String']['output'];
   view: Scalars['Int']['output'];
 };

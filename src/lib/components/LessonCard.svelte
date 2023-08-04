@@ -91,7 +91,7 @@
 				<div
 					class="flex flex-row bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] bg-clip-text text-transparent"
 				>
-					{item.subject.displayName}
+					{item.course.subject.displayName}
 				</div>
 			</div>
 		</div>

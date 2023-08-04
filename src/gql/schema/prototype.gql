@@ -31,7 +31,6 @@ type Course {
 type Lesson {
 	id: ID!
 	course: Course!
-	subject: Subject!
 	title: String!
 	description: String!
 	intro: LessonIntro!

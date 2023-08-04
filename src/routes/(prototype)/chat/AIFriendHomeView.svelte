@@ -1,5 +1,11 @@
 <script lang="ts">
-	import { aiFriends, inboxes } from './+page.svelte';
+	import type { AiFriend } from '$gql/generated/graphql';
+	import { aiFriendCurrentView, aiFriends, inboxes, selectedAIFriend } from './+page.svelte';
+
+	const select = (friend: AiFriend) => {
+		$selectedAIFriend = friend;
+		$aiFriendCurrentView = 'DETAILED';
+	};
 </script>
 
 <div class="flex flex-col p-[6vw]">
@@ -7,7 +13,7 @@
 
 	<div class="mb-[4vw] flex flex-row overflow-x-auto p-[4vw]">
 		{#each $aiFriends as friend}
-			<button class="h-[20vw] w-[20vw] rounded-full bg-[#6C80E8]" />
+			<button on:click={() => select(friend)} class="h-[20vw] w-[20vw] rounded-full bg-[#6C80E8]" />
 		{/each}
 	</div>
 
@@ -23,7 +29,7 @@
 				class="relative z-10 mt-[5vw] flex flex-row gap-[4vw] rounded-[5vw] rounded-bl-none p-[5vw]"
 			>
 				<div class="min-h-[13vw] min-w-[13vw] rounded-full bg-[#6C80E8]" />
-				<div class="text-[4.5vw] font-bold ">
+				<div class="text-[4.5vw] font-bold">
 					{inbox.message}
 				</div>
 			</button>

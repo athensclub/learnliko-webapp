@@ -2,9 +2,11 @@
 	import { writable } from 'svelte/store';
 	import type { AiFriend } from '$gql/generated/graphql';
 
-	export const aiFriendCurrentView = writable<'Home'>('Home');
+	export const aiFriendCurrentView = writable<'HOME' | 'DETAILED'>('HOME');
 
 	export const aiFriends = writable<AiFriend[]>([]);
+
+	export const selectedAIFriend = writable<AiFriend | null>(null);
 
 	export type Inbox = {
 		friend: AiFriend;
@@ -14,11 +16,13 @@
 </script>
 
 <script lang="ts">
-	import AiFriendHomeView from './AIFriendHomeView.svelte';
+	import AIFriendHomeView from './AIFriendHomeView.svelte';
 	import { onMount } from 'svelte';
+	import AIFriendDetailedView from './AIFriendDetailedView.svelte';
 
 	onMount(() => {
-		$aiFriendCurrentView = 'Home';
+		$aiFriendCurrentView = 'HOME';
+		$selectedAIFriend = null;
 
 		const kiko: AiFriend = {
 			name: 'KiKo',
@@ -40,7 +44,9 @@
 </script>
 
 <div class="w-full flex-1 font-line-seed">
-	{#if $aiFriendCurrentView === 'Home'}
-		<AiFriendHomeView />
+	{#if $aiFriendCurrentView === 'HOME'}
+		<AIFriendHomeView />
+		{:else if $aiFriendCurrentView === 'DETAILED'}
+		<AIFriendDetailedView />
 	{/if}
 </div>

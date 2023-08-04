@@ -17,6 +17,10 @@ import {
 } from 'firebase/firestore/lite';
 import { increaseActiveUser, updateTotalLearner } from '../analytic';
 
+/**
+ * Query Data Section
+ * ===============================
+ */
 export const queryCurrentUserLessonRecap = async function () {
 	const uid = _safeGetUID();
 	const userRef = collection(firestore, `Users/${uid}/LessonRecaps`);
@@ -32,6 +36,10 @@ export const queryCurrentUserLessonRecap = async function () {
 	return recaps;
 };
 
+/**
+ * Mutation Data Section
+ * ===============================
+ */
 export const createUserAccount = async function (data: UserProfile) {
 	const uid = _safeGetUID();
 
@@ -89,6 +97,10 @@ export const setupCurrentUserAccount = async function (
 	]);
 };
 
+/**
+ * Utils Functions Section
+ * ===============================
+ */
 const _safeGetUID = function () {
 	// get user's id from [auth]
 	const uid = auth.currentUser?.uid;

@@ -3,6 +3,7 @@
 	import { page } from '$app/stores';
 	import { ActivityType, type Lesson, type SelectionCard } from '$gql/generated/graphql';
 	import { onDestroy, onMount } from 'svelte';
+	import { increaseCourseProgress, increaseCurrency } from '$lib/temp/user';
 	// ts-ignore
 	import { Howl } from 'howler';
 
@@ -14,9 +15,7 @@
 	import LessonListeningActivityView from './LessonListeningActivityView.svelte';
 	import LessonDialogueActivityView from './LessonDialogueActivityView.svelte';
 	import LessonFinishedView from './LessonFinishedView.svelte';
-	import { fade } from 'svelte/transition';
 	import LessonBottomProgressBar from './LessonBottomProgressBar.svelte';
-	import { increaseCourseProgress, increaseCurrency } from '$lib/temp/user';
 	import Typewriter from 'svelte-typewriter/Typewriter.svelte';
 
 	let data: Lesson | null = null;
@@ -59,7 +58,7 @@
 			coin = 200,
 			exp = 200;
 		await Promise.all([
-			increaseCourseProgress(data.course).then((value) => (courseProgress = value* 100)),
+			increaseCourseProgress(data.course).then((value) => (courseProgress = value * 100)),
 			increaseCurrency({ coin, exp })
 		]);
 		return { courseProgress, coin, exp };

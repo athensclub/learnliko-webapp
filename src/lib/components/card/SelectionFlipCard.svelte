@@ -13,8 +13,8 @@
 	import { onMount } from 'svelte';
 	import Typewriter from 'svelte-typewriter/Typewriter.svelte';
 	import { fade } from 'svelte/transition';
-	import { toast } from './toasts/ToastManager.svelte';
-	import AnswerCorrectToast from './toasts/AnswerCorrectToast.svelte';
+	import { toast } from '../toasts/ToastManager.svelte';
+	import AnswerCorrectToast from '../toasts/AnswerCorrectToast.svelte';
 
 	export let data: SelectionCard;
 

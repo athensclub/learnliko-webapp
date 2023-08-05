@@ -3,10 +3,10 @@
 	import { scale } from 'svelte/transition';
 	import restartIcon from '$asset/icons/restart.png';
 	import { isMobile } from '$lib/global/breakpoints';
-	import Flippable from './Flippable.svelte';
+	import Flippable from '../Flippable.svelte';
 	import { playAudio } from '$lib/global/audio';
-	import { toast } from './toasts/ToastManager.svelte';
-	import AnswerCorrectToast from './toasts/AnswerCorrectToast.svelte';
+	import { toast } from '../toasts/ToastManager.svelte';
+	import AnswerCorrectToast from '../toasts/AnswerCorrectToast.svelte';
 
 	let clazz = '';
 

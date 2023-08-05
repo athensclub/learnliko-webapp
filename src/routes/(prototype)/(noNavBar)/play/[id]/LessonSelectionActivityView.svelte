@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { Activity, ActivityCard, SelectionCard } from '$gql/generated/graphql';
-	import SelectionFlipCard from '$lib/components/SelectionFlipCard.svelte';
+	import SelectionFlipCard from '$lib/components/card/SelectionFlipCard.svelte';
 	import VocabFlipCard from '$lib/components/VocabFlipCard.svelte';
 	import AnswerCorrectToast from '$lib/components/toasts/AnswerCorrectToast.svelte';
 	import { toast } from '$lib/components/toasts/ToastManager.svelte';

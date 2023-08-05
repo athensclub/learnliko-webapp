@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { Activity, ClozeCard } from '$gql/generated/graphql';
 	import { fade } from 'svelte/transition';
-	import ClozeFlipCard from '$lib/components/ClozeFlipCard.svelte';
+	import ClozeFlipCard from '$lib/components/card/ClozeFlipCard.svelte';
 
 	export let addProgress: (val: number) => void;
 	export let onFinish: () => void;

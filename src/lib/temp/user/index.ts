@@ -1,19 +1,23 @@
-import type { User } from '$gql/generated/graphql';
+import type { Course, User } from '$gql/generated/graphql';
 import { auth, firestore } from '$lib/configs/firebase.config';
 import type { PretestCEFRLevel } from '$lib/types/pretest';
 import type { UserProfile } from '$lib/types/userProfile';
 import {
 	QueryConstraint,
 	Timestamp,
+	arrayUnion,
 	collection,
 	doc,
 	getDoc,
 	getDocs,
+	increment,
 	orderBy,
 	query,
+	runTransaction,
 	setDoc,
 	updateDoc,
-	where
+	where,
+	writeBatch
 } from 'firebase/firestore/lite';
 import { increaseActiveUser, updateTotalLearner } from '../analytic';
 
@@ -21,6 +25,7 @@ import { increaseActiveUser, updateTotalLearner } from '../analytic';
  * Query Data Section
  * ===============================
  */
+
 export const queryCurrentUserLessonRecap = async function () {
 	const uid = _safeGetUID();
 	const userRef = collection(firestore, `Users/${uid}/LessonRecaps`);
@@ -40,6 +45,7 @@ export const queryCurrentUserLessonRecap = async function () {
  * Mutation Data Section
  * ===============================
  */
+
 export const createUserAccount = async function (data: UserProfile) {
 	const uid = _safeGetUID();
 
@@ -54,7 +60,7 @@ export const getCurrentUserData = async function () {
 	const userDoc = await getDoc(userDocRef);
 
 	// return null if user doesn't exist/complete setup
-	if (!userDoc.exists() || !userDoc.data().profile) return;
+	if (!userDoc.exists()) return;
 
 	return userDoc.data() as User;
 };
@@ -98,9 +104,61 @@ export const setupCurrentUserAccount = async function (
 };
 
 /**
+ * Increase `course`'s progression by 20% per function call
+ * @param course
+ */
+export const increaseCourseProgress = async function (course: Course) {
+	const uid = _safeGetUID();
+
+	// Run transaction to mutate user's `subjectProgress` object
+	const userDocRef = doc(firestore, `Users/${uid}`);
+	await runTransaction(firestore, async (transaction) => {
+		const userData = (await transaction.get(userDocRef)).data() as User;
+
+		// Search for subject and course index in array of user's progress
+		const subjectIndex = userData.subjectProgress.findIndex(
+			(e) => e.subject.id === course.subject.id
+		);
+		if (subjectIndex > -1) {
+			const courseIndex = userData.subjectProgress[subjectIndex].courseProgress.findIndex(
+				(e) => e.course.id === course.id
+			);
+			if (courseIndex > -1) {
+				// prevent over-increase of progress
+				if (userData.subjectProgress[subjectIndex].courseProgress[courseIndex].progress >= 1)
+					return;
+
+				// increase progress by mutate `userData.subjectProgress`
+				userData.subjectProgress[subjectIndex].courseProgress[courseIndex].progress += 0.2;
+			} else {
+				// if not found push to the back of array
+				userData.subjectProgress[subjectIndex].courseProgress.push({
+					course,
+					progress: 0.2
+				});
+			}
+		} else {
+			// if not found push new progress to the back of array
+			userData.subjectProgress.push({
+				subject: course.subject,
+				courseProgress: [
+					{
+						course,
+						progress: 0.2
+					}
+				]
+			});
+		}
+
+		transaction.update(userDocRef, 'subjectProgress', userData.subjectProgress);
+	});
+};
+
+/**
  * Utils Functions Section
  * ===============================
  */
+
 const _safeGetUID = function () {
 	// get user's id from [auth]
 	const uid = auth.currentUser?.uid;

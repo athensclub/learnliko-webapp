@@ -2,7 +2,7 @@
 	import { writable } from 'svelte/store';
 	import type { AiFriend } from '$gql/generated/graphql';
 
-	export const aiFriendCurrentView = writable<'HOME' | 'DETAILED'>('HOME');
+	export const aiFriendCurrentView = writable<'HOME' | 'DETAILED' | 'CHAT'>('HOME');
 
 	export const aiFriends = writable<AiFriend[]>([]);
 
@@ -19,6 +19,7 @@
 	import AIFriendHomeView from './AIFriendHomeView.svelte';
 	import { onMount } from 'svelte';
 	import AIFriendDetailedView from './AIFriendDetailedView.svelte';
+	import AIFriendChatView from './AIFriendChatView.svelte';
 
 	onMount(() => {
 		$aiFriendCurrentView = 'HOME';
@@ -51,5 +52,7 @@
 		<AIFriendHomeView />
 	{:else if $aiFriendCurrentView === 'DETAILED'}
 		<AIFriendDetailedView />
+	{:else if $aiFriendCurrentView === 'CHAT'}
+		<AIFriendChatView />
 	{/if}
 </div>

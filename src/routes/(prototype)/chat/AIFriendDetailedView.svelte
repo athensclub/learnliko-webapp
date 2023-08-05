@@ -50,6 +50,7 @@
 		</div>
 
 		<button
+			on:click={() => ($aiFriendCurrentView = 'CHAT')}
 			class="mt-[8vw] rounded-full bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] px-[12vw] py-[1.5vw] text-[5vw] font-bold text-white"
 		>
 			Talk

@@ -9,9 +9,10 @@ import type {
 import type { Mode } from '$lib/types/mode';
 import type { ChatMessage } from '$lib/types/requests/chatCompletion';
 import { round } from '$lib/utils/math';
+import type { ChatCompletionRequestMessage } from 'openai';
 import { get } from 'svelte/store';
 
-export const chat = async function (messages: ChatMessage[]) {
+export const chat = async function (messages: ChatCompletionRequestMessage[]) {
 	const response = await fetch('/api/v1/conversation/chat', {
 		method: 'POST',
 		body: JSON.stringify({ messages })

@@ -25,7 +25,7 @@ const _configurationEdge = new EdgeConfiguration({
 });
 const _openaiEdge = new OpenAIEdgeApi(_configurationEdge)
 
-export const chatCompletion = async function (messages: ChatMessage[]) {
+export const chatCompletion = async function (messages: ChatCompletionRequestMessage[]) {
 	const chatGPT = await _openai.createChatCompletion({
 		model: 'gpt-3.5-turbo',
 		messages

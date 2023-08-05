@@ -110,6 +110,7 @@ export const setupCurrentUserAccount = async function (
 export const increaseCourseProgress = async function (course: Course) {
 	const uid = _safeGetUID();
 	const userDocRef = doc(firestore, `Users/${uid}`);
+	let currentProgress = 1;
 
 	// Run transaction to mutate user's `subjectProgress` object
 	await runTransaction(firestore, async (transaction) => {
@@ -130,12 +131,17 @@ export const increaseCourseProgress = async function (course: Course) {
 
 				// increase progress by mutate `userData.subjectProgress`
 				userData.subjectProgress[subjectIndex].courseProgress[courseIndex].progress += 0.2;
+
+				currentProgress =
+					userData.subjectProgress[subjectIndex].courseProgress[courseIndex].progress;
 			} else {
 				// if not found push to the back of array
 				userData.subjectProgress[subjectIndex].courseProgress.push({
 					course,
 					progress: 0.2
 				});
+
+				currentProgress = 0.2;
 			}
 		} else {
 			// if not found push new progress to the back of array
@@ -148,10 +154,14 @@ export const increaseCourseProgress = async function (course: Course) {
 					}
 				]
 			});
+
+			currentProgress = 0.2;
 		}
 
 		transaction.update(userDocRef, 'subjectProgress', userData.subjectProgress);
 	});
+
+	return currentProgress;
 };
 
 /**

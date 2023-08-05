@@ -109,9 +109,9 @@ export const setupCurrentUserAccount = async function (
  */
 export const increaseCourseProgress = async function (course: Course) {
 	const uid = _safeGetUID();
+	const userDocRef = doc(firestore, `Users/${uid}`);
 
 	// Run transaction to mutate user's `subjectProgress` object
-	const userDocRef = doc(firestore, `Users/${uid}`);
 	await runTransaction(firestore, async (transaction) => {
 		const userData = (await transaction.get(userDocRef)).data() as User;
 
@@ -152,6 +152,17 @@ export const increaseCourseProgress = async function (course: Course) {
 
 		transaction.update(userDocRef, 'subjectProgress', userData.subjectProgress);
 	});
+};
+
+/**
+ * Increase provided currency
+ * @param data
+ */
+export const increaseCurrency = async function (data: { coin?: number; exp?: number }) {
+	const uid = _safeGetUID();
+	const userDocRef = doc(firestore, `Users/${uid}`);
+
+	await updateDoc(userDocRef, { coin: increment(data.coin ?? 0), exp: increment(data.exp ?? 0) });
 };
 
 /**

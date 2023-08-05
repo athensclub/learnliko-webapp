@@ -8,6 +8,7 @@
 
 	export let exp: number = 200;
 	export let coin: number = 800;
+	export let progress: number = 50;
 
 	let displayExp = tweened(0);
 	let displayCoin = tweened(0);
@@ -34,7 +35,7 @@
 			<div class="mt-[3vw] flex items-center {$isMobile ? 'flex-col' : 'flex-row'}">
 				<CircularProgressBar
 					class={$isMobile ? 'h-[42vw] w-[42vw]' : 'h-[12vw] w-[12vw]'}
-					value={50}
+					value={progress}
 				>
 					<div class="flex h-full flex-col items-center justify-center">
 						<div class={$isMobile ? 'text-[2.5vw]' : 'text-[0.3vw]'}>CEFR</div>
@@ -42,8 +43,12 @@
 					</div>
 				</CircularProgressBar>
 
-				<div class={$isMobile ? 'text-[5vw] mt-[6vw]' : 'text-[2vw]'}>คุณได้รับ</div>
-				<div class="flex flex-row gap-[3vw] items-center {$isMobile ? 'mt-[3vw] text-[6vw]' : 'ml-[4vw] text-[3vw]'}">
+				<div class={$isMobile ? 'mt-[6vw] text-[5vw]' : 'text-[2vw]'}>คุณได้รับ</div>
+				<div
+					class="flex flex-row items-center gap-[3vw] {$isMobile
+						? 'mt-[3vw] text-[6vw]'
+						: 'ml-[4vw] text-[3vw]'}"
+				>
 					<div class="mt-[1vw] flex flex-row items-center">
 						<div class="bg-gradient-to-r from-[#C698FF] to-[#6C80E8] bg-clip-text text-transparent">
 							+{Math.floor($displayExp)}

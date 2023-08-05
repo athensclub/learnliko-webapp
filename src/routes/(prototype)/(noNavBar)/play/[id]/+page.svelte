@@ -16,6 +16,8 @@
 	import LessonFinishedView from './LessonFinishedView.svelte';
 	import { fade } from 'svelte/transition';
 	import LessonBottomProgressBar from './LessonBottomProgressBar.svelte';
+	import { increaseCourseProgress, increaseCurrency } from '$lib/temp/user';
+	import Typewriter from 'svelte-typewriter/Typewriter.svelte';
 
 	let data: Lesson | null = null;
 	let music: Howl | null = null;
@@ -25,7 +27,7 @@
 		music = new Howl({ src: data.ambientAudio, volume: 0.06, loop: true });
 	});
 
-	let currentView: 'NARRATIVE' | 'ACTIVITY' | 'FINISHED' = 'NARRATIVE';
+	let currentView: 'NARRATIVE' | 'ACTIVITY' | 'FINISHED' = 'FINISHED';
 
 	let activityIndex = 0;
 	$: currentActivity = data?.activities[activityIndex];
@@ -48,6 +50,19 @@
 	const addProgress = (p: number) => {
 		if (!data) throw Error('Add progress while data is not defined');
 		progress = progress + p / data.activities.length;
+	};
+
+	const onFinish = async () => {
+		if (!data) throw Error('No lesson data provided');
+
+		let courseProgress = 0,
+			coin = 200,
+			exp = 200;
+		await Promise.all([
+			increaseCourseProgress(data.course).then((value) => (courseProgress = value* 100)),
+			increaseCurrency({ coin, exp })
+		]);
+		return { courseProgress, coin, exp };
 	};
 
 	let playingMusic = true;
@@ -172,7 +187,16 @@
 				<h1 class="mx-auto text-[8vw] font-bold text-white">Error:Activity data not found</h1>
 			{/if}
 		{:else if currentView === 'FINISHED'}
-			<LessonFinishedView />
+			<!-- Wait to execute `onFinish` function then show `LessonFinishedView` -->
+			{#await onFinish()}
+				<div class="z-10 flex h-full items-center justify-center">
+					<div class="flex flex-row rounded-[4.2vw] bg-white p-[5.6vw] text-[5.6vw] font-bold">
+						Loading<Typewriter mode="loop">...</Typewriter>
+					</div>
+				</div>
+			{:then value}
+				<LessonFinishedView progress={value.courseProgress} coin={value.coin} exp={value.exp} />
+			{/await}
 		{/if}
 
 		{#if currentView === 'ACTIVITY'}

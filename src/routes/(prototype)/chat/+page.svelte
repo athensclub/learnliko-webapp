@@ -28,6 +28,9 @@
 			name: 'KiKo',
 			role: 'Assistant',
 			subject: 'Assistant',
+			imageProfile:
+				'https://cdn.discordapp.com/attachments/842737146321174558/1137453930171871362/image.png',
+			backgroundColor: '#6C80E8',
 			interest: 'Helping learners archive their goals with Learnliko',
 			ability: ['App Instruction'],
 			prompt:
@@ -46,7 +49,7 @@
 <div class="w-full flex-1 font-line-seed">
 	{#if $aiFriendCurrentView === 'HOME'}
 		<AIFriendHomeView />
-		{:else if $aiFriendCurrentView === 'DETAILED'}
+	{:else if $aiFriendCurrentView === 'DETAILED'}
 		<AIFriendDetailedView />
 	{/if}
 </div>

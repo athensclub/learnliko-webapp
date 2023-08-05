@@ -19,7 +19,9 @@
 			class="relative flex w-[85%] flex-col rounded-[5vw] p-[5vw]"
 		>
 			<div
-				class="absolute left-[50%] top-[-12.5vw] min-h-[25vw] min-w-[25vw] translate-x-[-50%] rounded-full bg-[#6C80E8]"
+				style="background-color: {$selectedAIFriend.backgroundColor};
+				   background-image: url('{$selectedAIFriend.imageProfile}');"
+				class="absolute left-[50%] top-[-12.5vw] min-h-[25vw] min-w-[25vw] translate-x-[-50%] rounded-full bg-cover bg-center"
 			/>
 
 			<div class="mx-auto mt-[15vw] text-[5vw] font-bold">{$selectedAIFriend.role}</div>

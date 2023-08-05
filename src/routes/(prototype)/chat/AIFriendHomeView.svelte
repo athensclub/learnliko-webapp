@@ -13,7 +13,12 @@
 
 	<div class="mb-[4vw] flex flex-row overflow-x-auto p-[4vw]">
 		{#each $aiFriends as friend}
-			<button on:click={() => select(friend)} class="h-[20vw] w-[20vw] rounded-full bg-[#6C80E8]" />
+			<button
+				on:click={() => select(friend)}
+				style="background-color: {friend.backgroundColor};
+					   background-image: url('{friend.imageProfile}');"
+				class="h-[20vw] w-[20vw] rounded-full bg-cover bg-center"
+			/>
 		{/each}
 	</div>
 
@@ -28,7 +33,11 @@
 				style="box-shadow: 0px 4px 16px 0px rgba(0, 0, 0, 0.10);"
 				class="relative z-10 mt-[5vw] flex flex-row gap-[4vw] rounded-[5vw] rounded-bl-none p-[5vw]"
 			>
-				<div class="min-h-[13vw] min-w-[13vw] rounded-full bg-[#6C80E8]" />
+				<div
+					style="background-color: {inbox.friend.backgroundColor};
+						   background-image: url('{inbox.friend.imageProfile}');"
+					class="min-h-[13vw] min-w-[13vw] rounded-full bg-cover bg-center"
+				/>
 				<div class="text-[4.5vw] font-bold">
 					{inbox.message}
 				</div>

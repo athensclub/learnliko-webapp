@@ -27,7 +27,7 @@
 		music = new Howl({ src: data.ambientAudio, volume: 0.06, loop: true });
 	});
 
-	let currentView: 'NARRATIVE' | 'ACTIVITY' | 'FINISHED' = 'FINISHED';
+	let currentView: 'NARRATIVE' | 'ACTIVITY' | 'FINISHED' = 'NARRATIVE';
 
 	let activityIndex = 0;
 	$: currentActivity = data?.activities[activityIndex];

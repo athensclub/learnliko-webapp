@@ -172,4 +172,6 @@ type AIFriend {
 	interest: String!
 	ability: [String!]!
 	prompt: String!
+	imageProfile: String!
+	backgroundColor: String!
 }

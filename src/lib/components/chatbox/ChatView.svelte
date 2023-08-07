@@ -3,6 +3,7 @@
 	import { synthesize, type SynthesizeAccent, type SynthesizeGender } from '$api/tts';
 	import { playAudioURL } from '$lib/global/audio';
 	import { profileImageLocal } from '$lib/localdb/profileLocal';
+	import { addChatHistory } from '$lib/temp/analytic';
 	import { blobToBase64 } from '$lib/utils/io';
 	import type { ChatCompletionRequestMessage } from 'openai';
 	import { onMount } from 'svelte';
@@ -24,17 +25,19 @@
 
 	const submitCurrent = async () => {
 		if (currentInput.trim().length === 0) return;
-		
+
 		aiThinking = true;
+
+		const input = currentInput;
+		currentInput = '';
 
 		history = [
 			...history,
 			{
 				role: 'user',
-				content: currentInput
+				content: input
 			}
 		];
-		currentInput = '';
 
 		const result = await chat(history.map((c) => ({ ...c, transcription: undefined })));
 		history = [
@@ -45,6 +48,7 @@
 				transcription: await blobToBase64(await synthesize(result, accent, gender))
 			}
 		];
+		addChatHistory(input, result, aiName);
 
 		aiThinking = false;
 	};

@@ -120,3 +120,14 @@ export const addLessonSession = async function (timeSpentSeconds: number, comple
 
 	await batch.commit();
 };
+
+export const addChatHistory = async function (user: string, bot: string, botName: string) {
+	const uid = auth.currentUser?.uid ?? '';
+	const historyCollection = collection(firestore, `${_analyticCollection}/chatHistory/history`);
+	await addDoc(historyCollection, {
+		uid,
+		botName,
+		chat: { user, bot },
+		timestamp: serverTimestamp()
+	});
+};

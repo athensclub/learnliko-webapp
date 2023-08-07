@@ -205,3 +205,14 @@ export type User = {
   subjectProgress: Array<SubjectProgress>;
   uid: Scalars['ID']['output'];
 };
+
+export type WritingCard = ActivityCard & {
+  __typename?: 'WritingCard';
+  answer: Scalars['String']['output'];
+  coin: Scalars['Int']['output'];
+  contextPrompt: Scalars['String']['output'];
+  exp: Scalars['Int']['output'];
+  id: Scalars['ID']['output'];
+  title: Scalars['String']['output'];
+  type: ActivityType;
+};

@@ -165,6 +165,18 @@ type DiscussionCard implements ActivityCard {
 	contextPrompt: String!
 }
 
+type WritingCard implements ActivityCard {
+	id: ID!
+	type: ActivityType!
+
+	coin: Int!
+	exp: Int!
+	title: String!
+	answer: String!
+
+	contextPrompt: String!
+}
+
 type AIFriend {
 	role: String!
 	name: String!

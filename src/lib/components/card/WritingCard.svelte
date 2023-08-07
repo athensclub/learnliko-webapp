@@ -33,7 +33,7 @@
 				'this is suggestion this is suggestionthis is suggestionthis is suggestionthis is suggestionthis is suggestionthis is suggestionthis is suggestion'
 		},
 		{
-			percentage: 3,
+			percentage: 60,
 			response:
 				'this is dummy answer this is dummy answerthis is dummy answerthis is dummy answerthis is dummy answerthis is dummy answerthis is dummy answerthis is dummy answerthis is dummy answerthis is dummy answerthis is dummy answerthis is dummy answerthis is dummy answerthis is dummy answerthis is dummy answerthis is dummy answerthis is dummy answerthis is dummy answerthis is dummy answerthis is dummy answerthis is dummy answer',
 			suggestion:
@@ -42,7 +42,7 @@
 	];
 	let currentResultIndex = 0;
 	$: currentResult = results[currentResultIndex];
-	$: isPassed = results[results.length - 1].percentage > 60;
+	$: isPassed = results[results.length - 1].percentage >= 60;
 
 	const evaluateResponse = () => {
 		loading = true;
@@ -52,10 +52,12 @@
 			onPassed?.call(undefined);
 		}
 
+		currentResultIndex = results.length - 1;
+		showResult = true;
+
 		setTimeout(() => {
 			loading = false;
 		}, 2000);
-
 	};
 	const rewrite = () => {
 		response = '';
@@ -65,7 +67,7 @@
 
 <div class="relative min-h-[59.7vh] min-w-[83.3vw] rounded-[8.21vw] bg-white {clazz}">
 	{#if loading}
-		<div>
+		<div class="flex h-full items-center justify-center text-[4.1vw] font-bold">
 			Loading<Typewriter mode="loop">...</Typewriter>
 		</div>
 	{:else if !showResult}
@@ -197,6 +199,7 @@
 			<!-- check button -->
 			<div class="flex w-full justify-end pb-[2.6vh] pr-[3.8vw]">
 				<button
+					on:click={evaluateResponse}
 					disabled={!isFinished}
 					class="rounded-[5.77vw] px-[8.97vw] py-[1.18vh] text-[4.1vw] font-bold text-white
 			{isFinished ? `bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] ` : `bg-gray-300`}"

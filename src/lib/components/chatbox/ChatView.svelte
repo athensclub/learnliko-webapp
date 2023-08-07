@@ -16,11 +16,15 @@
 	export let accent: SynthesizeAccent;
 	export let gender: SynthesizeGender;
 
+	export let scale = 1;
+
 	let history: (ChatCompletionRequestMessage & { transcription?: string })[] = [];
 	let aiThinking = false;
 	let currentInput = '';
 
 	const submitCurrent = async () => {
+		if (currentInput.trim().length === 0) return;
+		
 		aiThinking = true;
 
 		history = [
@@ -70,15 +74,21 @@
 					style="background-color: {chat.role === 'assistant' ? aiBackground : ''};
                            background-image: url('{chat.role === 'assistant'
 						? aiImage
-						: $profileImageLocal}');"
-					class="max-h-[15vw] min-h-[15vw] min-w-[15vw] max-w-[15vw] rounded-full bg-cover bg-center"
+						: $profileImageLocal}'); 
+						min-height: {15 * scale}vw;
+						max-height: {15 * scale}vw;
+						min-width: {15 * scale}vw;
+						max-width: {15 * scale}vw; "
+					class="rounded-full bg-cover bg-center"
 				/>
 
 				<button
 					on:click={() => playAudioURL(chat.transcription ?? '')}
 					disabled={chat.role === 'user'}
-					style="box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.25);"
-					class="flex max-w-[80%] flex-row rounded-[5vw] p-[5vw] text-start text-[4.5vw] font-bold"
+					style="box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.25); 
+					font-size: {4.5 * scale}vw; 
+					padding: {5 * scale}vw;"
+					class="flex max-w-[80%] flex-row rounded-[5vw] text-start font-bold"
 				>
 					{chat.content}
 
@@ -109,14 +119,15 @@
 	class="absolute bottom-[6vw] left-[50%] mx-auto flex w-[90%] translate-x-[-50%] flex-row gap-[4vw] rounded-[4vw] bg-white p-[4vw]"
 >
 	{#if aiThinking}
-		<div class="flex flex-row text-[5vw] font-bold">
+		<div style="font-size: {5 * scale}vw;" class="flex flex-row font-bold">
 			{aiName} กำลังคิด<Typewriter mode="loop">...</Typewriter>
 		</div>
 	{:else}
 		<input
 			bind:value={currentInput}
 			placeholder="Typing..."
-			class="flex flex-1 rounded-full bg-[#F2F2F2] px-[5vw] text-[4vw] font-bold"
+			style="font-size: {4 * scale}vw;"
+			class="flex flex-1 rounded-full bg-[#F2F2F2] px-[5vw] font-bold"
 		/>
 
 		<button

@@ -46,6 +46,7 @@
 		</div>
 		<!-- Can't type cast :( -->
 		<ChatView
+			scale={0.7}
 			prompt={item.bot.prompt}
 			intro={item.bot.intro}
 			aiName={item.bot.name}

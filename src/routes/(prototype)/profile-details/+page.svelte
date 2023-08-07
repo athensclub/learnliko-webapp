@@ -12,34 +12,12 @@
 	import { writable } from 'svelte/store';
 	import ProfileHomeView from './ProfileHomeView.svelte';
 	import ProfileDetailedView from './ProfileDetailedView.svelte';
+	import userSession from '$lib/stores/userSession';
 
 	onMount(() => {
 		$profileCurrentView = 'HOME';
 		$selectedProfileProgress = null;
-		// TODO: user userSession data.
-		$profileProgresses = [
-			{
-				courseProgress: [
-					{
-						progress: 0.6,
-						course: {
-							displayName: 'Pre A1',
-							subject: {
-								displayName: 'English',
-								indicatorLabel: 'CEFR',
-								id: 'english'
-							},
-							id: 'prea1'
-						}
-					}
-				],
-				subject: {
-					displayName: 'English',
-					indicatorLabel: 'CEFR',
-					id: 'english'
-				}
-			}
-		];
+		$profileProgresses = $userSession.accountData?.subjectProgress ?? [];
 	});
 
 	// $userSession.accountData?.subjectProgress[0].

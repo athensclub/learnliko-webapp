@@ -26,7 +26,7 @@
 		<Select
 			class="mt-[6vw] w-[40vw]"
 			value={$selectedProfileProgress?.courseProgress[0].course.displayName}
-			on:change={(e) => (selectedCourse = $selectedProfileProgress.courseProgress[e.detail.index])}
+			on:change={(e) => (selectedCourse = $selectedProfileProgress?.courseProgress[e.detail.index])}
 			items={$selectedProfileProgress?.courseProgress.map((c) => c.course.displayName)}
 		/>
 

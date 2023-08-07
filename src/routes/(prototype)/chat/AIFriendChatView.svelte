@@ -41,7 +41,10 @@
 			</div>
 		</div>
 
+		<!-- Can't typecast :( -->
 		<ChatView
+			gender={$selectedAIFriend.gender}
+			accent={$selectedAIFriend.accent}
 			aiName={$selectedAIFriend.name}
 			aiBackground={$selectedAIFriend.backgroundColor}
 			prompt={$selectedAIFriend.prompt}

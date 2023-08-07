@@ -20,30 +20,17 @@
 	import { onMount } from 'svelte';
 	import AIFriendDetailedView from './AIFriendDetailedView.svelte';
 	import AIFriendChatView from './AIFriendChatView.svelte';
+	import { getAIFriends } from '$api/aiFriends';
+	import { shuffle } from '$lib/utils/array';
 
-	onMount(() => {
+	onMount(async () => {
 		$aiFriendCurrentView = 'HOME';
 		$selectedAIFriend = null;
 
-		const kiko: AiFriend = {
-			name: 'KiKo',
-			role: 'Assistant',
-			subject: 'Assistant',
-			imageProfile:
-				'https://cdn.discordapp.com/attachments/842737146321174558/1137453930171871362/image.png',
-			backgroundColor: '#6C80E8',
-			interest: 'Helping learners archive their goals with Learnliko',
-			ability: ['App Instruction'],
-			prompt:
-				'You are a helpful assistant that will guide the user in using Learnliko web application.'
-		};
-		$aiFriends = [kiko];
-		$inboxes = [
-			{
-				friend: kiko,
-				message: 'สวัสดี ยินดีต้อรับสู่ Learnliko นี่คือคำแนะนำเบื้องต้น...'
-			}
-		];
+		$aiFriends = await getAIFriends();
+		$inboxes = shuffle([...$aiFriends])
+			.slice(0, 3)
+			.map((friend) => ({ friend, message: friend.intro }));
 	});
 </script>
 

@@ -30,6 +30,7 @@
 
 		{#each $inboxes as inbox}
 			<button
+				on:click={() => select(inbox.friend)}
 				style="box-shadow: 0px 4px 16px 0px rgba(0, 0, 0, 0.10);"
 				class="relative z-10 mt-[5vw] flex flex-row gap-[4vw] rounded-[5vw] rounded-bl-none p-[5vw]"
 			>

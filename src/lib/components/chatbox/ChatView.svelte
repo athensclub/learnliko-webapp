@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { chat } from '$api/conversation';
-	import { synthesize } from '$api/tts';
+	import { synthesize, type SynthesizeAccent, type SynthesizeGender } from '$api/tts';
 	import { playAudioURL } from '$lib/global/audio';
 	import { profileImageLocal } from '$lib/localdb/profileLocal';
 	import { blobToBase64 } from '$lib/utils/io';
@@ -13,6 +13,8 @@
 	export let aiBackground: string;
 	export let aiImage: string;
 	export let aiName: string;
+	export let accent: SynthesizeAccent;
+	export let gender: SynthesizeGender;
 
 	let history: (ChatCompletionRequestMessage & { transcription?: string })[] = [];
 	let aiThinking = false;
@@ -36,7 +38,7 @@
 			{
 				role: 'assistant',
 				content: result,
-				transcription: await blobToBase64(await synthesize(result, 'US', 'FEMALE'))
+				transcription: await blobToBase64(await synthesize(result, accent, gender))
 			}
 		];
 
@@ -76,12 +78,12 @@
 					on:click={() => playAudioURL(chat.transcription ?? '')}
 					disabled={chat.role === 'user'}
 					style="box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.25);"
-					class="flex text-start max-w-[80%] flex-row rounded-[5vw] p-[5vw] text-[4.5vw] font-bold"
+					class="flex max-w-[80%] flex-row rounded-[5vw] p-[5vw] text-start text-[4.5vw] font-bold"
 				>
 					{chat.content}
 
 					{#if chat.transcription}
-						<div class="flex h-full flex-col justify-end ml-[5vw]">
+						<div class="ml-[5vw] flex h-full flex-col justify-end">
 							<svg
 								class="w-[4vw]"
 								viewBox="0 0 15 15"

@@ -2,11 +2,9 @@
 	import type { SynthesizeAccent, SynthesizeGender } from '$api/tts';
 	import type { Activity, DialogueCard, DiscussionCard } from '$gql/generated/graphql';
 	import ChatView from '$lib/components/chatbox/ChatView.svelte';
-	import ConversationView from '$lib/components/chatbox/ConversationView.svelte';
-	import { isMobile } from '$lib/global/breakpoints';
-	import { chatContext } from '$lib/global/chatbox';
-	import { conversationFinished } from '$lib/global/conversation';
-	import { onMount } from 'svelte';
+	import FeedbackModal from '$lib/components/modals/FeedbackModal.svelte';
+	import { getContext, onMount } from 'svelte';
+	import type { Context } from 'svelte-simple-modal';
 	import { fade, fly } from 'svelte/transition';
 
 	export let data: Activity;
@@ -14,6 +12,7 @@
 
 	export let addProgress: (val: number) => void;
 	export let onFinish: () => void;
+
 
 	const finish = () => {
 		addProgress(1);

@@ -2,12 +2,6 @@
 	import { aiFriendCurrentView, selectedAIFriend } from './+page.svelte';
 	import { hideBottomNavBar } from '../+layout.svelte';
 	import { onDestroy, onMount } from 'svelte';
-	import type { ChatCompletionRequestMessage } from 'openai';
-	import { synthesize } from '$api/tts';
-	import { blobToBase64 } from '$lib/utils/io';
-	import { profileImageLocal } from '$lib/localdb/profileLocal';
-	import Typewriter from 'svelte-typewriter/Typewriter.svelte';
-	import { chat } from '$api/conversation';
 	import ChatView from '$lib/components/chatbox/ChatView.svelte';
 
 	onMount(async () => {
@@ -48,7 +42,6 @@
 		</div>
 
 		<ChatView
-			class="w-full flex-1"
 			aiName={$selectedAIFriend.name}
 			aiBackground={$selectedAIFriend.backgroundColor}
 			prompt={$selectedAIFriend.prompt}

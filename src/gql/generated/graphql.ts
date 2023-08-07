@@ -18,9 +18,12 @@ export type Scalars = {
 export type AiFriend = {
   __typename?: 'AIFriend';
   ability: Array<Scalars['String']['output']>;
+  accent: Scalars['String']['output'];
   backgroundColor: Scalars['String']['output'];
+  gender: Scalars['String']['output'];
   imageProfile: Scalars['String']['output'];
   interest: Scalars['String']['output'];
+  intro: Scalars['String']['output'];
   name: Scalars['String']['output'];
   prompt: Scalars['String']['output'];
   role: Scalars['String']['output'];

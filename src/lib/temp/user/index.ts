@@ -65,11 +65,11 @@ export const getCurrentUserData = async function () {
 	return userDoc.data() as User;
 };
 
-export const createGuestProfile = async function () {
+export const createGuestProfile = async function (yearBorn: number) {
 	const uid = _safeGetUID();
 
 	const userDocRef = doc(firestore, `Users/${uid}`);
-	const data = { uid, coin: 0, exp: 0, subjectProgress: [] };
+	const data = { uid, yearBorn, coin: 0, exp: 0, subjectProgress: [] };
 	await setDoc(userDocRef, data);
 
 	return data;

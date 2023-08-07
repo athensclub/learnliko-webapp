@@ -69,6 +69,7 @@ enum ActivityType {
 	CLOZE
 	DIALOGUE
 	DISCUSSION
+	WRITING
 }
 
 interface ActivityCard {

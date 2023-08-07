@@ -45,7 +45,8 @@ export enum ActivityType {
   Discussion = 'DISCUSSION',
   Listening = 'LISTENING',
   Reading = 'READING',
-  Selection = 'SELECTION'
+  Selection = 'SELECTION',
+  Writing = 'WRITING'
 }
 
 export type BotDetails = {

@@ -54,7 +54,7 @@
 			},
 			{
 				role: 'assistant',
-				content: 'Hello!',
+				content: intro,
 				transcription: await blobToBase64(await synthesize(intro, 'US', 'FEMALE'))
 			}
 		];

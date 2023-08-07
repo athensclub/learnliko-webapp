@@ -17,6 +17,7 @@
 	import LessonFinishedView from './LessonFinishedView.svelte';
 	import LessonBottomProgressBar from './LessonBottomProgressBar.svelte';
 	import Typewriter from 'svelte-typewriter/Typewriter.svelte';
+	import LessonDiscussionActivityView from './LessonDiscussionActivityView.svelte';
 
 	let data: Lesson | null = null;
 	let music: Howl | null = null;
@@ -181,6 +182,8 @@
 					<LessonListeningActivityView data={currentActivity} {addProgress} onFinish={nextView} />
 				{:else if currentActivity.type === ActivityType.Dialogue}
 					<LessonDialogueActivityView data={currentActivity} {addProgress} onFinish={nextView} />
+				{:else if currentActivity.type === ActivityType.Discussion}
+					<LessonDiscussionActivityView data={currentActivity} {addProgress} onFinish={nextView} />
 				{/if}
 			{:else}
 				<h1 class="mx-auto text-[8vw] font-bold text-white">Error:Activity data not found</h1>

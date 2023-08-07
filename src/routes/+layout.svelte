@@ -1,5 +1,6 @@
 <script lang="ts">
 	import '../app.scss';
+	import icon from '$lib/images/learnliko_icon.png';
 	import Chatbox from '$lib/components/chatbox/Chatbox.svelte';
 	import { showChatbox } from '$lib/global/chatbox';
 	import { onMount } from 'svelte';
@@ -16,6 +17,7 @@
 	import { graphqlClient } from '$lib/graphql';
 	import { setContextClient } from '@urql/svelte';
 	import { goto } from '$app/navigation';
+	import { fade } from 'svelte/transition';
 
 	let loading = false;
 
@@ -60,24 +62,38 @@
 
 <div class="h-full w-full max-w-[100vw] overflow-x-hidden">
 	{#if browser}
-		<Modal>
-			{#if $showChatbox}
-				<div
-					class={`fixed ${
-						$isMobile
-							? `bottom-0 h-[65vh] w-[100vw]`
-							: 'bottom-0 left-[50%] h-[85vh] w-[37vw] translate-x-[-50%]'
-					} z-[600]`}
-				>
-					<Chatbox />
+		<!-- TODO: remove mobile check when desktop support is ready -->
+		{#if $isMobile}
+			<Modal>
+				{#if $showChatbox}
+					<div
+						class={`fixed ${
+							$isMobile
+								? `bottom-0 h-[65vh] w-[100vw]`
+								: 'bottom-0 left-[50%] h-[85vh] w-[37vw] translate-x-[-50%]'
+						} z-[600]`}
+					>
+						<Chatbox />
+					</div>
+				{/if}
+
+				<ToastManager />
+
+				{#if !loading}
+					<slot />
+				{/if}
+			</Modal>
+		{:else}
+			<div transition:fade class="mx-auto flex flex-col items-center justify-center h-[100vh] font-line-seed">
+				<div class="flex flex-row">
+					<img class="h-[6.5rem] w-[6.5rem] opacity-20" src={icon} alt="Learnliko" />
+					<img class="relative top-[1.5rem] right-[3rem] h-[6.5rem] w-[6.5rem]" src={icon} alt="Learnliko" />
 				</div>
-			{/if}
 
-			<ToastManager />
-
-			{#if !loading}
-				<slot />
-			{/if}
-		</Modal>
+				<div class="max-w-[80%] text-[4.5vw] font-bold text-center mt-[8vw]">
+					Learnliko currently only support mobile device.
+				</div>
+			</div>
+		{/if}
 	{/if}
 </div>

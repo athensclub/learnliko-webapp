@@ -1,14 +1,18 @@
 <script lang="ts">
 	import CircularProgressBar from '$lib/components/CircularProgressBar.svelte';
+	import FeedbackModal from '$lib/components/modals/FeedbackModal.svelte';
 	import { isMobile } from '$lib/global/breakpoints';
 	import { round } from '$lib/utils/math';
-	import { onMount } from 'svelte';
+	import { getContext, onMount } from 'svelte';
+	import type { Context } from 'svelte-simple-modal';
 	import { tweened } from 'svelte/motion';
 	import { fade } from 'svelte/transition';
 
 	export let exp: number = 200;
 	export let coin: number = 800;
 	export let progress: number = 50;
+
+	const { open }: Context = getContext('simple-modal');
 
 	let displayExp = tweened(0);
 	let displayCoin = tweened(0);
@@ -17,6 +21,8 @@
 	onMount(() => {
 		$displayExp = exp;
 		$displayCoin = coin;
+
+		open(FeedbackModal);
 	});
 </script>
 

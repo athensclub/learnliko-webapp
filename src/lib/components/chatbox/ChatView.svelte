@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { chat } from '$api/conversation';
 	import { synthesize } from '$api/tts';
+	import { playAudioURL } from '$lib/global/audio';
 	import { profileImageLocal } from '$lib/localdb/profileLocal';
 	import { blobToBase64 } from '$lib/utils/io';
 	import type { ChatCompletionRequestMessage } from 'openai';
@@ -71,12 +72,29 @@
 					class="max-h-[15vw] min-h-[15vw] min-w-[15vw] max-w-[15vw] rounded-full bg-cover bg-center"
 				/>
 
-				<div
+				<button
+					on:click={() => playAudioURL(chat.transcription ?? '')}
+					disabled={chat.role === 'user'}
 					style="box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.25);"
-					class="flex flex-row rounded-[5vw] p-[5vw] text-[4.5vw] font-bold"
+					class="flex text-start max-w-[80%] flex-row rounded-[5vw] p-[5vw] text-[4.5vw] font-bold"
 				>
 					{chat.content}
-				</div>
+
+					{#if chat.transcription}
+						<div class="flex h-full flex-col justify-end ml-[5vw]">
+							<svg
+								class="w-[4vw]"
+								viewBox="0 0 15 15"
+								fill="none"
+								xmlns="http://www.w3.org/2000/svg"
+							>
+								<rect y="5" width="3" height="7" rx="1.5" fill="#545454" />
+								<rect x="12" y="5" width="3" height="6" rx="1.5" fill="#545454" />
+								<rect x="6" width="3" height="15" rx="1.5" fill="#545454" />
+							</svg>
+						</div>
+					{/if}
+				</button>
 			</div>
 		{/if}
 	{/each}

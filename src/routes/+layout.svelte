@@ -34,8 +34,7 @@
 		if ($userSession.isLoggedIn) {
 			const profileData = await getCurrentUserData();
 			if (!profileData) {
-				const data = await createGuestProfile();
-				userSession.update({ accountData: data });
+				goto('/');
 			} else {
 				userSession.update({ accountData: profileData });
 			}
@@ -84,13 +83,20 @@
 				{/if}
 			</Modal>
 		{:else}
-			<div transition:fade class="mx-auto flex flex-col items-center justify-center h-[100vh] font-line-seed">
+			<div
+				transition:fade
+				class="mx-auto flex h-[100vh] flex-col items-center justify-center font-line-seed"
+			>
 				<div class="flex flex-row">
 					<img class="h-[6.5rem] w-[6.5rem] opacity-20" src={icon} alt="Learnliko" />
-					<img class="relative top-[1.5rem] right-[3rem] h-[6.5rem] w-[6.5rem]" src={icon} alt="Learnliko" />
+					<img
+						class="relative right-[3rem] top-[1.5rem] h-[6.5rem] w-[6.5rem]"
+						src={icon}
+						alt="Learnliko"
+					/>
 				</div>
 
-				<div class="max-w-[80%] text-[4.5vw] font-bold text-center mt-[8vw]">
+				<div class="mt-[8vw] max-w-[80%] text-center text-[4.5vw] font-bold">
 					Learnliko currently only support mobile device.
 				</div>
 			</div>

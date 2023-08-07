@@ -14,8 +14,8 @@
 				return;
 			}
 
-			// navigate to homepage if user is not logged in
-			if (!session.isLoggedIn) goto(`/`);
+			// navigate to homepage if user is not logged in or not complete create account
+			if (!session.isLoggedIn || !session.accountData?.uid) goto(`/`);
 
 			loading = false;
 		});

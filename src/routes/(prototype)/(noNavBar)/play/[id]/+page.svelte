@@ -18,6 +18,7 @@
 	import LessonBottomProgressBar from './LessonBottomProgressBar.svelte';
 	import Typewriter from 'svelte-typewriter/Typewriter.svelte';
 	import LessonDiscussionActivityView from './LessonDiscussionActivityView.svelte';
+	import { addLessonSession } from '$lib/temp/analytic';
 
 	let data: Lesson | null = null;
 	let music: Howl | null = null;
@@ -77,8 +78,14 @@
 		}, MUSIC_FADE_DURATION);
 	}
 
+	const startedTime = Date.now();
+
 	onDestroy(() => {
 		music?.unload();
+
+		const timespentSecond = Math.floor((Date.now() - startedTime) / 1000);
+		const isFinished = currentView === 'FINISHED';
+		addLessonSession(timespentSecond, isFinished);
 	});
 </script>
 

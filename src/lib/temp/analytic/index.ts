@@ -1,8 +1,9 @@
 import type { LessonProgress, ProfileData, User } from '$gql/generated/graphql';
-import { firestore } from '$lib/configs/firebase.config';
+import { auth, firestore } from '$lib/configs/firebase.config';
 import type { PretestCEFRLevel } from '$lib/types/pretest';
 import {
 	QueryConstraint,
+	addDoc,
 	collection,
 	collectionGroup,
 	doc,
@@ -12,8 +13,10 @@ import {
 	limit,
 	orderBy,
 	query,
+	serverTimestamp,
 	setDoc,
-	where
+	where,
+	writeBatch
 } from 'firebase/firestore/lite';
 
 const _analyticCollection = 'Analytics';
@@ -91,4 +94,29 @@ export const updateTotalLearner = async function (level: PretestCEFRLevel) {
 		{ totalLevel: increment(_level.indexOf(level)), totalLearner: increment(1) },
 		{ merge: true }
 	);
+};
+
+/**
+ *
+ * @param timeSpentSeconds in seconds
+ * @param completed do user complete the lesson
+ */
+export const addLessonSession = async function (timeSpentSeconds: number, completed: boolean) {
+	const uid = auth.currentUser?.uid ?? '';
+	const batch = writeBatch(firestore);
+
+	const sessionDocRef = doc(collection(firestore, `${_analyticCollection}/lessonSession/sessions`));
+	const totalDocRef = doc(firestore, `${_analyticCollection}/lessonSession`);
+	batch.set(sessionDocRef, {
+		uid,
+		timeSpent: timeSpentSeconds,
+		completed,
+		timestamp: serverTimestamp()
+	});
+	batch.update(totalDocRef, {
+		totalSession: increment(1),
+		totalTimespent: increment(timeSpentSeconds)
+	});
+
+	await batch.commit();
 };

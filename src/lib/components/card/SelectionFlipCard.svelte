@@ -1,14 +1,9 @@
 <script lang="ts">
 	import { synthesize } from '$api/tts';
 	import type { SelectionCard } from '$gql/generated/graphql';
-	import { RECAP_VOCAB_QUIZ, UPDATE_LESSON_PROGRESS } from '$gql/schema/mutations';
 	import Flippable from '$lib/components/Flippable.svelte';
 	import { playAudio, playAudioURL } from '$lib/global/audio';
 	import { isMobile } from '$lib/global/breakpoints';
-	import { graphqlClient } from '$lib/graphql';
-	import { learnedVocabLocal } from '$lib/localdb/profileLocal';
-	import userSession from '$lib/stores/userSession';
-	import type { FlipCardItem } from '$lib/types/flip_card';
 	import { blobToBase64 } from '$lib/utils/io';
 	import { onMount } from 'svelte';
 	import Typewriter from 'svelte-typewriter/Typewriter.svelte';
@@ -92,11 +87,9 @@
 			onCorrect();
 		} else {
 			playAudio('Fail');
-            
+
 			onWrong();
 		}
-
-		$learnedVocabLocal = [...new Set([...($learnedVocabLocal ?? []), ...choices])];
 	};
 </script>
 

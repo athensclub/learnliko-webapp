@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { getLessonById } from '$api/lesson';
 	import { page } from '$app/stores';
-	import { ActivityType, type Lesson, type SelectionCard } from '$gql/generated/graphql';
+	import { ActivityType, type Lesson } from '$gql/generated/graphql';
 	import { onDestroy, onMount } from 'svelte';
 	import { increaseCourseProgress, increaseCurrency } from '$lib/temp/user';
 	// ts-ignore

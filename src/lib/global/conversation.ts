@@ -1,4 +1,4 @@
-import { analyzeDialog, analyzeGoalScore, chat, checkGoalProgress } from '$api/conversation';
+import { analyzeGoalScore, chat, checkGoalProgress } from '$api/conversation';
 import { transcribe } from '$api/transcription';
 import { synthesize } from '$api/tts';
 import {
@@ -8,23 +8,11 @@ import {
 } from '$lib/types/conversationData';
 import type { ChatMessage } from '$lib/types/requests/chatCompletion';
 import { get, writable } from 'svelte/store';
-import {
-	chatContext,
-	recapHistory,
-	recapResult,
-	type RecapHistory,
-	type RecapResult
-} from './chatbox';
+import { chatContext, recapResult, type RecapHistory, type RecapResult } from './chatbox';
 import { blobToBase64 } from '$lib/utils/io';
-import { round } from '$lib/utils/math';
-import { completeConversationLocal } from '$lib/localdb/conversationLocal';
 import { audioRecording } from './recording';
 import { textAdaptor } from '$api/textProcessor';
 import type { CEFRLevel } from '$lib/types/CEFRLevel';
-import { graphqlClient } from '$lib/graphql';
-import { RECAP_CONVERSATION_QUIZ, UPDATE_LESSON_PROGRESS } from '$gql/schema/mutations';
-import userSession from '$lib/stores/userSession';
-// import type { ConversationRecapHistoryCreateDataInput } from '$gql/generated/graphql';
 
 interface HistoryItem {
 	role: 'user' | 'assistant';

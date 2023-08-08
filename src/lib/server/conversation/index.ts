@@ -13,19 +13,11 @@ import {
 } from './prompt';
 import type { ChatMessage } from '$lib/types/requests/chatCompletion';
 
-export const queryConversations = async function (mode: Mode) {
-	let data; // = await import(mapping[mode]);
-	if (mode === 'Professional') {
-		data = await import('$lib/server/db/conversations.json');
-	} else if (mode === 'Student') {
-		data = await import('$lib/server/db/student_conversations.json');
-	} else {
-		throw new Error('Unknown mode: ' + mode);
-	}
-	return data.results.map((val) => val as ConversationCarouselItem);
-};
-
-export const isDialogueAchieveGoal = async function (latest: string, history: string | null, goal: string) {
+export const isDialogueAchieveGoal = async function (
+	latest: string,
+	history: string | null,
+	goal: string
+) {
 	if (!latest) throw new Error('No latest dialogue provided');
 	if (!goal) throw new Error('No goal provided');
 
@@ -44,7 +36,9 @@ export const isDialogueAchieveGoal = async function (latest: string, history: st
 		}
 	};
 
-	const userInput = `Goal: ${goal}\n\nLatest Dialogue:\n${latest}\n\nPrior Conversation History:\n${history ? history : 'There is no conversation history for this dialogue'}`;
+	const userInput = `Goal: ${goal}\n\nLatest Dialogue:\n${latest}\n\nPrior Conversation History:\n${
+		history ? history : 'There is no conversation history for this dialogue'
+	}`;
 	// console.log(userInput);
 
 	const response = await gptFunctionCalling(
@@ -54,12 +48,36 @@ export const isDialogueAchieveGoal = async function (latest: string, history: st
 				content:
 					"You are a dialogue evaluator tasked with assessing whether a given dialogue has achieved its goal. You will be given the latest dialogue (a pair of User message and partner's message) and a conversation history as a context. You have to determine if the participants in the conversation have successfully accomplished what they set out to do. Evaluate the dialogue and provide your analysis, stating whether the goal has been achieved or not. Give your answer by calling is_dialogue_achieve_goal function, passing your answer as argument in result parameter."
 			},
-			{ role: 'user', 'content': "Goal: ถามเพื่อนของคุณว่าเขาชอบทำอะไรหลังเลิกเรียน\n\nLatest Dialogue\nAlex: After school, I like to play soccer. It's a great way to stay active and have fun with my friends. Playing sports helps me relax and unwind after a long day of studying.\n\nPrior Conversation History:\nAlex: Hello I’m Alex,I'm a new student.\nUser: Hello. What do you like to do in the morning?\nAlex: In the morning, I typically get up and clean my teeth. Then I eat breakfast. It's necessary to begin the day with a nutritious meal.\nUser: Nice. what about after school?\n\n" },
-			{ role: 'assistant', 'content': '', function_call: { 'name': 'is_dialogue_achieve_goal', arguments: '{\n  "result": true\n}' } },
-			{ role: 'user', 'content': "Goal: ถามเจนว่าชอบทำอะไรในวันหยุด\n\nLatest Dialogue:\nUser: What do you like to do on holidays?\nJane: Oh, I love going sailing or fishing on holidays! There’s something so peaceful and enjoyable about being out on the water. How about you? What do you like to do on your holidays?\n\nPrior Conversation History:\nJane: Hello,I’m Jane\n\n" },
-			{ role: 'assistant', 'content': '', function_call: { 'name': 'is_dialogue_achieve_goal', arguments: '{\n  "result": true\n}' } },
-			{ role: 'user', 'content': "Goal: ถามนักท่องเที่ยวว่าเดินทางด้วยอะไร\n\nLatest Dialogue:\nUser: Anyway, how do you commute around here?\nSusan: Well, since I'm a tourist, I've been traveling by plane to get from one destination to another. It's a convenient and efficient way to cover long distances quickly. Plus, I enjoy looking out the window and getting a bird's eye view of the beautiful landscapes below. How about you? How do you usually get around?  \n\nPrior Conversation History:\nSusan: Hey, I'm Susan nice too meet you.\nUser: Hello. How are you?\nSusan: Hey! I'm doing great, thanks! How about you?\nUser: I'm doing pretty good, thank you.\nSusan: That's fantastic news! So, please, inform me about your preferred creature?\nUser: giraffes, how about you?\nSusan: Giraffes are awesome! I love their long necks and how gracefully they move. As for me, I'm all about monkeys! They are so playful and mischievous, they always make me smile.\nUser: Do you also know about tiger? they are really fast and strong\nSusan: Oh, yes! Tigers are amazing animals. They are very fast and strong, and also very sneaky. Did you know that they can run as fast as 40 miles per hour? That's like a super fast cat! They also have strong mouths and sharp teeth, which makes them great hunters. They can easily catch prey that is much bigger than them. Tigers are really impressive!" },
-			{ role: 'assistant', 'content': '', function_call: { 'name': 'is_dialogue_achieve_goal', arguments: '{\n  "result": true\n}' } },
+			{
+				role: 'user',
+				content:
+					"Goal: ถามเพื่อนของคุณว่าเขาชอบทำอะไรหลังเลิกเรียน\n\nLatest Dialogue\nAlex: After school, I like to play soccer. It's a great way to stay active and have fun with my friends. Playing sports helps me relax and unwind after a long day of studying.\n\nPrior Conversation History:\nAlex: Hello I’m Alex,I'm a new student.\nUser: Hello. What do you like to do in the morning?\nAlex: In the morning, I typically get up and clean my teeth. Then I eat breakfast. It's necessary to begin the day with a nutritious meal.\nUser: Nice. what about after school?\n\n"
+			},
+			{
+				role: 'assistant',
+				content: '',
+				function_call: { name: 'is_dialogue_achieve_goal', arguments: '{\n  "result": true\n}' }
+			},
+			{
+				role: 'user',
+				content:
+					'Goal: ถามเจนว่าชอบทำอะไรในวันหยุด\n\nLatest Dialogue:\nUser: What do you like to do on holidays?\nJane: Oh, I love going sailing or fishing on holidays! There’s something so peaceful and enjoyable about being out on the water. How about you? What do you like to do on your holidays?\n\nPrior Conversation History:\nJane: Hello,I’m Jane\n\n'
+			},
+			{
+				role: 'assistant',
+				content: '',
+				function_call: { name: 'is_dialogue_achieve_goal', arguments: '{\n  "result": true\n}' }
+			},
+			{
+				role: 'user',
+				content:
+					"Goal: ถามนักท่องเที่ยวว่าเดินทางด้วยอะไร\n\nLatest Dialogue:\nUser: Anyway, how do you commute around here?\nSusan: Well, since I'm a tourist, I've been traveling by plane to get from one destination to another. It's a convenient and efficient way to cover long distances quickly. Plus, I enjoy looking out the window and getting a bird's eye view of the beautiful landscapes below. How about you? How do you usually get around?  \n\nPrior Conversation History:\nSusan: Hey, I'm Susan nice too meet you.\nUser: Hello. How are you?\nSusan: Hey! I'm doing great, thanks! How about you?\nUser: I'm doing pretty good, thank you.\nSusan: That's fantastic news! So, please, inform me about your preferred creature?\nUser: giraffes, how about you?\nSusan: Giraffes are awesome! I love their long necks and how gracefully they move. As for me, I'm all about monkeys! They are so playful and mischievous, they always make me smile.\nUser: Do you also know about tiger? they are really fast and strong\nSusan: Oh, yes! Tigers are amazing animals. They are very fast and strong, and also very sneaky. Did you know that they can run as fast as 40 miles per hour? That's like a super fast cat! They also have strong mouths and sharp teeth, which makes them great hunters. They can easily catch prey that is much bigger than them. Tigers are really impressive!"
+			},
+			{
+				role: 'assistant',
+				content: '',
+				function_call: { name: 'is_dialogue_achieve_goal', arguments: '{\n  "result": true\n}' }
+			},
 			{ role: 'user', content: userInput }
 		],
 		[_function],

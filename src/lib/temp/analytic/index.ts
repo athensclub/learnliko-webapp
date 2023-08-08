@@ -131,3 +131,21 @@ export const addChatHistory = async function (user: string, bot: string, botName
 		timestamp: serverTimestamp()
 	});
 };
+
+export const addDailyUser = async function () {
+	const uid = auth.currentUser?.uid ?? '';
+	const logDocRef = doc(collection(firestore, `${_analyticCollection}/dailyActiveUser/logs`));
+	const totalDocRef = doc(firestore, `${_analyticCollection}/dailyActiveUser`);
+
+	const batch = writeBatch(firestore);
+
+	batch.set(logDocRef, {
+		uid,
+		timestamp: serverTimestamp()
+	});
+	batch.update(totalDocRef, {
+		total: increment(1)
+	});
+
+	await batch.commit();
+};

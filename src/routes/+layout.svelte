@@ -18,6 +18,7 @@
 	import { setContextClient } from '@urql/svelte';
 	import { goto } from '$app/navigation';
 	import { fade } from 'svelte/transition';
+	import { addDailyUser } from '$lib/temp/analytic';
 
 	let loading = false;
 
@@ -38,6 +39,8 @@
 			} else {
 				userSession.update({ accountData: profileData });
 			}
+
+			addActiveUser();
 		}
 
 		userSession.update({ initialized: true });
@@ -53,6 +56,24 @@
 		// Subscribe on firebase auth state change
 		auth.onAuthStateChanged(OnAuthStateChanged);
 	});
+
+	const addActiveUser = async () => {
+		const lastActive = localStorage.getItem('lastActive');
+		if (lastActive) {
+			const lastTimestamp = Number(lastActive);
+			if (isNaN(lastTimestamp)) return;
+
+			const diff = Date.now() - lastTimestamp;
+			const hours = diff / 3600000;
+
+			if (hours >= 24) {
+				await addDailyUser();
+				localStorage.setItem('lastActive', Date.now().toString());
+			}
+		} else {
+			localStorage.setItem('lastActive', Date.now().toString());
+		}
+	};
 
 	$: if (!$showChatbox) {
 		resetRecordingData();

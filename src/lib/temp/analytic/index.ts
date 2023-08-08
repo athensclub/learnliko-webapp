@@ -99,6 +99,7 @@ export const updateTotalLearner = async function (level: PretestCEFRLevel) {
 export const addLessonSession = async function (
 	timeSpentSeconds: number,
 	completed: boolean,
+	progress: number,
 	lesson: string
 ) {
 	const uid = auth.currentUser?.uid ?? '';
@@ -110,6 +111,7 @@ export const addLessonSession = async function (
 		uid,
 		completed,
 		lesson,
+		progress,
 		timeSpent: timeSpentSeconds,
 		timestamp: serverTimestamp()
 	});

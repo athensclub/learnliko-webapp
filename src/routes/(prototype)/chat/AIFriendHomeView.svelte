@@ -2,9 +2,9 @@
 	import type { AiFriend } from '$gql/generated/graphql';
 	import { aiFriendCurrentView, aiFriends, inboxes, selectedAIFriend } from './+page.svelte';
 
-	const select = (friend: AiFriend) => {
+	const select = (friend: AiFriend, targetView: typeof $aiFriendCurrentView = 'DETAILED') => {
 		$selectedAIFriend = friend;
-		$aiFriendCurrentView = 'DETAILED';
+		$aiFriendCurrentView = targetView;
 	};
 </script>
 
@@ -30,7 +30,7 @@
 
 		{#each $inboxes as inbox}
 			<button
-				on:click={() => select(inbox.friend)}
+				on:click={() => select(inbox.friend, 'CHAT')}
 				style="box-shadow: 0px 4px 16px 0px rgba(0, 0, 0, 0.10);"
 				class="relative z-10 mt-[5vw] flex flex-row gap-[4vw] rounded-[5vw] rounded-bl-none p-[5vw]"
 			>

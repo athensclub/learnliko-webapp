@@ -98,7 +98,6 @@ export const updateTotalLearner = async function (level: PretestCEFRLevel) {
 
 export const addLessonSession = async function (
 	timeSpentSeconds: number,
-	completed: boolean,
 	progress: number,
 	lesson: string
 ) {
@@ -109,7 +108,6 @@ export const addLessonSession = async function (
 	const totalDocRef = doc(firestore, `${_analyticCollection}/lessonSession`);
 	batch.set(sessionDocRef, {
 		uid,
-		completed,
 		lesson,
 		progress,
 		timeSpent: timeSpentSeconds,

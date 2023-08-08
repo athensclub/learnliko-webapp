@@ -95,8 +95,7 @@
 		music?.unload();
 
 		const timespentSecond = Math.floor((Date.now() - startedTime) / 1000);
-		const isFinished = currentView === 'FINISHED';
-		addLessonSession(timespentSecond, isFinished, progress, data?.id ?? '');
+		addLessonSession(timespentSecond, progress, data?.id ?? '');
 	});
 </script>
 

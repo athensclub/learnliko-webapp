@@ -7,21 +7,28 @@
 	import { getLocalProgress } from '$lib/localdb/lessonProgressLocal';
 	import { onMount } from 'svelte';
 	import Typewriter from 'svelte-typewriter/Typewriter.svelte';
-
-	let currentView: 'EXPLORE' | 'CONTINUE' = 'EXPLORE';
+	import { fade } from 'svelte/transition';
 
 	type DisplayLesson = { lesson: Lesson; progress: number };
 
 	let lessons: DisplayLesson[] | null = null;
+	let totalLessons: DisplayLesson[] | null = null;
 	onMount(async () => {
 		const _lessons: Lesson[] = await getLessonCards();
-		lessons = _lessons.map((e) => {
+		totalLessons = _lessons.map((e) => {
 			return {
 				lesson: e,
 				progress: (getLocalProgress(e.id)?.progress ?? 0) * 100
 			};
 		});
 	});
+
+	let currentView: 'EXPLORE' | 'COMPLETED' = 'EXPLORE';
+	$: if (currentView === 'EXPLORE') {
+		lessons = totalLessons?.filter((e) => e.progress < 100) ?? [];
+	} else {
+		lessons = totalLessons?.filter((e) => e.progress >= 100) ?? [];
+	}
 
 	let displayedLessons: DisplayLesson[] | null = null;
 
@@ -48,7 +55,7 @@
 >
 	<img class="h-8 w-8" src={icon} alt="Learnliko Logo" />
 
-	<!-- <div class="flex flex-row text-[4.5vw] font-bold">
+	<div class="flex flex-row text-[4.5vw] font-bold">
 		<button
 			on:click={() => (currentView = 'EXPLORE')}
 			class="px-[3vw] {currentView === 'EXPLORE'
@@ -61,14 +68,14 @@
 		<div class="my-auto h-[80%] w-[0.2vw] bg-[#252525]/[0.15]" />
 
 		<button
-			on:click={() => (currentView = 'CONTINUE')}
-			class="px-[3vw] {currentView === 'CONTINUE'
+			on:click={() => (currentView = 'COMPLETED')}
+			class="px-[3vw] {currentView === 'COMPLETED'
 				? 'bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] bg-clip-text text-transparent'
 				: 'text-black/[0.34]'}"
 		>
-			Continue
+			Completed
 		</button>
-	</div> -->
+	</div>
 
 	<button>
 		<svg class="w-[6vw]" viewBox="0 0 22 23" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -95,20 +102,32 @@
 	</div>
 
 	{#if displayedLessons}
-		<div
-			class={`no-scrollbar my-auto flex snap-x snap-mandatory flex-row gap-[5vw] overflow-x-auto px-[10vw] ${
-				$isMobile ? 'w-full' : 'w-[54vw] pb-[10vh] pt-0'
-			}`}
-		>
-			{#each displayedLessons as item (item.lesson.id)}
-				<LessonCard
-					item={item.lesson}
-					progress={item.progress}
-					class="snap-center {$isMobile
-						? 'max-h-[115vw] min-h-[115vw] min-w-[80vw]'
-						: 'mt-[calc(48vh-19vw)] h-[38vw] w-[27vw]'}"
-				/>
-			{/each}
+		<div class="flex h-full items-center">
+			{#if displayedLessons.length > 0}
+				<div
+					in:fade={{ delay: 400 }}
+					class={`no-scrollbar my-auto flex snap-x snap-mandatory flex-row gap-[5vw] overflow-x-auto px-[10vw] ${
+						$isMobile ? 'w-full' : 'w-[54vw] pb-[10vh] pt-0'
+					}`}
+				>
+					{#each displayedLessons as item (item.lesson.id)}
+						<LessonCard
+							item={item.lesson}
+							progress={item.progress}
+							class="snap-center {$isMobile
+								? 'max-h-[115vw] min-h-[115vw] min-w-[80vw]'
+								: 'mt-[calc(48vh-19vw)] h-[38vw] w-[27vw]'}"
+						/>
+					{/each}
+				</div>
+			{:else}
+				<div
+					in:fade={{ delay: 400 }}
+					class="pointer-events-none flex h-full w-full flex-row items-center justify-center text-[5.4vw]"
+				>
+					ไม่มีบทเรียน
+				</div>
+			{/if}
 		</div>
 	{:else}
 		<div

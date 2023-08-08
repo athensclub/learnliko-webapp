@@ -19,6 +19,7 @@
 	import Typewriter from 'svelte-typewriter/Typewriter.svelte';
 	import LessonDiscussionActivityView from './LessonDiscussionActivityView.svelte';
 	import { addLessonSession } from '$lib/temp/analytic';
+	import { getLocalProgress, saveLocalProgress } from '$lib/localdb/lessonProgressLocal';
 
 	let data: Lesson | null = null;
 	let music: Howl | null = null;
@@ -40,6 +41,10 @@
 			currentView = 'FINISHED';
 		} else {
 			activityIndex = activityIndex + 1;
+			
+			// save progress to local only when moving to the new activity
+			// to prevent incorrect `progress`
+			if (data?.id) saveLocalProgress(data.id, activityIndex, progress);
 		}
 	};
 

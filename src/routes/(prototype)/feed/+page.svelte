@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { getLessonCards } from '$api/lesson';
+	import { goto } from '$app/navigation';
 	import type { Lesson } from '$gql/generated/graphql';
 	import LessonCard from '$lib/components/LessonCard.svelte';
 	import { isMobile } from '$lib/global/breakpoints';
@@ -77,7 +78,7 @@
 		</button>
 	</div>
 
-	<button>
+	<button on:click={() => goto('/profile-details')}>
 		<svg class="w-[6vw]" viewBox="0 0 22 23" fill="none" xmlns="http://www.w3.org/2000/svg">
 			<rect width="22" height="3" rx="1.5" fill="#1C1C1C" />
 			<rect x="9" y="10" width="13" height="3" rx="1.5" fill="#1C1C1C" />

@@ -96,12 +96,11 @@ export const updateTotalLearner = async function (level: PretestCEFRLevel) {
 	);
 };
 
-/**
- *
- * @param timeSpentSeconds in seconds
- * @param completed do user complete the lesson
- */
-export const addLessonSession = async function (timeSpentSeconds: number, completed: boolean) {
+export const addLessonSession = async function (
+	timeSpentSeconds: number,
+	completed: boolean,
+	lesson: string
+) {
 	const uid = auth.currentUser?.uid ?? '';
 	const batch = writeBatch(firestore);
 
@@ -109,8 +108,9 @@ export const addLessonSession = async function (timeSpentSeconds: number, comple
 	const totalDocRef = doc(firestore, `${_analyticCollection}/lessonSession`);
 	batch.set(sessionDocRef, {
 		uid,
-		timeSpent: timeSpentSeconds,
 		completed,
+		lesson,
+		timeSpent: timeSpentSeconds,
 		timestamp: serverTimestamp()
 	});
 	batch.update(totalDocRef, {

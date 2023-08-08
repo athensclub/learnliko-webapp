@@ -85,7 +85,7 @@
 
 		const timespentSecond = Math.floor((Date.now() - startedTime) / 1000);
 		const isFinished = currentView === 'FINISHED';
-		addLessonSession(timespentSecond, isFinished);
+		addLessonSession(timespentSecond, isFinished, data?.id ?? '');
 	});
 </script>
 

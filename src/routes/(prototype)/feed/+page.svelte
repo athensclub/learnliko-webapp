@@ -70,7 +70,7 @@
 </header>
 
 <div class="flex w-full flex-1 flex-col font-line-seed">
-	<div class="mt-[8vw] flex flex-row gap-[3vw] overflow-x-auto px-[4vw] pb-[2vw] no-scrollbar">
+	<div class="no-scrollbar mt-[8vw] flex flex-row gap-[3vw] overflow-x-auto px-[4vw] pb-[2vw]">
 		{#each tags as tag, index}
 			<button
 				on:click={() => (selectedTagIndex = index)}
@@ -86,7 +86,7 @@
 
 	{#if displayedLessons}
 		<div
-			class={`flex snap-x snap-mandatory flex-row gap-[5vw] my-auto overflow-x-auto px-[10vw] ${
+			class={`no-scrollbar my-auto flex snap-x snap-mandatory flex-row gap-[5vw] overflow-x-auto px-[10vw] ${
 				$isMobile ? 'w-full' : 'w-[54vw] pb-[10vh] pt-0'
 			}`}
 		>

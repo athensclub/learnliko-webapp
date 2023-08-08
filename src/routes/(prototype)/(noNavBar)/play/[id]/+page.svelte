@@ -47,11 +47,11 @@
 			currentView = 'FINISHED';
 		} else {
 			activityIndex = activityIndex + 1;
-
-			// save progress to local only when moving to the new activity
-			// to prevent incorrect `progress`
-			if (data?.id) saveLocalProgress(data.id, activityIndex, progress);
 		}
+
+		// save progress to local only when moving to the new activity
+		// to prevent incorrect `progress`
+		if (data?.id) saveLocalProgress(data.id, activityIndex, progress);
 	};
 
 	let progress = 0;

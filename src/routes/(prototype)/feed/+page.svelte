@@ -70,7 +70,7 @@
 </header>
 
 <div class="flex w-full flex-1 flex-col font-line-seed">
-	<div class="mt-[8vw] flex flex-row gap-[3vw] overflow-x-auto px-[4vw] pb-[2vw]">
+	<div class="mt-[8vw] flex flex-row gap-[3vw] overflow-x-auto px-[4vw] pb-[2vw] no-scrollbar">
 		{#each tags as tag, index}
 			<button
 				on:click={() => (selectedTagIndex = index)}

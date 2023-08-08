@@ -27,6 +27,12 @@
 	onMount(async () => {
 		data = await getLessonById($page.params.id);
 		music = new Howl({ src: data.ambientAudio, volume: 0.06, loop: true });
+
+		const localProgress = getLocalProgress(data.id);
+		if (localProgress && localProgress.progress < 1) {
+			activityIndex = localProgress.activityIndex;
+			progress = localProgress.progress;
+		}
 	});
 
 	let currentView: 'NARRATIVE' | 'ACTIVITY' | 'FINISHED' = 'NARRATIVE';
@@ -41,7 +47,7 @@
 			currentView = 'FINISHED';
 		} else {
 			activityIndex = activityIndex + 1;
-			
+
 			// save progress to local only when moving to the new activity
 			// to prevent incorrect `progress`
 			if (data?.id) saveLocalProgress(data.id, activityIndex, progress);

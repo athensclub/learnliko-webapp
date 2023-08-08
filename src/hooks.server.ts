@@ -27,7 +27,7 @@ export const handle: Handle = async ({ resolve, event }) => {
 	const response = await resolve(event);
 
 	// Apply CORS header for API routes
-	if (event.url.pathname.startsWith('/api')) {
+	if (isOnProduction() && event.url.pathname.startsWith('/api')) {
 		const isOnWhitelist = _whitelist.includes(event.url.origin);
 
 		// If isn't on the whitelist return Unauthorized response

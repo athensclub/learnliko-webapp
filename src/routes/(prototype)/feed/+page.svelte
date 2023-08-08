@@ -4,17 +4,26 @@
 	import LessonCard from '$lib/components/LessonCard.svelte';
 	import { isMobile } from '$lib/global/breakpoints';
 	import icon from '$lib/images/learnliko_icon.png';
+	import { getLocalProgress } from '$lib/localdb/lessonProgressLocal';
 	import { onMount } from 'svelte';
 	import Typewriter from 'svelte-typewriter/Typewriter.svelte';
 
 	let currentView: 'EXPLORE' | 'CONTINUE' = 'EXPLORE';
 
-	let lessons: Lesson[] | null = null;
+	type DisplayLesson = { lesson: Lesson; progress: number };
+
+	let lessons: DisplayLesson[] | null = null;
 	onMount(async () => {
-		lessons = await getLessonCards();
+		const _lessons: Lesson[] = await getLessonCards();
+		lessons = _lessons.map((e) => {
+			return {
+				lesson: e,
+				progress: (getLocalProgress(e.id)?.progress ?? 0) * 100
+			};
+		});
 	});
 
-	let displayedLessons: Lesson[] | null = null;
+	let displayedLessons: DisplayLesson[] | null = null;
 
 	let tags = ['ทั้งหมด', 'ภาษาอังกฤษ', 'เขียนโปรแกรม'];
 	let selectedTagIndex = 0;
@@ -23,9 +32,10 @@
 		if (selectedTagIndex === 0) {
 			displayedLessons = lessons;
 		} else if (selectedTagIndex === 1) {
-			displayedLessons = lessons?.filter((l) => l.course.subject.id === 'english') ?? null;
+			displayedLessons = lessons?.filter((l) => l.lesson.course.subject.id === 'english') ?? null;
 		} else if (selectedTagIndex === 2) {
-			displayedLessons = lessons?.filter((l) => l.course.subject.id === 'programming') ?? null;
+			displayedLessons =
+				lessons?.filter((l) => l.lesson.course.subject.id === 'programming') ?? null;
 		}
 	};
 	$: selectedTagIndex, lessons, updateTagFilter();
@@ -90,10 +100,10 @@
 				$isMobile ? 'w-full' : 'w-[54vw] pb-[10vh] pt-0'
 			}`}
 		>
-			{#each displayedLessons as item (item.id)}
+			{#each displayedLessons as item (item.lesson.id)}
 				<LessonCard
-					{item}
-					progress={0}
+					item={item.lesson}
+					progress={item.progress}
 					class="snap-center {$isMobile
 						? 'max-h-[115vw] min-h-[115vw] min-w-[80vw]'
 						: 'mt-[calc(48vh-19vw)] h-[38vw] w-[27vw]'}"

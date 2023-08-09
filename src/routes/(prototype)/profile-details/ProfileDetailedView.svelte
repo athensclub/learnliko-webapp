@@ -40,7 +40,7 @@
 					<div class={$isMobile ? 'text-[3.5vw]' : 'text-[0.3vw]'}>
 						{$selectedProfileProgress.subject.indicatorLabel}
 					</div>
-					<div class={$isMobile ? 'text-[9vw]' : 'text-[2vw]'}>
+					<div class={$isMobile ? 'text-[5.5vw]' : 'text-[2vw]'}>
 						{selectedCourse?.course.displayName}
 					</div>
 				</div>

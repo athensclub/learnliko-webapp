@@ -152,7 +152,7 @@
 						<div class={$isMobile ? 'text-[2.5vw]' : 'text-[0.3vw]'}>
 							{progress.subject.indicatorLabel}
 						</div>
-						<div class={$isMobile ? 'text-[7vw]' : 'text-[2vw]'}>
+						<div class={$isMobile ? 'text-[4.6vw]' : 'text-[2vw]'}>
 							{courseProgress.course.displayName}
 						</div>
 					</div>

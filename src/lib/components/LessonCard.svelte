@@ -31,8 +31,8 @@
 <!-- Specify the size(width, height) of the card in the user of the component, not in the component itself. -->
 <div
 	style="background-image: url('{item.backgroundUrl}');"
-	class={`relative flex flex-col justify-between  overflow-hidden bg-cover bg-center shadow-2xl ${
-		$isMobile ? 'rounded-[6vw]' : 'rounded-[2vw]'
+	class={`relative flex flex-col justify-between  overflow-hidden bg-cover bg-center shadow-sm  ${
+		$isMobile ? 'rounded-[8vw]' : 'rounded-[2vw] '
 	} ${clazz}`}
 >
 	<a
@@ -115,7 +115,7 @@
 		<div
 			style="font-size: {scale * ($isMobile ? 3 : 1)}vw; padding: {scale *
 				($isMobile ? 1.5 : 1)}vw;"
-			class="relative bottom-[30%] right-[3%] h-fit animate-wiggle rounded-bl-none bg-white font-bold {$isMobile
+			class="relative bottom-[30%] right-[3%] h-fit animate-wiggle py-[3vw] px-[2.5vw] rounded-bl-none bg-white font-bold {$isMobile
 				? 'rounded-[6vw]'
 				: 'rounded-[2vw]'}"
 		>

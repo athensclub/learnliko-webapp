@@ -33,7 +33,7 @@
 
 	let displayedLessons: DisplayLesson[] | null = null;
 
-	let tags = ['ทั้งหมด', 'ภาษาอังกฤษ', 'เขียนโปรแกรม'];
+	let tags = ['ทั้งหมด', '🤝ภาษาอังกฤษ', '💻เขียนโปรแกรม'];
 	let selectedTagIndex = 0;
 	const updateTagFilter = () => {
 		// TODO: implement more general version of this
@@ -92,7 +92,7 @@
 		{#each tags as tag, index}
 			<button
 				on:click={() => (selectedTagIndex = index)}
-				class="whitespace-nowrap rounded-full px-[4.5vw] py-[1.5vw] text-[4.5vw] font-bold {selectedTagIndex ===
+				class="whitespace-nowrap rounded-full px-[5.5vw] py-[2.5vw] pb-[3.5vw] text-[4.5vw] font-bold {selectedTagIndex ===
 				index
 					? 'bg-[#3D3D3D] text-white'
 					: 'bg-[#F8F8F8] text-black'}"
@@ -116,8 +116,8 @@
 							item={item.lesson}
 							progress={item.progress}
 							class="snap-center {$isMobile
-								? 'max-h-[115vw] min-h-[115vw] min-w-[80vw]'
-								: 'mt-[calc(48vh-19vw)] h-[38vw] w-[27vw]'}"
+								? 'max-h-[140vw] min-h-[80vw] min-w-[85vw]'
+								: 'mt-[calc(48vh-19vw)] h-[40vw] w-[32vw]'}"
 						/>
 					{/each}
 				</div>

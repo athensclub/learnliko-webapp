@@ -13,11 +13,11 @@
 </script>
 
 <div
-	class="flex w-full flex-row items-center justify-center gap-[4vw] border-b border-black/[0.15] py-[12vw]"
+	class="flex w-full flex-row  justify-left px-[6vw] gap-[4vw] border-b border-black/[0.15] py-[12vw]"
 >
 	<div
 		style="background-image: url('{$profileImageLocal}');"
-		class="h-[18vw] w-[18vw] rounded-[3vw] bg-cover bg-center"
+		class="h-[18vw] w-[18vw] rounded-[3vw] bg-cover bg-center border border-black/[0.15]"
 	/>
 
 	<div class="flex flex-col justify-center">

@@ -13,7 +13,7 @@
 >
 	<button
 		on:click={() => (expanded = true)}
-		class="flex flex-col items-center text-[4.5vw] font-bold text-white"
+		class="flex flex-col items-center text-[3.8vw] font-bold text-white"
 	>
 		<svg class="w-[4vw]" viewBox="0 0 16 9" fill="none" xmlns="http://www.w3.org/2000/svg">
 			<path
@@ -21,7 +21,7 @@
 				fill="white"
 			/>
 		</svg>
-		Progress
+		ความคืบหน้า
 	</button>
 
 	<div class="mt-[4vw] h-[3vw] w-full rounded-full bg-white">

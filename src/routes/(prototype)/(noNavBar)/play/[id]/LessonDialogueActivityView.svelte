@@ -83,24 +83,24 @@
 					<div class="flex flex-row items-center gap-[4vw]">
 						<div
 							style="background-image: url('{$chatContext.conversation.avatar.models.neutral}');"
-							class="h-[16vw] w-[16vw] rounded-full bg-white bg-cover bg-top"
+							class="h-[20vw] w-[20vw] rounded-full bg-white bg-cover bg-top"
 						/>
 						<div class="flex flex-col">
-							<div class="text-[3.5vw] font-bold text-white/80">{item.bot.role}</div>
-							<div class="text-[5.5vw] font-bold text-white">{item.bot.name}</div>
+							<div class="text-[3.6vw] font-bold text-white/80">{item.bot.role}</div>
+							<div class="text-[6.2vw] font-bold text-white">{item.bot.name}</div>
 						</div>
 					</div>
 
 					<button
 						on:click={() => (currentView = 'DIALOGUE')}
-						class="h-fit rounded-full bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] px-[7vw] py-[1.5vw] text-[4.5vw]"
+						class="h-fit rounded-full bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] px-[7vw] py-[1.5vw] text-[3.8vw] font-bold"
 					>
 						พูดคุย
 					</button>
 				</div>
 
 				<div class="mt-[5vw] flex w-full flex-row items-center justify-between">
-					<div class={`font-bold ${$isMobile ? 'text-[6vw]' : 'text-[1.7vw]'}`}>🎯ภารกิจของคุณ</div>
+					<div class="text-[5.1vw] font-bold">🎯ภารกิจของคุณ</div>
 
 					<div
 						class="flex flex-row rounded-full {$isMobile
@@ -108,7 +108,7 @@
 							: 'mx-[0.5vw] px-[0.5vw] py-[0.3vw] text-[1.05vw]'}"
 					>
 						<div
-							class="bg-gradient-to-br from-[#C698FF] to-[#6C80E8] bg-clip-text text-transparent"
+							class="bg-gradient-to-br from-[#C698FF] to-[#6C80E8] bg-clip-text font-bold text-transparent"
 						>
 							+{item.exp}
 						</div>
@@ -153,7 +153,7 @@
 						</svg>
 
 						<div
-							class="ml-[0.5vw] bg-gradient-to-t from-[#FFE08F] via-[#E4AE24] to-[#FFE08F] bg-clip-text text-transparent"
+							class="ml-[0.5vw] bg-gradient-to-t from-[#FFE08F] via-[#E4AE24] to-[#FFE08F] bg-clip-text font-bold text-transparent"
 						>
 							+{item.coin}
 						</div>
@@ -209,21 +209,15 @@
 					</div>
 				</div>
 
-				<div class={`${$isMobile ? 'mt-[3vw] text-[4.5vw]' : 'mt-[1vw] text-[1.3vw]'}`}>
+				<div class="mt-[3vw] text-[3.6vw] font-bold">
 					{$chatContext.conversation.details.learner.mission}
 				</div>
 
 				<!-- Divider -->
-				<div
-					class={`w-full bg-white ${$isMobile ? 'my-[6vw] h-[0.23vh]' : 'my-[2vw] h-[0.15vh]'}`}
-				/>
+				<div class="my-[2.4vh] h-[0.23vh] w-full bg-white" />
 
-				<div class={`font-bold ${$isMobile ? 'text-[6vw]' : 'text-[1.7vw]'}`}>เป้าหมาย</div>
-				<div
-					class={`whitespace-pre-wrap ${
-						$isMobile ? 'mt-[3vw] text-[4.5vw]' : 'mt-[1vw] text-[1.3vw]'
-					}`}
-				>
+				<div class="text-[4.6vw] font-bold">เป้าหมาย</div>
+				<div class="mt-[1vh] whitespace-pre-wrap text-[3.8vw] font-bold">
 					{$chatContext.conversation.details.learner.goal
 						.map((g, i) => `${i + 1}. ${g}`)
 						.join('\n')}
@@ -254,8 +248,6 @@
 					recorderClass="text-black bg-white w-[90%] bottom-[27vw]"
 					finishButtonClass="border-white/[0.15]"
 				/>
-
-
 			</div>
 		{/if}
 	</div>

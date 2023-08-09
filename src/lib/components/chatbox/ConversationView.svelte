@@ -49,8 +49,11 @@
 </script>
 
 {#if $initializedConversation && conversationDetails}
-	<div style="box-shadow: 0px 4px 15px 0px rgba(0, 0, 0, 0.10);" class="w-full py-[4vw] text-center text-[4.5vw] font-bold">
-		{$currentGoal+1}. {conversationDetails.learner.goal[$currentGoal]}
+	<div
+		style="box-shadow: 0px 4px 15px 0px rgba(0, 0, 0, 0.10);"
+		class="w-full py-[7.2vw] text-center text-[4.2vw] font-bold"
+	>
+		{$currentGoal + 1}. {conversationDetails.learner.goal[$currentGoal]}
 	</div>
 
 	<div class={`h-full w-full overflow-y-auto ${clazz}`}>
@@ -72,7 +75,7 @@
 
 					<button
 						on:click={onFinishClicked}
-						class={`mr-4 mt-3 w-fit rounded-lg border px-4 py-1 text-[4vw] font-normal text-white bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] ${finishButtonClass}`}
+						class={`mr-4 mt-3 w-fit rounded-lg border bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] px-4 py-1 text-[4vw] font-normal text-white ${finishButtonClass}`}
 					>
 						เสร็จสิ้น
 					</button>

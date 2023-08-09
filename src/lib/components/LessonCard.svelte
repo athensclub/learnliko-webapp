@@ -60,41 +60,43 @@
 			</defs>
 		</svg>
 
-		<div style="font-size: {scale * ($isMobile ? 4.2 : 1.5)}vw;" class="max-w-[90%]">
-			{item.title}
-		</div>
-		<div style="font-size: {scale * ($isMobile ? 3 : 1.05)}vw;" class="mt-[1.2vh] max-w-[90%]">
-			{item.description}
+	<div
+		style="font-size: {scale * ($isMobile ? 3.2 : 1)}vw;"
+		class="mb-[2vh] flex flex-row {$isMobile ? 'gap-[3vw]' : 'gap-[1vw]'}"
+	>
+		<div
+			style="padding-left: {scale * ($isMobile ? 5 : 2)}vw; 
+				padding-right: {scale * ($isMobile ? 5 : 2)}vw;
+				 padding-top: {scale * ($isMobile ? 0.5 : 1)}vh;
+				  padding-bottom: {scale * ($isMobile ? 0.5 : 1)}vh;"
+			class="flex items-center justify-center rounded-full bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD]"
+		>
+			{item.course.displayName}
 		</div>
 
 		<div
-			style="font-size: {scale * ($isMobile ? 3.2 : 1)}vw;"
-			class="mt-[2vh] flex flex-row {$isMobile ? 'gap-[3vw]' : 'gap-[1vw]'}"
+			style="padding-left: {scale * ($isMobile ? 3 : 1)}vw; 
+				padding-right: {scale * ($isMobile ? 3 : 1)}vw;
+				 padding-top: {scale * ($isMobile ? 0.5 : 1)}vh;
+				  padding-bottom: {scale * ($isMobile ? 0.5 : 1)}vh;"
+			class="rounded-full bg-white"
 		>
 			<div
-				style="padding-left: {scale * ($isMobile ? 5 : 2)}vw; 
-					padding-right: {scale * ($isMobile ? 5 : 2)}vw;
-				 	padding-top: {scale * ($isMobile ? 0.5 : 1)}vh;
-				  	padding-bottom: {scale * ($isMobile ? 0.5 : 1)}vh;"
-				class="flex items-center justify-center rounded-full bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD]"
+				class="flex flex-row bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] bg-clip-text text-transparent"
 			>
-				{item.course.displayName}
-			</div>
-
-			<div
-				style="padding-left: {scale * ($isMobile ? 3 : 1)}vw; 
-					padding-right: {scale * ($isMobile ? 3 : 1)}vw;
-				 	padding-top: {scale * ($isMobile ? 0.5 : 1)}vh;
-				  	padding-bottom: {scale * ($isMobile ? 0.5 : 1)}vh;"
-				class="rounded-full bg-white"
-			>
-				<div
-					class="flex flex-row bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] bg-clip-text text-transparent"
-				>
-					{item.course.subject.displayName}
-				</div>
+				{item.course.subject.displayName}
 			</div>
 		</div>
+	</div>
+
+		<div style="font-size: {scale * ($isMobile ? 4.2 : 1.5)}vw;" class="max-w-[90%]">
+			{item.title}
+		</div>
+		<div style="font-size: {scale * ($isMobile ? 3 : 1.05)}vw;" class="mt-[0.5vh] max-w-[90%]">
+			{item.description}
+		</div>
+
+
 
 		<div
 			style="height: {scale * ($isMobile ? 3.6 : 1.35)}vw;"

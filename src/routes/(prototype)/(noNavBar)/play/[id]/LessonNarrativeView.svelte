@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { Narrative } from '$gql/generated/graphql';
 	import { isMobile } from '$lib/global/breakpoints';
+	import Typewriter from 'svelte-typewriter/Typewriter.svelte';
 	import { fade } from 'svelte/transition';
 
 	export let onFinish: () => void;
@@ -34,7 +35,7 @@
 				? 'max-w-[80%] text-[4.5vw]'
 				: 'max-w-[60%] text-[1.5vw]'}"
 		>
-			{items[currentItem].text}
+			<Typewriter>{items[currentItem].text}</Typewriter>
 		</div>
 
 		<button

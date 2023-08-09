@@ -177,7 +177,7 @@
 			</div>
 
 			<!-- Title -->
-			<div class="mt-[2vh] text-center text-[5vw] font-bold text-white">{data.title}</div>
+		<div class="mt-[2vh] text-center text-[5vw] font-bold text-white">{data.title}</div>
 
 			<!-- Activity name -->
 			{#if currentView === 'ACTIVITY' && currentActivity}

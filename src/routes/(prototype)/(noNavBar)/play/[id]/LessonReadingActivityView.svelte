@@ -7,6 +7,13 @@
 	export let addProgress: (val: number) => void;
 	export let onFinish: () => void;
 
+	/**
+	 * Called when the height of shown component of this activity changes.
+	 */
+	export let updateHeight: (pixels: number) => {};
+	let height = 0;
+	$: updateHeight(height);
+
 	export let data: Activity;
 	let item: ReadingCard = data.cards[0] as ReadingCard;
 
@@ -28,7 +35,7 @@
 		transition:fade
 		class="pointer-events-none absolute left-0 top-0 flex h-full w-full items-center justify-center overflow-hidden"
 	>
-		<div class="pointer-events-auto mt-[16vw] flex flex-col">
+		<div class="pointer-events-auto mt-[16vw] flex flex-col" bind:clientHeight={height}>
 			<div
 				class="relative overflow-hidden bg-white {$isMobile
 					? 'h-[57vh] w-[85vw] rounded-[4vw]'
@@ -79,6 +86,7 @@
 	<!-- Use this view's onFinish trigger, so no op for selection activity onFinish.
 		 Also use this view's addProgress, ignore the argument in addProgresss -->
 	<LessonSelectionActivityView
+		{updateHeight}
 		addProgress={(_) => addProgress(1 / initialQuizLength)}
 		onFinish={() => {}}
 		items={quiz}

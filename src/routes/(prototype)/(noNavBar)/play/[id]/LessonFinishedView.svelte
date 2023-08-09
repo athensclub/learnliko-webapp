@@ -12,6 +12,13 @@
 	export let coin: number = 800;
 	export let progress: number = 50;
 
+	/**
+	 * Called when the height of shown component of this activity changes.
+	 */
+	export let updateHeight: (pixels: number) => {};
+	let height = 0;
+	$: updateHeight(height);
+
 	const { open }: Context = getContext('simple-modal');
 
 	let displayExp = tweened(0);
@@ -34,6 +41,7 @@
 		class="pointer-events-auto flex flex-row justify-center overflow-hidden bg-white p-[8vw] {$isMobile
 			? 'rounded-[5vw]'
 			: 'h-[30vw] w-[60vw] rounded-[2vw]'}"
+		bind:clientHeight={height}
 	>
 		<div class="flex h-full flex-col items-center justify-center font-bold">
 			<div class={$isMobile ? 'text-[7vw]' : 'text-[2.5vw]'}>Congratulation 🎉</div>

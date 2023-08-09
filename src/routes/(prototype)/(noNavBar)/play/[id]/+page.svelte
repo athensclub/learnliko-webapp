@@ -41,6 +41,9 @@
 	let activityIndex = 0;
 	$: currentActivity = data?.activities[activityIndex];
 
+	let activityHeight = 0;
+	const updateHeight = (pixels: number) => (activityHeight = pixels);
+
 	const nextView = () => {
 		if (currentView === 'NARRATIVE') {
 			currentView = 'ACTIVITY';
@@ -108,8 +111,9 @@
 
 {#if data}
 	<div
-		style="background-image: url('{data.backgroundUrl}');"
-		class="relative flex h-[100dvh] w-[100dvw] flex-col bg-cover bg-center font-line-seed transition-[background-image]"
+		style="background-image: url('{data.backgroundUrl}');
+			   height: max(100vh, calc({activityHeight}px + 70vw));"
+		class="relative flex w-[100dvw] flex-col bg-cover bg-center font-line-seed transition-[background-image]"
 	>
 		<div class="absolute left-0 top-0 h-[32vh] w-full bg-gradient-to-b from-black/80 to-black/0" />
 
@@ -197,20 +201,37 @@
 						<LessonSelectionActivityView
 							items={currentActivity.cards}
 							{addProgress}
+							{updateHeight}
 							onFinish={nextView}
 						/>
 					{:else if currentActivity.type === ActivityType.Reading}
-						<LessonReadingActivityView data={currentActivity} {addProgress} onFinish={nextView} />
+						<LessonReadingActivityView
+							data={currentActivity}
+							{addProgress}
+							{updateHeight}
+							onFinish={nextView}
+						/>
 					{:else if currentActivity.type === ActivityType.Cloze}
-						<LessonClozeActivityView data={currentActivity} {addProgress} onFinish={nextView} />
+						<LessonClozeActivityView
+							data={currentActivity}
+							{addProgress}
+							{updateHeight}
+							onFinish={nextView}
+						/>
 					{:else if currentActivity.type === ActivityType.Listening}
-						<LessonListeningActivityView data={currentActivity} {addProgress} onFinish={nextView} />
+						<LessonListeningActivityView
+							data={currentActivity}
+							{addProgress}
+							{updateHeight}
+							onFinish={nextView}
+						/>
 					{:else if currentActivity.type === ActivityType.Dialogue}
 						<LessonDialogueActivityView data={currentActivity} {addProgress} onFinish={nextView} />
 					{:else if currentActivity.type === ActivityType.Discussion}
 						<LessonDiscussionActivityView
 							data={currentActivity}
 							{addProgress}
+							{updateHeight}
 							onFinish={nextView}
 						/>
 					{/if}

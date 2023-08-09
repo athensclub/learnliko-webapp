@@ -9,6 +9,13 @@
 	export let onFinish: () => void;
 
 	/**
+	 * Called when the height of shown component of this activity changes.
+	 */
+	export let updateHeight: (pixels: number) => {};
+	let height = 0;
+	$: updateHeight(height);
+
+	/**
 	 * (Optional) This function will get called when a list of selection cards
 	 * in this option has changed (because user has played a card). Useful in
 	 * section that uses selection quiz and want to keep track of remaining items.
@@ -93,6 +100,7 @@
 	<!-- Multiple absolute position so that transition work without shifts  -->
 	{#each displayed as item, index (item)}
 		<div
+			bind:clientHeight={height}
 			style="left: {$isMobile ? 50 : 50 + 4 * (index - 1)}vw; 
 			transform: translate({$isMobile ? -50 : -50 + 100 * (index - 1)}%,0);"
 			transition:fade

@@ -13,6 +13,12 @@
 	export let addProgress: (val: number) => void;
 	export let onFinish: () => void;
 
+	/**
+	 * Called when the height of shown component of this activity changes.
+	 */
+	export let updateHeight: (pixels: number) => {};
+	let height = 0;
+	$: updateHeight(height);
 
 	const finish = () => {
 		addProgress(1);
@@ -27,6 +33,7 @@
 	<div
 		transition:fly={{ y: 800, duration: 800 }}
 		class={`pointer-events-auto absolute flex h-[57%] w-[85%] flex-col items-center overflow-hidden rounded-[5vw] border-[1px] border-b-0 border-black/10 bg-transparent bg-white font-line-seed`}
+		bind:clientHeight={height}
 	>
 		<div
 			style="box-shadow: 0px 4px 15px 0px rgba(0, 0, 0, 0.10);"

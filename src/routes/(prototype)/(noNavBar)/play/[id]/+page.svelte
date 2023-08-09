@@ -20,6 +20,7 @@
 	import LessonDiscussionActivityView from './LessonDiscussionActivityView.svelte';
 	import { addLessonSession } from '$lib/temp/analytic';
 	import { getLocalProgress, saveLocalProgress } from '$lib/localdb/lessonProgressLocal';
+	import userSession from '$lib/stores/userSession';
 
 	let data: Lesson | null = null;
 	let music: Howl | null = null;
@@ -71,7 +72,13 @@
 			coin = 200,
 			exp = 200;
 		await Promise.all([
-			increaseCourseProgress(data.course).then((value) => (courseProgress = value * 100)),
+			increaseCourseProgress(data.course).then((value) => {
+				courseProgress = value.currentProgress * 100;
+
+				if ($userSession.accountData) {
+					$userSession.accountData.subjectProgress = value.subjectProgress ?? [];
+				}
+			}),
 			increaseCurrency({ coin, exp })
 		]);
 		return { courseProgress, coin, exp };

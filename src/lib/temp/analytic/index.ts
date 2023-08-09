@@ -101,7 +101,9 @@ export const addLessonSession = async function (
 	progress: number,
 	lesson: string
 ) {
-	const uid = auth.currentUser?.uid ?? '';
+	const uid = auth.currentUser?.uid;
+	if (!uid) return;
+
 	const batch = writeBatch(firestore);
 
 	const sessionDocRef = doc(collection(firestore, `${_analyticCollection}/lessonSession/sessions`));

@@ -1,11 +1,9 @@
 <script lang="ts">
-	import { revealGoalHint } from '$lib/global/conversation';
 	import { getContext } from 'svelte';
 	import type { Context } from 'svelte-simple-modal';
 
 	const { close }: Context = getContext('simple-modal');
 	const handleConfirmClicked = () => {
-		revealGoalHint();
 		close();
 	};
 </script>

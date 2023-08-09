@@ -116,8 +116,8 @@
 							item={item.lesson}
 							progress={item.progress}
 							class="snap-center {$isMobile
-								? 'max-h-[140vw] min-h-[80vw] min-w-[85vw]'
-								: 'mt-[calc(48vh-19vw)] h-[40vw] w-[32vw]'}"
+								? 'max-h-[115vw] min-h-[115vw] min-w-[80vw]'
+								: 'mt-[calc(48vh-19vw)] h-[38vw] w-[27vw]'}"
 						/>
 					{/each}
 				</div>

@@ -110,10 +110,10 @@
 	},
 
 	{
-		"title": "ทำความรู้จักและทักทาย!",
+		"title": "ชายหาดแสนสนุก!",
 		"description": "เช้านี้เป็นเช้าแสนวุ่นวาย มีกิจวัตรประจำวันให้ทำมากมายเป็นประจำเหมือนทุกวัน",
 		"ambientAudio": "https://cdn.pixabay.com/audio/2022/07/19/audio_272763b5bb.mp3",
-		"backgroundUrl": "https://cdn.midjourney.com/1a7dd329-bd7b-466f-be54-1fe893630a10/0_3.png",
+		"backgroundUrl": "https://cdn.midjourney.com/f67c1282-516c-436c-ad69-6a7d02295d91/0_1.png",
 		"like": 329,
 		"view": 83214,
 		"activities": [
@@ -308,7 +308,7 @@
 			"accent": "US",
 			"gender": "FEMALE",
 			"bot": "https://media.discordapp.net/attachments/1120787872379842711/1126571584111513660/image-removebg_6_1.png?width=249&height=654",
-			"message": "Hello, nice to meet you."
+			"message": "I love Beach and Sea!"
 		},
 		"course": {
 			"displayName": "Pre A1",

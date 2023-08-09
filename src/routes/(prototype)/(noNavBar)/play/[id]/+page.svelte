@@ -177,7 +177,7 @@
 			</div>
 
 			<!-- Title -->
-		<div class="mt-[2vh] text-center text-[5vw] font-bold text-white">{data.title}</div>
+			<div class="mt-[2vh] text-center text-[5vw] font-bold text-white">{data.title}</div>
 
 			<!-- Activity name -->
 			{#if currentView === 'ACTIVITY' && currentActivity}
@@ -190,28 +190,34 @@
 		{#if currentView === 'NARRATIVE'}
 			<LessonNarrativeView items={data.narratives} onFinish={nextView} />
 		{:else if currentView === 'ACTIVITY'}
-			{#if currentActivity}
-				{#if currentActivity.type === ActivityType.Selection}
-					<!-- Can't do type casting in template :( -->
-					<LessonSelectionActivityView
-						items={currentActivity.cards}
-						{addProgress}
-						onFinish={nextView}
-					/>
-				{:else if currentActivity.type === ActivityType.Reading}
-					<LessonReadingActivityView data={currentActivity} {addProgress} onFinish={nextView} />
-				{:else if currentActivity.type === ActivityType.Cloze}
-					<LessonClozeActivityView data={currentActivity} {addProgress} onFinish={nextView} />
-				{:else if currentActivity.type === ActivityType.Listening}
-					<LessonListeningActivityView data={currentActivity} {addProgress} onFinish={nextView} />
-				{:else if currentActivity.type === ActivityType.Dialogue}
-					<LessonDialogueActivityView data={currentActivity} {addProgress} onFinish={nextView} />
-				{:else if currentActivity.type === ActivityType.Discussion}
-					<LessonDiscussionActivityView data={currentActivity} {addProgress} onFinish={nextView} />
+			{#key currentActivity}
+				{#if currentActivity}
+					{#if currentActivity.type === ActivityType.Selection}
+						<!-- Can't do type casting in template :( -->
+						<LessonSelectionActivityView
+							items={currentActivity.cards}
+							{addProgress}
+							onFinish={nextView}
+						/>
+					{:else if currentActivity.type === ActivityType.Reading}
+						<LessonReadingActivityView data={currentActivity} {addProgress} onFinish={nextView} />
+					{:else if currentActivity.type === ActivityType.Cloze}
+						<LessonClozeActivityView data={currentActivity} {addProgress} onFinish={nextView} />
+					{:else if currentActivity.type === ActivityType.Listening}
+						<LessonListeningActivityView data={currentActivity} {addProgress} onFinish={nextView} />
+					{:else if currentActivity.type === ActivityType.Dialogue}
+						<LessonDialogueActivityView data={currentActivity} {addProgress} onFinish={nextView} />
+					{:else if currentActivity.type === ActivityType.Discussion}
+						<LessonDiscussionActivityView
+							data={currentActivity}
+							{addProgress}
+							onFinish={nextView}
+						/>
+					{/if}
+				{:else}
+					<h1 class="mx-auto text-[8vw] font-bold text-white">Error:Activity data not found</h1>
 				{/if}
-			{:else}
-				<h1 class="mx-auto text-[8vw] font-bold text-white">Error:Activity data not found</h1>
-			{/if}
+			{/key}
 		{:else if currentView === 'FINISHED'}
 			<!-- Wait to execute `onFinish` function then show `LessonFinishedView` -->
 			{#await onFinish()}

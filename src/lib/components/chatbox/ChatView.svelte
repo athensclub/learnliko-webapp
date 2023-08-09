@@ -63,7 +63,7 @@
 			{
 				role: 'assistant',
 				content: intro,
-				transcription: await blobToBase64(await synthesize(intro, 'US', 'FEMALE'))
+				transcription: await blobToBase64(await synthesize(intro, accent, gender))
 			}
 		];
 		aiThinking = false;

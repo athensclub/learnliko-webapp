@@ -55,7 +55,8 @@
 
 		// save progress to local only when moving to the new activity
 		// to prevent incorrect `progress`
-		if (data?.id) saveLocalProgress(data.id, activityIndex, progress);
+		if (data?.id)
+			saveLocalProgress(data.id, activityIndex, currentView === 'FINISHED' ? 1 : progress);
 	};
 
 	let progress = 0;

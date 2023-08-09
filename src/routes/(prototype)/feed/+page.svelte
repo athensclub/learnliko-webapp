@@ -88,7 +88,7 @@
 </header>
 
 <div class="flex w-full flex-1 flex-col font-line-seed">
-	<div class="no-scrollbar mt-[8vw] flex flex-row gap-[3vw] overflow-x-auto px-[4vw] pb-[2vw]">
+	<div class="no-scrollbar mt-[15vw] flex flex-row gap-[3vw] overflow-x-auto px-[5vw]">
 		{#each tags as tag, index}
 			<button
 				on:click={() => (selectedTagIndex = index)}
@@ -107,8 +107,8 @@
 			{#if displayedLessons.length > 0}
 				<div
 					in:fade={{ delay: 400 }}
-					class={`no-scrollbar my-auto flex snap-x snap-mandatory flex-row gap-[5vw] overflow-x-auto px-[10vw] ${
-						$isMobile ? 'w-full' : 'w-[54vw] pb-[10vh] pt-0'
+					class={`no-scrollbar my-auto flex snap-x snap-mandatory flex-row gap-[5vw] overflow-x-auto px-[5vw] ${
+						$isMobile ? 'w-full' : 'w-[54vw] pt-0'
 					}`}
 				>
 					{#each displayedLessons as item (item.lesson.id)}
@@ -116,7 +116,7 @@
 							item={item.lesson}
 							progress={item.progress}
 							class="snap-center {$isMobile
-								? 'max-h-[115vw] min-h-[115vw] min-w-[80vw]'
+								? 'max-h-[120vw] min-h-[120vw] min-w-[86vw]'
 								: 'mt-[calc(48vh-19vw)] h-[38vw] w-[27vw]'}"
 						/>
 					{/each}

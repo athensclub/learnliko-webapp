@@ -88,7 +88,7 @@
 
 <div
 	transition:fade
-	class="pointer-events-none absolute left-0 top-0 flex h-[100vh] w-full flex-row items-center justify-center gap-[5vw]"
+	class="pointer-events-none absolute left-0 top-0 flex h-[100%] w-full flex-row items-center justify-center gap-[5vw]"
 >
 	<!-- Multiple absolute position so that transition work without shifts  -->
 	{#each displayed as item, index (item)}

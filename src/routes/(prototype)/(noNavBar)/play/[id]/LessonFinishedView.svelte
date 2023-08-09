@@ -1,4 +1,5 @@
 <script lang="ts">
+	import type { Course } from '$gql/generated/graphql';
 	import CircularProgressBar from '$lib/components/CircularProgressBar.svelte';
 	import FeedbackModal from '$lib/components/modals/FeedbackModal.svelte';
 	import { isMobile } from '$lib/global/breakpoints';
@@ -11,6 +12,7 @@
 	export let exp: number = 200;
 	export let coin: number = 800;
 	export let progress: number = 50;
+	export let course: Course;
 
 	/**
 	 * Called when the height of shown component of this activity changes.
@@ -52,8 +54,10 @@
 					value={progress}
 				>
 					<div class="flex h-full flex-col items-center justify-center">
-						<div class={$isMobile ? 'text-[2.5vw]' : 'text-[0.3vw]'}>CEFR</div>
-						<div class={$isMobile ? 'text-[7vw]' : 'text-[2vw]'}>Pre A1</div>
+						<div class={$isMobile ? 'text-[2.5vw]' : 'text-[0.3vw]'}>
+							{course.subject.indicatorLabel}
+						</div>
+						<div class={$isMobile ? 'text-[7vw]' : 'text-[2vw]'}>{course.displayName}</div>
 					</div>
 				</CircularProgressBar>
 

@@ -249,7 +249,13 @@
 					</div>
 				</div>
 			{:then value}
-				<LessonFinishedView progress={value.courseProgress} coin={value.coin} exp={value.exp} />
+				<LessonFinishedView
+					course={data.course}
+					progress={value.courseProgress}
+					coin={value.coin}
+					exp={value.exp}
+					{updateHeight}
+				/>
 			{/await}
 		{/if}
 

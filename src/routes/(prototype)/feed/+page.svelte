@@ -61,7 +61,7 @@
 			on:click={() => (currentView = 'EXPLORE')}
 			class="px-[3vw] {currentView === 'EXPLORE'
 				? 'bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] bg-clip-text text-transparent'
-				: 'text-black/[0.34]'}"
+				: 'text-black/[0.20]'}"
 		>
 			Explore
 		</button>
@@ -79,7 +79,7 @@
 	</div>
 
 	<button on:click={() => goto('/profile-details')}>
-		<svg class="w-[6vw]" viewBox="0 0 22 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+		<svg class="w-[5vw]" viewBox="0 0 22 23" fill="none" xmlns="http://www.w3.org/2000/svg">
 			<rect width="22" height="3" rx="1.5" fill="#1C1C1C" />
 			<rect x="9" y="10" width="13" height="3" rx="1.5" fill="#1C1C1C" />
 			<rect x="6" y="20" width="16" height="3" rx="1.5" fill="#1C1C1C" />

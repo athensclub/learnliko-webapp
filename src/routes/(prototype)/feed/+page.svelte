@@ -72,9 +72,9 @@
 			on:click={() => (currentView = 'COMPLETED')}
 			class="px-[3vw] {currentView === 'COMPLETED'
 				? 'bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] bg-clip-text text-transparent'
-				: 'text-black/[0.34]'}"
+				: 'text-black/[0.20]'}"
 		>
-			Completed
+			Studied
 		</button>
 	</div>
 
@@ -88,14 +88,14 @@
 </header>
 
 <div class="flex w-full flex-1 flex-col font-line-seed">
-	<div class="no-scrollbar mt-[15vw] flex flex-row gap-[3vw] overflow-x-auto px-[5vw]">
+	<div class="no-scrollbar mt-[6vw] flex flex-row gap-[3vw] overflow-x-auto px-[5vw]">
 		{#each tags as tag, index}
 			<button
 				on:click={() => (selectedTagIndex = index)}
 				class="whitespace-nowrap rounded-full px-[5.5vw] py-[2.5vw] pb-[3.5vw] text-[4.5vw] font-bold {selectedTagIndex ===
 				index
-					? 'bg-[#3D3D3D] text-white'
-					: 'bg-[#F8F8F8] text-black'}"
+					? 'bg-[#212121] text-white'
+					: 'bg-[#F8F8F8] text-[#212121] '}"
 			>
 				{tag}
 			</button>

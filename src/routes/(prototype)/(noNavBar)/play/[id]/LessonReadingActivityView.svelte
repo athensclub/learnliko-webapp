@@ -46,13 +46,13 @@
 					<div transition:fade class="absolute left-0 top-0 flex h-full w-full flex-col p-[6vw]">
 						<div class="flex-1 flex-col overflow-y-auto">
 							<img
-								class="max-w-full rounded-[4vw]"
+								class="h-[23.7vh] w-full rounded-[4vw] object-cover"
 								src={currentPage.illustrationUrl}
 								alt="Illustration"
 							/>
 
-							<div class="mt-[5vw] text-[5.5vw] font-bold">{item.title}</div>
-							<div class="mt-[2vw] text-[4vw]">{currentPage.text}</div>
+							<div class="mt-[2vh] text-[5.5vw] font-bold">{item.title}</div>
+							<div class="mt-[1vh] text-[4vw]">{currentPage.text}</div>
 
 							<!-- Bottom spacing -->
 							<div class="h-[8vw] w-full" />
@@ -66,7 +66,7 @@
 					{#each item.pages as _, index}
 						<button
 							on:click={() => (pageIndex = index)}
-							class="h-[4vw] w-[12vw] rounded-full {pageIndex === index
+							class="aspect-[37/10] w-[9.5vw] rounded-full {pageIndex === index
 								? 'bg-black'
 								: 'bg-[#D9D9D9]'}"
 						/>
@@ -76,7 +76,7 @@
 
 			<button
 				on:click={() => (currentView = 'QUIZ')}
-				class="mx-auto mt-[4vw] w-fit rounded-full bg-white px-[6vw] py-[1vw] text-[4.5vw] font-bold"
+				class="mx-auto mt-[4vw] w-fit rounded-full bg-white px-[6.9vw] py-[0.8vh] text-[3.8vw] font-bold"
 			>
 				ตอบคำถาม
 			</button>
@@ -94,7 +94,7 @@
 	>
 		<button
 			on:click={() => (currentView = 'READING')}
-			class="pointer-events-auto mx-auto mt-[4vw] w-fit rounded-full bg-white px-[6vw] py-[1vw] text-[4.5vw] font-bold"
+			class="pointer-events-auto mx-auto mt-[4vw] w-fit rounded-full bg-white px-[6.9vw] py-[0.8vh] text-[3.8vw] font-bold"
 			slot="bottom"
 		>
 			อ่านเนื้อหา

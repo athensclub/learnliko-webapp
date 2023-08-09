@@ -111,7 +111,7 @@
 
 	{
 		"title": "ชายหาดแสนสนุก!",
-		"description": "เช้านี้เป็นเช้าแสนวุ่นวาย มีกิจวัตรประจำวันให้ทำมากมายเป็นประจำเหมือนทุกวัน",
+		"description": "วันนี้ร้อนมากๆเป็นกลางเดือนเมษายน ขณะนี้เป็นเวลาบ่ายแก่ๆ แดดร้อนเริ่มกลายเป็นอุ่น...",
 		"ambientAudio": "https://cdn.pixabay.com/audio/2022/07/19/audio_272763b5bb.mp3",
 		"backgroundUrl": "https://cdn.midjourney.com/f67c1282-516c-436c-ad69-6a7d02295d91/0_1.png",
 		"like": 329,
@@ -321,10 +321,10 @@
 		"id": "2"
 	},
 	{
-		"title": "วันหยุดมาถึงแล้ว!",
-		"description": "เช้านี้เป็นเช้าแสนวุ่นวาย มีกิจวัตรประจำวันให้ทำมากมายเป็นประจำเหมือนทุกวัน",
+		"title": "เติมสีสันให้กับโลกใบนี้!",
+		"description": "แอลิสคือนางฟ้าที่ออกเดินทางไปยังดวงดาวต่างๆ เพื่อค้นหาสีสัน ที่สามารถเติม...",
 		"ambientAudio": "https://cdn.pixabay.com/audio/2022/07/19/audio_272763b5bb.mp3",
-		"backgroundUrl": "https://cdn.midjourney.com/1a7dd329-bd7b-466f-be54-1fe893630a10/0_3.png",
+		"backgroundUrl": "https://cdn.midjourney.com/898c9f66-e40a-418d-9372-458ce16b3246/0_0.png",
 		"like": 329,
 		"view": 83214,
 		"activities": [
@@ -518,7 +518,7 @@
 		"intro": {
 			"accent": "US",
 			"gender": "FEMALE",
-			"bot": "https://media.discordapp.net/attachments/1120787872379842711/1122773372732981258/vi_potrait_full_body_3d_avatar_girl_stylize_smile_b891a33b-0f46-4270-9ad8-ecca245d8e9e-removebg.png?width=298&height=655",
+			"bot": "https://media.discordapp.net/attachments/1120787872379842711/1126571585671803031/image-removebg_5_1.png?width=496&height=655",
 			"message": "Hello, nice to meet you."
 		},
 		"course": {
@@ -532,10 +532,10 @@
 		"id": "3"
 	},
 	{
-		"title": "ทำความรู้จักและทักทาย!",
-		"description": "เช้านี้เป็นเช้าแสนวุ่นวาย มีกิจวัตรประจำวันให้ทำมากมายเป็นประจำเหมือนทุกวัน",
+		"title": "เริ่มต้นการเป็นโปรแกรมเมอร์!",
+		"description": "เริ่มเรียนรู้การเขียนโค้ด โปรแกรมแรกของคุณจะสร้างขึ้นด้วยตัวเอง ไปพร้อมกับหุ่นยนต์ผู้ช่วย...",
 		"ambientAudio": "https://cdn.pixabay.com/audio/2022/07/19/audio_272763b5bb.mp3",
-		"backgroundUrl": "https://cdn.midjourney.com/1a7dd329-bd7b-466f-be54-1fe893630a10/0_3.png",
+		"backgroundUrl": "https://media.discordapp.net/attachments/1018855917715984434/1138747679002861658/vi_minimal_clean_computer_coding_room_lab_3d_stylize_future_wit_9f67d106-5dd4-49b2-ad21-61a7385e3c04.png?width=655&height=655",
 		"like": 329,
 		"view": 83214,
 		"activities": [
@@ -729,8 +729,8 @@
 		"intro": {
 			"accent": "US",
 			"gender": "FEMALE",
-			"bot": "https://media.discordapp.net/attachments/1120787872379842711/1122773372732981258/vi_potrait_full_body_3d_avatar_girl_stylize_smile_b891a33b-0f46-4270-9ad8-ecca245d8e9e-removebg.png?width=298&height=655",
-			"message": "Hello, nice to meet you."
+			"bot": "https://media.discordapp.net/attachments/1120787872379842711/1138746116918231120/image-removebg_10_1.png?width=345&height=654",
+			"message": "print()"
 		},
 		"course": {
 			"displayName": "Basic Python",

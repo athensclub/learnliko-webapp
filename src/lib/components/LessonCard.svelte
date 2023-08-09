@@ -90,7 +90,7 @@
 	</div>
 
 		<div style="font-size: {scale * ($isMobile ? 4.2 : 1.5)}vw;" class="max-w-[90%]">
-			{item.title}
+			<Typewriter mode="loopRandom" >{item.title}</Typewriter>
 		</div>
 		<div style="font-size: {scale * ($isMobile ? 3 : 1.05)}vw;" class="mt-[0.5vh] max-w-[90%]">
 			{item.description}
@@ -110,18 +110,18 @@
 	</a>
 
 	<div class="flex h-[50%] flex-row items-center">
-		<div class="ml-[5%] flex h-full animate-slideInLeft flex-col justify-end">
+		<div class="ml-[5%] flex h-full  flex-col justify-end">
 			<img class="max-h-full max-w-[33vw] object-contain" src={item.intro.bot} alt="Avatar" />
 		</div>
 
 		<div
 			style="font-size: {scale * ($isMobile ? 3 : 1)}vw; padding: {scale *
 				($isMobile ? 1.5 : 1)}vw;"
-			class="relative bottom-[30%] right-[3%] h-fit animate-wiggle py-[3vw] px-[2.5vw] rounded-bl-none bg-white font-bold {$isMobile
+			class="relative bottom-[30%] right-[3%] h-fit animate-bounce py-[3vw] px-[2.5vw] rounded-bl-none bg-white font-bold {$isMobile
 				? 'rounded-[6vw]'
 				: 'rounded-[2vw]'}"
 		>
-			<button
+		<button
 				on:click={() => {
 					speech && playAudioURL(speech);
 				}}

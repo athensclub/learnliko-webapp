@@ -135,7 +135,7 @@
 </div>
 
 <div class="flex flex-col p-[6vw]">
-	<div class="text-[5.5vw] font-bold">Analyzers</div>
+	<div class="text-[5.5vw] font-bold">Analytics</div>
 	{#each $profileProgresses as progress, index}
 		{#each progress.courseProgress as courseProgress}
 			<div

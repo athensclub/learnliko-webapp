@@ -36,23 +36,19 @@
 		class="pointer-events-none absolute left-0 top-0 flex h-full w-full items-center justify-center overflow-hidden"
 	>
 		<div class="pointer-events-auto mt-[16vw] flex flex-col" bind:clientHeight={height}>
-			<div
-				class="relative overflow-hidden bg-white {$isMobile
-					? 'h-[57vh] w-[85vw] rounded-[4vw]'
-					: 'h-[30vw] w-[60vw]'}"
-			>
+			<div class="relative h-[57vh] w-[85vw] overflow-hidden rounded-[8.2vw] bg-white">
 				{#key pageIndex}
 					<!-- absolute positioning to do proper transition -->
-					<div transition:fade class="absolute left-0 top-0 flex h-full w-full flex-col p-[6vw]">
+					<div transition:fade class="absolute left-0 top-0 flex h-full w-full flex-col p-[7.7vw]">
 						<div class="flex-1 flex-col overflow-y-auto">
 							<img
-								class="h-[23.7vh] w-full rounded-[4vw] object-cover"
+								class="h-[23.7vh] w-full rounded-[4.6vw] object-cover"
 								src={currentPage.illustrationUrl}
 								alt="Illustration"
 							/>
 
-							<div class="mt-[2vh] text-[5.5vw] font-bold">{item.title}</div>
-							<div class="mt-[1vh] text-[4vw]">{currentPage.text}</div>
+							<div class="mt-[2vh] text-[4.8vw] font-bold">{item.title}</div>
+							<div class="mt-[1vh] text-[3.8vw]">{currentPage.text}</div>
 
 							<!-- Bottom spacing -->
 							<div class="h-[8vw] w-full" />

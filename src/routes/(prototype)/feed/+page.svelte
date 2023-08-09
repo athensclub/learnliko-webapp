@@ -24,11 +24,11 @@
 		});
 	});
 
-	let currentView: 'EXPLORE' | 'COMPLETED' = 'EXPLORE';
+	let currentView: 'EXPLORE' | 'STUDIED' = 'EXPLORE';
 	$: if (currentView === 'EXPLORE') {
-		lessons = totalLessons?.filter((e) => e.progress < 100) ?? [];
+		lessons = totalLessons?.filter((e) => Math.round(e.progress) < 100) ?? [];
 	} else {
-		lessons = totalLessons?.filter((e) => e.progress >= 100) ?? [];
+		lessons = totalLessons?.filter((e) => Math.round(e.progress) >= 100) ?? [];
 	}
 
 	let displayedLessons: DisplayLesson[] | null = null;
@@ -69,8 +69,8 @@
 		<div class="my-auto h-[80%] w-[0.2vw] bg-[#252525]/[0.15]" />
 
 		<button
-			on:click={() => (currentView = 'COMPLETED')}
-			class="px-[3vw] {currentView === 'COMPLETED'
+			on:click={() => (currentView = 'STUDIED')}
+			class="px-[3vw] {currentView === 'STUDIED'
 				? 'bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD] bg-clip-text text-transparent'
 				: 'text-black/[0.20]'}"
 		>

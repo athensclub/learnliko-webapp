@@ -41,7 +41,7 @@
 		class="relative flex w-full flex-col bg-[#0000008C] font-bold text-white backdrop-blur-sm"
 	>
 		<svg
-			class="absolute w-[7%] {$isMobile ? 'right-[6vw] top-[6vw]' : 'right-[2vw] top-[2vw]'}"
+			class="absolute w-[6%] {$isMobile ? 'right-[4vw] top-[6vw]' : 'right-[2vw] top-[2vw]'}"
 			viewBox="0 0 39 32"
 			fill="none"
 			xmlns="http://www.w3.org/2000/svg"

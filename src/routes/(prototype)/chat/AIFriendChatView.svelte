@@ -48,7 +48,7 @@
 			aiName={$selectedAIFriend.name}
 			aiBackground={$selectedAIFriend.backgroundColor}
 			prompt={$selectedAIFriend.prompt}
-			intro={'Hello'}
+			intro={$selectedAIFriend.intro}
 			aiImage={$selectedAIFriend.imageProfile}
 		/>
 	{/if}

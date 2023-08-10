@@ -227,7 +227,7 @@
 				<div class="h-[27vw] w-full" />
 			</div>
 		{:else if currentView === 'DIALOGUE'}
-			<div class={`flex h-full flex-col justify-end ${$isMobile ? 'w-full' : 'w-fit'}`}>
+			<!-- <div class={`flex h-full flex-col justify-end ${$isMobile ? 'w-full' : 'w-fit'}`}>
 				<img
 					class={`${
 						$isMobile ? `mx-auto max-h-[80%] max-w-full` : `bottom-0 h-[90%] transition-transform`
@@ -235,19 +235,30 @@
 					src={$chatContext.conversation.avatar.models[$chatContext.bot.emotion]}
 					alt="Avatar"
 				/>
-			</div>
+			</div> -->
 
-			<div
-				transition:fly={{ y: 800, duration: 800 }}
-				class={`pointer-events-auto absolute bottom-0 flex h-[55%] w-full flex-col items-center overflow-hidden rounded-[5vw] rounded-b-none border-[1px] border-b-0 border-black/10 bg-transparent bg-white font-line-seed`}
-			>
-				<ConversationView
-					onFinishClicked={onFinish}
-					class="text-black"
-					initializingClass="text-black"
-					recorderClass="text-black bg-white w-[90%] bottom-[27vw]"
-					finishButtonClass="border-white/[0.15]"
-				/>
+			<div class="absolute bottom-0 flex h-[80vh] w-full flex-col">
+				<div class="flex w-full flex-1 items-center justify-center">
+					<div
+						style="background-color: {item.bot.backgroundColor}; 
+							   background-image: url('{$chatContext.conversation.avatar.models[$chatContext.bot.emotion]}');"
+						class="h-[25vw] w-[25vw] rounded-full border-[1vw] border-white bg-cover bg-top"
+					/>
+				</div>
+
+				<div
+					transition:fly={{ y: 800, duration: 800 }}
+					class={`pointer-events-auto flex h-[55vh] w-full flex-col items-center overflow-hidden rounded-[5vw] rounded-b-none border-[1px] border-b-0 border-black/10 bg-transparent bg-white font-line-seed`}
+				>
+					<ConversationView
+						aiChatProfileBackgroundColor={item.bot.backgroundColor}
+						onFinishClicked={onFinish}
+						class="text-black"
+						initializingClass="text-black"
+						recorderClass="text-black bg-white w-[90%] bottom-[27vw]"
+						finishButtonClass="border-white/[0.15]"
+					/>
+				</div>
 			</div>
 		{/if}
 	</div>

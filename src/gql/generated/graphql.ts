@@ -56,6 +56,7 @@ export type BotDetails = {
   __typename?: 'BotDetails';
   accent: Scalars['String']['output'];
   avatar: Scalars['String']['output'];
+  backgroundColor: Scalars['String']['output'];
   gender: Scalars['String']['output'];
   intro: Scalars['String']['output'];
   name: Scalars['String']['output'];

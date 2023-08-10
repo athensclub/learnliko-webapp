@@ -57,7 +57,7 @@
 			intro={item.bot.intro}
 			aiName={item.bot.name}
 			aiImage={item.bot.avatar}
-			aiBackground={'transparent'}
+			aiBackground={item.bot.backgroundColor}
 			gender={item.bot.gender}
 			accent={item.bot.accent}
 		/>

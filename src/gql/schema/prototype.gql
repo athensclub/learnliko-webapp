@@ -139,6 +139,7 @@ type BotDetails {
 	intro: String!
 	prompt: String!
 	avatar: String!
+	backgroundColor: String!
 	role: String!
 	name: String!
 	accent: String!

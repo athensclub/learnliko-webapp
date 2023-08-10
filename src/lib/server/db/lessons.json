@@ -11,70 +11,210 @@
 				"title": "Quiz",
 				"cards": [
 					{
-						"text": "“What is this called?”",
-						"image": "https://cdn.discordapp.com/attachments/1120787872379842711/1121124468538998835/vi_leopard_cartoon_realistic_in_the_savanna_325b24af-9414-40b4-80fc-e705c1e04fd1.png",
-						"choices": ["tiger", "lion", "monkey", "elephant"],
-						"answerIndex": 0,
-						"coin": 100,
+						"text": "“What is this picture?”",
+						"image": "https://cdn.midjourney.com/a571767f-0ee4-4df3-a4ac-20585c44baa8/0_1.png",
+						"choices": ["bee", "bold", "boy", "both"],
+						"answerIndex": 2,
+						"coin": 10,
 						"exp": 25,
 						"type": "SELECTION"
 					},
 					{
-						"text": "“Sorry, now I ... working.” จงเติมคำในช่องว่าง",
+						"text": "“I (...) a student.” จงเติมคำในช่องว่าง",
 						"choices": ["is", "am", "are", "-"],
 						"answerIndex": 1,
-						"coin": 100,
+						"coin": 10,
 						"exp": 25,
 						"type": "SELECTION"
-					}
+					},
+					{
+						"text": "“What is this picture?”",
+						"image": "https://cdn.midjourney.com/1006d974-c542-4168-b370-d270ff1b206a/0_0.png",
+						"choices": ["bath", "book", "bag", "note"],
+						"answerIndex": 1,
+						"coin": 10,
+						"exp": 25,
+						"type": "SELECTION"
+					},
+					{
+						"text": "“What is this picture?”",
+						"image": "https://cdn.midjourney.com/36b2cc8d-0a53-4147-91e4-983e88216e22/0_2.png",
+						"choices": ["score", "school", "hotel", "sport"],
+						"answerIndex": 1,
+						"coin": 10,
+						"exp": 25,
+						"type": "SELECTION"
+					},
+					{
+						"text": "“What is this picture?”",
+						"image": "https://cdn.midjourney.com/c845d2a3-fcaf-4d60-9fc4-fc7b7378729f/0_1.png",
+						"choices": ["best", "car", "bus", "bike"],
+						"answerIndex": 2,
+						"coin": 10,
+						"exp": 25,
+						"type": "SELECTION"
+					},
+					{
+						"text": "“Amy is wearing a blue (...).” จงเติมคำในช่องว่าง",
+						"choices": ["pen", "bag", "shirt", "chair"],
+						"answerIndex": 2,
+						"coin": 10,
+						"exp": 25,
+						"type": "SELECTION"
+					},
+					{
+						"text": "“May I (...) in please?” จงเติมคำในช่องว่าง",
+						"choices": ["draw", "come", "like", "go"],
+						"answerIndex": 1,
+						"coin": 10,
+						"exp": 25,
+						"type": "SELECTION"
+					},
+					{
+						"text": "“What is this picture?”",
+						"image": "https://cdn.midjourney.com/be5af1f1-ad27-4ff7-9d20-f46cd5be8f6e/0_0.png",
+						"choices": ["board", "both", "bar", "bath"],
+						"answerIndex": 0,
+						"coin": 10,
+						"exp": 25,
+						"type": "SELECTION"
+					},
+					{
+						"text": "“(...) book you like to read?” จงเติมคำในช่องว่าง",
+						"choices": ["When", "Who", "What", "Where"],
+						"answerIndex": 2,
+						"coin": 10,
+						"exp": 25,
+						"type": "SELECTION"
+					}	
+
 				],
 				"type": "SELECTION"
 			},
 			{
-				"title": "Quiz",
+				"title": "Blog",
 				"cards": [
 					{
-						"text": "“What is this called?”",
-						"image": "https://cdn.discordapp.com/attachments/1120787872379842711/1121124468538998835/vi_leopard_cartoon_realistic_in_the_savanna_325b24af-9414-40b4-80fc-e705c1e04fd1.png",
-						"choices": ["tiger", "lion", "monkey", "elephant"],
-						"answerIndex": 0,
-						"coin": 100,
-						"exp": 25,
-						"type": "SELECTION"
-					},
-					{
-						"text": "“Sorry, now I ... working.” จงเติมคำในช่องว่าง",
-						"choices": ["is", "am", "are", "-"],
-						"answerIndex": 1,
-						"coin": 100,
-						"exp": 25,
-						"type": "SELECTION"
+						"title": "Andy's family",
+						"pages": [
+							{
+								"text": "Hi! I'm Andy. I'm 9 years old and this is my family. We live in a small house in a beautiful garden. My father's name is Aaron. He's a teacher. He's 42 years old. My mother's name is Clare. She's a teacher. She's 40. My parents work in a school in the center of town.  I have got 2 brothers. their names are Sam and Max. Sam is the middle child and Max is our little brother. We got one big black dog.",
+								"illustrationUrl": "https://media.discordapp.net/attachments/1087307553471463514/1123524602639941722/vi_family_photo_7653c771-4d8d-4a6d-90a3-0563c30e812f.png?width=655&height=655"
+							}
+						],
+						"questions": [
+							{
+								"text": "พ่อของ Andy ทำงานอะไร",
+								"choices": [
+									"teacher",
+									"dad",
+									"police",
+									"brother"
+								],
+								"answerIndex": 0,
+								"coin": 10,
+								"exp": 25,
+								"type": "SELECTION"
+							},
+							{
+								"text": "แม่ของ Andy อายุเท่าไหร่",
+								"choices": [
+									"nine",
+									"forty-two",
+									"fifty-one",
+									"forty"
+								],
+								"answerIndex": 3,
+								"coin": 10,
+								"exp": 25,
+								"type": "SELECTION"
+							},
+							{
+								"text": "สัตว์เลี้ยงของบ้านนี้คืออะไร",
+								"choices": [
+									"cat",
+									"bird",
+									"dog",
+									"duck"
+								],
+								"answerIndex": 2,
+								"coin": 10,
+								"exp": 25,
+								"type": "SELECTION"
+							},
+							{
+								"text": "Andy มีพี่น้องกี่คน",
+								"choices": [
+									"one",
+									"zero",
+									"two",
+									"three"
+								],
+								"answerIndex": 2,
+								"coin": 10,
+								"exp": 25,
+								"type": "SELECTION"
+							},
+							{
+								"text": "Andy เป็นอะไรกับ Max",
+								"choices": [
+									"little brother",
+									"dad",
+									"mom",
+									"big brother"
+								],
+								"answerIndex": 3,
+								"coin": 10,
+								"exp": 25,
+								"type": "SELECTION"
+							}
+
+						],
+						"type": "READING"
 					}
 				],
-				"type": "SELECTION"
+				"type": "READING"
 			},
 			{
-				"title": "Quiz",
+				"title": "Talk",
 				"cards": [
 					{
-						"text": "“What is this called?”",
-						"image": "https://cdn.discordapp.com/attachments/1120787872379842711/1121124468538998835/vi_leopard_cartoon_realistic_in_the_savanna_325b24af-9414-40b4-80fc-e705c1e04fd1.png",
-						"choices": ["tiger", "lion", "monkey", "elephant"],
-						"answerIndex": 0,
-						"coin": 100,
-						"exp": 25,
-						"type": "SELECTION"
-					},
-					{
-						"text": "“Sorry, now I ... working.” จงเติมคำในช่องว่าง",
-						"choices": ["is", "am", "are", "-"],
-						"answerIndex": 1,
-						"coin": 100,
-						"exp": 25,
-						"type": "SELECTION"
+						"bot": {
+							"avatar": "https://media.discordapp.net/attachments/1120787872379842711/1128390106785533972/image.png?width=366&height=655",
+							"accent": "US",
+							"gender": "FEMALE",
+							"intro": "Hi, my name is Amy. I like to read books.",
+							"name": "Amy",
+							"prompt": "You are a girl, studying in grade 1, your name is Amy, you are friendly and funny. and you are talking to your new friend. Your Goal: You have to have a conversation with your new friend and answer him about your favorite tales book and animal. Answer Format: You have to answer in the JSON format by using to following JSON schema {// your response\"message\": string,// \"neutral\", \"joy\", \"trust\", \"fear\", \"surprise\", \"sadness\", \"disgust\", \"anger\", \"anticipation\"\"emotion\": string,// the enum value// “NORMAL” used when the situation is normal// “INAPPROPRIATE” used when the situation is out of context or say something inappropriate// “END-OF-CONVERSATION” used When your friend says goodbye\"status\": string} Your information: 1. You like to read The tales of the lion and the mouse 2. You like hippos the most.",
+							"role": "New friend"
+						},
+						"learner": {
+							"mission": "พูดคุยกับเพื่อนร่วมชั้นคนใหม่ของคุณ เธอชื่อ Amy และชอบอ่านหนังสือ",
+							"goal": [
+								{
+									"description": "ถาม  Amy ว่าชอบอ่านหนังสืออะไร",
+									"hint": "What book do you like to read?",
+									"prompt": "Asking for book that like to read."
+								},
+								{
+									"description": "ถามว่าเธอชอบสัตว์อะไร",
+									"hint": "What animal do you like?",
+									"prompt": "Asking for favorite animal"
+								},
+								{
+									"description": "บอกลาและบอก Amy ว่ายินดีที่ได้รู้จักเธอ",
+									"hint": "Good bye, nice too meet you.",
+									"prompt": "Say good bye"
+								}
+							]
+						},
+						"contextPrompt": "Learner is casually chat with their friend named Amy about favorite book, favorite book, and saying goodbye . Learner is aiming to ask about her  favorite book, what animal she likes, and end with saying goodbye.",
+						"coin": 50,
+						"exp": 100,
+						"type": "DIALOGUE"
 					}
 				],
-				"type": "SELECTION"
+				"type": "DIALOGUE"
 			}
 		],
 		
@@ -93,7 +233,7 @@
 			}
 		],
 		"intro": {
-			"accent": "UK",
+			"accent": "US",
 			"gender": "FEMALE",
 			"bot": "https://media.discordapp.net/attachments/1120787872379842711/1128390106785533972/image.png?width=366&height=655",
 			"message": "Hello, nice to meet you."
@@ -121,32 +261,85 @@
 				"title": "Quiz",
 				"cards": [
 					{
-						"text": "“What is this called?”",
-						"image": "https://cdn.discordapp.com/attachments/1120787872379842711/1121124468538998835/vi_leopard_cartoon_realistic_in_the_savanna_325b24af-9414-40b4-80fc-e705c1e04fd1.png",
-						"choices": [
-							"tiger",
-							"lion",
-							"monkey",
-							"elephant"
-						],
-						"answerIndex": 0,
-						"coin": 100,
+						"text": "“What is this picture?”",
+						"image": "https://cdn.midjourney.com/3bb6598e-7b7f-4bf0-98e2-3e23c1356b6b/0_1.png",
+						"choices": ["land", "ship", "beach", "bath"],
+						"answerIndex": 2,
+						"coin": 10,
 						"exp": 25,
 						"type": "SELECTION"
 					},
 					{
-						"text": "“Sorry, now I ... working.” จงเติมคำในช่องว่าง",
-						"choices": [
-							"is",
-							"am",
-							"are",
-							"-"
-						],
+						"text": "“What is this picture?”",
+						"image": "https://cdn.midjourney.com/53ff891c-14d3-4a6a-9abd-32cbb47a37ab/0_1.png",
+						"choices": ["clone", "phone", "camera", "button"],
+						"answerIndex": 2,
+						"coin": 10,
+						"exp": 25,
+						"type": "SELECTION"
+					},
+					{
+						"text": "“What is this picture?”",
+						"image": "https://cdn.midjourney.com/b6c32aca-406b-4396-b270-ecb39bbfad26/0_0.png",
+						"choices": ["shell", "shark", "tank", "whale"],
 						"answerIndex": 1,
-						"coin": 100,
+						"coin": 10,
+						"exp": 25,
+						"type": "SELECTION"
+					},
+					{
+						"text": "“We (...) to the beach every week.” จงเติมคำในช่องว่าง",
+						"choices": ["go", "do", "make", "learn"],
+						"answerIndex": 0,
+						"coin": 10,
+						"exp": 25,
+						"type": "SELECTION"
+					},
+					{
+						"text": "“I'm very hot. I want (...).” จงเติมคำในช่องว่าง",
+						"choices": ["hat", "wave", "sun", "sand"],
+						"answerIndex": 0,
+						"coin": 10,
+						"exp": 25,
+						"type": "SELECTION"
+					},
+					{
+						"text": "“I take a picture with my (...).” จงเติมคำในช่องว่าง",
+						"choices": ["camera", "cold", "glasses", "hat"],
+						"answerIndex": 0,
+						"coin": 10,
+						"exp": 25,
+						"type": "SELECTION"
+					},
+					{
+						"text": "“What is this picture?”",
+						"image": "https://cdn.midjourney.com/9ecf1209-c419-4bbe-91be-905434714cf3/0_1.png",
+						"choices": ["ship", "shirt", "shape", "shark"],
+						"answerIndex": 0,
+						"coin": 10,
+						"exp": 25,
+						"type": "SELECTION"
+					},
+					{
+						"text": "“What is this picture?”",
+						"image": "https://cdn.midjourney.com/b1efd72e-4f3e-4ecb-8c72-48914ee65bbe/0_0.png",
+						"choices": ["lemonade", "coke", "beer", "ice"],
+						"answerIndex": 0,
+						"coin": 10,
+						"exp": 25,
+						"type": "SELECTION"
+					},
+					{
+						"text": "“What is this picture?”",
+						"image": "https://cdn.midjourney.com/269b7094-e7cf-42cd-bcaf-252f19af045b/0_1.png",
+						"choices": ["turtle", "fish", "shape", "shell"],
+						"answerIndex": 3,
+						"coin": 10,
 						"exp": 25,
 						"type": "SELECTION"
 					}
+			
+
 				],
 				"type": "SELECTION"
 			},
@@ -154,25 +347,48 @@
 				"title": "Reading",
 				"cards": [
 					{
-						"title": "A Busy Day",
+						"title": "At the beach",
 						"pages": [
 							{
-								"text": "Today is a busy day for you. In the morning, you wake up early, go to the bathroom to clean your body, and eat a good breakfast. Then you go to school and have fun. play toy cars with your friends at the playground. In the evening, you come back home and enjoy yourself. Finally, you have dinner with your family before going to bed. and you complete the day with a nice sleep.",
-								"illustrationUrl": "https://cdn.midjourney.com/4bb21813-1c93-44ed-8781-d9c3483e7575/0_2.png"
-							},
-							{
-								"text": "Test second page.",
-								"illustrationUrl": "https://cdn.midjourney.com/4bb21813-1c93-44ed-8781-d9c3483e7575/0_2.png"
+								"text": "I sit on the beach, holding a camera. The sun shine as I drink my lemonade. With my glasses on, I read a book. Sand on my toes, and waves  nearby. I find a shell and watch fish swim. I take a picture, enjoy the beautiful sea.",
+								"illustrationUrl": "https://cdn.midjourney.com/32c2a55f-1afb-4cbe-8dff-e55ab799ea75/0_0.png"
 							}
+			
 						],
 						"questions": [
 							{
-								"text": "คุณทำะไรหลังจากตื่นนอน",
+								"text": "What am I holding on the beach?",
 								"choices": [
-									"clean your body",
-									"go to bed",
-									"eat breakfast",
-									"play toy cars"
+									"Camera",
+									"Lemonade",
+									"Glasses",
+									"Fish"
+								],
+								"answerIndex": 0,
+								"coin": 100,
+								"exp": 25,
+								"type": "SELECTION"
+							},
+							{
+								"text": "What do I see in the sea?",
+								"choices": [
+									"Shark",
+									"Fish",
+									"Swim",
+									"Bird"
+								],
+								"answerIndex": 1,
+								"coin": 100,
+								"exp": 25,
+								"type": "SELECTION"
+							},
+							{
+								"text": "ฉันสวมใส่อะไรในระหว่างอ่านหนังสือ",
+								"choices": [
+									"Glasses",
+									"Read",
+									"Hat",
+									"Swim"
 								],
 								"answerIndex": 0,
 								"coin": 100,
@@ -189,95 +405,61 @@
 				"title": "Fill in the Blank",
 				"cards": [
 					{
-						"title": "Cloze title",
-						"text": "Fill in the _\nthis should be on new line,\nsecond blank _ ",
-						"coin": 10,
-						"exp": 10,
+						"title": "เรียงประโยคว่า 'ฉันเห็นปลาฉลามในทะเล' ",
+						"text": "_saw_____.",
+						"coin": 15,
+						"exp": 35,
 						"choices": [
-							"here",
-							"blank"
+							"shark",
+							"I",
+							"in",
+							"sea",
+							"a",
+							"the"
 						],
 						"answerIndexes": [
 							1,
-							0
+							4,
+							0,
+							2,
+							5,
+							3
 						],
 						"type": "CLOZE"
-					},
-					{
-						"title": "Cloze title2",
-						"text": "Fill in the _\nthis should be on new line,\nsecond blank _ ",
-						"coin": 10,
-						"exp": 10,
-						"choices": [
-							"here",
-							"blank"
-						],
-						"answerIndexes": [
-							1,
-							0
-						],
-						"type": "CLOZE"
-					}
+					}		
 				],
 				"type": "CLOZE"
-			},
-			{
-				"title": "Podcast",
-				"cards": [
-					{
-						"title": "Exciting Song",
-						"audioUrl": "https://www.learningcontainer.com/wp-content/uploads/2020/02/Kalimba.mp3",
-						"illustrationUrl": "https://cdn.discordapp.com/attachments/1120787872379842711/1121124787784274040/vi_capital_city_new_York_7b1ddf5c-2cb0-46a9-9ea8-2184bc4e58de.png",
-						"questions": [
-							{
-								"text": "เพลงสนุกไหม",
-								"choices": [
-									"ไม่รู้",
-									"ไม่รู้ ",
-									"ไม่รู้  ",
-									"ไม่รู้   "
-								],
-								"answerIndex": 2,
-								"coin": 100,
-								"exp": 25,
-								"type": "SELECTION"
-							}
-						],
-						"type": "LISTENING"
-					}
-				],
-				"type": "LISTENING"
 			},
 			{
 				"title": "Meeting",
 				"cards": [
 					{
 						"bot": {
-							"avatar": "https://media.discordapp.net/attachments/1120787872379842711/1122773372732981258/vi_potrait_full_body_3d_avatar_girl_stylize_smile_b891a33b-0f46-4270-9ad8-ecca245d8e9e-removebg.png?width=298&height=655",
+							"avatar": "https://media.discordapp.net/attachments/1120787872379842711/1126571584111513660/image-removebg_6_1.png?width=249&height=654",
 							"accent": "US",
-							"gender": "FEMALE",
-							"intro": "Welcome to the shop how can I help you?",
-							"name": "Lucy",
-							"prompt": "Your role: You are a female stationery shop keeper, you are kind, and friendly. Your name is Lucy. Your Goal: You have to give customer an information about the product available in you store, the sell them to the customer. Answer Format: You have to answer in the JSON format by using to following JSON schema {// your response\"message\": string,// \"neutral\", \"joy\", \"trust\", \"fear\", \"surprise\", \"sadness\", \"disgust\", \"anger\", \"anticipation\"\"emotion\": string,// the enum value// “NORMAL” used when the situation is normal// “INAPPROPRIATE” used when the situation is out of context or say something inappropriate// “END-OF-CONVERSATION” used when the customer have left or finish purchased your product\"status\": string} Shop information: There are only pen and pencil available in your store. The pen and pencil is 5฿ and 10฿ each respectively. Your store have only 10 pens, 10 pencils stock in your storage.",
-							"role": "Shopkeeper"
+							"gender": "MALE",
+							"intro": "Do you like to go to the beach in the Holidays?",
+							"name": "Alex",
+							"prompt": "You are a boy, studying in grade 1, your name is Alex, you are friendly and funny. and you are talking to your friend about beach and holidays. Your Goal: You have to have a conversation with your friend and answer him about your favorite stuffs that you like to bring with when you go to the beach and how often that you go to the beach. Answer Format: You have to answer in the JSON format by using to following JSON schema {// your response\"message\": string,// \"neutral\", \"joy\", \"trust\", \"fear\", \"surprise\", \"sadness\", \"disgust\", \"anger\", \"anticipation\"\"emotion\": string,// the enum value// “NORMAL” used when the situation is normal// “INAPPROPRIATE” used when the situation is out of context or say something inappropriate// “END-OF-CONVERSATION” used When your friend says goodbye\"status\": string} Your information: 1. You like to bring glasses an a book to the beach 2. You go to the beach every hoildays, You love beach so much.",
+							"role": "Friend"
 						},
 						"learner": {
-							"mission": "คุณกำลังอยู่ในร้านเครื่องเขียน และคุณต้องซื้อเครื่องเขียนจากพนักงานขายที่ชื่อ Lucy",
+							"mission": "คุณกำลังพูดคุยกับ Alex เพื่อนของคุณ เกี่ยวการไปเที่ยวชายหาดในวันหยุด",
 							"goal": [
 								{
-									"description": "สอบถามสินค้าที่ขาย",
-									"hint": "Do you have any pens in your shop?",
-									"prompt": "Asking for products available in the shop"
+									"description": "ตอบคำถาม Alex ว่าชอบไปทะเลในวันหยุดไหม",
+									"hint": "Yes, I like to go to the beach in the Holidays.",
+									"prompt": "Answering Alex about Do I like to go to the beach in the Holidays"
 								},
 								{
-									"description": "สั่งซื้อปากกา 2 ด้าม",
-									"hint": "I would like to buy two pens.",
-									"prompt": "Buy two pens"
+									"description": "ตอบ Alex ว่าชอบนำอะไรไปเที่ยวชายหาด",
+									"hint": "What do you like to bring to the beach?",
+									"prompt": "Alex Asking about What do like to bring to the beach?"
 								},
 								{
-									"description": "สอบถามราคาสินค้าที่ต้องการซื้อ",
-									"hint": "How much is it?",
-									"prompt": "Asking for a product price"
+									"description": "บอกลาและบอก Alex ว่าเจอกันที่ชายหาด",
+									"hint": "Good bye, see you at the beach.",
+									"prompt": "Say good bye and see you at the beach."
 								}
 							]
 						},
@@ -306,7 +488,7 @@
 		],
 		"intro": {
 			"accent": "US",
-			"gender": "FEMALE",
+			"gender": "MALE",
 			"bot": "https://media.discordapp.net/attachments/1120787872379842711/1126571584111513660/image-removebg_6_1.png?width=249&height=654",
 			"message": "I love Beach and Sea!"
 		},

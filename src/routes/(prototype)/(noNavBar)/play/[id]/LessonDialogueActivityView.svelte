@@ -240,9 +240,8 @@
 			<div class="absolute bottom-0 flex h-[80vh] w-full flex-col">
 				<div class="flex w-full flex-1 items-center justify-center">
 					<div
-						style="background-image: url('{$chatContext.conversation.avatar.models[
-							$chatContext.bot.emotion
-						]}');"
+						style="background-color: {item.bot.backgroundColor}; 
+							   background-image: url('{$chatContext.conversation.avatar.models[$chatContext.bot.emotion]}');"
 						class="h-[25vw] w-[25vw] rounded-full border-[1vw] border-white bg-cover bg-top"
 					/>
 				</div>
@@ -252,6 +251,7 @@
 					class={`pointer-events-auto flex h-[55vh] w-full flex-col items-center overflow-hidden rounded-[5vw] rounded-b-none border-[1px] border-b-0 border-black/10 bg-transparent bg-white font-line-seed`}
 				>
 					<ConversationView
+						aiChatProfileBackgroundColor={item.bot.backgroundColor}
 						onFinishClicked={onFinish}
 						class="text-black"
 						initializingClass="text-black"

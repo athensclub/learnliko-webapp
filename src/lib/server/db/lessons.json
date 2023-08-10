@@ -77,7 +77,7 @@
 				"type": "SELECTION"
 			}
 		],
-		
+
 		"narratives": [
 			{
 				"text": "วันนี้เป็นวันแรกที่คุณเข้าห้องเรียนและรับการเรียนรู้ภาษาอังกฤษกับเพื่อนๆ ในห้องเรียนนี้ คุณพบกับหน้าต่างที่เปิดออกมองเห็นสวนสวย ดอกไม้สีสันสวยงามที่แสนอัศจรรย์ และเสียงนกน้อยที่ร้องเพลงอย่างสดใส",
@@ -123,12 +123,7 @@
 					{
 						"text": "“What is this called?”",
 						"image": "https://cdn.discordapp.com/attachments/1120787872379842711/1121124468538998835/vi_leopard_cartoon_realistic_in_the_savanna_325b24af-9414-40b4-80fc-e705c1e04fd1.png",
-						"choices": [
-							"tiger",
-							"lion",
-							"monkey",
-							"elephant"
-						],
+						"choices": ["tiger", "lion", "monkey", "elephant"],
 						"answerIndex": 0,
 						"coin": 100,
 						"exp": 25,
@@ -136,12 +131,7 @@
 					},
 					{
 						"text": "“Sorry, now I ... working.” จงเติมคำในช่องว่าง",
-						"choices": [
-							"is",
-							"am",
-							"are",
-							"-"
-						],
+						"choices": ["is", "am", "are", "-"],
 						"answerIndex": 1,
 						"coin": 100,
 						"exp": 25,
@@ -168,12 +158,7 @@
 						"questions": [
 							{
 								"text": "คุณทำะไรหลังจากตื่นนอน",
-								"choices": [
-									"clean your body",
-									"go to bed",
-									"eat breakfast",
-									"play toy cars"
-								],
+								"choices": ["clean your body", "go to bed", "eat breakfast", "play toy cars"],
 								"answerIndex": 0,
 								"coin": 100,
 								"exp": 25,
@@ -193,14 +178,8 @@
 						"text": "Fill in the _\nthis should be on new line,\nsecond blank _ ",
 						"coin": 10,
 						"exp": 10,
-						"choices": [
-							"here",
-							"blank"
-						],
-						"answerIndexes": [
-							1,
-							0
-						],
+						"choices": ["here", "blank"],
+						"answerIndexes": [1, 0],
 						"type": "CLOZE"
 					},
 					{
@@ -208,14 +187,8 @@
 						"text": "Fill in the _\nthis should be on new line,\nsecond blank _ ",
 						"coin": 10,
 						"exp": 10,
-						"choices": [
-							"here",
-							"blank"
-						],
-						"answerIndexes": [
-							1,
-							0
-						],
+						"choices": ["here", "blank"],
+						"answerIndexes": [1, 0],
 						"type": "CLOZE"
 					}
 				],
@@ -231,12 +204,7 @@
 						"questions": [
 							{
 								"text": "เพลงสนุกไหม",
-								"choices": [
-									"ไม่รู้",
-									"ไม่รู้ ",
-									"ไม่รู้  ",
-									"ไม่รู้   "
-								],
+								"choices": ["ไม่รู้", "ไม่รู้ ", "ไม่รู้  ", "ไม่รู้   "],
 								"answerIndex": 2,
 								"coin": 100,
 								"exp": 25,
@@ -254,6 +222,7 @@
 					{
 						"bot": {
 							"avatar": "https://media.discordapp.net/attachments/1120787872379842711/1122773372732981258/vi_potrait_full_body_3d_avatar_girl_stylize_smile_b891a33b-0f46-4270-9ad8-ecca245d8e9e-removebg.png?width=298&height=655",
+							"backgroundColor": "#6C80E8",
 							"accent": "US",
 							"gender": "FEMALE",
 							"intro": "Welcome to the shop how can I help you?",
@@ -334,12 +303,7 @@
 					{
 						"text": "“What is this called?”",
 						"image": "https://cdn.discordapp.com/attachments/1120787872379842711/1121124468538998835/vi_leopard_cartoon_realistic_in_the_savanna_325b24af-9414-40b4-80fc-e705c1e04fd1.png",
-						"choices": [
-							"tiger",
-							"lion",
-							"monkey",
-							"elephant"
-						],
+						"choices": ["tiger", "lion", "monkey", "elephant"],
 						"answerIndex": 0,
 						"coin": 100,
 						"exp": 25,
@@ -347,12 +311,7 @@
 					},
 					{
 						"text": "“Sorry, now I ... working.” จงเติมคำในช่องว่าง",
-						"choices": [
-							"is",
-							"am",
-							"are",
-							"-"
-						],
+						"choices": ["is", "am", "are", "-"],
 						"answerIndex": 1,
 						"coin": 100,
 						"exp": 25,
@@ -379,12 +338,7 @@
 						"questions": [
 							{
 								"text": "คุณทำะไรหลังจากตื่นนอน",
-								"choices": [
-									"clean your body",
-									"go to bed",
-									"eat breakfast",
-									"play toy cars"
-								],
+								"choices": ["clean your body", "go to bed", "eat breakfast", "play toy cars"],
 								"answerIndex": 0,
 								"coin": 100,
 								"exp": 25,
@@ -404,14 +358,8 @@
 						"text": "Fill in the _\nthis should be on new line,\nsecond blank _ ",
 						"coin": 10,
 						"exp": 10,
-						"choices": [
-							"here",
-							"blank"
-						],
-						"answerIndexes": [
-							1,
-							0
-						],
+						"choices": ["here", "blank"],
+						"answerIndexes": [1, 0],
 						"type": "CLOZE"
 					},
 					{
@@ -419,14 +367,8 @@
 						"text": "Fill in the _\nthis should be on new line,\nsecond blank _ ",
 						"coin": 10,
 						"exp": 10,
-						"choices": [
-							"here",
-							"blank"
-						],
-						"answerIndexes": [
-							1,
-							0
-						],
+						"choices": ["here", "blank"],
+						"answerIndexes": [1, 0],
 						"type": "CLOZE"
 					}
 				],
@@ -442,12 +384,7 @@
 						"questions": [
 							{
 								"text": "เพลงสนุกไหม",
-								"choices": [
-									"ไม่รู้",
-									"ไม่รู้ ",
-									"ไม่รู้  ",
-									"ไม่รู้   "
-								],
+								"choices": ["ไม่รู้", "ไม่รู้ ", "ไม่รู้  ", "ไม่รู้   "],
 								"answerIndex": 2,
 								"coin": 100,
 								"exp": 25,
@@ -465,6 +402,7 @@
 					{
 						"bot": {
 							"avatar": "https://media.discordapp.net/attachments/1120787872379842711/1122773372732981258/vi_potrait_full_body_3d_avatar_girl_stylize_smile_b891a33b-0f46-4270-9ad8-ecca245d8e9e-removebg.png?width=298&height=655",
+							"backgroundColor": "#6C80E8",
 							"accent": "US",
 							"gender": "FEMALE",
 							"intro": "Welcome to the shop how can I help you?",
@@ -545,12 +483,7 @@
 					{
 						"text": "“What is this called?”",
 						"image": "https://cdn.discordapp.com/attachments/1120787872379842711/1121124468538998835/vi_leopard_cartoon_realistic_in_the_savanna_325b24af-9414-40b4-80fc-e705c1e04fd1.png",
-						"choices": [
-							"tiger",
-							"lion",
-							"monkey",
-							"elephant"
-						],
+						"choices": ["tiger", "lion", "monkey", "elephant"],
 						"answerIndex": 0,
 						"coin": 100,
 						"exp": 25,
@@ -558,12 +491,7 @@
 					},
 					{
 						"text": "“Sorry, now I ... working.” จงเติมคำในช่องว่าง",
-						"choices": [
-							"is",
-							"am",
-							"are",
-							"-"
-						],
+						"choices": ["is", "am", "are", "-"],
 						"answerIndex": 1,
 						"coin": 100,
 						"exp": 25,
@@ -590,12 +518,7 @@
 						"questions": [
 							{
 								"text": "คุณทำะไรหลังจากตื่นนอน",
-								"choices": [
-									"clean your body",
-									"go to bed",
-									"eat breakfast",
-									"play toy cars"
-								],
+								"choices": ["clean your body", "go to bed", "eat breakfast", "play toy cars"],
 								"answerIndex": 0,
 								"coin": 100,
 								"exp": 25,
@@ -615,14 +538,8 @@
 						"text": "Fill in the _\nthis should be on new line,\nsecond blank _ ",
 						"coin": 10,
 						"exp": 10,
-						"choices": [
-							"here",
-							"blank"
-						],
-						"answerIndexes": [
-							1,
-							0
-						],
+						"choices": ["here", "blank"],
+						"answerIndexes": [1, 0],
 						"type": "CLOZE"
 					},
 					{
@@ -630,14 +547,8 @@
 						"text": "Fill in the _\nthis should be on new line,\nsecond blank _ ",
 						"coin": 10,
 						"exp": 10,
-						"choices": [
-							"here",
-							"blank"
-						],
-						"answerIndexes": [
-							1,
-							0
-						],
+						"choices": ["here", "blank"],
+						"answerIndexes": [1, 0],
 						"type": "CLOZE"
 					}
 				],
@@ -653,12 +564,7 @@
 						"questions": [
 							{
 								"text": "เพลงสนุกไหม",
-								"choices": [
-									"ไม่รู้",
-									"ไม่รู้ ",
-									"ไม่รู้  ",
-									"ไม่รู้   "
-								],
+								"choices": ["ไม่รู้", "ไม่รู้ ", "ไม่รู้  ", "ไม่รู้   "],
 								"answerIndex": 2,
 								"coin": 100,
 								"exp": 25,
@@ -676,6 +582,7 @@
 					{
 						"bot": {
 							"avatar": "https://media.discordapp.net/attachments/1120787872379842711/1122773372732981258/vi_potrait_full_body_3d_avatar_girl_stylize_smile_b891a33b-0f46-4270-9ad8-ecca245d8e9e-removebg.png?width=298&height=655",
+							"backgroundColor": "#6C80E8",
 							"accent": "US",
 							"gender": "FEMALE",
 							"intro": "Welcome to the shop how can I help you?",
@@ -756,12 +663,7 @@
 					{
 						"text": "“What is this called?”",
 						"image": "https://cdn.discordapp.com/attachments/1120787872379842711/1121124468538998835/vi_leopard_cartoon_realistic_in_the_savanna_325b24af-9414-40b4-80fc-e705c1e04fd1.png",
-						"choices": [
-							"tiger",
-							"lion",
-							"monkey",
-							"elephant"
-						],
+						"choices": ["tiger", "lion", "monkey", "elephant"],
 						"answerIndex": 0,
 						"coin": 100,
 						"exp": 25,
@@ -769,12 +671,7 @@
 					},
 					{
 						"text": "“Sorry, now I ... working.” จงเติมคำในช่องว่าง",
-						"choices": [
-							"is",
-							"am",
-							"are",
-							"-"
-						],
+						"choices": ["is", "am", "are", "-"],
 						"answerIndex": 1,
 						"coin": 100,
 						"exp": 25,
@@ -801,12 +698,7 @@
 						"questions": [
 							{
 								"text": "คุณทำะไรหลังจากตื่นนอน",
-								"choices": [
-									"clean your body",
-									"go to bed",
-									"eat breakfast",
-									"play toy cars"
-								],
+								"choices": ["clean your body", "go to bed", "eat breakfast", "play toy cars"],
 								"answerIndex": 0,
 								"coin": 100,
 								"exp": 25,
@@ -826,14 +718,8 @@
 						"text": "Fill in the _\nthis should be on new line,\nsecond blank _ ",
 						"coin": 10,
 						"exp": 10,
-						"choices": [
-							"here",
-							"blank"
-						],
-						"answerIndexes": [
-							1,
-							0
-						],
+						"choices": ["here", "blank"],
+						"answerIndexes": [1, 0],
 						"type": "CLOZE"
 					},
 					{
@@ -841,14 +727,8 @@
 						"text": "Fill in the _\nthis should be on new line,\nsecond blank _ ",
 						"coin": 10,
 						"exp": 10,
-						"choices": [
-							"here",
-							"blank"
-						],
-						"answerIndexes": [
-							1,
-							0
-						],
+						"choices": ["here", "blank"],
+						"answerIndexes": [1, 0],
 						"type": "CLOZE"
 					}
 				],
@@ -864,12 +744,7 @@
 						"questions": [
 							{
 								"text": "เพลงสนุกไหม",
-								"choices": [
-									"ไม่รู้",
-									"ไม่รู้ ",
-									"ไม่รู้  ",
-									"ไม่รู้   "
-								],
+								"choices": ["ไม่รู้", "ไม่รู้ ", "ไม่รู้  ", "ไม่รู้   "],
 								"answerIndex": 2,
 								"coin": 100,
 								"exp": 25,
@@ -887,6 +762,7 @@
 					{
 						"bot": {
 							"avatar": "https://media.discordapp.net/attachments/1120787872379842711/1122773372732981258/vi_potrait_full_body_3d_avatar_girl_stylize_smile_b891a33b-0f46-4270-9ad8-ecca245d8e9e-removebg.png?width=298&height=655",
+							"backgroundColor": "#6C80E8",
 							"accent": "US",
 							"gender": "FEMALE",
 							"intro": "Welcome to the shop how can I help you?",

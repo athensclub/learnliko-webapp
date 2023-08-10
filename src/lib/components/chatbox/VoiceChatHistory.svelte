@@ -9,6 +9,8 @@
 	export let aiBackgroundColor = '#FFFFFF3D';
 	export let userBackgroundColor = '#FFFFFF3D';
 
+	export let aiProfileBackgroundColor = '#766A78';
+
 	export let allowFriendSpeakSlower = false;
 
 	let clazz = '';
@@ -39,7 +41,8 @@
 						class={`rounded-full border border-white bg-cover bg-top ${
 							$isMobile ? 'h-[10vw] w-[10vw]' : 'h-[3.4vw] w-[3.4vw]'
 						}`}
-						style="background-color: #766A78; background-image: url('{assistantProfileImage}');"
+						style="background-color: {aiProfileBackgroundColor}; 
+							   background-image: url('{assistantProfileImage}');"
 					/>
 				{/if}
 

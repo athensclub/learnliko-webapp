@@ -81,14 +81,12 @@
 	>
 		<div class="pointer-events-auto mt-[16vw] flex flex-col" bind:clientHeight={height}>
 			<div
-				class="flex flex-col justify-between overflow-hidden bg-white p-[6vw] {$isMobile
-					? 'h-[57vh] w-[85vw] rounded-[4vw]'
-					: 'h-[30vw] w-[60vw]'}"
+				class="flex h-fit w-[83.3vw] flex-col justify-between gap-y-[2.5vh] overflow-hidden rounded-[8.2vw] bg-white px-[9.7vw] py-[3.4vh]"
 			>
-				<div class="mx-auto text-[5.5vw] font-bold">{item.title}</div>
+				<div class="mx-auto text-[4.1vw] font-bold">{item.title}</div>
 
 				<img
-					class="max-h-[50%] max-w-full rounded-[4vw]"
+					class="aspect-square w-full rounded-[4vw] object-cover shadow-[0_2px_8px_0_rgba(0,0,0,0.25)]"
 					src={item.illustrationUrl}
 					alt="Podcast Illustration"
 				/>
@@ -98,7 +96,7 @@
 					<div
 						bind:this={progressBar}
 						on:click={onProgressBarClicked}
-						class="h-[4vw] w-full rounded-full bg-[#F0F0F0]"
+						class="h-[1.2vh] w-full rounded-full bg-[#F0F0F0]"
 					>
 						<div
 							style="width: {duration === 0 ? 0 : (currentTime / duration) * 100}%;"
@@ -106,14 +104,14 @@
 						/>
 					</div>
 
-					<div class="flex w-full flex-row justify-between text-[3.5vw] font-bold">
+					<div class="flex w-full flex-row justify-between text-[2.4vw] font-bold">
 						<div>00:00</div>
 						<div>{secondsToHHMM(duration)}</div>
 					</div>
 
 					<button
 						on:click={() => (isPlaying = !isPlaying)}
-						class="mx-auto flex w-[15vw] items-center justify-center rounded-full shadow-all"
+						class="mx-auto flex h-[15vw] w-[15vw] items-center justify-center rounded-full shadow-all"
 					>
 						{#if isPlaying}
 							<svg
@@ -148,7 +146,7 @@
 
 			<button
 				on:click={() => (currentView = 'QUIZ')}
-				class="mx-auto mt-[4vw] w-fit rounded-full bg-white px-[6vw] py-[1vw] text-[4.5vw] font-bold"
+				class="mx-auto mt-[4vw] w-fit rounded-full bg-white px-[6.9vw] py-[0.8vh] text-[3.8vw] font-bold"
 			>
 				ตอบคำถาม
 			</button>
@@ -166,7 +164,7 @@
 	>
 		<button
 			on:click={() => (currentView = 'LISTENING')}
-			class="pointer-events-auto mx-auto mt-[4vw] w-fit rounded-full bg-white px-[6vw] py-[1vw] text-[4.5vw] font-bold"
+			class="pointer-events-auto mx-auto mt-[4vw] w-fit rounded-full bg-white px-[6.9vw] py-[0.8vh] text-[3.8vw] font-bold"
 			slot="bottom"
 		>
 			ฟังเนื้อหา

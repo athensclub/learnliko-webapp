@@ -92,7 +92,7 @@
 					style="box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.25); 
 					font-size: {4.5 * scale}vw; 
 					padding: {5 * scale}vw;"
-					class="flex max-w-[80%] flex-row rounded-[5vw] text-start font-bold"
+					class="flex max-w-[80%] flex-row whitespace-pre-wrap rounded-[5vw] text-start font-bold"
 				>
 					{chat.content}
 
@@ -127,11 +127,11 @@
 			{aiName} กำลังคิด<Typewriter mode="loop">...</Typewriter>
 		</div>
 	{:else}
-		<input
+		<textarea
 			bind:value={currentInput}
 			placeholder="Typing..."
 			style="font-size: {4 * scale}vw;"
-			class="flex flex-1 rounded-full bg-[#F2F2F2] px-[5vw] font-bold"
+			class="flex h-[12vw] flex-1 rounded-full bg-[#F2F2F2] px-[5vw] pt-[3vw] font-bold"
 		/>
 
 		<button

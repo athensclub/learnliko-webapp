@@ -11,7 +11,7 @@
 <div class="flex flex-col p-[3vw]">
 	<div class="text-[8vw] font-bold px-[6vw] pt-[6vw]">AI Friends</div>
 
-	<div class="mb-[4vw] flex flex-row overflow-x-auto p-[4vw]">
+	<div class="mb-[4vw] flex flex-row overflow-x-auto gap-[6vw] p-[4vw]">
 		{#each $aiFriends as friend}
 			<button
 				on:click={() => select(friend)}

@@ -222,7 +222,7 @@
 			{/if}
 
 			<div class="max-w-[80%] font-bold {data.image ? 'text-[5vw]' : 'text-[7vw]'}">
-				{data.text}
+				<Typewriter>{data.text}</Typewriter>
 			</div>
 
 			<div

@@ -30,6 +30,8 @@
 	export let aiChatBackgroundColor = '#EFEFEF';
 	export let userChatBackgroundColor = '#EFEFEF';
 
+	export let aiChatProfileBackgroundColor = '#766A78';
+
 	/**
 	 * Whether to show help (click for hint) button.
 	 */
@@ -61,6 +63,7 @@
 	<div class={`h-full w-full overflow-y-auto ${clazz}`}>
 		<!-- TODO: use profile image from cloud db. -->
 		<VoiceChatHistory
+			aiProfileBackgroundColor={aiChatProfileBackgroundColor}
 			allowFriendSpeakSlower
 			class={voiceChatHistoryClass}
 			aiBackgroundColor={aiChatBackgroundColor}

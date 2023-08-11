@@ -8,7 +8,7 @@
 	};
 </script>
 
-<div class="flex h-full w-full flex-col items-center bg-white p-[2vw] font-line-seed">
+<div class="flex h-full w-full flex-col items-center bg-white p-[2vw] font-line-seed rounded-[10vh] py-[45vw]">
 	<div class="text-[15vw]">📝</div>
 	<div class="mt-[8vw] text-center text-[7vw] font-bold">
 		ช่วยเราทำแบบสอบถามเพื่อการพัฒนา Learnliko

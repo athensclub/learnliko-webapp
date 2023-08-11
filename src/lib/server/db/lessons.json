@@ -654,15 +654,15 @@
 		],
 		"narratives": [
 			{
-				"text": "เช้านี้เป็นเช้าแสนวุ่นวาย มีกิจวัตรประจำวันให้ทำมากมายเป็นประจำเหมือนทุกวัน แต่เราไม่เคยหงุดหงิดหรือกลัว แต่เรากลับเตรียมตัวให้พร้อมที่จะเผชิญกับทุกสิ่งที่ต้องทำในเช้านี้",
+				"text": "แอลิสคือนางฟ้าที่ออกเดินทางไปยังดวงดาวต่างๆ เพื่อค้นหาสีสัน ที่สามารถเติมความสว่างและความสดใสให้กับโลก",
 				"illustrationUrl": "https://cdn.midjourney.com/1a7dd329-bd7b-466f-be54-1fe893630a10/0_3.png"
 			},
 			{
-				"text": "เมื่อเสร็จสิ้นการเลือกชุดผ้าที่สวยงามแล้ว เราจับยาสีฟันและหว่านน้ำบางๆ เพื่อทำความสะอาดลมหายใจของเรา ความรื่นรมย์ของการล้างหน้า รับประทานอาหาารเช้าเมื่อรู็สึกสดชื่นแล้ว แค่นี้ก็พร้อมจะไปโรงเรียนแล้วล่ะ",
+				"text": "เธอพบเจอสีต่างๆมากมาย เช่น สีเขียวที่ทำให้รู้สึกสดชื่น สีชมพูที่ทำให้รู้สึกอบอุ่น สีเหลืองที่ทำให้รู้สึกเบิกบาน และสีแดงที่ทำให้รู้สึกมั่นคง",
 				"illustrationUrl": "https://cdn.midjourney.com/1a7dd329-bd7b-466f-be54-1fe893630a10/0_3.png"
 			},
 			{
-				"text": "ไปถึงโรงเรียน ทำกิจกรรมต่างๆ ไม่ว่าจะเล่นกับเพื่อนๆที่สนามเด็กเล่น เรียนบทเรียนที่แปลกใหม่ กินข้าวเที่ยงที่โรงอาหาร เสร็จจากกิจที่เหน็ดเหนื่อยมาทั้งวันถึงเวลากลับบ้าน อาบนำ้เปลี่ยนเสื้อผ้ามีเวลาให้ตัวเองในยามคำ่คืน ปล่อยให้ตัวเองผ่อนคลายถึงที่สุดจนพลอยหลับไป",
+				"text": "เธอนำสีทั้งหมดกลับมาให้โลก ทำให้โลกสว่างสดใสมากขึ้น และแน่นอนคุณจะได้เรียนรู้เกี่ยวกับสีและโลกใบนี้ผ่านภาษาอังกฤษ คุณพร้อมแล้วหรือยัง",
 				"illustrationUrl": "https://cdn.midjourney.com/1a7dd329-bd7b-466f-be54-1fe893630a10/0_3.png"
 			}
 		],
@@ -670,7 +670,7 @@
 			"accent": "US",
 			"gender": "FEMALE",
 			"bot": "https://media.discordapp.net/attachments/1120787872379842711/1126571585671803031/image-removebg_5_1.png?width=496&height=655",
-			"message": "Hello, nice to meet you."
+			"message": "Hi, I'm angel Alis"
 		},
 		"course": {
 			"displayName": "Pre A1",
@@ -769,10 +769,10 @@
 		"id": "4"
 	},
 	{
-		"title": "ทำความรู้จักและทักทาย!",
-		"description": "เช้านี้เป็นเช้าแสนวุ่นวาย มีกิจวัตรประจำวันให้ทำมากมายเป็นประจำเหมือนทุกวัน",
+		"title": "รู้จักตัวแปรและสร้างโปรแกรมบวกเลข",
+		"description": "บ่ายวันนี้คุณอยู่ในห้องแลปคอมพิวเตอร์ของโรงเรียน มีภารกิจสำคัญนั่นคือการสร้างเครื่องคิดเลข...",
 		"ambientAudio": "https://cdn.pixabay.com/audio/2022/07/19/audio_272763b5bb.mp3",
-		"backgroundUrl": "https://cdn.midjourney.com/1a7dd329-bd7b-466f-be54-1fe893630a10/0_3.png",
+		"backgroundUrl": "https://media.discordapp.net/attachments/1087307553471463514/1131796046025064608/vi_coding_lab_c495a888-0cec-40f1-a1a3-1363cf4e12ff.png?width=655&height=655",
 		"like": 329,
 		"view": 83214,
 		"activities": [
@@ -934,9 +934,9 @@
 		],
 		"intro": {
 			"accent": "US",
-			"gender": "FEMALE",
-			"bot": "https://media.discordapp.net/attachments/1120787872379842711/1122773372732981258/vi_potrait_full_body_3d_avatar_girl_stylize_smile_b891a33b-0f46-4270-9ad8-ecca245d8e9e-removebg.png?width=298&height=655",
-			"message": "Hello, nice to meet you."
+			"gender": "MALE",
+			"bot": "https://media.discordapp.net/attachments/1120787872379842711/1126571585281740951/vi_potrait_full_body_3d_avatar_boy_stylize_smile_a3c783fb-c9f5-4dd8-b2bd-659ae7580ddd-removebg_1.png?width=259&height=655",
+			"message": "result = num1 + num2"
 		},
 		"course": {
 			"displayName": "Basic Python",

@@ -75,16 +75,20 @@
 		let courseProgress = 0,
 			coin = 200,
 			exp = 200;
-		await Promise.all([
-			increaseCourseProgress(data.course).then((value) => {
-				courseProgress = value.currentProgress * 100;
+		try {
+			await Promise.all([
+				increaseCourseProgress(data.course).then((value) => {
+					courseProgress = value.currentProgress * 100;
 
-				if ($userSession.accountData) {
-					$userSession.accountData.subjectProgress = value.subjectProgress ?? [];
-				}
-			}),
-			increaseCurrency({ coin, exp })
-		]);
+					if ($userSession.accountData) {
+						$userSession.accountData.subjectProgress = value.subjectProgress ?? [];
+					}
+				}),
+				increaseCurrency({ coin, exp })
+			]);
+		} catch (error) {
+			console.log(error);
+		}
 		return { courseProgress, coin, exp };
 	};
 

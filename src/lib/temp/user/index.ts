@@ -114,7 +114,10 @@ export const increaseCourseProgress = async function (course: Course) {
 
 	// Run transaction to mutate user's `subjectProgress` object
 	const subjectProgress = await runTransaction(firestore, async (transaction) => {
-		const userData = (await transaction.get(userDocRef)).data() as User;
+		const docData = await transaction.get(userDocRef);
+		if (!docData || !docData.exists()) return;
+
+		const userData = docData.data() as User;
 
 		// Search for subject and course index in array of user's progress
 		const subjectIndex = userData.subjectProgress.findIndex(

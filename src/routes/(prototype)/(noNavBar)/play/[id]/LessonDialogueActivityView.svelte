@@ -3,7 +3,12 @@
 	import type { Activity, DialogueCard } from '$gql/generated/graphql';
 	import ConversationView from '$lib/components/chatbox/ConversationView.svelte';
 	import { isMobile } from '$lib/global/breakpoints';
-	import { chatContext } from '$lib/global/chatbox';
+	import {
+		chatContext,
+		currentChatboxView,
+		onRecapFinished,
+		showChatbox
+	} from '$lib/global/chatbox';
 	import { conversationFinished } from '$lib/global/conversation';
 	import { onMount } from 'svelte';
 	import { fade, fly } from 'svelte/transition';
@@ -63,6 +68,15 @@
 		};
 	});
 	let currentView: 'BRIEFING' | 'DIALOGUE' = 'BRIEFING';
+
+	const onFinishConversation = () => {
+		$onRecapFinished = () => {
+			$showChatbox = false;
+			onFinish();
+		};
+		$currentChatboxView = 'RECAP';
+		$showChatbox = true;
+	};
 </script>
 
 {#if $chatContext}
@@ -242,7 +256,7 @@
 				class={`pointer-events-auto absolute bottom-0 flex h-[55%] w-full flex-col items-center overflow-hidden rounded-[5vw] rounded-b-none border-[1px] border-b-0 border-black/10 bg-transparent bg-white font-line-seed`}
 			>
 				<ConversationView
-					onFinishClicked={onFinish}
+					onFinishClicked={onFinishConversation}
 					class="text-black"
 					initializingClass="text-black"
 					recorderClass="text-black bg-white w-[90%] bottom-[27vw]"

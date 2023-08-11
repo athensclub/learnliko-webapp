@@ -53,7 +53,9 @@
 		style="box-shadow: 0px 4px 15px 0px rgba(0, 0, 0, 0.10);"
 		class="w-full py-[7.2vw] text-center text-[4.2vw] font-bold"
 	>
-		{$currentGoal + 1}. {conversationDetails.learner.goal[$currentGoal]}
+		{conversationDetails.learner.goal[$currentGoal] !== undefined
+			? `${$currentGoal + 1}. ${conversationDetails.learner.goal[$currentGoal]}`
+			: 'เสร็จสิ้นภารกิจ'}
 	</div>
 
 	<div class={`h-full w-full overflow-y-auto ${clazz}`}>

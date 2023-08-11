@@ -129,7 +129,7 @@ export const checkConversationFinished = () => {
 		if (get(saveCurrentConversation)) {
 			finishedTime = new Date();
 			// TODO: implement recap in the future
-			// computeRecap();
+			computeRecap();
 		}
 	}
 };

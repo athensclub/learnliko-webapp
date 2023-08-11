@@ -54,10 +54,10 @@
 					value={progress}
 				>
 					<div class="flex h-full flex-col items-center justify-center">
-						<div class={$isMobile ? 'text-[2.5vw]' : 'text-[0.3vw]'}>
+						<div class="text-[2.5vw]">
 							{course.subject.indicatorLabel}
 						</div>
-						<div class={$isMobile ? 'text-[7vw]' : 'text-[2vw]'}>{course.displayName}</div>
+						<div class="text-[4.6vw]">{course.displayName}</div>
 					</div>
 				</CircularProgressBar>
 

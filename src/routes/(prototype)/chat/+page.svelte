@@ -1,5 +1,5 @@
 <script lang="ts" context="module">
-	import { writable } from 'svelte/store';
+	import { derived, writable } from 'svelte/store';
 	import type { AiFriend } from '$gql/generated/graphql';
 
 	export const aiFriendCurrentView = writable<'HOME' | 'DETAILED' | 'CHAT'>('HOME');
@@ -7,6 +7,8 @@
 	export const aiFriends = writable<AiFriend[]>([]);
 
 	export const selectedAIFriend = writable<AiFriend | null>(null);
+
+	export const selectedAIFriendIntro = writable<string | null>(null);
 
 	export type Inbox = {
 		friend: AiFriend;
@@ -21,7 +23,7 @@
 	import AIFriendDetailedView from './AIFriendDetailedView.svelte';
 	import AIFriendChatView from './AIFriendChatView.svelte';
 	import { getAIFriends } from '$api/aiFriends';
-	import { shuffle } from '$lib/utils/array';
+	import { getRandomItem, shuffle } from '$lib/utils/array';
 
 	onMount(async () => {
 		$aiFriendCurrentView = 'HOME';
@@ -30,7 +32,7 @@
 		$aiFriends = await getAIFriends();
 		$inboxes = shuffle([...$aiFriends])
 			.slice(0, 3)
-			.map((friend) => ({ friend, message: friend.intro }));
+			.map((friend) => ({ friend, message: getRandomItem(friend.intro) }));
 	});
 </script>
 

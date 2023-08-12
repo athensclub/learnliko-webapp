@@ -188,7 +188,7 @@ type AIFriend {
 	prompt: String!
 	imageProfile: String!
 	backgroundColor: String!
-	intro: String!
+	intro: [String!]!
 	gender: String!
 	accent: String!
 }

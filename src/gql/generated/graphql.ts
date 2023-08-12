@@ -23,7 +23,7 @@ export type AiFriend = {
   gender: Scalars['String']['output'];
   imageProfile: Scalars['String']['output'];
   interest: Scalars['String']['output'];
-  intro: Scalars['String']['output'];
+  intro: Array<Scalars['String']['output']>;
   name: Scalars['String']['output'];
   prompt: Scalars['String']['output'];
   role: Scalars['String']['output'];

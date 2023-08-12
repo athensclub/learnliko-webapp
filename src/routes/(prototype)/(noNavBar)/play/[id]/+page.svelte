@@ -231,7 +231,12 @@
 							onFinish={nextView}
 						/>
 					{:else if currentActivity.type === ActivityType.Dialogue}
-						<LessonDialogueActivityView data={currentActivity} {addProgress} onFinish={nextView} />
+						<LessonDialogueActivityView
+							backgroundUrl={data.backgroundUrl}
+							data={currentActivity}
+							{addProgress}
+							onFinish={nextView}
+						/>
 					{:else if currentActivity.type === ActivityType.Discussion}
 						<LessonDiscussionActivityView
 							data={currentActivity}

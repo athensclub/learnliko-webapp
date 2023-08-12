@@ -19,6 +19,8 @@
 	export let addProgress: (val: number) => void;
 	export let onFinish: () => void;
 
+	export let backgroundUrl: string;
+
 	$: if ($conversationFinished) {
 		addProgress(1);
 	}
@@ -59,7 +61,7 @@
 				intro: item.bot.intro,
 				image: '',
 				topic: '',
-				background: 'unknown',
+				background: backgroundUrl,
 				fromLesson: 'unknown',
 				context: item.contextPrompt,
 				id: item.id

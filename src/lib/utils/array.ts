@@ -21,3 +21,13 @@ export function shuffle<T>(array: T[]) {
 
     return array;
 }
+
+/**
+ * 
+ * @see https://stackoverflow.com/a/5915122
+ * @param array 
+ * @returns 
+ */
+export function getRandomItem<T>(array: T[]) {
+    return array[Math.floor(Math.random() * array.length)];
+}

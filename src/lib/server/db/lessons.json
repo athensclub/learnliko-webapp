@@ -208,7 +208,7 @@
 								}
 							]
 						},
-						"contextPrompt": "Learner is casually chat with their friend named Amy about favorite book, favorite book, and saying goodbye . Learner is aiming to ask about her  favorite book, what animal she likes, and end with saying goodbye.",
+						"contextPrompt": "Learner is casually chat with their friend named Amy about favorite book, favorite animal, and saying goodbye . Learner is aiming to ask about her  favorite book, what animal she likes, and end with saying goodbye.",
 						"coin": 50,
 						"exp": 100,
 						"type": "DIALOGUE"

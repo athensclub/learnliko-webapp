@@ -514,15 +514,47 @@
 				"title": "Podcast",
 				"cards": [
 					{
-						"title": "Exciting Song",
+						"title": "The sunny day at park",
 						"audioUrl": "https://firebasestorage.googleapis.com/v0/b/learnliko-develop.appspot.com/o/Today%20is%20a%20sunny%20day.mp3?alt=media&token=4e5aa501-4aaf-4367-bee5-debc82a09e82",
-						"illustrationUrl": "https://cdn.discordapp.com/attachments/1120787872379842711/1121124787784274040/vi_capital_city_new_York_7b1ddf5c-2cb0-46a9-9ea8-2184bc4e58de.png",
+						"illustrationUrl": "https://media.discordapp.net/attachments/1018855917715984434/1141683114150723584/vi_Today_is_a_sunny_day._The_sky_is_blue_and_the_sun_is_a_big_y_4cd7e325-a340-4313-a876-9c3824acbd9d.png?width=520&height=520",
 						"questions": [
 							{
-								"text": "เพลงสนุกไหม",
-								"choices": ["ไม่รู้", "ไม่รู้ ", "ไม่รู้  ", "ไม่รู้   "],
+								"text": "What color is the sky?",
+								"choices": ["Blue", "Purple ", "Yellow", "Red"],
+								"answerIndex": 0,
+								"coin": 10,
+								"exp": 25,
+								"type": "SELECTION"
+							},
+							{
+								"text": "What flowers do they see at the park?",
+								"choices": ["Yellow sun", "Red roses", "Orange juice", "Red apple"],
+								"answerIndex": 1,
+								"coin": 10,
+								"exp": 25,
+								"type": "SELECTION"
+							},
+							{
+								"text": "Where do they have a picnic?",
+								"choices": ["In the park", "On the chair", "Under a big tree", "At the zoo"],
 								"answerIndex": 2,
-								"coin": 100,
+								"coin": 10,
+								"exp": 25,
+								"type": "SELECTION"
+							},
+							{
+								"text": "What do they eat at the park?",
+								"choices": ["Red roses", "Juicy red apples", "Purple tulip", "Green grass"],
+								"answerIndex": 1,
+								"coin": 10,
+								"exp": 25,
+								"type": "SELECTION"
+							},
+							{
+								"text": "What do they drink?",
+								"choices": ["Green grass", "Juicy apples", "Red flowers", "Orange juice"],
+								"answerIndex": 3,
+								"coin": 10,
 								"exp": 25,
 								"type": "SELECTION"
 							}
@@ -538,42 +570,42 @@
 				"cards": [
 					{
 						"text": "“What is this picture?”",
-						"image": "https://cdn.midjourney.com/3bb6598e-7b7f-4bf0-98e2-3e23c1356b6b/0_1.png",
-						"choices": ["land", "ship", "beach", "bath"],
-						"answerIndex": 2,
-						"coin": 10,
-						"exp": 25,
-						"type": "SELECTION"
-					},
-					{
-						"text": "“What is this picture?”",
-						"image": "https://cdn.midjourney.com/53ff891c-14d3-4a6a-9abd-32cbb47a37ab/0_1.png",
-						"choices": ["clone", "phone", "camera", "button"],
-						"answerIndex": 2,
-						"coin": 10,
-						"exp": 25,
-						"type": "SELECTION"
-					},
-					{
-						"text": "“What is this picture?”",
-						"image": "https://cdn.midjourney.com/b6c32aca-406b-4396-b270-ecb39bbfad26/0_0.png",
-						"choices": ["shell", "shark", "tank", "whale"],
+						"image": "https://cdn.midjourney.com/395d4c30-a522-4e0c-85aa-be8c859558c0/0_3.png",
+						"choices": ["sand", "sun", "son", "soon"],
 						"answerIndex": 1,
 						"coin": 10,
 						"exp": 25,
 						"type": "SELECTION"
 					},
 					{
-						"text": "“We (...) to the beach every week.” จงเติมคำในช่องว่าง",
-						"choices": ["go", "do", "make", "learn"],
+						"text": "“What is this picture?”",
+						"image": "https://media.discordapp.net/attachments/1120787872379842711/1125124266006949888/image.png",
+						"choices": ["Black", "Red", "Yellow", "Green"],
+						"answerIndex": 2,
+						"coin": 10,
+						"exp": 25,
+						"type": "SELECTION"
+					},
+					{
+						"text": "“What is this picture?”",
+						"image": "https://cdn.midjourney.com/c76b5200-d1dd-48ee-bbca-d71daf0ce74c/0_1.png",
+						"choices": ["Glass", "Grass", "Tree", "Sea"],
+						"answerIndex": 1,
+						"coin": 10,
+						"exp": 25,
+						"type": "SELECTION"
+					},
+					{
+						"text": "“The ocean is big and (...).” จงเติมคำในช่องว่าง",
+						"choices": ["blue", "do", "grass", "ball"],
 						"answerIndex": 0,
 						"coin": 10,
 						"exp": 25,
 						"type": "SELECTION"
 					},
 					{
-						"text": "“I'm very hot. I want (...).” จงเติมคำในช่องว่าง",
-						"choices": ["hat", "wave", "sun", "sand"],
+						"text": "“I play with a (...).” จงเติมคำในช่องว่าง",
+						"choices": ["red ball", "blue moon", "black hat", "yellow sun"],
 						"answerIndex": 0,
 						"coin": 10,
 						"exp": 25,
@@ -589,87 +621,49 @@
 					},
 					{
 						"text": "“What is this picture?”",
-						"image": "https://cdn.midjourney.com/9ecf1209-c419-4bbe-91be-905434714cf3/0_1.png",
-						"choices": ["ship", "shirt", "shape", "shark"],
-						"answerIndex": 0,
+						"image": "https://cdn.midjourney.com/a97d4091-2ed4-49ec-bafe-739e6502bf8a/0_1.png",
+						"choices": ["red ball", "red apple", "red book", "red roses"],
+						"answerIndex": 1,
 						"coin": 10,
 						"exp": 25,
 						"type": "SELECTION"
 					},
 					{
 						"text": "“What is this picture?”",
-						"image": "https://cdn.midjourney.com/b1efd72e-4f3e-4ecb-8c72-48914ee65bbe/0_0.png",
-						"choices": ["lemonade", "coke", "beer", "ice"],
+						"image": "https://cdn.midjourney.com/3c9f1f3a-81c0-4c60-adb1-90affb429dee/0_0.png",
+						"choices": ["blue ocean", "green garden", "blue sky", "dark room"],
 						"answerIndex": 0,
-						"coin": 10,
-						"exp": 25,
-						"type": "SELECTION"
-					},
-					{
-						"text": "“What is this picture?”",
-						"image": "https://cdn.midjourney.com/269b7094-e7cf-42cd-bcaf-252f19af045b/0_1.png",
-						"choices": ["turtle", "fish", "shape", "shell"],
-						"answerIndex": 3,
 						"coin": 10,
 						"exp": 25,
 						"type": "SELECTION"
 					}
-			
-
 				],
 				"type": "SELECTION"
-			},
-			{
-				"title": "Reading",
-				"cards": [
-					{
-						"title": "A Busy Day",
-						"pages": [
-							{
-								"text": "Today is a busy day for you. In the morning, you wake up early, go to the bathroom to clean your body, and eat a good breakfast. Then you go to school and have fun. play toy cars with your friends at the playground. In the evening, you come back home and enjoy yourself. Finally, you have dinner with your family before going to bed. and you complete the day with a nice sleep.",
-								"illustrationUrl": "https://cdn.midjourney.com/4bb21813-1c93-44ed-8781-d9c3483e7575/0_2.png"
-							},
-							{
-								"text": "Test second page.",
-								"illustrationUrl": "https://cdn.midjourney.com/4bb21813-1c93-44ed-8781-d9c3483e7575/0_2.png"
-							}
-						],
-						"questions": [
-							{
-								"text": "คุณทำะไรหลังจากตื่นนอน",
-								"choices": ["clean your body", "go to bed", "eat breakfast", "play toy cars"],
-								"answerIndex": 0,
-								"coin": 100,
-								"exp": 25,
-								"type": "SELECTION"
-							}
-						],
-						"type": "READING"
-					}
-				],
-				"type": "READING"
 			},
 			{
 				"title": "Fill in the Blank",
 				"cards": [
 					{
-						"title": "Cloze title",
-						"text": "Fill in the _\nthis should be on new line,\nsecond blank _ ",
-						"coin": 10,
-						"exp": 10,
-						"choices": ["here", "blank"],
-						"answerIndexes": [1, 0],
+						"title": "เรียงประโยคว่า 'ดอกไม้สวยและสีชมพู'",
+						"text": "_flower_____.",
+						"coin": 15,
+						"exp": 35,
+						"choices": [
+							"beautiful",
+							"The",
+							"pink",
+							"and",
+							"is"
+						],
+						"answerIndexes": [
+							1,
+							4,
+							0,
+							3,
+							2
+						],
 						"type": "CLOZE"
-					},
-					{
-						"title": "Cloze title2",
-						"text": "Fill in the _\nthis should be on new line,\nsecond blank _ ",
-						"coin": 10,
-						"exp": 10,
-						"choices": ["here", "blank"],
-						"answerIndexes": [1, 0],
-						"type": "CLOZE"
-					}
+					}		
 				],
 				"type": "CLOZE"
 			},
@@ -682,8 +676,8 @@
 							"backgroundColor": "#6C80E8",
 							"accent": "US",
 							"gender": "FEMALE",
-							"intro": "Welcome to the shop how can I help you?",
-							"name": "Lucy",
+							"intro": "Hello,I’m Alice.I’m the color fairy",
+							"name": "Alice",
 							"prompt": "Your role: You are a female stationery shop keeper, you are kind, and friendly. Your name is Lucy. Your Goal: You have to give customer an information about the product available in you store, the sell them to the customer. Answer Format: You have to answer in the JSON format by using to following JSON schema {// your response\"message\": string,// \"neutral\", \"joy\", \"trust\", \"fear\", \"surprise\", \"sadness\", \"disgust\", \"anger\", \"anticipation\"\"emotion\": string,// the enum value// “NORMAL” used when the situation is normal// “INAPPROPRIATE” used when the situation is out of context or say something inappropriate// “END-OF-CONVERSATION” used when the customer have left or finish purchased your product\"status\": string} Shop information: There are only pen and pencil available in your store. The pen and pencil is 5฿ and 10฿ each respectively. Your store have only 10 pens, 10 pencils stock in your storage.",
 							"role": "Shopkeeper"
 						},
@@ -734,7 +728,7 @@
 			"accent": "US",
 			"gender": "FEMALE",
 			"bot": "https://media.discordapp.net/attachments/1120787872379842711/1126571585671803031/image-removebg_5_1.png?width=496&height=655",
-			"message": "Hi, I'm angel Alis"
+			"message": "Hello,I’m Alice.I’m the color fairy"
 		},
 		"course": {
 			"displayName": "Pre A1",

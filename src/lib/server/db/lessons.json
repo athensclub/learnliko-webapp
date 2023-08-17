@@ -678,30 +678,30 @@
 							"gender": "FEMALE",
 							"intro": "Hello,I’m Alice.I’m the color fairy",
 							"name": "Alice",
-							"prompt": "Your role: You are a female stationery shop keeper, you are kind, and friendly. Your name is Lucy. Your Goal: You have to give customer an information about the product available in you store, the sell them to the customer. Answer Format: You have to answer in the JSON format by using to following JSON schema {// your response\"message\": string,// \"neutral\", \"joy\", \"trust\", \"fear\", \"surprise\", \"sadness\", \"disgust\", \"anger\", \"anticipation\"\"emotion\": string,// the enum value// “NORMAL” used when the situation is normal// “INAPPROPRIATE” used when the situation is out of context or say something inappropriate// “END-OF-CONVERSATION” used when the customer have left or finish purchased your product\"status\": string} Shop information: There are only pen and pencil available in your store. The pen and pencil is 5฿ and 10฿ each respectively. Your store have only 10 pens, 10 pencils stock in your storage.",
+							"prompt": "Your role: You are a fairy, you are kind, and friendly. Your name is Alice. Your Goal: You have to give answer about colors, your favorite color, color of the sky, and color of the roses. Answer Format: You have to answer in the JSON format by using to following JSON schema {// your response\"message\": string,// \"neutral\", \"joy\", \"trust\", \"fear\", \"surprise\", \"sadness\", \"disgust\", \"anger\", \"anticipation\"\"emotion\": string,// the enum value// “NORMAL” used when the situation is normal// “INAPPROPRIATE” used when the situation is out of context or say something inappropriate// “END-OF-CONVERSATION” used when the learner have left or finish asking about what is the color of roses\"status\": string} Color information: You like green color, the sky is blue color, and the roses is red color",
 							"role": "Shopkeeper"
 						},
 						"learner": {
-							"mission": "คุณกำลังอยู่ในร้านเครื่องเขียน และคุณต้องซื้อเครื่องเขียนจากพนักงานขายที่ชื่อ Lucy",
+							"mission": "คุณกำลังพูดคุยกับนางฟ้า ชื่อว่า Alice เธอเป็นผู้ที่สร้างสีสรรค์ให้กับโลกใบนี้",
 							"goal": [
 								{
-									"description": "สอบถามสินค้าที่ขาย",
-									"hint": "Do you have any pens in your shop?",
-									"prompt": "Asking for products available in the shop"
+									"description": "ถาม Alice ว่าชอบ สีอะไร",
+									"hint": "What's your favorite color?",
+									"prompt": "Asking for Alice's favorite color"
 								},
 								{
-									"description": "สั่งซื้อปากกา 2 ด้าม",
-									"hint": "I would like to buy two pens.",
-									"prompt": "Buy two pens"
+									"description": "ถาม Alice ว่าสีของท้องฟ้าคือสีอะไร",
+									"hint": "What is the color of the sky?",
+									"prompt": "Asking Alice about the color of the sky"
 								},
 								{
-									"description": "สอบถามราคาสินค้าที่ต้องการซื้อ",
-									"hint": "How much is it?",
-									"prompt": "Asking for a product price"
+									"description": "ถาม Alice ว่าสีของดอกกุหลาบคือสีอะไร",
+									"hint": "What is the color of the roses?",
+									"prompt": "Asking Alice about the color of the roses"
 								}
 							]
 						},
-						"contextPrompt": "The user is in a stationery shop and is trying to buy pen/pencils from the shopkeeper.",
+						"contextPrompt": "The user is in a garden and is asking to fairy name Alice about color of things.",
 						"coin": 100,
 						"exp": 25,
 						"type": "DIALOGUE"
@@ -713,15 +713,15 @@
 		"narratives": [
 			{
 				"text": "แอลิสคือนางฟ้าที่ออกเดินทางไปยังดวงดาวต่างๆ เพื่อค้นหาสีสัน ที่สามารถเติมความสว่างและความสดใสให้กับโลก",
-				"illustrationUrl": "https://cdn.midjourney.com/1a7dd329-bd7b-466f-be54-1fe893630a10/0_3.png"
+				"illustrationUrl": "https://media.discordapp.net/attachments/1018855917715984434/1141764780445671535/vi_Today_is_a_sunny_day._The_sky_is_blue_and_the_sun_is_a_big_y_42e67b36-3469-4f94-b283-70ff217c1fce.png?width=520&height=520"
 			},
 			{
 				"text": "เธอพบเจอสีต่างๆมากมาย เช่น สีเขียวที่ทำให้รู้สึกสดชื่น สีชมพูที่ทำให้รู้สึกอบอุ่น สีเหลืองที่ทำให้รู้สึกเบิกบาน และสีแดงที่ทำให้รู้สึกมั่นคง",
-				"illustrationUrl": "https://cdn.midjourney.com/1a7dd329-bd7b-466f-be54-1fe893630a10/0_3.png"
+				"illustrationUrl": "https://media.discordapp.net/attachments/1018855917715984434/1141764780445671535/vi_Today_is_a_sunny_day._The_sky_is_blue_and_the_sun_is_a_big_y_42e67b36-3469-4f94-b283-70ff217c1fce.png?width=520&height=520"
 			},
 			{
 				"text": "เธอนำสีทั้งหมดกลับมาให้โลก ทำให้โลกสว่างสดใสมากขึ้น และแน่นอนคุณจะได้เรียนรู้เกี่ยวกับสีและโลกใบนี้ผ่านภาษาอังกฤษ คุณพร้อมแล้วหรือยัง",
-				"illustrationUrl": "https://cdn.midjourney.com/1a7dd329-bd7b-466f-be54-1fe893630a10/0_3.png"
+				"illustrationUrl": "https://media.discordapp.net/attachments/1018855917715984434/1141764780445671535/vi_Today_is_a_sunny_day._The_sky_is_blue_and_the_sun_is_a_big_y_42e67b36-3469-4f94-b283-70ff217c1fce.png?width=520&height=520"
 			}
 		],
 		"intro": {
@@ -744,7 +744,7 @@
 		"title": "เริ่มต้นการเป็นโปรแกรมเมอร์!",
 		"description": "เริ่มเรียนรู้การเขียนโค้ด โปรแกรมแรกของคุณจะสร้างขึ้นด้วยตัวเอง ไปพร้อมกับหุ่นยนต์ผู้ช่วย...",
 		"ambientAudio": "https://cdn.pixabay.com/audio/2022/07/19/audio_272763b5bb.mp3",
-		"backgroundUrl": "https://media.discordapp.net/attachments/1018855917715984434/1138747679002861658/vi_minimal_clean_computer_coding_room_lab_3d_stylize_future_wit_9f67d106-5dd4-49b2-ad21-61a7385e3c04.png?width=655&height=655",
+		"backgroundUrl": "https://media.discordapp.net/attachments/1018855917715984434/1141764780445671535/vi_Today_is_a_sunny_day._The_sky_is_blue_and_the_sun_is_a_big_y_42e67b36-3469-4f94-b283-70ff217c1fce.png?width=520&height=520",
 		"like": 329,
 		"view": 83214,
 		"activities": [

@@ -80,7 +80,7 @@
 						"type": "SELECTION"
 					},
 					{
-						"text": "“(...) book you like to read?” จงเติมคำในช่องว่าง",
+						"text": "“(...) book do you like to read?” จงเติมคำในช่องว่าง",
 						"choices": ["When", "Who", "What", "Where"],
 						"answerIndex": 2,
 						"coin": 10,
@@ -463,7 +463,7 @@
 								}
 							]
 						},
-						"contextPrompt": "The user is in a stationery shop and is trying to buy pen/pencils from the shopkeeper.",
+						"contextPrompt": "Learner is casually chat with their friend named Alex about going to the beach in the Holidays, favorite stuffs that like to bring to the beach, and saying goodbye and see you at the beach . Learner is aiming to Answer questions about preference for going to the beach in the holidays, what stuffs to bring to the beach, and end with saying goodbye see you at the beach.",
 						"coin": 100,
 						"exp": 25,
 						"type": "DIALOGUE"
@@ -511,25 +511,111 @@
 		"view": 83214,
 		"activities": [
 			{
+				"title": "Podcast",
+				"cards": [
+					{
+						"title": "Exciting Song",
+						"audioUrl": "https://firebasestorage.googleapis.com/v0/b/learnliko-develop.appspot.com/o/Today%20is%20a%20sunny%20day.mp3?alt=media&token=4e5aa501-4aaf-4367-bee5-debc82a09e82",
+						"illustrationUrl": "https://cdn.discordapp.com/attachments/1120787872379842711/1121124787784274040/vi_capital_city_new_York_7b1ddf5c-2cb0-46a9-9ea8-2184bc4e58de.png",
+						"questions": [
+							{
+								"text": "เพลงสนุกไหม",
+								"choices": ["ไม่รู้", "ไม่รู้ ", "ไม่รู้  ", "ไม่รู้   "],
+								"answerIndex": 2,
+								"coin": 100,
+								"exp": 25,
+								"type": "SELECTION"
+							}
+						],
+						"type": "LISTENING"
+					}
+				],
+				"type": "LISTENING"
+			},
+
+			{
 				"title": "Quiz",
 				"cards": [
 					{
-						"text": "“What is this called?”",
-						"image": "https://cdn.discordapp.com/attachments/1120787872379842711/1121124468538998835/vi_leopard_cartoon_realistic_in_the_savanna_325b24af-9414-40b4-80fc-e705c1e04fd1.png",
-						"choices": ["tiger", "lion", "monkey", "elephant"],
-						"answerIndex": 0,
-						"coin": 100,
+						"text": "“What is this picture?”",
+						"image": "https://cdn.midjourney.com/3bb6598e-7b7f-4bf0-98e2-3e23c1356b6b/0_1.png",
+						"choices": ["land", "ship", "beach", "bath"],
+						"answerIndex": 2,
+						"coin": 10,
 						"exp": 25,
 						"type": "SELECTION"
 					},
 					{
-						"text": "“Sorry, now I ... working.” จงเติมคำในช่องว่าง",
-						"choices": ["is", "am", "are", "-"],
+						"text": "“What is this picture?”",
+						"image": "https://cdn.midjourney.com/53ff891c-14d3-4a6a-9abd-32cbb47a37ab/0_1.png",
+						"choices": ["clone", "phone", "camera", "button"],
+						"answerIndex": 2,
+						"coin": 10,
+						"exp": 25,
+						"type": "SELECTION"
+					},
+					{
+						"text": "“What is this picture?”",
+						"image": "https://cdn.midjourney.com/b6c32aca-406b-4396-b270-ecb39bbfad26/0_0.png",
+						"choices": ["shell", "shark", "tank", "whale"],
 						"answerIndex": 1,
-						"coin": 100,
+						"coin": 10,
+						"exp": 25,
+						"type": "SELECTION"
+					},
+					{
+						"text": "“We (...) to the beach every week.” จงเติมคำในช่องว่าง",
+						"choices": ["go", "do", "make", "learn"],
+						"answerIndex": 0,
+						"coin": 10,
+						"exp": 25,
+						"type": "SELECTION"
+					},
+					{
+						"text": "“I'm very hot. I want (...).” จงเติมคำในช่องว่าง",
+						"choices": ["hat", "wave", "sun", "sand"],
+						"answerIndex": 0,
+						"coin": 10,
+						"exp": 25,
+						"type": "SELECTION"
+					},
+					{
+						"text": "“I take a picture with my (...).” จงเติมคำในช่องว่าง",
+						"choices": ["camera", "cold", "glasses", "hat"],
+						"answerIndex": 0,
+						"coin": 10,
+						"exp": 25,
+						"type": "SELECTION"
+					},
+					{
+						"text": "“What is this picture?”",
+						"image": "https://cdn.midjourney.com/9ecf1209-c419-4bbe-91be-905434714cf3/0_1.png",
+						"choices": ["ship", "shirt", "shape", "shark"],
+						"answerIndex": 0,
+						"coin": 10,
+						"exp": 25,
+						"type": "SELECTION"
+					},
+					{
+						"text": "“What is this picture?”",
+						"image": "https://cdn.midjourney.com/b1efd72e-4f3e-4ecb-8c72-48914ee65bbe/0_0.png",
+						"choices": ["lemonade", "coke", "beer", "ice"],
+						"answerIndex": 0,
+						"coin": 10,
+						"exp": 25,
+						"type": "SELECTION"
+					},
+					{
+						"text": "“What is this picture?”",
+						"image": "https://cdn.midjourney.com/269b7094-e7cf-42cd-bcaf-252f19af045b/0_1.png",
+						"choices": ["turtle", "fish", "shape", "shell"],
+						"answerIndex": 3,
+						"coin": 10,
 						"exp": 25,
 						"type": "SELECTION"
 					}
+			
+
 				],
 				"type": "SELECTION"
 			},
@@ -586,28 +672,6 @@
 					}
 				],
 				"type": "CLOZE"
-			},
-			{
-				"title": "Podcast",
-				"cards": [
-					{
-						"title": "Exciting Song",
-						"audioUrl": "https://www.learningcontainer.com/wp-content/uploads/2020/02/Kalimba.mp3",
-						"illustrationUrl": "https://cdn.discordapp.com/attachments/1120787872379842711/1121124787784274040/vi_capital_city_new_York_7b1ddf5c-2cb0-46a9-9ea8-2184bc4e58de.png",
-						"questions": [
-							{
-								"text": "เพลงสนุกไหม",
-								"choices": ["ไม่รู้", "ไม่รู้ ", "ไม่รู้  ", "ไม่รู้   "],
-								"answerIndex": 2,
-								"coin": 100,
-								"exp": 25,
-								"type": "SELECTION"
-							}
-						],
-						"type": "LISTENING"
-					}
-				],
-				"type": "LISTENING"
 			},
 			{
 				"title": "Meeting",

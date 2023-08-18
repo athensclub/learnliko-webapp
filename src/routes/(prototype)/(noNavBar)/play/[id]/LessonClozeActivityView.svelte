@@ -32,7 +32,7 @@
 
 {#key currentIndex}
 	<div
-		in:fade={{ delay: 400 }}
+		in:fade={{ delay: 250 }}
 		out:fade
 		class="mt-[3.8vh] flex w-full items-center justify-center"
 		bind:clientHeight={height}

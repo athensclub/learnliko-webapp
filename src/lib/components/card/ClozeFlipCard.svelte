@@ -261,7 +261,7 @@
 							</button>
 						{:else}
 							<div
-								in:scale={{ delay: 400 }}
+								in:scale={{ delay: 250 }}
 								class="mx-[3vw] h-[8.46vw] w-[8.46vw] rounded-[2vw] bg-[#EAEAEA]"
 							/>
 						{/if}

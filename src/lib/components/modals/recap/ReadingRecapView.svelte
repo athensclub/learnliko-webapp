@@ -68,7 +68,7 @@
 	];
 </script>
 
-<div in:fade={{ delay: 500 }} out:fade class="flex w-full flex-col">
+<div in:fade={{ delay: 250 }} out:fade class="flex w-full flex-col">
 	<div class="mt-[2vw] text-[1.5vw]">สรุปคำศัพท์ที่ได้เรียนรู้จากการอ่าน</div>
 
 	<div class="mt-[2vw] flex max-w-full flex-row flex-wrap gap-[1vw] leading-[2vw]">

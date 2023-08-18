@@ -259,7 +259,7 @@
 
 			{#if submitting}
 				<div
-					in:fade={{ delay: 500 }}
+					in:fade={{ delay: 400 }}
 					out:fade
 					class="pointer-events-none absolute left-0 top-0 z-20 flex h-full w-full flex-row items-center justify-center {$isMobile
 						? 'text-[5vw]'
@@ -269,7 +269,7 @@
 				</div>
 			{:else if correctAnswer === null}
 				<div
-					in:fade={{ delay: 500 }}
+					in:fade={{ delay: 250 }}
 					out:fade
 					class="pointer-events-none absolute left-0 top-0 flex h-full w-full flex-col justify-between {$isMobile
 						? 'p-[6vw]'
@@ -330,7 +330,7 @@
 				</div>
 			{:else}
 				<div
-					in:fade={{ delay: 500 }}
+					in:fade={{ delay: 250 }}
 					out:fade
 					class="pointer-events-none absolute left-0 top-0 flex h-full w-full flex-col items-center font-bold
                         {data.image ? 'justify-center' : 'justify-start'} 

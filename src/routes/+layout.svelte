@@ -19,6 +19,7 @@
 	import { goto } from '$app/navigation';
 	import { fade } from 'svelte/transition';
 	import { addDailyUser } from '$lib/temp/analytic';
+	import Typewriter from 'svelte-typewriter/Typewriter.svelte';
 
 	let loading = false;
 
@@ -117,8 +118,8 @@
 					/>
 				</div>
 
-				<div class="mt-[8vw] max-w-[80%] text-center text-[4.5vw] font-bold">
-					Learnliko currently only support mobile device.
+				<div class="mt-[8vw] max-w-[60%] text-center text-[3.5vw]">
+					<Typewriter>Learnliko currently only support <strong>mobile device📱</strong>.</Typewriter>
 				</div>
 			</div>
 		{/if}

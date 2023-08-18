@@ -74,7 +74,7 @@
 			}
 
 			updateItems([...displayed.filter((d) => !d.hide), ...queue]);
-		}, 5000);
+		}, 2500);
 		addProgress(1 / count);
 	};
 

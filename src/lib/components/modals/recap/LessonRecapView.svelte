@@ -237,7 +237,7 @@
 	];
 </script>
 
-<div in:fade={{ delay: 500 }} out:fade class="flex w-full flex-col">
+<div in:fade={{ delay: 250 }} out:fade class="flex w-full flex-col">
 	{#each lessons as lesson, index}
 		<div class="mt-[2vw] flex flex-row items-center">
 			<div class="text-[1.6vw]">บทเรียน: {lesson.topic}</div>

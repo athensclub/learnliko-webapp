@@ -48,7 +48,7 @@
 
 <!-- https://github.com/sveltejs/svelte/issues/544#issuecomment-586417387 -->
 {#key correctAnswers}
-	<div in:fade={{ delay: 500 }} out:fade class="h-full w-full font-bold">
+	<div in:fade={{ delay: 250 }} out:fade class="h-full w-full font-bold">
 		<div class="flex h-full w-full flex-col overflow-y-auto">
 			{#if correctAnswers === null}
 				<div style="font-size: {scale * ($isMobile ? 6 : 2.25)}vw;">คำถาม</div>

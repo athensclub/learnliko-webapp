@@ -72,7 +72,7 @@
 		</div>
 	{:else if !showResult}
 		<!-- Enter answer section -->
-		<div in:fade={{ delay: 400 }} out:fade>
+		<div in:fade={{ delay: 250 }} out:fade>
 			<!-- show exp & coin -->
 			<div
 				style="box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.15);"
@@ -209,7 +209,7 @@
 		</div>
 	{:else}
 		<!-- Show result section -->
-		<div in:fade={{ delay: 400 }} out:fade>
+		<div in:fade={{ delay: 250 }} out:fade>
 			<!-- title -->
 			<div
 				class="flex flex-col justify-center border-b border-[#EAEAEA] py-[1.7vh] text-center text-[3.1vw] font-bold"
@@ -224,7 +224,7 @@
 				<div class="h-[18vh]">
 					{#key currentResultIndex}
 						<p
-							in:fade={{ delay: 400 }}
+							in:fade={{ delay: 250 }}
 							out:fade
 							class="my-[2.3vh] h-full w-full overflow-y-scroll px-[5.4vw] text-[3.6vw] outline-none placeholder:font-bold placeholder:text-[#E0E0E0]"
 						>

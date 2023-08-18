@@ -40,7 +40,7 @@
 
 <!-- https://github.com/sveltejs/svelte/issues/544#issuecomment-586417387 -->
 <div
-	in:fade={{ delay: 500 }}
+	in:fade={{ delay: 250 }}
 	out:fade
 	class="relative flex h-full w-full {$isMobile
 		? 'flex-col gap-[5vw] overflow-y-auto'

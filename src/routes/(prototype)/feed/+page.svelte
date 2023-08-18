@@ -106,7 +106,7 @@
 		<div class="flex h-full items-center">
 			{#if displayedLessons.length > 0}
 				<div
-					in:fade={{ delay: 400 }}
+					in:fade={{ delay: 250 }}
 					class={`no-scrollbar my-auto flex snap-x snap-mandatory flex-row gap-[5vw] overflow-x-auto px-[5vw] ${
 						$isMobile ? 'w-full' : 'w-[54vw] pt-0'
 					}`}
@@ -123,7 +123,7 @@
 				</div>
 			{:else}
 				<div
-					in:fade={{ delay: 400 }}
+					in:fade={{ delay: 250 }}
 					class="pointer-events-none flex h-full w-full flex-row items-center justify-center text-[5.4vw]"
 				>
 					ไม่มีบทเรียน

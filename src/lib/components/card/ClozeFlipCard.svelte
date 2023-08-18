@@ -19,9 +19,11 @@
 	const textParts = data.text.split('_').map((line) => line.split('\n'));
 
 	// duplicate choices array, each element contain orinal index and status
-	const choices = data.choices.map((choice, originalIndex) =>
-		Object.create({ choice, originalIndex, selected: false })
-	);
+	const choices = data.choices.map((choice, originalIndex) => ({
+		choice,
+		originalIndex,
+		selected: false
+	}));
 
 	// store user's answer(choice's index)
 	let userAnswers: (number | null)[] = Array(choices.length).fill(null);
@@ -78,12 +80,14 @@
 		for (let index = 0; index < userAnswers.length; index++) {
 			const choiceIndex = userAnswers[index];
 
-			// not fisnished fill the blank yet
+			// not finished filling the blank yet
 			if (choiceIndex === null) {
 				throw new Error('Complete fill in the blank');
 			}
 
-			if (choices[choiceIndex].originalIndex !== data.answerIndexes[index]) {
+			// compare string value instead of index in cases where are there are choices
+			// with equal string value, then this would prevent ordering check.
+			if (choices[choiceIndex].choice !== data.choices[data.answerIndexes[index]]) {
 				correctAll = false;
 				break;
 			}

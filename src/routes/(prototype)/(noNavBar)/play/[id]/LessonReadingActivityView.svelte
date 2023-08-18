@@ -47,8 +47,8 @@
 								alt="Illustration"
 							/>
 
-							<div class="mt-[2vh] text-[4.8vw] font-bold">{item.title}</div>
-							<div class="mt-[1vh] text-[3.8vw]">{currentPage.text}</div>
+							<div class="mt-[2vh] text-[5.8vw] font-bold">{item.title}</div>
+							<div class="mt-[1vh] text-[4.8vw]">{currentPage.text}</div>
 
 							<!-- Bottom spacing -->
 							<div class="h-[8vw] w-full" />

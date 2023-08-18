@@ -1,8 +1,10 @@
 <script lang="ts">
 	import { getLessonById } from '$api/lesson';
 	import { page } from '$app/stores';
+	import FeedbackModal from '$lib/components/modals/FeedbackModal.svelte';
 	import { ActivityType, type Lesson } from '$gql/generated/graphql';
-	import { onDestroy, onMount } from 'svelte';
+	import { getContext, onDestroy, onMount } from 'svelte';
+	import type { Context } from 'svelte-simple-modal';
 	import { increaseCourseProgress, increaseCurrency } from '$lib/temp/user';
 	// ts-ignore
 	import { Howl } from 'howler';
@@ -24,6 +26,8 @@
 
 	let data: Lesson | null = null;
 	let music: Howl | null = null;
+
+	const { open }: Context = getContext('simple-modal');
 
 	onMount(async () => {
 		data = await getLessonById($page.params.id);
@@ -126,7 +130,8 @@
 			<!-- Top bar -->
 			<div class="flex w-full flex-row justify-between">
 				<button
-					on:click={() => window.history.back()}
+					on:click={() => window.history.back()} 
+					on:click={() => open(FeedbackModal)}
 					class="flex h-fit flex-row rounded-full bg-white px-[4vw] py-[1.5vh]"
 				>
 					<svg class="w-[13vw]" viewBox="0 0 78 23" fill="none" xmlns="http://www.w3.org/2000/svg">

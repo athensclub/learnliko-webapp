@@ -12,7 +12,7 @@ export const usernameLocal = browser
 export const profileImageLocal = browser
 	? persist(
 			writable<string>(
-				'https://cdn.discordapp.com/attachments/842737146321174558/1122773960019423262/30-307416_profile-icon-png-image-free-download-searchpng-employee.png'
+				'https://media.discordapp.net/attachments/1120787872379842711/1142017279882690630/guestprofile.png?width=655&height=655'
 			),
 			createIndexedDBStorage(),
 			'profileImage'

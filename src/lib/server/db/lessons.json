@@ -13,7 +13,12 @@
 					{
 						"text": "“What is this picture?”",
 						"image": "https://cdn.midjourney.com/a571767f-0ee4-4df3-a4ac-20585c44baa8/0_1.png",
-						"choices": ["bee", "bold", "boy", "both"],
+						"choices": [
+							"bee",
+							"bold",
+							"boy",
+							"both"
+						],
 						"answerIndex": 2,
 						"coin": 10,
 						"exp": 25,
@@ -21,7 +26,12 @@
 					},
 					{
 						"text": "“I (...) a student.” จงเติมคำในช่องว่าง",
-						"choices": ["is", "am", "are", "-"],
+						"choices": [
+							"is",
+							"am",
+							"are",
+							"-"
+						],
 						"answerIndex": 1,
 						"coin": 10,
 						"exp": 25,
@@ -30,7 +40,12 @@
 					{
 						"text": "“What is this picture?”",
 						"image": "https://cdn.midjourney.com/1006d974-c542-4168-b370-d270ff1b206a/0_0.png",
-						"choices": ["bath", "book", "bag", "note"],
+						"choices": [
+							"bath",
+							"book",
+							"bag",
+							"note"
+						],
 						"answerIndex": 1,
 						"coin": 10,
 						"exp": 25,
@@ -39,7 +54,12 @@
 					{
 						"text": "“What is this picture?”",
 						"image": "https://cdn.midjourney.com/36b2cc8d-0a53-4147-91e4-983e88216e22/0_2.png",
-						"choices": ["score", "school", "hotel", "sport"],
+						"choices": [
+							"score",
+							"school",
+							"hotel",
+							"sport"
+						],
 						"answerIndex": 1,
 						"coin": 10,
 						"exp": 25,
@@ -48,7 +68,12 @@
 					{
 						"text": "“What is this picture?”",
 						"image": "https://cdn.midjourney.com/c845d2a3-fcaf-4d60-9fc4-fc7b7378729f/0_1.png",
-						"choices": ["best", "car", "bus", "bike"],
+						"choices": [
+							"best",
+							"car",
+							"bus",
+							"bike"
+						],
 						"answerIndex": 2,
 						"coin": 10,
 						"exp": 25,
@@ -56,7 +81,12 @@
 					},
 					{
 						"text": "“Amy is wearing a blue (...).” จงเติมคำในช่องว่าง",
-						"choices": ["pen", "bag", "shirt", "chair"],
+						"choices": [
+							"pen",
+							"bag",
+							"shirt",
+							"chair"
+						],
 						"answerIndex": 2,
 						"coin": 10,
 						"exp": 25,
@@ -64,7 +94,12 @@
 					},
 					{
 						"text": "“May I (...) in please?” จงเติมคำในช่องว่าง",
-						"choices": ["draw", "come", "like", "go"],
+						"choices": [
+							"draw",
+							"come",
+							"like",
+							"go"
+						],
 						"answerIndex": 1,
 						"coin": 10,
 						"exp": 25,
@@ -73,7 +108,12 @@
 					{
 						"text": "“What is this picture?”",
 						"image": "https://cdn.midjourney.com/be5af1f1-ad27-4ff7-9d20-f46cd5be8f6e/0_0.png",
-						"choices": ["board", "both", "bar", "bath"],
+						"choices": [
+							"board",
+							"both",
+							"bar",
+							"bath"
+						],
 						"answerIndex": 0,
 						"coin": 10,
 						"exp": 25,
@@ -81,13 +121,17 @@
 					},
 					{
 						"text": "“(...) book do you like to read?” จงเติมคำในช่องว่าง",
-						"choices": ["When", "Who", "What", "Where"],
+						"choices": [
+							"When",
+							"Who",
+							"What",
+							"Where"
+						],
 						"answerIndex": 2,
 						"coin": 10,
 						"exp": 25,
 						"type": "SELECTION"
-					}	
-
+					}
 				],
 				"type": "SELECTION"
 			},
@@ -168,7 +212,6 @@
 								"exp": 25,
 								"type": "SELECTION"
 							}
-
 						],
 						"type": "READING"
 					}
@@ -217,7 +260,6 @@
 				"type": "DIALOGUE"
 			}
 		],
-
 		"narratives": [
 			{
 				"text": "วันนี้เป็นวันแรกที่คุณเข้าห้องเรียนและรับการเรียนรู้ภาษาอังกฤษกับเพื่อนๆ ในห้องเรียนนี้ คุณพบกับหน้าต่างที่เปิดออกมองเห็นสวนสวย ดอกไม้สีสันสวยงามที่แสนอัศจรรย์ และเสียงนกน้อยที่ร้องเพลงอย่างสดใส",
@@ -248,7 +290,6 @@
 		},
 		"id": "1"
 	},
-
 	{
 		"title": "ชายหาดแสนสนุก!",
 		"description": "วันนี้ร้อนมากๆเป็นกลางเดือนเมษายน ขณะนี้เป็นเวลาบ่ายแก่ๆ แดดร้อนเริ่มกลายเป็นอุ่น...",
@@ -263,7 +304,12 @@
 					{
 						"text": "“What is this picture?”",
 						"image": "https://cdn.midjourney.com/3bb6598e-7b7f-4bf0-98e2-3e23c1356b6b/0_1.png",
-						"choices": ["land", "ship", "beach", "bath"],
+						"choices": [
+							"land",
+							"ship",
+							"beach",
+							"bath"
+						],
 						"answerIndex": 2,
 						"coin": 10,
 						"exp": 25,
@@ -272,7 +318,12 @@
 					{
 						"text": "“What is this picture?”",
 						"image": "https://cdn.midjourney.com/53ff891c-14d3-4a6a-9abd-32cbb47a37ab/0_1.png",
-						"choices": ["clone", "phone", "camera", "button"],
+						"choices": [
+							"clone",
+							"phone",
+							"camera",
+							"button"
+						],
 						"answerIndex": 2,
 						"coin": 10,
 						"exp": 25,
@@ -281,7 +332,12 @@
 					{
 						"text": "“What is this picture?”",
 						"image": "https://cdn.midjourney.com/b6c32aca-406b-4396-b270-ecb39bbfad26/0_0.png",
-						"choices": ["shell", "shark", "tank", "whale"],
+						"choices": [
+							"shell",
+							"shark",
+							"tank",
+							"whale"
+						],
 						"answerIndex": 1,
 						"coin": 10,
 						"exp": 25,
@@ -289,7 +345,12 @@
 					},
 					{
 						"text": "“We (...) to the beach every week.” จงเติมคำในช่องว่าง",
-						"choices": ["go", "do", "make", "learn"],
+						"choices": [
+							"go",
+							"do",
+							"make",
+							"learn"
+						],
 						"answerIndex": 0,
 						"coin": 10,
 						"exp": 25,
@@ -297,7 +358,12 @@
 					},
 					{
 						"text": "“I'm very hot. I want (...).” จงเติมคำในช่องว่าง",
-						"choices": ["hat", "wave", "sun", "sand"],
+						"choices": [
+							"hat",
+							"wave",
+							"sun",
+							"sand"
+						],
 						"answerIndex": 0,
 						"coin": 10,
 						"exp": 25,
@@ -305,7 +371,12 @@
 					},
 					{
 						"text": "“I take a picture with my (...).” จงเติมคำในช่องว่าง",
-						"choices": ["camera", "cold", "glasses", "hat"],
+						"choices": [
+							"camera",
+							"cold",
+							"glasses",
+							"hat"
+						],
 						"answerIndex": 0,
 						"coin": 10,
 						"exp": 25,
@@ -314,7 +385,12 @@
 					{
 						"text": "“What is this picture?”",
 						"image": "https://cdn.midjourney.com/9ecf1209-c419-4bbe-91be-905434714cf3/0_1.png",
-						"choices": ["ship", "shirt", "shape", "shark"],
+						"choices": [
+							"ship",
+							"shirt",
+							"shape",
+							"shark"
+						],
 						"answerIndex": 0,
 						"coin": 10,
 						"exp": 25,
@@ -323,7 +399,12 @@
 					{
 						"text": "“What is this picture?”",
 						"image": "https://cdn.midjourney.com/b1efd72e-4f3e-4ecb-8c72-48914ee65bbe/0_0.png",
-						"choices": ["lemonade", "coke", "beer", "ice"],
+						"choices": [
+							"lemonade",
+							"coke",
+							"beer",
+							"ice"
+						],
 						"answerIndex": 0,
 						"coin": 10,
 						"exp": 25,
@@ -332,14 +413,17 @@
 					{
 						"text": "“What is this picture?”",
 						"image": "https://cdn.midjourney.com/269b7094-e7cf-42cd-bcaf-252f19af045b/0_1.png",
-						"choices": ["turtle", "fish", "shape", "shell"],
+						"choices": [
+							"turtle",
+							"fish",
+							"shape",
+							"shell"
+						],
 						"answerIndex": 3,
 						"coin": 10,
 						"exp": 25,
 						"type": "SELECTION"
 					}
-			
-
 				],
 				"type": "SELECTION"
 			},
@@ -353,7 +437,6 @@
 								"text": "I sit on the beach, holding a camera. The sun shine as I drink my lemonade. With my glasses on, I read a book. Sand on my toes, and waves  nearby. I find a shell and watch fish swim. I take a picture, enjoy the beautiful sea.",
 								"illustrationUrl": "https://cdn.midjourney.com/32c2a55f-1afb-4cbe-8dff-e55ab799ea75/0_0.png"
 							}
-			
 						],
 						"questions": [
 							{
@@ -402,7 +485,7 @@
 				"type": "READING"
 			},
 			{
-				"title": "Fill in the Blank",
+				"title": "Cloze",
 				"cards": [
 					{
 						"title": "เรียงประโยคว่า 'ฉันเห็นปลาฉลามในทะเล' ",
@@ -426,7 +509,7 @@
 							3
 						],
 						"type": "CLOZE"
-					}		
+					}
 				],
 				"type": "CLOZE"
 			},
@@ -464,8 +547,8 @@
 							]
 						},
 						"contextPrompt": "Learner is casually chat with their friend named Alex about going to the beach in the Holidays, favorite stuffs that like to bring to the beach, and saying goodbye and see you at the beach . Learner is aiming to Answer questions about preference for going to the beach in the holidays, what stuffs to bring to the beach, and end with saying goodbye see you at the beach.",
-						"coin": 100,
-						"exp": 25,
+						"coin": 50,
+						"exp": 100,
 						"type": "DIALOGUE"
 					}
 				],
@@ -478,11 +561,11 @@
 				"illustrationUrl": "https://cdn.midjourney.com/1a7dd329-bd7b-466f-be54-1fe893630a10/0_3.png"
 			},
 			{
-				"text": "ชายหาดที่นี่สวยมาก นำ้ทะเลใสเป็นพิเศษในหน้าร้อน หาดทรายยังคงสะอากสะอ้านแม้คนจะเต็มไปหมด บวกกับลมอุ่นๆที่กระทบกับผิวยามบ่ายแก่ๆ ช่างเป็นเวลาที่เหมาะในการทำกิจกรรมผ่อนคลายต่างๆเป็นที่สุด",
+				"text": "ชายหาดที่นี่สวยมาก น้ำทะเลใสเป็นพิเศษในหน้าร้อน หาดทรายยังคงสะอากสะอ้านแม้คนจะเต็มไปหมด บวกกับลมอุ่นๆที่กระทบกับผิวยามบ่ายแก่ๆ ช่างเป็นเวลาที่เหมาะในการทำกิจกรรมผ่อนคลายต่างๆเป็นที่สุด",
 				"illustrationUrl": "https://cdn.midjourney.com/1a7dd329-bd7b-466f-be54-1fe893630a10/0_3.png"
 			},
 			{
-				"text": "คุณแม่ที่เป็นคนกระตือรือล้นชอบถ่ายภาพ  คุณพ่อที่ดูแลทุกคนเก่งทำเครื่องดื่มดับร้อน น้องชายที่ช่างสังเกตุเดินตรวจตราหาด ส่วนคุณที่รักการนอนนิ่งๆกับหนังสือคู่ใจ  ว่าแล้วไม่รอช้า คุณและครอบครัวจึงแยกย้ายไปหาความสนุกในแบบของตัวเองทันที เพื่อใช้ช่วงเวลาอันสวยงามเช่นนี้ให้คุ้มค่าที่สุด!",
+				"text": "คุณแม่ที่เป็นคนกระตือรือล้นชอบถ่ายภาพ  คุณพ่อที่ดูแลทุกคนเก่งทำเครื่องดื่มดับร้อน น้องชายที่ช่างสังเกตุเดินตรวจตราหาด ส่วนคุณที่รักการนอนนิ่งๆกับหนังสือคู่ใจ ว่าแล้วไม่รอช้า คุณและครอบครัวจึงแยกย้ายไปหาความสนุกในแบบของตัวเองทันที เพื่อใช้ช่วงเวลาอันสวยงามเช่นนี้ให้คุ้มค่าที่สุด!",
 				"illustrationUrl": "https://cdn.midjourney.com/1a7dd329-bd7b-466f-be54-1fe893630a10/0_3.png"
 			}
 		],
@@ -520,7 +603,12 @@
 						"questions": [
 							{
 								"text": "What color is the sky?",
-								"choices": ["Blue", "Purple ", "Yellow", "Red"],
+								"choices": [
+									"Blue",
+									"Purple ",
+									"Yellow",
+									"Red"
+								],
 								"answerIndex": 0,
 								"coin": 10,
 								"exp": 25,
@@ -528,7 +616,12 @@
 							},
 							{
 								"text": "What flowers do they see at the park?",
-								"choices": ["Yellow sun", "Red roses", "Orange juice", "Red apple"],
+								"choices": [
+									"Yellow sun",
+									"Red roses",
+									"Orange juice",
+									"Red apple"
+								],
 								"answerIndex": 1,
 								"coin": 10,
 								"exp": 25,
@@ -536,7 +629,12 @@
 							},
 							{
 								"text": "Where do they have a picnic?",
-								"choices": ["In the park", "On the chair", "Under a big tree", "At the zoo"],
+								"choices": [
+									"In the park",
+									"On the chair",
+									"Under a big tree",
+									"At the zoo"
+								],
 								"answerIndex": 2,
 								"coin": 10,
 								"exp": 25,
@@ -544,7 +642,12 @@
 							},
 							{
 								"text": "What do they eat at the park?",
-								"choices": ["Red roses", "Juicy red apples", "Purple tulip", "Green grass"],
+								"choices": [
+									"Red roses",
+									"Juicy red apples",
+									"Purple tulip",
+									"Green grass"
+								],
 								"answerIndex": 1,
 								"coin": 10,
 								"exp": 25,
@@ -552,7 +655,12 @@
 							},
 							{
 								"text": "What do they drink?",
-								"choices": ["Green grass", "Juicy apples", "Red flowers", "Orange juice"],
+								"choices": [
+									"Green grass",
+									"Juicy apples",
+									"Red flowers",
+									"Orange juice"
+								],
 								"answerIndex": 3,
 								"coin": 10,
 								"exp": 25,
@@ -564,14 +672,18 @@
 				],
 				"type": "LISTENING"
 			},
-
 			{
 				"title": "Quiz",
 				"cards": [
 					{
 						"text": "“What is this picture?”",
 						"image": "https://cdn.midjourney.com/395d4c30-a522-4e0c-85aa-be8c859558c0/0_3.png",
-						"choices": ["sand", "sun", "son", "soon"],
+						"choices": [
+							"sand",
+							"sun",
+							"son",
+							"soon"
+						],
 						"answerIndex": 1,
 						"coin": 10,
 						"exp": 25,
@@ -580,7 +692,12 @@
 					{
 						"text": "“What is this picture?”",
 						"image": "https://media.discordapp.net/attachments/1120787872379842711/1125124266006949888/image.png",
-						"choices": ["Black", "Red", "Yellow", "Green"],
+						"choices": [
+							"Black",
+							"Red",
+							"Yellow",
+							"Green"
+						],
 						"answerIndex": 2,
 						"coin": 10,
 						"exp": 25,
@@ -589,7 +706,12 @@
 					{
 						"text": "“What is this picture?”",
 						"image": "https://cdn.midjourney.com/c76b5200-d1dd-48ee-bbca-d71daf0ce74c/0_1.png",
-						"choices": ["Glass", "Grass", "Tree", "Sea"],
+						"choices": [
+							"Glass",
+							"Grass",
+							"Tree",
+							"Sea"
+						],
 						"answerIndex": 1,
 						"coin": 10,
 						"exp": 25,
@@ -597,7 +719,12 @@
 					},
 					{
 						"text": "“The ocean is big and (...).” จงเติมคำในช่องว่าง",
-						"choices": ["blue", "do", "grass", "ball"],
+						"choices": [
+							"blue",
+							"do",
+							"grass",
+							"ball"
+						],
 						"answerIndex": 0,
 						"coin": 10,
 						"exp": 25,
@@ -605,7 +732,12 @@
 					},
 					{
 						"text": "“I play with a (...).” จงเติมคำในช่องว่าง",
-						"choices": ["red ball", "blue moon", "black hat", "yellow sun"],
+						"choices": [
+							"red ball",
+							"blue moon",
+							"black hat",
+							"yellow sun"
+						],
 						"answerIndex": 0,
 						"coin": 10,
 						"exp": 25,
@@ -613,7 +745,12 @@
 					},
 					{
 						"text": "“I take a picture with my (...).” จงเติมคำในช่องว่าง",
-						"choices": ["camera", "cold", "glasses", "hat"],
+						"choices": [
+							"camera",
+							"cold",
+							"glasses",
+							"hat"
+						],
 						"answerIndex": 0,
 						"coin": 10,
 						"exp": 25,
@@ -622,7 +759,12 @@
 					{
 						"text": "“What is this picture?”",
 						"image": "https://cdn.midjourney.com/a97d4091-2ed4-49ec-bafe-739e6502bf8a/0_1.png",
-						"choices": ["red ball", "red apple", "red book", "red roses"],
+						"choices": [
+							"red ball",
+							"red apple",
+							"red book",
+							"red roses"
+						],
 						"answerIndex": 1,
 						"coin": 10,
 						"exp": 25,
@@ -631,7 +773,12 @@
 					{
 						"text": "“What is this picture?”",
 						"image": "https://cdn.midjourney.com/3c9f1f3a-81c0-4c60-adb1-90affb429dee/0_0.png",
-						"choices": ["blue ocean", "green garden", "blue sky", "dark room"],
+						"choices": [
+							"blue ocean",
+							"green garden",
+							"blue sky",
+							"dark room"
+						],
 						"answerIndex": 0,
 						"coin": 10,
 						"exp": 25,
@@ -641,7 +788,7 @@
 				"type": "SELECTION"
 			},
 			{
-				"title": "Fill in the Blank",
+				"title": "Cloze",
 				"cards": [
 					{
 						"title": "เรียงประโยคว่า 'ดอกไม้สวยและสีชมพู'",
@@ -663,7 +810,7 @@
 							2
 						],
 						"type": "CLOZE"
-					}		
+					}
 				],
 				"type": "CLOZE"
 			},
@@ -672,14 +819,13 @@
 				"cards": [
 					{
 						"bot": {
-							"avatar": "https://media.discordapp.net/attachments/1120787872379842711/1122773372732981258/vi_potrait_full_body_3d_avatar_girl_stylize_smile_b891a33b-0f46-4270-9ad8-ecca245d8e9e-removebg.png?width=298&height=655",
-							"backgroundColor": "#6C80E8",
+							"avatar": "https://media.discordapp.net/attachments/1120787872379842711/1126571585671803031/image-removebg_5_1.png?width=496&height=655",
 							"accent": "US",
 							"gender": "FEMALE",
 							"intro": "Hello,I’m Alice.I’m the color fairy",
 							"name": "Alice",
 							"prompt": "Your role: You are a fairy, you are kind, and friendly. Your name is Alice. Your Goal: You have to give answer about colors, your favorite color, color of the sky, and color of the roses. Answer Format: You have to answer in the JSON format by using to following JSON schema {// your response\"message\": string,// \"neutral\", \"joy\", \"trust\", \"fear\", \"surprise\", \"sadness\", \"disgust\", \"anger\", \"anticipation\"\"emotion\": string,// the enum value// “NORMAL” used when the situation is normal// “INAPPROPRIATE” used when the situation is out of context or say something inappropriate// “END-OF-CONVERSATION” used when the learner have left or finish asking about what is the color of roses\"status\": string} Color information: You like green color, the sky is blue color, and the roses is red color",
-							"role": "Shopkeeper"
+							"role": "Fairy"
 						},
 						"learner": {
 							"mission": "คุณกำลังพูดคุยกับนางฟ้า ชื่อว่า Alice เธอเป็นผู้ที่สร้างสีสรรค์ให้กับโลกใบนี้",
@@ -702,8 +848,8 @@
 							]
 						},
 						"contextPrompt": "The user is in a garden and is asking to fairy name Alice about color of things.",
-						"coin": 100,
-						"exp": 25,
+						"coin": 50,
+						"exp": 100,
 						"type": "DIALOGUE"
 					}
 				],
@@ -742,34 +888,47 @@
 	},
 	{
 		"title": "เริ่มต้นการเป็นโปรแกรมเมอร์!",
-		"description": "เริ่มเรียนรู้การเขียนโค้ด โปรแกรมแรกของคุณจะสร้างขึ้นด้วยตัวเอง ไปพร้อมกับหุ่นยนต์ผู้ช่วย...",
+		"description": "ในโลกที่แวดล้อมด้วยเทคโนโลยีที่ก้าวกระโดดมาเรื่อยๆ แม้คุณจะเป็นใครก็ตาม คุณต้องเริ่มต้น...",
 		"ambientAudio": "https://cdn.pixabay.com/audio/2022/07/19/audio_272763b5bb.mp3",
 		"backgroundUrl": "https://media.discordapp.net/attachments/1018855917715984434/1138747690948243526/vi_minimal_clean_computer_coding_room_lab_3d_stylize_future_wit_948e7ae0-5ab6-436f-ab06-1fc84c269595.png?width=655&height=655",
 		"like": 329,
 		"view": 83214,
 		"activities": [
-		
 			{
-				"title": "Reading",
+				"title": "Blog",
 				"cards": [
 					{
-						"title": "A Busy Day",
+						"title": "Hello World",
 						"pages": [
 							{
-								"text": "Today is a busy day for you. In the morning, you wake up early, go to the bathroom to clean your body, and eat a good breakfast. Then you go to school and have fun. play toy cars with your friends at the playground. In the evening, you come back home and enjoy yourself. Finally, you have dinner with your family before going to bed. and you complete the day with a nice sleep.",
-								"illustrationUrl": "https://i0.wp.com/garonpower.com/wp-content/uploads/2019/01/computer-programming.jpeg?fit=1500%2C1000&ssl=1"
-							},
-							{
-								"text": "Test second page.",
-								"illustrationUrl": "https://i0.wp.com/garonpower.com/wp-content/uploads/2019/01/computer-programming.jpeg?fit=1500%2C1000&ssl=1"
+								"text": "เมื่อหลายปีก่อนในโลกของคอมพิวเตอร์ มีนักพัฒนาโปรแกรมชื่อดังผลิตมาในซอฟต์แวร์ที่เป็นเครื่องรุ่นแรก ภาษาการเขียนโปรแกรมยังไม่ได้ถูกประชาสัมพันธ์มากนัก และคนมากไม่รู้จักเกี่ยวกับโลกของการเขียนโปรแกรม เรื่องเล่าเริ่มต้นที่คุณอยากเรียนรู้เกี่ยวกับการเขียนโปรแกรมในภาษา Python นี่คือการเขียนโปรแกรม \"Hello World\" ด้วย Python ที่น่าตื่นเต้น Python เป็นภาษาการเขียนโปรแกรมที่นิยมและอ่านง่าย โปรแกรม \"Hello World\" เป็นเรื่องง่าย เพราะมันมีเพียงบรรทัดเดียวเท่านั้น แต่มีความหมายที่สำคัญในการเรียนรู้ภาษานี้ และในรูปภาพคือโค้ดสั้นๆ ที่เขียน \"Hello World\" ในภาษา Python โปรแกรม \"Hello World\" อาจจะดูง่าย แต่มีประโยชน์มากในการเรียนรู้และการพัฒนาซอฟต์แวร์จริง ๆ นี่คือหลายๆ ประโยชน์ที่สำคัญของโปรแกรม \"Hello World\" 1.ทดสอบระบบ: การเขียนโปรแกรม \"Hello World\" เป็นวิธีที่ดีในการทดสอบระบบและสภาพแวดล้อมการเขียนโปรแกรม มันช่วยตรวจสอบว่าระบบทำงานได้ตามปกติหรือไม่ และว่าคุณได้ตั้งค่าสิ่งต่างๆ อย่างถูกต้อง 2.เรียนรู้ภาษาการเขียนโปรแกรม: การเรียนรู้การเขียนโปรแกรมเริ่มต้นด้วยโปรแกรม \"Hello World\" เป็นเรื่องที่ดี เพราะมันช่วยในการทราบวิธีการเขียนโค้ดพื้นฐานในภาษานั้น ๆ 3.ทำความรู้จักกับ IDE หรือเครื่องมือการเขียนโปรแกรม: การเขียนโปรแกรม \"Hello World\" ช่วยให้คุณทำความรู้จักกับ Integrated Development Environment (IDE) หรือเครื่องมือในการเขียนโปรแกรมที่คุณใช้ เพื่อพัฒนาซอฟต์แวร์ 4.การทดสอบความรู้พื้นฐาน: การเขียนโปรแกรม \"Hello World\" ช่วยในการทดสอบความรู้พื้นฐานของคุณในการเขียนและรันโปรแกรม นี่เป็นขั้นตอนเริ่มต้นที่ดีในการตรวจสอบว่าคุณเข้าใจและทำความเข้าใจวิธีการทำงานของภาษาการเขียนโปรแกรม 5.สร้างความมั่นใจ: การรันโปรแกรม \"Hello World\" และเห็นผลลัพธ์ที่ถูกต้องบนหน้าจอคอมพิวเตอร์ช่วยสร้างความมั่นใจในความสามารถในการเขียนและรันโปรแกรม",
+								"illustrationUrl": "https://media.discordapp.net/attachments/1018855917715984434/1142023318527029319/image.png?width=655&height=655"
 							}
 						],
 						"questions": [
 							{
-								"text": "คุณทำะไรหลังจากตื่นนอน",
-								"choices": ["clean your body", "go to bed", "eat breakfast", "play toy cars"],
+								"text": "การเขียนโปรแกรม \"Hello World\" ใช้สำหรับวัตถุประสงค์อะไร?",
+								"choices": [
+									"แสดงผลข้อความ",
+									"ตรวจสอบเมาส์",
+									"ตรวจสอบสัญญาณ",
+									"คำนวณทางคณิตศาสตร์"
+								],
 								"answerIndex": 0,
-								"coin": 100,
+								"coin": 10,
+								"exp": 25,
+								"type": "SELECTION"
+							},
+							{
+								"text": "ข้อใดไม่ใช่วัตถุประสงค์ สำหรับโปรแกรม \"Hello World\"",
+								"choices": [
+									"ทำความคุ้นเคยกับ IDE",
+									"แสดงผลสี",
+									"แสดงผลข้อความ",
+									"เริ่มต้นการเขียนโค้ด"
+								],
+								"answerIndex": 1,
+								"coin": 10,
 								"exp": 25,
 								"type": "SELECTION"
 							}
@@ -783,30 +942,41 @@
 				"title": "Coding",
 				"cards": [
 					{
-						"title": "เขียนโปรแกรมแสดงผลคำว่า Hello world",
+						"title": "เรียงลำดับการเขียนโปรแกรมแสดงผลคำว่า Hello world",
 						"text": "_(____)",
 						"coin": 10,
 						"exp": 10,
-						"choices": ["print", "world","Hello","'","'"],
-						"answerIndexes": [0,3, 2, 1,4],
+						"choices": [
+							"print",
+							"world",
+							"Hello",
+							"\"",
+							"\""
+						],
+						"answerIndexes": [
+							0,
+							3,
+							2,
+							1,
+							4
+						],
 						"type": "CLOZE"
 					}
 				],
 				"type": "CLOZE"
 			}
-		
 		],
 		"narratives": [
 			{
-				"text": "เช้านี้เป็นเช้าแสนวุ่นวาย มีกิจวัตรประจำวันให้ทำมากมายเป็นประจำเหมือนทุกวัน แต่เราไม่เคยหงุดหงิดหรือกลัว แต่เรากลับเตรียมตัวให้พร้อมที่จะเผชิญกับทุกสิ่งที่ต้องทำในเช้านี้",
+				"text": "ในโลกที่แวดล้อมด้วยเทคโนโลยีและซอฟต์แวร์ที่ก้าวกระโดดมาเรื่อย ๆ แม้คุณจะเป็นใครก็ตาม คุณต้องเริ่มต้นที่จุดหนึ่ง และสำหรับโปรแกรมเมอร์ทุกคน จุดเริ่มต้นนั้นคือ Hello World",
 				"illustrationUrl": "https://cdn.midjourney.com/1a7dd329-bd7b-466f-be54-1fe893630a10/0_3.png"
 			},
 			{
-				"text": "เมื่อเสร็จสิ้นการเลือกชุดผ้าที่สวยงามแล้ว เราจับยาสีฟันและหว่านน้ำบางๆ เพื่อทำความสะอาดลมหายใจของเรา ความรื่นรมย์ของการล้างหน้า รับประทานอาหาารเช้าเมื่อรู็สึกสดชื่นแล้ว แค่นี้ก็พร้อมจะไปโรงเรียนแล้วล่ะ",
+				"text": "นี่คือบทเรียนแรกที่ทุกๆ โปรแกรมเมอร์ต้องเรียนรู้เมื่อเข้าสู่โลกของการเขียนโปรแกรม ไม่ว่าจะเป็นภาษาไพทอน Python, ภาษาซี C, หรือแม้กระทั่งภาษาจาวา Java",
 				"illustrationUrl": "https://cdn.midjourney.com/1a7dd329-bd7b-466f-be54-1fe893630a10/0_3.png"
 			},
 			{
-				"text": "ไปถึงโรงเรียน ทำกิจกรรมต่างๆ ไม่ว่าจะเล่นกับเพื่อนๆที่สนามเด็กเล่น เรียนบทเรียนที่แปลกใหม่ กินข้าวเที่ยงที่โรงอาหาร เสร็จจากกิจที่เหน็ดเหนื่อยมาทั้งวันถึงเวลากลับบ้าน อาบนำ้เปลี่ยนเสื้อผ้ามีเวลาให้ตัวเองในยามคำ่คืน ปล่อยให้ตัวเองผ่อนคลายถึงที่สุดจนพลอยหลับไป",
+				"text": "การพิมพ์ Hello World เป็นขั้นตอนแรกที่ทุกคนต้องทำเพื่อทดสอบความรู้และเพื่อให้แน่ใจว่าระบบทำงานได้ตามปกติ",
 				"illustrationUrl": "https://cdn.midjourney.com/1a7dd329-bd7b-466f-be54-1fe893630a10/0_3.png"
 			}
 		],
@@ -825,185 +995,7 @@
 			}
 		},
 		"id": "4"
-	},
-	{
-		"title": "รู้จักตัวแปรและสร้างโปรแกรมบวกเลข",
-		"description": "บ่ายวันนี้คุณอยู่ในห้องแลปคอมพิวเตอร์ของโรงเรียน มีภารกิจสำคัญนั่นคือการสร้างเครื่องคิดเลข...",
-		"ambientAudio": "https://cdn.pixabay.com/audio/2022/07/19/audio_272763b5bb.mp3",
-		"backgroundUrl": "https://media.discordapp.net/attachments/1087307553471463514/1131796046025064608/vi_coding_lab_c495a888-0cec-40f1-a1a3-1363cf4e12ff.png?width=655&height=655",
-		"like": 329,
-		"view": 83214,
-		"activities": [
-			{
-				"title": "Quiz",
-				"cards": [
-					{
-						"text": "“What is this called?”",
-						"image": "https://cdn.discordapp.com/attachments/1120787872379842711/1121124468538998835/vi_leopard_cartoon_realistic_in_the_savanna_325b24af-9414-40b4-80fc-e705c1e04fd1.png",
-						"choices": ["tiger", "lion", "monkey", "elephant"],
-						"answerIndex": 0,
-						"coin": 100,
-						"exp": 25,
-						"type": "SELECTION"
-					},
-					{
-						"text": "“Sorry, now I ... working.” จงเติมคำในช่องว่าง",
-						"choices": ["is", "am", "are", "-"],
-						"answerIndex": 1,
-						"coin": 100,
-						"exp": 25,
-						"type": "SELECTION"
-					}
-				],
-				"type": "SELECTION"
-			},
-			{
-				"title": "Reading",
-				"cards": [
-					{
-						"title": "A Busy Day",
-						"pages": [
-							{
-								"text": "Today is a busy day for you. In the morning, you wake up early, go to the bathroom to clean your body, and eat a good breakfast. Then you go to school and have fun. play toy cars with your friends at the playground. In the evening, you come back home and enjoy yourself. Finally, you have dinner with your family before going to bed. and you complete the day with a nice sleep.",
-								"illustrationUrl": "https://cdn.midjourney.com/4bb21813-1c93-44ed-8781-d9c3483e7575/0_2.png"
-							},
-							{
-								"text": "Test second page.",
-								"illustrationUrl": "https://cdn.midjourney.com/4bb21813-1c93-44ed-8781-d9c3483e7575/0_2.png"
-							}
-						],
-						"questions": [
-							{
-								"text": "คุณทำะไรหลังจากตื่นนอน",
-								"choices": ["clean your body", "go to bed", "eat breakfast", "play toy cars"],
-								"answerIndex": 0,
-								"coin": 100,
-								"exp": 25,
-								"type": "SELECTION"
-							}
-						],
-						"type": "READING"
-					}
-				],
-				"type": "READING"
-			},
-			{
-				"title": "Fill in the Blank",
-				"cards": [
-					{
-						"title": "Cloze title",
-						"text": "Fill in the _\nthis should be on new line,\nsecond blank _ ",
-						"coin": 10,
-						"exp": 10,
-						"choices": ["here", "blank"],
-						"answerIndexes": [1, 0],
-						"type": "CLOZE"
-					},
-					{
-						"title": "Cloze title2",
-						"text": "Fill in the _\nthis should be on new line,\nsecond blank _ ",
-						"coin": 10,
-						"exp": 10,
-						"choices": ["here", "blank"],
-						"answerIndexes": [1, 0],
-						"type": "CLOZE"
-					}
-				],
-				"type": "CLOZE"
-			},
-			{
-				"title": "Podcast",
-				"cards": [
-					{
-						"title": "Exciting Song",
-						"audioUrl": "https://www.learningcontainer.com/wp-content/uploads/2020/02/Kalimba.mp3",
-						"illustrationUrl": "https://cdn.discordapp.com/attachments/1120787872379842711/1121124787784274040/vi_capital_city_new_York_7b1ddf5c-2cb0-46a9-9ea8-2184bc4e58de.png",
-						"questions": [
-							{
-								"text": "เพลงสนุกไหม",
-								"choices": ["ไม่รู้", "ไม่รู้ ", "ไม่รู้  ", "ไม่รู้   "],
-								"answerIndex": 2,
-								"coin": 100,
-								"exp": 25,
-								"type": "SELECTION"
-							}
-						],
-						"type": "LISTENING"
-					}
-				],
-				"type": "LISTENING"
-			},
-			{
-				"title": "Meeting",
-				"cards": [
-					{
-						"bot": {
-							"avatar": "https://media.discordapp.net/attachments/1120787872379842711/1122773372732981258/vi_potrait_full_body_3d_avatar_girl_stylize_smile_b891a33b-0f46-4270-9ad8-ecca245d8e9e-removebg.png?width=298&height=655",
-							"backgroundColor": "#6C80E8",
-							"accent": "US",
-							"gender": "FEMALE",
-							"intro": "Welcome to the shop how can I help you?",
-							"name": "Lucy",
-							"prompt": "Your role: You are a female stationery shop keeper, you are kind, and friendly. Your name is Lucy. Your Goal: You have to give customer an information about the product available in you store, the sell them to the customer. Answer Format: You have to answer in the JSON format by using to following JSON schema {// your response\"message\": string,// \"neutral\", \"joy\", \"trust\", \"fear\", \"surprise\", \"sadness\", \"disgust\", \"anger\", \"anticipation\"\"emotion\": string,// the enum value// “NORMAL” used when the situation is normal// “INAPPROPRIATE” used when the situation is out of context or say something inappropriate// “END-OF-CONVERSATION” used when the customer have left or finish purchased your product\"status\": string} Shop information: There are only pen and pencil available in your store. The pen and pencil is 5฿ and 10฿ each respectively. Your store have only 10 pens, 10 pencils stock in your storage.",
-							"role": "Shopkeeper"
-						},
-						"learner": {
-							"mission": "คุณกำลังอยู่ในร้านเครื่องเขียน และคุณต้องซื้อเครื่องเขียนจากพนักงานขายที่ชื่อ Lucy",
-							"goal": [
-								{
-									"description": "สอบถามสินค้าที่ขาย",
-									"hint": "Do you have any pens in your shop?",
-									"prompt": "Asking for products available in the shop"
-								},
-								{
-									"description": "สั่งซื้อปากกา 2 ด้าม",
-									"hint": "I would like to buy two pens.",
-									"prompt": "Buy two pens"
-								},
-								{
-									"description": "สอบถามราคาสินค้าที่ต้องการซื้อ",
-									"hint": "How much is it?",
-									"prompt": "Asking for a product price"
-								}
-							]
-						},
-						"contextPrompt": "The user is in a stationery shop and is trying to buy pen/pencils from the shopkeeper.",
-						"coin": 100,
-						"exp": 25,
-						"type": "DIALOGUE"
-					}
-				],
-				"type": "DIALOGUE"
-			}
-		],
-		"narratives": [
-			{
-				"text": "เช้านี้เป็นเช้าแสนวุ่นวาย มีกิจวัตรประจำวันให้ทำมากมายเป็นประจำเหมือนทุกวัน แต่เราไม่เคยหงุดหงิดหรือกลัว แต่เรากลับเตรียมตัวให้พร้อมที่จะเผชิญกับทุกสิ่งที่ต้องทำในเช้านี้",
-				"illustrationUrl": "https://cdn.midjourney.com/1a7dd329-bd7b-466f-be54-1fe893630a10/0_3.png"
-			},
-			{
-				"text": "เมื่อเสร็จสิ้นการเลือกชุดผ้าที่สวยงามแล้ว เราจับยาสีฟันและหว่านน้ำบางๆ เพื่อทำความสะอาดลมหายใจของเรา ความรื่นรมย์ของการล้างหน้า รับประทานอาหาารเช้าเมื่อรู็สึกสดชื่นแล้ว แค่นี้ก็พร้อมจะไปโรงเรียนแล้วล่ะ",
-				"illustrationUrl": "https://cdn.midjourney.com/1a7dd329-bd7b-466f-be54-1fe893630a10/0_3.png"
-			},
-			{
-				"text": "ไปถึงโรงเรียน ทำกิจกรรมต่างๆ ไม่ว่าจะเล่นกับเพื่อนๆที่สนามเด็กเล่น เรียนบทเรียนที่แปลกใหม่ กินข้าวเที่ยงที่โรงอาหาร เสร็จจากกิจที่เหน็ดเหนื่อยมาทั้งวันถึงเวลากลับบ้าน อาบนำ้เปลี่ยนเสื้อผ้ามีเวลาให้ตัวเองในยามคำ่คืน ปล่อยให้ตัวเองผ่อนคลายถึงที่สุดจนพลอยหลับไป",
-				"illustrationUrl": "https://cdn.midjourney.com/1a7dd329-bd7b-466f-be54-1fe893630a10/0_3.png"
-			}
-		],
-		"intro": {
-			"accent": "US",
-			"gender": "MALE",
-			"bot": "https://media.discordapp.net/attachments/1120787872379842711/1126571585281740951/vi_potrait_full_body_3d_avatar_boy_stylize_smile_a3c783fb-c9f5-4dd8-b2bd-659ae7580ddd-removebg_1.png?width=259&height=655",
-			"message": "result = num1 + num2"
-		},
-		"course": {
-			"displayName": "Basic Python",
-			"subject": {
-				"displayName": "การเขียนโปรแกรม",
-				"id": "programming",
-				"indicatorLabel": "Python Level"
-			}
-		},
-		"id": "5"
 	}
+
+	
 ]

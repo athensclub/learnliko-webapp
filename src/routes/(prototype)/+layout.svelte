@@ -6,7 +6,7 @@
 	import NavBarLink from '$lib/components/navbar/NavBarLink.svelte';
 	import chatIcon from '$asset/icons/chat.png';
 	import chatEnableIcon from '$asset/icons/chatEnable.png';
-	import kidImage from '$asset/temp/kids.jpg';
+	import kidImage from '$asset/temp/guestprofile.png';
 	import { onMount } from 'svelte';
 	import userSession from '$lib/stores/userSession';
 	import { goto } from '$app/navigation';

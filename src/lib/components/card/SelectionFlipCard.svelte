@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { synthesize } from '$api/tts';
+	import { synthesizeAuto } from '$api/tts';
 	import type { SelectionCard } from '$gql/generated/graphql';
 	import Flippable from '$lib/components/Flippable.svelte';
 	import { playAudio, playAudioURL } from '$lib/global/audio';
@@ -21,7 +21,7 @@
 	const loadSpeeches = async () => {
 		const result = [];
 		for (let i = 0; i < choices.length; i++) {
-			const val = await synthesize(choices[i], 'US', 'FEMALE', 0.7);
+			const val = await synthesizeAuto(choices[i]);
 			result.push(await blobToBase64(val));
 		}
 		speeches = result;

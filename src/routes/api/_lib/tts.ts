@@ -1,6 +1,6 @@
 import type { SynthesizeRequestBody } from "$lib/types/requests/synthesize_request_body";
 
-export type SynthesizeAccent = 'Australia' | 'India' | 'UK' | 'US';
+export type SynthesizeAccent = 'Australia' | 'India' | 'UK' | 'US' | 'TH';
 export type SynthesizeGender = 'MALE' | 'FEMALE';
 
 const modelsMapping = {
@@ -85,3 +85,16 @@ export const synthesize = async function (text: string, accent: SynthesizeAccent
 
 	return response.blob();
 };
+
+/**
+ * Synthesize the given text to speech audio, automatically selecting accent, gender and speaking rate.
+ * If the text contains Thai character, the accent will be Thai, otherwise the accent will be US.
+ * The gender is always female. The speaking rate is always 0.7.
+ * @param text the text to synthesize.
+ * @returns an audio generated from transcribing the given text.
+ */
+export const synthesizeAuto = async (text: string) => {
+	// https://stackoverflow.com/a/56285693
+	const accent: SynthesizeAccent = /([\u0E00-\u0E7F]+)/.test(text) ? 'TH' : 'US';
+	return await synthesize(text, accent, 'FEMALE', 0.7);
+}

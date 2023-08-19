@@ -27,11 +27,15 @@
 	export { clazz as class };
 
 	export let allowHint: boolean;
-
-	const submitCurrentRecording = () => {
-		submitUserReply($currentRecording);
-		$currentRecording = null;
-	};
+	/**
+	 * Get called when a user finished recording audio, and confirm it by clicking submit icon.
+	 * Default behavior is to call submitUserReply global function of conversation.ts.
+	 * @param recording the recording audio that the user confirm.
+	 */
+	export let submitRecording = (recording: { data: Blob; url: string }) =>{
+		console.log("recorder")
+		submitUserReply(recording);
+	}
 
 	const { open }: Context = getContext('simple-modal');
 	const showHintModal = () => open(DialogueHintModal, {});
@@ -54,9 +58,7 @@
 		<div class="item flex h-full w-full flex-row items-center justify-between px-[2%] text-white">
 			<div class="flex-1 flex-row items-center justify-center">
 				<AudioPlayer
-					class={`rounded-full bg-[#EFEFEF] ${
-						$isMobile ? 'h-[5.6vh]' : 'h-[7vh] '
-					}`}
+					class={`rounded-full bg-[#EFEFEF] ${$isMobile ? 'h-[5.6vh]' : 'h-[7vh] '}`}
 					pauseColor="#6C80E8"
 					playColor="#6C80E8"
 					defaultBlockColor="#A9A9A9"
@@ -89,8 +91,12 @@
 					</svg>
 				</button>
 
+				<!-- $currentRecording should always exist in this block :( -->
 				<button
-					on:click={submitCurrentRecording}
+					on:click={() => {
+						submitRecording($currentRecording);
+						$currentRecording = null;
+					}}
 					class="flex aspect-square flex-1 items-center justify-center rounded-full bg-white {$isMobile
 						? 'min-w-[7vw] max-w-[7vw]'
 						: 'min-w-[3vw] max-w-[3vw]'}"
@@ -111,7 +117,9 @@
 					? 'text-[5.5vw]'
 					: 'text-[1.5vw]'}"
 			>
-				<div class="mr-[2vw] aspect-square w-[4vw] animate-pulse rounded-full bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD]" />
+				<div
+					class="mr-[2vw] aspect-square w-[4vw] animate-pulse rounded-full bg-gradient-to-r from-[#6C80E8] to-[#9BA1FD]"
+				/>
 				Recording..
 			</div>
 

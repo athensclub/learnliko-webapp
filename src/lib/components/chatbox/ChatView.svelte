@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { chat } from '$api/conversation';
+	import { assistantChat, chat } from '$api/conversation';
 	import { synthesize, type SynthesizeAccent, type SynthesizeGender } from '$api/tts';
 	import { playAudioURL } from '$lib/global/audio';
 	import { profileImageLocal } from '$lib/localdb/profileLocal';
@@ -36,19 +36,29 @@
 			{
 				role: 'user',
 				content: input
+			},
+			{
+				role: 'assistant',
+				content: ''
 			}
 		];
 
-		const result = await chat(history.map((c) => ({ ...c, transcription: undefined })));
-		history = [
-			...history,
-			{
-				role: 'assistant',
-				content: result,
-				transcription: await blobToBase64(await synthesize(result, accent, gender))
-			}
-		];
-		addChatHistory(input, result, aiName);
+		// const result = await chat(history.map((c) => ({ ...c, transcription: undefined })));
+		await assistantChat(
+			history.slice(0, history.length - 1).map((c) => ({ ...c, transcription: undefined })),
+			(token) =>
+				(history[history.length - 1] = {
+					...history[history.length - 1],
+					content: history[history.length - 1].content + token
+				})
+		);
+		history[history.length - 1] = {
+			...history[history.length - 1],
+			transcription: await blobToBase64(
+				await synthesize(history[history.length - 1].content!, accent, gender)
+			)
+		};
+		addChatHistory(input, history[history.length - 1].content!, aiName);
 
 		aiThinking = false;
 	};

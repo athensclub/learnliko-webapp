@@ -31,7 +31,7 @@ export const chat = async function (messages: ChatCompletionRequestMessage[]) {
  * @see https://stackoverflow.com/a/74336207
  */
 export const assistantChat = async function (
-	messages: ChatMessage[],
+	messages: ChatCompletionRequestMessage[],
 	callback: (token: string) => void
 ) {
 	// modified from https://stackoverflow.com/a/74336207

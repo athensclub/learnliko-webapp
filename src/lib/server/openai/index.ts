@@ -62,11 +62,7 @@ export const transcribe = async function (audio: Blob) {
 	readable.path = 'audio.webm';
 	const response = await _openai.createTranscription(
 		readable,
-		'whisper-1',
-		undefined,
-		undefined,
-		undefined,
-		'en'
+		'whisper-1'
 	);
 	return response.data.text;
 };

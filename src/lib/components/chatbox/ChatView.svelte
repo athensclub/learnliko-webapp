@@ -43,7 +43,6 @@
 			}
 		];
 
-		// const result = await chat(history.map((c) => ({ ...c, transcription: undefined })));
 		await assistantChat(
 			history.slice(0, history.length - 1).map((c) => ({ ...c, transcription: undefined })),
 			(token) =>
@@ -52,6 +51,7 @@
 					content: history[history.length - 1].content + token
 				})
 		);
+		
 		history[history.length - 1] = {
 			...history[history.length - 1],
 			transcription: await blobToBase64(

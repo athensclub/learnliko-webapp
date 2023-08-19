@@ -32,10 +32,9 @@
 	 * Default behavior is to call submitUserReply global function of conversation.ts.
 	 * @param recording the recording audio that the user confirm.
 	 */
-	export let submitRecording = (recording: { data: Blob; url: string }) =>{
-		console.log("recorder")
+	export let submitRecording = (recording: { data: Blob; url: string }) => {
 		submitUserReply(recording);
-	}
+	};
 
 	const { open }: Context = getContext('simple-modal');
 	const showHintModal = () => open(DialogueHintModal, {});

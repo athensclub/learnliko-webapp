@@ -1,5 +1,5 @@
 import preprocess from 'svelte-preprocess';
-import adapter from '@sveltejs/adapter-netlify';
+import adapter from '@sveltejs/adapter-vercel';
 import { vitePreprocess } from '@sveltejs/kit/vite';
 import path from 'path';
 
@@ -18,16 +18,7 @@ const config = {
 
 	kit: {
 		// See https://kit.svelte.dev/docs/adapters for more information about adapters.
-		adapter: adapter({
-			// if true, will create a Netlify Edge Function rather
-			// than using standard Node-based functions
-			edge: false,
-
-			// if true, will split your app into multiple functions
-			// instead of creating a single one for the entire app.
-			// if `edge` is true, this option cannot be used
-			split: false
-		}),
+		adapter: adapter({ }),
 		alias: {
 			// Access learnliko's api via SDK library
 			$api: path.resolve('./src/routes/api/_lib'),
